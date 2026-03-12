@@ -1,1 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViaDecide • decide.engine Tools Hub</title>
+  <style>
+    :root {
+      --bg: #060916;
+      --card: #11162a;
+      --muted: #9ba7c7;
+      --text: #f5f8ff;
+      --primary: #6ea8fe;
+      --primary-2: #8b5cf6;
+      --ok: #22c55e;
+      --border: #202a47;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at 20% 0%, #1d2a55 0%, var(--bg) 45%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(6, 9, 22, 0.85);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand { font-weight: 700; letter-spacing: 0.2px; }
+    .brand span { color: var(--primary); }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-link {
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.active { border-color: var(--primary); color: var(--primary); }
 
+    section { padding: 56px 0; scroll-margin-top: 80px; }
+    .hero h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 3rem); }
+    .hero p { color: var(--muted); max-width: 900px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+    .chip {
+      border: 1px solid var(--border);
+      background: rgba(110, 168, 254, 0.1);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+    }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #051022;
+      background: linear-gradient(120deg, var(--primary), #9fc5ff);
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      padding: 11px 16px;
+      cursor: pointer;
+    }
+    .btn.secondary {
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .tool-card {
+      background: linear-gradient(150deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tool-card h3 { margin: 0; font-size: 1.03rem; }
+    .tool-card p { margin: 0; color: var(--muted); font-size: 0.93rem; }
+    .use-tip {
+      color: #b4ffc8;
+      font-size: 0.83rem;
+      border-left: 2px solid var(--ok);
+      padding-left: 8px;
+    }
+
+    .mission {
+      background: rgba(17, 22, 42, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      padding: 24px 0 36px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand">Via<span>Decide</span> • decide.engine</div>
+      <nav>
+        <a class="nav-link" href="#home" data-route="home">Home</a>
+        <a class="nav-link" href="#tools" data-route="tools">Tools</a>
+        <a class="nav-link" href="#mission" data-route="mission">Mission 2030</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="hero">
+      <h1>Open-source tools by ViaDecide for Bharat Vishwaguru 2030.</h1>
+      <p>
+        This repository is useful because it gives students, founders, researchers, policy builders, and teams
+        ready-to-use decision tools they can run directly in browser. The initiative by <strong>ViaDecide</strong>
+        is to improve decision quality, productivity, and knowledge execution at scale so Bharat can become
+        <strong>Vishwaguru by 2030</strong> with practical, open workflows.
+      </p>
+      <div class="chips">
+        <span class="chip">Open Source Workflow Stack</span>
+        <span class="chip">Decision Intelligence for Everyday Users</span>
+        <span class="chip">Built by founder: Dharamdaxini</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="https://viadecide.com" target="_blank" rel="noopener">Visit viadecide.com</a>
+        <a class="btn secondary" href="https://www.youtube.com/@decide.engine" target="_blank" rel="noopener">decide.engine YouTube</a>
+        <a class="btn secondary" href="https://open.spotify.com/search/decide.engine" target="_blank" rel="noopener">decide.engine Spotify</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/dharamdaxini" target="_blank" rel="noopener">Founder LinkedIn</a>
+        <a class="btn secondary" href="https://www.instagram.com/dharamdaxini" target="_blank" rel="noopener">Founder Instagram</a>
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2>All tools with short CTA + quick use guide</h2>
+      <div class="tools-grid">
+        <article class="tool-card">
+          <h3>ViaDecide Agent</h3>
+          <p>Production-style assistant interface for task execution and decision support.</p>
+          <div class="use-tip">How to use: Open, type your request, and run guided actions.</div>
+          <a class="btn" href="agent.html">Open Tool</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>App Generator</h3>
+          <p>Create app blueprints rapidly from ideas to launch structure.</p>
+          <div class="use-tip">How to use: Fill idea inputs, generate specs, then export/share.</div>
+          <a class="btn" href="app-generator.html">Generate App Plan</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>Decision Brief Guide</h3>
+          <p>Fast framework to draft policy/strategy briefs in minutes.</p>
+          <div class="use-tip">How to use: Follow prompts section-by-section, then finalize brief.</div>
+          <a class="btn" href="decision-brief-guide.html">Build Brief</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>Retro Interview Practice</h3>
+          <p>Offline interview prep experience with realistic questioning.</p>
+          <div class="use-tip">How to use: Start practice mode, answer, review feedback loops.</div>
+          <a class="btn" href="interview-prep%20(2).html">Start Practice</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>Multi-Source Research Explained</h3>
+          <p>Shows how ViaDecide synthesizes multiple sources for better decisions.</p>
+          <div class="use-tip">How to use: Read flow, replicate framework in your own research.</div>
+          <a class="btn" href="multi-source-research-explained.html">Learn Framework</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>PromptAlchemy</h3>
+          <p>Prompt pack and templates for content, product, and research workflows.</p>
+          <div class="use-tip">How to use: Pick channel type, customize prompt, copy and deploy.</div>
+          <a class="btn" href="prompt-alchemy.html">Use Prompt Pack</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>MSME Sales Dashboard</h3>
+          <p>Simple data dashboard to track sales and view fast business insights.</p>
+          <div class="use-tip">How to use: Add rows, hit generate, inspect trends for decisions.</div>
+          <a class="btn" href="sales-dashboard.html">Open Dashboard</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>Student Research</h3>
+          <p>Decision research workspace for students and academic project users.</p>
+          <div class="use-tip">How to use: Define topic, collect evidence, export structured output.</div>
+          <a class="btn" href="student-research.html">Start Research</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>Wings of Fire Quiz</h3>
+          <p>Interactive multiplayer quiz experience to boost engagement and learning.</p>
+          <div class="use-tip">How to use: Create/join quiz, answer rounds, and compare scores.</div>
+          <a class="btn" href="wings-of-fire-quiz%20(1).html">Play Quiz</a>
+        </article>
+
+        <article class="tool-card">
+          <h3>Founder Weekly Decision Reviews</h3>
+          <p>Founder page to understand execution thinking and decision principles.</p>
+          <div class="use-tip">How to use: Follow review sections and apply frameworks weekly.</div>
+          <a class="btn" href="founder.html">View Founder Page</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="mission">
+      <div class="mission">
+        <h2>Why this matters for Bharat Vishwaguru by 2030</h2>
+        <p>
+          The repo turns knowledge into action: tools for research, prompting, interviews, dashboards,
+          and policy briefs. This lowers friction for millions of users to make better choices faster.
+          Better choices across education, entrepreneurship, and governance can compound into national-scale
+          capability, helping Bharat lead globally as Vishwaguru.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="#tools" data-route="tools">Explore Tools Now</a>
+          <a class="btn secondary" href="https://viadecide.com" target="_blank" rel="noopener">Join Initiative</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    © 2026 ViaDecide / decide.engine • Open source decision tooling for practical impact.
+  </footer>
+
+  <script src="router.js"></script>
+</body>
+</html>
