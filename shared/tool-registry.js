@@ -1,4 +1,17 @@
 (function (global) {
+  const CATEGORY_MAP = {
+    creators: 'creators',
+    coders: 'coders',
+    researchers: 'researchers',
+    operators: 'business',
+    founders: 'business',
+    students: 'education',
+    gamers: 'games',
+    engine: 'simulations',
+    system: 'system',
+    misc: 'misc'
+  };
+
   const builtinTools = [
     {
       id: 'prompt-alchemy-main',
@@ -40,7 +53,7 @@
       id: 'interview-prep',
       name: 'Interview Prep',
       description: 'Prepare structured interview responses.',
-      category: 'students',
+      category: 'education',
       audience: ['students'],
       inputs: ['role', 'experience'],
       outputs: ['interview_answers'],
@@ -52,7 +65,7 @@
       id: 'student-research',
       name: 'Student Research',
       description: 'Structure learning and research insights.',
-      category: 'students',
+      category: 'education',
       audience: ['students', 'researchers'],
       inputs: ['topic', 'sources'],
       outputs: ['research_summary'],
@@ -64,7 +77,7 @@
       id: 'decision-brief-guide',
       name: 'Decision Brief Guide',
       description: 'Convert analysis into concise decision briefs.',
-      category: 'operators',
+      category: 'business',
       audience: ['operators', 'founders'],
       inputs: ['context', 'decision'],
       outputs: ['decision_brief'],
@@ -88,7 +101,7 @@
       id: 'sales-dashboard',
       name: 'Sales Dashboard',
       description: 'Track and review sales performance snapshots.',
-      category: 'operators',
+      category: 'business',
       audience: ['operators', 'founders'],
       inputs: ['metrics'],
       outputs: ['dashboard_summary'],
@@ -100,7 +113,7 @@
       id: 'founder',
       name: 'Founder Narrative Builder',
       description: 'Build founder positioning and narrative assets.',
-      category: 'founders',
+      category: 'business',
       audience: ['founders', 'creators'],
       inputs: ['story', 'offer'],
       outputs: ['founder_narrative'],
@@ -112,7 +125,7 @@
       id: 'wings-of-fire-quiz',
       name: 'Wings of Fire Quiz',
       description: 'Interactive quiz tool.',
-      category: 'students',
+      category: 'games',
       audience: ['students'],
       inputs: ['answers'],
       outputs: ['score'],
@@ -121,23 +134,6 @@
       tags: ['legacy', 'quiz']
     }
   ];
-
-
-  function repoBasePath() {
-    const current = document.currentScript;
-    if (!current || !current.src) return '';
-    const marker = '/shared/tool-registry.js';
-    const idx = current.src.indexOf(marker);
-    if (idx === -1) return '';
-    return current.src.slice(0, idx + 1);
-  }
-
-  const BASE = repoBasePath();
-
-  function resolve(path) {
-    if (!BASE) return path;
-    return BASE + path;
-  }
 
   const importableToolDirs = [
     'tools/promptalchemy',
@@ -170,27 +166,52 @@
     'tools/engine/growth-path-recommender',
     'tools/engine/ai-coach-console',
     'tools/engine/simulation-runner',
-    'tools/engine/meta-health-dashboard'
-    'tools/template-vault'
+    'tools/engine/meta-health-dashboard',
+    'tools/engine/synthetic-player-generator',
+    'tools/engine/wave1-simulation-runner',
+    'tools/engine/balance-dashboard'
   ];
 
-  function normalizeTool(meta) {
+  function repoBasePath() {
+    const current = document.currentScript;
+    if (!current || !current.src) return '';
+    const marker = '/shared/tool-registry.js';
+    const idx = current.src.indexOf(marker);
+    if (idx === -1) return '';
+    return current.src.slice(0, idx + 1);
+  }
+
+  const BASE = repoBasePath();
+
+  function resolve(path) {
+    if (!BASE) return path;
+    return BASE + path;
+  }
+
+  function normalizeCategory(category) {
+    return CATEGORY_MAP[category] || category || 'misc';
+  }
+
+  function normalizeTool(meta, fallbackDir) {
+    const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
+    const category = normalizeCategory(meta.category);
+    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
     return {
-      id: meta.id || 'unknown-tool',
-      name: meta.name || meta.id || 'Unnamed Tool',
+      id,
+      name: meta.name || id,
       description: meta.description || '',
-      category: meta.category || 'uncategorized',
+      category,
       audience: Array.isArray(meta.audience) ? meta.audience : [],
       inputs: Array.isArray(meta.inputs) ? meta.inputs : [],
       outputs: Array.isArray(meta.outputs) ? meta.outputs : [],
       relatedTools: Array.isArray(meta.relatedTools) ? meta.relatedTools : [],
-      entry: meta.entry || '',
+      entry: meta.entry || defaultEntry,
       tags: Array.isArray(meta.tags) ? meta.tags : []
     };
   }
 
   function getBuiltinTools() {
-    return builtinTools.map(normalizeTool);
+    return builtinTools.map((tool) => normalizeTool(tool));
   }
 
   async function loadImportedTools() {
@@ -199,7 +220,8 @@
         try {
           const response = await fetch(resolve(`${dir}/config.json`), { cache: 'no-cache' });
           if (!response.ok) return null;
-          return normalizeTool(await response.json());
+          const meta = await response.json();
+          return normalizeTool(meta, dir);
         } catch (error) {
           return null;
         }
@@ -207,7 +229,6 @@
     );
     return loaded.filter(Boolean);
   }
-
 
   function getTools() {
     const ids = [
@@ -235,6 +256,7 @@
   }
 
   global.ToolRegistry = {
+    normalizeCategory,
     normalizeTool,
     getBuiltinTools,
     loadImportedTools,
@@ -243,24 +265,4 @@
     getTools,
     isRegistered
   };
-  const tools = [
-    'promptalchemy',
-    'script-generator',
-    'spec-builder',
-    'code-generator',
-    'code-reviewer',
-    'tool-router',
-    'export-studio',
-    'template-vault'
-  ];
-
-  function getTools() {
-    return tools.slice();
-  }
-
-  function isRegistered(id) {
-    return tools.includes(id);
-  }
-
-  global.ToolRegistry = { getTools, isRegistered };
 })(window);
