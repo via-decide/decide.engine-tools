@@ -122,6 +122,9 @@ body {
 
 .node { cursor: pointer; }
 .node:hover circle { stroke: #ffffff; stroke-width: 2; }
+.node { cursor: pointer; outline: none; }
+.node:hover circle { stroke: #ffffff; stroke-width: 2; }
+.node:focus-visible circle { stroke: #6ea8fe; stroke-width: 2.5; filter: drop-shadow(0 0 4px rgba(110, 168, 254, 0.6)); }
 
 .tooltip {
   position: absolute;
@@ -136,6 +139,7 @@ body {
   opacity: 0;
   transform: translateY(4px);
   transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 20;
 }
 
 .tooltip.show {
