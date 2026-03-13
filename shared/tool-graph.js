@@ -1,4 +1,6 @@
 (function () {
+  'use strict';
+
   const CATEGORY_ORDER = ['creators', 'coders', 'researchers', 'business', 'education', 'games', 'simulations', 'system', 'misc'];
   const CATEGORY_LABELS = {
     creators: 'Creators',
@@ -76,54 +78,69 @@
   }
 
   function renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, tooltip }) {
-    const byId = new Map(tools.map((tool) => [tool.id, tool]));
     const { nodes, width, height } = layoutNodes(tools);
 
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svg.setAttribute('aria-label', 'Tool graph explorer');
 
+    /* Category column labels */
     labelsGroup.innerHTML = CATEGORY_ORDER.map((key, idx) => `
       <text x="${170 + idx * 250}" y="38" fill="#a8b2d3" font-size="13" text-anchor="middle">${CATEGORY_LABELS[key]}</text>
     `).join('');
 
+    /* Build edge list from relatedTools, deduplicated */
     const nodeById = new Map(nodes.map((node) => [node.id, node]));
+    const edgeSet = new Set();
     const edges = [];
+
     nodes.forEach((node) => {
       (node.relatedTools || []).forEach((targetId) => {
-        const target = nodeById.get(targetId) || byId.get(targetId);
-        if (!target || !nodeById.get(target.id)) return;
-        edges.push({ from: node.id, to: target.id });
+        if (!nodeById.has(targetId)) return;
+        /* Canonical key: alphabetically sorted pair to prevent A-B + B-A dupes */
+        const key = node.id < targetId ? `${node.id}|${targetId}` : `${targetId}|${node.id}`;
+        if (edgeSet.has(key)) return;
+        edgeSet.add(key);
+        edges.push({ from: node.id, to: targetId });
       });
     });
 
     edgesGroup.innerHTML = edges.map((edge) => {
       const a = nodeById.get(edge.from);
       const b = nodeById.get(edge.to);
+      if (!a || !b) return '';
       return `<line class="edge" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" />`;
     }).join('');
 
+    /* Render nodes */
     nodesGroup.innerHTML = nodes.map((node) => {
-      const safeName = node.name.replace(/"/g, '&quot;');
-      const short = node.name.length > 20 ? `${node.name.slice(0, 20)}…` : node.name;
+      const safeName = (node.name || node.id).replace(/"/g, '&quot;');
+      const safeDesc = (node.description || '').replace(/"/g, '&quot;');
+      const short = node.name.length > 20 ? `${node.name.slice(0, 20)}\u2026` : node.name;
+      const color = CATEGORY_COLORS[node.category] || CATEGORY_COLORS.misc;
       return `
-        <g class="node" data-id="${node.id}" data-entry="${node.entry}" data-name="${safeName}" data-description="${(node.description || '').replace(/"/g, '&quot;')}" transform="translate(${node.x}, ${node.y})" tabindex="0" role="button" aria-label="Open ${safeName}">
-          <circle r="24" fill="${CATEGORY_COLORS[node.category] || CATEGORY_COLORS.misc}"></circle>
+        <g class="node" data-id="${node.id}" data-entry="${node.entry || ''}" data-name="${safeName}" data-description="${safeDesc}" transform="translate(${node.x}, ${node.y})" tabindex="0" role="button" aria-label="Open ${safeName}">
+          <circle r="24" fill="${color}"></circle>
           <text y="42">${short}</text>
         </g>
       `;
     }).join('');
 
+    /* ── Tooltip (positioned relative to .viewport container) ── */
+    const viewport = svg.closest('.viewport') || svg.parentElement;
+
     const showTip = (evt, nodeEl) => {
       const name = nodeEl.getAttribute('data-name') || '';
       const description = nodeEl.getAttribute('data-description') || 'No description available.';
       tooltip.innerHTML = `<strong>${name}</strong><br>${description}`;
-      tooltip.style.left = `${evt.clientX + 12}px`;
-      tooltip.style.top = `${evt.clientY + 12}px`;
+      const rect = viewport.getBoundingClientRect();
+      tooltip.style.left = `${evt.clientX - rect.left + 14}px`;
+      tooltip.style.top = `${evt.clientY - rect.top + 14}px`;
       tooltip.classList.add('show');
     };
 
     const hideTip = () => tooltip.classList.remove('show');
 
+    /* ── Node interaction ── */
     nodesGroup.querySelectorAll('.node').forEach((nodeEl) => {
       const open = () => {
         const entry = nodeEl.getAttribute('data-entry');
@@ -143,6 +160,7 @@
       nodeEl.addEventListener('blur', hideTip);
     });
 
+    /* ── Pan & zoom ── */
     const state = { scale: 1, tx: 0, ty: 0 };
     const applyTransform = () => {
       graphRoot.setAttribute('transform', `translate(${state.tx}, ${state.ty}) scale(${state.scale})`);
@@ -164,6 +182,7 @@
     }, { passive: false });
 
     svg.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.node')) return; /* don't pan when clicking a node */
       panning = true;
       panStart = { x: e.clientX, y: e.clientY, tx: state.tx, ty: state.ty };
       svg.setPointerCapture(e.pointerId);
@@ -193,12 +212,36 @@
     });
   }
 
+  /* ── Init ── */
   async function init() {
-    if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
-
-    const tools = await window.ToolRegistry.loadAll();
-    const legend = document.getElementById('legend');
     const svg = document.getElementById('graph');
+    const viewport = svg ? svg.closest('.viewport') || svg.parentElement : null;
+
+    if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') {
+      if (viewport) {
+        viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Tool registry failed to load. Ensure <code>shared/tool-registry.js</code> is accessible.</div>';
+      }
+      return;
+    }
+
+    let tools;
+    try {
+      tools = await window.ToolRegistry.loadAll();
+    } catch (e) {
+      if (viewport) {
+        viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Error loading tools: ' + (e.message || e) + '</div>';
+      }
+      return;
+    }
+
+    if (!tools || tools.length === 0) {
+      if (viewport) {
+        viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#94a3b8;">No tools found in registry.</div>';
+      }
+      return;
+    }
+
+    const legend = document.getElementById('legend');
     const graphRoot = document.getElementById('graph-root');
     const edgesGroup = document.getElementById('edges');
     const nodesGroup = document.getElementById('nodes');
