@@ -168,3 +168,12 @@ The simulation tools validate the farm loop concepts already implemented across 
 3. Layer 2 simulation (commons/trust) should add its own shared helpers (e.g., `shared/commons-simulation.js`).
 4. Layer 3 simulation (market/recruiter) should follow the same pattern.
 5. The balance dashboard can be extended with new chart blocks without rewriting existing ones.
+
+## Workflow and graph layer (additive)
+
+Additional standalone pages are available at repo root:
+
+- `tool-graph.html` with `shared/tool-graph.js` and `shared/tool-graph.css`
+- `workflow-builder.html` with `shared/workflow-ui.js`, `shared/workflow-engine.js`, and `shared/workflow-storage.js`
+
+They consume `ToolRegistry` metadata and do not require modifying existing `tools/*` tool code.

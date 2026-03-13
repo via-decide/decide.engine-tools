@@ -303,3 +303,12 @@ Analyzes simulation output for fairness: spam advantage ratio, quality-vs-volume
 ### Why Layer 2 and Layer 3 should wait
 
 Layer 2 (Commons: seed exchange, fruit sharing, circles, peer validation, trust scoring) and Layer 3 (Market: recruiter dashboard, discovery search, hire readiness) depend on a proven fair Layer 1 loop. If spammers can dominate ranking or lazy players can accidentally promote, the trust and recruiter layers will inherit and amplify those imbalances. Validate Wave 1 first.
+
+## Interactive ecosystem pages
+
+The hub now includes two additive, standalone pages:
+
+- `tool-graph.html` — visual graph explorer using `ToolRegistry` metadata and `relatedTools` edges.
+- `workflow-builder.html` — drag/drop workflow composer that saves to localStorage and starts sequential tool runs.
+
+These pages do not modify existing tools and keep preservation-first constraints intact.

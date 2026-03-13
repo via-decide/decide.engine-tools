@@ -41,3 +41,7 @@ Do not require all tools to adopt hooks immediately.
 - [ ] No unrelated files removed.
 - [ ] Changes are additive and import-friendly.
 - [ ] Future category routing remains deferred unless explicitly requested.
+
+## New standalone orchestration pages
+
+When adding orchestration UX (for example graph/workflow pages), keep them outside existing tool folders unless the change is explicitly tool-specific. Prefer shared adapters under `/shared` and keep direct tool entrypoints untouched.
