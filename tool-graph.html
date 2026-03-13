@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tool Graph Explorer • decide.engine</title>
+  <link rel="stylesheet" href="shared/tool-graph.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <h1>Tool Graph Explorer</h1>
+      <div class="actions">
+        <button id="reset-view" class="btn secondary" type="button">Reset View</button>
+        <a class="btn" href="index.html">Back to Hub</a>
+      </div>
+    </header>
+
+    <section id="legend" class="legend" aria-label="Category legend"></section>
+
+    <section class="viewport" aria-label="Interactive tool graph viewport">
+      <svg id="graph" role="img">
+        <g id="graph-root">
+          <g id="category-labels"></g>
+          <g id="edges"></g>
+          <g id="nodes"></g>
+        </g>
+      </svg>
+      <div id="tooltip" class="tooltip" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="shared/tool-registry.js"></script>
+  <script src="shared/tool-graph.js"></script>
+</body>
+</html>
