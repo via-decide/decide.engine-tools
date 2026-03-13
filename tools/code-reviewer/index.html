@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code Reviewer</title>
+  <link rel="stylesheet" href="../../shared/shared.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Code Reviewer</h1>
+      <p>Analyze HTML/CSS/JS snippets and suggest practical improvements.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <label for="code">Code Snippet</label>
+        <textarea id="code" placeholder="Paste HTML, CSS, or JS"></textarea>
+        <label for="focus">Review Focus</label>
+        <select id="focus">
+          <option value="quality">Readability & Quality</option>
+          <option value="performance">Performance</option>
+          <option value="accessibility">Accessibility</option>
+        </select>
+        <div class="toolbar">
+          <button id="review" class="primary">Run Review</button>
+          <button id="copy">Copy</button>
+          <button id="download">Download</button>
+        </div>
+      </article>
+      <article class="card">
+        <h2>Review Output</h2>
+        <pre id="output" class="output"></pre>
+      </article>
+    </section>
+  </main>
+  <script src="../../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>

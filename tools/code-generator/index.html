@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code Generator</title>
+  <link rel="stylesheet" href="../../shared/shared.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Code Generator</h1>
+      <p>Generate standalone HTML tool skeletons from prompts or specs.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <label for="toolName">Tool Name</label>
+        <input id="toolName" placeholder="e.g., Insight Mapper" />
+        <label for="description">Tool Description</label>
+        <textarea id="description"></textarea>
+        <label for="inputs">Input Fields (comma separated)</label>
+        <input id="inputs" placeholder="idea, context" />
+        <div class="toolbar">
+          <button id="generate" class="primary">Generate Skeleton</button>
+          <button id="copy">Copy</button>
+          <button id="download">Download</button>
+        </div>
+      </article>
+      <article class="card">
+        <h2>Generated HTML Skeleton</h2>
+        <pre id="output" class="output"></pre>
+      </article>
+    </section>
+  </main>
+  <script src="../../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>
