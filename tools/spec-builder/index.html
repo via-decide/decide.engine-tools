@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spec Builder</title>
+  <link rel="stylesheet" href="../../shared/shared.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Spec Builder</h1>
+      <p>Turn rough ideas into implementation-ready product specifications.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <label for="idea">Idea</label>
+        <textarea id="idea"></textarea>
+        <label for="users">Target Users</label>
+        <input id="users" placeholder="e.g., HCI prototype owner" />
+        <label for="constraints">Constraints</label>
+        <textarea id="constraints" placeholder="Technical, timeline, quality"></textarea>
+        <div class="toolbar">
+          <button id="generate" class="primary">Build Spec</button>
+          <button id="copy">Copy</button>
+          <button id="download">Download</button>
+        </div>
+      </article>
+      <article class="card">
+        <h2>Product Spec</h2>
+        <pre id="output" class="output"></pre>
+      </article>
+    </section>
+  </main>
+  <script src="../../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>
