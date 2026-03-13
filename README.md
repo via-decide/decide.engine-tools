@@ -177,3 +177,15 @@ Ideas that fit the philosophy of simple decision tools are encouraged.
 ViaDecide
 
 This project is part of the ViaDecide ecosystem, focused on building tools and systems that improve how people think, decide, and execute.
+
+---
+
+Tool Ecosystem Expansion
+
+A new modular generation ecosystem now exists under:
+
+- `/tools` for standalone tool apps
+- `/shared` for lightweight shared utilities
+- `/docs` for architecture and usage guidance
+
+See `docs/README.md` and `docs/ARCHITECTURE.md` for details.
