@@ -23,4 +23,7 @@
     "mesh-ready",
     "quality"
   ]
+  "inputs": ["code_snippet", "review_focus"],
+  "outputs": ["review_notes"],
+  "relatedTools": ["code-generator", "spec-builder", "export-studio"]
 }

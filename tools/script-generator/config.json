@@ -25,4 +25,7 @@
     "mesh-ready",
     "content"
   ]
+  "inputs": ["structured_prompt", "format", "length"],
+  "outputs": ["script"],
+  "relatedTools": ["promptalchemy", "spec-builder", "export-studio"]
 }

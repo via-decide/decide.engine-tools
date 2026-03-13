@@ -24,4 +24,7 @@
     "mesh-ready",
     "generation"
   ]
+  "inputs": ["tool_name", "description", "input_fields"],
+  "outputs": ["html_skeleton"],
+  "relatedTools": ["promptalchemy", "spec-builder", "code-reviewer"]
 }
