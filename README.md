@@ -103,4 +103,14 @@ Three tools validate that the Layer 1 (Farm) game loop is fair before expansion:
 
 ## ViaDecide
 
+Layer 2 (Commons: seed exchange, fruit sharing, circles, peer validation, trust scoring) and Layer 3 (Market: recruiter dashboard, discovery search, hire readiness) depend on a proven fair Layer 1 loop. If spammers can dominate ranking or lazy players can accidentally promote, the trust and recruiter layers will inherit and amplify those imbalances. Validate Wave 1 first.
+
+## Interactive ecosystem pages
+
+The hub now includes two additive, standalone pages:
+
+- `tool-graph.html` — visual graph explorer using `ToolRegistry` metadata and `relatedTools` edges.
+- `workflow-builder.html` — drag/drop workflow composer that saves to localStorage and starts sequential tool runs.
+
+These pages do not modify existing tools and keep preservation-first constraints intact.
 This project is part of the ViaDecide ecosystem, focused on building tools and systems that improve how people think, decide, and execute — supporting **Bharat Vishwaguru 2030**.

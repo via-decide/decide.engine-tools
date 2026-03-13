@@ -1,4 +1,6 @@
 (function (global) {
+  const RUN_STATE_KEY = 'viadecide.workflow-builder.run-state';
+
   function buildStepOrder(nodes, edges) {
     if (!nodes.length) return [];
 
@@ -19,6 +21,7 @@
 
     edges.forEach((edge) => {
       if (!adjacency.has(edge.from) || !adjacency.has(edge.to)) return;
+      if (edge.from === edge.to) return;
       adjacency.get(edge.from).push(edge.to);
       inDegree.set(edge.to, (inDegree.get(edge.to) || 0) + 1);
     });
@@ -63,11 +66,45 @@
     };
   }
 
+  function setRunState(runState) {
+    localStorage.setItem(RUN_STATE_KEY, JSON.stringify(runState));
+  }
+
+  function getRunState() {
+    try {
+      const raw = localStorage.getItem(RUN_STATE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function clearRunState() {
+    localStorage.removeItem(RUN_STATE_KEY);
+  }
+
+  function resolveToolMap(allTools) {
+    return new Map((allTools || []).map((tool) => [tool.id, tool]));
+  }
+
+  function nextStepFrom(runState, currentToolId) {
+    if (!runState || !Array.isArray(runState.steps)) return null;
+    const index = runState.steps.indexOf(currentToolId);
+    if (index === -1) return null;
+    if (index >= runState.steps.length - 1) return null;
+    return {
+      currentIndex: index,
+      nextToolId: runState.steps[index + 1]
+    };
+  }
+
   function runWorkflow(workflow, allTools) {
     if (!workflow || !Array.isArray(workflow.steps) || workflow.steps.length === 0) {
       return { ok: false, message: 'Workflow has no steps.' };
     }
 
+    const byId = resolveToolMap(allTools);
     const byId = new Map(allTools.map((tool) => [tool.id, tool]));
     const firstTool = byId.get(workflow.steps[0]);
     if (!firstTool || !firstTool.entry) {
@@ -80,6 +117,7 @@
       steps: workflow.steps,
       currentIndex: 0
     };
+    setRunState(runState);
     localStorage.setItem('viadecide.workflow-builder.run-state', JSON.stringify(runState));
 
     for (let i = 0; i < workflow.steps.length - 1; i += 1) {
@@ -99,6 +137,31 @@
     return { ok: true, message: 'Workflow started.' };
   }
 
+  function openNextToolFromCurrent(currentToolId, allTools) {
+    const runState = getRunState();
+    const next = nextStepFrom(runState, currentToolId);
+    if (!next) {
+      return { ok: false, message: 'No next step found for current tool.' };
+    }
+
+    const byId = resolveToolMap(allTools);
+    const target = byId.get(next.nextToolId);
+    if (!target || !target.entry) {
+      return { ok: false, message: 'Next tool entry not found.' };
+    }
+
+    setRunState({ ...runState, currentIndex: next.currentIndex + 1 });
+    global.location.href = target.entry;
+    return { ok: true, message: `Opening ${next.nextToolId}.` };
+  }
+
+  global.WorkflowEngine = {
+    buildStepOrder,
+    createWorkflow,
+    runWorkflow,
+    getRunState,
+    clearRunState,
+    openNextToolFromCurrent
   global.WorkflowEngine = {
     buildStepOrder,
     createWorkflow,

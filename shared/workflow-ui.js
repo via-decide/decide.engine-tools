@@ -38,6 +38,12 @@
     return state.tools.find((tool) => tool.id === id) || null;
   }
 
+  function uniqueEdgePush(from, to) {
+    if (from === to) return;
+    const exists = state.edges.some((e) => e.from === from && e.to === to);
+    if (!exists) state.edges.push({ from, to });
+  }
+
   function syncCanvas() {
     const canvas = el('workflow-canvas');
     const edgesLayer = el('workflow-edges');
@@ -126,6 +132,7 @@
               return;
             }
 
+            uniqueEdgePush(state.connectFrom, instanceId);
             const exists = state.edges.some((e) => e.from === state.connectFrom && e.to === instanceId);
             if (!exists) state.edges.push({ from: state.connectFrom, to: instanceId });
             state.connectFrom = null;
@@ -136,6 +143,14 @@
     });
   }
 
+  function currentWorkflow() {
+    const id = el('workflow-id').value.trim() || 'untitled-workflow';
+    return global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
+  }
+
+  function syncStepsPreview() {
+    const output = el('workflow-steps-preview');
+    const workflow = currentWorkflow();
   function syncStepsPreview() {
     const output = el('workflow-steps-preview');
     const id = el('workflow-id').value.trim() || 'untitled-workflow';
@@ -178,11 +193,24 @@
     });
   }
 
+  function ensureRunnable(workflow) {
+    if (!workflow.steps.length) {
+      return { ok: false, message: 'Add at least one tool node before saving or running.' };
+    }
+    return { ok: true };
+  }
+
   function bindControls() {
     el('save-workflow').addEventListener('click', () => {
       const id = el('workflow-id').value.trim();
       if (!id) {
         alert('Enter a workflow id before saving.');
+        return;
+      }
+      const workflow = currentWorkflow();
+      const check = ensureRunnable(workflow);
+      if (!check.ok) {
+        alert(check.message);
         return;
       }
       const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
@@ -198,6 +226,12 @@
     });
 
     el('run-workflow').addEventListener('click', () => {
+      const workflow = currentWorkflow();
+      const check = ensureRunnable(workflow);
+      if (!check.ok) {
+        alert(check.message);
+        return;
+      }
       const id = el('workflow-id').value.trim() || 'untitled-workflow';
       const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
       const result = global.WorkflowEngine.runWorkflow(workflow, state.tools);

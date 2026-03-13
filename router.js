@@ -5,6 +5,17 @@
   const navLinks = [...document.querySelectorAll('[data-route]')];
   const sections = [...document.querySelectorAll('main section[id]')];
 
+  const legacyToolPathMap = {
+    promptalchemy: 'tools/promptalchemy/index.html',
+    'script-generator': 'tools/script-generator/index.html',
+    'spec-builder': 'tools/spec-builder/index.html',
+    'code-generator': 'tools/code-generator/index.html',
+    'code-reviewer': 'tools/code-reviewer/index.html',
+    'tool-router': 'tools/tool-router/index.html',
+    'export-studio': 'tools/export-studio/index.html',
+    'template-vault': 'tools/template-vault/index.html'
+  };
+
   const setActive = (id) => {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link.getAttribute('data-route') === id);
@@ -19,6 +30,8 @@
     setActive(id);
   };
 
+  const resolveToolPath = (toolRef) => {
+    if (!toolRef) return null;
   /* ── Complete tool path map ── */
 
   /* Root-level standalone tools */
@@ -90,6 +103,8 @@
       return toolRef.endsWith('.html') ? toolRef : `${toolRef}/index.html`;
     }
 
+    if (legacyToolPathMap[toolRef]) return legacyToolPathMap[toolRef];
+
     /* Exact match in static map */
     if (allToolPaths[toolRef]) return allToolPaths[toolRef];
 
@@ -106,6 +121,12 @@
     const params = new URLSearchParams(window.location.search);
     const toolRef = params.get('tool');
     if (!toolRef) return;
+
+    const resolved = await resolveToolPath(toolRef);
+    if (!resolved) return;
+
+    window.location.href = resolved;
+  };
 
     try {
       const resolved = await resolveToolPath(toolRef);
@@ -138,6 +159,20 @@
     });
   });
 
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    },
+    {
+      rootMargin: '-30% 0px -50% 0px',
+      threshold: [0.2, 0.5, 0.8]
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
   /* ── Scroll spy ── */
   if (sections.length > 0) {
     const observer = new IntersectionObserver(
@@ -160,6 +195,7 @@
     setActive('home');
   }
 
+  openToolFromQuery();
   /* ── Process ?tool= query ── */
   openToolFromQuery();
 
