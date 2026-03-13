@@ -2,28 +2,11 @@
   "id": "code-reviewer",
   "name": "Code Reviewer",
   "description": "Analyze code and suggest improvements",
-  "inputs": [
-    "code_snippet",
-    "review_focus"
-  ],
-  "outputs": [
-    "review_notes"
-  ],
-  "relatedTools": [
-    "code-generator",
-    "spec-builder",
-    "export-studio"
-  ],
-  "category": "coders",
-  "audience": [
-    "coders"
-  ],
-  "entry": "tools/code-reviewer/index.html",
-  "tags": [
-    "mesh-ready",
-    "quality"
-  ]
   "inputs": ["code_snippet", "review_focus"],
   "outputs": ["review_notes"],
-  "relatedTools": ["code-generator", "spec-builder", "export-studio"]
+  "relatedTools": ["code-generator", "spec-builder", "export-studio"],
+  "category": "coders",
+  "audience": ["coders"],
+  "entry": "tools/code-reviewer/index.html",
+  "tags": ["mesh-ready", "quality"]
 }
