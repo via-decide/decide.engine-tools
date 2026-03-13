@@ -2,6 +2,30 @@
   "id": "spec-builder",
   "name": "Spec Builder",
   "description": "Convert ideas into product specs",
+  "inputs": [
+    "idea",
+    "target_users",
+    "constraints"
+  ],
+  "outputs": [
+    "product_spec"
+  ],
+  "relatedTools": [
+    "promptalchemy",
+    "code-generator",
+    "template-vault"
+  ],
+  "category": "operators",
+  "audience": [
+    "operators",
+    "founders",
+    "coders"
+  ],
+  "entry": "tools/spec-builder/index.html",
+  "tags": [
+    "mesh-ready",
+    "planning"
+  ]
   "inputs": ["idea", "target_users", "constraints"],
   "outputs": ["product_spec"],
   "relatedTools": ["promptalchemy", "code-generator", "template-vault"]

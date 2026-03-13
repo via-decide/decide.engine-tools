@@ -2,6 +2,28 @@
   "id": "code-generator",
   "name": "Code Generator",
   "description": "Convert prompts/specs into HTML tool skeletons",
+  "inputs": [
+    "tool_name",
+    "description",
+    "input_fields"
+  ],
+  "outputs": [
+    "html_skeleton"
+  ],
+  "relatedTools": [
+    "promptalchemy",
+    "spec-builder",
+    "code-reviewer"
+  ],
+  "category": "coders",
+  "audience": [
+    "coders"
+  ],
+  "entry": "tools/code-generator/index.html",
+  "tags": [
+    "mesh-ready",
+    "generation"
+  ]
   "inputs": ["tool_name", "description", "input_fields"],
   "outputs": ["html_skeleton"],
   "relatedTools": ["promptalchemy", "spec-builder", "code-reviewer"]

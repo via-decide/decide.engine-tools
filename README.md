@@ -1,43 +1,71 @@
-Decide Engine Tools
+# Decide Engine Tools
 
-Decision infrastructure for builders.
+Preservation-first, browser-native tool mesh for ViaDecide.
 
-Most software tools help you write, code, or manage tasks.
+## What this repository is
 
-This project focuses on something more fundamental:
+This repo hosts standalone decision and productivity tools that run directly in the browser with no build step.
 
-Helping people think, decide, and execute better.
+The ecosystem is being prepared as an **import-friendly staging repo** so many solo tool repos can be absorbed over time without losing existing code.
 
-Decide Engine Tools is a collection of lightweight web tools designed to structure thinking, accelerate decision-making, and simplify complex workflows.
+## Preservation-first principles
 
+- Never delete or simplify unrelated tools.
+- Keep existing tool behavior intact.
+- Prefer additive adapters, metadata, and shared helpers.
+- Keep tools standalone HTML/CSS/JS whenever possible.
 
----
+## Current structure
 
-Live Tools
+- `/shared` → lightweight interoperability layer (`tool-registry.js`, `tool-bridge.js`, `tool-storage.js`, `shared.css`)
+- `/tools` → modular tools that already follow shared metadata conventions
+- legacy standalone tool folders at root (for example: `prompt-alchemy`, `agent`, `founder`, `student-research`, etc.)
 
-Try the tools directly:
+## Metadata model
 
-https://via-decide.github.io/decide.engine-tools/
+Each tool can expose `config.json` with:
 
-No installation required.
+- `id`
+- `name`
+- `description`
+- `category`
+- `audience`
+- `inputs`
+- `outputs`
+- `relatedTools`
+- `entry`
+- `tags`
 
+This allows tool discovery without forcing destructive rewrites.
 
----
+## Future category routing (not implemented yet)
 
-What This Project Is
+Routing will later support folders and metadata for categories such as:
 
-A collection of small, focused tools that solve specific thinking and execution problems.
+- creators
+- gamers
+- coders
+- students
+- researchers
+- founders
+- operators
 
-Examples:
+This phase only prepares compatibility hooks and metadata for that routing.
 
-turning vague ideas into structured AI prompts
+## Open-source direction
 
-synthesizing research across multiple sources
+The long-term goal is a browser-native tool network where tools can:
 
-preparing for interviews
+- open related tools,
+- send context to other tools,
+- receive context from other tools,
+- return result context back into source workflows.
 
-designing simple AI agent workflows
+See also:
 
+- `ARCHITECTURE.md`
+- `CONTRIBUTING.md`
+- `AGENTS.md`
 generating lightweight apps
 
 converting complex analysis into decision briefs

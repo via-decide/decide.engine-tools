@@ -1,3 +1,19 @@
+# Tool Ecosystem Docs
+
+This docs folder describes the preservation-first tool mesh scaffolding.
+
+Primary references are now at repository root:
+
+- `README.md`
+- `ARCHITECTURE.md`
+- `CONTRIBUTING.md`
+- `AGENTS.md`
+
+## Quick note
+
+- Existing standalone tools are preserved.
+- Metadata and shared hooks are additive.
+- Final category routing is intentionally deferred.
 # Via Decide Tool Ecosystem
 
 This repository now contains a modular tool ecosystem under `/tools` where each tool is an independent HTML application.
