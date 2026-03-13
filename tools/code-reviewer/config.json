@@ -1,0 +1,8 @@
+{
+  "id": "code-reviewer",
+  "name": "Code Reviewer",
+  "description": "Analyze code and suggest improvements",
+  "inputs": ["code_snippet", "review_focus"],
+  "outputs": ["review_notes"],
+  "relatedTools": ["code-generator", "spec-builder", "export-studio"]
+}

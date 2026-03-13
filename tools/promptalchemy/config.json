@@ -1,0 +1,8 @@
+{
+  "id": "promptalchemy",
+  "name": "PromptAlchemy",
+  "description": "Generate structured prompts for downstream tools",
+  "inputs": ["idea", "context", "goal"],
+  "outputs": ["structured_prompt"],
+  "relatedTools": ["script-generator", "spec-builder", "code-generator"]
+}
