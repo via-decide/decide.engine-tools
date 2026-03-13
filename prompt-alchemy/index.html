@@ -254,9 +254,28 @@
         <span class="tiny">Positioning: first-render prompt packs across models</span>
       </div>
     </section>
+
+    <section class="card">
+      <div class="split">
+        <h2>Connected Actions</h2>
+        <div class="status">Preservation-first bridge</div>
+      </div>
+      <label>Related Tools</label>
+      <select id="relatedToolSelect">
+        <option value="">Select tool…</option>
+      </select>
+      <div class="btns">
+        <button id="openRelated">Continue In Selected Tool</button>
+        <button id="sendRelated">Send Preview Context</button>
+        <button id="checkIncoming">Check Incoming Context</button>
+      </div>
+      <div class="muted" id="bridgeStatus">Bridge ready. No routing lock-in applied yet.</div>
+    </section>
   </div>
 </div>
 
+<script src="../shared/tool-registry.js"></script>
+<script src="../shared/tool-bridge.js"></script>
 <script>
   /***********************
    * CONFIG
@@ -724,5 +743,95 @@ Flow:
 3) Send to Alchemy (Email) = credit event
 4) Share Link = viadecide.com/#p=...`;
 </script>
+
+<script>
+(function(){
+  const TOOL_ID = 'prompt-alchemy-main';
+  const relatedSelect = document.getElementById('relatedToolSelect');
+  const bridgeStatus = document.getElementById('bridgeStatus');
+  const relatedFallback = [
+    { id: 'promptalchemy', name: 'PromptAlchemy (Modular)' },
+    { id: 'script-generator', name: 'Script Generator' },
+    { id: 'spec-builder', name: 'Spec Builder' },
+    { id: 'code-generator', name: 'Code Generator' },
+    { id: 'export-studio', name: 'Export Studio' }
+  ];
+
+  function setBridgeStatus(text){
+    bridgeStatus.textContent = text;
+  }
+
+  async function hydrateRelatedTools(){
+    if (!relatedSelect) return;
+    let tools = relatedFallback;
+    try {
+      if (window.ToolRegistry && typeof window.ToolRegistry.findById === 'function') {
+        const meta = await window.ToolRegistry.findById(TOOL_ID);
+        if (meta && Array.isArray(meta.relatedTools) && meta.relatedTools.length) {
+          const all = await window.ToolRegistry.loadAll();
+          tools = meta.relatedTools.map((id) => all.find((t) => t.id === id) || { id, name: id });
+        }
+      }
+    } catch (err) {}
+
+    tools.forEach((tool) => {
+      const opt = document.createElement('option');
+      opt.value = tool.id;
+      opt.textContent = tool.name || tool.id;
+      relatedSelect.appendChild(opt);
+    });
+  }
+
+  function currentPayload(){
+    return {
+      promptPreview: document.getElementById('preview')?.textContent || '',
+      source: TOOL_ID,
+      sharedAt: new Date().toISOString(),
+      summary: {
+        platform: document.getElementById('platform')?.value || '',
+        format: document.getElementById('format')?.value || '',
+        goal: document.getElementById('goal')?.value || ''
+      }
+    };
+  }
+
+  document.getElementById('openRelated')?.addEventListener('click', async () => {
+    const target = relatedSelect.value;
+    if (!target) return setBridgeStatus('Choose a related tool first.');
+    try {
+      const tool = window.ToolRegistry ? await window.ToolRegistry.findById(target) : null;
+      if (tool && tool.entry) {
+        window.ToolBridge.openTool('../' + tool.entry);
+      } else {
+        setBridgeStatus('Selected tool has no entry metadata yet.');
+      }
+    } catch (err) {
+      setBridgeStatus('Unable to open selected tool.');
+    }
+  });
+
+  document.getElementById('sendRelated')?.addEventListener('click', () => {
+    const target = relatedSelect.value;
+    if (!target) return setBridgeStatus('Choose a related tool before sending context.');
+    if (!window.ToolBridge) return setBridgeStatus('Tool bridge unavailable.');
+    window.ToolBridge.sendContext(TOOL_ID, target, currentPayload());
+    setBridgeStatus(`Context prepared for ${target}. Open that tool to receive it.`);
+  });
+
+  document.getElementById('checkIncoming')?.addEventListener('click', () => {
+    if (!window.ToolBridge) return setBridgeStatus('Tool bridge unavailable.');
+    const incoming = window.ToolBridge.receiveContext(TOOL_ID);
+    if (!incoming) return setBridgeStatus('No incoming context queued for this tool.');
+    const data = incoming.data || {};
+    if (data.promptPreview && !document.getElementById('preview').textContent.trim()) {
+      document.getElementById('preview').textContent = data.promptPreview;
+    }
+    setBridgeStatus(`Received context from ${incoming.fromToolId}.`);
+  });
+
+  hydrateRelatedTools();
+})();
+</script>
+
 </body>
 </html>

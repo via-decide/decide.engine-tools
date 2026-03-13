@@ -1,0 +1,32 @@
+{
+  "id": "root-strength-calculator",
+  "name": "Root Strength Calculator",
+  "description": "Calculate fundamentals growth using practice, repetition, task difficulty, and consistency.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "completed_practice",
+    "learning_repetition",
+    "task_difficulty",
+    "consistency"
+  ],
+  "outputs": [
+    "root_strength_score"
+  ],
+  "relatedTools": [
+    "trunk-growth-calculator",
+    "weekly-harvest-engine"
+  ],
+  "entry": "tools/engine/root-strength-calculator/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

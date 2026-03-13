@@ -1,179 +1,63 @@
-Decide Engine Tools
+# Decide Engine Tools
 
-Decision infrastructure for builders.
+Preservation-first browser-native tool mesh for ViaDecide.
 
-Most software tools help you write, code, or manage tasks.
+## Current implementation scope
 
-This project focuses on something more fundamental:
+This repo now focuses on **Orchard Engine Wave 1 (Layer 1 — Farm)**.
 
-Helping people think, decide, and execute better.
+Wave 1 includes ten standalone mini-tools under `tools/engine/`:
 
-Decide Engine Tools is a collection of lightweight web tools designed to structure thinking, accelerate decision-making, and simplify complex workflows.
+1. player-signup
+2. orchard-profile-builder
+3. starter-farm-generator
+4. root-strength-calculator
+5. trunk-growth-calculator
+6. fruit-yield-engine
+7. daily-quest-generator
+8. weekly-harvest-engine
+9. thirty-day-promotion-engine
+10. fair-ranking-engine
 
+## Preservation-first rules
 
----
+- Existing standalone tools are preserved.
+- Changes are additive.
+- No unrelated folder is removed to fit architecture changes.
 
-Live Tools
+## Orchard metaphor map
 
-Try the tools directly:
+- roots = fundamentals
+- trunk = depth
+- branches = specialization
+- leaves = activity
+- fruits = completed outputs
+- seeds = reusable knowledge
+- water = consistency / energy
+- minerals = rare insight resources
+- soil = environment quality
+- sunlight = opportunity exposure
 
-https://via-decide.github.io/decide.engine-tools/
+## Shared foundation
 
-No installation required.
+Shared helpers used by Wave 1:
 
+- `shared/tool-registry.js`
+- `shared/tool-storage.js`
+- `shared/tool-bridge.js`
+- `shared/shared.css`
+- `shared/engine-utils.js`
+- `shared/engine-models.js`
 
----
+## What is deferred
 
-What This Project Is
+- Layer 2 (Commons) implementation,
+- Layer 3 (Market) implementation,
+- category routing and advanced orchestration.
 
-A collection of small, focused tools that solve specific thinking and execution problems.
+## Documentation
 
-Examples:
-
-turning vague ideas into structured AI prompts
-
-synthesizing research across multiple sources
-
-preparing for interviews
-
-designing simple AI agent workflows
-
-generating lightweight apps
-
-converting complex analysis into decision briefs
-
-
-Each tool focuses on one problem and solves it simply.
-
-
----
-
-Tools Included
-
-Prompt Alchemy
-Generate structured prompts for AI systems.
-
-Agent Builder
-Design simple AI agents and workflows.
-
-App Generator
-Create lightweight tools and micro-apps.
-
-Interview Prep
-Prepare structured answers for interviews.
-
-Student Research
-Combine multiple sources into structured insights.
-
-Decision Brief Guide
-Turn complex thinking into concise decision summaries.
-
-Multi Source Research Explained
-Understand and structure research across multiple sources.
-
-Sales Dashboard
-Track and analyze sales performance.
-
-Founder
-Founder positioning and narrative builder.
-
-
----
-
-Design Philosophy
-
-The tools follow a few principles.
-
-1. Small tools win
-
-Each tool solves a specific problem.
-
-Not a large platform.
-
-2. Thinking > features
-
-The goal is structured thinking, not feature complexity.
-
-3. Fast to use
-
-Most tools should work in seconds.
-
-4. Clear outcomes
-
-Every tool produces a useful output:
-
-a prompt
-
-a brief
-
-a plan
-
-a workflow
-
-
-
----
-
-Why This Exists
-
-AI tools make content generation easier.
-
-But most problems people face are decision problems:
-
-What should I build?
-
-Is this idea worth pursuing?
-
-How should I structure this research?
-
-What should my next step be?
-
-
-These tools are designed to support decision workflows, not just content generation.
-
-
----
-
-Project Structure
-
-Each tool is implemented as a standalone web page.
-
-This keeps the system:
-
-simple
-
-modular
-
-easy to extend
-
-
-New tools can be added without modifying the entire system.
-
-
----
-
-Repository
-
-Source code:
-
-https://github.com/via-decide/decide.engine-tools
-
-Live tools:
-
-https://via-decide.github.io/decide.engine-tools/
-
-
----
-
-Contributing
-
-New tools, improvements, and experiments are welcome.
-
-Ideas that fit the philosophy of simple decision tools are encouraged.
-
-
----
-
-ViaDecide
-
-This project is part of the ViaDecide ecosystem, focused on building tools and systems that improve how people think, decide, and execute.
+- `ORCHARD_ENGINE_DESIGN.md`
+- `ARCHITECTURE.md`
+- `AGENTS.md`
+- `CONTRIBUTING.md`

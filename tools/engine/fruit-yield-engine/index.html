@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fruit Yield Engine</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Fruit Yield Engine</h1>
+      <p>Convert completed task artifacts into fruit outputs using quality and completion status.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <label for="payload">Input JSON</label>
+        <textarea id="payload" placeholder='{"example": 1}'></textarea>
+        <label for="mode">Growth Mode</label>
+        <select id="mode">
+          <option value="steady">steady water cycle</option>
+          <option value="accelerated">accelerated sunlight push</option>
+          <option value="resilient">resilient soil rebuild</option>
+        </select>
+        <div class="toolbar">
+          <button id="run" class="primary">Run</button>
+          <button id="copy">Copy</button>
+          <button id="download">Download</button>
+        </div>
+        <p class="small">Metaphor map: roots=fundamentals, trunk=depth, branches=specialization, leaves=activity, fruits=outputs, seeds=reusable knowledge, water=consistency, minerals=rare insights, soil=environment, sunlight=opportunity.</p>
+      </article>
+      <article class="card">
+        <h2>Result</h2>
+        <pre id="output" class="output"></pre>
+      </article>
+    </section>
+  </main>
+  <script src="../../../shared/tool-storage.js"></script>
+  <script src="../../../shared/engine-utils.js"></script>
+  <script src="../../../shared/engine-models.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>

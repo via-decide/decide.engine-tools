@@ -1,0 +1,33 @@
+{
+  "id": "player-signup",
+  "name": "Player Signup",
+  "description": "Create player identity, choose a starter archetype, and attach a starter orchard.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "player_name",
+    "archetype",
+    "orchard_name",
+    "focus_branch"
+  ],
+  "outputs": [
+    "player_profile",
+    "starter_orchard_link"
+  ],
+  "relatedTools": [
+    "orchard-profile-builder",
+    "starter-farm-generator"
+  ],
+  "entry": "tools/engine/player-signup/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

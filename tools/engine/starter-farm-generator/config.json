@@ -1,0 +1,31 @@
+{
+  "id": "starter-farm-generator",
+  "name": "Starter Farm Generator",
+  "description": "Initialize starter resources, tree slots, root strength, trunk level, and branch map.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "archetype",
+    "soil_quality",
+    "sunlight_exposure"
+  ],
+  "outputs": [
+    "starter_farm_state"
+  ],
+  "relatedTools": [
+    "player-signup",
+    "daily-quest-generator"
+  ],
+  "entry": "tools/engine/starter-farm-generator/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

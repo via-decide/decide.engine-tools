@@ -1,0 +1,32 @@
+{
+  "id": "fruit-yield-engine",
+  "name": "Fruit Yield Engine",
+  "description": "Convert completed task artifacts into fruit outputs using quality and completion status.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "artifact_title",
+    "artifact_quality",
+    "completion_state",
+    "effort_depth"
+  ],
+  "outputs": [
+    "fruit_output_summary"
+  ],
+  "relatedTools": [
+    "daily-quest-generator",
+    "weekly-harvest-engine"
+  ],
+  "entry": "tools/engine/fruit-yield-engine/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

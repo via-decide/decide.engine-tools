@@ -1,0 +1,32 @@
+{
+  "id": "weekly-harvest-engine",
+  "name": "Weekly Harvest Engine",
+  "description": "Score one weekly cycle using consistency, fruit completion, growth trend, task completion, and fairness.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "consistency",
+    "completed_fruits",
+    "growth_trend",
+    "task_completion_rate"
+  ],
+  "outputs": [
+    "weekly_harvest_score"
+  ],
+  "relatedTools": [
+    "fair-ranking-engine",
+    "thirty-day-promotion-engine"
+  ],
+  "entry": "tools/engine/weekly-harvest-engine/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

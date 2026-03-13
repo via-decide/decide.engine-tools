@@ -1,0 +1,31 @@
+{
+  "id": "daily-quest-generator",
+  "name": "Daily Quest Generator",
+  "description": "Generate deterministic daily farm quests for root, trunk, and harvest progress.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "current_root_score",
+    "current_trunk_score",
+    "recent_fruits"
+  ],
+  "outputs": [
+    "daily_quests"
+  ],
+  "relatedTools": [
+    "fruit-yield-engine",
+    "weekly-harvest-engine"
+  ],
+  "entry": "tools/engine/daily-quest-generator/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

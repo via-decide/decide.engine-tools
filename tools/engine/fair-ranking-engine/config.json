@@ -1,0 +1,33 @@
+{
+  "id": "fair-ranking-engine",
+  "name": "Fair Ranking Engine",
+  "description": "Compute merit ranking using consistency, quality, effort depth, improvement trend, and anti-spam controls.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "consistency",
+    "quality",
+    "effort_depth",
+    "improvement_trend",
+    "volume"
+  ],
+  "outputs": [
+    "fair_rank_score"
+  ],
+  "relatedTools": [
+    "weekly-harvest-engine",
+    "thirty-day-promotion-engine"
+  ],
+  "entry": "tools/engine/fair-ranking-engine/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

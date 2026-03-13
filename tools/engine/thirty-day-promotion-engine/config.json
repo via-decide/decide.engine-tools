@@ -1,0 +1,34 @@
+{
+  "id": "thirty-day-promotion-engine",
+  "name": "30-Day Promotion Engine",
+  "description": "Evaluate promotion readiness using roots, trunk, fruits, consistency, and anti-spam integrity checks.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "root_strength",
+    "trunk_growth",
+    "fruit_completion",
+    "consistency",
+    "spam_flags"
+  ],
+  "outputs": [
+    "promotion_status",
+    "promotion_reasons"
+  ],
+  "relatedTools": [
+    "weekly-harvest-engine",
+    "fair-ranking-engine"
+  ],
+  "entry": "tools/engine/thirty-day-promotion-engine/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

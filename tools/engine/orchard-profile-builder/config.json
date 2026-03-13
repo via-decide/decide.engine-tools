@@ -1,0 +1,32 @@
+{
+  "id": "orchard-profile-builder",
+  "name": "Orchard Profile Builder",
+  "description": "Build a visible orchard profile across roots, trunk, branches, leaves, fruits, seeds, and harvest history.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "player_name",
+    "profile_notes",
+    "branch_focuses"
+  ],
+  "outputs": [
+    "orchard_profile"
+  ],
+  "relatedTools": [
+    "player-signup",
+    "root-strength-calculator",
+    "trunk-growth-calculator"
+  ],
+  "entry": "tools/engine/orchard-profile-builder/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}

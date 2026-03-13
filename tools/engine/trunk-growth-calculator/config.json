@@ -1,0 +1,32 @@
+{
+  "id": "trunk-growth-calculator",
+  "name": "Trunk Growth Calculator",
+  "description": "Calculate depth and resilience from challenge completion, work depth, sustained effort, and setback recovery.",
+  "category": "engine-farm-wave1",
+  "audience": [
+    "students",
+    "researchers",
+    "founders",
+    "operators"
+  ],
+  "inputs": [
+    "challenge_completion",
+    "work_depth",
+    "sustained_effort",
+    "recovered_setbacks"
+  ],
+  "outputs": [
+    "trunk_growth_score"
+  ],
+  "relatedTools": [
+    "root-strength-calculator",
+    "weekly-harvest-engine"
+  ],
+  "entry": "tools/engine/trunk-growth-calculator/index.html",
+  "tags": [
+    "orchard-engine",
+    "wave1",
+    "farm-layer",
+    "merit-based"
+  ]
+}
