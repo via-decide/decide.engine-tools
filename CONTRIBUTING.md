@@ -45,3 +45,4 @@ Do not require all tools to adopt hooks immediately.
 ## New standalone orchestration pages
 
 When adding orchestration UX (for example graph/workflow pages), keep them outside existing tool folders unless the change is explicitly tool-specific. Prefer shared adapters under `/shared` and keep direct tool entrypoints untouched.
+- [ ] New tools have correct `category` in config.json (see ARCHITECTURE.md for valid categories).

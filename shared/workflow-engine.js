@@ -105,6 +105,7 @@
     }
 
     const byId = resolveToolMap(allTools);
+    const byId = new Map(allTools.map((tool) => [tool.id, tool]));
     const firstTool = byId.get(workflow.steps[0]);
     if (!firstTool || !firstTool.entry) {
       return { ok: false, message: 'First step tool entry not found.' };
@@ -117,6 +118,7 @@
       currentIndex: 0
     };
     setRunState(runState);
+    localStorage.setItem('viadecide.workflow-builder.run-state', JSON.stringify(runState));
 
     for (let i = 0; i < workflow.steps.length - 1; i += 1) {
       const fromToolId = workflow.steps[i];
@@ -160,5 +162,9 @@
     getRunState,
     clearRunState,
     openNextToolFromCurrent
+  global.WorkflowEngine = {
+    buildStepOrder,
+    createWorkflow,
+    runWorkflow
   };
 })(window);

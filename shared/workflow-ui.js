@@ -133,6 +133,8 @@
             }
 
             uniqueEdgePush(state.connectFrom, instanceId);
+            const exists = state.edges.some((e) => e.from === state.connectFrom && e.to === instanceId);
+            if (!exists) state.edges.push({ from: state.connectFrom, to: instanceId });
             state.connectFrom = null;
             syncCanvas();
           }
@@ -149,6 +151,10 @@
   function syncStepsPreview() {
     const output = el('workflow-steps-preview');
     const workflow = currentWorkflow();
+  function syncStepsPreview() {
+    const output = el('workflow-steps-preview');
+    const id = el('workflow-id').value.trim() || 'untitled-workflow';
+    const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
     output.textContent = JSON.stringify({ id: workflow.id, steps: workflow.steps }, null, 2);
   }
 
@@ -207,6 +213,7 @@
         alert(check.message);
         return;
       }
+      const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
       global.WorkflowStorage.save(workflow);
       refreshSavedList();
     });
@@ -225,6 +232,8 @@
         alert(check.message);
         return;
       }
+      const id = el('workflow-id').value.trim() || 'untitled-workflow';
+      const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
       const result = global.WorkflowEngine.runWorkflow(workflow, state.tools);
       if (!result.ok) alert(result.message);
     });
