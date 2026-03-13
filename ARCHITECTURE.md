@@ -136,3 +136,35 @@ Future category routing will target metadata/folders like:
 - `/tools/researchers/`
 
 This phase does not implement final routing logic. It only ensures metadata and shared interfaces are ready.
+
+---
+
+## 6) Wave 1 Simulation Layer (additive)
+
+### Where the new simulation tools live
+
+```
+tools/engine/synthetic-player-generator/   ← NEW (Wave 1 simulation)
+tools/engine/wave1-simulation-runner/      ← NEW (Wave 1 simulation)
+tools/engine/balance-dashboard/            ← NEW (Wave 1 simulation)
+shared/simulation-utils.js                 ← NEW shared helper
+shared/engine-balance.js                   ← NEW shared helper
+```
+
+The original `tools/engine/simulation-runner/` is preserved unchanged. The new `wave1-simulation-runner/` is a purpose-built replacement with full archetype simulation, not a modification of the original.
+
+### How they relate to Wave 1 engine concepts
+
+The simulation tools validate the farm loop concepts already implemented across the existing engine tools:
+
+- **Synthetic Player Generator** creates test players matching the archetypes used by `player-signup/` and `starter-farm-generator/`.
+- **Wave 1 Simulation Runner** models the daily/weekly/monthly loops from `daily-quest-generator/`, `root-strength-calculator/`, `trunk-growth-calculator/`, `fruit-yield-engine/`, `weekly-harvest-engine/`, `thirty-day-promotion-engine/`, and `fair-ranking-engine/`.
+- **Balance Dashboard** consumes simulation output and answers whether the loop is fair before any Layer 2 or Layer 3 tools are activated.
+
+### How to extend later without breaking the repo
+
+1. New simulation tools should be added as new folders under `tools/engine/`.
+2. Shared helpers should be added as new files under `shared/` — never modify `engine-utils.js` or `engine-models.js` for simulation-specific logic.
+3. Layer 2 simulation (commons/trust) should add its own shared helpers (e.g., `shared/commons-simulation.js`).
+4. Layer 3 simulation (market/recruiter) should follow the same pattern.
+5. The balance dashboard can be extended with new chart blocks without rewriting existing ones.

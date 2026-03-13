@@ -267,3 +267,39 @@ A new modular generation ecosystem now exists under:
 - `/docs` for architecture and usage guidance
 
 See `docs/README.md` and `docs/ARCHITECTURE.md` for details.
+
+---
+
+## Wave 1 Simulation Tools
+
+Three new tools validate that the Layer 1 (Farm) game loop is fair before any expansion:
+
+### 1. Synthetic Player Generator
+
+`tools/engine/synthetic-player-generator/index.html`
+
+Generates realistic test players across 6 archetypes (slow learner, fast learner, spammer, consistent player, lazy player, high-potential irregular). Configurable count, archetype mix, and RNG seed.
+
+### 2. Wave 1 Simulation Runner
+
+`tools/engine/wave1-simulation-runner/index.html`
+
+Runs 30/60/90-day simulations modeling daily quest completion, root growth, trunk growth, fruit generation, weekly harvest scoring, monthly promotion evaluation, and fair ranking. Outputs leaderboard, archetype summaries, fairness notes, and exploit indicators.
+
+### 3. Balance Dashboard
+
+`tools/engine/balance-dashboard/index.html`
+
+Analyzes simulation output for fairness: spam advantage ratio, quality-vs-volume balance, archetype domination risk, promotion rate distribution, and weekly/fruit score distributions. Renders a BALANCED / MINOR ISSUES / REBALANCE NEEDED verdict.
+
+### How to use
+
+1. Open each tool's `index.html` directly in a browser (no build step, no server).
+2. Start with the Synthetic Player Generator to create a player set.
+3. Run the Wave 1 Simulation Runner (it auto-loads generated players from localStorage).
+4. Open the Balance Dashboard for a full fairness analysis.
+5. Tune parameters and re-run until the verdict is BALANCED.
+
+### Why Layer 2 and Layer 3 should wait
+
+Layer 2 (Commons: seed exchange, fruit sharing, circles, peer validation, trust scoring) and Layer 3 (Market: recruiter dashboard, discovery search, hire readiness) depend on a proven fair Layer 1 loop. If spammers can dominate ranking or lazy players can accidentally promote, the trust and recruiter layers will inherit and amplify those imbalances. Validate Wave 1 first.
