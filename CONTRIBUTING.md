@@ -41,3 +41,4 @@ Do not require all tools to adopt hooks immediately.
 - [ ] No unrelated files removed.
 - [ ] Changes are additive and import-friendly.
 - [ ] Future category routing remains deferred unless explicitly requested.
+- [ ] New tools have correct `category` in config.json (see ARCHITECTURE.md for valid categories).
