@@ -26,4 +26,7 @@
     "mesh-ready",
     "planning"
   ]
+  "inputs": ["idea", "target_users", "constraints"],
+  "outputs": ["product_spec"],
+  "relatedTools": ["promptalchemy", "code-generator", "template-vault"]
 }

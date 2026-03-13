@@ -25,4 +25,7 @@
     "mesh-ready",
     "export"
   ]
+  "inputs": ["content", "format"],
+  "outputs": ["export_blob"],
+  "relatedTools": ["promptalchemy", "script-generator", "code-reviewer", "template-vault"]
 }

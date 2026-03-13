@@ -25,4 +25,7 @@
     "mesh-ready",
     "prompting"
   ]
+  "inputs": ["idea", "context", "goal"],
+  "outputs": ["structured_prompt"],
+  "relatedTools": ["script-generator", "spec-builder", "code-generator"]
 }
