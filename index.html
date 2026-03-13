@@ -166,98 +166,15 @@
     </section>
 
     <section id="tools">
-      <h2>All tools with short CTA + quick use guide</h2>
-      <div class="tools-grid">
-        <article class="tool-card">
-          <h3>ViaDecide Agent</h3>
-          <p>Production-style assistant interface for task execution and decision support.</p>
-          <div class="use-tip">How to use: Open, type your request, and run guided actions.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/agent/">Open Tool</a>
-          <a class="btn" href="agent/">Open Tool</a>
-          <a class="btn" href="agent.html">Open Tool</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>App Generator</h3>
-          <p>Create app blueprints rapidly from ideas to launch structure.</p>
-          <div class="use-tip">How to use: Fill idea inputs, generate specs, then export/share.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/app-generator/">Generate App Plan</a>
-          <a class="btn" href="app-generator/">Generate App Plan</a>
-          <a class="btn" href="app-generator.html">Generate App Plan</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>Decision Brief Guide</h3>
-          <p>Fast framework to draft policy/strategy briefs in minutes.</p>
-          <div class="use-tip">How to use: Follow prompts section-by-section, then finalize brief.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/decision-brief-guide/">Build Brief</a>
-          <a class="btn" href="decision-brief-guide/">Build Brief</a>
-          <a class="btn" href="decision-brief-guide.html">Build Brief</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>Retro Interview Practice</h3>
-          <p>Offline interview prep experience with realistic questioning.</p>
-          <div class="use-tip">How to use: Start practice mode, answer, review feedback loops.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/interview-prep/">Start Practice</a>
-          <a class="btn" href="interview-prep/">Start Practice</a>
-          <a class="btn" href="interview-prep%20(2).html">Start Practice</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>Multi-Source Research Explained</h3>
-          <p>Shows how ViaDecide synthesizes multiple sources for better decisions.</p>
-          <div class="use-tip">How to use: Read flow, replicate framework in your own research.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/multi-source-research-explained/">Learn Framework</a>
-          <a class="btn" href="multi-source-research-explained/">Learn Framework</a>
-          <a class="btn" href="multi-source-research-explained.html">Learn Framework</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>PromptAlchemy</h3>
-          <p>Prompt pack and templates for content, product, and research workflows.</p>
-          <div class="use-tip">How to use: Pick channel type, customize prompt, copy and deploy.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/prompt-alchemy/">Use Prompt Pack</a>
-          <a class="btn" href="prompt-alchemy/">Use Prompt Pack</a>
-          <a class="btn" href="prompt-alchemy.html">Use Prompt Pack</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>MSME Sales Dashboard</h3>
-          <p>Simple data dashboard to track sales and view fast business insights.</p>
-          <div class="use-tip">How to use: Add rows, hit generate, inspect trends for decisions.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/sales-dashboard/">Open Dashboard</a>
-          <a class="btn" href="sales-dashboard/">Open Dashboard</a>
-          <a class="btn" href="sales-dashboard.html">Open Dashboard</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>Student Research</h3>
-          <p>Decision research workspace for students and academic project users.</p>
-          <div class="use-tip">How to use: Define topic, collect evidence, export structured output.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/student-research/">Start Research</a>
-          <a class="btn" href="student-research/">Start Research</a>
-          <a class="btn" href="student-research.html">Start Research</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>Wings of Fire Quiz</h3>
-          <p>Interactive multiplayer quiz experience to boost engagement and learning.</p>
-          <div class="use-tip">How to use: Create/join quiz, answer rounds, and compare scores.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/wings-of-fire-quiz/">Play Quiz</a>
-          <a class="btn" href="wings-of-fire-quiz/">Play Quiz</a>
-          <a class="btn" href="wings-of-fire-quiz%20(1).html">Play Quiz</a>
-        </article>
-
-        <article class="tool-card">
-          <h3>Founder Weekly Decision Reviews</h3>
-          <p>Founder page to understand execution thinking and decision principles.</p>
-          <div class="use-tip">How to use: Follow review sections and apply frameworks weekly.</div>
-          <a class="btn" href="https://via-decide.github.io/decide.engine-tools/founder/">View Founder Page</a>
-          <a class="btn" href="founder/">View Founder Page</a>
-          <a class="btn" href="founder.html">View Founder Page</a>
-        </article>
+      <h2>Tools by category</h2>
+      <p style="color: var(--muted);">Browse all standalone tools grouped by their current category metadata.</p>
+      <div class="tool-card" style="margin-bottom: 16px;">
+        <h3>Tool Graph Explorer</h3>
+        <p>Visual map of tools and their related tool relationships.</p>
+        <div class="use-tip">How to use: Zoom, pan, hover to view descriptions, and click a node to open its tool.</div>
+        <a class="btn" href="tool-graph.html">Open Tool Graph Explorer</a>
       </div>
+      <div id="categorized-tools"></div>
     </section>
 
     <section id="mission">
@@ -281,6 +198,59 @@
     © 2026 ViaDecide / decide.engine • Open source decision tooling for practical impact.
   </footer>
 
+
+  <script src="shared/tool-registry.js"></script>
+  <script>
+    (async function renderCategorizedTools() {
+      if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
+
+      const labels = {
+        creators: 'Creators',
+        coders: 'Coders',
+        researchers: 'Researchers',
+        business: 'Business',
+        education: 'Education',
+        games: 'Games',
+        simulations: 'Simulations',
+        system: 'System',
+        misc: 'Misc'
+      };
+
+      const container = document.getElementById('categorized-tools');
+      if (!container) return;
+
+      const tools = await window.ToolRegistry.loadAll();
+      const grouped = new Map(Object.keys(labels).map((key) => [key, []]));
+
+      tools.forEach((tool) => {
+        const key = grouped.has(tool.category) ? tool.category : 'misc';
+        grouped.get(key).push(tool);
+      });
+
+      container.innerHTML = Object.entries(labels)
+        .map(([key, label]) => {
+          const items = (grouped.get(key) || []).sort((a, b) => a.name.localeCompare(b.name));
+          const cards = items.length
+            ? items.map((tool) => `
+              <article class="tool-card">
+                <h3>${tool.name}</h3>
+                <p>${tool.description || 'Standalone browser tool.'}</p>
+                <div class="use-tip">Path: ${tool.entry}</div>
+                <a class="btn" href="${tool.entry}">Open Tool</a>
+              </article>
+            `).join('')
+            : '<p style="color: var(--muted);">No tools currently mapped.</p>';
+
+          return `
+            <section aria-label="${label}">
+              <h3>${label}</h3>
+              <div class="tools-grid">${cards}</div>
+            </section>
+          `;
+        })
+        .join('');
+    })();
+  </script>
   <script src="router.js"></script>
 </body>
 </html>
