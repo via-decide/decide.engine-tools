@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-weather-system-tool-in-toolsengineweather-sy
+Title: Add weather-system tool in tools/engine/weather-system/ with config.j...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working weather-system tool that injects randomized resource variables into the daily loop
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
