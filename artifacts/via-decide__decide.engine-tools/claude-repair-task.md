@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add genesis-seed-initializer tool in tools/engine/genesis-seed-initializer/ with config.json, index.html, tool.js. Interface for new players to receive an ID and select their "Soil" (industry/domain). Initializes the player profile in localStorage with 0 roots, 10 starting Water, and "Dormant Seed" status. Vanilla JS, UI based on global-theme.css.
 
 RULES
 1. Audit touched files first and identify regressions.
