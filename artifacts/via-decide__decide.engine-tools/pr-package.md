@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-resource-optimization-puzzle-tool-in-tool
+Title: Create resource-optimization-puzzle tool in tools/engine/resource-opt...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working resource-optimization-puzzle mini-game for strategic resource management
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
