@@ -1,3 +1,9 @@
+²Branch: simba/create-candidate-comparison-view-tool-in-toolsen
+Title: Create candidate-comparison-view tool in tools/engine/candidate-compa...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working candidate-comparison-view tool for market layer recruiter analysis
 Branch: simba/integrate-gsap-greensock-via-cdn-into-assetsjsma
 Title: Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.j...
 

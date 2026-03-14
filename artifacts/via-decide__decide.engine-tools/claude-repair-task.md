@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Create candidate-comparison-view tool in tools/engine/candidate-comparison-view/ with config.json, index.html, tool.js. Enables recruiters to select multiple players and visually compare their root fundamentals, branch depth, trust scores, and fruit yields side-by-side. Vanilla JS, standalone UI.
 Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.js. Rewrite the "Magnetic Button" logic to use GSAP's gsap.to() for buttery-smooth spring physics instead of native CSS transitions. Also, create a GSAP timeline function to trigger the "Shimmering Text" and "Glowing Border" evolution alerts in the growth-milestone-engine.
 Integrate vanilla-tilt.js via CDN into the root index.html. Apply the data-tilt attribute and initialize the tilt physics on all .orchard-panel game cards in the Bento Grid. Configure it for a subtle 3D glare effect (data-tilt-glare="true") to enhance the glassmorphism look when the user hovers over the games.
 Create _assets/js/engine-bus.js. This is the central wiring hub. Create a global window.OrchardBus object with .on(event, callback) and .emit(event, payload) methods (wrapping standard CustomEvents). Update the new router to automatically clear specific tool listeners when navigating away to prevent memory leaks, while keeping core state listeners alive.
