@@ -1,3 +1,9 @@
+Branch: simba/create-assetsjsengine-busjs-this-is-the-central-
+Title: Create _assets/js/engine-bus.js. This is the central wiring hub. Crea...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working standardized event bus that makes it perfectly clear for AI how to wire backend tools to the UI
 Branch: simba/update-orchard-routerjs-and-global-themecss-to-a
 Title: Update orchard-router.js and global-theme.css to add view transitions...
 

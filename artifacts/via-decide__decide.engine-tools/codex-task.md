@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create _assets/js/engine-bus.js. This is the central wiring hub. Create a global window.OrchardBus object with .on(event, callback) and .emit(event, payload) methods (wrapping standard CustomEvents). Update the new router to automatically clear specific tool listeners when navigating away to prevent memory leaks, while keeping core state listeners alive.
+
+CONSTRAINTS
+pure Vanilla JS; must interface perfectly with the existing localStorage state manager
 Update orchard-router.js and global-theme.css to add view transitions. Before injecting new HTML into #game-stage, apply a CSS class .fade-out-scale to the old content. Wait for the transition duration, swap the innerHTML, and apply .fade-in-scale to the new content. If the browser supports the native document.startViewTransition() API, use that as the primary method for buttery smooth, morphing transitions between tools.
 
 CONSTRAINTS
