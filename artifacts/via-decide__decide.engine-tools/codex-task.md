@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add daily-streak-tracker tool in tools/engine/daily-streak-tracker/ with config.json, index.html, tool.js. Monitors continuous player logins and quest completions, calculating multipliers for consistency (water/energy accumulation). Includes visual calendar widget. Vanilla JS.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
