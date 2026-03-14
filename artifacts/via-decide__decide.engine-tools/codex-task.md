@@ -2,9 +2,14 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 Add candidate-comparison-view tool in tools/engine/candidate-comparison-view/ with config.json, index.html, tool.js. Allows recruiters to view side-by-side comparisons of player orchard profiles, emphasizing consistency, trust scores, and growth trends over pure volume. Vanilla JS.
+fix shared/tool-registry.js - the file has a syntax error caused by an unclosed TOOL_OVERRIDES object literal and triple-declared const variables in normalizeTool(); rewrite the file as a single clean IIFE with one TOOL_OVERRIDES object, one normalizeTool function, and no duplicate declarations; preserve all existing tool IDs in importableToolDirs and ENGINE_TOOL_IDS
 
 CONSTRAINTS
-preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
+edit shared/tool-registry.js only; do not touch any other file; preserve all importableToolDirs entries
+fix shared/tool-graph.js - the file has a syntax error from a duplicate IIFE header, a broken unclosed init() function, and a misplaced comment that splits a return statement; rewrite as a single clean IIFE with use strict at top, one set of const declarations, one init() function with error handling, and no duplicate code
+
+CONSTRAINTS
+edit shared/tool-graph.js only; do not touch any other file; preserve all graph rendering and pan/zoom logic
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
