@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-progress-timeline-viz-tool-in-toolsengine
+Title: Create progress-timeline-viz tool in tools/engine/progress-timeline-v...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working progress-timeline-viz tool displaying historical player growth
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
