@@ -1,9 +1,9 @@
-Branch: simba/add-regex-tester-tool-in-toolsregex-tester-with-
-Title: add regex-tester tool in tools/regex-tester/ with config.json index.h...
+Branch: simba/add-flashcard-engine-tool-in-toolsflashcard-engi
+Title: add flashcard-engine tool in tools/flashcard-engine/ with config.json...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working regex-tester tool with PR
+- Goal: working flashcard-engine tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
