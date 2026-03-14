@@ -4,9 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add candidate-comparison-view tool in tools/engine/candidate-comparison-view/ with config.json, index.html, tool.js. Allows recruiters to view side-by-side comparisons of player orchard profiles, emphasizing consistency, trust scores, and growth trends over pure volume. Vanilla JS.
-fix shared/tool-registry.js - the file has a syntax error caused by an unclosed TOOL_OVERRIDES object literal and triple-declared const variables in normalizeTool(); rewrite the file as a single clean IIFE with one TOOL_OVERRIDES object, one normalizeTool function, and no duplicate declarations; preserve all existing tool IDs in importableToolDirs and ENGINE_TOOL_IDS
-fix shared/tool-graph.js - the file has a syntax error from a duplicate IIFE header, a broken unclosed init() function, and a misplaced comment that splits a return statement; rewrite as a single clean IIFE with use strict at top, one set of const declarations, one init() function with error handling, and no duplicate code
+add tools/games/memory-match/ with config.json index.html tool.js - vanilla JS card flip memory game with 16 cards, move counter, timer, win detection, saves best time to localStorage key orchard_engine_memory_best
 
 RULES
 1. Audit touched files first and identify regressions.
