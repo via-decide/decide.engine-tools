@@ -1,3 +1,5 @@
+Branch: simba/add-tetris-game-tool-in-toolstetris-game-with-co
+Title: add tetris-game tool in tools/tetris-game/ with config.json index.htm...
 Branch: simba/add-color-palette-generator-tool-in-toolscolor-p
 Title: add color-palette-generator tool in tools/color-palette-generator/ wi...
 Branch: simba/add-flashcard-engine-tool-in-toolsflashcard-engi
@@ -15,6 +17,7 @@ Title: add swot-analyzer tool in tools/swot-analyzer/ with config.json index...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working tetris-game tool with PR
 - Goal: working color-palette-generator tool with PR
 - Goal: working flashcard-engine tool with PR
 - Goal: working swot-analyzer tool with PR

@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+add tetris-game tool in tools/tetris-game/ with config.json index.html tool.js. Falling block puzzle, vanilla JS, standalone.
 add color-palette-generator tool in tools/color-palette-generator/ with config.json index.html tool.js. Generate harmonious color palettes from seed color.
 add flashcard-engine tool in tools/flashcard-engine/ with config.json index.html tool.js. Spaced repetition flashcards with JSON deck support.
 add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
