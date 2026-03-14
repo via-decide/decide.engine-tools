@@ -2,6 +2,15 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 add tools/creators/social-content-generator/ with config.json index.html tool.js - a standalone social media content generator; user enters one topic/idea and clicks Generate; the tool outputs ready-to-copy scripts for 7 sections: (1) LinkedIn Post, (2) WhatsApp Channel Post, (3) YouTube Title + Description + First Comment + Ping Comment, (4) Community Post, (5) Spotify Episode Title + Description + Post Time suggestion; plus an AI Image Prompt for each platform; each section has its own labelled card with a Copy button; all output is pure text generated from templates using the input topic; use the Orchard palette colors soil #1A1614 leaf #52B756 water #29B6F6 gold #FFCA28; layout is two columns on desktop, single column on mobile; save last input to localStorage key social_content_generator_draft
+add tools/games/resource-puzzle/ with config.json index.html tool.js - resource allocation puzzle where player distributes 100 water/nutrients across 3 tree slots to maximize fruit yield score, uses orchard palette colors, saves high score to localStorage
+
+CONSTRAINTS
+edit tools/games/resource-puzzle/ only; no frameworks; no shared file changes
+add tools/games/quiz-engine/ with config.json index.html tool.js - JSON-driven quiz tool, 5 hardcoded orchard/career questions, multiple choice, score at end, emits engine:quiz_completed with {score, total} on finish
+
+CONSTRAINTS
+edit tools/games/quiz-engine/ only; no frameworks; no shared file changes
+add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
 
 CONSTRAINTS
 edit tools/creators/social-content-generator/ only; do not touch router.js tool-registry.js index.html README or any shared file; no external APIs; all generation is template-based vanilla JS; load ../../shared/shared.css and tool.js only
