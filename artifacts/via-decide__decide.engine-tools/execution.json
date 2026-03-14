@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-toolsengineevent-notification-hub-build-a",
   "branch": "simba/create-toolsenginelive-event-scheduler-build-a-v",
   "branch": "simba/create-toolsengineserver-tournament-engine-build",
   "branch": "simba/create-toolsengineserver-boss-engine-build-a-hea",

@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineevent-notification-hub-build-a
+Title: Create tools/engine/event-notification-hub/. Build a player-facing UI...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A unified UI dashboard where players can track all ongoing, future, and past server events and claim rewards.
 Branch: simba/create-toolsenginelive-event-scheduler-build-a-v
 Title: Create tools/engine/live-event-scheduler/. Build a Vanilla JS admin d...
 

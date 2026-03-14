@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/event-notification-hub/. Build a player-facing UI panel that reads orchard_engine_scheduled_events and displays a tabbed inbox: "Active", "Upcoming", and "Completed". Listen for engine:tournament_started, engine:boss_defeated, etc., to render visual alerts. Use a clean, list-based layout with countdown timers for active events.
+
+CONSTRAINTS
+pure Vanilla JS; use Orchard CSS variables; standalone execution.
 Create tools/engine/live-event-scheduler/. Build a Vanilla JS admin dashboard to manage scheduled server events. UI should allow creating entries for Tournaments and Bosses with fields: id, type, startTime, endTime, reward, and targetGoal. The tool must save an array of these objects to localStorage.getItem('orchard_engine_scheduled_events') and dispatch window.dispatchEvent(new CustomEvent('engine:events_updated')) when changes are saved.
 
 CONSTRAINTS
