@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-seasonal-events-engine-tool-in-toolsenginese
+Title: Add seasonal-events-engine tool in tools/engine/seasonal-events-engin...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working seasonal-events-engine tool that applies temporary global modifiers to game variables
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
