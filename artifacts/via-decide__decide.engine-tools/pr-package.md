@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-archetype-distribution-analyzer-tool-in-tool
+Title: Add archetype-distribution-analyzer tool in tools/engine/archetype-di...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working archetype-distribution-analyzer tool that visualizes population specialization trends
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
