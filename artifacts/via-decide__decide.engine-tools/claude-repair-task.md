@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create tools/engine/upsc-master-os/. Take the provided monolithic "UPSC 2026 Engine" prototype and split it into the standard Orchard Engine 3-file structure. 1. index.html: Contain the DOM, Tailwind/Chart.js/PDF.js CDN scripts, and the inline CSS. 2. tool.js: Extract all the vanilla JavaScript objects (AppData, YouTubeAPI, PDFExtractor, Orb, StudyEngine, Missions, ResearchVault, Tracker, PYQ, AIEval, ChartsData) and the DOMContentLoaded event listeners into this file. 3. config.json: Create the metadata for the tool registry (e.g., isEngineTool: false, gameIcon: "🏛️", gameDescription: "Master Operating System for UPSC 2026 Preparation").
+Create tools/engine/upsc-mains-simulator/. Build a strict, timed text-editor UI. Users select a question type (10-marker or 15-marker) which starts an un-pausable countdown (7 or 11 minutes). Disable paste events (onpaste="return false"). Include a live Word Count and WPM tracker. Upon timeout or manual submit, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_mains_written', { detail: { answerText } })) to send the payload to the OS AI Evaluator.
 
 RULES
 1. Audit touched files first and identify regressions.
