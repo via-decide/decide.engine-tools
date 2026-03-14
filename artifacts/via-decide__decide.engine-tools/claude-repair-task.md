@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add snake-game tool in tools/snake-game/ with config.json index.html tool.js. Classic snake game, vanilla JS, standalone browser tool.
+add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
 
 RULES
 1. Audit touched files first and identify regressions.

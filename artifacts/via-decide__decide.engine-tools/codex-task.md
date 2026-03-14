@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add snake-game tool in tools/snake-game/ with config.json index.html tool.js. Classic snake game, vanilla JS, standalone browser tool.
+add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js

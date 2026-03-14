@@ -1,9 +1,9 @@
-Branch: simba/add-snake-game-tool-in-toolssnake-game-with-conf
-Title: add snake-game tool in tools/snake-game/ with config.json index.html ...
+Branch: simba/add-regex-tester-tool-in-toolsregex-tester-with-
+Title: add regex-tester tool in tools/regex-tester/ with config.json index.h...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working snake-game tool with PR
+- Goal: working regex-tester tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
