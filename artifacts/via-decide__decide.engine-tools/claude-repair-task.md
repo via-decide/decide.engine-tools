@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
+Create candidate-comparison-view tool in tools/engine/candidate-comparison-view/ with config.json, index.html, tool.js. Enables recruiters to select multiple players and visually compare their root fundamentals, branch depth, trust scores, and fruit yields side-by-side. Vanilla JS, standalone UI.
 
 RULES
 1. Audit touched files first and identify regressions.
