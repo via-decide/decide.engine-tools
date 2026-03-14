@@ -5,6 +5,12 @@
   const sections = [...document.querySelectorAll('main section[id]')];
   const routeAliases = { researchers: 'research' };
 
+  const routeAliases = {
+    researchers: 'research'
+  };
+
+  const canonicalRoute = (id) => routeAliases[id] || id;
+
   /* ── Complete tool path map ── */
 
   /* Root-level standalone tools */
@@ -108,6 +114,19 @@
       return;
     }
     setActive('home');
+    const canonicalId = canonicalRoute(id);
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', canonicalRoute(link.getAttribute('data-route')) === canonicalId);
+    });
+  };
+
+  const goToRoute = (id, { smooth = true, updateHash = true } = {}) => {
+    const canonicalId = canonicalRoute(id);
+    const section = document.getElementById(canonicalId);
+    if (!section) return;
+    if (updateHash) history.replaceState(null, '', `#${canonicalId}`);
+    section.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    setActive(canonicalId);
   };
 
   /* ── Tool path resolution ── */
@@ -187,11 +206,23 @@
   const initial = routeFromHash();
   if (initial && document.getElementById(initial)) {
     setTimeout(() => goToRoute(initial), 50);
+  const initial = window.location.hash.replace('#', '');
+  const canonicalInitial = canonicalRoute(initial);
+  if (canonicalInitial && document.getElementById(canonicalInitial)) {
+    setTimeout(() => goToRoute(canonicalInitial, { smooth: false }), 50);
   } else {
     setActive('home');
   }
 
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    const canonicalHash = canonicalRoute(hash);
+    if (!document.getElementById(canonicalHash)) return;
+    goToRoute(canonicalHash, { smooth: false, updateHash: false });
+  });
+
   openToolFromQuery();
 
-  globalThis.Router = { resolveToolPath, allToolPaths };
+  globalThis.Router = { resolveToolPath, allToolPaths, canonicalRoute, routeAliases };
 })();
