@@ -1,9 +1,9 @@
-Branch: simba/create-toolsengineupsc-master-os-take-the-provid
-Title: Create tools/engine/upsc-master-os/. Take the provided monolithic "UP...
+Branch: simba/create-toolsengineupsc-csat-trainer-build-a-high
+Title: Create tools/engine/upsc-csat-trainer/. Build a highly focused quiz U...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: A fully functional, beautifully routed, standalone UPSC 2026 Master OS tool cleanly integrated into the engine repository.
+- Goal: A targeted CSAT daily practice tool that identifies time-management bottlenecks in quantitative aptitude.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
