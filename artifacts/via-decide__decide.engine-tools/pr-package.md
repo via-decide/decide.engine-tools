@@ -1,21 +1,15 @@
-Branch: simba/add-growth-milestone-engine-tool-in-toolsengineg
-Title: Add growth-milestone-engine tool in tools/engine/growth-milestone-eng...
+Branch: simba/fix-sharedtool-registryjs---the-file-has-a-synta
+Title: fix shared/tool-registry.js - the file has a syntax error caused by a...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working growth-milestone-engine tool that provides psychological feedback and state progression
-Branch: simba/add-daily-weather-replenisher-tool-in-toolsengin
-Title: Add daily-weather-replenisher tool in tools/engine/daily-weather-repl...
+- Goal: shared/tool-registry.js passes node --check and ToolRegistry.loadAll() works in browser
+Branch: simba/fix-sharedtool-graphjs---the-file-has-a-syntax-e
+Title: fix shared/tool-graph.js - the file has a syntax error from a duplica...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working daily-weather-replenisher tool to manage the daily energy economy
-Branch: simba/add-genesis-seed-initializer-tool-in-toolsengine
-Title: Add genesis-seed-initializer tool in tools/engine/genesis-seed-initia...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working genesis-seed-initializer tool to establish initial player state and environment
+- Goal: shared/tool-graph.js passes node --check and renders the tool graph correctly
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
