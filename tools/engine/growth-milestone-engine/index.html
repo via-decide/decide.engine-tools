@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Growth Milestone Engine</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --color-soil-dark: var(--bg, #1A1614);
+      --color-soil-light: var(--bg-alt, #282320);
+      --color-bark-brown: #4A3B32;
+      --color-leaf-green: var(--accent-2, #52B756);
+      --color-leaf-dark: #388E3C;
+      --color-water-blue: #29B6F6;
+      --color-mineral-gold: var(--accent, #FFCA28);
+      --color-burn-red: #E53935;
+      --color-toxic-green: #76FF03;
+      --color-text-main: var(--text, #F5E6D3);
+      --color-text-muted: var(--muted, #A18D82);
+      --font-heading: 'Merriweather', serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-pill: 99px;
+      --shadow-base: 0 8px 16px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 20px rgba(82, 183, 86, 0.4);
+      --shadow-burn: 0 0 20px rgba(229, 57, 53, 0.6);
+      --shadow-toxic: 0 0 20px rgba(118, 255, 3, 0.4);
+    }
+    * { box-sizing: border-box; }
+    body { background-color: var(--color-soil-dark); background-image: linear-gradient(rgba(74, 59, 50, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(74, 59, 50, 0.15) 1px, transparent 1px); background-size: 20px 20px; color: var(--color-text-main); font-family: var(--font-body); margin: 0; padding: 24px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    .dashboard { max-width: 900px; width: 100%; display: flex; flex-direction: column; gap: 24px; }
+    .orchard-panel { background-color: var(--color-soil-light); border: 2px solid var(--color-bark-brown); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow-base); display: flex; flex-direction: column; gap: 16px; position: relative; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--color-bark-brown); padding-bottom: 16px; margin-bottom: 8px; }
+    h1, h2, h3 { font-family: var(--font-heading); margin: 0; color: var(--color-text-main); }
+    h2 { font-size: 1.5rem; color: var(--color-mineral-gold); }
+    p { margin: 0; color: var(--color-text-muted); line-height: 1.6; }
+    .top-metrics { display: flex; gap: 16px; padding: 12px 16px; background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); border: 1px solid var(--color-bark-brown); font-weight: 600; margin-bottom: -8px; }
+    .metric-badge { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+    .env-bar { display: flex; gap: 16px; padding: 16px; background: rgba(0, 0, 0, 0.2); border-radius: var(--radius-sm); border: 1px dashed var(--color-bark-brown); flex-wrap: wrap; }
+    .env-stat { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 140px; }
+    .env-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+    select.env-select { background-color: var(--color-soil-dark); color: var(--color-text-main); border: 1px solid var(--color-bark-brown); padding: 8px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; outline: none; cursor: pointer; }
+    select.env-select:focus { border-color: var(--color-leaf-green); }
+    .resource-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; width: 100%; }
+    .resource-card { background-color: var(--color-soil-dark); border: 1px solid var(--color-bark-brown); border-radius: var(--radius-sm); padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .res-header { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; }
+    .res-bar-container { width: 100%; height: 8px; background-color: rgba(0,0,0,0.5); border-radius: var(--radius-pill); overflow: hidden; }
+    .res-bar-fill { height: 100%; transition: width 0.3s ease, background-color 0.3s ease; }
+    #water-bar { background-color: var(--color-water-blue); }
+    #nutrient-bar { background-color: var(--color-mineral-gold); }
+    #stress-bar { background-color: var(--color-burn-red); }
+    .pest-icons { color: var(--color-toxic-green); font-size: 0.9rem; letter-spacing: 2px; }
+    .stage-visualizer { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; background-color: rgba(26, 22, 20, 0.5); border: 1px dashed var(--color-bark-brown); border-radius: var(--radius-md); transition: all 0.8s ease; position: relative; overflow: hidden; }
+    .stage-visualizer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1; transition: background 0.8s ease; pointer-events: none; }
+    .stage-visualizer.weather-rain::before { background: linear-gradient(180deg, transparent, var(--color-water-blue)); }
+    .stage-visualizer.weather-sun::before { background: radial-gradient(circle at top, var(--color-mineral-gold), transparent 70%); }
+    .stage-visualizer.sprouted { border-color: var(--color-leaf-green); box-shadow: var(--shadow-glow); }
+    .stage-visualizer.burning { border-color: var(--color-burn-red); box-shadow: var(--shadow-burn); }
+    .stage-visualizer.infested { border-color: var(--color-toxic-green); box-shadow: var(--shadow-toxic); }
+    #canvas-container { width: 200px; height: 200px; margin-bottom: 16px; position: relative; z-index: 2; border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, transparent 70%); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .status-badge { padding: 6px 16px; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; background-color: var(--color-bark-brown); color: var(--color-text-main); z-index: 2; }
+    .progress-wrapper { width: 100%; margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .progress-labels { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); }
+    .progress-container { width: 100%; background-color: var(--color-soil-dark); border-radius: var(--radius-pill); height: 12px; border: 1px solid var(--color-bark-brown); overflow: hidden; }
+    .progress-fill { height: 100%; background-color: var(--color-leaf-green); width: 0%; transition: width 0.4s ease; background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent); background-size: 20px 20px; animation: moveStripes 1s linear infinite; }
+    @keyframes moveStripes { 0% { background-position: 0 0; } 100% { background-position: 20px 0; } }
+    .actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
+    .action-group { display: flex; flex-direction: column; gap: 8px; background: var(--color-soil-dark); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--color-bark-brown); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; padding: 10px 16px; border-radius: var(--radius-sm); border: none; cursor: pointer; transition: all 0.1s; position: relative; top: 0; width: 100%; }
+    .btn-action { background-color: var(--color-water-blue); color: #111; box-shadow: 0 4px 0 #0288D1; }
+    .btn-action:active:not(:disabled) { top: 4px; box-shadow: 0 0px 0 #0288D1; }
+    .btn-grow { background-color: var(--color-leaf-green); color: #111; box-shadow: 0 4px 0 var(--color-leaf-dark); }
+    .btn-grow:active:not(:disabled) { top: 4px; box-shadow: 0 0px 0 var(--color-leaf-dark); }
+    .btn-danger { background-color: var(--color-burn-red); color: white; box-shadow: 0 4px 0 #B71C1C; }
+    .btn-danger:active:not(:disabled) { top: 4px; box-shadow: 0 0px 0 #B71C1C; }
+    .btn-toxic { background-color: var(--color-toxic-green); color: #111; box-shadow: 0 4px 0 #64DD17; }
+    .btn-toxic:active:not(:disabled) { top: 4px; box-shadow: 0 0px 0 #64DD17; }
+    .btn:disabled { background-color: var(--color-bark-brown) !important; color: var(--color-text-muted) !important; cursor: not-allowed; box-shadow: none !important; top: 4px; }
+    .terminal { background-color: #000; border-radius: var(--radius-sm); padding: 16px; font-family: monospace; font-size: 0.85rem; color: var(--color-text-muted); height: 160px; overflow-y: auto; border: 1px solid var(--color-bark-brown); }
+    .log-success { color: var(--color-leaf-green); }
+    .log-info { color: var(--color-water-blue); }
+    .log-warn { color: var(--color-mineral-gold); }
+    .log-danger { color: var(--color-burn-red); font-weight: bold;}
+    .log-toxic { color: var(--color-toxic-green); }
+    .log-system { color: #A18D82; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="orchard-panel">
+      <div class="header">
+        <div>
+          <h2>Growth Milestone Engine</h2>
+          <p>The interconnected farming loop. Manage resources, combat pests, and grow.</p>
+        </div>
+      </div>
+
+      <div class="top-metrics">
+        <div class="metric-badge" style="color: var(--color-text-main);">📅 <span id="txt-day">Day 1</span></div>
+        <div class="metric-badge" style="color: var(--color-mineral-gold);">🪙 <span id="txt-credits">50</span> Credits</div>
+        <div class="metric-badge" id="badge-immunity" style="color: var(--color-water-blue); display: none; margin-left: auto;">🛡️ Immune</div>
+      </div>
+
+      <div class="env-bar" id="environment-panel">
+        <div class="env-stat">
+          <span class="env-label">🟤 Soil (Domain)</span>
+          <select class="env-select" id="select-soil">
+            <option value="Backend Systems">Backend Systems</option>
+            <option value="Frontend UI/UX">Frontend UI/UX</option>
+          </select>
+        </div>
+        <div class="env-stat">
+          <span class="env-label">☀️ Sunlight</span>
+          <select class="env-select" id="select-sun">
+            <option value="1.5">High (x1.5)</option>
+            <option value="1.0" selected>Normal (x1.0)</option>
+            <option value="0.5">Low (x0.5)</option>
+          </select>
+        </div>
+        <div class="env-stat">
+          <span class="env-label">🌧️ Weather</span>
+          <select class="env-select" id="select-weather">
+            <option value="rain">Light Rain (+Mod)</option>
+            <option value="sun">Sunny (Base)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="resource-dashboard">
+        <div class="resource-card"><div class="res-header"><span>💧 Water</span><span id="txt-water">30/30</span></div><div class="res-bar-container"><div class="res-bar-fill" id="water-bar" style="width: 100%;"></div></div></div>
+        <div class="resource-card"><div class="res-header"><span>✨ Nutrients</span><span id="txt-nutrients">100%</span></div><div class="res-bar-container"><div class="res-bar-fill" id="nutrient-bar" style="width: 100%;"></div></div></div>
+        <div class="resource-card"><div class="res-header"><span style="color: var(--color-burn-red);">🔥 Stress</span><span id="txt-stress" style="color: var(--color-burn-red);">0%</span></div><div class="res-bar-container"><div class="res-bar-fill" id="stress-bar" style="width: 0%;"></div></div></div>
+        <div class="resource-card" style="border-color: var(--color-toxic-green); background-color: rgba(118, 255, 3, 0.05);"><div class="res-header"><span style="color: var(--color-toxic-green);">🐛 Pests</span></div><div class="pest-icons" id="txt-pests">Clean Environment</div></div>
+      </div>
+
+      <div class="stage-visualizer weather-rain" id="visualizer">
+        <div id="canvas-container"></div>
+        <div class="status-badge" id="player-status" style="background-color: #5D4037;">Dormant Seed</div>
+        <div class="progress-wrapper">
+          <div class="progress-labels"><span>Root Strength: <span id="root-val" style="color: var(--color-text-main);">0</span></span><span id="next-milestone-label">Next: Sprout (20)</span></div>
+          <div class="progress-container"><div class="progress-fill" id="root-bar"></div></div>
+        </div>
+      </div>
+
+      <div class="actions-grid">
+        <div class="action-group"><span class="env-label">Work & Progression</span><button class="btn btn-action" id="btn-simulate">📚 Research (-5💧)</button><button class="btn btn-danger" id="btn-rest">🌙 Rest to Next Day (-15🪙)</button></div>
+        <div class="action-group">
+          <span class="env-label">Fertilizer Market</span>
+          <select class="env-select" id="select-fert"><option value="basic">Compost (+40%✨) - 15🪙</option><option value="synthetic">Synthetic (+80%✨, +15🔥) - 25🪙</option><option value="premium">Organic (+100%✨, -20🔥) - 50🪙</option></select>
+          <button class="btn btn-grow" id="btn-fertilize" style="background-color: var(--color-mineral-gold);">🛒 Buy Fertilizer</button>
+        </div>
+        <div class="action-group">
+          <span class="env-label">Pest Control</span>
+          <select class="env-select" id="select-pest"><option value="organic">Neem Oil (Kills 1🐛) - 15🪙</option><option value="chemical">Chemical Spray (Kills All🐛, -20%✨, +15🔥) - 25🪙</option><option value="systemic">Systemic Guard (Immunity 3 Days, +10🔥) - 60🪙</option></select>
+          <button class="btn btn-toxic" id="btn-pesticide">🧪 Apply Pesticide</button>
+        </div>
+      </div>
+
+      <div class="terminal" id="terminal-log"><div class="log-system">[System] Engine initialized. All constraints interconnected.</div></div>
+    </div>
+  </div>
+  <script src="tool.js"></script>
+</body>
+</html>
