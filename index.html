@@ -71,6 +71,13 @@
     .tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.83rem;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
     .tab:hover{border-color:var(--border2);color:var(--text)}
     .tab.on{background:var(--leaf);border-color:var(--leaf);color:#0a1a0a}
+    .tools-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:-8px 0 16px}
+    .tools-meta{font-size:.78rem;color:var(--muted)}
+    .tools-toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .toggle-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.76rem;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+    .toggle-btn[aria-pressed='true']{border-color:var(--leaf);color:var(--leaf)}
+    .toggle-check{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.76rem;border:1px solid var(--border);padding:5px 9px;border-radius:999px}
+    .toggle-check input{accent-color:var(--leaf)}
 
     /* ── TOOL GRID ── */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px}
@@ -444,6 +451,16 @@
         <button class="tab" data-c="education">Students</button>
         <button class="tab" data-c="system">System</button>
       </div>
+      <div class="tools-controls">
+        <div class="tools-meta" id="featured-count">0 featured</div>
+        <div class="tools-toggles">
+          <button class="toggle-btn" id="sort-alpha-toggle" type="button" aria-pressed="true">Sort: A → Z</button>
+          <label class="toggle-check" for="include-engine-toggle">
+            <input id="include-engine-toggle" type="checkbox">
+            Include engine tools
+          </label>
+        </div>
+      </div>
       <div class="grid" id="all-grid">
         <div class="empty">Loading tools…</div>
       </div>
@@ -668,94 +685,9 @@
 </footer>
 
 <script src="shared/tool-registry.js"></script>
-<script>
-(() => {
-  'use strict';
-
-  // Smooth scroll nav
-  document.querySelectorAll('.nl[data-s]').forEach(l => {
-    l.addEventListener('click', e => {
-      e.preventDefault();
-      const sec = document.getElementById(l.dataset.s);
-      if (sec) sec.scrollIntoView({ behavior:'smooth' });
-    });
-  });
-
-  // Active nav on scroll
-  const sections = [...document.querySelectorAll('section[id]')];
-  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('on', l.dataset.s === e.target.id));
-    });
-  }, { threshold: 0.35 });
-  sections.forEach(s => io.observe(s));
-
-  // Category map for chips
-  const CAT = {
-    creators:'c-creators', coders:'c-coders', researchers:'c-researchers',
-    operators:'c-operators', business:'c-business', education:'c-education',
-    system:'c-system', misc:'c-misc'
-  };
-  const ICON = {
-    creators:'✏️', coders:'💻', researchers:'🔬', operators:'📊',
-    business:'📊', education:'📚', system:'⚙️', misc:'🍃'
-  };
-  const LABEL = {
-    creators:'Creators', coders:'Builders', researchers:'Research',
-    operators:'Business', business:'Business', education:'Students',
-    system:'System', misc:'Other'
-  };
-
-  let tools = [];
-  let activeTab = 'all';
-
-  // Exclude engine/simulation tools entirely
-  function isGeneral(t) {
-    return !t.isEngineTool
-      && t.category !== 'simulations'
-      && t.category !== 'engine'
-      && t.entry && !t.entry.includes('tools/engine/');
-  }
-
-  function renderAll() {
-    const grid = document.getElementById('all-grid');
-    if (!grid) return;
-    const show = tools.filter(t => isGeneral(t) && (activeTab === 'all' || t.category === activeTab));
-    if (!show.length) { grid.innerHTML = '<div class="empty">No tools here yet.</div>'; return; }
-    grid.innerHTML = show.sort((a,b) => a.name.localeCompare(b.name)).map(t => {
-      const cc = CAT[t.category] || 'c-misc';
-      const ic = ICON[t.category] || '🍃';
-      const lb = LABEL[t.category] || t.category;
-      return `<a class="card" href="${t.entry}">
-        <div class="card-top"><span class="chip ${cc}">${lb}</span><span class="card-icon">${ic}</span></div>
-        <h3>${t.name}</h3>
-        <p>${t.description || 'Standalone browser tool.'}</p>
-        <span class="card-link">Open</span>
-      </a>`;
-    }).join('');
-  }
-
-  // Tabs
-  document.getElementById('tab-row')?.addEventListener('click', e => {
-    const tab = e.target.closest('.tab');
-    if (!tab) return;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
-    tab.classList.add('on');
-    activeTab = tab.dataset.c;
-    renderAll();
-  });
-
-  // Load registry
-  (async () => {
-    if (!window.ToolRegistry?.loadAll) return;
-    try {
-      tools = await window.ToolRegistry.loadAll();
-      renderAll();
-    } catch(e) { console.warn('Registry:', e); }
-  })();
-})();
-</script>
+<script src="ui/utils/tools.js"></script>
+<script src="ui/main-ui.js"></script>
+<script src="ui/all-tools.js"></script>
 <script src="router.js"></script>
 </body>
 </html>
