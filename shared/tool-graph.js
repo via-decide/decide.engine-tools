@@ -1,219 +1,60 @@
 (function () {
-  const CATEGORY_ORDER = ['creators', 'coders', 'researchers', 'business', 'education', 'games', 'simulations', 'system', 'misc'];
-  const CATEGORY_LABELS = {
   'use strict';
 
   var CATEGORY_ORDER = ['creators', 'coders', 'researchers', 'business', 'education', 'games', 'simulations', 'system', 'misc'];
+
   var CATEGORY_LABELS = {
-    creators: 'Creators',
-    coders: 'Coders',
-    researchers: 'Researchers',
-    business: 'Business',
-    education: 'Education',
-    games: 'Games',
-    simulations: 'Simulations',
-    system: 'System',
-    misc: 'Misc'
+    creators: 'Creators', coders: 'Coders', researchers: 'Researchers',
+    business: 'Business', education: 'Education', games: 'Games',
+    simulations: 'Simulations', system: 'System', misc: 'Misc'
   };
 
-  const CATEGORY_COLORS = {
   var CATEGORY_COLORS = {
-    creators: '#f59e0b',
-    coders: '#60a5fa',
-    researchers: '#34d399',
-    business: '#f472b6',
-    education: '#a78bfa',
-    games: '#fb7185',
-    simulations: '#22d3ee',
-    system: '#94a3b8',
-    misc: '#cbd5e1'
+    creators: '#f59e0b', coders: '#60a5fa', researchers: '#34d399',
+    business: '#f472b6', education: '#a78bfa', games: '#fb7185',
+    simulations: '#22d3ee', system: '#94a3b8', misc: '#cbd5e1'
   };
-
-  function getSvgPoint(svg, x, y) {
-    const pt = svg.createSVGPoint();
-    pt.x = x;
-    pt.y = y;
-    return pt.matrixTransform(svg.getScreenCTM().inverse());
-  }
-
-  function buildLegend(container) {
-    container.innerHTML = CATEGORY_ORDER.map((key) => `
-      <div class="legend-item">
-        <span class="swatch" style="background:${CATEGORY_COLORS[key]}"></span>
-        ${CATEGORY_LABELS[key]}
-      </div>
-    `).join('');
-  }
-
-  function layoutNodes(tools) {
-    const grouped = new Map(CATEGORY_ORDER.map((k) => [k, []]));
-    tools.forEach((tool) => {
-      const category = grouped.has(tool.category) ? tool.category : 'misc';
-      grouped.get(category).push(tool);
-    });
-
-    const colGap = 250;
-    const rowGap = 96;
-    const startX = 170;
-    const startY = 100;
-    const nodes = [];
-
-    CATEGORY_ORDER.forEach((category, colIdx) => {
-      const bucket = grouped.get(category) || [];
-      bucket.sort((a, b) => a.name.localeCompare(b.name));
-
-      bucket.forEach((tool, rowIdx) => {
-        nodes.push({
-          ...tool,
-          x: startX + colIdx * colGap,
-          y: startY + rowIdx * rowGap + 32,
-          category
-        });
-      });
-    });
-
-    const maxRows = Math.max(1, ...CATEGORY_ORDER.map((k) => (grouped.get(k) || []).length));
-    return {
-      nodes,
-  /* ── Helpers ── */
 
   function escapeHtml(str) {
     return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
-
-  function screenToSvg(svg, clientX, clientY) {
-    var ctm = svg.getScreenCTM();
-    if (!ctm) return null;
-    var pt = svg.createSVGPoint();
-    pt.x = clientX;
-    pt.y = clientY;
-    return pt.matrixTransform(ctm.inverse());
-  }
-
-  /* ── Legend ── */
 
   function buildLegend(container) {
+    if (!container) return;
     container.innerHTML = CATEGORY_ORDER.map(function (key) {
       return '<div class="legend-item">' +
         '<span class="swatch" style="background:' + CATEGORY_COLORS[key] + '"></span>' +
-        CATEGORY_LABELS[key] +
-        '</div>';
+        CATEGORY_LABELS[key] + '</div>';
     }).join('');
   }
 
-  /* ── Layout ── */
-
-  function layoutNodes(tools) {
+  function layoutNodes(tools, width, height) {
     var grouped = new Map(CATEGORY_ORDER.map(function (k) { return [k, []]; }));
     tools.forEach(function (tool) {
-      var category = grouped.has(tool.category) ? tool.category : 'misc';
-      grouped.get(category).push(tool);
+      var key = grouped.has(tool.category) ? tool.category : 'misc';
+      grouped.get(key).push(tool);
     });
 
-    var colGap = 250;
-    var rowGap = 96;
-    var startX = 170;
-    var startY = 100;
+    var cols = CATEGORY_ORDER.filter(function (k) { return grouped.get(k).length > 0; }).length;
+    var colW = cols > 0 ? width / cols : width;
     var nodes = [];
+    var colIdx = 0;
 
-    CATEGORY_ORDER.forEach(function (category, colIdx) {
-      var bucket = grouped.get(category) || [];
-      bucket.sort(function (a, b) { return a.name.localeCompare(b.name); });
-
-      bucket.forEach(function (tool, rowIdx) {
-        nodes.push({
-          id: tool.id,
-          name: tool.name || tool.id,
-          description: tool.description || '',
-          category: category,
-          entry: tool.entry || '',
-          relatedTools: tool.relatedTools || [],
-          x: startX + colIdx * colGap,
-          y: startY + rowIdx * rowGap + 32
-        });
+    CATEGORY_ORDER.forEach(function (cat) {
+      var group = grouped.get(cat) || [];
+      if (!group.length) return;
+      var cx = colW * colIdx + colW / 2;
+      group.forEach(function (tool, row) {
+        var rowH = height / (group.length + 1);
+        nodes.push({ tool: tool, x: cx, y: rowH * (row + 1), category: cat });
       });
+      colIdx++;
     });
 
-    var maxRows = Math.max(1, Math.max.apply(null, CATEGORY_ORDER.map(function (k) {
-      return (grouped.get(k) || []).length;
-    })));
-
-    return {
-      nodes: nodes,
-      width: startX * 2 + (CATEGORY_ORDER.length - 1) * colGap,
-      height: 180 + maxRows * rowGap
-    };
+    return nodes;
   }
-
-  function renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, tooltip }) {
-    const byId = new Map(tools.map((tool) => [tool.id, tool]));
-    const { nodes, width, height } = layoutNodes(tools);
-
-    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    svg.setAttribute('aria-label', 'Tool graph explorer');
-
-    labelsGroup.innerHTML = CATEGORY_ORDER.map((key, idx) => `
-      <text x="${170 + idx * 250}" y="38" fill="#a8b2d3" font-size="13" text-anchor="middle">${CATEGORY_LABELS[key]}</text>
-    `).join('');
-
-    const nodeById = new Map(nodes.map((node) => [node.id, node]));
-    const edges = [];
-    nodes.forEach((node) => {
-      (node.relatedTools || []).forEach((targetId) => {
-        const target = nodeById.get(targetId) || byId.get(targetId);
-        if (!target || !nodeById.get(target.id)) return;
-        edges.push({ from: node.id, to: target.id });
-      });
-    });
-
-    edgesGroup.innerHTML = edges.map((edge) => {
-      const a = nodeById.get(edge.from);
-      const b = nodeById.get(edge.to);
-      return `<line class="edge" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" />`;
-    }).join('');
-
-    nodesGroup.innerHTML = nodes.map((node) => {
-      const safeName = node.name.replace(/"/g, '&quot;');
-      const short = node.name.length > 20 ? `${node.name.slice(0, 20)}…` : node.name;
-      return `
-        <g class="node" data-id="${node.id}" data-entry="${node.entry}" data-name="${safeName}" data-description="${(node.description || '').replace(/"/g, '&quot;')}" transform="translate(${node.x}, ${node.y})" tabindex="0" role="button" aria-label="Open ${safeName}">
-          <circle r="24" fill="${CATEGORY_COLORS[node.category] || CATEGORY_COLORS.misc}"></circle>
-          <text y="42">${short}</text>
-        </g>
-      `;
-    }).join('');
-
-    const showTip = (evt, nodeEl) => {
-      const name = nodeEl.getAttribute('data-name') || '';
-      const description = nodeEl.getAttribute('data-description') || 'No description available.';
-      tooltip.innerHTML = `<strong>${name}</strong><br>${description}`;
-      tooltip.style.left = `${evt.clientX + 12}px`;
-      tooltip.style.top = `${evt.clientY + 12}px`;
-      tooltip.classList.add('show');
-    };
-
-    const hideTip = () => tooltip.classList.remove('show');
-
-    nodesGroup.querySelectorAll('.node').forEach((nodeEl) => {
-      const open = () => {
-        const entry = nodeEl.getAttribute('data-entry');
-        if (entry) window.location.href = entry;
-      };
-
-      nodeEl.addEventListener('click', open);
-      nodeEl.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          open();
-        }
-      });
-      nodeEl.addEventListener('mousemove', (evt) => showTip(evt, nodeEl));
-      nodeEl.addEventListener('mouseenter', (evt) => showTip(evt, nodeEl));
-  /* ── Render ── */
 
   function renderGraph(opts) {
     var svg = opts.svg;
@@ -224,213 +65,150 @@
     var tools = opts.tools;
     var tooltip = opts.tooltip;
 
-    var layout = layoutNodes(tools);
-    var nodes = layout.nodes;
-    var width = layout.width;
-    var height = layout.height;
+    var W = svg.clientWidth || 900;
+    var H = svg.clientHeight || 600;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
-    svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
-    svg.setAttribute('aria-label', 'Tool graph explorer');
+    var nodes = layoutNodes(tools, W, H);
+    var byId = new Map(tools.map(function (t) { return [t.id, t]; }));
 
-    /* Category column labels */
-    labelsGroup.innerHTML = CATEGORY_ORDER.map(function (key, idx) {
-      return '<text x="' + (170 + idx * 250) + '" y="38" fill="#a8b2d3" font-size="13" text-anchor="middle">' + CATEGORY_LABELS[key] + '</text>';
-    }).join('');
-
-    /* Build edge list from relatedTools, deduplicated */
-    var nodeById = new Map(nodes.map(function (n) { return [n.id, n]; }));
-    var edgeSet = new Set();
-    var edges = [];
-
+    // Draw edges
+    edgesGroup.innerHTML = '';
     nodes.forEach(function (node) {
-      (node.relatedTools || []).forEach(function (targetId) {
-        if (!nodeById.has(targetId)) return;
-        var key = node.id < targetId ? node.id + '|' + targetId : targetId + '|' + node.id;
-        if (edgeSet.has(key)) return;
-        edgeSet.add(key);
-        edges.push({ from: node.id, to: targetId });
+      var relatedTools = node.tool.relatedTools || [];
+      relatedTools.forEach(function (relId) {
+        var target = nodes.find(function (n) { return n.tool.id === relId; });
+        if (!target) return;
+        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', node.x); line.setAttribute('y1', node.y);
+        line.setAttribute('x2', target.x); line.setAttribute('y2', target.y);
+        line.setAttribute('stroke', '#334155'); line.setAttribute('stroke-width', '1');
+        edgesGroup.appendChild(line);
       });
     });
 
-    edgesGroup.innerHTML = edges.map(function (edge) {
-      var a = nodeById.get(edge.from);
-      var b = nodeById.get(edge.to);
-      if (!a || !b) return '';
-      return '<line class="edge" x1="' + a.x + '" y1="' + a.y + '" x2="' + b.x + '" y2="' + b.y + '" />';
-    }).join('');
+    // Draw nodes
+    nodesGroup.innerHTML = '';
+    nodes.forEach(function (node) {
+      var color = CATEGORY_COLORS[node.category] || '#cbd5e1';
+      var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('class', 'node');
+      g.setAttribute('transform', 'translate(' + node.x + ',' + node.y + ')');
+      g.setAttribute('tabindex', '0');
+      g.setAttribute('aria-label', node.tool.name);
 
-    /* Render nodes */
-    nodesGroup.innerHTML = nodes.map(function (node) {
-      var safeName = escapeHtml(node.name);
-      var safeDesc = escapeHtml(node.description || 'No description available.');
-      var short = node.name.length > 20 ? escapeHtml(node.name.slice(0, 20)) + '\u2026' : safeName;
-      var color = CATEGORY_COLORS[node.category] || CATEGORY_COLORS.misc;
-      return '<g class="node" data-id="' + escapeHtml(node.id) + '" data-entry="' + escapeHtml(node.entry) + '" data-name="' + safeName + '" data-description="' + safeDesc + '" transform="translate(' + node.x + ', ' + node.y + ')" tabindex="0" role="button" aria-label="Open ' + safeName + '">' +
-        '<circle r="24" fill="' + color + '"></circle>' +
-        '<text y="42">' + short + '</text>' +
-        '</g>';
-    }).join('');
+      var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('r', '10');
+      circle.setAttribute('fill', color);
+      circle.setAttribute('stroke', '#1e293b');
+      circle.setAttribute('stroke-width', '2');
 
-    /* ── Tooltip ── */
-    var viewport = svg.closest('.viewport') || svg.parentElement;
+      var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('y', '22');
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-size', '9');
+      text.setAttribute('fill', '#94a3b8');
+      text.textContent = node.tool.name.slice(0, 18);
 
-    function showTip(evt, nodeEl) {
-      var name = nodeEl.getAttribute('data-name') || '';
-      var description = nodeEl.getAttribute('data-description') || 'No description available.';
-      tooltip.innerHTML = '<strong>' + name + '</strong><br>' + description;
-      var rect = viewport.getBoundingClientRect();
-      tooltip.style.left = (evt.clientX - rect.left + 14) + 'px';
-      tooltip.style.top = (evt.clientY - rect.top + 14) + 'px';
-      tooltip.classList.add('show');
-    }
+      g.appendChild(circle);
+      g.appendChild(text);
 
-    function hideTip() {
-      tooltip.classList.remove('show');
-    }
-
-    /* ── Node interaction ── */
-    nodesGroup.querySelectorAll('.node').forEach(function (nodeEl) {
-      function openTool() {
-        var entry = nodeEl.getAttribute('data-entry');
-        if (entry) window.location.href = entry;
-      }
-
-      nodeEl.addEventListener('click', openTool);
-      nodeEl.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openTool();
-        }
+      g.addEventListener('mouseenter', function (e) {
+        if (!tooltip) return;
+        tooltip.innerHTML = '<strong>' + escapeHtml(node.tool.name) + '</strong>' +
+          '<br>' + escapeHtml(node.tool.description || '') +
+          '<br><span style="color:#64748b;font-size:0.8em">' + escapeHtml(node.tool.entry || '') + '</span>';
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX + 12) + 'px';
+        tooltip.style.top = (e.clientY - 8) + 'px';
       });
-      nodeEl.addEventListener('mousemove', function (evt) { showTip(evt, nodeEl); });
-      nodeEl.addEventListener('mouseenter', function (evt) { showTip(evt, nodeEl); });
-      nodeEl.addEventListener('mouseleave', hideTip);
-      nodeEl.addEventListener('blur', hideTip);
+
+      g.addEventListener('mouseleave', function () {
+        if (tooltip) tooltip.style.display = 'none';
+      });
+
+      g.addEventListener('click', function () {
+        if (node.tool.entry) window.location.href = node.tool.entry;
+      });
+
+      nodesGroup.appendChild(g);
     });
 
-    const state = { scale: 1, tx: 0, ty: 0 };
-    const applyTransform = () => {
-      graphRoot.setAttribute('transform', `translate(${state.tx}, ${state.ty}) scale(${state.scale})`);
-    };
+    // Category labels
+    labelsGroup.innerHTML = '';
+    var usedCols = new Map();
+    nodes.forEach(function (node) {
+      if (!usedCols.has(node.category)) usedCols.set(node.category, node.x);
+    });
+    usedCols.forEach(function (cx, cat) {
+      var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', cx);
+      label.setAttribute('y', '18');
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('font-size', '11');
+      label.setAttribute('font-weight', '700');
+      label.setAttribute('fill', CATEGORY_COLORS[cat] || '#94a3b8');
+      label.textContent = CATEGORY_LABELS[cat] || cat;
+      labelsGroup.appendChild(label);
+    });
 
-    let panning = false;
-    let panStart = null;
-
-    svg.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const factor = e.deltaY < 0 ? 1.08 : 0.92;
-      const nextScale = Math.min(3.2, Math.max(0.45, state.scale * factor));
-      const before = getSvgPoint(svg, e.clientX, e.clientY);
-      state.scale = nextScale;
-      const after = getSvgPoint(svg, e.clientX, e.clientY);
-      state.tx += (after.x - before.x) * state.scale;
-      state.ty += (after.y - before.y) * state.scale;
-      applyTransform();
-    }, { passive: false });
-
-    svg.addEventListener('pointerdown', (e) => {
-    /* ── Pan & zoom state ── */
+    // Pan and zoom
     var state = { scale: 1, tx: 0, ty: 0 };
 
     function applyTransform() {
-      graphRoot.setAttribute('transform', 'translate(' + state.tx + ', ' + state.ty + ') scale(' + state.scale + ')');
+      graphRoot.setAttribute('transform',
+        'translate(' + state.tx + ',' + state.ty + ') scale(' + state.scale + ')'
+      );
     }
 
-    /* ── Zoom to cursor ── */
-    svg.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      var factor = e.deltaY < 0 ? 1.08 : 0.92;
-      var nextScale = Math.min(3.2, Math.max(0.45, state.scale * factor));
-
-      var svgMouse = screenToSvg(svg, e.clientX, e.clientY);
-      if (!svgMouse) return;
-
-      var gx = (svgMouse.x - state.tx) / state.scale;
-      var gy = (svgMouse.y - state.ty) / state.scale;
-
-      state.scale = nextScale;
-      state.tx = svgMouse.x - gx * state.scale;
-      state.ty = svgMouse.y - gy * state.scale;
-
-      applyTransform();
-    }, { passive: false });
-
-    /* ── Panning ── */
     var panning = false;
     var panStart = null;
 
     svg.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('.node')) return;
+      if (e.target.closest && e.target.closest('.node')) return;
       panning = true;
       panStart = { x: e.clientX, y: e.clientY, tx: state.tx, ty: state.ty };
       svg.setPointerCapture(e.pointerId);
     });
 
-    svg.addEventListener('pointermove', (e) => {
+    svg.addEventListener('pointermove', function (e) {
       if (!panning || !panStart) return;
       state.tx = panStart.tx + (e.clientX - panStart.x);
       state.ty = panStart.ty + (e.clientY - panStart.y);
       applyTransform();
     });
 
-    const stopPan = (e) => {
-      panning = false;
-      panStart = null;
-      if (typeof e.pointerId === 'number') svg.releasePointerCapture(e.pointerId);
-    };
-    svg.addEventListener('pointermove', function (e) {
-      if (!panning || !panStart) return;
-      var ctm = svg.getScreenCTM();
-      var pixelScale = ctm ? ctm.a : 1;
-      state.tx = panStart.tx + (e.clientX - panStart.x) / pixelScale;
-      state.ty = panStart.ty + (e.clientY - panStart.y) / pixelScale;
-      applyTransform();
-    });
-
     function stopPan(e) {
       panning = false;
       panStart = null;
-      try {
-        if (typeof e.pointerId === 'number') svg.releasePointerCapture(e.pointerId);
-      } catch (_) { /* pointer may already be released */ }
+      try { if (typeof e.pointerId === 'number') svg.releasePointerCapture(e.pointerId); } catch (_) {}
     }
 
     svg.addEventListener('pointerup', stopPan);
     svg.addEventListener('pointercancel', stopPan);
 
-    document.getElementById('reset-view').addEventListener('click', () => {
-    document.getElementById('reset-view').addEventListener('click', function () {
-      state.scale = 1;
-      state.tx = 0;
-      state.ty = 0;
+    svg.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var delta = e.deltaY > 0 ? 0.9 : 1.1;
+      state.scale = Math.min(4, Math.max(0.2, state.scale * delta));
       applyTransform();
-    });
+    }, { passive: false });
+
+    var resetBtn = document.getElementById('reset-view');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        state.scale = 1; state.tx = 0; state.ty = 0;
+        applyTransform();
+      });
+    }
   }
-
-  async function init() {
-    if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
-
-    const tools = await window.ToolRegistry.loadAll();
-    const legend = document.getElementById('legend');
-    const svg = document.getElementById('graph');
-    const graphRoot = document.getElementById('graph-root');
-    const edgesGroup = document.getElementById('edges');
-    const nodesGroup = document.getElementById('nodes');
-    const labelsGroup = document.getElementById('category-labels');
-    const tooltip = document.getElementById('tooltip');
-
-    buildLegend(legend);
-    renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, tooltip });
-  /* ── Init ── */
 
   async function init() {
     var svg = document.getElementById('graph');
     var viewport = svg ? (svg.closest('.viewport') || svg.parentElement) : null;
 
     if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') {
-      if (viewport) {
-        viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Tool registry failed to load. Ensure <code>shared/tool-registry.js</code> is accessible.</div>';
-      }
+      if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Tool registry failed to load.</div>';
       return;
     }
 
@@ -438,36 +216,24 @@
     try {
       tools = await window.ToolRegistry.loadAll();
     } catch (e) {
-      if (viewport) {
-        viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Error loading tools: ' + escapeHtml(e.message || e) + '</div>';
-      }
+      if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Error: ' + escapeHtml(e.message) + '</div>';
       return;
     }
 
-    if (!tools || tools.length === 0) {
-      if (viewport) {
-        viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#94a3b8;">No tools found in registry.</div>';
-      }
+    if (!tools || !tools.length) {
+      if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#94a3b8;">No tools found.</div>';
       return;
     }
 
-    var legend = document.getElementById('legend');
+    var legend    = document.getElementById('legend');
     var graphRoot = document.getElementById('graph-root');
     var edgesGroup = document.getElementById('edges');
     var nodesGroup = document.getElementById('nodes');
     var labelsGroup = document.getElementById('category-labels');
-    var tooltip = document.getElementById('tooltip');
+    var tooltip   = document.getElementById('tooltip');
 
     buildLegend(legend);
-    renderGraph({
-      svg: svg,
-      graphRoot: graphRoot,
-      edgesGroup: edgesGroup,
-      nodesGroup: nodesGroup,
-      labelsGroup: labelsGroup,
-      tools: tools,
-      tooltip: tooltip
-    });
+    renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, tooltip });
   }
 
   init();
