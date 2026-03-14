@@ -1,3 +1,9 @@
+Branch: simba/integrate-gsap-greensock-via-cdn-into-assetsjsma
+Title: Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.j...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working GSAP-powered magnetic buttons and UI alerts that feel incredibly smooth
 Branch: simba/integrate-vanilla-tiltjs-via-cdn-into-the-root-i
 Title: Integrate vanilla-tilt.js via CDN into the root index.html. Apply the...
 

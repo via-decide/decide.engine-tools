@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.js. Rewrite the "Magnetic Button" logic to use GSAP's gsap.to() for buttery-smooth spring physics instead of native CSS transitions. Also, create a GSAP timeline function to trigger the "Shimmering Text" and "Glowing Border" evolution alerts in the growth-milestone-engine.
+
+CONSTRAINTS
+preserve existing tools; use CDN for GSAP; pure Vanilla JS implementation
 Integrate vanilla-tilt.js via CDN into the root index.html. Apply the data-tilt attribute and initialize the tilt physics on all .orchard-panel game cards in the Bento Grid. Configure it for a subtle 3D glare effect (data-tilt-glare="true") to enhance the glassmorphism look when the user hovers over the games.
 
 CONSTRAINTS
