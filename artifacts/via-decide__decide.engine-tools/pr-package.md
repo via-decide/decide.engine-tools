@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-knowledge-quiz-challenge-tool-in-toolseng
+Title: Create knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-c...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working knowledge-quiz-challenge mini-game to boost engagement and seed review
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
