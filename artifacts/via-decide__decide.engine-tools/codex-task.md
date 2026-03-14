@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add snake-game tool in tools/snake-game/ with config.json index.html tool.js. Classic snake game, vanilla JS, standalone browser tool.
+add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js
