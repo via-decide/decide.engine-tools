@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/skin-street-food-config/. Build a standalone JSON configuration tool that injects the Street Food Cart skin definition into localStorage.getItem('orchard_engine_available_skins'). The config must include id: 'street-food-cart', labels: { roots: 'Recipes', water: 'Fresh Ingredients', pests: 'Health Inspector', fruit: 'Orders Served', seed: 'Secret Masala', session: 'Service Shift' }. Set the seasonName to 'Festival Season'. Dispatch window.dispatchEvent(new CustomEvent('engine:skins_registry_updated')) upon successful injection.
+
+CONSTRAINTS
+pure Vanilla JS; no visual rendering; must strictly match the structure of the existing Skin System config.
 Create tools/engine/upsc-csat-trainer/. Build a highly focused quiz UI containing a local JSON bank of logical reasoning and quantitative aptitude questions. Render 5 random questions per daily session. Implement a hidden timer that tracks exactly how many seconds the user spends on each specific question before selecting an option. Save these time-to-solve metrics to localStorage.getItem('upsc_csat_metrics') and render a post-session chart showing their speed bottlenecks.
 
 CONSTRAINTS

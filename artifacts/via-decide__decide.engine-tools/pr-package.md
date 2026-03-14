@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineskin-street-food-config-build-
+Title: Create tools/engine/skin-street-food-config/. Build a standalone JSON...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A backend definition file that formally registers the Indian Street Food Cart terminology into the engine's skin registry.
 Branch: simba/create-toolsengineupsc-csat-trainer-build-a-high
 Title: Create tools/engine/upsc-csat-trainer/. Build a highly focused quiz U...
 
