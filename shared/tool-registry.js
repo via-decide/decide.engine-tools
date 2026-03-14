@@ -1,4 +1,6 @@
 (function (global) {
+  'use strict';
+
   const CATEGORY_MAP = {
     creators: 'creators',
     coders: 'coders',
@@ -13,87 +15,66 @@
   };
 
   const ENGINE_TOOL_IDS = new Set([
-    'engine-state-manager',
-    'llm-action-parser',
-    'daily-weather-replenisher',
-    'admin-moderation-panel',
-    'simulation-runner',
-    'player-signup',
-    'orchard-profile-builder',
-    'starter-farm-generator',
-    'root-strength-calculator',
-    'trunk-growth-calculator',
-    'fruit-yield-engine',
-    'daily-quest-generator',
-    'weekly-harvest-engine',
-    'thirty-day-promotion-engine',
-    'fair-ranking-engine',
-    'seed-exchange',
-    'fruit-sharing',
-    'circle-builder',
-    'peer-validation-engine',
-    'trust-score-engine',
-    'recruiter-dashboard',
-    'orchard-discovery-search',
-    'hire-readiness-scorer',
-    'four-direction-pipeline',
-    'growth-path-recommender',
-    'ai-coach-console',
-    'seed-quality-scorer',
-    'meta-health-dashboard',
-    'synthetic-player-generator',
-    'wave1-simulation-runner',
-    'balance-dashboard',
+    'engine-state-manager', 'llm-action-parser', 'daily-weather-replenisher',
+    'admin-moderation-panel', 'simulation-runner', 'player-signup',
+    'orchard-profile-builder', 'starter-farm-generator', 'root-strength-calculator',
+    'trunk-growth-calculator', 'fruit-yield-engine', 'daily-quest-generator',
+    'weekly-harvest-engine', 'thirty-day-promotion-engine', 'fair-ranking-engine',
+    'seed-exchange', 'fruit-sharing', 'circle-builder', 'peer-validation-engine',
+    'trust-score-engine', 'recruiter-dashboard', 'orchard-discovery-search',
+    'hire-readiness-scorer', 'four-direction-pipeline', 'growth-path-recommender',
+    'ai-coach-console', 'seed-quality-scorer', 'meta-health-dashboard',
+    'synthetic-player-generator', 'wave1-simulation-runner', 'balance-dashboard',
     'growth-milestone-engine'
   ]);
 
+  // Per-tool overrides — used by the hub to surface player-facing metadata
   const TOOL_OVERRIDES = {
     'starter-farm-generator': {
       isEngineTool: false,
       featured: true,
-      category: 'Layer 1 - Farm',
+      category: 'engine',
       gameIcon: '🌱',
       gameDescription: 'Initialize your farm identity and start your orchard run.',
-      entry: './tools/engine/starter-farm-generator/index.html'
+      entry: 'tools/engine/starter-farm-generator/index.html'
     },
     'orchard-profile-builder': {
       isEngineTool: false,
-      category: 'Layer 1 - Farm',
+      category: 'engine',
       gameIcon: '🪪',
       gameDescription: 'Shape your orchard profile, role, and growth direction.'
     },
     'daily-quest-generator': {
       isEngineTool: false,
-      category: 'Layer 1 - Farm',
+      category: 'engine',
       gameIcon: '📜',
       gameDescription: 'Generate your daily quest loop and actionable growth tasks.'
     },
     'weekly-harvest-engine': {
       isEngineTool: false,
-      category: 'Layer 2 - Commons',
+      category: 'engine',
       gameIcon: '🧺',
       gameDescription: 'Convert your weekly actions into measurable harvest outcomes.'
     },
     'seed-exchange': {
       isEngineTool: false,
-      category: 'Layer 3 - Market',
+      category: 'engine',
       gameIcon: '🛒',
       gameDescription: 'Trade seeds and unlock better orchard opportunities.'
-  const FEATURED_TOOL_OVERRIDES = {
-    'starter-farm-generator': {
+    },
+    'growth-milestone-engine': {
       isEngineTool: false,
-      featured: true,
-      entry: './tools/engine/starter-farm-generator/index.html'
+      category: 'engine',
+      gameIcon: '📈',
+      gameDescription: 'Track root strength, manage pests, and evolve your tree.'
     }
   };
 
   function inferEngineTool(meta, normalizedCategory, defaultEntry, id) {
     if (typeof meta.isEngineTool === 'boolean') return meta.isEngineTool;
     if (typeof meta.hidden === 'boolean') return meta.hidden;
-
     if (ENGINE_TOOL_IDS.has(id)) return true;
     if (normalizedCategory === 'simulations' || normalizedCategory === 'system') return true;
-
     const entry = (meta.entry || defaultEntry || '').toLowerCase();
     return entry.startsWith('tools/engine/');
   }
@@ -222,49 +203,26 @@
   ];
 
   const importableToolDirs = [
-    'tools/promptalchemy',
-    'tools/script-generator',
-    'tools/spec-builder',
-    'tools/code-generator',
-    'tools/code-reviewer',
-    'tools/tool-router',
-    'tools/export-studio',
-    'tools/template-vault',
-    'tools/idea-remixer',
-    'tools/task-splitter',
-    'tools/prompt-compare',
-    'tools/repo-improvement-brief',
-    'tools/workflow-template-gallery',
-    'tools/tool-search-discovery',
-    'tools/context-packager',
-    'tools/output-evaluator',
-    'tools/engine/player-signup',
-    'tools/engine/orchard-profile-builder',
-    'tools/engine/starter-farm-generator',
-    'tools/engine/root-strength-calculator',
-    'tools/engine/trunk-growth-calculator',
-    'tools/engine/fruit-yield-engine',
-    'tools/engine/daily-quest-generator',
-    'tools/engine/weekly-harvest-engine',
-    'tools/engine/thirty-day-promotion-engine',
-    'tools/engine/fair-ranking-engine',
-    'tools/engine/seed-exchange',
-    'tools/engine/fruit-sharing',
-    'tools/engine/circle-builder',
-    'tools/engine/peer-validation-engine',
-    'tools/engine/trust-score-engine',
-    'tools/engine/recruiter-dashboard',
-    'tools/engine/orchard-discovery-search',
-    'tools/engine/hire-readiness-scorer',
-    'tools/engine/four-direction-pipeline',
-    'tools/engine/growth-path-recommender',
-    'tools/engine/ai-coach-console',
-    'tools/engine/simulation-runner',
-    'tools/engine/seed-quality-scorer',
-    'tools/engine/meta-health-dashboard',
-    'tools/engine/synthetic-player-generator',
-    'tools/engine/wave1-simulation-runner',
-    'tools/engine/balance-dashboard'
+    'tools/promptalchemy', 'tools/script-generator', 'tools/spec-builder',
+    'tools/code-generator', 'tools/code-reviewer', 'tools/tool-router',
+    'tools/export-studio', 'tools/template-vault', 'tools/idea-remixer',
+    'tools/task-splitter', 'tools/prompt-compare', 'tools/repo-improvement-brief',
+    'tools/workflow-template-gallery', 'tools/tool-search-discovery',
+    'tools/context-packager', 'tools/output-evaluator',
+    'tools/engine/player-signup', 'tools/engine/orchard-profile-builder',
+    'tools/engine/starter-farm-generator', 'tools/engine/root-strength-calculator',
+    'tools/engine/trunk-growth-calculator', 'tools/engine/fruit-yield-engine',
+    'tools/engine/daily-quest-generator', 'tools/engine/weekly-harvest-engine',
+    'tools/engine/thirty-day-promotion-engine', 'tools/engine/fair-ranking-engine',
+    'tools/engine/seed-exchange', 'tools/engine/fruit-sharing',
+    'tools/engine/circle-builder', 'tools/engine/peer-validation-engine',
+    'tools/engine/trust-score-engine', 'tools/engine/recruiter-dashboard',
+    'tools/engine/orchard-discovery-search', 'tools/engine/hire-readiness-scorer',
+    'tools/engine/four-direction-pipeline', 'tools/engine/growth-path-recommender',
+    'tools/engine/ai-coach-console', 'tools/engine/simulation-runner',
+    'tools/engine/seed-quality-scorer', 'tools/engine/meta-health-dashboard',
+    'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
+    'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine'
   ];
 
   function repoBasePath() {
@@ -290,17 +248,13 @@
   function normalizeTool(meta, fallbackDir) {
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const normalizedCategory = normalizeCategory(meta.category);
-    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
+    const defaultEntry = fallbackDir ? fallbackDir + '/index.html' : '';
     const override = TOOL_OVERRIDES[id] || {};
     const category = override.category || normalizedCategory;
     const isEngineTool = (typeof override.isEngineTool === 'boolean')
       ? override.isEngineTool
       : inferEngineTool(meta, normalizedCategory, defaultEntry, id);
-    const override = FEATURED_TOOL_OVERRIDES[id] || {};
-    const isEngineTool = (typeof override.isEngineTool === 'boolean')
-      ? override.isEngineTool
-      : inferEngineTool(meta, category, defaultEntry, id);
-    const isEngineTool = inferEngineTool(meta, category, defaultEntry, id);
+
     return {
       id,
       name: meta.name || id,
@@ -327,11 +281,11 @@
     const loaded = await Promise.all(
       importableToolDirs.map(async (dir) => {
         try {
-          const response = await fetch(resolve(`${dir}/config.json`), { cache: 'no-cache' });
+          const response = await fetch(resolve(dir + '/config.json'), { cache: 'no-cache' });
           if (!response.ok) return null;
           const meta = await response.json();
           return normalizeTool(meta, dir);
-        } catch (error) {
+        } catch (_) {
           return null;
         }
       })
@@ -341,8 +295,8 @@
 
   function getTools() {
     const ids = [
-      ...builtinTools.map((tool) => tool.id),
-      ...importableToolDirs.map((path) => path.split('/').pop())
+      ...builtinTools.map((t) => t.id),
+      ...importableToolDirs.map((p) => p.split('/').pop())
     ];
     return Array.from(new Set(ids));
   }
@@ -374,4 +328,5 @@
     getTools,
     isRegistered
   };
+
 })(window);
