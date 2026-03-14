@@ -5,6 +5,8 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 add tetris-game tool in tools/tetris-game/ with config.json index.html tool.js. Falling block puzzle, vanilla JS, standalone.
+add memory-match tool in tools/memory-match/ with config.json index.html tool.js. Card flip memory game with timer and scoring.
+add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
 
 RULES
 1. Audit touched files first and identify regressions.
