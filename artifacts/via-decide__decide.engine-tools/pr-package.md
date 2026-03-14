@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-achievement-badge-system-tool-in-toolsengine
+Title: Add achievement-badge-system tool in tools/engine/achievement-badge-s...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working achievement-badge-system tool that tracks and visualizes earned milestones
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
