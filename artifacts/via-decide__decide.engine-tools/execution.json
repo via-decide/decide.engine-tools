@@ -1,11 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/integrate-gsap-greensock-via-cdn-into-assetsjsma",
-  "branch": "simba/integrate-vanilla-tiltjs-via-cdn-into-the-root-i",
-  "branch": "simba/create-assetsjsengine-busjs-this-is-the-central-",
-  "branch": "simba/update-orchard-routerjs-and-global-themecss-to-a",
-  "branch": "simba/create-a-new-core-script-assetsjsorchard-routerj",
+  "branch": "simba/create-toolsengineserver-boss-engine-build-a-hea",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
