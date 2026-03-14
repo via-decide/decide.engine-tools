@@ -124,9 +124,28 @@
       padding: 24px 0 36px;
       font-size: 0.9rem;
     }
+
+    .dev-badge {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      background: #b91c1c;
+      border: 1px solid #ef4444;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      letter-spacing: 0.4px;
+      display: none;
+    }
+
+    body.dev-mode-active .dev-badge { display: inline-flex; }
   </style>
 </head>
 <body>
+  <div class="dev-badge">DEV MODE</div>
   <header class="site-header">
     <div class="container nav-wrap">
       <div class="brand">Via<span>Decide</span> • decide.engine</div>
@@ -207,8 +226,17 @@
 
   <script src="shared/tool-registry.js"></script>
   <script>
-    (async function renderCategorizedTools() {
+    (async function initToolDirectory() {
       if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
+
+      const DEV_HOTKEY = {
+        key: 'E',
+        ctrl: true,
+        shift: true
+      };
+
+      let allTools = [];
+      let devMode = false;
 
       const labels = {
         creators: 'Creators',
@@ -225,36 +253,65 @@
       const container = document.getElementById('categorized-tools');
       if (!container) return;
 
-      const tools = await window.ToolRegistry.loadAll();
-      const grouped = new Map(Object.keys(labels).map((key) => [key, []]));
+      function visibleTools() {
+        return allTools.filter((tool) => devMode || !tool.isEngineTool);
+      }
 
-      tools.forEach((tool) => {
-        const key = grouped.has(tool.category) ? tool.category : 'misc';
-        grouped.get(key).push(tool);
+      function renderCategorizedTools() {
+        const grouped = new Map(Object.keys(labels).map((key) => [key, []]));
+
+        visibleTools().forEach((tool) => {
+          const key = grouped.has(tool.category) ? tool.category : 'misc';
+          grouped.get(key).push(tool);
+        });
+
+        container.innerHTML = Object.entries(labels)
+          .map(([key, label]) => {
+            const items = (grouped.get(key) || []).sort((a, b) => a.name.localeCompare(b.name));
+            if (!items.length) return '';
+
+            const cards = items.map((tool) => `
+                <article class="tool-card">
+                  <h3>${tool.name}</h3>
+                  <p>${tool.description || 'Standalone browser tool.'}</p>
+                  <div class="use-tip">Path: ${tool.entry}</div>
+                  <a class="btn" href="${tool.entry}">Open Tool</a>
+                </article>
+              `).join('');
+
+            return `
+              <section aria-label="${label}">
+                <h3>${label}</h3>
+                <div class="tools-grid">${cards}</div>
+              </section>
+            `;
+          })
+          .join('');
+
+        if (!container.innerHTML.trim()) {
+          container.innerHTML = '<p style="color: var(--muted);">No player-facing tools currently mapped.</p>';
+        }
+      }
+
+      function setDevMode(enabled) {
+        devMode = enabled;
+        document.body.classList.toggle('dev-mode-active', devMode);
+        renderCategorizedTools();
+      }
+
+      document.addEventListener('keydown', (event) => {
+        const keyMatches = event.key && event.key.toUpperCase() === DEV_HOTKEY.key;
+        const hotkey = keyMatches && event.ctrlKey === DEV_HOTKEY.ctrl && event.shiftKey === DEV_HOTKEY.shift;
+        const tilde = event.key === '~' || event.code === 'Backquote';
+
+        if (!hotkey && !tilde) return;
+
+        event.preventDefault();
+        setDevMode(!devMode);
       });
 
-      container.innerHTML = Object.entries(labels)
-        .map(([key, label]) => {
-          const items = (grouped.get(key) || []).sort((a, b) => a.name.localeCompare(b.name));
-          const cards = items.length
-            ? items.map((tool) => `
-              <article class="tool-card">
-                <h3>${tool.name}</h3>
-                <p>${tool.description || 'Standalone browser tool.'}</p>
-                <div class="use-tip">Path: ${tool.entry}</div>
-                <a class="btn" href="${tool.entry}">Open Tool</a>
-              </article>
-            `).join('')
-            : '<p style="color: var(--muted);">No tools currently mapped.</p>';
-
-          return `
-            <section aria-label="${label}">
-              <h3>${label}</h3>
-              <div class="tools-grid">${cards}</div>
-            </section>
-          `;
-        })
-        .join('');
+      allTools = await window.ToolRegistry.loadAll();
+      renderCategorizedTools();
     })();
   </script>
   <script src="router.js"></script>
