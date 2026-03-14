@@ -1,1048 +1,626 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ViaDecide • Orchard Player Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --color-soil-dark: #1A1614;
-      --color-soil-light: #282320;
-      --color-bark-brown: #4A3B32;
-      --color-leaf-green: #52B756;
-      --color-leaf-dark: #388E3C;
-      --color-water-blue: #29B6F6;
-      --color-mineral-gold: #FFCA28;
-      --color-text-main: #F5E6D3;
-      --color-text-muted: #A18D82;
-      --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-pill: 999px;
-      --shadow-base: 0 10px 24px rgba(0, 0, 0, 0.45);
-      --shadow-card: 0 12px 24px rgba(0, 0, 0, 0.6);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background-color: var(--color-soil-dark);
-      background-image: linear-gradient(rgba(74, 59, 50, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(74, 59, 50, 0.15) 1px, transparent 1px);
-      background-size: 20px 20px;
-      color: var(--color-text-main);
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.5;
-    }
+<title>ViaDecide Orchard Hub</title>
 
-    .container { width: min(1120px, 92vw); margin: 0 auto; }
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(26, 22, 20, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--color-bark-brown);
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --soil:    #1A1614;
-      --soil-2:  #231e1b;
-      --soil-3:  #2d2623;
-      --bark:    #4A3B32;
-      --bark-2:  #6b5346;
-      --leaf:    #52B756;
-      --leaf-dk: #357a39;
-      --water:   #29B6F6;
-      --water-dk:#0277BD;
-      --gold:    #FFCA28;
-      --gold-dk: #c79800;
-      --cream:   #F5E6D3;
-      --muted:   #8a7568;
-      --radius:  14px;
-      --radius-sm: 8px;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
 
-    html { scroll-behavior: smooth; }
+/* ---------- ROOT ---------- */
 
-    body {
-      background: var(--soil);
-      color: var(--cream);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+:root{
 
-    /* ─── Grain texture overlay ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 128px 128px;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
+--soil:#1A1614;
+--soil2:#231e1b;
+--soil3:#2d2623;
 
-    .wrap { width: min(1140px, 92vw); margin: 0 auto; position: relative; z-index: 1; }
+--bark:#4A3B32;
 
-    /* ─── NAV ─── */
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(26, 22, 20, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--bark);
-    }
+--leaf:#52B756;
+--leaf-dark:#357a39;
 
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-      flex-wrap: wrap;
-      padding: 14px 0;
-    }
-    .brand { font-weight: 700; letter-spacing: 0.3px; }
-    .brand span { color: var(--color-leaf-green); }
+--water:#29B6F6;
 
-    nav { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav-link {
-      border: 1px solid var(--color-bark-brown);
-      color: var(--color-text-main);
-      text-decoration: none;
-      border-radius: var(--radius-pill);
-      padding: 8px 12px;
-      font-size: 0.9rem;
-    }
+--gold:#FFCA28;
 
-    section { padding: 26px 0; scroll-margin-top: 86px; }
+--cream:#F5E6D3;
+--muted:#8a7568;
 
-    .orchard-panel {
-      border: 2px solid var(--color-bark-brown);
-      border-radius: var(--radius-md);
-      background: var(--color-soil-light);
-      box-shadow: var(--shadow-base);
-      padding: 24px;
-    }
+}
 
-    .hero-title, .section-heading, .card-title {
-      margin: 0;
-      font-family: 'Merriweather', serif;
-      color: var(--color-text-main);
-    }
-    .hero-title { font-size: clamp(1.8rem, 4vw, 2.8rem); }
-    .section-heading { font-size: 1.4rem; }
+/* ---------- RESET ---------- */
 
-    .hero-subtitle, .section-sub, .card-desc {
-      color: var(--color-text-muted);
-      margin: 10px 0 0;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-    .starter-card {
-      margin-top: 16px;
-      border: 2px solid var(--color-leaf-green);
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(82, 183, 86, 0.18), rgba(40, 35, 32, 0.9));
-      padding: 22px;
-      box-shadow: 0 0 24px rgba(82, 183, 86, 0.22), var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+body{
 
-    section { padding: 26px 0; scroll-margin-top: 86px; }
+background:var(--soil);
+color:var(--cream);
 
-    .orchard-panel {
-      border: 2px solid var(--color-bark-brown);
-      border-radius: var(--radius-md);
-      background: var(--color-soil-light);
-      box-shadow: var(--shadow-base);
-      padding: 24px;
-    }
+font-family:'DM Sans',system-ui;
 
-    .hero-title, .section-heading, .card-title {
-      margin: 0;
-      font-family: 'Merriweather', serif;
-      color: var(--color-text-main);
-    }
-    .hero-title { font-size: clamp(1.8rem, 4vw, 2.8rem); }
-    .section-heading { font-size: 1.4rem; }
+line-height:1.6;
 
-    .hero-subtitle, .section-sub, .card-desc {
-      color: var(--color-text-muted);
-      margin: 10px 0 0;
-    }
+}
 
-    .starter-card {
-      margin-top: 16px;
-      border: 2px solid var(--color-leaf-green);
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(82, 183, 86, 0.18), rgba(40, 35, 32, 0.9));
-      padding: 22px;
-      box-shadow: 0 0 24px rgba(82, 183, 86, 0.22), var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+/* ---------- NAV ---------- */
 
-    .brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      color: var(--cream);
-      text-decoration: none;
-    }
-    .brand em { color: var(--leaf); font-style: normal; }
+.nav{
 
-    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
-    .nav-link {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      padding: 7px 13px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: var(--cream);
-      border-color: var(--bark);
-    }
+position:sticky;
+top:0;
 
-    .dev-badge {
-      display: none;
-      position: fixed;
-      top: 13px; right: 13px;
-      z-index: 200;
-      background: #7f1d1d;
-      border: 1px solid #ef4444;
-      color: #fca5a5;
-      font-size: 0.73rem;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-    body.dev-active .dev-badge { display: inline-flex; }
+background:#1a1614;
 
-    /* ─── SECTIONS ─── */
-    section { padding: 56px 0; scroll-margin-top: 70px; }
+border-bottom:1px solid var(--bark);
 
-    /* ─── HERO ─── */
-    .hero {
-      padding-top: 72px;
-      padding-bottom: 64px;
-    }
+z-index:10;
 
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--leaf);
-      margin-bottom: 18px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 24px; height: 2px;
-      background: var(--leaf);
-      border-radius: 2px;
-    }
+}
 
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-      font-weight: 900;
-      line-height: 1.1;
-      color: var(--cream);
-      max-width: 840px;
-      margin-bottom: 20px;
-    }
-    .hero-title .accent { color: var(--leaf); }
+.nav-inner{
 
-    .hero-sub {
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 580px;
-      margin-bottom: 36px;
-    }
+max-width:1100px;
+margin:auto;
 
-    /* ─── FEATURED CARD ─── */
-    .featured-card {
-      margin-top: 40px;
-      background: linear-gradient(135deg, rgba(82,183,86,0.14) 0%, rgba(35,30,27,0.95) 60%);
-      border: 1.5px solid rgba(82,183,86,0.45);
-      border-radius: var(--radius);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      box-shadow: 0 0 40px rgba(82,183,86,0.12), 0 20px 40px rgba(0,0,0,0.5);
-      position: relative;
-      overflow: hidden;
-    }
-    .featured-card::after {
-      content: '🌳';
-      position: absolute;
-      right: 28px; bottom: 16px;
-      font-size: 5rem;
-      opacity: 0.06;
-      line-height: 1;
-      pointer-events: none;
-    }
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      width: fit-content;
-      font-size: 0.73rem;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
-    .chip-leaf { background: var(--leaf); color: #0d1a0e; }
-    .chip-gold { background: var(--gold); color: #1a1200; }
-    .chip-water { background: var(--water); color: #012a3a; }
+padding:14px;
 
-    .featured-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-      font-weight: 700;
-      color: var(--cream);
-      line-height: 1.2;
-    }
-    .featured-card p { color: var(--muted); max-width: 640px; }
+}
 
-    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.brand{
 
-    .starter-chip {
-      display: inline-flex;
-      width: fit-content;
-      padding: 5px 10px;
-      border-radius: var(--radius-pill);
-      background: var(--color-leaf-green);
-      color: #111;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+font-family:'Playfair Display';
+font-weight:700;
 
-    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+}
 
-    .starter-chip {
-      display: inline-flex;
-      width: fit-content;
-      padding: 5px 10px;
-      border-radius: var(--radius-pill);
-      background: var(--color-leaf-green);
-      color: #111;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+.brand span{
 
-    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+color:var(--leaf);
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      transition: all 0.1s;
-      position: relative;
-      top: 0;
-    }
+}
 
-    .btn-grow {
-      background: var(--color-leaf-green);
-      color: #111;
-      box-shadow: 0 5px 0 var(--color-leaf-dark);
-      padding: 13px 24px;
-      min-width: 220px;
-      font-size: 1.01rem;
-    }
-    .btn-grow:active { top: 5px; box-shadow: 0 0 0 var(--color-leaf-dark); }
+.nav-links{
 
-    .btn-action {
-      background: var(--color-water-blue);
-      color: #111;
-      box-shadow: 0 4px 0 #0288D1;
-      padding: 10px 14px;
-      font-size: 0.9rem;
-    }
-    .btn-action:active { top: 4px; box-shadow: 0 0 0 #0288D1; }
+display:flex;
+gap:16px;
 
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      transition: all 0.1s;
-      position: relative;
-      top: 0;
-    }
+}
 
-    .btn-grow {
-      background: var(--color-leaf-green);
-      color: #111;
-      box-shadow: 0 5px 0 var(--color-leaf-dark);
-      padding: 13px 24px;
-      min-width: 220px;
-      font-size: 1.01rem;
-    }
-    .btn-grow:active { top: 5px; box-shadow: 0 0 0 var(--color-leaf-dark); }
+.nav-links a{
 
-    .btn-action {
-      background: var(--color-water-blue);
-      color: #111;
-      box-shadow: 0 4px 0 #0288D1;
-      padding: 10px 14px;
-      font-size: 0.9rem;
-      gap: 7px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      border-radius: var(--radius-sm);
-      padding: 12px 22px;
-      transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
-      position: relative;
-      top: 0;
-    }
+text-decoration:none;
+color:var(--muted);
 
-    .btn-primary {
-      background: var(--leaf);
-      color: #0d1a0e;
-      box-shadow: 0 5px 0 var(--leaf-dk);
-    }
-    .btn-primary:hover { filter: brightness(1.08); }
-    .btn-primary:active { top: 4px; box-shadow: 0 1px 0 var(--leaf-dk); }
+font-size:14px;
 
-    .btn-ghost {
-      background: transparent;
-      color: var(--cream);
-      border: 1px solid var(--bark);
-    }
-    .btn-ghost:hover { border-color: var(--bark-2); background: rgba(74,59,50,0.3); }
+}
 
-    .btn-water {
-      background: var(--water);
-      color: #012a3a;
-      box-shadow: 0 4px 0 var(--water-dk);
-    }
-    .btn-water:hover { filter: brightness(1.08); }
-    .btn-water:active { top: 3px; box-shadow: 0 1px 0 var(--water-dk); }
+.nav-links a:hover{
 
-    /* ─── SECTION HEADER ─── */
-    .sec-header { margin-bottom: 28px; }
-    .sec-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-    .sec-sub { color: var(--muted); font-size: 0.93rem; }
+color:var(--cream);
 
-    /* ─── MODULE GRID ─── */
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 14px;
-    }
+}
 
-    .module-card {
-      background: var(--soil-2);
-      border: 1px solid var(--bark);
-      border-radius: var(--radius);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-      text-decoration: none;
-      color: inherit;
-    }
-    .module-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.45);
-      border-color: var(--bark-2);
-    }
+/* ---------- HERO ---------- */
 
-    .module-icon { font-size: 1.6rem; line-height: 1; }
-    .module-name {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--cream);
-    }
-    .module-desc { font-size: 0.88rem; color: var(--muted); flex: 1; }
-    .module-open {
-      margin-top: 4px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--leaf);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .module-open::after { content: '→'; transition: transform 0.15s; }
-    .module-card:hover .module-open::after { transform: translateX(3px); }
+.hero{
 
-    /* ─── DIVIDER ─── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--bark), transparent);
-      margin: 0;
-    }
+text-align:center;
 
-    /* ─── TOOLS GRID ─── */
-    .tools-section { margin-bottom: 28px; }
-    .tools-section-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--bark-2);
-      margin-bottom: 12px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--bark);
-    }
-    .btn-action:active { top: 4px; box-shadow: 0 0 0 #0288D1; }
+padding:80px 20px;
 
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
+max-width:900px;
+margin:auto;
 
-    .game-card {
-      background: var(--color-soil-light);
-      border: 1px solid var(--color-bark-brown);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-    }
-    .game-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+}
 
-    .game-icon { font-size: 1.7rem; line-height: 1; }
-    .layer-chip {
-      width: fit-content;
-      font-size: 0.74rem;
-      color: #111;
-      background: var(--color-mineral-gold);
-      border-radius: var(--radius-pill);
-      padding: 3px 8px;
-      font-weight: 700;
-    }
+.hero-title{
 
-    .card-title { font-size: 1.05rem; }
-    .card-desc { font-size: 0.91rem; margin-top: 0; }
-    .card-spacer { flex: 1; }
-    .card-btn { width: 100%; margin-top: 6px; }
+font-family:'Playfair Display';
 
-    .dev-badge {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      z-index: 100;
-      display: none;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid #ef4444;
-      background: #b91c1c;
-      color: #fff;
-      font-size: 0.76rem;
-      font-weight: 700;
-    }
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 10px;
-    }
+font-size:48px;
 
-    .tool-card {
-      background: var(--soil-2);
-      border: 1px solid var(--bark);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .tool-card:hover { border-color: var(--bark-2); background: var(--soil-3); }
-    .tool-card h4 { font-size: 0.92rem; font-weight: 600; color: var(--cream); }
-    .tool-card p { font-size: 0.82rem; color: var(--muted); }
-    .tool-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--water);
-      text-decoration: none;
-      margin-top: 4px;
-    }
-    .tool-link::after { content: '↗'; }
-    .tool-link:hover { color: var(--cream); }
+}
 
-    .card-title { font-size: 1.05rem; }
-    .card-desc { font-size: 0.91rem; margin-top: 0; }
-    .card-spacer { flex: 1; }
-    .card-btn { width: 100%; margin-top: 6px; }
+.hero-title .accent{
 
-    .dev-badge {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      z-index: 100;
-      display: none;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid #ef4444;
-      background: #b91c1c;
-      color: #fff;
-      font-size: 0.76rem;
-      font-weight: 700;
-    /* ─── MISSION ─── */
-    .mission-box {
-      background: var(--soil-2);
-      border: 1px solid var(--bark);
-      border-left: 4px solid var(--gold);
-      border-radius: var(--radius);
-      padding: 32px;
-    }
-    .mission-box h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: var(--gold);
-    }
-    .mission-box p { color: var(--muted); max-width: 680px; }
+color:var(--leaf);
 
-    /* ─── FOOTER ─── */
-    .site-footer {
-      border-top: 1px solid var(--bark);
-      padding: 22px 0 40px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      position: relative;
-      z-index: 1;
-    }
-    body.dev-mode-active .dev-badge { display: inline-flex; }
+}
 
-    .footer {
-      border-top: 1px solid var(--color-bark-brown);
-      color: var(--color-text-muted);
-      padding: 18px 0 36px;
-      font-size: 0.88rem;
-    /* ─── EMPTY STATE ─── */
-    .empty-state {
-      color: var(--muted);
-      font-size: 0.93rem;
-      padding: 24px 0;
-    }
+.hero-sub{
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-up { animation: fadeUp 0.45s ease both; }
-    .fade-up-2 { animation: fadeUp 0.45s 0.1s ease both; }
-    .fade-up-3 { animation: fadeUp 0.45s 0.2s ease both; }
-  </style>
+margin-top:16px;
+color:var(--muted);
+
+}
+
+.hero-actions{
+
+margin-top:32px;
+
+display:flex;
+gap:12px;
+justify-content:center;
+flex-wrap:wrap;
+
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn{
+
+padding:14px 24px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+
+}
+
+.btn-primary{
+
+background:var(--leaf);
+color:#061107;
+
+border:none;
+
+box-shadow:0 4px 0 var(--leaf-dark);
+
+}
+
+.btn-primary:active{
+
+transform:translateY(3px);
+
+box-shadow:none;
+
+}
+
+.btn-secondary{
+
+border:1px solid var(--bark);
+color:var(--cream);
+
+}
+
+/* ---------- SECTIONS ---------- */
+
+.section-title{
+
+text-align:center;
+
+font-size:32px;
+
+margin-top:40px;
+
+font-family:'Playfair Display';
+
+}
+
+/* ---------- MODULE GRID ---------- */
+
+.module-grid{
+
+max-width:1100px;
+margin:40px auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+
+gap:16px;
+
+padding:0 20px;
+
+}
+
+.module-card{
+
+background:var(--soil2);
+
+border:1px solid var(--bark);
+
+border-radius:14px;
+
+padding:20px;
+
+transition:.2s;
+
+display:flex;
+flex-direction:column;
+
+}
+
+.module-card:hover{
+
+transform:translateY(-4px);
+
+background:var(--soil3);
+
+}
+
+.module-title{
+
+font-weight:600;
+
+margin-top:6px;
+
+}
+
+.module-desc{
+
+font-size:14px;
+color:var(--muted);
+
+margin-top:6px;
+
+flex:1;
+
+}
+
+.module-open{
+
+margin-top:10px;
+
+color:var(--leaf);
+
+font-weight:600;
+
+font-size:14px;
+
+text-decoration:none;
+
+}
+
+/* ---------- DIRECTORY ---------- */
+
+#toolDirectory{
+
+max-width:1100px;
+margin:40px auto;
+
+padding:0 20px;
+
+}
+
+.tool-group{
+
+margin-bottom:30px;
+
+}
+
+.tool-group h3{
+
+margin-bottom:12px;
+
+}
+
+.tool-list{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+
+gap:10px;
+
+}
+
+/* ---------- MISSION ---------- */
+
+.mission{
+
+max-width:700px;
+margin:40px auto;
+text-align:center;
+color:var(--muted);
+
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer{
+
+text-align:center;
+
+padding:30px;
+
+border-top:1px solid var(--bark);
+
+color:var(--muted);
+
+}
+
+/* ---------- DEV MODE ---------- */
+
+.dev-banner{
+
+position:fixed;
+
+bottom:20px;
+left:20px;
+
+background:#7f1d1d;
+
+padding:6px 12px;
+
+border-radius:6px;
+
+display:none;
+
+}
+
+body.dev .dev-banner{
+
+display:block;
+
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:700px){
+
+.hero-title{
+
+font-size:36px;
+
+}
+
+.nav-links{
+
+gap:10px;
+
+font-size:12px;
+
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <div class="dev-badge">DEV MODE</div>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <div class="brand">Via<span>Decide</span> • Orchard Player Hub</div>
-      <nav>
-        <a class="nav-link" href="#home" data-route="home">Home</a>
-        <a class="nav-link" href="#modules" data-route="modules">Game Modules</a>
-        <a class="nav-link" href="#mission" data-route="mission">Mission</a>
-      </nav>
+<div class="dev-banner">⚙ Dev Mode</div>
 
-  <div class="dev-badge">⚙ DEV MODE</div>
+<nav class="nav">
+<div class="nav-inner">
 
-  <nav class="site-nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="#home">Via<em>Decide</em> · Orchard</a>
-      <div class="nav-links">
-        <a class="nav-link active" href="#home"     data-route="home">Home</a>
-        <a class="nav-link"        href="#modules"  data-route="modules">Modules</a>
-        <a class="nav-link"        href="#directory" data-route="directory">Directory</a>
-        <a class="nav-link"        href="#mission"  data-route="mission">Mission</a>
-      </div>
-    </div>
-  </nav>
+<div class="brand">
+Via<span>Decide</span> Orchard
+</div>
 
-  <main class="container">
-    <section id="home">
-      <div class="orchard-panel">
-        <h1 class="hero-title">Begin Your Orchard Journey</h1>
-        <p class="hero-subtitle">Start in the Starter Farm, then unlock your layered orchard mechanics as you grow.</p>
+<div class="nav-links">
+<a href="#home">Home</a>
+<a href="#modules">Modules</a>
+<a href="#directory">Tools</a>
+<a href="#mission">Mission</a>
+</div>
 
-        <div class="starter-card" id="starter-farm-featured">
-          <span class="starter-chip">Featured Entry Point</span>
-          <h2 class="card-title">Initialize Starter Farm</h2>
-          <p class="card-desc">Set up your farm identity, seed state, and first progression loop.</p>
-          <div class="cta-row">
-            <a class="btn btn-grow" href="./tools/engine/starter-farm-generator/index.html">🌱 Start Game</a>
-            <a class="btn btn-action" href="tool-graph.html">Explore Graph</a>
-  <main>
-    <!-- ─── HERO ─── -->
-    <section id="home" class="hero">
-      <div class="wrap">
-        <div class="hero-eyebrow fade-up">Orchard Player Hub</div>
-        <h1 class="hero-title fade-up-2">
-          Grow your skills.<br>
-          <span class="accent">Harvest your potential.</span>
-        </h1>
-        <p class="hero-sub fade-up-3">
-          Start in the Starter Farm. Build root strength, grow branches of expertise, and produce fruit through consistent action.
-        </p>
+</div>
+</nav>
 
-        <div class="featured-card fade-up-3" id="featured-entry">
-          <span class="chip chip-leaf">⭐ Featured Entry Point</span>
-          <h2>Initialize Starter Farm</h2>
-          <p>Set up your farm identity, seed state, and first progression loop. Your orchard journey begins here.</p>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="./tools/engine/starter-farm-generator/index.html">🌱 Start Game</a>
-            <a class="btn btn-water"   href="./tools/engine/growth-milestone-engine/index.html">📈 Milestone Engine</a>
-            <a class="btn btn-ghost"   href="tool-graph.html">Tool Graph</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="home" class="hero">
 
-    <section id="modules">
-      <h2 class="section-heading">Your Orchard Mechanics</h2>
-      <p class="section-sub">Layered game modules available to players. Engine/admin internals stay hidden unless Dev Mode is active.</p>
-      <div id="game-modules-grid" class="module-grid"></div>
-    <div class="divider"></div>
+<h1 class="hero-title">
+Grow your skills.<br>
+<span class="accent">Harvest your potential.</span>
+</h1>
 
-    <!-- ─── MODULES ─── -->
-    <section id="modules">
-      <div class="wrap">
-        <div class="sec-header">
-          <h2 class="sec-title">Game Modules</h2>
-          <p class="sec-sub">Core engine tools powering the Orchard simulation. Press <kbd style="background:var(--bark);padding:1px 6px;border-radius:4px;font-size:0.8em;">~</kbd> to toggle Dev Mode.</p>
-        </div>
-        <div class="module-grid" id="module-grid">
-          <p class="empty-state">Loading modules…</p>
-        </div>
-      </div>
-    </section>
+<p class="hero-sub">
+Start in the Starter Farm and grow your orchard.
+</p>
 
-    <div class="divider"></div>
+<div class="hero-actions">
 
-    <!-- ─── DIRECTORY ─── -->
-    <section id="directory">
-      <div class="wrap">
-        <div class="sec-header">
-          <h2 class="sec-title">Tool Directory</h2>
-          <p class="sec-sub">All registered tools by category.</p>
-        </div>
-        <div id="tool-directory">
-          <p class="empty-state">Loading tools…</p>
-        </div>
-      </div>
-    </section>
+<button id="startGameBtn" class="btn btn-primary">
+🌱 Start Game
+</button>
 
-    <div class="divider"></div>
+<a href="#modules" class="btn btn-secondary">
+Explore Modules
+</a>
 
-    <!-- ─── MISSION ─── -->
-    <section id="mission">
-      <div class="orchard-panel">
-        <h2 class="section-heading">Why this matters for Bharat Vishwaguru by 2030</h2>
-        <p class="section-sub">This open-source stack helps learners and builders move from ideas to outcomes through practical decision workflows and interactive tools.</p>
-      <div class="wrap">
-        <div class="mission-box">
-          <h2>Why this matters</h2>
-          <p>This open-source stack helps learners and builders move from ideas to outcomes through practical decision workflows and interactive tools — building toward Bharat Vishwaguru by 2030.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+</div>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      © 2026 ViaDecide / decide.engine · Open source decision tooling for practical impact.
-    </div>
-  </footer>
+</section>
 
-  <script src="shared/tool-registry.js"></script>
-  <script>
-    (async function initToolDirectory() {
-      if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
+<section id="modules">
 
-      const DEV_HOTKEY = { key: 'E', ctrl: true, shift: true };
-      const FEATURED_STARTER_ID = 'starter-farm-generator';
+<h2 class="section-title">
+Game Modules
+</h2>
 
-      const featuredShell = document.getElementById('starter-farm-featured');
-      const moduleGrid = document.getElementById('game-modules-grid');
-      if (!moduleGrid) return;
-    (() => {
-      const FEATURED_ID = 'starter-farm-generator';
-      const DEV_KEY = { key: 'E', ctrl: true, shift: true };
+<div id="moduleGrid" class="module-grid">
+Loading modules...
+</div>
 
-      const ENGINE_IDS = new Set([
-        'player-signup','orchard-profile-builder','starter-farm-generator',
-        'root-strength-calculator','trunk-growth-calculator','fruit-yield-engine',
-        'daily-quest-generator','weekly-harvest-engine','thirty-day-promotion-engine',
-        'fair-ranking-engine','seed-exchange','fruit-sharing','circle-builder',
-        'peer-validation-engine','trust-score-engine','recruiter-dashboard',
-        'orchard-discovery-search','hire-readiness-scorer','four-direction-pipeline',
-        'growth-path-recommender','ai-coach-console','simulation-runner',
-        'meta-health-dashboard','synthetic-player-generator','wave1-simulation-runner',
-        'balance-dashboard','growth-milestone-engine','seed-quality-scorer'
-      ]);
+</section>
 
-      const ICONS = {
-        creators:'✏️', coders:'💻', researchers:'🔬', business:'📊',
-        education:'📚', games:'🎮', simulations:'🌳', system:'⚙️',
-        misc:'🍃', engine:'🌱', operators:'🏢'
-      };
+<section id="directory">
 
-      const LABELS = {
-        creators:'Creators', coders:'Coders', researchers:'Researchers',
-        business:'Business', education:'Education', games:'Games',
-        simulations:'Simulations', system:'System', engine:'Engine', misc:'Misc'
-      };
+<h2 class="section-title">
+Tool Directory
+</h2>
 
-      let allTools = [];
-      let devMode = false;
+<div id="toolDirectory">
+Loading tools...
+</div>
 
-      function visibleModules() {
-        return allTools.filter((tool) => {
-          if (tool.id === FEATURED_STARTER_ID) return false;
-          if (devMode) return true;
-          return !tool.isEngineTool;
-        });
-      }
+</section>
 
-      function sortModules(a, b) {
-        return (a.category || '').localeCompare(b.category || '') || a.name.localeCompare(b.name);
-      }
+<section id="mission">
 
-      function renderFeaturedStarter() {
-        if (!featuredShell) return;
-        const starter = allTools.find((tool) => tool.id === FEATURED_STARTER_ID || tool.featured);
-        if (!starter) return;
+<h2 class="section-title">
+Mission
+</h2>
 
-        featuredShell.innerHTML = `
-          <span class="starter-chip">Featured Entry Point</span>
-          <h2 class="card-title">${starter.gameIcon || '🌱'} ${starter.name || 'Initialize Starter Farm'}</h2>
-          <p class="card-desc">${starter.gameDescription || starter.description || 'Set up your farm identity, seed state, and first progression loop.'}</p>
-          <div class="cta-row">
-            <a class="btn btn-grow" href="${starter.entry || './tools/engine/starter-farm-generator/index.html'}">🌱 Start Game</a>
-            <a class="btn btn-action" href="workflow-builder.html">Open Workflow Builder</a>
-          </div>
-        `;
-      }
+<p class="mission">
+Open source decision tooling helping learners move from ideas to outcomes.  
+Building toward Bharat Vishwaguru 2030.
+</p>
 
-      function renderGameModules() {
-        const cards = visibleModules().sort(sortModules).map((tool) => `
-          <article class="game-card">
-            <div class="game-icon">${tool.gameIcon || '🍃'}</div>
-            <span class="layer-chip">${tool.category || 'Gameplay'}</span>
-            <h3 class="card-title">${tool.name}</h3>
-            <p class="card-desc">${tool.gameDescription || tool.description || 'Standalone orchard module.'}</p>
-            <div class="card-spacer"></div>
-            <a class="btn btn-action card-btn" href="${tool.entry}">Open Module</a>
-          </article>
-        `).join('');
+</section>
 
-        moduleGrid.innerHTML = cards || '<p class="section-sub">No modules are mapped for this mode.</p>';
-      }
+<footer class="footer">
+© 2026 ViaDecide
+</footer>
 
-      function setDevMode(enabled) {
-        devMode = enabled;
-        document.body.classList.toggle('dev-mode-active', devMode);
-        renderGameModules();
-      }
+<script src="shared/tool-registry.js"></script>
 
-      document.addEventListener('keydown', (event) => {
-        const keyMatches = event.key && event.key.toUpperCase() === DEV_HOTKEY.key;
-        const hotkey = keyMatches && event.ctrlKey === DEV_HOTKEY.ctrl && event.shiftKey === DEV_HOTKEY.shift;
-        const tilde = event.key === '~' || event.code === 'Backquote';
-        if (!hotkey && !tilde) return;
-        event.preventDefault();
-        setDevMode(!devMode);
-      });
+<script>
 
-      allTools = await window.ToolRegistry.loadAll();
-      renderFeaturedStarter();
-      renderGameModules();
-      function isEngine(tool) {
-        return ENGINE_IDS.has(tool.id) || tool.category === 'engine' || tool.category === 'simulations';
-      }
+let tools=[]
+let devMode=false
 
-      function visibleTools() {
-        return allTools.filter(t => devMode || !isEngine(t));
-      }
+const MAIN_GAME_ID="starter-farm-generator"
 
-      function renderModules() {
-        const grid = document.getElementById('module-grid');
-        if (!grid) return;
+async function init(){
 
-        const engineTools = allTools
-          .filter(t => isEngine(t) && t.id !== FEATURED_ID)
-          .sort((a,b) => a.name.localeCompare(b.name));
+if(!window.ToolRegistry) return
 
-        const show = devMode ? allTools.filter(t => t.id !== FEATURED_ID) : engineTools;
+tools=await window.ToolRegistry.loadAll()
 
-        if (!show.length) {
-          grid.innerHTML = '<p class="empty-state">No modules loaded yet.</p>';
-          return;
-        }
+setupStartGame()
 
-        grid.innerHTML = show.map(t => `
-          <a class="module-card" href="${t.entry}">
-            <div class="module-icon">${ICONS[t.category] || '🍃'}</div>
-            <div>
-              <span class="chip chip-${t.category === 'games' ? 'gold' : t.category === 'coders' ? 'water' : 'leaf'}" style="font-size:0.68rem;padding:3px 8px;">
-                ${t.category || 'engine'}
-              </span>
-            </div>
-            <div class="module-name">${t.name}</div>
-            <div class="module-desc">${t.description || 'Standalone orchard module.'}</div>
-            <div class="module-open">Open module</div>
-          </a>
-        `).join('');
-      }
+renderModules()
 
-      function renderDirectory() {
-        const dir = document.getElementById('tool-directory');
-        if (!dir) return;
+renderDirectory()
 
-        const tools = allTools.filter(t => t.id !== FEATURED_ID && (devMode || !isEngine(t)));
+}
 
-        const grouped = {};
-        tools.forEach(t => {
-          const cat = t.category || 'misc';
-          if (!grouped[cat]) grouped[cat] = [];
-          grouped[cat].push(t);
-        });
+function setupStartGame(){
 
-        const order = ['creators','coders','researchers','business','education','games','simulations','engine','system','misc'];
-        const cats = [...new Set([...order, ...Object.keys(grouped)])].filter(c => grouped[c]?.length);
+const btn=document.getElementById("startGameBtn")
 
-        if (!cats.length) {
-          dir.innerHTML = '<p class="empty-state">No tools in directory yet.</p>';
-          return;
-        }
+const mainGame=tools.find(t=>t.id===MAIN_GAME_ID)
 
-        dir.innerHTML = cats.map(cat => {
-          const items = (grouped[cat] || []).sort((a,b) => a.name.localeCompare(b.name));
-          return `
-            <div class="tools-section">
-              <div class="tools-section-label">${ICONS[cat] || '·'} ${LABELS[cat] || cat}</div>
-              <div class="tools-grid">
-                ${items.map(t => `
-                  <div class="tool-card">
-                    <h4>${t.name}</h4>
-                    <p>${t.description || 'Standalone browser tool.'}</p>
-                    <a class="tool-link" href="${t.entry}">Open</a>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
+if(!mainGame) return
 
-      function updateFeatured() {
-        const card = document.getElementById('featured-entry');
-        if (!card) return;
-        const starter = allTools.find(t => t.id === FEATURED_ID);
-        if (!starter) return;
-        // Update description from registry if available
-        const p = card.querySelector('p');
-        if (p && starter.description) p.textContent = starter.description;
-        const h2 = card.querySelector('h2');
-        if (h2) h2.textContent = starter.name || 'Initialize Starter Farm';
-        const link = card.querySelector('.btn-primary');
-        if (link) link.href = starter.entry || './tools/engine/starter-farm-generator/index.html';
-      }
+btn.onclick=()=>{
 
-      function setDevMode(on) {
-        devMode = on;
-        document.body.classList.toggle('dev-active', on);
-        renderModules();
-        renderDirectory();
-      }
+window.location.href=mainGame.entry
 
-      // Nav active state via scroll
-      const sections = [...document.querySelectorAll('section[id]')];
-      const navLinks = [...document.querySelectorAll('.nav-link[data-route]')];
+}
 
-      const io = new IntersectionObserver(entries => {
-        const hit = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (hit) {
-          navLinks.forEach(l => l.classList.toggle('active', l.dataset.route === hit.target.id));
-        }
-      }, { rootMargin: '-30% 0px -50% 0px', threshold: [0.1, 0.5] });
-      sections.forEach(s => io.observe(s));
+}
 
-      navLinks.forEach(l => {
-        l.addEventListener('click', e => {
-          e.preventDefault();
-          const sec = document.getElementById(l.dataset.route);
-          if (sec) { sec.scrollIntoView({ behavior: 'smooth' }); }
-          navLinks.forEach(x => x.classList.remove('active'));
-          l.classList.add('active');
-        });
-      });
+function renderModules(){
 
-      // Dev mode hotkey
-      document.addEventListener('keydown', e => {
-        const isHotkey = e.key?.toUpperCase() === DEV_KEY.key && e.ctrlKey && e.shiftKey;
-        const isTilde  = e.key === '~' || e.code === 'Backquote';
-        if (isHotkey || isTilde) { e.preventDefault(); setDevMode(!devMode); }
-      });
+const grid=document.getElementById("moduleGrid")
 
-      // Load tools
-      (async () => {
-        if (!window.ToolRegistry?.loadAll) return;
-        allTools = await window.ToolRegistry.loadAll();
-        updateFeatured();
-        renderModules();
-        renderDirectory();
-      })();
-    })();
-  </script>
-  <script src="router.js"></script>
+const visible=tools.filter(t=>devMode||!t.isEngineTool)
+
+if(!visible.length){
+
+grid.innerHTML="No modules available"
+return
+
+}
+
+grid.innerHTML=visible.map(t=>`
+
+<div class="module-card">
+
+<div class="module-title">${t.name}</div>
+
+<div class="module-desc">
+${t.description||""}
+</div>
+
+<a class="module-open" href="${t.entry}">
+Open Module →
+</a>
+
+</div>
+
+`).join("")
+
+}
+
+function renderDirectory(){
+
+const dir=document.getElementById("toolDirectory")
+
+const groups={}
+
+tools.forEach(t=>{
+
+if(!groups[t.category]) groups[t.category]=[]
+
+groups[t.category].push(t)
+
+})
+
+dir.innerHTML=Object.keys(groups).map(cat=>`
+
+<div class="tool-group">
+
+<h3>${cat}</h3>
+
+<div class="tool-list">
+
+${groups[cat].map(t=>`
+
+<div class="module-card">
+
+<div class="module-title">${t.name}</div>
+
+<div class="module-desc">
+${t.description||""}
+</div>
+
+<a class="module-open" href="${t.entry}">
+Open
+</a>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</div>
+
+`).join("")
+
+}
+
+/* DEV MODE */
+
+document.addEventListener("keydown",e=>{
+
+if(e.key==="~"){
+
+devMode=!devMode
+
+document.body.classList.toggle("dev",devMode)
+
+renderModules()
+
+}
+
+})
+
+init()
+
+</script>
+
 </body>
 </html>
