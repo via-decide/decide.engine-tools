@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-a-new-standalone-tool-called-flashcard-engin
+Title: Add a new standalone tool called flashcard-engine in tools/flashcard-...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: Produce working flashcard-engine tool with config.json, index.html, tool.js, registered and routed.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
