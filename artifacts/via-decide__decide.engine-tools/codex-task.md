@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/upsc-current-affairs/. Build a Vanilla JS RSS feed reader that fetches daily updates from public Indian news feeds (using a free CORS proxy like api.allorigins.win if necessary). Render a clean, ad-free list of daily headlines and summaries. Add a "Track" button next to each article that dispatches window.dispatchEvent(new CustomEvent('engine:mission_added', { detail: { text: "Read: " + article.title, type: "Study" } })).
+
+CONSTRAINTS
+pure Vanilla JS; handle fetch errors gracefully; strictly informative and text-heavy UI matching the OS theme.
 Create tools/engine/upsc-mains-simulator/. Build a strict, timed text-editor UI. Users select a question type (10-marker or 15-marker) which starts an un-pausable countdown (7 or 11 minutes). Disable paste events (onpaste="return false"). Include a live Word Count and WPM tracker. Upon timeout or manual submit, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_mains_written', { detail: { answerText } })) to send the payload to the OS AI Evaluator.
 
 CONSTRAINTS

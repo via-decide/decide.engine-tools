@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Create tools/engine/upsc-current-affairs/. Build a Vanilla JS RSS feed reader that fetches daily updates from public Indian news feeds (using a free CORS proxy like api.allorigins.win if necessary). Render a clean, ad-free list of daily headlines and summaries. Add a "Track" button next to each article that dispatches window.dispatchEvent(new CustomEvent('engine:mission_added', { detail: { text: "Read: " + article.title, type: "Study" } })).
 Create tools/engine/upsc-mains-simulator/. Build a strict, timed text-editor UI. Users select a question type (10-marker or 15-marker) which starts an un-pausable countdown (7 or 11 minutes). Disable paste events (onpaste="return false"). Include a live Word Count and WPM tracker. Upon timeout or manual submit, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_mains_written', { detail: { answerText } })) to send the payload to the OS AI Evaluator.
 Create tools/engine/upsc-swipe-deck/. Build a Vanilla JS swipe-based flashcard application. The UI must feature a central stack of cards holding UPSC facts (e.g., "Article 14", "Simlipal National Park location"). Implement mouse/touch drag physics. Swipe Right marks it "Known", Swipe Left marks it "Forgot". When a card is swiped left, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_error_logged', { detail: { topic: card.topic, desc: card.fact, revDate: nextDay } })) to feed the main OS error tracker.
 

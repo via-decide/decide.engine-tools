@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-toolsengineupsc-current-affairs-build-a-v",
   "branch": "simba/create-toolsengineupsc-mains-simulator-build-a-s",
   "branch": "simba/create-toolsengineupsc-swipe-deck-build-a-vanill",
   "files_to_create": [

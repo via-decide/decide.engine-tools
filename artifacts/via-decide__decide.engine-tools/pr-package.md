@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineupsc-current-affairs-build-a-v
+Title: Create tools/engine/upsc-current-affairs/. Build a Vanilla JS RSS fee...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: An automated daily news aggregator that turns Current Affairs reading directly into actionable OS missions.
 Branch: simba/create-toolsengineupsc-mains-simulator-build-a-s
 Title: Create tools/engine/upsc-mains-simulator/. Build a strict, timed text...
 
