@@ -1,3 +1,5 @@
+Branch: simba/add-toolscreatorssocial-content-generator-with-c
+Title: add tools/creators/social-content-generator/ with config.json index.h...
 Branch: simba/add-toolsgamesresource-puzzle-with-configjson-in
 Title: add tools/games/resource-puzzle/ with config.json index.html tool.js ...
 
@@ -15,19 +17,7 @@ Title: add tools/games/typing-speed/ with config.json index.html tool.js - v...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working typing test, standalone
-Branch: simba/add-toolsgamesmemory-match-with-configjson-index
-Title: add tools/games/memory-match/ with config.json index.html tool.js - v...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: playable memory match in browser, standalone
-Branch: simba/add-toolsgamessnake-game-with-configjson-indexht
-Title: add tools/games/snake-game/ with config.json index.html tool.js - van...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: playable snake game in browser, standalone
+- Goal: one input field, one Generate button, 7 labelled output cards each with copy button, all content platform-specific and ready to post
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
