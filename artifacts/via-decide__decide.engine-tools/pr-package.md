@@ -1,3 +1,9 @@
+Branch: simba/in-toolsenginegrowth-milestone-enginetooljs-only
+Title: in tools/engine/growth-milestone-engine/tool.js only - add a paused f...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: animate loop pauses when tab is hidden; event listeners never duplicate; zero shared file changes
 Branch: simba/rewrite-toolsenginestarter-farm-generatortooljs-
 Title: rewrite tools/engine/starter-farm-generator/tool.js to add hydrateSta...
 

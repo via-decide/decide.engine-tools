@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+in tools/engine/growth-milestone-engine/tool.js only - add a paused flag, set it true/false via document.addEventListener('visibilitychange', ...), and wrap the requestAnimationFrame call in animate3D so it only fires when not paused; add a boolean initDone guard at the top of wireIncomingEvents so it returns early if called twice
+
+CONSTRAINTS
+edit tools/engine/growth-milestone-engine/tool.js only; do not touch index.html config.json router.js tool-registry.js README or any shared file; no new dependencies
 rewrite tools/engine/starter-farm-generator/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back to same key on every change, emitEvent(name, data) dispatching window CustomEvents, and resource guard preventing run if water is 0 or credits are negative; keep existing copy and download buttons; apply Orchard palette colors Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28 via inline style block in index.html
 
 CONSTRAINTS

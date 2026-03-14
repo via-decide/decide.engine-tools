@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/in-toolsenginegrowth-milestone-enginetooljs-only",
   "branch": "simba/rewrite-toolsenginestarter-farm-generatortooljs-",
   "branch": "simba/rewrite-toolsenginedaily-quest-generatortooljs-t",
   "branch": "simba/rewrite-toolsengineseed-exchangetooljs-to-add-hy",
