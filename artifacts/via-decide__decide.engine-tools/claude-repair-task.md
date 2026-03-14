@@ -5,6 +5,8 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 rewrite tools/engine/seed-exchange/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every exchange, emitEvent(name, data) for engine:seed_exchanged events, and a credits guard that blocks exchange if state.credits is less than 1; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
+rewrite tools/engine/seed-exchange/tool.js only - replace generic stub with: hydrateState() reading localStorage.getItem('orchard_engine_player_state'), syncState() writing back after each exchange, emitEvent dispatching engine:seed_exchanged, and a guard returning early if state.credits<1; add a <style> block inside tools/engine/seed-exchange/index.html only setting body background #1A1614 and button accent #FFCA28
+in tools/engine/growth-milestone-engine/tool.js fix the animate3D function to pause rendering when the tab is hidden - add document.addEventListener visibilitychange to set a paused flag and only call requestAnimationFrame when document.visibilityState is visible; also add a once flag to wireIncomingEvents so listeners are never duplicated if init fires more than once
 
 RULES
 1. Audit touched files first and identify regressions.
