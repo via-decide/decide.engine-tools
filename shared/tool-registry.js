@@ -257,7 +257,8 @@
     'tools/engine/seed-quality-scorer', 'tools/engine/meta-health-dashboard',
     'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
     'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine',
-    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz'
+    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz',
+    'tools/engine/script-generator-files'
   ];
 
   function repoBasePath() {
@@ -283,6 +284,7 @@
   function normalizeTool(meta, fallbackDir) {
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const normalizedCategory = normalizeCategory(meta.category);
+    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
     const defaultEntry = fallbackDir ? fallbackDir + '/index.html' : '';
     const override = TOOL_OVERRIDES[id] || {};
     const category = override.category || normalizedCategory;
