@@ -1,0 +1,17 @@
+{
+  "id": "seed-quality-scorer",
+  "name": "Seed Quality Scorer",
+  "description": "Evaluate reusable knowledge seeds by scoring clarity, viability, and growth potential.",
+  "category": "engine",
+  "version": "1.0.0",
+  "inputs": [
+    "seed_batch",
+    "scoring_weights",
+    "growth_focus"
+  ],
+  "outputs": [
+    "seed_scores",
+    "quality_tier",
+    "improvement_actions"
+  ]
+}
