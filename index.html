@@ -3,490 +3,411 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ViaDecide · Orchard Engine</title>
+  <title>ViaDecide · Decision Tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root{
-      --soil:#1A1614; --soil2:#231e1b; --soil3:#2d2623;
-      --bark:#4A3B32; --bark2:#6b5346;
+      --bg:#0f0d0c; --bg2:#1a1614; --bg3:#231e1b; --bg4:#2d2623;
+      --border:#3a2e28; --border2:#4f3e36;
+      --text:#f0e4d0; --muted:#8a7568; --subtle:#5a4e47;
       --leaf:#52B756; --leafdk:#357a39;
       --water:#29B6F6; --waterdk:#0277BD;
       --gold:#FFCA28; --golddk:#c79800;
-      --cream:#F5E6D3; --muted:#8a7568;
-      --r:12px; --rsm:8px;
+      --amber:#f59e0b;
+      --rose:#f472b6;
+      --violet:#a78bfa;
+      --r:10px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:var(--soil);color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;min-height:100vh}
-
-    .wrap{width:min(1140px,92vw);margin:0 auto;position:relative}
-
-    /* NAV */
-    .nav{position:sticky;top:0;z-index:100;background:rgba(26,22,20,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bark)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 0;gap:12px;flex-wrap:wrap}
-    .brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--cream);text-decoration:none}
-    .brand em{color:var(--leaf);font-style:normal}
-    .nav-links{display:flex;gap:5px;flex-wrap:wrap}
-    .nav-link{color:var(--muted);text-decoration:none;font-size:0.87rem;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid transparent;transition:color .15s,border-color .15s}
-    .nav-link:hover,.nav-link.active{color:var(--cream);border-color:var(--bark)}
-
-    /* HERO */
-    .hero{padding:64px 0 48px}
-    .hero-eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--leaf);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-    .hero-eyebrow::before{content:'';display:inline-block;width:24px;height:2px;background:var(--leaf);border-radius:2px}
-    .hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.08;margin-bottom:16px}
-    .hero-h1 em{color:var(--leaf);font-style:normal}
-    .hero-sub{color:var(--muted);font-size:1.05rem;max-width:520px;margin-bottom:36px}
-
-    /* FEATURED GAME CARD */
-    .game-hero{
-      background:linear-gradient(135deg,rgba(82,183,86,.13) 0%,rgba(35,30,27,.97) 55%);
-      border:1.5px solid rgba(82,183,86,.4);
-      border-radius:var(--r);padding:28px 32px;
-      display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
-      box-shadow:0 0 48px rgba(82,183,86,.1),0 20px 40px rgba(0,0,0,.5);
-      position:relative;overflow:hidden;margin-bottom:16px;
+    body{
+      background:var(--bg);color:var(--text);
+      font-family:'DM Sans',system-ui,sans-serif;
+      line-height:1.6;min-height:100vh;
     }
-    .game-hero::after{content:'🌳';position:absolute;right:20px;bottom:10px;font-size:72px;opacity:.06;pointer-events:none}
-    .gh-chip{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:var(--leaf);color:#0d1a0e;border-radius:999px;padding:4px 10px;margin-bottom:12px}
-    .gh-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:700;margin-bottom:8px}
-    .gh-desc{color:var(--muted);font-size:.95rem;max-width:560px;margin-bottom:18px}
-    .gh-stats{display:flex;gap:20px}
-    .gh-stat{display:flex;flex-direction:column}
-    .gh-num{font-size:1.4rem;font-weight:700;color:var(--gold);line-height:1}
-    .gh-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
-    .gh-btn-col{display:flex;flex-direction:column;gap:10px;min-width:160px}
+    a{text-decoration:none;color:inherit}
+    .w{width:min(1100px,92vw);margin:0 auto}
 
-    /* BUTTONS */
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:600;font-size:.93rem;border:none;cursor:pointer;border-radius:var(--rsm);padding:11px 20px;transition:transform .1s,box-shadow .1s,filter .1s;position:relative;top:0}
-    .btn-primary{background:var(--leaf);color:#0d1a0e;box-shadow:0 5px 0 var(--leafdk)}
-    .btn-primary:hover{filter:brightness(1.07)}
-    .btn-primary:active{top:4px;box-shadow:0 1px 0 var(--leafdk)}
-    .btn-water{background:var(--water);color:#012a3a;box-shadow:0 4px 0 var(--waterdk)}
-    .btn-water:active{top:3px;box-shadow:0 1px 0 var(--waterdk)}
-    .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--bark)}
-    .btn-ghost:hover{border-color:var(--bark2);background:rgba(74,59,50,.3)}
-    .btn-sm{padding:8px 14px;font-size:.85rem}
-    .btn-full{width:100%}
+    /* ── NAV ── */
+    .nav{
+      position:sticky;top:0;z-index:100;
+      background:rgba(15,13,12,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-i{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px;flex-wrap:wrap}
+    .brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700}
+    .brand em{color:var(--leaf);font-style:normal}
+    .nav-links{display:flex;gap:4px;flex-wrap:wrap}
+    .nl{color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 11px;border-radius:999px;border:1px solid transparent;transition:all .15s}
+    .nl:hover,.nl.on{color:var(--text);border-color:var(--border)}
 
-    /* SECTION */
-    section{padding:48px 0;scroll-margin-top:70px}
-    .sec-hd{margin-bottom:24px}
-    .sec-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:5px}
-    .sec-sub{color:var(--muted);font-size:.9rem}
-    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--bark),transparent);margin:0}
+    /* ── HERO ── */
+    .hero{padding:60px 0 52px}
+    .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--leaf);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .eyebrow::before{content:'';display:inline-block;width:22px;height:2px;background:var(--leaf);border-radius:2px}
+    h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.08;margin-bottom:16px}
+    h1 em{color:var(--leaf);font-style:normal}
+    .sub{color:var(--muted);font-size:1rem;max-width:500px;margin-bottom:32px}
+    .hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+    .hstat{display:flex;flex-direction:column}
+    .hstat-n{font-size:1.8rem;font-weight:800;color:var(--text);line-height:1}
+    .hstat-l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
 
-    /* ENGINE GRID */
-    .engine-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-    .eng-card{background:var(--soil2);border:1px solid var(--bark);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s,border-color .18s}
-    .eng-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.4);border-color:var(--bark2)}
-    .eng-icon{font-size:1.5rem;line-height:1}
-    .eng-cat{font-size:.7rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 7px;border-radius:999px;width:fit-content}
-    .cat-engine{background:rgba(82,183,86,.15);color:var(--leaf)}
-    .cat-creators{background:rgba(255,202,40,.15);color:var(--gold)}
-    .cat-coders{background:rgba(41,182,246,.15);color:var(--water)}
-    .cat-business{background:rgba(244,114,182,.15);color:#f472b6}
-    .cat-education{background:rgba(167,139,250,.15);color:#a78bfa}
-    .cat-games{background:rgba(251,113,133,.15);color:#fb7185}
-    .cat-system{background:rgba(148,163,184,.15);color:#94a3b8}
-    .cat-researchers{background:rgba(52,211,153,.15);color:#34d399}
-    .cat-misc{background:rgba(203,213,225,.1);color:#94a3b8}
-    .eng-name{font-weight:600;font-size:.95rem;color:var(--cream)}
-    .eng-desc{font-size:.83rem;color:var(--muted);flex:1;line-height:1.45}
-    .eng-open{font-size:.8rem;font-weight:600;color:var(--leaf);display:flex;align-items:center;gap:4px;margin-top:4px}
-    .eng-open::after{content:'→';transition:transform .15s}
-    .eng-card:hover .eng-open::after{transform:translateX(3px)}
+    /* ── DIVIDER ── */
+    .div{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
 
-    /* ALL TOOLS GRID */
-    .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-    .tool-card{background:var(--soil2);border:1px solid var(--bark);border-radius:var(--rsm);padding:14px;display:flex;flex-direction:column;gap:6px;transition:border-color .15s,background .15s}
-    .tool-card:hover{border-color:var(--bark2);background:var(--soil3)}
-    .tool-card h4{font-size:.9rem;font-weight:600;color:var(--cream)}
-    .tool-card p{font-size:.8rem;color:var(--muted);flex:1}
-    .tool-link{display:inline-flex;align-items:center;gap:3px;font-size:.8rem;font-weight:600;color:var(--water);text-decoration:none;margin-top:4px}
-    .tool-link::after{content:'↗'}
-    .tool-link:hover{color:var(--cream)}
+    /* ── SECTION ── */
+    section{padding:44px 0;scroll-margin-top:68px}
+    .sh{margin-bottom:22px}
+    .sh h2{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;margin-bottom:5px}
+    .sh p{color:var(--muted);font-size:.88rem}
 
-    /* SECTION TABS */
-    .tab-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-    .tab{background:transparent;border:1px solid var(--bark);color:var(--muted);font-size:.85rem;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
-    .tab:hover{border-color:var(--bark2);color:var(--cream)}
-    .tab.active{background:var(--leaf);border-color:var(--leaf);color:#0d1a0e}
+    /* ── TABS ── */
+    .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+    .tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.83rem;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+    .tab:hover{border-color:var(--border2);color:var(--text)}
+    .tab.on{background:var(--leaf);border-color:var(--leaf);color:#0a1a0a}
 
-    /* COMING SOON */
-    .coming-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-    .coming-card{background:var(--soil2);border:1px dashed var(--bark);border-radius:var(--r);padding:16px;opacity:.7;display:flex;flex-direction:column;gap:6px}
-    .coming-icon{font-size:1.4rem}
-    .coming-name{font-weight:600;font-size:.9rem;color:var(--cream)}
-    .coming-desc{font-size:.8rem;color:var(--muted)}
-    .coming-badge{font-size:.7rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);background:rgba(255,202,40,.1);padding:3px 8px;border-radius:999px;width:fit-content}
+    /* ── TOOL GRID ── */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px}
+    .card{
+      background:var(--bg2);border:1px solid var(--border);
+      border-radius:var(--r);padding:18px;
+      display:flex;flex-direction:column;gap:8px;
+      transition:transform .17s,box-shadow .17s,border-color .17s;
+      cursor:pointer;
+    }
+    .card:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.45);border-color:var(--border2)}
+    .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .chip{font-size:.69rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
+    .c-creators{background:rgba(245,158,11,.12);color:var(--amber)}
+    .c-coders{background:rgba(41,182,246,.12);color:var(--water)}
+    .c-researchers{background:rgba(52,211,153,.12);color:#34d399}
+    .c-operators{background:rgba(167,139,250,.12);color:var(--violet)}
+    .c-business{background:rgba(244,114,182,.12);color:var(--rose)}
+    .c-education{background:rgba(167,139,250,.12);color:var(--violet)}
+    .c-system{background:rgba(148,163,184,.12);color:#94a3b8}
+    .c-misc{background:rgba(203,213,225,.08);color:#94a3b8}
+    .card-icon{font-size:1.3rem;line-height:1}
+    .card h3{font-size:.95rem;font-weight:600;color:var(--text)}
+    .card p{font-size:.82rem;color:var(--muted);flex:1;line-height:1.45}
+    .card-link{
+      display:inline-flex;align-items:center;gap:4px;
+      font-size:.82rem;font-weight:600;color:var(--leaf);margin-top:4px;
+      transition:gap .15s;
+    }
+    .card-link::after{content:'→'}
+    .card:hover .card-link{gap:7px}
 
-    /* EMPTY */
-    .empty{color:var(--muted);font-size:.9rem;padding:20px 0}
+    /* ── FEATURED TOOLS ROW ── */
+    .featured-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:16px}
+    .feat-card{
+      background:linear-gradient(135deg,rgba(82,183,86,.1),rgba(26,22,20,.97));
+      border:1.5px solid rgba(82,183,86,.3);
+      border-radius:var(--r);padding:22px;
+      display:flex;flex-direction:column;gap:10px;
+      box-shadow:0 0 32px rgba(82,183,86,.07);
+    }
+    .feat-card:hover{border-color:rgba(82,183,86,.55);transform:translateY(-2px)}
+    .feat-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700}
+    .feat-card p{color:var(--muted);font-size:.88rem;line-height:1.5}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:6px;
+      font-weight:600;font-size:.9rem;border:none;cursor:pointer;
+      border-radius:var(--r);padding:10px 18px;
+      transition:transform .1s,box-shadow .1s,filter .1s;
+      position:relative;top:0;text-decoration:none;
+    }
+    .btn-green{background:var(--leaf);color:#0a1a0a;box-shadow:0 4px 0 var(--leafdk)}
+    .btn-green:hover{filter:brightness(1.07)}
+    .btn-green:active{top:3px;box-shadow:0 1px 0 var(--leafdk)}
+    .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .btn-ghost:hover{border-color:var(--border2);background:var(--bg3)}
+    .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
 
-    /* MISSION */
-    .mission-box{background:var(--soil2);border:1px solid var(--bark);border-left:4px solid var(--gold);border-radius:var(--r);padding:28px}
-    .mission-box h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:8px}
-    .mission-box p{color:var(--muted);max-width:640px}
+    /* ── EMPTY ── */
+    .empty{color:var(--muted);font-size:.88rem;padding:16px 0}
 
-    /* FOOTER */
-    .footer{border-top:1px solid var(--bark);padding:20px 0 40px;color:var(--muted);font-size:.84rem;position:relative;z-index:1}
-
-    /* LOADING */
-    .loading-state{color:var(--muted);font-size:.9rem;padding:12px 0}
+    /* ── FOOTER ── */
+    footer{border-top:1px solid var(--border);padding:20px 0 36px;color:var(--muted);font-size:.82rem}
+    footer a{color:var(--water)}
+    footer a:hover{color:var(--text)}
   </style>
 </head>
 <body>
 
 <nav class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="#home">Via<em>Decide</em> · Orchard</a>
+  <div class="w nav-i">
+    <a class="brand" href="#home">Via<em>Decide</em></a>
     <div class="nav-links">
-      <a class="nav-link active" href="#home"    data-route="home">Home</a>
-      <a class="nav-link"        href="#game"    data-route="game">🌱 Play</a>
-      <a class="nav-link"        href="#modules" data-route="modules">Engine</a>
-      <a class="nav-link"        href="#tools"   data-route="tools">Tools</a>
-      <a class="nav-link"        href="#coming"  data-route="coming">Coming</a>
+      <a class="nl on" href="#home"        data-s="home">Home</a>
+      <a class="nl"    href="#creators"    data-s="creators">Creators</a>
+      <a class="nl"    href="#builders"    data-s="builders">Builders</a>
+      <a class="nl"    href="#researchers" data-s="researchers">Research</a>
+      <a class="nl"    href="#business"    data-s="business">Business</a>
+      <a class="nl"    href="#all"         data-s="all">All Tools</a>
     </div>
   </div>
 </nav>
 
 <main>
 
-  <!-- HOME -->
+  <!-- HERO -->
   <section id="home" class="hero">
-    <div class="wrap">
-      <div class="hero-eyebrow">44 Live Tools · Open Source · Zero Install</div>
-      <h1 class="hero-h1">Build. Play.<br><em>Grow your orchard.</em></h1>
-      <p class="hero-sub">Browser tools for creators, builders, and players. No login. No framework. Just open and use.</p>
+    <div class="w">
+      <div class="eyebrow">Free · No Login · Open Source</div>
+      <h1>Tools that help you<br>think, build, <em>decide.</em></h1>
+      <p class="sub">Practical browser tools for creators, students, researchers, and business builders. Open any tool and start in seconds.</p>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">44</div><div class="hstat-l">Live Tools</div></div>
+        <div class="hstat"><div class="hstat-n">0</div><div class="hstat-l">Login Required</div></div>
+        <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">Forever</div></div>
+      </div>
+    </div>
+  </section>
 
-      <!-- FEATURED: GROWTH MILESTONE ENGINE -->
-      <div class="game-hero">
-        <div>
-          <div class="gh-chip">🎮 Live Game</div>
-          <div class="gh-title">Growth Milestone Engine</div>
-          <div class="gh-desc">A real Three.js farming game in your browser. Grow your tree from seed to orchard, manage water and nutrients, fight pests, survive burnout. Every mechanic maps to real career growth.</div>
-          <div class="gh-stats">
-            <div class="gh-stat"><div class="gh-num">4</div><div class="gh-label">Growth Stages</div></div>
-            <div class="gh-stat"><div class="gh-num">3D</div><div class="gh-label">Three.js</div></div>
-            <div class="gh-stat"><div class="gh-num">0</div><div class="gh-label">Frameworks</div></div>
+  <div class="div"></div>
+
+  <!-- CREATORS -->
+  <section id="creators">
+    <div class="w">
+      <div class="sh">
+        <h2>✏️ For Creators</h2>
+        <p>Generate prompts, remix ideas, write scripts, and compare outputs. Built for content creators, writers, and marketers.</p>
+      </div>
+      <div class="featured-row">
+        <div class="feat-card">
+          <div class="chip c-creators">Most Used</div>
+          <h3>PromptAlchemy</h3>
+          <p>Turn a raw idea into a structured prompt pack ready for any AI tool. Works for social, video, writing, and product.</p>
+          <div class="btn-row">
+            <a class="btn btn-green" href="./prompt-alchemy/index.html">Open Tool</a>
+            <a class="btn btn-ghost" href="./tools/promptalchemy/index.html">New Version</a>
           </div>
         </div>
-        <div class="gh-btn-col">
-          <a class="btn btn-primary btn-full" href="./tools/engine/growth-milestone-engine/index.html">🌱 Play Now</a>
-          <a class="btn btn-water btn-full"   href="./tools/engine/starter-farm-generator/index.html">⚙️ Start Farm</a>
-          <a class="btn btn-ghost btn-full"   href="./tool-graph.html">Tool Graph</a>
+        <div class="feat-card">
+          <div class="chip c-creators">Popular</div>
+          <h3>Idea Remixer</h3>
+          <p>Paste one idea, get six angle variants — different audiences, formats, and positioning to test fast.</p>
+          <div class="btn-row">
+            <a class="btn btn-green" href="./tools/idea-remixer/index.html">Open Tool</a>
+          </div>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- GAME + ENGINE MODULES -->
-  <section id="game">
-    <div class="wrap">
-      <div class="sec-hd">
-        <div class="sec-title">🌳 Game Engine Modules</div>
-        <div class="sec-sub">All 28 engine tools — click any to open. Each is standalone and works in your browser right now.</div>
-      </div>
-      <div class="engine-grid" id="engine-grid">
-        <!-- Hardcoded so they ALWAYS show even if registry fails -->
-        <a class="eng-card" href="./tools/engine/growth-milestone-engine/index.html">
-          <div class="eng-icon">📈</div>
-          <div class="eng-cat cat-engine">Game</div>
-          <div class="eng-name">Growth Milestone Engine</div>
-          <div class="eng-desc">3D farming game — grow, manage pests, survive burnout, evolve your tree.</div>
-          <div class="eng-open">Play</div>
+      <div class="grid">
+        <a class="card" href="./tools/script-generator/index.html">
+          <div class="card-top"><span class="chip c-creators">Creators</span><span class="card-icon">🎬</span></div>
+          <h3>Script Generator</h3>
+          <p>Convert your structured prompt into a ready-to-record script for video, podcast, or reels.</p>
+          <span class="card-link">Open</span>
         </a>
-        <a class="eng-card" href="./tools/engine/starter-farm-generator/index.html">
-          <div class="eng-icon">🌱</div>
-          <div class="eng-cat cat-engine">Layer 1</div>
-          <div class="eng-name">Starter Farm Generator</div>
-          <div class="eng-desc">Initialize your farm identity, seed state, and first progression loop.</div>
-          <div class="eng-open">Open</div>
+        <a class="card" href="./tools/prompt-compare/index.html">
+          <div class="card-top"><span class="chip c-researchers">Analysis</span><span class="card-icon">⚖️</span></div>
+          <h3>Prompt Compare</h3>
+          <p>Paste two or three prompts side-by-side and score them for clarity, specificity, and downstream utility.</p>
+          <span class="card-link">Open</span>
         </a>
-        <a class="eng-card" href="./tools/engine/daily-quest-generator/index.html">
-          <div class="eng-icon">📜</div>
-          <div class="eng-cat cat-engine">Daily</div>
-          <div class="eng-name">Daily Quest Generator</div>
-          <div class="eng-desc">Generate today's action tasks based on your farm health and growth stage.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/weekly-harvest-engine/index.html">
-          <div class="eng-icon">🧺</div>
-          <div class="eng-cat cat-engine">Weekly</div>
-          <div class="eng-name">Weekly Harvest Engine</div>
-          <div class="eng-desc">Convert your weekly actions into measurable harvest outcomes.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/seed-exchange/index.html">
-          <div class="eng-icon">🛒</div>
-          <div class="eng-cat cat-engine">Market</div>
-          <div class="eng-name">Seed Exchange</div>
-          <div class="eng-desc">Trade seeds and unlock better orchard opportunities.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/orchard-profile-builder/index.html">
-          <div class="eng-icon">🪪</div>
-          <div class="eng-cat cat-engine">Profile</div>
-          <div class="eng-name">Orchard Profile Builder</div>
-          <div class="eng-desc">Shape your orchard identity, role, and growth direction.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/root-strength-calculator/index.html">
-          <div class="eng-icon">🌿</div>
-          <div class="eng-cat cat-engine">Core</div>
-          <div class="eng-name">Root Strength Calculator</div>
-          <div class="eng-desc">Calculate your foundational skill depth and career root score.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/trunk-growth-calculator/index.html">
-          <div class="eng-icon">🪵</div>
-          <div class="eng-cat cat-engine">Core</div>
-          <div class="eng-name">Trunk Growth Calculator</div>
-          <div class="eng-desc">Measure depth of expertise and progression velocity.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/fruit-yield-engine/index.html">
-          <div class="eng-icon">🍎</div>
-          <div class="eng-cat cat-engine">Output</div>
-          <div class="eng-name">Fruit Yield Engine</div>
-          <div class="eng-desc">Compute output value from your growth inputs and effort cycles.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/fruit-sharing/index.html">
-          <div class="eng-icon">🤝</div>
-          <div class="eng-cat cat-engine">Social</div>
-          <div class="eng-name">Fruit Sharing</div>
-          <div class="eng-desc">Distribute output and rewards across orchard circles.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/seed-quality-scorer/index.html">
-          <div class="eng-icon">⭐</div>
-          <div class="eng-cat cat-engine">Quality</div>
-          <div class="eng-name">Seed Quality Scorer</div>
-          <div class="eng-desc">Score seeds for clarity, viability, and growth potential.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/thirty-day-promotion-engine/index.html">
-          <div class="eng-icon">🚀</div>
-          <div class="eng-cat cat-engine">30-Day</div>
-          <div class="eng-name">30-Day Promotion Engine</div>
-          <div class="eng-desc">Build and track a 30-day growth sprint to your next level.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/fair-ranking-engine/index.html">
-          <div class="eng-icon">🏆</div>
-          <div class="eng-cat cat-engine">Ranking</div>
-          <div class="eng-name">Fair Ranking Engine</div>
-          <div class="eng-desc">Merit-based ranking of players using multi-factor scoring.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/trust-score-engine/index.html">
-          <div class="eng-icon">🛡️</div>
-          <div class="eng-cat cat-engine">Trust</div>
-          <div class="eng-name">Trust Score Engine</div>
-          <div class="eng-desc">Calculate credibility and trust scores across orchard interactions.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/peer-validation-engine/index.html">
-          <div class="eng-icon">✅</div>
-          <div class="eng-cat cat-engine">Validation</div>
-          <div class="eng-name">Peer Validation Engine</div>
-          <div class="eng-desc">Validate player contributions through peer review cycles.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/circle-builder/index.html">
-          <div class="eng-icon">⭕</div>
-          <div class="eng-cat cat-engine">Social</div>
-          <div class="eng-name">Circle Builder</div>
-          <div class="eng-desc">Form and manage growth circles for collaborative progression.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/growth-path-recommender/index.html">
-          <div class="eng-icon">🗺️</div>
-          <div class="eng-cat cat-engine">AI Coach</div>
-          <div class="eng-name">Growth Path Recommender</div>
-          <div class="eng-desc">Get a personalised recommended growth path based on your current state.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/ai-coach-console/index.html">
-          <div class="eng-icon">🤖</div>
-          <div class="eng-cat cat-engine">AI</div>
-          <div class="eng-name">AI Coach Console</div>
-          <div class="eng-desc">Interact with the orchard AI coach for guidance and next actions.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/hire-readiness-scorer/index.html">
-          <div class="eng-icon">💼</div>
-          <div class="eng-cat cat-engine">Career</div>
-          <div class="eng-name">Hire Readiness Scorer</div>
-          <div class="eng-desc">Score your readiness for the next career opportunity.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/recruiter-dashboard/index.html">
-          <div class="eng-icon">🔍</div>
-          <div class="eng-cat cat-engine">Recruiter</div>
-          <div class="eng-name">Recruiter Dashboard</div>
-          <div class="eng-desc">Recruiter-side view of orchard players and their readiness scores.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/four-direction-pipeline/index.html">
-          <div class="eng-icon">🧭</div>
-          <div class="eng-cat cat-engine">Pipeline</div>
-          <div class="eng-name">Four Direction Pipeline</div>
-          <div class="eng-desc">Map growth across all four career directions simultaneously.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/orchard-discovery-search/index.html">
-          <div class="eng-icon">🔎</div>
-          <div class="eng-cat cat-engine">Search</div>
-          <div class="eng-name">Orchard Discovery Search</div>
-          <div class="eng-desc">Search the orchard ecosystem for players, circles, and seeds.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/player-signup/index.html">
-          <div class="eng-icon">🆕</div>
-          <div class="eng-cat cat-engine">Onboard</div>
-          <div class="eng-name">Player Signup</div>
-          <div class="eng-desc">Onboard new players into the orchard with initial state setup.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/balance-dashboard/index.html">
-          <div class="eng-icon">⚖️</div>
-          <div class="eng-cat cat-engine">System</div>
-          <div class="eng-name">Balance Dashboard</div>
-          <div class="eng-desc">View ecosystem balance metrics across all orchard modules.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/meta-health-dashboard/index.html">
-          <div class="eng-icon">🏥</div>
-          <div class="eng-cat cat-engine">Health</div>
-          <div class="eng-name">Meta Health Dashboard</div>
-          <div class="eng-desc">Monitor overall ecosystem health signals in real time.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/simulation-runner/index.html">
-          <div class="eng-icon">▶️</div>
-          <div class="eng-cat cat-engine">Sim</div>
-          <div class="eng-name">Simulation Runner</div>
-          <div class="eng-desc">Run growth simulations across configurable orchard scenarios.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/synthetic-player-generator/index.html">
-          <div class="eng-icon">👤</div>
-          <div class="eng-cat cat-engine">Testing</div>
-          <div class="eng-name">Synthetic Player Generator</div>
-          <div class="eng-desc">Generate synthetic player profiles for simulation and testing.</div>
-          <div class="eng-open">Open</div>
-        </a>
-        <a class="eng-card" href="./tools/engine/wave1-simulation-runner/index.html">
-          <div class="eng-icon">🌊</div>
-          <div class="eng-cat cat-engine">Wave 1</div>
-          <div class="eng-name">Wave 1 Simulation</div>
-          <div class="eng-desc">Run the Wave 1 cohort simulation with configurable player sets.</div>
-          <div class="eng-open">Open</div>
+        <a class="card" href="./tools/output-evaluator/index.html">
+          <div class="card-top"><span class="chip c-researchers">Quality</span><span class="card-icon">📊</span></div>
+          <h3>Output Evaluator</h3>
+          <p>Score any AI output for clarity, completeness, novelty, and actionability — with improvement suggestions.</p>
+          <span class="card-link">Open</span>
         </a>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="div"></div>
+
+  <!-- BUILDERS / CODERS -->
+  <section id="builders">
+    <div class="w">
+      <div class="sh">
+        <h2>💻 For Builders</h2>
+        <p>Spec, code, review, and ship. Tools for developers, product managers, and anyone building something.</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="./tools/spec-builder/index.html">
+          <div class="card-top"><span class="chip c-operators">Product</span><span class="card-icon">📋</span></div>
+          <h3>Spec Builder</h3>
+          <p>Turn a vague feature idea into a proper product spec with goals, constraints, and acceptance criteria.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/task-splitter/index.html">
+          <div class="card-top"><span class="chip c-coders">Planning</span><span class="card-icon">🗂️</span></div>
+          <h3>Task Splitter</h3>
+          <p>Break a big goal into ordered subtasks with owners, dependencies, and done criteria. Hand to any agent or dev.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/repo-improvement-brief/index.html">
+          <div class="card-top"><span class="chip c-coders">Dev</span><span class="card-icon">🔧</span></div>
+          <h3>Repo Improvement Brief</h3>
+          <p>Turn a gut feeling about a codebase into a focused implementation brief ready for Codex or Claude.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/code-generator/index.html">
+          <div class="card-top"><span class="chip c-coders">Code</span><span class="card-icon">⚡</span></div>
+          <h3>Code Generator</h3>
+          <p>Describe what you need and get a working HTML tool skeleton with structure and basic logic.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/code-reviewer/index.html">
+          <div class="card-top"><span class="chip c-coders">Review</span><span class="card-icon">🔍</span></div>
+          <h3>Code Reviewer</h3>
+          <p>Paste code and get structured feedback on quality, bugs, and improvements before you push.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./agent/index.html">
+          <div class="card-top"><span class="chip c-coders">AI</span><span class="card-icon">🤖</span></div>
+          <h3>Agent Builder</h3>
+          <p>Design simple AI agents and workflows — define tasks, constraints, and output format.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./app-generator/index.html">
+          <div class="card-top"><span class="chip c-coders">Generate</span><span class="card-icon">🏗️</span></div>
+          <h3>App Generator</h3>
+          <p>Describe your micro-app idea and get an implementation plan and feature list to start building.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/template-vault/index.html">
+          <div class="card-top"><span class="chip c-operators">Templates</span><span class="card-icon">🗄️</span></div>
+          <h3>Template Vault</h3>
+          <p>Save and reuse your best prompts, specs, and briefs. Your personal reusable asset library.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/export-studio/index.html">
+          <div class="card-top"><span class="chip c-operators">Export</span><span class="card-icon">📤</span></div>
+          <h3>Export Studio</h3>
+          <p>Package any output as plain text, Markdown, or JSON for handoff to a tool, agent, or teammate.</p>
+          <span class="card-link">Open</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- RESEARCHERS / STUDENTS -->
+  <section id="researchers">
+    <div class="w">
+      <div class="sh">
+        <h2>🔬 For Researchers &amp; Students</h2>
+        <p>Structure your learning, synthesise sources, prep for interviews, and evaluate your outputs.</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="./student-research/index.html">
+          <div class="card-top"><span class="chip c-education">Students</span><span class="card-icon">📚</span></div>
+          <h3>Student Research</h3>
+          <p>Structure your research process — define your question, organise sources, and build your summary.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./multi-source-research-explained/index.html">
+          <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
+          <h3>Multi-Source Research</h3>
+          <p>Synthesise findings from multiple sources into one coherent, structured research output.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./interview-prep/index.html">
+          <div class="card-top"><span class="chip c-education">Career</span><span class="card-icon">🎯</span></div>
+          <h3>Interview Prep</h3>
+          <p>Build structured answers for any interview question — behavioural, technical, or case-based.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/context-packager/index.html">
+          <div class="card-top"><span class="chip c-system">Workflow</span><span class="card-icon">📦</span></div>
+          <h3>Context Packager</h3>
+          <p>Collect key context from your research and package it into a reusable handoff document.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/workflow-template-gallery/index.html">
+          <div class="card-top"><span class="chip c-system">Templates</span><span class="card-icon">🗂️</span></div>
+          <h3>Workflow Gallery</h3>
+          <p>Browse reusable workflow templates and generate launch-ready sequence briefs for any project.</p>
+          <span class="card-link">Open</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- BUSINESS -->
+  <section id="business">
+    <div class="w">
+      <div class="sh">
+        <h2>📊 For Business</h2>
+        <p>Make better decisions, build your narrative, track sales, and package your thinking for stakeholders.</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="./decision-brief-guide/index.html">
+          <div class="card-top"><span class="chip c-business">Decisions</span><span class="card-icon">⚖️</span></div>
+          <h3>Decision Brief Guide</h3>
+          <p>Turn messy analysis into a clean one-page decision brief you can share with any stakeholder.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./founder/index.html">
+          <div class="card-top"><span class="chip c-business">Founders</span><span class="card-icon">🚀</span></div>
+          <h3>Founder Narrative Builder</h3>
+          <p>Build your origin story, positioning, and founder narrative assets for pitches and press.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./sales-dashboard/index.html">
+          <div class="card-top"><span class="chip c-business">Sales</span><span class="card-icon">📈</span></div>
+          <h3>Sales Dashboard</h3>
+          <p>Track and review sales performance snapshots — input your metrics, get a structured summary.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/tool-search-discovery/index.html">
+          <div class="card-top"><span class="chip c-system">Discovery</span><span class="card-icon">🔎</span></div>
+          <h3>Tool Search</h3>
+          <p>Search across all tools by category, keyword, or use case to find the right one fast.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/tool-router/index.html">
+          <div class="card-top"><span class="chip c-system">Workflow</span><span class="card-icon">↗️</span></div>
+          <h3>Tool Router</h3>
+          <p>Describe what you need to do and get a suggested sequence of tools to use next.</p>
+          <span class="card-link">Open</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
 
   <!-- ALL TOOLS -->
-  <section id="tools">
-    <div class="wrap">
-      <div class="sec-hd">
-        <div class="sec-title">🧰 All Tools</div>
-        <div class="sec-sub">Every live tool — for creators, builders, researchers, and businesses.</div>
+  <section id="all">
+    <div class="w">
+      <div class="sh">
+        <h2>🧰 All Tools</h2>
+        <p>Every live tool in one place — filter by category.</p>
       </div>
-
-      <div class="tab-row" id="tab-row">
-        <button class="tab active" data-cat="all">All</button>
-        <button class="tab" data-cat="creators">✏️ Creators</button>
-        <button class="tab" data-cat="coders">💻 Builders</button>
-        <button class="tab" data-cat="business">📊 Business</button>
-        <button class="tab" data-cat="researchers">🔬 Research</button>
-        <button class="tab" data-cat="education">📚 Education</button>
-        <button class="tab" data-cat="system">⚙️ System</button>
+      <div class="tabs" id="tab-row">
+        <button class="tab on" data-c="all">All</button>
+        <button class="tab" data-c="creators">Creators</button>
+        <button class="tab" data-c="coders">Builders</button>
+        <button class="tab" data-c="researchers">Research</button>
+        <button class="tab" data-c="operators">Business</button>
+        <button class="tab" data-c="education">Students</button>
+        <button class="tab" data-c="system">System</button>
       </div>
-
-      <div class="tools-grid" id="tools-grid">
-        <div class="loading-state">Loading tools…</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- COMING SOON -->
-  <section id="coming">
-    <div class="wrap">
-      <div class="sec-hd">
-        <div class="sec-title">🎮 Mini Games — Coming Soon</div>
-        <div class="sec-sub">All connect to the Orchard state engine. Your score feeds your farm.</div>
-      </div>
-      <div class="coming-grid">
-        <div class="coming-card">
-          <div class="coming-icon">🐍</div>
-          <div class="coming-badge">In Dev</div>
-          <div class="coming-name">Snake</div>
-          <div class="coming-desc">Classic snake — your score becomes fruit production in the engine.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-icon">🃏</div>
-          <div class="coming-badge">Queued</div>
-          <div class="coming-name">Memory Match</div>
-          <div class="coming-desc">16-card flip game. Best time saved as water consistency.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-icon">⌨️</div>
-          <div class="coming-badge">Queued</div>
-          <div class="coming-name">Typing Speed</div>
-          <div class="coming-desc">WPM test with orchard sentences. Speed becomes water level.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-icon">🧩</div>
-          <div class="coming-badge">Queued</div>
-          <div class="coming-name">Resource Puzzle</div>
-          <div class="coming-desc">Allocate water/nutrients across 3 tree slots to maximise yield.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-icon">📝</div>
-          <div class="coming-badge">Queued</div>
-          <div class="coming-name">Quiz Engine</div>
-          <div class="coming-desc">Knowledge check that unlocks orchard progression bonuses.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-icon">🎯</div>
-          <div class="coming-badge">Planned</div>
-          <div class="coming-name">Social Content Generator</div>
-          <div class="coming-desc">One topic → LinkedIn, WhatsApp, YouTube, Spotify scripts + image prompts.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- MISSION -->
-  <section id="mission">
-    <div class="wrap">
-      <div class="mission-box">
-        <h2>Why this exists</h2>
-        <p>An open-source stack helping learners and builders move from ideas to outcomes through practical decision tools and an interactive game engine — building capability, one orchard cycle at a time.</p>
+      <div class="grid" id="all-grid">
+        <div class="empty">Loading tools…</div>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <div class="wrap">
-    © 2026 ViaDecide / decide.engine · Open source · <a href="https://github.com/via-decide/decide.engine-tools" style="color:var(--water)">GitHub</a>
+<footer>
+  <div class="w" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <span>© 2026 ViaDecide · Free browser tools for practical thinkers</span>
+    <div style="display:flex;gap:14px">
+      <a href="https://github.com/via-decide/decide.engine-tools">GitHub</a>
+      <a href="./tool-graph.html">Tool Graph</a>
+    </div>
   </div>
 </footer>
 
@@ -495,88 +416,88 @@
 (() => {
   'use strict';
 
-  // ── NAV active state ──
-  const navLinks = [...document.querySelectorAll('.nav-link[data-route]')];
-  const sections = [...document.querySelectorAll('section[id]')];
-
-  new IntersectionObserver(entries => {
-    const hit = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (hit) navLinks.forEach(l => l.classList.toggle('active', l.dataset.route === hit.target.id));
-  }, { rootMargin:'-30% 0px -50% 0px', threshold:[0.1,0.5] }).observe
-    ? sections.forEach(s => {
-        new IntersectionObserver(entries => {
-          entries.forEach(e => { if(e.isIntersecting) navLinks.forEach(l => l.classList.toggle('active', l.dataset.route === e.target.id)); });
-        }, { threshold: 0.3 }).observe(s);
-      })
-    : null;
-
-  navLinks.forEach(l => {
+  // Smooth scroll nav
+  document.querySelectorAll('.nl[data-s]').forEach(l => {
     l.addEventListener('click', e => {
       e.preventDefault();
-      const sec = document.getElementById(l.dataset.route);
+      const sec = document.getElementById(l.dataset.s);
       if (sec) sec.scrollIntoView({ behavior:'smooth' });
     });
   });
 
-  // ── TOOL DIRECTORY with tabs ──
-  const LABELS = { creators:'Creators', coders:'Coders', researchers:'Researchers', business:'Business', education:'Education', system:'System', misc:'Misc', operators:'Business', simulations:'Engine' };
-  const CAT_CSS = { creators:'creators', coders:'coders', researchers:'researchers', business:'business', education:'education', system:'system', misc:'misc', operators:'business', simulations:'engine' };
+  // Active nav on scroll
+  const sections = [...document.querySelectorAll('section[id]')];
+  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('on', l.dataset.s === e.target.id));
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => io.observe(s));
 
-  let allLoadedTools = [];
+  // Category map for chips
+  const CAT = {
+    creators:'c-creators', coders:'c-coders', researchers:'c-researchers',
+    operators:'c-operators', business:'c-business', education:'c-education',
+    system:'c-system', misc:'c-misc'
+  };
+  const ICON = {
+    creators:'✏️', coders:'💻', researchers:'🔬', operators:'📊',
+    business:'📊', education:'📚', system:'⚙️', misc:'🍃'
+  };
+  const LABEL = {
+    creators:'Creators', coders:'Builders', researchers:'Research',
+    operators:'Business', business:'Business', education:'Students',
+    system:'System', misc:'Other'
+  };
+
+  let tools = [];
   let activeTab = 'all';
 
-  function catClass(cat) { return 'cat-' + (CAT_CSS[cat] || 'misc'); }
-
-  function renderToolsGrid(tools) {
-    const grid = document.getElementById('tools-grid');
-    if (!grid) return;
-
-    // Filter out engine tools from the tools grid (they're in engine section)
-    const show = tools.filter(t => {
-      if (t.isEngineTool || t.category === 'simulations' || t.category === 'engine') return false;
-      if (activeTab === 'all') return true;
-      return t.category === activeTab;
-    });
-
-    if (!show.length) { grid.innerHTML = '<div class="empty">No tools in this category yet.</div>'; return; }
-
-    grid.innerHTML = show.sort((a,b) => a.name.localeCompare(b.name)).map(t => `
-      <div class="tool-card">
-        <div class="eng-cat ${catClass(t.category)}" style="margin-bottom:4px">${LABELS[t.category]||t.category}</div>
-        <h4>${t.name}</h4>
-        <p>${t.description || 'Standalone browser tool.'}</p>
-        <a class="tool-link" href="${t.entry}">Open tool</a>
-      </div>
-    `).join('');
+  // Exclude engine/simulation tools entirely
+  function isGeneral(t) {
+    return !t.isEngineTool
+      && t.category !== 'simulations'
+      && t.category !== 'engine'
+      && t.entry && !t.entry.includes('tools/engine/');
   }
 
-  // Tab switching
+  function renderAll() {
+    const grid = document.getElementById('all-grid');
+    if (!grid) return;
+    const show = tools.filter(t => isGeneral(t) && (activeTab === 'all' || t.category === activeTab));
+    if (!show.length) { grid.innerHTML = '<div class="empty">No tools here yet.</div>'; return; }
+    grid.innerHTML = show.sort((a,b) => a.name.localeCompare(b.name)).map(t => {
+      const cc = CAT[t.category] || 'c-misc';
+      const ic = ICON[t.category] || '🍃';
+      const lb = LABEL[t.category] || t.category;
+      return `<a class="card" href="${t.entry}">
+        <div class="card-top"><span class="chip ${cc}">${lb}</span><span class="card-icon">${ic}</span></div>
+        <h3>${t.name}</h3>
+        <p>${t.description || 'Standalone browser tool.'}</p>
+        <span class="card-link">Open</span>
+      </a>`;
+    }).join('');
+  }
+
+  // Tabs
   document.getElementById('tab-row')?.addEventListener('click', e => {
     const tab = e.target.closest('.tab');
     if (!tab) return;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    activeTab = tab.dataset.cat;
-    renderToolsGrid(allLoadedTools);
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    activeTab = tab.dataset.c;
+    renderAll();
   });
 
-  // Load tools from registry
+  // Load registry
   (async () => {
     if (!window.ToolRegistry?.loadAll) return;
     try {
-      allLoadedTools = await window.ToolRegistry.loadAll();
-      renderToolsGrid(allLoadedTools);
-    } catch(e) {
-      console.warn('Registry load failed:', e);
-    }
+      tools = await window.ToolRegistry.loadAll();
+      renderAll();
+    } catch(e) { console.warn('Registry:', e); }
   })();
-
-  // ── URL routing: ?tool=id ──
-  const params = new URLSearchParams(window.location.search);
-  const toolRef = params.get('tool');
-  if (toolRef && window.Router?.allToolPaths?.[toolRef]) {
-    window.location.href = window.Router.allToolPaths[toolRef];
-  }
 })();
 </script>
 <script src="router.js"></script>
