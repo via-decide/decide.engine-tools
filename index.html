@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -435,5 +435,442 @@
     })();
   </script>
   <script src="router.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaDecide • Decision Engine Hub</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Cognitive Orchard Palette */
+            --color-void: #0D0B0A;
+            --color-soil-deep: #161311;
+            --color-soil-surface: #221D1A;
+            --color-bark: #3D322B;
+            --color-leaf-neon: #6EE77B;
+            --color-leaf-forest: #388E3C;
+            --color-water-pulse: #38BDF8;
+            --color-gold-ore: #FCD34D;
+            --color-data-ghost: rgba(245, 230, 211, 0.6);
+            --color-ivory: #F5E6D3;
+            
+            /* UI Engine Tokens */
+            --radius-hud: 4px;
+            --radius-card: 12px;
+            --radius-organic: 24px;
+            --shadow-glow: 0 0 20px rgba(110, 231, 123, 0.15);
+            --glass-bg: rgba(22, 19, 17, 0.8);
+            --transition-fluid: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { box-sizing: border-box; outline: none; }
+        
+        body {
+            margin: 0;
+            background-color: var(--color-void);
+            color: var(--color-ivory);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(110, 231, 123, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233D322B' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* --- Header & HUD --- */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-container {
+            width: min(1300px, 94vw);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--color-ivory);
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            background: var(--color-leaf-neon);
+            border-radius: var(--radius-hud);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .brand-text {
+            font-family: 'Merriweather', serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-text span { color: var(--color-leaf-neon); opacity: 0.8; }
+
+        .engine-status {
+            display: flex;
+            gap: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-data-ghost);
+        }
+
+        .status-item { display: flex; align-items: center; gap: 6px; }
+        .pulse { 
+            width: 6px; height: 6px; background: var(--color-leaf-neon); 
+            border-radius: 50%; box-shadow: 0 0 8px var(--color-leaf-neon);
+            animation: blink 2s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* --- Hero: The Cognitive Root --- */
+        .hero {
+            padding: 100px 0 60px;
+            position: relative;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            line-height: 0.95;
+            margin: 0 0 30px;
+        }
+
+        .hero-title .glow {
+            color: var(--color-leaf-neon);
+            text-shadow: var(--shadow-glow);
+        }
+
+        .hero-p {
+            font-size: 1.1rem;
+            color: var(--color-data-ghost);
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Action Hub --- */
+        .action-card {
+            background: linear-gradient(135deg, var(--color-soil-surface), var(--color-soil-deep));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-organic);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+
+        .action-card::after {
+            content: "ENGINE V2.5";
+            position: absolute;
+            bottom: -10px;
+            right: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4rem;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 18px 36px;
+            border-radius: var(--radius-hud);
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: var(--transition-fluid);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--color-leaf-neon);
+            color: var(--color-void);
+            box-shadow: 0 10px 20px rgba(110, 231, 123, 0.2);
+        }
+        .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(110, 231, 123, 0.3); }
+
+        .btn-ghost {
+            color: var(--color-ivory);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-left: 15px;
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.05); }
+
+        /* --- Module Architecture --- */
+        .section-nav {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+
+        .nav-tab {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--color-data-ghost);
+            cursor: pointer;
+            transition: var(--transition-fluid);
+            position: relative;
+        }
+
+        .nav-tab.active { color: var(--color-leaf-neon); }
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-leaf-neon);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 100px;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-card);
+            padding: 30px;
+            transition: var(--transition-fluid);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .module-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(110, 231, 123, 0.3);
+            transform: scale(1.02);
+        }
+
+        .module-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--color-leaf-neon);
+            margin-bottom: 10px;
+        }
+
+        .module-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            margin: 0 0 12px;
+        }
+
+        .module-desc {
+            color: var(--color-data-ghost);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .module-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            color: var(--color-data-ghost);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 900px) {
+            .hero-layout { grid-template-columns: 1fr; }
+            .hero-title { font-size: 3.5rem; }
+            .engine-status { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="#" class="brand">
+                <div class="brand-logo">V</div>
+                <div class="brand-text">Via<span>Decide</span></div>
+            </a>
+            
+            <div class="engine-status">
+                <div class="status-item"><span class="pulse"></span> Core Engine Active</div>
+                <div class="status-item">Latency: 24ms</div>
+                <div class="status-item">Nodes: 14</div>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <kbd style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; color: var(--color-data-ghost);">TILDE TO DEBUG</kbd>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="width: min(1300px, 94vw); margin: 0 auto;">
+        
+        <section class="hero">
+            <div class="hero-layout">
+                <div>
+                    <h1 class="hero-title">Cognitive<br><span class="glow">Orchard</span></h1>
+                    <p class="hero-p">The decision-intelligence layer for practical builders. Transform raw information into a high-yield growth engine using modular cognitive tools.</p>
+                    
+                    <div id="featured-slot">
+                        <!-- JS Loaded -->
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <h3 style="margin-top:0; font-family:'Merriweather';">Engine Console</h3>
+                    <p style="font-size: 0.85rem; color: var(--color-data-ghost);">Select a primary entry point or initialize a new decision-thread in the global orchard state.</p>
+                    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 30px;">
+                        <a href="./tools/engine/starter-farm-generator/index.html" class="btn btn-primary" style="justify-content: center;">🌱 Initialize Root Farm</a>
+                        <a href="#modules" class="btn btn-ghost" style="justify-content: center; margin: 0;">Explore Module Library</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modules" style="padding: 60px 0;">
+            <div class="section-nav">
+                <div class="nav-tab active">ALL MODULES</div>
+                <div class="nav-tab">CORE LAYERS</div>
+                <div class="nav-tab">STRATEGY</div>
+                <div class="nav-tab">SYSTEM</div>
+            </div>
+
+            <div id="module-grid" class="grid">
+                <!-- Modules injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">ViaDecide</div>
+        <p style="color: var(--color-data-ghost); font-size: 0.8rem; letter-spacing: 2px;">BHARAT VISHWAGURU • 2030 VISION</p>
+        <p style="margin-top: 40px; font-size: 0.7rem; opacity: 0.3;">© 2026 DECIDE.ENGINE OPEN SOURCE TOOLS</p>
+    </footer>
+
+    <script src="shared/tool-registry.js"></script>
+
+    <script>
+        /**
+         * COGNITIVE ENGINE UI LOGIC
+         */
+        let allTools = [];
+        let devMode = false;
+
+        const CORE_ID = 'starter-farm-generator';
+
+        const FALLBACK_REGISTRY = [
+            { id: 'starter-farm-generator', name: 'Root Farm', category: 'Core', gameIcon: '🌱', description: 'The fundamental state engine. Initialize decision variables and local variables.', entry: './tools/engine/starter-farm-generator/index.html', isEngineTool: false },
+            { id: 'decision-matrix', name: 'Decision Matrix', category: 'Strategy', gameIcon: '⚖️', description: 'Weighted factor analysis for path optimization in complex environments.', entry: './tools/engine/decision-matrix/index.html', isEngineTool: false },
+            { id: 'vision-board', name: 'Vision Mapper', category: 'Strategy', gameIcon: '🖼️', description: 'Long-term state visualization. Map project outcomes to physical orchard growth.', entry: './tools/engine/vision-board/index.html', isEngineTool: false },
+            { id: 'daily-quest-generator', name: 'Quest Engine', category: 'Activity', gameIcon: '📜', description: 'Dynamic task generation based on current farm health and seed requirements.', entry: './tools/engine/daily-quest-generator/index.html', isEngineTool: false },
+            { id: 'weekly-harvest-engine', name: 'Harvest Protocol', category: 'Outcome', gameIcon: '🧺', description: 'Evaluate weekly performance and mint harvest tokens based on completion rates.', entry: './tools/engine/weekly-harvest-engine/index.html', isEngineTool: false },
+            { id: 'seed-exchange', name: 'Seed Market', category: 'Market', gameIcon: '🛒', description: 'Resource redistribution hub. Exchange excess yield for rare strategic seeds.', entry: './tools/engine/seed-exchange/index.html', isEngineTool: false },
+            { id: 'resource-mapper', name: 'Inventory Hub', category: 'System', gameIcon: '🗺️', description: 'Cross-module resource tracking and dependency mapping for engine assets.', entry: './tools/engine/resource-mapper/index.html', isEngineTool: false },
+            { id: 'workflow-builder', name: 'Workflow Logic', category: 'System', gameIcon: '⚡', description: 'Underlying logic builder. Design custom decision paths for the engine.', entry: './tools/engine/workflow-builder/index.html', isEngineTool: true },
+            { id: 'admin-debug', name: 'Engine Debug', category: 'System', gameIcon: '⚙️', description: 'Low-level access to the global state and module routing tables.', entry: './tools/engine/console/index.html', isEngineTool: true }
+        ];
+
+        async function initialize() {
+            try {
+                if (window.ToolRegistry) {
+                    allTools = await window.ToolRegistry.loadAll();
+                }
+                if (!allTools || allTools.length === 0) allTools = FALLBACK_REGISTRY;
+            } catch (e) {
+                allTools = FALLBACK_REGISTRY;
+            }
+            render();
+        }
+
+        function render() {
+            const grid = document.getElementById('module-grid');
+            const featured = document.getElementById('featured-slot');
+
+            // Render Modules
+            const filtered = allTools.filter(t => devMode || !t.isEngineTool);
+            
+            grid.innerHTML = filtered.map(tool => `
+                <div class="module-card">
+                    <div class="module-id">ID: DECIDE-MOD-${tool.id.substring(0,4).toUpperCase()}</div>
+                    <h3 class="module-title">${tool.gameIcon || '🍃'} ${tool.name}</h3>
+                    <p class="module-desc">${tool.description}</p>
+                    <div class="module-footer">
+                        <span class="badge">${tool.category}</span>
+                        <a href="${tool.entry}" class="btn" style="padding: 10px 20px; font-size: 0.7rem; border: 1px solid rgba(255,255,255,0.1);">Execute</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Tilde debug
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '~' || e.key === '`') {
+                devMode = !devMode;
+                document.body.style.border = devMode ? '2px solid var(--color-leaf-neon)' : 'none';
+                render();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', initialize);
+    </script>
 </body>
 </html>

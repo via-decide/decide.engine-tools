@@ -1,21 +1,23 @@
-Branch: simba/add-growth-milestone-engine-tool-in-toolsengineg
-Title: Add growth-milestone-engine tool in tools/engine/growth-milestone-eng...
+Branch: simba/add-toolscreatorssocial-content-generator-with-c
+Title: add tools/creators/social-content-generator/ with config.json index.h...
+Branch: simba/add-toolsgamesresource-puzzle-with-configjson-in
+Title: add tools/games/resource-puzzle/ with config.json index.html tool.js ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working growth-milestone-engine tool that provides psychological feedback and state progression
-Branch: simba/add-daily-weather-replenisher-tool-in-toolsengin
-Title: Add daily-weather-replenisher tool in tools/engine/daily-weather-repl...
+- Goal: working puzzle game, standalone
+Branch: simba/add-toolsgamesquiz-engine-with-configjson-indexh
+Title: add tools/games/quiz-engine/ with config.json index.html tool.js - JS...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working daily-weather-replenisher tool to manage the daily energy economy
-Branch: simba/add-genesis-seed-initializer-tool-in-toolsengine
-Title: Add genesis-seed-initializer tool in tools/engine/genesis-seed-initia...
+- Goal: working quiz, standalone
+Branch: simba/add-toolsgamestyping-speed-with-configjson-index
+Title: add tools/games/typing-speed/ with config.json index.html tool.js - v...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working genesis-seed-initializer tool to establish initial player state and environment
+- Goal: one input field, one Generate button, 7 labelled output cards each with copy button, all content platform-specific and ready to post
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

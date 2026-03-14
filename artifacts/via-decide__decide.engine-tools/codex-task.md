@@ -1,13 +1,19 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add llm-action-parser tool in tools/engine/llm-action-parser/ with config.json, index.html, tool.js. Backend testing UI that accepts plain-text real-world actions (e.g., "Read React docs"). Simulates the 4-pipeline logic (Absorption, Consolidation, Specialization, Yield) to generate a strict JSON payload mapping the action to game stat changes (Root increase, Water cost). Vanilla JS.
-Add growth-milestone-engine tool in tools/engine/growth-milestone-engine/ with config.json, index.html, tool.js. Listens for the first successful LLM validation payload (Pipeline 1) and triggers the visual/state change from "Dormant Seed" to "Sprout". Updates UI state and unlocks further trunk growth. Vanilla JS.
-Add daily-weather-replenisher tool in tools/engine/daily-weather-replenisher/ with config.json, index.html, tool.js. Simulates the 24-hour real-world cycle. Restores the player's Water (energy) supply to a baseline maximum based on their Soil and Root level to prevent volume-spamming. Vanilla JS logic testing dashboard.
-Add genesis-seed-initializer tool in tools/engine/genesis-seed-initializer/ with config.json, index.html, tool.js. Interface for new players to receive an ID and select their "Soil" (industry/domain). Initializes the player profile in localStorage with 0 roots, 10 starting Water, and "Dormant Seed" status. Vanilla JS, UI based on global-theme.css.
+add tools/creators/social-content-generator/ with config.json index.html tool.js - a standalone social media content generator; user enters one topic/idea and clicks Generate; the tool outputs ready-to-copy scripts for 7 sections: (1) LinkedIn Post, (2) WhatsApp Channel Post, (3) YouTube Title + Description + First Comment + Ping Comment, (4) Community Post, (5) Spotify Episode Title + Description + Post Time suggestion; plus an AI Image Prompt for each platform; each section has its own labelled card with a Copy button; all output is pure text generated from templates using the input topic; use the Orchard palette colors soil #1A1614 leaf #52B756 water #29B6F6 gold #FFCA28; layout is two columns on desktop, single column on mobile; save last input to localStorage key social_content_generator_draft
+add tools/games/resource-puzzle/ with config.json index.html tool.js - resource allocation puzzle where player distributes 100 water/nutrients across 3 tree slots to maximize fruit yield score, uses orchard palette colors, saves high score to localStorage
 
 CONSTRAINTS
-preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
+edit tools/games/resource-puzzle/ only; no frameworks; no shared file changes
+add tools/games/quiz-engine/ with config.json index.html tool.js - JSON-driven quiz tool, 5 hardcoded orchard/career questions, multiple choice, score at end, emits engine:quiz_completed with {score, total} on finish
+
+CONSTRAINTS
+edit tools/games/quiz-engine/ only; no frameworks; no shared file changes
+add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
+
+CONSTRAINTS
+edit tools/creators/social-content-generator/ only; do not touch router.js tool-registry.js index.html README or any shared file; no external APIs; all generation is template-based vanilla JS; load ../../shared/shared.css and tool.js only
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
