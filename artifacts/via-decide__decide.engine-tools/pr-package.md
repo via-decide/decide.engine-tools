@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-circle-leaderboard-tool-in-toolsenginecir
+Title: Create circle-leaderboard tool in tools/engine/circle-leaderboard/ wi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working circle-leaderboard tool that displays competitive rankings of player groups
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
