@@ -4,9 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
-add tools/games/memory-match/ with config.json index.html tool.js - vanilla JS card flip memory game with 16 cards, move counter, timer, win detection, saves best time to localStorage key orchard_engine_memory_best
-add tools/games/snake-game/ with config.json index.html tool.js - vanilla JS canvas snake game, arrow key controls, score tracking, saves high score to localStorage key orchard_engine_snake_score, emits engine:score_achieved on new high score
+add tools/creators/social-content-generator/ with config.json index.html tool.js - a standalone social media content generator; user enters one topic/idea and clicks Generate; the tool outputs ready-to-copy scripts for 7 sections: (1) LinkedIn Post, (2) WhatsApp Channel Post, (3) YouTube Title + Description + First Comment + Ping Comment, (4) Community Post, (5) Spotify Episode Title + Description + Post Time suggestion; plus an AI Image Prompt for each platform; each section has its own labelled card with a Copy button; all output is pure text generated from templates using the input topic; use the Orchard palette colors soil #1A1614 leaf #52B756 water #29B6F6 gold #FFCA28; layout is two columns on desktop, single column on mobile; save last input to localStorage key social_content_generator_draft
 
 RULES
 1. Audit touched files first and identify regressions.
