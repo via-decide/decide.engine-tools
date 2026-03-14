@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
+add color-palette-generator tool in tools/color-palette-generator/ with config.json index.html tool.js. Generate harmonious color palettes from seed color.
 
 RULES
 1. Audit touched files first and identify regressions.
