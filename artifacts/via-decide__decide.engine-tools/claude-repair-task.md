@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create tools/engine/upsc-master-os/. Take the provided monolithic "UPSC 2026 Engine" prototype and split it into the standard Orchard Engine 3-file structure. 1. index.html: Contain the DOM, Tailwind/Chart.js/PDF.js CDN scripts, and the inline CSS. 2. tool.js: Extract all the vanilla JavaScript objects (AppData, YouTubeAPI, PDFExtractor, Orb, StudyEngine, Missions, ResearchVault, Tracker, PYQ, AIEval, ChartsData) and the DOMContentLoaded event listeners into this file. 3. config.json: Create the metadata for the tool registry (e.g., isEngineTool: false, gameIcon: "🏛️", gameDescription: "Master Operating System for UPSC 2026 Preparation").
+Create tools/engine/upsc-current-affairs/. Build a Vanilla JS RSS feed reader that fetches daily updates from public Indian news feeds (using a free CORS proxy like api.allorigins.win if necessary). Render a clean, ad-free list of daily headlines and summaries. Add a "Track" button next to each article that dispatches window.dispatchEvent(new CustomEvent('engine:mission_added', { detail: { text: "Read: " + article.title, type: "Study" } })).
 
 RULES
 1. Audit touched files first and identify regressions.
