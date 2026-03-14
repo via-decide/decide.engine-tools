@@ -1,3 +1,9 @@
+Branch: simba/fix-sharedtool-registryjs---the-file-has-a-synta
+Title: fix shared/tool-registry.js - the file has a syntax error caused by a...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: shared/tool-registry.js passes node --check and ToolRegistry.loadAll() works in browser
 Branch: simba/fix-sharedtool-graphjs---the-file-has-a-syntax-e
 Title: fix shared/tool-graph.js - the file has a syntax error from a duplica...
 

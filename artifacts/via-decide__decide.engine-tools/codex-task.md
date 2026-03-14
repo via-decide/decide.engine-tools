@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+fix shared/tool-registry.js - the file has a syntax error caused by an unclosed TOOL_OVERRIDES object literal and triple-declared const variables in normalizeTool(); rewrite the file as a single clean IIFE with one TOOL_OVERRIDES object, one normalizeTool function, and no duplicate declarations; preserve all existing tool IDs in importableToolDirs and ENGINE_TOOL_IDS
+
+CONSTRAINTS
+edit shared/tool-registry.js only; do not touch any other file; preserve all importableToolDirs entries
 fix shared/tool-graph.js - the file has a syntax error from a duplicate IIFE header, a broken unclosed init() function, and a misplaced comment that splits a return statement; rewrite as a single clean IIFE with use strict at top, one set of const declarations, one init() function with error handling, and no duplicate code
 
 CONSTRAINTS
