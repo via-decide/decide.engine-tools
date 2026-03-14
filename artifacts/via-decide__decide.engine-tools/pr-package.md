@@ -1,9 +1,9 @@
-Branch: simba/add-a-progress-timeline-tool-in-toolsprogress-ti
-Title: add a progress-timeline tool in tools/progress-timeline with config.j...
+Branch: simba/add-seed-quality-scorer-tool-in-toolsengineseed-
+Title: Add seed-quality-scorer tool in tools/engine/seed-quality-scorer/ wit...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working standalone progress-timeline tool registered and routable
+- Goal: working seed-quality-scorer tool that evaluates and scores knowledge contributions
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
