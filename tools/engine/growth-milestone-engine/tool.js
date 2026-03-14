@@ -91,6 +91,11 @@
   let scene, camera, renderer, currentPlant, dirLight;
   let targetScale = 1;
   let isBurning = false;
+  let animPaused = false;
+
+  document.addEventListener('visibilitychange', () => {
+    animPaused = document.hidden;
+  });
 
   function syncState() {
     localStorage.setItem(MASTER_STATE_KEY, JSON.stringify(state));
@@ -210,6 +215,7 @@
       }
       currentPlant.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
+    if (!animPaused) renderer.render(scene, camera);
     renderer.render(scene, camera);
   }
 
@@ -488,6 +494,8 @@
   }
 
   function wireIncomingEvents() {
+    if (wireIncomingEvents._wired) return;
+    wireIncomingEvents._wired = true;
     window.addEventListener('engine:weather_changed', (e) => {
       state.environment.weather = e.detail.newWeather;
       updateUI();
