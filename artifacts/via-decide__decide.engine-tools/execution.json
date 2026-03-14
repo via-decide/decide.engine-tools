@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/create-toolsengineupsc-master-os-take-the-provid",
+  "branch": "simba/create-toolsengineupsc-csat-trainer-build-a-high",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
