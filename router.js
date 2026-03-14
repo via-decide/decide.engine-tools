@@ -68,7 +68,11 @@
     'meta-health-dashboard':             'tools/engine/meta-health-dashboard/index.html',
     'synthetic-player-generator':        'tools/engine/synthetic-player-generator/index.html',
     'wave1-simulation-runner':           'tools/engine/wave1-simulation-runner/index.html',
-    'balance-dashboard':                 'tools/engine/balance-dashboard/index.html'
+    'balance-dashboard':                 'tools/engine/balance-dashboard/index.html',
+    'growth-milestone-engine':           'tools/engine/growth-milestone-engine/index.html',
+    'layer1-swipe-crucible':             'tools/engine/layer1-swipe-crucible/index.html',
+    'seed-quality-scorer':               'tools/engine/seed-quality-scorer/index.html',
+    'script-generator-files':            'tools/engine/script-generator-files/index.html'
   };
 
   /* Merged lookup table */
