@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+rewrite tools/engine/starter-farm-generator/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back to same key on every change, emitEvent(name, data) dispatching window CustomEvents, and resource guard preventing run if water is 0 or credits are negative; keep existing copy and download buttons; apply Orchard palette colors Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28 via inline style block in index.html
+
+CONSTRAINTS
+additive rewrite of tool.js only; update index.html style block only; do not touch config.json or shared files
 rewrite tools/engine/daily-quest-generator/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every quest generation, emitEvent(name, data) for engine:quest_generated events, and a guard that prevents generation if state.water is 0; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/rewrite-toolsenginestarter-farm-generatortooljs-
+Title: rewrite tools/engine/starter-farm-generator/tool.js to add hydrateSta...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: starter-farm-generator reads and writes orchard_engine_player_state, emits engine events, and blocks invalid actions
 Branch: simba/rewrite-toolsenginedaily-quest-generatortooljs-t
 Title: rewrite tools/engine/daily-quest-generator/tool.js to add hydrateStat...
 
