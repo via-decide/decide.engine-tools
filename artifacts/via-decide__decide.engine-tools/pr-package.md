@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-daily-streak-tracker-tool-in-toolsenginedail
+Title: Add daily-streak-tracker tool in tools/engine/daily-streak-tracker/ w...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working daily-streak-tracker tool that calculates and displays consistency rewards
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
