@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Analyzes reusable knowledge (seeds) submitted by players and assigns a quality score based on originality, structure, and peer validation metrics. Vanilla JS, standalone logic.
+Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
