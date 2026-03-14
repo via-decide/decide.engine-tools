@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add seasonal-events-engine tool in tools/engine/seasonal-events-engine/ with config.json, index.html, tool.js. Defines and runs time-bound game modifiers affecting global soil quality and sunlight exposure, prompting players to adapt their daily quests for maximum yield. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
