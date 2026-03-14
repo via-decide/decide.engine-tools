@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-json-formatter-
+Title: Add a new standalone tool called json-formatter in tools/json-formatt...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working json-formatter tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-api-request-bui
 Title: Add a new standalone tool called api-request-builder in tools/api-req...
 
