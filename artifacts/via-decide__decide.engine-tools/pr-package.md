@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-retention-funnel-tracker-tool-in-toolseng
+Title: Create retention-funnel-tracker tool in tools/engine/retention-funnel...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working retention-funnel-tracker tool to analyze player lifecycle bottlenecks
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
