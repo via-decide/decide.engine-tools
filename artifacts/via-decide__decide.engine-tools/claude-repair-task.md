@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
+Create retention-funnel-tracker tool in tools/engine/retention-funnel-tracker/ with config.json, index.html, tool.js. Admin analytics tool visualizing player drop-off rates from signup → first quest → first harvest → first promotion. Vanilla JS, standalone data visualization.
 
 RULES
 1. Audit touched files first and identify regressions.
