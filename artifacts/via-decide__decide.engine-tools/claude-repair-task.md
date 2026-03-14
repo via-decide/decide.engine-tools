@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create tools/engine/street-food-event-deck/. Build a logic interceptor for the Layer 1 Swipe Crucible. When the active skin is street-food-cart, this script overwrites localStorage.getItem('orchard_engine_swipe_deck') with thematic card objects: { type: 'prep', text: 'Prep ingredients' }, { type: 'serve', text: 'Take order' }, { type: 'pest', text: 'Power cut! Save the fridge' }, { type: 'growth', text: 'Handle customer complaint' }. Dispatch window.dispatchEvent(new CustomEvent('engine:swipe_deck_reloaded')) so the crucible UI refreshes with the new cards.
+Create tools/engine/upsc-master-os/. Take the provided monolithic "UPSC 2026 Engine" prototype and split it into the standard Orchard Engine 3-file structure. 1. index.html: Contain the DOM, Tailwind/Chart.js/PDF.js CDN scripts, and the inline CSS. 2. tool.js: Extract all the vanilla JavaScript objects (AppData, YouTubeAPI, PDFExtractor, Orb, StudyEngine, Missions, ResearchVault, Tracker, PYQ, AIEval, ChartsData) and the DOMContentLoaded event listeners into this file. 3. config.json: Create the metadata for the tool registry (e.g., isEngineTool: false, gameIcon: "🏛️", gameDescription: "Master Operating System for UPSC 2026 Preparation").
 
 RULES
 1. Audit touched files first and identify regressions.
