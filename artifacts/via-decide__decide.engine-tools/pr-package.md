@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-candidate-comparison-view-tool-in-toolsen
+Title: Create candidate-comparison-view tool in tools/engine/candidate-compa...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working candidate-comparison-view tool for market layer recruiter analysis
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
