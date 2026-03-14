@@ -1,9 +1,9 @@
-Branch: simba/create-toolsengineupsc-master-os-take-the-provid
-Title: Create tools/engine/upsc-master-os/. Take the provided monolithic "UP...
+Branch: simba/create-toolsengineupsc-swipe-deck-build-a-vanill
+Title: Create tools/engine/upsc-swipe-deck/. Build a Vanilla JS swipe-based ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: A fully functional, beautifully routed, standalone UPSC 2026 Master OS tool cleanly integrated into the engine repository.
+- Goal: A frictionless, swipe-based active recall trainer for Prelims fact memorization.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

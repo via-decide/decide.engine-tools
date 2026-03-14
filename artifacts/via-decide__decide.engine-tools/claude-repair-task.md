@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create tools/engine/upsc-master-os/. Take the provided monolithic "UPSC 2026 Engine" prototype and split it into the standard Orchard Engine 3-file structure. 1. index.html: Contain the DOM, Tailwind/Chart.js/PDF.js CDN scripts, and the inline CSS. 2. tool.js: Extract all the vanilla JavaScript objects (AppData, YouTubeAPI, PDFExtractor, Orb, StudyEngine, Missions, ResearchVault, Tracker, PYQ, AIEval, ChartsData) and the DOMContentLoaded event listeners into this file. 3. config.json: Create the metadata for the tool registry (e.g., isEngineTool: false, gameIcon: "🏛️", gameDescription: "Master Operating System for UPSC 2026 Preparation").
+Create tools/engine/upsc-swipe-deck/. Build a Vanilla JS swipe-based flashcard application. The UI must feature a central stack of cards holding UPSC facts (e.g., "Article 14", "Simlipal National Park location"). Implement mouse/touch drag physics. Swipe Right marks it "Known", Swipe Left marks it "Forgot". When a card is swiped left, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_error_logged', { detail: { topic: card.topic, desc: card.fact, revDate: nextDay } })) to feed the main OS error tracker.
 
 RULES
 1. Audit touched files first and identify regressions.
