@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add growth-milestone-engine tool in tools/engine/growth-milestone-engine/ with config.json, index.html, tool.js. Listens for the first successful LLM validation payload (Pipeline 1) and triggers the visual/state change from "Dormant Seed" to "Sprout". Updates UI state and unlocks further trunk growth. Vanilla JS.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
