@@ -1,3 +1,9 @@
+Branch: simba/rewrite-toolsenginedaily-quest-generatortooljs-t
+Title: rewrite tools/engine/daily-quest-generator/tool.js to add hydrateStat...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: daily-quest-generator syncs with orchard master state and emits quest events
 Branch: simba/rewrite-toolsengineseed-exchangetooljs-to-add-hy
 Title: rewrite tools/engine/seed-exchange/tool.js to add hydrateState() pull...
 

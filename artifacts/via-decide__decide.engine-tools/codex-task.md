@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+rewrite tools/engine/daily-quest-generator/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every quest generation, emitEvent(name, data) for engine:quest_generated events, and a guard that prevents generation if state.water is 0; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
+
+CONSTRAINTS
+additive rewrite of tool.js; update index.html style block only; do not touch config.json or shared files
 rewrite tools/engine/seed-exchange/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every exchange, emitEvent(name, data) for engine:seed_exchanged events, and a credits guard that blocks exchange if state.credits is less than 1; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
 
 CONSTRAINTS
