@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
+Create progress-timeline-viz tool in tools/engine/progress-timeline-viz/ with config.json, index.html, tool.js. Renders a chronological visual history of a player's farm, showing trunk growth, branch unlocks, and major harvest events over time. Vanilla JS, standalone charting interface.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
