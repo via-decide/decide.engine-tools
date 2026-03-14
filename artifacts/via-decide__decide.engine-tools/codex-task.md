@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tools/engine/street-food-event-deck/. Build a logic interceptor for the Layer 1 Swipe Crucible. When the active skin is street-food-cart, this script overwrites localStorage.getItem('orchard_engine_swipe_deck') with thematic card objects: { type: 'prep', text: 'Prep ingredients' }, { type: 'serve', text: 'Take order' }, { type: 'pest', text: 'Power cut! Save the fridge' }, { type: 'growth', text: 'Handle customer complaint' }. Dispatch window.dispatchEvent(new CustomEvent('engine:swipe_deck_reloaded')) so the crucible UI refreshes with the new cards.
+Create tools/engine/skin-street-food-config/. Build a standalone JSON configuration tool that injects the Street Food Cart skin definition into localStorage.getItem('orchard_engine_available_skins'). The config must include id: 'street-food-cart', labels: { roots: 'Recipes', water: 'Fresh Ingredients', pests: 'Health Inspector', fruit: 'Orders Served', seed: 'Secret Masala', session: 'Service Shift' }. Set the seasonName to 'Festival Season'. Dispatch window.dispatchEvent(new CustomEvent('engine:skins_registry_updated')) upon successful injection.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; must preserve the underlying logic tags (type: 'prep' acts identically to type: 'water' in the base game).
+pure Vanilla JS; no visual rendering; must strictly match the structure of the existing Skin System config.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
