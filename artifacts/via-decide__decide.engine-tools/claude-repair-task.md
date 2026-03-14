@@ -4,12 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add tools/creators/social-content-generator/ with config.json index.html tool.js - a standalone social media content generator; user enters one topic/idea and clicks Generate; the tool outputs ready-to-copy scripts for 7 sections: (1) LinkedIn Post, (2) WhatsApp Channel Post, (3) YouTube Title + Description + First Comment + Ping Comment, (4) Community Post, (5) Spotify Episode Title + Description + Post Time suggestion; plus an AI Image Prompt for each platform; each section has its own labelled card with a Copy button; all output is pure text generated from templates using the input topic; use the Orchard palette colors soil #1A1614 leaf #52B756 water #29B6F6 gold #FFCA28; layout is two columns on desktop, single column on mobile; save last input to localStorage key social_content_generator_draft
-add tools/games/resource-puzzle/ with config.json index.html tool.js - resource allocation puzzle where player distributes 100 water/nutrients across 3 tree slots to maximize fruit yield score, uses orchard palette colors, saves high score to localStorage
-add tools/games/quiz-engine/ with config.json index.html tool.js - JSON-driven quiz tool, 5 hardcoded orchard/career questions, multiple choice, score at end, emits engine:quiz_completed with {score, total} on finish
-add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
-add tools/games/memory-match/ with config.json index.html tool.js - vanilla JS card flip memory game with 16 cards, move counter, timer, win detection, saves best time to localStorage key orchard_engine_memory_best
-add tools/games/snake-game/ with config.json index.html tool.js - vanilla JS canvas snake game, arrow key controls, score tracking, saves high score to localStorage key orchard_engine_snake_score, emits engine:score_achieved on new high score
+Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.js. Rewrite the "Magnetic Button" logic to use GSAP's gsap.to() for buttery-smooth spring physics instead of native CSS transitions. Also, create a GSAP timeline function to trigger the "Shimmering Text" and "Glowing Border" evolution alerts in the growth-milestone-engine.
 
 RULES
 1. Audit touched files first and identify regressions.
