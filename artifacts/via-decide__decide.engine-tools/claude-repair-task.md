@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add snake-game tool in tools/snake-game/ with config.json index.html tool.js. Classic snake game, vanilla JS, standalone browser tool.
+add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
 
 RULES
 1. Audit touched files first and identify regressions.
