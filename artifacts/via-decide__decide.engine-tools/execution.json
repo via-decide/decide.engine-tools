@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-a-new-standalone-tool-called-social-post-pla",
   "branch": "simba/add-a-new-standalone-tool-called-regex-tester-in",
   "branch": "simba/add-a-new-standalone-tool-called-json-formatter-",
   "branch": "simba/add-a-new-standalone-tool-called-api-request-bui",

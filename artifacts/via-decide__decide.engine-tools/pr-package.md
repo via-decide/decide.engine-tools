@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-social-post-pla
+Title: Add a new standalone tool called social-post-planner in tools/social-...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working social-post-planner tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-regex-tester-in
 Title: Add a new standalone tool called regex-tester in tools/regex-tester/....
 
