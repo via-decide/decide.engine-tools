@@ -1,21 +1,9 @@
-Branch: simba/create-collaboration-matchmaker-tool-in-toolseng
-Title: Create collaboration-matchmaker tool in tools/engine/collaboration-ma...
+Branch: simba/add-a-progress-timeline-tool-in-toolsprogress-ti
+Title: add a progress-timeline tool in tools/progress-timeline with config.j...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that pairs players for cooperative quests
-Branch: simba/create-circle-leaderboard-tool-in-toolsenginecir
-Title: Create circle-leaderboard tool in tools/engine/circle-leaderboard/ wi...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working circle-leaderboard tool that displays competitive rankings of player groups
-Branch: simba/create-knowledge-quiz-challenge-tool-in-toolseng
-Title: Create knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-c...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working knowledge-quiz-challenge mini-game to boost engagement and seed review
+- Goal: working standalone progress-timeline tool registered and routable
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
