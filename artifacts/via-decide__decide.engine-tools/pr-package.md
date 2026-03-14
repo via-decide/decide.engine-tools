@@ -1,3 +1,9 @@
+Branch: simba/create-toolsenginewater-trial-view-build-a-playe
+Title: Create tools/engine/water-trial-view/. Build a player-facing UI for t...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A tournament dashboard that visualizes and gamifies daily habit consistency over a 7-day period.
 Branch: simba/create-toolsengineroot-challenge-view-build-a-pl
 Title: Create tools/engine/root-challenge-view/. Build a player-facing UI fo...
 

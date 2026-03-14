@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/water-trial-view/. Build a player-facing UI for the "Water Trial" consistency tournament. Display a 7-day calendar grid tracking daily login/session completions. The UI must highlight unbroken streaks and compare the player's consistency score against the tournament threshold needed to win rewards. Read local streak data and tournament status.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; must use data-skin-label attributes.
 Create tools/engine/root-challenge-view/. Build a player-facing UI for the "Root Challenge". Focus the visual hierarchy on "Root Strength" gain over the current week. Render a line chart or visual growth indicator comparing the player's local root progression against a simulated average competitor score. Read state from server-tournament-engine.
 
 CONSTRAINTS
