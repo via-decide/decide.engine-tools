@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
+add color-palette-generator tool in tools/color-palette-generator/ with config.json index.html tool.js. Generate harmonious color palettes from seed color.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js
