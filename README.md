@@ -71,6 +71,22 @@ Three tools validate that the Layer 1 (Farm) game loop is fair before expansion:
 
 **Why Layer 2 and Layer 3 should wait:** Commons and Market layers depend on a proven fair Layer 1 loop. Validate Wave 1 first.
 
+
+## Simba workflow expansion (new standalone tools)
+
+Added eight additive standalone tools to improve Simba-driven repository improvement workflows:
+
+- `idea-remixer` — generate idea variants (angle, audience, naming, positioning)
+- `task-splitter` — convert high-level goals into executable subtasks
+- `prompt-compare` — compare prompts for structure, clarity, and utility
+- `repo-improvement-brief` — turn improvement ideas into implementation briefs
+- `workflow-template-gallery` — reusable sequence templates for common execution flows
+- `tool-search-discovery` — keyword/category discovery across the tool ecosystem
+- `context-packager` — package mission context for downstream handoffs
+- `output-evaluator` — score outputs for clarity, completeness, novelty, actionability
+
+These tools are standalone HTML/CSS/JS apps with export/copy support and are registered for index discovery and deep-link routing.
+
 ## Shared foundation
 
 - `shared/tool-registry.js` — tool discovery and category mapping
