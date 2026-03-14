@@ -257,7 +257,8 @@
     'tools/engine/seed-quality-scorer', 'tools/engine/meta-health-dashboard',
     'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
     'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine',
-    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz'
+    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz',
+    'tools/engine/script-generator-files'
   ];
 
   function repoBasePath() {
