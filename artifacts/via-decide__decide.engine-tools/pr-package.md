@@ -1,9 +1,9 @@
-Branch: simba/create-toolsengineupsc-master-os-take-the-provid
-Title: Create tools/engine/upsc-master-os/. Take the provided monolithic "UP...
+Branch: simba/create-toolsengineupsc-mains-simulator-build-a-s
+Title: Create tools/engine/upsc-mains-simulator/. Build a strict, timed text...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: A fully functional, beautifully routed, standalone UPSC 2026 Master OS tool cleanly integrated into the engine repository.
+- Goal: A high-pressure, exam-condition simulator for Mains answer writing practice.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
