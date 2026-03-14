@@ -1,23 +1,9 @@
-Branch: simba/add-toolscreatorssocial-content-generator-with-c
-Title: add tools/creators/social-content-generator/ with config.json index.h...
-Branch: simba/add-toolsgamesresource-puzzle-with-configjson-in
-Title: add tools/games/resource-puzzle/ with config.json index.html tool.js ...
+Branch: simba/integrate-gsap-greensock-via-cdn-into-assetsjsma
+Title: Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.j...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working puzzle game, standalone
-Branch: simba/add-toolsgamesquiz-engine-with-configjson-indexh
-Title: add tools/games/quiz-engine/ with config.json index.html tool.js - JS...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working quiz, standalone
-Branch: simba/add-toolsgamestyping-speed-with-configjson-index
-Title: add tools/games/typing-speed/ with config.json index.html tool.js - v...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: one input field, one Generate button, 7 labelled output cards each with copy button, all content platform-specific and ready to post
+- Goal: working GSAP-powered magnetic buttons and UI alerts that feel incredibly smooth
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
