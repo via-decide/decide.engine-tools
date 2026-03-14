@@ -189,17 +189,7 @@
 <nav class="nav">
   <div class="w nav-i">
     <a class="brand" href="#home">Via<em>Decide</em></a>
-    <div class="nav-links">
-      <a class="nl on" href="#home"        data-s="home">Home</a>
-      <a class="nl"    href="#creators"    data-s="creators">Creators</a>
-      <a class="nl"    href="#builders"    data-s="builders">Builders</a>
-      <a class="nl"    href="#researchers" data-s="researchers">Research</a>
-      <a class="nl"    href="#business"    data-s="business">Business</a>
-      <a class="nl"    href="#orchard"     data-s="orchard">🌳 Orchard Game</a>
-      <a class="nl"    href="#games"       data-s="games">🎮 Games</a>
-      <a class="nl"    href="#mars"        data-s="mars">🚀 Mars</a>
-      <a class="nl"    href="#all"         data-s="all">All Tools</a>
-    </div>
+    <div class="nav-links" id="main-nav-links"></div>
   </div>
 </nav>
 
@@ -341,7 +331,7 @@
   <div class="div"></div>
 
   <!-- RESEARCHERS / STUDENTS -->
-  <section id="researchers">
+  <section id="research">
     <div class="w">
       <div class="sh">
         <h2>🔬 For Researchers &amp; Students</h2>
@@ -667,29 +657,11 @@
   </div>
 </footer>
 
+<script src="ui/main-ui.js"></script>
 <script src="shared/tool-registry.js"></script>
 <script>
 (() => {
   'use strict';
-
-  // Smooth scroll nav
-  document.querySelectorAll('.nl[data-s]').forEach(l => {
-    l.addEventListener('click', e => {
-      e.preventDefault();
-      const sec = document.getElementById(l.dataset.s);
-      if (sec) sec.scrollIntoView({ behavior:'smooth' });
-    });
-  });
-
-  // Active nav on scroll
-  const sections = [...document.querySelectorAll('section[id]')];
-  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('on', l.dataset.s === e.target.id));
-    });
-  }, { threshold: 0.35 });
-  sections.forEach(s => io.observe(s));
 
   // Category map for chips
   const CAT = {

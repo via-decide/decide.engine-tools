@@ -1,8 +1,9 @@
 (() => {
   'use strict';
 
-  const navLinks = [...document.querySelectorAll('[data-route]')];
+  const navLinks = [...document.querySelectorAll('.nl[data-route]')];
   const sections = [...document.querySelectorAll('main section[id]')];
+  const routeAliases = { researchers: 'research' };
 
   /* ── Complete tool path map ── */
 
@@ -80,18 +81,33 @@
 
   /* ── Navigation helpers ── */
 
+  const normalizeRoute = (id) => routeAliases[id] || id;
+
   const setActive = (id) => {
+    const routeId = normalizeRoute(id);
     navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('data-route') === id);
+      link.classList.toggle('on', link.getAttribute('data-route') === routeId);
     });
   };
 
   const goToRoute = (id) => {
-    const section = document.getElementById(id);
+    const routeId = normalizeRoute(id);
+    const section = document.getElementById(routeId);
     if (!section) return;
-    history.replaceState(null, '', `#${id}`);
+    history.replaceState(null, '', `#${routeId}`);
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setActive(id);
+    setActive(routeId);
+  };
+
+  const routeFromHash = () => normalizeRoute(window.location.hash.replace('#', ''));
+
+  const syncFromHash = () => {
+    const route = routeFromHash();
+    if (route && document.getElementById(route)) {
+      goToRoute(route);
+      return;
+    }
+    setActive('home');
   };
 
   /* ── Tool path resolution ── */
@@ -166,7 +182,9 @@
     sections.forEach((section) => observer.observe(section));
   }
 
-  const initial = window.location.hash.replace('#', '');
+  window.addEventListener('hashchange', syncFromHash);
+
+  const initial = routeFromHash();
   if (initial && document.getElementById(initial)) {
     setTimeout(() => goToRoute(initial), 50);
   } else {
