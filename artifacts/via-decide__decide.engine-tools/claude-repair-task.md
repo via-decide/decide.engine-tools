@@ -7,6 +7,8 @@ TASK
 add flashcard-engine tool in tools/flashcard-engine/ with config.json index.html tool.js. Spaced repetition flashcards with JSON deck support.
 add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
 add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
+add memory-match tool in tools/memory-match/ with config.json index.html tool.js. Card flip memory game with timer and scoring.
+add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
 
 RULES
 1. Audit touched files first and identify regressions.
