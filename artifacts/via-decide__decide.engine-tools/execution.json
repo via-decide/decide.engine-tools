@@ -1,6 +1,9 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-flashcard-engine-tool-in-toolsflashcard-engi",
+  "branch": "simba/add-json-formatter-tool-in-toolsjson-formatter-w",
+  "branch": "simba/add-regex-tester-tool-in-toolsregex-tester-with-",
   "branch": "simba/add-memory-match-tool-in-toolsmemory-match-with-",
   "branch": "simba/add-swot-analyzer-tool-in-toolsswot-analyzer-wit",
   "files_to_create": [
