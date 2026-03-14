@@ -92,6 +92,22 @@
   let targetScale = 1;
   let isBurning = false;
 
+  function syncState() {
+    localStorage.setItem(MASTER_STATE_KEY, JSON.stringify(state));
+  }
+
+  function emitEvent(name, data) {
+    window.dispatchEvent(new CustomEvent(name, { detail: data }));
+  }
+
+  function canPerformAction() {
+    if (state.water === 0 || state.credits < 1) {
+      log('⛔ Action blocked. Requires water > 0 and credits >= 1.', 'warn');
+      return false;
+    }
+    return true;
+  }
+
   function saveState() {
     localStorage.setItem(MASTER_STATE_KEY, JSON.stringify(state));
   }
@@ -272,6 +288,7 @@
         els.canvasContainer.style.transform = 'scale(1.0)';
       }, 300);
       log(`Evolution! You are now a [${nS.name}]. Max Water increased to ${state.maxWater}.`, 'success');
+      emitEvent('engine:evolution', { newStageName: nS.name, newMaxWater: state.maxWater });
       window.dispatchEvent(new CustomEvent('engine:evolution', {
         detail: { newStageName: nS.name, newMaxWater: state.maxWater }
       }));
@@ -299,6 +316,9 @@
     state.stress = 0;
     state.actionFatigue = 0;
     targetScale = 0.5;
+    syncState();
+
+    emitEvent('engine:crop_burn', { rootDamage, stressReset: true });
     saveState();
 
     window.dispatchEvent(new CustomEvent('engine:crop_burn', {
@@ -316,6 +336,7 @@
 
   function wireActions() {
     els.btnRest.addEventListener('click', () => {
+      if (!canPerformAction()) return;
       if (state.credits < 15) return;
       state.credits -= 15;
       state.day += 1;
@@ -334,6 +355,10 @@
       if (state.pestImmunity > 0) state.pestImmunity -= 1;
 
       updateUI();
+      syncState();
+      if (state.stress >= 100) triggerCropBurn();
+      log('🌙 Rested. Paid 15🪙.', 'system');
+      emitEvent('engine:day_advanced', { currentDay: state.day, cost: 15 });
       saveState();
       if (state.stress >= 100) triggerCropBurn();
       log('🌙 Rested. Paid 15🪙.', 'system');
@@ -345,6 +370,7 @@
     });
 
     els.btnFertilize.addEventListener('click', () => {
+      if (!canPerformAction()) return;
       const f = FERT_TYPES[els.selFert.value];
       if (state.credits < f.cost) return log(`❌ Need ${f.cost}🪙 for ${f.name}.`, 'warn');
       state.credits -= f.cost;
@@ -353,6 +379,11 @@
       log(`🛒 Applied ${f.name}. Nutrients +${f.nut}%. Stress altered by ${f.stress}.`, 'success');
       if (state.stress >= 100) triggerCropBurn();
       updateUI();
+      syncState();
+    });
+
+    els.btnPesticide.addEventListener('click', () => {
+      if (!canPerformAction()) return;
       saveState();
     });
 
@@ -368,6 +399,11 @@
       log(`🧪 Applied ${p.name}. Pests eliminated. Nutrients -${p.nutDrain}%, Stress +${p.stress}.`, 'toxic');
       if (state.stress >= 100) triggerCropBurn();
       updateUI();
+      syncState();
+    });
+
+    els.btnSimulate.addEventListener('click', () => {
+      if (!canPerformAction()) return;
       saveState();
     });
 
@@ -402,6 +438,14 @@
         if (state.pestImmunity === 0 && Math.random() < 0.25) {
           state.pests = Math.min(5, state.pests + 1);
           log('🐛 A Bug (Pest) infested your work! It will drain nutrients until treated.', 'danger');
+          emitEvent('engine:pest_outbreak', { pestCount: state.pests });
+        }
+
+        emitEvent('engine:research_completed', { rootsGained: finalG, waterSpent: 5, creditsEarned: 12 });
+
+        checkEvolution();
+        updateUI();
+        syncState();
           window.dispatchEvent(new CustomEvent('engine:pest_outbreak', {
             detail: { pestCount: state.pests }
           }));
@@ -425,17 +469,20 @@
 
     els.selSoil.addEventListener('change', () => {
       state.environment.soil = els.selSoil.value;
+      syncState();
       saveState();
     });
 
     els.selSun.addEventListener('change', () => {
       state.environment.sunlightMultiplier = parseFloat(els.selSun.value);
+      syncState();
       saveState();
     });
 
     els.selWeather.addEventListener('change', () => {
       state.environment.weather = els.selWeather.value;
       updateUI();
+      syncState();
       saveState();
     });
   }
@@ -444,6 +491,7 @@
     window.addEventListener('engine:weather_changed', (e) => {
       state.environment.weather = e.detail.newWeather;
       updateUI();
+      syncState();
       saveState();
       log(`🌦️ Weather synced from external tool: ${e.detail.newWeather}.`, 'system');
     });
@@ -451,6 +499,7 @@
     window.addEventListener('engine:market_reward', (e) => {
       state.credits += Number(e.detail.credits) || 0;
       updateUI();
+      syncState();
       saveState();
       log(`💹 Market reward received: +${Number(e.detail.credits) || 0} credits.`, 'success');
     });
@@ -462,6 +511,7 @@
     init3D();
     checkEvolution();
     updateUI();
+    syncState();
     saveState();
   }
 

@@ -15,6 +15,39 @@
   };
 
   const ENGINE_TOOL_IDS = new Set([
+    'engine-state-manager',
+    'llm-action-parser',
+    'daily-weather-replenisher',
+    'admin-moderation-panel',
+    'simulation-runner',
+    'player-signup',
+    'orchard-profile-builder',
+    'root-strength-calculator',
+    'trunk-growth-calculator',
+    'fruit-yield-engine',
+    'daily-quest-generator',
+    'weekly-harvest-engine',
+    'thirty-day-promotion-engine',
+    'fair-ranking-engine',
+    'seed-exchange',
+    'fruit-sharing',
+    'circle-builder',
+    'peer-validation-engine',
+    'trust-score-engine',
+    'recruiter-dashboard',
+    'orchard-discovery-search',
+    'hire-readiness-scorer',
+    'four-direction-pipeline',
+    'growth-path-recommender',
+    'ai-coach-console',
+    'seed-quality-scorer',
+    'meta-health-dashboard',
+    'synthetic-player-generator',
+    'wave1-simulation-runner',
+    'balance-dashboard',
+    'growth-milestone-engine'
+  ]);
+
     'engine-state-manager', 'llm-action-parser', 'daily-weather-replenisher',
     'admin-moderation-panel', 'simulation-runner', 'player-signup',
     'orchard-profile-builder', 'starter-farm-generator', 'root-strength-calculator',
@@ -33,6 +66,14 @@
     'starter-farm-generator': {
       isEngineTool: false,
       featured: true,
+      category: 'Layer 1 - Farm',
+      gameIcon: '🌱',
+      gameDescription: 'Initialize your farm identity and start your orchard run.',
+      entry: './tools/engine/starter-farm-generator/index.html'
+    },
+    'orchard-profile-builder': {
+      isEngineTool: false,
+      category: 'Layer 1 - Farm',
       category: 'engine',
       gameIcon: '🌱',
       gameDescription: 'Initialize your farm identity and start your orchard run.',
@@ -46,18 +87,23 @@
     },
     'daily-quest-generator': {
       isEngineTool: false,
+      category: 'Layer 1 - Farm',
       category: 'engine',
       gameIcon: '📜',
       gameDescription: 'Generate your daily quest loop and actionable growth tasks.'
     },
     'weekly-harvest-engine': {
       isEngineTool: false,
+      category: 'Layer 2 - Commons',
       category: 'engine',
       gameIcon: '🧺',
       gameDescription: 'Convert your weekly actions into measurable harvest outcomes.'
     },
     'seed-exchange': {
       isEngineTool: false,
+      category: 'Layer 3 - Market',
+      gameIcon: '🛒',
+      gameDescription: 'Trade seeds and unlock better orchard opportunities.'
       category: 'engine',
       gameIcon: '🛒',
       gameDescription: 'Trade seeds and unlock better orchard opportunities.'
@@ -73,6 +119,10 @@
   function inferEngineTool(meta, normalizedCategory, defaultEntry, id) {
     if (typeof meta.isEngineTool === 'boolean') return meta.isEngineTool;
     if (typeof meta.hidden === 'boolean') return meta.hidden;
+
+    if (ENGINE_TOOL_IDS.has(id)) return true;
+    if (normalizedCategory === 'simulations' || normalizedCategory === 'system') return true;
+
     if (ENGINE_TOOL_IDS.has(id)) return true;
     if (normalizedCategory === 'simulations' || normalizedCategory === 'system') return true;
     const entry = (meta.entry || defaultEntry || '').toLowerCase();
@@ -248,6 +298,7 @@
   function normalizeTool(meta, fallbackDir) {
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const normalizedCategory = normalizeCategory(meta.category);
+    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
     const defaultEntry = fallbackDir ? fallbackDir + '/index.html' : '';
     const override = TOOL_OVERRIDES[id] || {};
     const category = override.category || normalizedCategory;
