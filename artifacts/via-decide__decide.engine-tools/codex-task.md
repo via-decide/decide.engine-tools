@@ -2,6 +2,8 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 Create collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Suggests potential circle members or project partners by matching complementary branch specializations and root strengths. Vanilla JS, standalone interface.
+Create circle-leaderboard tool in tools/engine/circle-leaderboard/ with config.json, index.html, tool.js. Ranks player circles based on collective trust scores, combined fruit yield, and successful seed exchanges. Vanilla JS, standalone dashboard view.
+Create knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-challenge/ with config.json, index.html, tool.js. A mini-game where players answer timed questions based on high-quality seeds shared by the community to earn extra minerals. Vanilla JS, standalone playable mini-game.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed

@@ -2,6 +2,8 @@
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
   "branch": "simba/create-collaboration-matchmaker-tool-in-toolseng",
+  "branch": "simba/create-circle-leaderboard-tool-in-toolsenginecir",
+  "branch": "simba/create-knowledge-quiz-challenge-tool-in-toolseng",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
