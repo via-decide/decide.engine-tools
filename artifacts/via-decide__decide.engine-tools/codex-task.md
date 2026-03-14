@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/blight-boss-view/. Build a dramatic, high-stakes UI for "The Blight" server boss. Read orchard_engine_boss_progress and the target goal (50,000 pests) from the active event. Render a massive, collective progress bar. Include a local contribution counter showing how many pests the current player has cleared during the event timeframe. Update dynamically by listening to the server-boss-engine.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; utilize intense, urgent CSS styling (e.g., pulsing alerts or toxic color accents) that adapts to the active skin.
 Create tools/engine/water-trial-view/. Build a player-facing UI for the "Water Trial" consistency tournament. Display a 7-day calendar grid tracking daily login/session completions. The UI must highlight unbroken streaks and compare the player's consistency score against the tournament threshold needed to win rewards. Read local streak data and tournament status.
 
 CONSTRAINTS

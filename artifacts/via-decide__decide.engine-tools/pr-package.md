@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineblight-boss-view-build-a-drama
+Title: Create tools/engine/blight-boss-view/. Build a dramatic, high-stakes ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: An immersive boss fight dashboard that visualizes the community's collective effort to eradicate a global threat.
 Branch: simba/create-toolsenginewater-trial-view-build-a-playe
 Title: Create tools/engine/water-trial-view/. Build a player-facing UI for t...
 

@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-toolsengineblight-boss-view-build-a-drama",
   "branch": "simba/create-toolsenginewater-trial-view-build-a-playe",
   "branch": "simba/create-toolsengineroot-challenge-view-build-a-pl",
   "branch": "simba/create-toolsengineharvest-race-view-build-a-play",
