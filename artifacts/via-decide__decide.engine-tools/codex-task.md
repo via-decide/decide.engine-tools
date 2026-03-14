@@ -1,8 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
-add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
+add memory-match tool in tools/memory-match/ with config.json index.html tool.js. Card flip memory game with timer and scoring.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js
