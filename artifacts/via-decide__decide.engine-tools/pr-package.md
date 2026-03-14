@@ -1,9 +1,9 @@
-Branch: simba/add-swot-analyzer-tool-in-toolsswot-analyzer-wit
-Title: add swot-analyzer tool in tools/swot-analyzer/ with config.json index...
+Branch: simba/add-tetris-game-tool-in-toolstetris-game-with-co
+Title: add tetris-game tool in tools/tetris-game/ with config.json index.htm...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working swot-analyzer tool with PR
+- Goal: working tetris-game tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
