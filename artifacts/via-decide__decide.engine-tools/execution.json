@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-daily-weather-replenisher-tool-in-toolsengin",
   "branch": "simba/add-genesis-seed-initializer-tool-in-toolsengine",
   "files_to_create": [
     "codex-task.md",
