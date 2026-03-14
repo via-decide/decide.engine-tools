@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add achievement-badge-system tool in tools/engine/achievement-badge-system/ with config.json, index.html, tool.js. Tracks player milestones across farm/commons/market layers and awards badges for specific actions (first-fruit, 7-day-streak, etc.). Displays earned badges with dates and progress toward the next tier. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
