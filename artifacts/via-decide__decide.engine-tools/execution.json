@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-toolsengineskin-pack-manager-build-a-head",
   "branch": "simba/create-toolsengineskin-engine-build-a-foundation",
   "branch": "simba/create-toolsengineevent-notification-hub-build-a",
   "branch": "simba/create-toolsenginelive-event-scheduler-build-a-v",

@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineskin-pack-manager-build-a-head
+Title: Create tools/engine/skin-pack-manager/. Build a headless Vanilla JS u...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A backend state manager that securely handles the unlocking and ownership verification of cosmetic skin packs.
 Branch: simba/create-toolsengineskin-engine-build-a-foundation
 Title: Create tools/engine/skin-engine/. Build a foundational Vanilla JS scr...
 

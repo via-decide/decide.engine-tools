@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/skin-pack-manager/. Build a headless Vanilla JS utility that manages skin ownership. Initialize a default array in localStorage.getItem('orchard_engine_owned_skins') containing only the base farming skin. Implement functions to check if a skin is owned and a function to purchase a skin, which deducts 'Harvest Gems' via localStorage and adds the skin ID to the owned array. Dispatch engine:skin_unlocked on successful purchase.
+
+CONSTRAINTS
+pure Vanilla JS; no UI rendering; ensure robust validation before deducting currency.
 Create tools/engine/skin-engine/. Build a foundational Vanilla JS script that runs on initialization. It must read localStorage.getItem('orchard_engine_active_skin') (defaulting to the farming theme). The script must select all DOM elements with specific data-skin-label attributes (e.g., data-skin-label="roots") and update their innerText based on the active skin's dictionary. It must also remap the root CSS variables (--color-soil-dark, etc.) to the active skin's palette by applying styles to the document.documentElement. Listen for engine:skin_changed to trigger a re-render.
 
 CONSTRAINTS
