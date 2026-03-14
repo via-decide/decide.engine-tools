@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
+Create progress-timeline-viz tool in tools/engine/progress-timeline-viz/ with config.json, index.html, tool.js. Renders a chronological visual history of a player's farm, showing trunk growth, branch unlocks, and major harvest events over time. Vanilla JS, standalone charting interface.
 
 RULES
 1. Audit touched files first and identify regressions.
