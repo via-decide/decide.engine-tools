@@ -86,6 +86,7 @@ Added eight additive standalone tools to improve Simba-driven repository improve
 - `output-evaluator` — score outputs for clarity, completeness, novelty, actionability
 
 These tools are standalone HTML/CSS/JS apps with export/copy support and are registered for index discovery and deep-link routing. Category placement was chosen for least disruption: ideation in creators, planning/briefing in coders, evaluation/comparison in researchers, and orchestration/discovery/handoff in system.
+These tools are standalone HTML/CSS/JS apps with export/copy support and are registered for index discovery and deep-link routing.
 
 ## Shared foundation
 
