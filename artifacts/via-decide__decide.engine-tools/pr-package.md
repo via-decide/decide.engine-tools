@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-a-new-standalone-tool-called-study-timer-in-
+Title: Add a new standalone tool called study-timer in tools/study-timer/. T...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: Produce working study-timer tool with config.json, index.html, tool.js, registered and routed.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
