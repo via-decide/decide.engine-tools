@@ -3,199 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ViaDecide • decide.engine Tools Hub</title>
+  <title>ViaDecide • Orchard Player Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #060916;
-      --card: #11162a;
-      --muted: #9ba7c7;
-      --text: #f5f8ff;
-      --primary: #6ea8fe;
-      --primary-2: #8b5cf6;
-      --ok: #22c55e;
-      --border: #202a47;
+      --color-soil-dark: #1A1614;
+      --color-soil-light: #282320;
+      --color-bark-brown: #4A3B32;
+      --color-leaf-green: #52B756;
+      --color-leaf-dark: #388E3C;
+      --color-water-blue: #29B6F6;
+      --color-mineral-gold: #FFCA28;
+      --color-text-main: #F5E6D3;
+      --color-text-muted: #A18D82;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-base: 0 10px 24px rgba(0, 0, 0, 0.45);
+      --shadow-card: 0 12px 24px rgba(0, 0, 0, 0.6);
     }
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: radial-gradient(circle at 20% 0%, #1d2a55 0%, var(--bg) 45%);
-      color: var(--text);
+      min-height: 100vh;
+      background-color: var(--color-soil-dark);
+      background-image: linear-gradient(rgba(74, 59, 50, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(74, 59, 50, 0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--color-text-main);
+      font-family: 'Inter', system-ui, sans-serif;
       line-height: 1.5;
     }
-    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
     .site-header {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(6, 9, 22, 0.85);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
+      z-index: 20;
+      background: rgba(26, 22, 20, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-bark-brown);
     }
     .nav-wrap {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 0;
       gap: 12px;
       flex-wrap: wrap;
+      padding: 14px 0;
     }
-    .brand { font-weight: 700; letter-spacing: 0.2px; }
-    .brand span { color: var(--primary); }
+    .brand { font-weight: 700; letter-spacing: 0.3px; }
+    .brand span { color: var(--color-leaf-green); }
+
     nav { display: flex; gap: 8px; flex-wrap: wrap; }
     .nav-link {
-      border: 1px solid var(--border);
-      color: var(--text);
+      border: 1px solid var(--color-bark-brown);
+      color: var(--color-text-main);
       text-decoration: none;
+      border-radius: var(--radius-pill);
+      padding: 8px 12px;
       font-size: 0.9rem;
-      padding: 8px 12px;
-      border-radius: 999px;
-      transition: 0.2s ease;
-    }
-    .nav-link:hover, .nav-link.active { border-color: var(--primary); color: var(--primary); }
-
-    section { padding: 56px 0; scroll-margin-top: 80px; }
-    .hero h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 3rem); }
-    .hero p { color: var(--muted); max-width: 900px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
-    .chip {
-      border: 1px solid var(--border);
-      background: rgba(110, 168, 254, 0.1);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 0.88rem;
     }
 
-    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #051022;
-      background: linear-gradient(120deg, var(--primary), #9fc5ff);
-      border-radius: 10px;
-      font-weight: 700;
-      border: none;
-      padding: 11px 16px;
-      cursor: pointer;
-    }
-    .btn.secondary {
-      color: var(--text);
-      background: transparent;
-      border: 1px solid var(--border);
-      font-weight: 600;
+    section { padding: 26px 0; scroll-margin-top: 86px; }
+
+    .orchard-panel {
+      border: 2px solid var(--color-bark-brown);
+      border-radius: var(--radius-md);
+      background: var(--color-soil-light);
+      box-shadow: var(--shadow-base);
+      padding: 24px;
     }
 
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+    .hero-title, .section-heading, .card-title {
+      margin: 0;
+      font-family: 'Merriweather', serif;
+      color: var(--color-text-main);
+    }
+    .hero-title { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    .section-heading { font-size: 1.4rem; }
+
+    .hero-subtitle, .section-sub, .card-desc {
+      color: var(--color-text-muted);
+      margin: 10px 0 0;
+    }
+
+    .starter-card {
       margin-top: 16px;
-    }
-    .tool-card {
-      background: linear-gradient(150deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
+      border: 2px solid var(--color-leaf-green);
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, rgba(82, 183, 86, 0.18), rgba(40, 35, 32, 0.9));
+      padding: 22px;
+      box-shadow: 0 0 24px rgba(82, 183, 86, 0.22), var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .tool-card h3 { margin: 0; font-size: 1.03rem; }
-    .tool-card p { margin: 0; color: var(--muted); font-size: 0.93rem; }
-    .use-tip {
-      color: #b4ffc8;
-      font-size: 0.83rem;
-      border-left: 2px solid var(--ok);
-      padding-left: 8px;
+
+    .starter-chip {
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--color-leaf-green);
+      color: #111;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .mission {
-      background: rgba(17, 22, 42, 0.65);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.1s;
+      position: relative;
+      top: 0;
     }
+
+    .btn-grow {
+      background: var(--color-leaf-green);
+      color: #111;
+      box-shadow: 0 5px 0 var(--color-leaf-dark);
+      padding: 13px 24px;
+      min-width: 220px;
+      font-size: 1.01rem;
+    }
+    .btn-grow:active { top: 5px; box-shadow: 0 0 0 var(--color-leaf-dark); }
+
+    .btn-action {
+      background: var(--color-water-blue);
+      color: #111;
+      box-shadow: 0 4px 0 #0288D1;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+    }
+    .btn-action:active { top: 4px; box-shadow: 0 0 0 #0288D1; }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .game-card {
+      background: var(--color-soil-light);
+      border: 1px solid var(--color-bark-brown);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    }
+    .game-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+
+    .game-icon { font-size: 1.7rem; line-height: 1; }
+    .layer-chip {
+      width: fit-content;
+      font-size: 0.74rem;
+      color: #111;
+      background: var(--color-mineral-gold);
+      border-radius: var(--radius-pill);
+      padding: 3px 8px;
+      font-weight: 700;
+    }
+
+    .card-title { font-size: 1.05rem; }
+    .card-desc { font-size: 0.91rem; margin-top: 0; }
+    .card-spacer { flex: 1; }
+    .card-btn { width: 100%; margin-top: 6px; }
+
+    .dev-badge {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 100;
+      display: none;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #ef4444;
+      background: #b91c1c;
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+    body.dev-mode-active .dev-badge { display: inline-flex; }
 
     .footer {
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      padding: 24px 0 36px;
-      font-size: 0.9rem;
+      border-top: 1px solid var(--color-bark-brown);
+      color: var(--color-text-muted);
+      padding: 18px 0 36px;
+      font-size: 0.88rem;
     }
   </style>
 </head>
 <body>
+  <div class="dev-badge">DEV MODE</div>
+
   <header class="site-header">
     <div class="container nav-wrap">
-      <div class="brand">Via<span>Decide</span> • decide.engine</div>
+      <div class="brand">Via<span>Decide</span> • Orchard Player Hub</div>
       <nav>
         <a class="nav-link" href="#home" data-route="home">Home</a>
-        <a class="nav-link" href="#tools" data-route="tools">Tools</a>
-        <a class="nav-link" href="#mission" data-route="mission">Mission 2030</a>
+        <a class="nav-link" href="#modules" data-route="modules">Game Modules</a>
+        <a class="nav-link" href="#mission" data-route="mission">Mission</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <section id="home" class="hero">
-      <h1>Open-source tools by ViaDecide for Bharat Vishwaguru 2030.</h1>
-      <p>
-        This repository is useful because it gives students, founders, researchers, policy builders, and teams
-        ready-to-use decision tools they can run directly in browser. The initiative by <strong>ViaDecide</strong>
-        is to improve decision quality, productivity, and knowledge execution at scale so Bharat can become
-        <strong>Vishwaguru by 2030</strong> with practical, open workflows.
-      </p>
-      <div class="chips">
-        <span class="chip">Open Source Workflow Stack</span>
-        <span class="chip">Decision Intelligence for Everyday Users</span>
-        <span class="chip">Built by founder: Dharamdaxini</span>
-      </div>
-      <div class="btn-row">
-        <a class="btn" href="https://viadecide.com" target="_blank" rel="noopener">Visit viadecide.com</a>
-        <a class="btn secondary" href="https://www.youtube.com/@decide.engine" target="_blank" rel="noopener">decide.engine YouTube</a>
-        <a class="btn secondary" href="https://open.spotify.com/show/2okZ1WXMWXLrSwFzClUPPp" target="_blank" rel="noopener">decide.engine Spotify</a>
-        <a class="btn secondary" href="https://www.linkedin.com/in/dharam-daxini-a77508164?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener">Founder LinkedIn</a>
-        <a class="btn secondary" href="https://www.instagram.com/dharamdaxini" target="_blank" rel="noopener">Founder Instagram</a>
-        <a class="btn secondary" href="https://www.linkedin.com/newsletters/decision-engine-lab-7436013913500110850" target="_blank" rel="noopener">Read Daily Updates</a>
-        <a class="btn secondary" href="https://open.spotify.com/search/decide.engine" target="_blank" rel="noopener">decide.engine Spotify</a>
-        <a class="btn secondary" href="https://www.linkedin.com/in/dharamdaxini" target="_blank" rel="noopener">Founder LinkedIn</a>
-        <a class="btn secondary" href="https://www.instagram.com/dharamdaxini" target="_blank" rel="noopener">Founder Instagram</a>
+    <section id="home">
+      <div class="orchard-panel">
+        <h1 class="hero-title">Begin Your Orchard Journey</h1>
+        <p class="hero-subtitle">Start in the Starter Farm, then unlock your layered orchard mechanics as you grow.</p>
+
+        <div class="starter-card" id="starter-farm-featured">
+          <span class="starter-chip">Featured Entry Point</span>
+          <h2 class="card-title">Initialize Starter Farm</h2>
+          <p class="card-desc">Set up your farm identity, seed state, and first progression loop.</p>
+          <div class="cta-row">
+            <a class="btn btn-grow" href="./tools/engine/starter-farm-generator/index.html">🌱 Start Game</a>
+            <a class="btn btn-action" href="tool-graph.html">Explore Graph</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="tools">
-      <h2>Tools by category</h2>
-      <p style="color: var(--muted);">Browse all standalone tools grouped by their current category metadata.</p>
-      <div class="tool-card" style="margin-bottom: 16px;">
-        <h3>Tool Graph Explorer</h3>
-        <p>Visual map of tools and their related tool relationships.</p>
-        <div class="use-tip">How to use: Zoom, pan, hover to view descriptions, and click a node to open its tool.</div>
-        <a class="btn" href="tool-graph.html">Open Tool Graph Explorer</a>
-      </div>
-      <div class="tool-card" style="margin-bottom: 16px;">
-        <h3>Workflow Builder</h3>
-        <p>Build, save, and run custom tool workflows with visual connections.</p>
-        <div class="use-tip">How to use: Drag tools to canvas, connect steps, save workflow, then run pipeline.</div>
-        <a class="btn" href="workflow-builder.html">Open Workflow Builder</a>
-      </div>
-      <div id="categorized-tools"></div>
+    <section id="modules">
+      <h2 class="section-heading">Your Orchard Mechanics</h2>
+      <p class="section-sub">Layered game modules available to players. Engine/admin internals stay hidden unless Dev Mode is active.</p>
+      <div id="game-modules-grid" class="module-grid"></div>
     </section>
 
     <section id="mission">
-      <div class="mission">
-        <h2>Why this matters for Bharat Vishwaguru by 2030</h2>
-        <p>
-          The repo turns knowledge into action: tools for research, prompting, interviews, dashboards,
-          and policy briefs. This lowers friction for millions of users to make better choices faster.
-          Better choices across education, entrepreneurship, and governance can compound into national-scale
-          capability, helping Bharat lead globally as Vishwaguru.
-        </p>
-        <div class="btn-row">
-          <a class="btn" href="#tools" data-route="tools">Explore Tools Now</a>
-          <a class="btn secondary" href="https://viadecide.com" target="_blank" rel="noopener">Join Initiative</a>
-        </div>
+      <div class="orchard-panel">
+        <h2 class="section-heading">Why this matters for Bharat Vishwaguru by 2030</h2>
+        <p class="section-sub">This open-source stack helps learners and builders move from ideas to outcomes through practical decision workflows and interactive tools.</p>
       </div>
     </section>
   </main>
@@ -204,57 +258,82 @@
     © 2026 ViaDecide / decide.engine • Open source decision tooling for practical impact.
   </footer>
 
-
   <script src="shared/tool-registry.js"></script>
   <script>
-    (async function renderCategorizedTools() {
+    (async function initToolDirectory() {
       if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
 
-      const labels = {
-        creators: 'Creators',
-        coders: 'Coders',
-        researchers: 'Researchers',
-        business: 'Business',
-        education: 'Education',
-        games: 'Games',
-        simulations: 'Simulations',
-        system: 'System',
-        misc: 'Misc'
-      };
+      const DEV_HOTKEY = { key: 'E', ctrl: true, shift: true };
+      const FEATURED_STARTER_ID = 'starter-farm-generator';
 
-      const container = document.getElementById('categorized-tools');
-      if (!container) return;
+      const featuredShell = document.getElementById('starter-farm-featured');
+      const moduleGrid = document.getElementById('game-modules-grid');
+      if (!moduleGrid) return;
 
-      const tools = await window.ToolRegistry.loadAll();
-      const grouped = new Map(Object.keys(labels).map((key) => [key, []]));
+      let allTools = [];
+      let devMode = false;
 
-      tools.forEach((tool) => {
-        const key = grouped.has(tool.category) ? tool.category : 'misc';
-        grouped.get(key).push(tool);
+      function visibleModules() {
+        return allTools.filter((tool) => {
+          if (tool.id === FEATURED_STARTER_ID) return false;
+          if (devMode) return true;
+          return !tool.isEngineTool;
+        });
+      }
+
+      function sortModules(a, b) {
+        return (a.category || '').localeCompare(b.category || '') || a.name.localeCompare(b.name);
+      }
+
+      function renderFeaturedStarter() {
+        if (!featuredShell) return;
+        const starter = allTools.find((tool) => tool.id === FEATURED_STARTER_ID || tool.featured);
+        if (!starter) return;
+
+        featuredShell.innerHTML = `
+          <span class="starter-chip">Featured Entry Point</span>
+          <h2 class="card-title">${starter.gameIcon || '🌱'} ${starter.name || 'Initialize Starter Farm'}</h2>
+          <p class="card-desc">${starter.gameDescription || starter.description || 'Set up your farm identity, seed state, and first progression loop.'}</p>
+          <div class="cta-row">
+            <a class="btn btn-grow" href="${starter.entry || './tools/engine/starter-farm-generator/index.html'}">🌱 Start Game</a>
+            <a class="btn btn-action" href="workflow-builder.html">Open Workflow Builder</a>
+          </div>
+        `;
+      }
+
+      function renderGameModules() {
+        const cards = visibleModules().sort(sortModules).map((tool) => `
+          <article class="game-card">
+            <div class="game-icon">${tool.gameIcon || '🍃'}</div>
+            <span class="layer-chip">${tool.category || 'Gameplay'}</span>
+            <h3 class="card-title">${tool.name}</h3>
+            <p class="card-desc">${tool.gameDescription || tool.description || 'Standalone orchard module.'}</p>
+            <div class="card-spacer"></div>
+            <a class="btn btn-action card-btn" href="${tool.entry}">Open Module</a>
+          </article>
+        `).join('');
+
+        moduleGrid.innerHTML = cards || '<p class="section-sub">No modules are mapped for this mode.</p>';
+      }
+
+      function setDevMode(enabled) {
+        devMode = enabled;
+        document.body.classList.toggle('dev-mode-active', devMode);
+        renderGameModules();
+      }
+
+      document.addEventListener('keydown', (event) => {
+        const keyMatches = event.key && event.key.toUpperCase() === DEV_HOTKEY.key;
+        const hotkey = keyMatches && event.ctrlKey === DEV_HOTKEY.ctrl && event.shiftKey === DEV_HOTKEY.shift;
+        const tilde = event.key === '~' || event.code === 'Backquote';
+        if (!hotkey && !tilde) return;
+        event.preventDefault();
+        setDevMode(!devMode);
       });
 
-      container.innerHTML = Object.entries(labels)
-        .map(([key, label]) => {
-          const items = (grouped.get(key) || []).sort((a, b) => a.name.localeCompare(b.name));
-          const cards = items.length
-            ? items.map((tool) => `
-              <article class="tool-card">
-                <h3>${tool.name}</h3>
-                <p>${tool.description || 'Standalone browser tool.'}</p>
-                <div class="use-tip">Path: ${tool.entry}</div>
-                <a class="btn" href="${tool.entry}">Open Tool</a>
-              </article>
-            `).join('')
-            : '<p style="color: var(--muted);">No tools currently mapped.</p>';
-
-          return `
-            <section aria-label="${label}">
-              <h3>${label}</h3>
-              <div class="tools-grid">${cards}</div>
-            </section>
-          `;
-        })
-        .join('');
+      allTools = await window.ToolRegistry.loadAll();
+      renderFeaturedStarter();
+      renderGameModules();
     })();
   </script>
   <script src="router.js"></script>
