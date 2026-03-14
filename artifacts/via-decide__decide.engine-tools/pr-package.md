@@ -4,6 +4,12 @@ Title: add tools/games/memory-match/ with config.json index.html tool.js - v...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: playable memory match in browser, standalone
+Branch: simba/add-toolsgamessnake-game-with-configjson-indexht
+Title: add tools/games/snake-game/ with config.json index.html tool.js - van...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: playable snake game in browser, standalone
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
