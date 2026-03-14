@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add employer-job-posting tool in tools/engine/employer-job-posting/ with config.json, index.html, tool.js. Interface for recruiters to define market opportunities, specifying required root fundamentals, branch specializations, and minimum trust scores. Stores postings in local state. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
