@@ -256,7 +256,7 @@
 
     <section id="modules">
       <h2 class="section-heading">Your Orchard Mechanics</h2>
-      <p class="section-sub">Layered game modules available to players. Engine/admin internals stay hidden unless Dev Mode is active.</p>
+      <p class="section-sub">Only playable game modules are shown here. Engine/admin internals are hidden unless Dev Mode is active.</p>
       <p id="modules-load-note" class="load-note" style="display: none;"></p>
       <div id="game-modules-grid" class="module-grid"></div>
     </section>
@@ -280,7 +280,24 @@
 
       const DEV_HOTKEY = { key: 'E', ctrl: true, shift: true };
       const FEATURED_STARTER_ID = 'starter-farm-generator';
+      const PLAYABLE_MODULE_IDS = new Set([
+        'growth-milestone-engine',
+        'daily-quest-generator',
+        'weekly-harvest-engine',
+        'seed-exchange',
+        'fruit-sharing',
+        'circle-builder'
+      ]);
       const FALLBACK_TOOLS = [
+        {
+          id: 'growth-milestone-engine',
+          name: 'Growth Milestone Engine',
+          category: 'Current Farming Game',
+          gameIcon: '🌳',
+          gameDescription: 'Play the live farming loop with resources, weather, and evolution.',
+          entry: 'tools/engine/growth-milestone-engine/index.html',
+          isEngineTool: false
+        },
         {
           id: 'daily-quest-generator',
           name: 'Daily Quest Generator',
@@ -307,6 +324,15 @@
           gameDescription: 'Exchange credits for seed opportunities and expand play.',
           entry: 'tools/engine/seed-exchange/index.html',
           isEngineTool: false
+        },
+        {
+          id: 'fruit-sharing',
+          name: 'Fruit Sharing',
+          category: 'Layer 2 - Commons',
+          gameIcon: '🍎',
+          gameDescription: 'Share earned output with your commons layer allies.',
+          entry: 'tools/engine/fruit-sharing/index.html',
+          isEngineTool: false
         }
       ];
 
@@ -322,7 +348,7 @@
         return allTools.filter((tool) => {
           if (tool.id === FEATURED_STARTER_ID) return false;
           if (devMode) return true;
-          return !tool.isEngineTool;
+          return PLAYABLE_MODULE_IDS.has(tool.id);
         });
       }
 
@@ -340,7 +366,7 @@
             <p class="card-desc">Enter the real game and initialize your orchard profile.</p>
             <div class="cta-row">
               <a class="btn btn-grow" href="./tools/engine/starter-farm-generator/index.html">🌱 Connect & Start Game</a>
-              <a class="btn btn-action" href="workflow-builder.html">Open Workflow Builder</a>
+              <a class="btn btn-action" href="./tools/engine/growth-milestone-engine/index.html">Open Current Farming Game</a>
             </div>
           `;
           return;
@@ -352,7 +378,7 @@
           <p class="card-desc">${starter.gameDescription || starter.description || 'Set up your farm identity, seed state, and first progression loop.'}</p>
           <div class="cta-row">
             <a class="btn btn-grow" href="${starter.entry || './tools/engine/starter-farm-generator/index.html'}">🌱 Connect & Start Game</a>
-            <a class="btn btn-action" href="workflow-builder.html">Open Workflow Builder</a>
+            <a class="btn btn-action" href="./tools/engine/growth-milestone-engine/index.html">Open Current Farming Game</a>
           </div>
         `;
       }
