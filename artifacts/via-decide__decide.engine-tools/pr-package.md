@@ -4,6 +4,18 @@ Title: in tools/engine/growth-milestone-engine/tool.js only - add a paused f...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: animate loop pauses when tab is hidden; event listeners never duplicate; zero shared file changes
+Branch: simba/rewrite-toolsengineseed-exchangetooljs-only---re
+Title: rewrite tools/engine/seed-exchange/tool.js only - replace generic stu...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: seed-exchange syncs orchard state and blocks zero-credit actions; no shared file changes
+Branch: simba/in-toolsenginegrowth-milestone-enginetooljs-fix-
+Title: in tools/engine/growth-milestone-engine/tool.js fix the animate3D fun...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: animate loop pauses on tab switch; event listeners never stack
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
