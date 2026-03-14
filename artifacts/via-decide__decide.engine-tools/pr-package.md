@@ -1,3 +1,9 @@
+Branch: simba/create-collaboration-matchmaker-tool-in-toolseng
+Title: Create collaboration-matchmaker tool in tools/engine/collaboration-ma...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working collaboration-matchmaker tool that pairs players for cooperative quests
 Branch: simba/create-circle-leaderboard-tool-in-toolsenginecir
 Title: Create circle-leaderboard tool in tools/engine/circle-leaderboard/ wi...
 
