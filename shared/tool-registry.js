@@ -20,6 +20,7 @@
     'simulation-runner',
     'player-signup',
     'orchard-profile-builder',
+    'starter-farm-generator',
     'root-strength-calculator',
     'trunk-growth-calculator',
     'fruit-yield-engine',
@@ -78,6 +79,11 @@
       category: 'Layer 3 - Market',
       gameIcon: '🛒',
       gameDescription: 'Trade seeds and unlock better orchard opportunities.'
+  const FEATURED_TOOL_OVERRIDES = {
+    'starter-farm-generator': {
+      isEngineTool: false,
+      featured: true,
+      entry: './tools/engine/starter-farm-generator/index.html'
     }
   };
 
@@ -290,6 +296,11 @@
     const isEngineTool = (typeof override.isEngineTool === 'boolean')
       ? override.isEngineTool
       : inferEngineTool(meta, normalizedCategory, defaultEntry, id);
+    const override = FEATURED_TOOL_OVERRIDES[id] || {};
+    const isEngineTool = (typeof override.isEngineTool === 'boolean')
+      ? override.isEngineTool
+      : inferEngineTool(meta, category, defaultEntry, id);
+    const isEngineTool = inferEngineTool(meta, category, defaultEntry, id);
     return {
       id,
       name: meta.name || id,

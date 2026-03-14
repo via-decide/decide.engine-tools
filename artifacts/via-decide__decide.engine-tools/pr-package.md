@@ -1,3 +1,51 @@
+Branch: simba/add-a-new-standalone-tool-called-citation-format
+Title: Add a new standalone tool called citation-formatter in tools/citation...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working citation-formatter tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-data-visualizer
+Title: Add a new standalone tool called data-visualizer in tools/data-visual...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working data-visualizer tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-color-palette-g
+Title: Add a new standalone tool called color-palette-generator in tools/col...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working color-palette-generator tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-social-post-pla
+Title: Add a new standalone tool called social-post-planner in tools/social-...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working social-post-planner tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-regex-tester-in
+Title: Add a new standalone tool called regex-tester in tools/regex-tester/....
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working regex-tester tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-json-formatter-
+Title: Add a new standalone tool called json-formatter in tools/json-formatt...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working json-formatter tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-api-request-bui
+Title: Add a new standalone tool called api-request-builder in tools/api-req...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working api-request-builder tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-health-check-da
+Title: Add a new standalone tool called health-check-dashboard in tools/heal...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working health-check-dashboard tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-growth-milestone-engine-tool-in-toolsengineg
 Title: Add growth-milestone-engine tool in tools/engine/growth-milestone-eng...
 
