@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-candidate-comparison-view-tool-in-toolsengin
+Title: Add candidate-comparison-view tool in tools/engine/candidate-comparis...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working candidate-comparison-view tool that helps market participants evaluate multiple players
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
