@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-admin-moderation-panel-tool-in-toolsenginead
+Title: Add admin-moderation-panel tool in tools/engine/admin-moderation-pane...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working admin-moderation-panel tool for manual oversight of game systems
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
