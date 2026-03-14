@@ -1,21 +1,63 @@
-Branch: simba/add-growth-milestone-engine-tool-in-toolsengineg
-Title: Add growth-milestone-engine tool in tools/engine/growth-milestone-eng...
+Branch: simba/add-a-new-standalone-tool-called-memory-match-in
+Title: Add a new standalone tool called memory-match in tools/games/memory-m...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working growth-milestone-engine tool that provides psychological feedback and state progression
-Branch: simba/add-daily-weather-replenisher-tool-in-toolsengin
-Title: Add daily-weather-replenisher tool in tools/engine/daily-weather-repl...
+- Goal: Produce working memory-match tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-pricing-calcula
+Title: Add a new standalone tool called pricing-calculator in tools/pricing-...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working daily-weather-replenisher tool to manage the daily energy economy
-Branch: simba/add-genesis-seed-initializer-tool-in-toolsengine
-Title: Add genesis-seed-initializer tool in tools/engine/genesis-seed-initia...
+- Goal: Produce working pricing-calculator tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-okr-planner-in-
+Title: Add a new standalone tool called okr-planner in tools/okr-planner/. T...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working genesis-seed-initializer tool to establish initial player state and environment
+- Goal: Produce working okr-planner tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-swot-analyzer-i
+Title: Add a new standalone tool called swot-analyzer in tools/swot-analyzer...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working swot-analyzer tool with config.json, index.html, tool.js, registered and routed.
+²Branch: simba/create-candidate-comparison-view-tool-in-toolsen
+Title: Create candidate-comparison-view tool in tools/engine/candidate-compa...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working candidate-comparison-view tool for market layer recruiter analysis
+Branch: simba/integrate-gsap-greensock-via-cdn-into-assetsjsma
+Title: Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.j...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working GSAP-powered magnetic buttons and UI alerts that feel incredibly smooth
+Branch: simba/integrate-vanilla-tiltjs-via-cdn-into-the-root-i
+Title: Integrate vanilla-tilt.js via CDN into the root index.html. Apply the...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working 3D tilt physics on the main launcher cards for a premium tactile feel
+Branch: simba/create-assetsjsengine-busjs-this-is-the-central-
+Title: Create _assets/js/engine-bus.js. This is the central wiring hub. Crea...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working standardized event bus that makes it perfectly clear for AI how to wire backend tools to the UI
+Branch: simba/update-orchard-routerjs-and-global-themecss-to-a
+Title: Update orchard-router.js and global-theme.css to add view transitions...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working premium page transitions that make the standalone tools feel like a unified native app
+Branch: simba/create-a-new-core-script-assetsjsorchard-routerj
+Title: Create a new core script _assets/js/orchard-router.js. Implement a Va...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working seamless Fetch-based routing that eliminates full page reloads and maintains the global event bus
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
