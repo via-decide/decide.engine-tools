@@ -1,15 +1,9 @@
-Branch: simba/add-json-formatter-tool-in-toolsjson-formatter-w
-Title: add json-formatter tool in tools/json-formatter/ with config.json ind...
+Branch: simba/add-memory-match-tool-in-toolsmemory-match-with-
+Title: add memory-match tool in tools/memory-match/ with config.json index.h...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working json-formatter tool with PR
-Branch: simba/add-regex-tester-tool-in-toolsregex-tester-with-
-Title: add regex-tester tool in tools/regex-tester/ with config.json index.h...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working regex-tester tool with PR
+- Goal: working memory-match tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
