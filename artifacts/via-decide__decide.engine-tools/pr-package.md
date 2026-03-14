@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-swot-analyzer-i
+Title: Add a new standalone tool called swot-analyzer in tools/swot-analyzer...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working swot-analyzer tool with config.json, index.html, tool.js, registered and routed.
 ²Branch: simba/create-candidate-comparison-view-tool-in-toolsen
 Title: Create candidate-comparison-view tool in tools/engine/candidate-compa...
 
