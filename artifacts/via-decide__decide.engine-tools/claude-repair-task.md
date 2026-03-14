@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add a progress-timeline tool in tools/progress-timeline with config.json index.html and tool.js - users enter milestones with dates and see a visual timeline
+Add seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Analyzes reusable knowledge (seeds) submitted by players and assigns a quality score based on originality, structure, and peer validation metrics. Vanilla JS, standalone logic.
 
 RULES
 1. Audit touched files first and identify regressions.
