@@ -6,194 +6,23 @@
   <title>ViaDecide · Decision Tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    :root{
-      --bg:#0f0d0c; --bg2:#1a1614; --bg3:#231e1b; --bg4:#2d2623;
-      --border:#3a2e28; --border2:#4f3e36;
-      --text:#f0e4d0; --muted:#8a7568; --subtle:#5a4e47;
-      --leaf:#52B756; --leafdk:#357a39;
-      --water:#29B6F6; --waterdk:#0277BD;
-      --gold:#FFCA28; --golddk:#c79800;
-      --amber:#f59e0b;
-      --rose:#f472b6;
-      --violet:#a78bfa;
-      --r:10px;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    *:focus{outline:none}
-    *:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
-    html{scroll-behavior:smooth}
-    body{
-      background:var(--bg);color:var(--text);
-      font-family:'DM Sans',system-ui,sans-serif;
-      line-height:1.6;min-height:100vh;
-    }
-    a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
-    .w{width:min(1100px,92vw);margin:0 auto}
-
-    /* ── NAV ── */
-    .nav{
-      position:sticky;top:0;z-index:100;
-      background:rgba(15,13,12,0.92);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav-i{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px;flex-wrap:wrap}
-    .brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700}
-    .brand em{color:var(--leaf);font-style:normal}
-    .nav-links{display:flex;gap:4px;flex-wrap:wrap}
-    .nl{color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 11px;border-radius:999px;border:1px solid transparent;transition:all .15s}
-    .nl:hover,.nl.on{color:var(--text);border-color:var(--border)}
-
-    /* ── HERO ── */
-    .hero{padding:60px 0 52px}
-    .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--leaf);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-    .eyebrow::before{content:'';display:inline-block;width:22px;height:2px;background:var(--leaf);border-radius:2px}
-    h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.08;margin-bottom:16px}
-    h1 em{color:var(--leaf);font-style:normal}
-    .sub{color:var(--muted);font-size:1rem;max-width:500px;margin-bottom:32px}
-    .hero-stats{display:flex;gap:28px;flex-wrap:wrap}
-    .hstat{display:flex;flex-direction:column}
-    .hstat-n{font-size:1.8rem;font-weight:800;color:var(--text);line-height:1}
-    .hstat-l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
-
-    /* ── DIVIDER ── */
-    .div{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
-
-    /* ── SECTION ── */
-    section{padding:44px 0;scroll-margin-top:68px}
-    .sh{margin-bottom:22px}
-    .sh h2{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;margin-bottom:5px}
-    .sh p{color:var(--muted);font-size:.88rem}
-
-    /* ── TABS ── */
-    .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
-    .tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.83rem;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
-    .tab:hover{border-color:var(--border2);color:var(--text)}
-    .tab.on{background:var(--leaf);border-color:var(--leaf);color:#0a1a0a}
-
-    /* ── TOOL GRID ── */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px}
-    .card{
-      background:var(--bg2);border:1px solid var(--border);
-      border-radius:var(--r);padding:18px;
-      display:flex;flex-direction:column;gap:8px;
-      transition:transform .17s,box-shadow .17s,border-color .17s;
-      cursor:pointer;
-    }
-    .card:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.45);border-color:var(--border2)}
-    .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .chip{font-size:.69rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap}
-    .c-creators{background:rgba(245,158,11,.12);color:var(--amber)}
-    .c-coders{background:rgba(41,182,246,.12);color:var(--water)}
-    .c-researchers{background:rgba(52,211,153,.12);color:#34d399}
-    .c-operators{background:rgba(167,139,250,.12);color:var(--violet)}
-    .c-business{background:rgba(244,114,182,.12);color:var(--rose)}
-    .c-education{background:rgba(167,139,250,.12);color:var(--violet)}
-    .c-system{background:rgba(148,163,184,.12);color:#94a3b8}
-    .c-misc{background:rgba(203,213,225,.08);color:#94a3b8}
-    .card-icon{font-size:1.3rem;line-height:1}
-    .card h3{font-size:.95rem;font-weight:600;color:var(--text)}
-    .card p{font-size:.82rem;color:var(--muted);flex:1;line-height:1.45}
-    .card-link{
-      display:inline-flex;align-items:center;gap:4px;
-      font-size:.82rem;font-weight:600;color:var(--leaf);margin-top:4px;
-      transition:gap .15s;
-    }
-    .card-link::after{content:'→'}
-    .card:hover .card-link{gap:7px}
-
-    /* ── FEATURED TOOLS ROW ── */
-    .featured-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:16px}
-    .feat-card{
-      background:linear-gradient(135deg,rgba(82,183,86,.1),rgba(26,22,20,.97));
-      border:1.5px solid rgba(82,183,86,.3);
-      border-radius:var(--r);padding:22px;
-      display:flex;flex-direction:column;gap:10px;
-      box-shadow:0 0 32px rgba(82,183,86,.07);
-    }
-    .feat-card:hover{border-color:rgba(82,183,86,.55);transform:translateY(-2px)}
-    .feat-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700}
-    .feat-card p{color:var(--muted);font-size:.88rem;line-height:1.5}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:6px;
-      font-weight:600;font-size:.9rem;border:none;cursor:pointer;
-      border-radius:var(--r);padding:10px 18px;
-      transition:transform .1s,box-shadow .1s,filter .1s;
-      position:relative;top:0;text-decoration:none;
-    }
-    .btn-green{background:var(--leaf);color:#0a1a0a;box-shadow:0 4px 0 var(--leafdk)}
-    .btn-green:hover{filter:brightness(1.07)}
-    .btn-green:active{top:3px;box-shadow:0 1px 0 var(--leafdk)}
-    .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
-    .btn-ghost:hover{border-color:var(--border2);background:var(--bg3)}
-    .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-
-    /* ── EMPTY ── */
-    .empty{color:var(--muted);font-size:.88rem;padding:16px 0}
-
-    /* ── FOOTER ── */
-    footer{border-top:1px solid var(--border);padding:20px 0 36px;color:var(--muted);font-size:.82rem}
-    footer a{color:var(--water)}
-    footer a:hover{color:var(--text)}
-    /* MARS GAME */
-    .mars-hero{
-      background:linear-gradient(135deg,rgba(220,38,38,.1) 0%,rgba(26,22,20,.97) 55%);
-      border:1.5px solid rgba(220,38,38,.3);
-      border-radius:var(--r);padding:28px 32px;
-      display:flex;align-items:center;justify-content:space-between;gap:24px;
-      box-shadow:0 0 48px rgba(220,38,38,.07);
-      overflow:hidden;position:relative;
-    }
-    .mars-left{flex:1;min-width:0}
-    .mars-badge{display:inline-flex;align-items:center;font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(220,38,38,.15);color:#f87171;border-radius:999px;padding:4px 10px;margin-bottom:10px}
-    .mars-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;margin-bottom:8px}
-    .mars-desc{color:var(--muted);font-size:.9rem;max-width:520px;margin-bottom:14px;line-height:1.5}
-    .mars-pills{display:flex;flex-wrap:wrap;gap:7px}
-    .mpill{font-size:.75rem;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted)}
-    .btn-mars{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;box-shadow:0 4px 0 #7f1d1d}
-    .btn-mars:hover{filter:brightness(1.1)}
-    .btn-mars:active{top:3px;box-shadow:0 1px 0 #7f1d1d}
-    .mars-visual{width:160px;height:160px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-    .mars-planet{
-      width:130px;height:130px;border-radius:50%;
-      background:radial-gradient(circle at 35% 35%, #ef4444, #b91c1c 40%, #7f1d1d 70%, #450a0a);
-      box-shadow:0 0 40px rgba(220,38,38,.35),inset -20px -10px 30px rgba(0,0,0,.5);
-      animation:marsRotate 20s linear infinite;
-    }
-    @keyframes marsRotate{
-      0%{box-shadow:0 0 40px rgba(220,38,38,.35),inset -20px -10px 30px rgba(0,0,0,.5)}
-      50%{box-shadow:0 0 60px rgba(220,38,38,.5),inset -20px -10px 30px rgba(0,0,0,.5)}
-      100%{box-shadow:0 0 40px rgba(220,38,38,.35),inset -20px -10px 30px rgba(0,0,0,.5)}
-    }
-    @media(max-width:640px){.mars-visual{display:none}}
-
-    /* MISSION CTA */
-    .mission-wrap{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:32px;flex-wrap:wrap;
-      background:var(--bg2);border:1px solid var(--border);
-      border-left:4px solid var(--leaf);
-      border-radius:var(--r);padding:32px;
-    }
-    .mission-text{flex:1;min-width:260px}
-    .mission-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;flex-shrink:0}
-    .mstat{display:flex;flex-direction:column;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px 20px}
-    .mstat-n{font-size:1.8rem;font-weight:800;color:var(--leaf);line-height:1}
-    .mstat-l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px}
-
-  </style>
+  <link rel="stylesheet" href="./ui/main-ui.css"/>
 </head>
 <body>
+  <header id="shell-header"></header>
+  <main id="app"></main>
+  <div id="shell-footer"></div>
+  <script type="module" src="./ui/main-ui.js"></script>
 
 <nav class="nav">
   <div class="w nav-i">
     <a class="brand" href="#home">Via<em>Decide</em></a>
+    <div class="nav-links" id="main-nav-links"></div>
     <div class="nav-links">
       <a class="nl on" href="#home"        data-s="home">Home</a>
       <a class="nl"    href="#creators"    data-s="creators">Creators</a>
       <a class="nl"    href="#builders"    data-s="builders">Builders</a>
-      <a class="nl"    href="#researchers" data-s="researchers">Research</a>
+      <a class="nl"    href="#research"    data-s="research">Research</a>
       <a class="nl"    href="#business"    data-s="business">Business</a>
       <a class="nl"    href="#orchard"     data-s="orchard">🌳 Orchard Game</a>
       <a class="nl"    href="#games"       data-s="games">🎮 Games</a>
@@ -233,6 +62,46 @@
 
   <!-- RESEARCHERS / STUDENTS -->
   <section id="researchers"></section>
+  <section id="research">
+    <div class="w">
+      <div class="sh">
+        <h2>🔬 For Researchers &amp; Students</h2>
+        <p>Structure your learning, synthesise sources, prep for interviews, and evaluate your outputs.</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="./student-research/index.html">
+          <div class="card-top"><span class="chip c-education">Students</span><span class="card-icon">📚</span></div>
+          <h3>Student Research</h3>
+          <p>Structure your research process — define your question, organise sources, and build your summary.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./multi-source-research-explained/index.html">
+          <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
+          <h3>Multi-Source Research</h3>
+          <p>Synthesise findings from multiple sources into one coherent, structured research output.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./interview-prep/index.html">
+          <div class="card-top"><span class="chip c-education">Career</span><span class="card-icon">🎯</span></div>
+          <h3>Interview Prep</h3>
+          <p>Build structured answers for any interview question — behavioural, technical, or case-based.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/context-packager/index.html">
+          <div class="card-top"><span class="chip c-system">Workflow</span><span class="card-icon">📦</span></div>
+          <h3>Context Packager</h3>
+          <p>Collect key context from your research and package it into a reusable handoff document.</p>
+          <span class="card-link">Open</span>
+        </a>
+        <a class="card" href="./tools/workflow-template-gallery/index.html">
+          <div class="card-top"><span class="chip c-system">Templates</span><span class="card-icon">🗂️</span></div>
+          <h3>Workflow Gallery</h3>
+          <p>Browse reusable workflow templates and generate launch-ready sequence briefs for any project.</p>
+          <span class="card-link">Open</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <div class="div"></div>
 
@@ -452,6 +321,7 @@
   </div>
 </footer>
 
+<script src="ui/main-ui.js"></script>
 <script src="shared/tool-registry.js"></script>
 <script type="module">
 import { renderHomeSections } from "./ui/sections/render-sections.js";
@@ -459,24 +329,56 @@ import { renderHomeSections } from "./ui/sections/render-sections.js";
 (() => {
   'use strict';
 
+  const HASH_ALIASES = {
+    researchers: 'research'
+  };
+
+  const canonicalSectionId = (id) => HASH_ALIASES[id] || id;
+
+  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
+  const setActiveNav = (id) => {
+    const canonical = canonicalSectionId(id);
+    navLinks.forEach((l) => l.classList.toggle('on', l.dataset.s === canonical));
+  };
+
+  const scrollToSection = (id, { smooth = true, updateHash = true } = {}) => {
+    const canonical = canonicalSectionId(id);
+    const sec = document.getElementById(canonical);
+    if (!sec) return;
+    if (updateHash) history.replaceState(null, '', `#${canonical}`);
+    sec.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+    setActiveNav(canonical);
+  };
+
   // Smooth scroll nav
-  document.querySelectorAll('.nl[data-s]').forEach(l => {
-    l.addEventListener('click', e => {
+  navLinks.forEach((l) => {
+    l.addEventListener('click', (e) => {
       e.preventDefault();
-      const sec = document.getElementById(l.dataset.s);
-      if (sec) sec.scrollIntoView({ behavior:'smooth' });
+      scrollToSection(l.dataset.s);
     });
   });
 
   // Active nav on scroll
   const sections = [...document.querySelectorAll('section[id]')];
-  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('on', l.dataset.s === e.target.id));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) setActiveNav(e.target.id);
     });
   }, { threshold: 0.35 });
-  sections.forEach(s => io.observe(s));
+  sections.forEach((s) => io.observe(s));
+
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash) {
+    setTimeout(() => scrollToSection(initialHash, { smooth: false }), 50);
+  } else {
+    setActiveNav('home');
+  }
+
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    scrollToSection(hash, { smooth: false, updateHash: false });
+  });
 
   // Category map for chips
   const CAT = {
