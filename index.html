@@ -1,1032 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ViaDecide • Orchard Player Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --color-soil-dark: #1A1614;
-      --color-soil-light: #282320;
-      --color-bark-brown: #4A3B32;
-      --color-leaf-green: #52B756;
-      --color-leaf-dark: #388E3C;
-      --color-water-blue: #29B6F6;
-      --color-mineral-gold: #FFCA28;
-      --color-text-main: #F5E6D3;
-      --color-text-muted: #A18D82;
-      --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-pill: 999px;
-      --shadow-base: 0 10px 24px rgba(0, 0, 0, 0.45);
-      --shadow-card: 0 12px 24px rgba(0, 0, 0, 0.6);
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background-color: var(--color-soil-dark);
-      background-image: linear-gradient(rgba(74, 59, 50, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(74, 59, 50, 0.15) 1px, transparent 1px);
-      background-size: 20px 20px;
-      color: var(--color-text-main);
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.5;
-    }
-
-    .container { width: min(1120px, 92vw); margin: 0 auto; }
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(26, 22, 20, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--color-bark-brown);
-    }
-    .nav-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 14px 0;
-    }
-    .brand { font-weight: 700; letter-spacing: 0.3px; }
-    .brand span { color: var(--color-leaf-green); }
-
-    nav { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav-link {
-      border: 1px solid var(--color-bark-brown);
-      color: var(--color-text-main);
-      text-decoration: none;
-      border-radius: var(--radius-pill);
-      padding: 8px 12px;
-      font-size: 0.9rem;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .nav-link:focus { outline: none; }
-    .nav-link:focus-visible { box-shadow: 0 0 0 2px var(--color-leaf-green); }
-
-    section { padding: 26px 0; scroll-margin-top: 86px; }
-
-    .orchard-panel {
-      border: 2px solid var(--color-bark-brown);
-      border-radius: var(--radius-md);
-      background: var(--color-soil-light);
-      box-shadow: var(--shadow-base);
-      padding: 24px;
-    }
-
-    .hero-title, .section-heading, .card-title {
-      margin: 0;
-      font-family: 'Merriweather', serif;
-      color: var(--color-text-main);
-    }
-    .hero-title { font-size: clamp(1.8rem, 4vw, 2.8rem); }
-    .section-heading { font-size: 1.4rem; }
-
-    .hero-subtitle, .section-sub, .card-desc {
-      color: var(--color-text-muted);
-      margin: 10px 0 0;
-    }
-
-    .starter-card {
-      margin-top: 16px;
-      border: 2px solid var(--color-leaf-green);
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(82, 183, 86, 0.18), rgba(40, 35, 32, 0.9));
-      padding: 22px;
-      box-shadow: 0 0 24px rgba(82, 183, 86, 0.22), var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .starter-chip {
-      display: inline-flex;
-      width: fit-content;
-      padding: 5px 10px;
-      border-radius: var(--radius-pill);
-      background: var(--color-leaf-green);
-      color: #111;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      transition: all 0.1s;
-      position: relative;
-      top: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .btn:focus { outline: none; }
-    .btn:focus-visible { box-shadow: 0 0 0 2px var(--color-leaf-green); }
-
-    .btn-grow {
-      background: var(--color-leaf-green);
-      color: #111;
-      box-shadow: 0 5px 0 var(--color-leaf-dark);
-      padding: 13px 24px;
-      min-width: 220px;
-      font-size: 1.01rem;
-    }
-    .btn-grow:active { top: 5px; box-shadow: 0 0 0 var(--color-leaf-dark); }
-
-    .btn-action {
-      background: var(--color-water-blue);
-      color: #111;
-      box-shadow: 0 4px 0 #0288D1;
-      padding: 10px 14px;
-      font-size: 0.9rem;
-    }
-    .btn-action:active { top: 4px; box-shadow: 0 0 0 #0288D1; }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .game-card {
-      background: var(--color-soil-light);
-      border: 1px solid var(--color-bark-brown);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-    }
-    .game-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
-
-    .game-icon { font-size: 1.7rem; line-height: 1; }
-    .layer-chip {
-      width: fit-content;
-      font-size: 0.74rem;
-      color: #111;
-      background: var(--color-mineral-gold);
-      border-radius: var(--radius-pill);
-      padding: 3px 8px;
-      font-weight: 700;
-    }
-
-    .card-title { font-size: 1.05rem; }
-    .card-desc { font-size: 0.91rem; margin-top: 0; }
-    .card-spacer { flex: 1; }
-    .card-btn { width: 100%; margin-top: 6px; }
-
-    .load-note {
-      margin: 10px 0 0;
-      color: var(--color-mineral-gold);
-      font-size: 0.86rem;
-    }
-
-    .dev-badge {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      z-index: 100;
-      display: none;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid #ef4444;
-      background: #b91c1c;
-      color: #fff;
-      font-size: 0.76rem;
-      font-weight: 700;
-    }
-    body.dev-mode-active .dev-badge { display: inline-flex; }
-
-    .footer {
-      border-top: 1px solid var(--color-bark-brown);
-      color: var(--color-text-muted);
-      padding: 18px 0 36px;
-      font-size: 0.88rem;
-    }
-  </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>ViaDecide Orchard Hub</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-/* ---------- ROOT ---------- */
-
-:root{
-
---soil:#1A1614;
---soil2:#231e1b;
---soil3:#2d2623;
-
---bark:#4A3B32;
-
---leaf:#52B756;
---leaf-dark:#357a39;
-
---water:#29B6F6;
-
---gold:#FFCA28;
-
---cream:#F5E6D3;
---muted:#8a7568;
-
-}
-
-/* ---------- RESET ---------- */
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
-body{
-
-background:var(--soil);
-color:var(--cream);
-
-font-family:'DM Sans',system-ui;
-
-line-height:1.6;
-
-}
-
-/* ---------- NAV ---------- */
-
-.nav{
-
-position:sticky;
-top:0;
-
-background:#1a1614;
-
-border-bottom:1px solid var(--bark);
-
-z-index:10;
-
-}
-
-.nav-inner{
-
-max-width:1100px;
-margin:auto;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:14px;
-
-}
-
-.brand{
-
-font-family:'Playfair Display';
-font-weight:700;
-
-}
-
-.brand span{
-
-color:var(--leaf);
-
-}
-
-.nav-links{
-
-display:flex;
-gap:16px;
-
-}
-
-.nav-links a{
-
-text-decoration:none;
-color:var(--muted);
-
-font-size:14px;
-
-}
-
-.nav-links a:hover{
-
-color:var(--cream);
-
-}
-
-/* ---------- HERO ---------- */
-
-.hero{
-
-text-align:center;
-
-padding:80px 20px;
-
-max-width:900px;
-margin:auto;
-
-}
-
-.hero-title{
-
-font-family:'Playfair Display';
-
-font-size:48px;
-
-}
-
-.hero-title .accent{
-
-color:var(--leaf);
-
-}
-
-.hero-sub{
-
-margin-top:16px;
-color:var(--muted);
-
-}
-
-.hero-actions{
-
-margin-top:32px;
-
-display:flex;
-gap:12px;
-justify-content:center;
-flex-wrap:wrap;
-
-}
-
-/* ---------- BUTTONS ---------- */
-
-.btn{
-
-padding:14px 24px;
-border-radius:10px;
-font-weight:600;
-cursor:pointer;
-text-decoration:none;
-
-}
-
-.btn-primary{
-
-background:var(--leaf);
-color:#061107;
-
-border:none;
-
-box-shadow:0 4px 0 var(--leaf-dark);
-
-}
-
-.btn-primary:active{
-
-transform:translateY(3px);
-
-box-shadow:none;
-
-}
-
-.btn-secondary{
-
-border:1px solid var(--bark);
-color:var(--cream);
-
-}
-
-/* ---------- SECTIONS ---------- */
-
-.section-title{
-
-text-align:center;
-
-font-size:32px;
-
-margin-top:40px;
-
-font-family:'Playfair Display';
-
-}
-
-/* ---------- MODULE GRID ---------- */
-
-.module-grid{
-
-max-width:1100px;
-margin:40px auto;
-
-display:grid;
-
-grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-
-gap:16px;
-
-padding:0 20px;
-
-}
-
-.module-card{
-
-background:var(--soil2);
-
-border:1px solid var(--bark);
-
-border-radius:14px;
-
-padding:20px;
-
-transition:.2s;
-
-display:flex;
-flex-direction:column;
-
-}
-
-.module-card:hover{
-
-transform:translateY(-4px);
-
-background:var(--soil3);
-
-}
-
-.module-title{
-
-font-weight:600;
-
-margin-top:6px;
-
-}
-
-.module-desc{
-
-font-size:14px;
-color:var(--muted);
-
-margin-top:6px;
-
-flex:1;
-
-}
-
-.module-open{
-
-margin-top:10px;
-
-color:var(--leaf);
-
-font-weight:600;
-
-font-size:14px;
-
-text-decoration:none;
-
-}
-
-/* ---------- DIRECTORY ---------- */
-
-#toolDirectory{
-
-max-width:1100px;
-margin:40px auto;
-
-padding:0 20px;
-
-}
-
-.tool-group{
-
-margin-bottom:30px;
-
-}
-
-.tool-group h3{
-
-margin-bottom:12px;
-
-}
-
-.tool-list{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-
-gap:10px;
-
-}
-
-/* ---------- MISSION ---------- */
-
-.mission{
-
-max-width:700px;
-margin:40px auto;
-text-align:center;
-color:var(--muted);
-
-}
-
-/* ---------- FOOTER ---------- */
-
-.footer{
-
-text-align:center;
-
-padding:30px;
-
-border-top:1px solid var(--bark);
-
-color:var(--muted);
-
-}
-
-/* ---------- DEV MODE ---------- */
-
-.dev-banner{
-
-position:fixed;
-
-bottom:20px;
-left:20px;
-
-background:#7f1d1d;
-
-padding:6px 12px;
-
-border-radius:6px;
-
-display:none;
-
-}
-
-body.dev .dev-banner{
-
-display:block;
-
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width:700px){
-
-.hero-title{
-
-font-size:36px;
-
-}
-
-.nav-links{
-
-gap:10px;
-
-font-size:12px;
-
-}
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaDecide • Orchard Hub</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Orchard Palette */
+            --color-soil-darker: #120F0E;
+            --color-soil-dark: #1A1614;
+            --color-soil-light: #282320;
+            --color-bark-brown: #4A3B32;
+            --color-leaf-green: #52B756;
+            --color-leaf-dark: #388E3C;
+            --color-water-blue: #29B6F6;
+            --color-mineral-gold: #FFCA28;
+            --color-text-main: #F5E6D3;
+            --color-text-muted: #A18D82;
+            
+            /* UI Tokens */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 999px;
+            --shadow-base: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --shadow-card: 0 12px 24px rgba(0, 0, 0, 0.6);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: var(--color-soil-darker);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(82, 183, 86, 0.08), transparent 50%),
+                linear-gradient(rgba(74, 59, 50, 0.1) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(74, 59, 50, 0.1) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            color: var(--color-text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container { 
+            width: min(1200px, 92vw); 
+            margin: 0 auto; 
+        }
+
+        /* --- Navigation --- */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(18, 15, 14, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74, 59, 50, 0.4);
+        }
+
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .brand { 
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            font-weight: 900; 
+            letter-spacing: -0.5px;
+            color: var(--color-text-main);
+            text-decoration: none;
+        }
+        .brand span { color: var(--color-leaf-green); }
+
+        nav { display: flex; gap: 12px; }
+        .nav-link {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            transition: var(--transition);
+        }
+        .nav-link:hover { color: var(--color-text-main); background: rgba(255,255,255,0.05); }
+        .nav-link.active { color: var(--color-leaf-green); background: rgba(82, 183, 86, 0.1); }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin: 0;
+            line-height: 1.1;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--color-leaf-green);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 24px auto 40px;
+        }
+
+        /* --- Featured Game Card --- */
+        .featured-card {
+            background: linear-gradient(145deg, var(--color-soil-light), var(--color-soil-dark));
+            border: 2px solid var(--color-bark-brown);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto 80px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-base);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(82, 183, 86, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .chip {
+            background: var(--color-leaf-green);
+            color: #111;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-leaf-green);
+            color: #061107;
+            box-shadow: 0 6px 0 var(--color-leaf-dark);
+            font-size: 1.1rem;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--color-leaf-dark); }
+        .btn-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--color-leaf-dark); }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--color-bark-brown);
+            color: var(--color-text-main);
+        }
+        .btn-secondary:hover { background: var(--color-soil-light); border-color: var(--color-text-muted); }
+
+        /* --- Modules Grid --- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--color-leaf-green);
+            padding-left: 20px;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--color-soil-light);
+            border: 1px solid var(--color-bark-brown);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-leaf-green);
+            box-shadow: var(--shadow-card);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            color: var(--color-mineral-gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            margin: 0 0 10px 0;
+        }
+
+        .card-desc {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        /* --- Dev Banner --- */
+        .dev-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-size: 0.8rem;
+            font-weight: 800;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        body.dev-mode .dev-banner { display: block; }
+        body.dev-mode .engine-tool { border-style: dashed; border-color: var(--color-mineral-gold); }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--color-bark-brown);
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero { padding: 40px 0; }
+            .nav-links { display: none; }
+            .grid { grid-template-columns: 1fr; }
+            .featured-card { padding: 24px; }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="dev-badge">DEV MODE</div>
 
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <div class="brand">Via<span>Decide</span> • Orchard Player Hub</div>
-      <nav>
-        <a class="nav-link" href="#home" data-route="home">Home</a>
-        <a class="nav-link" href="#modules" data-route="modules">Game Modules</a>
-        <a class="nav-link" href="#mission" data-route="mission">Mission</a>
-      </nav>
-    </div>
-  </header>
+    <div class="dev-banner">DEVELOPER MODE ACTIVE</div>
 
-  <main class="container">
-    <section id="home">
-      <div class="orchard-panel">
-        <h1 class="hero-title">Begin Your Orchard Journey</h1>
-        <p class="hero-subtitle">Start in the Starter Farm, then unlock your layered orchard mechanics as you grow.</p>
-
-        <div class="starter-card" id="starter-farm-featured">
-          <span class="starter-chip">Featured Entry Point</span>
-          <h2 class="card-title">Initialize Starter Farm</h2>
-          <p class="card-desc">Set up your farm identity, seed state, and first progression loop.</p>
-          <div class="cta-row">
-            <a class="btn btn-grow" href="./tools/engine/starter-farm-generator/index.html">🌱 Start Game</a>
-            <a class="btn btn-action" href="tool-graph.html">Explore Graph</a>
-          </div>
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a href="#" class="brand">Via<span>Decide</span> Orchard</a>
+            <nav class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#modules" class="nav-link">Modules</a>
+                <a href="#mission" class="nav-link">Mission</a>
+            </nav>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <section id="modules">
-      <h2 class="section-heading">Your Orchard Mechanics</h2>
-      <p class="section-sub">Layered game modules available to players. Engine/admin internals stay hidden unless Dev Mode is active.</p>
-      <p id="modules-load-note" class="load-note" style="display: none;"></p>
-      <div id="game-modules-grid" class="module-grid"></div>
-    </section>
-
-    <section id="mission">
-      <div class="orchard-panel">
-        <h2 class="section-heading">Why this matters for Bharat Vishwaguru by 2030</h2>
-        <p class="section-sub">This open-source stack helps learners and builders move from ideas to outcomes through practical decision workflows and interactive tools.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="container footer">
-    © 2026 ViaDecide / decide.engine • Open source decision tooling for practical impact.
-  </footer>
-
-  <script src="shared/tool-registry.js"></script>
-  <script>
-    (async function initToolDirectory() {
-      if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') return;
-
-      const DEV_HOTKEY = { key: 'E', ctrl: true, shift: true };
-      const FEATURED_STARTER_ID = 'starter-farm-generator';
-      const FALLBACK_TOOLS = [
-        {
-          id: 'daily-quest-generator',
-          name: 'Daily Quest Generator',
-          category: 'Layer 1 - Farm',
-          gameIcon: '📜',
-          gameDescription: 'Generate your daily quests and stay on growth track.',
-          entry: 'tools/engine/daily-quest-generator/index.html',
-          isEngineTool: false
-        },
-        {
-          id: 'weekly-harvest-engine',
-          name: 'Weekly Harvest Engine',
-          category: 'Layer 2 - Commons',
-          gameIcon: '🧺',
-          gameDescription: 'Review weekly outcomes and convert actions into harvest.',
-          entry: 'tools/engine/weekly-harvest-engine/index.html',
-          isEngineTool: false
-        },
-        {
-          id: 'seed-exchange',
-          name: 'Seed Exchange',
-          category: 'Layer 3 - Market',
-          gameIcon: '🛒',
-          gameDescription: 'Exchange credits for seed opportunities and expand play.',
-          entry: 'tools/engine/seed-exchange/index.html',
-          isEngineTool: false
-        }
-      ];
-
-      const featuredShell = document.getElementById('starter-farm-featured');
-      const moduleGrid = document.getElementById('game-modules-grid');
-      const loadNote = document.getElementById('modules-load-note');
-      if (!moduleGrid) return;
-
-      let allTools = [];
-      let devMode = false;
-
-      function visibleModules() {
-        return allTools.filter((tool) => {
-          if (tool.id === FEATURED_STARTER_ID) return false;
-          if (devMode) return true;
-          return !tool.isEngineTool;
-        });
-      }
-
-      function sortModules(a, b) {
-        return (a.category || '').localeCompare(b.category || '') || a.name.localeCompare(b.name);
-      }
-
-      function renderFeaturedStarter() {
-        if (!featuredShell) return;
-        const starter = allTools.find((tool) => tool.id === FEATURED_STARTER_ID || tool.featured);
-        if (!starter) {
-          featuredShell.innerHTML = `
-            <span class="starter-chip">Featured Entry Point</span>
-            <h2 class="card-title">🌱 Initialize Starter Farm</h2>
-            <p class="card-desc">Enter the real game and initialize your orchard profile.</p>
-            <div class="cta-row">
-              <a class="btn btn-grow" href="./tools/engine/starter-farm-generator/index.html">🌱 Connect & Start Game</a>
-              <a class="btn btn-action" href="workflow-builder.html">Open Workflow Builder</a>
+    <main class="container">
+        <!-- Hero / Starter Section -->
+        <section id="home" class="hero">
+            <h1 class="hero-title">Grow Your Skills.<br><em>Harvest Results.</em></h1>
+            <p class="hero-subtitle">Step into a decision-based farming ecosystem designed to bridge the gap between ideas and outcomes.</p>
+            
+            <div id="featured-slot" class="featured-card">
+                <!-- Fallback content while loading -->
+                <span class="chip">Main Entry Point</span>
+                <h2 class="card-title" style="font-size: 2rem;">Initialize Starter Farm</h2>
+                <p class="card-desc" style="max-width: 500px;">Connect your profile and begin your journey through the layered mechanics of the orchard engine.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <a href="./tools/engine/starter-farm-generator/index.html" class="btn btn-primary">🌱 Start New Game</a>
+                    <button class="btn btn-secondary" onclick="window.location.hash='modules'">Browse Modules</button>
+                </div>
             </div>
-          `;
-          return;
+        </section>
+
+        <!-- Main Modules Grid -->
+        <section id="modules">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Game Modules</h2>
+                    <p style="color: var(--color-text-muted); margin: 5px 0 0;">Interactive layers of the Orchard Ecosystem.</p>
+                </div>
+            </div>
+            
+            <div id="module-grid" class="grid">
+                <!-- JS will populate this -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--color-text-muted);">
+                    Gathering seeds... (Loading Modules)
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section id="mission" style="padding: 100px 0; text-align: center;">
+            <div style="max-width: 700px; margin: 0 auto; background: rgba(82, 183, 86, 0.03); padding: 40px; border-radius: var(--radius-lg); border: 1px solid rgba(82, 183, 86, 0.1);">
+                <h2 class="section-title" style="margin-bottom: 20px;">The 2030 Mission</h2>
+                <p style="font-size: 1.1rem; color: var(--color-text-muted);">
+                    ViaDecide is an open-source framework built to empower Bharat's next generation of builders. By gamifying practical decision-making and project management, we turn complex workflows into intuitive harvests.
+                </p>
+                <div style="margin-top: 30px; display: flex; justify-content: center; gap: 40px; opacity: 0.6;">
+                    <div><strong>100%</strong><br><small>Open Source</small></div>
+                    <div><strong>Web3</strong><br><small>Ready</small></div>
+                    <div><strong>Impact</strong><br><small>Focused</small></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 ViaDecide • Build. Decide. Thrive.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.5;">Press <kbd style="background: #333; padding: 2px 5px; border-radius: 4px; border: 1px solid #555;">~</kbd> to toggle Developer Engine Tools</p>
+        </div>
+    </footer>
+
+    <!-- Registry Script -->
+    <script src="shared/tool-registry.js"></script>
+
+    <script>
+        /**
+         * ORCHARD HUB CORE LOGIC
+         */
+        const CORE_GAME_ID = 'starter-farm-generator';
+        let devMode = false;
+        let allTools = [];
+
+        // Comprehensive Fallbacks in case tool-registry.js is missing
+        const FALLBACK_MODULES = [
+            {
+                id: 'starter-farm-generator',
+                name: 'Starter Farm',
+                category: 'Layer 1 - Core',
+                gameIcon: '🌱',
+                description: 'The foundation of your orchard. Initialize state and seed your first progress loops.',
+                entry: './tools/engine/starter-farm-generator/index.html',
+                isEngineTool: false
+            },
+            {
+                id: 'daily-quest-generator',
+                name: 'Daily Quest Engine',
+                category: 'Layer 1 - Activity',
+                gameIcon: '📜',
+                description: 'Generate and track daily missions to keep your farm growing consistently.',
+                entry: './tools/engine/daily-quest-generator/index.html',
+                isEngineTool: false
+            },
+            {
+                id: 'weekly-harvest-engine',
+                name: 'Weekly Harvest',
+                category: 'Layer 2 - Outcome',
+                gameIcon: '🧺',
+                description: 'Convert your weekly completed tasks into valuable harvest rewards.',
+                entry: './tools/engine/weekly-harvest-engine/index.html',
+                isEngineTool: false
+            },
+            {
+                id: 'seed-exchange',
+                name: 'Seed Exchange',
+                category: 'Layer 3 - Market',
+                gameIcon: '🛒',
+                description: 'The community marketplace where seeds are traded for ecosystem credits.',
+                entry: './tools/engine/seed-exchange/index.html',
+                isEngineTool: false
+            },
+            {
+                id: 'admin-debug',
+                name: 'Engine Console',
+                category: 'System',
+                gameIcon: '⚙️',
+                description: 'Internal engine diagnostics and state management tools.',
+                entry: './tools/engine/console/index.html',
+                isEngineTool: true
+            }
+        ];
+
+        async function initHub() {
+            const moduleGrid = document.getElementById('module-grid');
+            
+            try {
+                // Try to load from registry
+                if (window.ToolRegistry && typeof window.ToolRegistry.loadAll === 'function') {
+                    allTools = await window.ToolRegistry.loadAll();
+                }
+
+                // If registry is empty or failed, use fallbacks
+                if (!allTools || allTools.length === 0) {
+                    console.warn("Registry empty or failed. Using fallback game modules.");
+                    allTools = FALLBACK_MODULES;
+                }
+            } catch (err) {
+                console.error("Critical Registry Error:", err);
+                allTools = FALLBACK_MODULES;
+            }
+
+            renderHub();
         }
 
-        featuredShell.innerHTML = `
-          <span class="starter-chip">Featured Entry Point</span>
-          <h2 class="card-title">${starter.gameIcon || '🌱'} ${starter.name || 'Initialize Starter Farm'}</h2>
-          <p class="card-desc">${starter.gameDescription || starter.description || 'Set up your farm identity, seed state, and first progression loop.'}</p>
-          <div class="cta-row">
-            <a class="btn btn-grow" href="${starter.entry || './tools/engine/starter-farm-generator/index.html'}">🌱 Connect & Start Game</a>
-            <a class="btn btn-action" href="workflow-builder.html">Open Workflow Builder</a>
-          </div>
-        `;
-      }
+        function renderHub() {
+            const moduleGrid = document.getElementById('module-grid');
+            const featuredSlot = document.getElementById('featured-slot');
 
-      function renderGameModules() {
-        const cards = visibleModules().sort(sortModules).map((tool) => `
-          <article class="game-card">
-            <div class="game-icon">${tool.gameIcon || '🍃'}</div>
-            <span class="layer-chip">${tool.category || 'Gameplay'}</span>
-            <h3 class="card-title">${tool.name}</h3>
-            <p class="card-desc">${tool.gameDescription || tool.description || 'Standalone orchard module.'}</p>
-            <div class="card-spacer"></div>
-            <a class="btn btn-action card-btn" href="${tool.entry}">Open Module</a>
-          </article>
-        `).join('');
+            // 1. Render Featured Card
+            const starter = allTools.find(t => t.id === CORE_GAME_ID);
+            if (starter) {
+                featuredSlot.innerHTML = `
+                    <span class="chip">Main Entry Point</span>
+                    <h2 class="card-title" style="font-size: 2.2rem;">${starter.name}</h2>
+                    <p class="card-desc" style="max-width: 500px; font-size: 1.1rem;">${starter.description}</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        <a href="${starter.entry}" class="btn btn-primary">${starter.gameIcon || '🌱'} Enter The Orchard</a>
+                        <a href="#mission" class="btn btn-secondary">Learn More</a>
+                    </div>
+                `;
+            }
 
-        moduleGrid.innerHTML = cards || '<p class="section-sub">No modules are mapped for this mode.</p>';
-      }
+            // 2. Render Grid Modules
+            // Filter: If not in devMode, hide tools marked as isEngineTool
+            const visibleTools = allTools.filter(t => {
+                if (t.id === CORE_GAME_ID) return false; // Don't duplicate in grid
+                if (devMode) return true;
+                return !t.isEngineTool;
+            });
 
-      function setDevMode(enabled) {
-        devMode = enabled;
-        document.body.classList.toggle('dev-mode-active', devMode);
-        renderGameModules();
-      }
+            if (visibleTools.length === 0) {
+                moduleGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--color-text-muted);">No additional modules available at this layer.</p>`;
+                return;
+            }
 
-      document.addEventListener('keydown', (event) => {
-        const keyMatches = event.key && event.key.toUpperCase() === DEV_HOTKEY.key;
-        const hotkey = keyMatches && event.ctrlKey === DEV_HOTKEY.ctrl && event.shiftKey === DEV_HOTKEY.shift;
-        const tilde = event.key === '~' || event.code === 'Backquote';
-        if (!hotkey && !tilde) return;
-        event.preventDefault();
-        setDevMode(!devMode);
-      });
-
-      try {
-        allTools = await window.ToolRegistry.loadAll();
-        if (!Array.isArray(allTools) || !allTools.length) {
-          allTools = FALLBACK_TOOLS.slice();
-          if (loadNote) {
-            loadNote.style.display = 'block';
-            loadNote.textContent = 'Module registry unavailable. Loaded core modules fallback.';
-          }
+            moduleGrid.innerHTML = visibleTools.map(tool => `
+                <article class="card ${tool.isEngineTool ? 'engine-tool' : ''}">
+                    <div class="card-icon">${tool.gameIcon || '🍃'}</div>
+                    <div class="card-tag">${tool.category || 'Gameplay'}</div>
+                    <h3 class="card-title">${tool.name}</h3>
+                    <p class="card-desc">${tool.description || 'Access this orchard module to expand your capabilities.'}</p>
+                    <a href="${tool.entry}" class="btn btn-secondary" style="width: 100%;">Open Module</a>
+                </article>
+            `).join('');
         }
-      } catch (_error) {
-        allTools = FALLBACK_TOOLS.slice();
-        if (loadNote) {
-          loadNote.style.display = 'block';
-          loadNote.textContent = 'Module loading fallback active. Core game modules are available.';
-        }
-      }
 
-      renderFeaturedStarter();
-      renderGameModules();
-    })();
-  </script>
-  <script src="router.js"></script>
-
-<div class="dev-banner">⚙ Dev Mode</div>
-
-<nav class="nav">
-<div class="nav-inner">
-
-<div class="brand">
-Via<span>Decide</span> Orchard
-</div>
-
-<div class="nav-links">
-<a href="#home">Home</a>
-<a href="#modules">Modules</a>
-<a href="#directory">Tools</a>
-<a href="#mission">Mission</a>
-</div>
-
-</div>
-</nav>
-
-<section id="home" class="hero">
-
-<h1 class="hero-title">
-Grow your skills.<br>
-<span class="accent">Harvest your potential.</span>
-</h1>
-
-<p class="hero-sub">
-Start in the Starter Farm and grow your orchard.
-</p>
-
-<div class="hero-actions">
-
-<button id="startGameBtn" class="btn btn-primary">
-🌱 Start Game
-</button>
-
-<a href="#modules" class="btn btn-secondary">
-Explore Modules
-</a>
-
-</div>
-
-</section>
-
-<section id="modules">
-
-<h2 class="section-title">
-Game Modules
-</h2>
-
-<div id="moduleGrid" class="module-grid">
-Loading modules...
-</div>
-
-</section>
-
-<section id="directory">
-
-<h2 class="section-title">
-Tool Directory
-</h2>
-
-<div id="toolDirectory">
-Loading tools...
-</div>
-
-</section>
-
-<section id="mission">
-
-<h2 class="section-title">
-Mission
-</h2>
-
-<p class="mission">
-Open source decision tooling helping learners move from ideas to outcomes.  
-Building toward Bharat Vishwaguru 2030.
-</p>
-
-</section>
-
-<footer class="footer">
-© 2026 ViaDecide
-</footer>
-
-<script src="shared/tool-registry.js"></script>
-
-<script>
-
-let tools=[]
-let devMode=false
-
-const MAIN_GAME_ID="starter-farm-generator"
-
-async function init(){
-
-if(!window.ToolRegistry) return
-
-tools=await window.ToolRegistry.loadAll()
-
-setupStartGame()
-
-renderModules()
-
-renderDirectory()
-
-}
-
-function setupStartGame(){
-
-const btn=document.getElementById("startGameBtn")
-
-const mainGame=tools.find(t=>t.id===MAIN_GAME_ID)
-
-if(!mainGame) return
-
-btn.onclick=()=>{
-
-window.location.href=mainGame.entry
-
-}
-
-}
-
-function renderModules(){
-
-const grid=document.getElementById("moduleGrid")
-
-const visible=tools.filter(t=>devMode||!t.isEngineTool)
-
-if(!visible.length){
-
-grid.innerHTML="No modules available"
-return
-
-}
-
-grid.innerHTML=visible.map(t=>`
-
-<div class="module-card">
-
-<div class="module-title">${t.name}</div>
-
-<div class="module-desc">
-${t.description||""}
-</div>
-
-<a class="module-open" href="${t.entry}">
-Open Module →
-</a>
-
-</div>
-
-`).join("")
-
-}
-
-function renderDirectory(){
-
-const dir=document.getElementById("toolDirectory")
-
-const groups={}
-
-tools.forEach(t=>{
-
-if(!groups[t.category]) groups[t.category]=[]
-
-groups[t.category].push(t)
-
-})
-
-dir.innerHTML=Object.keys(groups).map(cat=>`
-
-<div class="tool-group">
-
-<h3>${cat}</h3>
-
-<div class="tool-list">
-
-${groups[cat].map(t=>`
-
-<div class="module-card">
-
-<div class="module-title">${t.name}</div>
-
-<div class="module-desc">
-${t.description||""}
-</div>
-
-<a class="module-open" href="${t.entry}">
-Open
-</a>
-
-</div>
-
-`).join("")}
-
-</div>
-
-</div>
-
-`).join("")
-
-}
-
-/* DEV MODE */
-
-document.addEventListener("keydown",e=>{
-
-if(e.key==="~"){
-
-devMode=!devMode
-
-document.body.classList.toggle("dev",devMode)
-
-renderModules()
-
-}
-
-})
-
-init()
-
-</script>
-
+        // --- DEV MODE TOGGLE ---
+        document.addEventListener('keydown', (e) => {
+            // Toggle with Tilde (~) or Ctrl+Shift+E
+            const isTilde = e.key === '~' || e.key === '`';
+            const isCombo = e.ctrlKey && e.shiftKey && e.key.toUpperCase() === 'E';
+
+            if (isTilde || isCombo) {
+                e.preventDefault();
+                devMode = !devMode;
+                document.body.classList.toggle('dev-mode', devMode);
+                renderHub();
+                console.log(`[ViaDecide] Developer Mode: ${devMode ? 'ON' : 'OFF'}`);
+            }
+        });
+
+        // --- Simple Nav Highlight ---
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', initHub);
+    </script>
 </body>
 </html>
