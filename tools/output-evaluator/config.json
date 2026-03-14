@@ -1,0 +1,13 @@
+{
+  "id": "output-evaluator",
+  "name": "Output Evaluator",
+  "title": "Output Evaluator",
+  "description": "Score outputs for clarity, completeness, novelty, and actionability with structured improvement guidance.",
+  "inputs": ["output_text", "success_criteria"],
+  "outputs": ["evaluation_report"],
+  "relatedTools": ["prompt-compare", "context-packager", "repo-improvement-brief"],
+  "category": "researchers",
+  "audience": ["researchers", "operators", "coders"],
+  "entry": "tools/output-evaluator/index.html",
+  "tags": ["evaluation", "quality", "simba-workflows"]
+}

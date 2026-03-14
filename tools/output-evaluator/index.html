@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Output Evaluator</title>
+  <link rel="stylesheet" href="../../shared/shared.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Output Evaluator</h1>
+      <p>Evaluate generated output quality before handoff or execution.</p>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <label for="text">Output to evaluate</label>
+        <textarea id="text" placeholder="Paste output text"></textarea>
+
+        <label for="criteria">Success criteria (optional)</label>
+        <textarea id="criteria" placeholder="What should excellent output include?"></textarea>
+
+        <div class="toolbar">
+          <button id="evaluate" class="primary">Evaluate</button>
+          <button id="copy">Copy</button>
+          <button id="download">Download</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Evaluation Report</h2>
+        <pre id="output" class="output"></pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="../../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>
