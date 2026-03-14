@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add resource-optimization-puzzle tool in tools/engine/resource-optimization-puzzle/ with config.json, index.html, tool.js. A strategic mini-game where players drag and drop limited water and minerals into a grid to maximize potential fruit yield under constrained UI parameters. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
