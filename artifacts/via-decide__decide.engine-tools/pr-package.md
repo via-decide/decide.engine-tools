@@ -1,23 +1,9 @@
-Branch: simba/add-toolscreatorssocial-content-generator-with-c
-Title: add tools/creators/social-content-generator/ with config.json index.h...
-Branch: simba/add-toolsgamesresource-puzzle-with-configjson-in
-Title: add tools/games/resource-puzzle/ with config.json index.html tool.js ...
+Branch: simba/create-a-new-core-script-assetsjsorchard-routerj
+Title: Create a new core script _assets/js/orchard-router.js. Implement a Va...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working puzzle game, standalone
-Branch: simba/add-toolsgamesquiz-engine-with-configjson-indexh
-Title: add tools/games/quiz-engine/ with config.json index.html tool.js - JS...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working quiz, standalone
-Branch: simba/add-toolsgamestyping-speed-with-configjson-index
-Title: add tools/games/typing-speed/ with config.json index.html tool.js - v...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: one input field, one Generate button, 7 labelled output cards each with copy button, all content platform-specific and ready to post
+- Goal: working seamless Fetch-based routing that eliminates full page reloads and maintains the global event bus
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
