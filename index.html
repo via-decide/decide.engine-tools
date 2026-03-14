@@ -193,7 +193,7 @@
       <a class="nl on" href="#home"        data-s="home">Home</a>
       <a class="nl"    href="#creators"    data-s="creators">Creators</a>
       <a class="nl"    href="#builders"    data-s="builders">Builders</a>
-      <a class="nl"    href="#researchers" data-s="researchers">Research</a>
+      <a class="nl"    href="#research"    data-s="research">Research</a>
       <a class="nl"    href="#business"    data-s="business">Business</a>
       <a class="nl"    href="#orchard"     data-s="orchard">🌳 Orchard Game</a>
       <a class="nl"    href="#games"       data-s="games">🎮 Games</a>
@@ -341,7 +341,7 @@
   <div class="div"></div>
 
   <!-- RESEARCHERS / STUDENTS -->
-  <section id="researchers">
+  <section id="research">
     <div class="w">
       <div class="sh">
         <h2>🔬 For Researchers &amp; Students</h2>
@@ -672,24 +672,56 @@
 (() => {
   'use strict';
 
+  const HASH_ALIASES = {
+    researchers: 'research'
+  };
+
+  const canonicalSectionId = (id) => HASH_ALIASES[id] || id;
+
+  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
+  const setActiveNav = (id) => {
+    const canonical = canonicalSectionId(id);
+    navLinks.forEach((l) => l.classList.toggle('on', l.dataset.s === canonical));
+  };
+
+  const scrollToSection = (id, { smooth = true, updateHash = true } = {}) => {
+    const canonical = canonicalSectionId(id);
+    const sec = document.getElementById(canonical);
+    if (!sec) return;
+    if (updateHash) history.replaceState(null, '', `#${canonical}`);
+    sec.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+    setActiveNav(canonical);
+  };
+
   // Smooth scroll nav
-  document.querySelectorAll('.nl[data-s]').forEach(l => {
-    l.addEventListener('click', e => {
+  navLinks.forEach((l) => {
+    l.addEventListener('click', (e) => {
       e.preventDefault();
-      const sec = document.getElementById(l.dataset.s);
-      if (sec) sec.scrollIntoView({ behavior:'smooth' });
+      scrollToSection(l.dataset.s);
     });
   });
 
   // Active nav on scroll
   const sections = [...document.querySelectorAll('section[id]')];
-  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('on', l.dataset.s === e.target.id));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) setActiveNav(e.target.id);
     });
   }, { threshold: 0.35 });
-  sections.forEach(s => io.observe(s));
+  sections.forEach((s) => io.observe(s));
+
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash) {
+    setTimeout(() => scrollToSection(initialHash, { smooth: false }), 50);
+  } else {
+    setActiveNav('home');
+  }
+
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    scrollToSection(hash, { smooth: false, updateHash: false });
+  });
 
   // Category map for chips
   const CAT = {
