@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/harvest-race-view/. Build a player-facing UI specific to the "Harvest Race" tournament. Display a simulated global leaderboard reading from orchard_engine_mock_leaderboard. Emphasize the player's current "Fruit Output" metric. Provide real-time UI feedback (progress bars, rank changes) by listening to updates from the server-tournament-engine.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; must utilize data-skin-label attributes for terminology consistency.
 Create tools/engine/skin-selector-ui/. Build a player-facing gallery UI displaying the 5 defined skins (Space Colony, Dojo, Kitchen, Scholar, Street Food). Read orchard_engine_owned_skins to determine state. For owned skins, show an "Equip" button that updates orchard_engine_active_skin and dispatches engine:skin_changed. For unowned skins, show a "Unlock (X Gems)" button that interfaces with the skin-pack-manager. Display visual previews of the color palettes and term changes for each skin.
 
 CONSTRAINTS

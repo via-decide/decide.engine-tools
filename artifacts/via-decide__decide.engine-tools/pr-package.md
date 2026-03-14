@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineharvest-race-view-build-a-play
+Title: Create tools/engine/harvest-race-view/. Build a player-facing UI spec...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A dedicated, competitive UI dashboard showing the player's standing in the 24-hour fruit production race.
 Branch: simba/create-toolsengineskin-selector-ui-build-a-playe
 Title: Create tools/engine/skin-selector-ui/. Build a player-facing gallery ...
 
