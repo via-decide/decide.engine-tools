@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add weather-system tool in tools/engine/weather-system/ with config.json, index.html, tool.js. Simulates external randomized factors introducing daily modifiers to available water and minerals, directly impacting trunk and branch growth rates. Includes UI for current weather forecast. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
