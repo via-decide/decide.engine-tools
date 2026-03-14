@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-memory-match-in
+Title: Add a new standalone tool called memory-match in tools/games/memory-m...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working memory-match tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-pricing-calcula
 Title: Add a new standalone tool called pricing-calculator in tools/pricing-...
 
