@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineskin-engine-build-a-foundation
+Title: Create tools/engine/skin-engine/. Build a foundational Vanilla JS scr...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A dynamic theming engine that seamlessly updates CSS variables and terminology strings across the DOM without altering core logic.
 Branch: simba/create-toolsengineevent-notification-hub-build-a
 Title: Create tools/engine/event-notification-hub/. Build a player-facing UI...
 

@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/skin-engine/. Build a foundational Vanilla JS script that runs on initialization. It must read localStorage.getItem('orchard_engine_active_skin') (defaulting to the farming theme). The script must select all DOM elements with specific data-skin-label attributes (e.g., data-skin-label="roots") and update their innerText based on the active skin's dictionary. It must also remap the root CSS variables (--color-soil-dark, etc.) to the active skin's palette by applying styles to the document.documentElement. Listen for engine:skin_changed to trigger a re-render.
+
+CONSTRAINTS
+pure Vanilla JS; must be globally accessible or easily imported; fallback gracefully if skin data is missing.
 Create tools/engine/event-notification-hub/. Build a player-facing UI panel that reads orchard_engine_scheduled_events and displays a tabbed inbox: "Active", "Upcoming", and "Completed". Listen for engine:tournament_started, engine:boss_defeated, etc., to render visual alerts. Use a clean, list-based layout with countdown timers for active events.
 
 CONSTRAINTS
