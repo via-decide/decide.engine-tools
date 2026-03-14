@@ -5,6 +5,18 @@ in tools/engine/growth-milestone-engine/tool.js only - add a paused flag, set it
 
 CONSTRAINTS
 edit tools/engine/growth-milestone-engine/tool.js only; do not touch index.html config.json router.js tool-registry.js README or any shared file; no new dependencies
+rewrite tools/engine/starter-farm-generator/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back to same key on every change, emitEvent(name, data) dispatching window CustomEvents, and resource guard preventing run if water is 0 or credits are negative; keep existing copy and download buttons; apply Orchard palette colors Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28 via inline style block in index.html
+
+CONSTRAINTS
+additive rewrite of tool.js only; update index.html style block only; do not touch config.json or shared files
+rewrite tools/engine/daily-quest-generator/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every quest generation, emitEvent(name, data) for engine:quest_generated events, and a guard that prevents generation if state.water is 0; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
+
+CONSTRAINTS
+additive rewrite of tool.js; update index.html style block only; do not touch config.json or shared files
+rewrite tools/engine/seed-exchange/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every exchange, emitEvent(name, data) for engine:seed_exchanged events, and a credits guard that blocks exchange if state.credits is less than 1; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
+
+CONSTRAINTS
+additive rewrite of tool.js; update index.html style block only; do not touch config.json or shared files
 rewrite tools/engine/seed-exchange/tool.js only - replace generic stub with: hydrateState() reading localStorage.getItem('orchard_engine_player_state'), syncState() writing back after each exchange, emitEvent dispatching engine:seed_exchanged, and a guard returning early if state.credits<1; add a <style> block inside tools/engine/seed-exchange/index.html only setting body background #1A1614 and button accent #FFCA28
 
 CONSTRAINTS
