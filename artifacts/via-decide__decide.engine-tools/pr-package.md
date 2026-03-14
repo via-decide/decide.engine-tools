@@ -4,6 +4,12 @@ Title: Update orchard-router.js and global-theme.css to add view transitions...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: working premium page transitions that make the standalone tools feel like a unified native app
+Branch: simba/create-a-new-core-script-assetsjsorchard-routerj
+Title: Create a new core script _assets/js/orchard-router.js. Implement a Va...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working seamless Fetch-based routing that eliminates full page reloads and maintains the global event bus
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

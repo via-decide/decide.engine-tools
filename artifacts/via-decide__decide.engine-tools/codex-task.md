@@ -5,6 +5,10 @@ Update orchard-router.js and global-theme.css to add view transitions. Before in
 
 CONSTRAINTS
 pure Vanilla JS and CSS; fallback smoothly if View Transitions API is not supported
+Create a new core script _assets/js/orchard-router.js. Implement a Vanilla JS SPA router that intercepts all <a href> clicks to internal tools. Prevent default navigation. Instead, use fetch() to get the target HTML, parse it, extract the contents of the .orchard-panel or main container, and inject it into a central <main id="game-stage"> in the root index.html. Execute any accompanying <script> tags safely.
+
+CONSTRAINTS
+pure Vanilla JS; preserve browser history using history.pushState; handle 404s gracefully
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
