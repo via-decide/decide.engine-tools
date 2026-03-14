@@ -4,6 +4,24 @@ Title: add tools/games/quiz-engine/ with config.json index.html tool.js - JS...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: working quiz, standalone
+Branch: simba/add-toolsgamestyping-speed-with-configjson-index
+Title: add tools/games/typing-speed/ with config.json index.html tool.js - v...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working typing test, standalone
+Branch: simba/add-toolsgamesmemory-match-with-configjson-index
+Title: add tools/games/memory-match/ with config.json index.html tool.js - v...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: playable memory match in browser, standalone
+Branch: simba/add-toolsgamessnake-game-with-configjson-indexht
+Title: add tools/games/snake-game/ with config.json index.html tool.js - van...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: playable snake game in browser, standalone
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

@@ -5,6 +5,18 @@ add tools/games/quiz-engine/ with config.json index.html tool.js - JSON-driven q
 
 CONSTRAINTS
 edit tools/games/quiz-engine/ only; no frameworks; no shared file changes
+add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
+
+CONSTRAINTS
+edit tools/games/typing-speed/ only; no frameworks; no shared file changes
+add tools/games/memory-match/ with config.json index.html tool.js - vanilla JS card flip memory game with 16 cards, move counter, timer, win detection, saves best time to localStorage key orchard_engine_memory_best
+
+CONSTRAINTS
+edit tools/games/memory-match/ only; no frameworks; no shared file changes
+add tools/games/snake-game/ with config.json index.html tool.js - vanilla JS canvas snake game, arrow key controls, score tracking, saves high score to localStorage key orchard_engine_snake_score, emits engine:score_achieved on new high score
+
+CONSTRAINTS
+edit tools/games/snake-game/ only; no frameworks; no shared file changes
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
