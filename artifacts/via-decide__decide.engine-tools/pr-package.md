@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-citation-format
+Title: Add a new standalone tool called citation-formatter in tools/citation...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working citation-formatter tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-data-visualizer
 Title: Add a new standalone tool called data-visualizer in tools/data-visual...
 
