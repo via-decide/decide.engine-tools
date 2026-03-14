@@ -12,6 +12,60 @@
     misc: 'misc'
   };
 
+  const ENGINE_TOOL_IDS = new Set([
+    'engine-state-manager',
+    'llm-action-parser',
+    'daily-weather-replenisher',
+    'admin-moderation-panel',
+    'simulation-runner',
+    'player-signup',
+    'orchard-profile-builder',
+    'starter-farm-generator',
+    'root-strength-calculator',
+    'trunk-growth-calculator',
+    'fruit-yield-engine',
+    'daily-quest-generator',
+    'weekly-harvest-engine',
+    'thirty-day-promotion-engine',
+    'fair-ranking-engine',
+    'seed-exchange',
+    'fruit-sharing',
+    'circle-builder',
+    'peer-validation-engine',
+    'trust-score-engine',
+    'recruiter-dashboard',
+    'orchard-discovery-search',
+    'hire-readiness-scorer',
+    'four-direction-pipeline',
+    'growth-path-recommender',
+    'ai-coach-console',
+    'seed-quality-scorer',
+    'meta-health-dashboard',
+    'synthetic-player-generator',
+    'wave1-simulation-runner',
+    'balance-dashboard',
+    'growth-milestone-engine'
+  ]);
+
+  const FEATURED_TOOL_OVERRIDES = {
+    'starter-farm-generator': {
+      isEngineTool: false,
+      featured: true,
+      entry: './tools/engine/starter-farm-generator/index.html'
+    }
+  };
+
+  function inferEngineTool(meta, normalizedCategory, defaultEntry, id) {
+    if (typeof meta.isEngineTool === 'boolean') return meta.isEngineTool;
+    if (typeof meta.hidden === 'boolean') return meta.hidden;
+
+    if (ENGINE_TOOL_IDS.has(id)) return true;
+    if (normalizedCategory === 'simulations' || normalizedCategory === 'system') return true;
+
+    const entry = (meta.entry || defaultEntry || '').toLowerCase();
+    return entry.startsWith('tools/engine/');
+  }
+
   const builtinTools = [
     {
       id: 'prompt-alchemy-main',
@@ -205,16 +259,23 @@
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const category = normalizeCategory(meta.category);
     const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
+    const override = FEATURED_TOOL_OVERRIDES[id] || {};
+    const isEngineTool = (typeof override.isEngineTool === 'boolean')
+      ? override.isEngineTool
+      : inferEngineTool(meta, category, defaultEntry, id);
+    const isEngineTool = inferEngineTool(meta, category, defaultEntry, id);
     return {
       id,
       name: meta.name || id,
       description: meta.description || '',
       category,
+      isEngineTool,
+      featured: (typeof override.featured === 'boolean') ? override.featured : !!meta.featured,
       audience: Array.isArray(meta.audience) ? meta.audience : [],
       inputs: Array.isArray(meta.inputs) ? meta.inputs : [],
       outputs: Array.isArray(meta.outputs) ? meta.outputs : [],
       relatedTools: Array.isArray(meta.relatedTools) ? meta.relatedTools : [],
-      entry: meta.entry || defaultEntry,
+      entry: override.entry || meta.entry || defaultEntry,
       tags: Array.isArray(meta.tags) ? meta.tags : []
     };
   }
