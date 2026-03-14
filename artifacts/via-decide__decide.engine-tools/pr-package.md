@@ -1,9 +1,15 @@
-Branch: simba/add-llm-action-parser-tool-in-toolsenginellm-act
-Title: Add llm-action-parser tool in tools/engine/llm-action-parser/ with co...
+Branch: simba/add-growth-milestone-engine-tool-in-toolsengineg
+Title: Add growth-milestone-engine tool in tools/engine/growth-milestone-eng...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working llm-action-parser tool that maps real-world effort to strict JSON engine stats
+- Goal: working growth-milestone-engine tool that provides psychological feedback and state progression
+Branch: simba/add-daily-weather-replenisher-tool-in-toolsengin
+Title: Add daily-weather-replenisher tool in tools/engine/daily-weather-repl...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working daily-weather-replenisher tool to manage the daily energy economy
 Branch: simba/add-genesis-seed-initializer-tool-in-toolsengine
 Title: Add genesis-seed-initializer tool in tools/engine/genesis-seed-initia...
 
