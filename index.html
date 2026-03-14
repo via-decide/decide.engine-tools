@@ -228,6 +228,24 @@
       padding: 18px 0 36px;
       font-size: 0.88rem;
     }
+
+    .dev-badge {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      background: #b91c1c;
+      border: 1px solid #ef4444;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      letter-spacing: 0.4px;
+      display: none;
+    }
+
+    body.dev-mode-active .dev-badge { display: inline-flex; }
   </style>
 </head>
 <body>
@@ -287,6 +305,14 @@
 
       const DEV_HOTKEY = { key: 'E', ctrl: true, shift: true };
       const FEATURED_STARTER_ID = 'starter-farm-generator';
+      const DEV_HOTKEY = {
+        key: 'E',
+        ctrl: true,
+        shift: true
+      };
+
+      let allTools = [];
+      let devMode = false;
 
       const labels = {
         creators: 'Creators',
@@ -334,6 +360,13 @@
       function renderDirectory() {
         const grouped = new Map(Object.keys(labels).map((key) => [key, []]));
 
+      function visibleTools() {
+        return allTools.filter((tool) => devMode || !tool.isEngineTool);
+      }
+
+      function renderCategorizedTools() {
+        const grouped = new Map(Object.keys(labels).map((key) => [key, []]));
+
         visibleTools().forEach((tool) => {
           const key = grouped.has(tool.category) ? tool.category : 'misc';
           grouped.get(key).push(tool);
@@ -356,6 +389,17 @@
             return `
               <section aria-label="${label}">
                 <h3 class="section-heading" style="font-size:1.1rem; margin-top: 16px;">${label}</h3>
+                <article class="tool-card">
+                  <h3>${tool.name}</h3>
+                  <p>${tool.description || 'Standalone browser tool.'}</p>
+                  <div class="use-tip">Path: ${tool.entry}</div>
+                  <a class="btn" href="${tool.entry}">Open Tool</a>
+                </article>
+              `).join('');
+
+            return `
+              <section aria-label="${label}">
+                <h3>${label}</h3>
                 <div class="tools-grid">${cards}</div>
               </section>
             `;
@@ -364,6 +408,7 @@
 
         if (!container.innerHTML.trim()) {
           container.innerHTML = '<p class="section-sub">No additional tools are currently mapped.</p>';
+          container.innerHTML = '<p style="color: var(--muted);">No player-facing tools currently mapped.</p>';
         }
       }
 
@@ -371,6 +416,7 @@
         devMode = enabled;
         document.body.classList.toggle('dev-mode-active', devMode);
         renderDirectory();
+        renderCategorizedTools();
       }
 
       document.addEventListener('keydown', (event) => {
@@ -378,6 +424,9 @@
         const hotkey = keyMatches && event.ctrlKey === DEV_HOTKEY.ctrl && event.shiftKey === DEV_HOTKEY.shift;
         const tilde = event.key === '~' || event.code === 'Backquote';
         if (!hotkey && !tilde) return;
+
+        if (!hotkey && !tilde) return;
+
         event.preventDefault();
         setDevMode(!devMode);
       });
@@ -385,6 +434,7 @@
       allTools = await window.ToolRegistry.loadAll();
       updateFeaturedStarter();
       renderDirectory();
+      renderCategorizedTools();
     })();
   </script>
   <script src="router.js"></script>

@@ -20,6 +20,7 @@
     'simulation-runner',
     'player-signup',
     'orchard-profile-builder',
+    'starter-farm-generator',
     'root-strength-calculator',
     'trunk-growth-calculator',
     'fruit-yield-engine',
@@ -262,6 +263,7 @@
     const isEngineTool = (typeof override.isEngineTool === 'boolean')
       ? override.isEngineTool
       : inferEngineTool(meta, category, defaultEntry, id);
+    const isEngineTool = inferEngineTool(meta, category, defaultEntry, id);
     return {
       id,
       name: meta.name || id,
