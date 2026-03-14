@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Workflow Template Gallery — ViaDecide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#080a0f;--bg1:#0c0e15;--bg2:#10131c;--bg3:#161923;
+  --bd:rgba(255,255,255,0.07);--bd2:rgba(255,255,255,0.12);
+  --tx:#f0ede6;--tx2:#8a8fa8;--tx3:#454860;
+  --gold:#c8932a;--gold2:#e8a830;
+  --teal:#1a8c7d;--teal2:#22b4a0;
+  --sf:rgba(255,255,255,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;overflow-x:hidden}
+.hdr{padding:4rem 2.5rem 2rem;max-width:1200px;margin:0 auto;text-align:center}
+.h-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--teal2);margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
+.h-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:300;line-height:1;margin-bottom:1rem}
+.h-h1 em{font-style:italic;color:var(--gold)}
+.h-sub{font-size:.95rem;color:var(--tx2);max-width:500px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;padding:2rem 2.5rem 5rem;max-width:1200px;margin:0 auto}
+.t-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:1.5rem;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+.t-card:hover{transform:translateY(-4px);border-color:var(--gold2)}
+.t-cat{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;display:block}
+.t-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:.5rem;color:var(--tx)}
+.t-desc{font-size:.85rem;color:var(--tx2);line-height:1.5;margin-bottom:1.5rem;flex:1}
+.t-cta{display:inline-block;padding:.5rem 1rem;background:rgba(34,180,160,.1);color:var(--teal2);font-size:.75rem;font-weight:600;border-radius:8px;text-align:center;text-decoration:none;transition:background .2s}
+.t-cta:hover{background:rgba(34,180,160,.2)}
+@media(max-width:640px){
+  .hdr{padding:3rem 1.5rem 1.5rem}
+  .grid{padding:1.5rem 1.5rem 3rem}
+}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="h-eyebrow">◆ Template Gallery</div>
+  <h1 class="h-h1">Ready-to-use <em>Workflows</em></h1>
+  <p class="h-sub">Instantly clone and adapt structured AI workflows, logic grids, and prompt templates for your own use-cases.</p>
+</header>
+<main class="grid">
+  <div class="t-card">
+    <span class="t-cat">Content Creation</span>
+    <h3 class="t-name">Multi-Angle Essay</h3>
+    <p class="t-desc">A 4-step workflow that forces the AI to argue for, argue against, synthesize, and then write the final essay.</p>
+    <a href="#" class="t-cta">Use Template →</a>
+  </div>
+  <div class="t-card">
+    <span class="t-cat">Development</span>
+    <h3 class="t-name">UI Component Spec</h3>
+    <p class="t-desc">Structured generator for React/Tailwind component specs including variants, accessibility, and edge-cases.</p>
+    <a href="#" class="t-cta">Use Template →</a>
+  </div>
+  <div class="t-card">
+    <span class="t-cat">Product Management</span>
+    <h3 class="t-name">PRD to User Stories</h3>
+    <p class="t-desc">Converts a rough Product Requirements Document into granular, BDD-formatted Jira user stories.</p>
+    <a href="#" class="t-cta">Use Template →</a>
+  </div>
+  <div class="t-card">
+    <span class="t-cat">Marketing</span>
+    <h3 class="t-name">Landing Page Copy</h3>
+    <p class="t-desc">Generates hero copy, feature blocks, and CTA logic based on the Value Proposition Canvas.</p>
+    <a href="#" class="t-cta">Use Template →</a>
+  </div>
+</main>
+</body>
+</html>
