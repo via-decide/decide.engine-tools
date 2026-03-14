@@ -1,5 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
+  "mode": "live",
+  "branch": "simba/resume-improvement-for-via-decidedecideengine-to",
   "mode": "codex_then_claude",
   "branch": "simba/add-tetris-game-tool-in-toolstetris-game-with-co",
   "branch": "simba/add-color-palette-generator-tool-in-toolscolor-p",

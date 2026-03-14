@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Resume improvement for via-decide/decide.engine-tools
+
+CONSTRAINTS
+Preserve existing code; prefer additive changes.
 add tetris-game tool in tools/tetris-game/ with config.json index.html tool.js. Falling block puzzle, vanilla JS, standalone.
 add color-palette-generator tool in tools/color-palette-generator/ with config.json index.html tool.js. Generate harmonious color palettes from seed color.
 add flashcard-engine tool in tools/flashcard-engine/ with config.json index.html tool.js. Spaced repetition flashcards with JSON deck support.
