@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add speed-coding-challenge tool in tools/engine/speed-coding-challenge/ with config.json, index.html, tool.js. A timed interactive text-area puzzle simulating specialized branch work. Evaluates typing speed and basic syntax matching to generate high-quality seeds upon completion. Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
