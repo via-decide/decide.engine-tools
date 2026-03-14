@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
+Create employer-job-board tool in tools/engine/employer-job-board/ with config.json, index.html, tool.js. Allows recruiters to post specific 'market demands' (jobs) that require certain fruit types, branch specializations, and minimum trust scores. Vanilla JS, standalone interface.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
