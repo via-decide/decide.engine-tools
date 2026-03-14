@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-employer-job-board-tool-in-toolsengineemp
+Title: Create employer-job-board tool in tools/engine/employer-job-board/ wi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working employer-job-board tool linking market demand to player capabilities
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
