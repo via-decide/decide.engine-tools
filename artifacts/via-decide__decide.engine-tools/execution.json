@@ -1,8 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/add-json-formatter-tool-in-toolsjson-formatter-w",
-  "branch": "simba/add-regex-tester-tool-in-toolsregex-tester-with-",
+  "branch": "simba/add-memory-match-tool-in-toolsmemory-match-with-",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
