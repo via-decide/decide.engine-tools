@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-health-check-da
+Title: Add a new standalone tool called health-check-dashboard in tools/heal...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working health-check-dashboard tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-growth-milestone-engine-tool-in-toolsengineg
 Title: Add growth-milestone-engine tool in tools/engine/growth-milestone-eng...
 
