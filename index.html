@@ -72,6 +72,13 @@
     .tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.83rem;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
     .tab:hover{border-color:var(--border2);color:var(--text)}
     .tab.on{background:var(--leaf);border-color:var(--leaf);color:#0a1a0a}
+    .tools-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:-8px 0 16px}
+    .tools-meta{font-size:.78rem;color:var(--muted)}
+    .tools-toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .toggle-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.76rem;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+    .toggle-btn[aria-pressed='true']{border-color:var(--leaf);color:var(--leaf)}
+    .toggle-check{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.76rem;border:1px solid var(--border);padding:5px 9px;border-radius:999px}
+    .toggle-check input{accent-color:var(--leaf)}
 
     /* ── TOOL GRID ── */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px}
@@ -304,6 +311,16 @@
         <button class="tab" data-c="education">Students</button>
         <button class="tab" data-c="system">System</button>
       </div>
+      <div class="tools-controls">
+        <div class="tools-meta" id="featured-count">0 featured</div>
+        <div class="tools-toggles">
+          <button class="toggle-btn" id="sort-alpha-toggle" type="button" aria-pressed="true">Sort: A → Z</button>
+          <label class="toggle-check" for="include-engine-toggle">
+            <input id="include-engine-toggle" type="checkbox">
+            Include engine tools
+          </label>
+        </div>
+      </div>
       <div class="grid" id="all-grid">
         <div class="empty">Loading tools…</div>
       </div>
@@ -379,6 +396,9 @@
 <script src="ui/games.js"></script>
 <script src="ui/main-ui.js"></script>
 <script src="shared/tool-registry.js"></script>
+<script src="ui/utils/tools.js"></script>
+<script src="ui/main-ui.js"></script>
+<script src="ui/all-tools.js"></script>
 <script type="module">
 import { renderHomeSections } from "./ui/sections/render-sections.js";
 
