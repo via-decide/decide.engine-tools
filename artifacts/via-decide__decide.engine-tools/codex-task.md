@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Update orchard-router.js and global-theme.css to add view transitions. Before injecting new HTML into #game-stage, apply a CSS class .fade-out-scale to the old content. Wait for the transition duration, swap the innerHTML, and apply .fade-in-scale to the new content. If the browser supports the native document.startViewTransition() API, use that as the primary method for buttery smooth, morphing transitions between tools.
+
+CONSTRAINTS
+pure Vanilla JS and CSS; fallback smoothly if View Transitions API is not supported
 Create a new core script _assets/js/orchard-router.js. Implement a Vanilla JS SPA router that intercepts all <a href> clicks to internal tools. Prevent default navigation. Instead, use fetch() to get the target HTML, parse it, extract the contents of the .orchard-panel or main container, and inject it into a central <main id="game-stage"> in the root index.html. Execute any accompanying <script> tags safely.
 
 CONSTRAINTS

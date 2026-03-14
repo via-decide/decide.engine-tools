@@ -1,3 +1,9 @@
+Branch: simba/update-orchard-routerjs-and-global-themecss-to-a
+Title: Update orchard-router.js and global-theme.css to add view transitions...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working premium page transitions that make the standalone tools feel like a unified native app
 Branch: simba/create-a-new-core-script-assetsjsorchard-routerj
 Title: Create a new core script _assets/js/orchard-router.js. Implement a Va...
 
