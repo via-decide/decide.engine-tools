@@ -1,9 +1,9 @@
-Branch: simba/create-toolsenginestreet-food-event-deck-build-a
-Title: Create tools/engine/street-food-event-deck/. Build a logic intercepto...
+Branch: simba/create-toolsengineskin-street-food-theme-build-a
+Title: Create tools/engine/skin-street-food-theme/. Build a CSS/JS utility t...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: A content-swapping utility that injects culturally relevant, highly relatable daily swipe tasks specific to the Street Food Cart skin.
+- Goal: A dynamic styling script that instantly transforms the game's aesthetic into a vibrant, recognizable Indian street food color palette.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
