@@ -1,3 +1,5 @@
+Branch: simba/add-color-palette-generator-tool-in-toolscolor-p
+Title: add color-palette-generator tool in tools/color-palette-generator/ wi...
 Branch: simba/add-flashcard-engine-tool-in-toolsflashcard-engi
 Title: add flashcard-engine tool in tools/flashcard-engine/ with config.json...
 Branch: simba/add-json-formatter-tool-in-toolsjson-formatter-w
@@ -13,6 +15,7 @@ Title: add swot-analyzer tool in tools/swot-analyzer/ with config.json index...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working color-palette-generator tool with PR
 - Goal: working flashcard-engine tool with PR
 - Goal: working swot-analyzer tool with PR
 
