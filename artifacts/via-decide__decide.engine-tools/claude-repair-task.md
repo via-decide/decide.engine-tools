@@ -5,6 +5,8 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 add flashcard-engine tool in tools/flashcard-engine/ with config.json index.html tool.js. Spaced repetition flashcards with JSON deck support.
+add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
+add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
 
 RULES
 1. Audit touched files first and identify regressions.

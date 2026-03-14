@@ -1,5 +1,13 @@
 Branch: simba/add-flashcard-engine-tool-in-toolsflashcard-engi
 Title: add flashcard-engine tool in tools/flashcard-engine/ with config.json...
+Branch: simba/add-json-formatter-tool-in-toolsjson-formatter-w
+Title: add json-formatter tool in tools/json-formatter/ with config.json ind...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working json-formatter tool with PR
+Branch: simba/add-regex-tester-tool-in-toolsregex-tester-with-
+Title: add regex-tester tool in tools/regex-tester/ with config.json index.h...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools

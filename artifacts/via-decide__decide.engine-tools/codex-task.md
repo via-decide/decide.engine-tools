@@ -2,6 +2,8 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 add flashcard-engine tool in tools/flashcard-engine/ with config.json index.html tool.js. Spaced repetition flashcards with JSON deck support.
+add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
+add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js
