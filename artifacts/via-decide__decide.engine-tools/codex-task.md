@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/root-challenge-view/. Build a player-facing UI for the "Root Challenge". Focus the visual hierarchy on "Root Strength" gain over the current week. Render a line chart or visual growth indicator comparing the player's local root progression against a simulated average competitor score. Read state from server-tournament-engine.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; avoid external chart libraries if possible (use simple HTML/CSS bar graphs).
 Create tools/engine/harvest-race-view/. Build a player-facing UI specific to the "Harvest Race" tournament. Display a simulated global leaderboard reading from orchard_engine_mock_leaderboard. Emphasize the player's current "Fruit Output" metric. Provide real-time UI feedback (progress bars, rank changes) by listening to updates from the server-tournament-engine.
 
 CONSTRAINTS

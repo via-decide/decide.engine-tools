@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineroot-challenge-view-build-a-pl
+Title: Create tools/engine/root-challenge-view/. Build a player-facing UI fo...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A focused tournament view tracking and visualizing deep foundational growth metrics against global competitors.
 Branch: simba/create-toolsengineharvest-race-view-build-a-play
 Title: Create tools/engine/harvest-race-view/. Build a player-facing UI spec...
 

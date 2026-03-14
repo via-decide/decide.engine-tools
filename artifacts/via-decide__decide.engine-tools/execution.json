@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-toolsengineroot-challenge-view-build-a-pl",
   "branch": "simba/create-toolsengineharvest-race-view-build-a-play",
   "branch": "simba/create-toolsengineskin-selector-ui-build-a-playe",
   "branch": "simba/create-toolsengineskin-pack-manager-build-a-head",
