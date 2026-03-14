@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add llm-action-parser tool in tools/engine/llm-action-parser/ with config.json, index.html, tool.js. Backend testing UI that accepts plain-text real-world actions (e.g., "Read React docs"). Simulates the 4-pipeline logic (Absorption, Consolidation, Specialization, Yield) to generate a strict JSON payload mapping the action to game stat changes (Root increase, Water cost). Vanilla JS.
 Add growth-milestone-engine tool in tools/engine/growth-milestone-engine/ with config.json, index.html, tool.js. Listens for the first successful LLM validation payload (Pipeline 1) and triggers the visual/state change from "Dormant Seed" to "Sprout". Updates UI state and unlocks further trunk growth. Vanilla JS.
 Add daily-weather-replenisher tool in tools/engine/daily-weather-replenisher/ with config.json, index.html, tool.js. Simulates the 24-hour real-world cycle. Restores the player's Water (energy) supply to a baseline maximum based on their Soil and Root level to prevent volume-spamming. Vanilla JS logic testing dashboard.
 Add genesis-seed-initializer tool in tools/engine/genesis-seed-initializer/ with config.json, index.html, tool.js. Interface for new players to receive an ID and select their "Soil" (industry/domain). Initializes the player profile in localStorage with 0 roots, 10 starting Water, and "Dormant Seed" status. Vanilla JS, UI based on global-theme.css.
