@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
+Add llm-action-parser tool in tools/engine/llm-action-parser/ with config.json, index.html, tool.js. Backend testing UI that accepts plain-text real-world actions (e.g., "Read React docs"). Simulates the 4-pipeline logic (Absorption, Consolidation, Specialization, Yield) to generate a strict JSON payload mapping the action to game stat changes (Root increase, Water cost). Vanilla JS.
 
 RULES
 1. Audit touched files first and identify regressions.
