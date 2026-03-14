@@ -1,3 +1,9 @@
+Branch: simba/add-toolsgamestyping-speed-with-configjson-index
+Title: add tools/games/typing-speed/ with config.json index.html tool.js - v...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working typing test, standalone
 Branch: simba/add-toolsgamesmemory-match-with-configjson-index
 Title: add tools/games/memory-match/ with config.json index.html tool.js - v...
 

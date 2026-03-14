@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
+
+CONSTRAINTS
+edit tools/games/typing-speed/ only; no frameworks; no shared file changes
 add tools/games/memory-match/ with config.json index.html tool.js - vanilla JS card flip memory game with 16 cards, move counter, timer, win detection, saves best time to localStorage key orchard_engine_memory_best
 
 CONSTRAINTS
