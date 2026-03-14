@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-resource-optimization-puzzle-tool-in-toolsen
+Title: Add resource-optimization-puzzle tool in tools/engine/resource-optimi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working resource-optimization-puzzle tool that tests spatial and resource management skills
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
