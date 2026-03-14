@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
+add tetris-game tool in tools/tetris-game/ with config.json index.html tool.js. Falling block puzzle, vanilla JS, standalone.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js
