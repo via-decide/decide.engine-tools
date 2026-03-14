@@ -1,8 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
-add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
+add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js
