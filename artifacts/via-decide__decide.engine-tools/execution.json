@@ -1,9 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/improve-repository-via-decidedecideengine-tools",
-  "mode": "claude_repair",
-  "branch": "simba/review-repair-validate-and-push-the-new-standalo",
+  "branch": "simba/add-snake-game-tool-in-toolssnake-game-with-conf",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
