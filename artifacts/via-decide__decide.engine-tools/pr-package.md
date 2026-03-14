@@ -1,9 +1,9 @@
-Branch: simba/add-seed-quality-scorer-tool-in-toolsengineseed-
-Title: Add seed-quality-scorer tool in tools/engine/seed-quality-scorer/ wit...
+Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
+Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that evaluates and scores knowledge contributions
+- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
