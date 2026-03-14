@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
+add tetris-game tool in tools/tetris-game/ with config.json index.html tool.js. Falling block puzzle, vanilla JS, standalone.
 
 RULES
 1. Audit touched files first and identify regressions.
