@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-okr-planner-in-
+Title: Add a new standalone tool called okr-planner in tools/okr-planner/. T...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working okr-planner tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-swot-analyzer-i
 Title: Add a new standalone tool called swot-analyzer in tools/swot-analyzer...
 
