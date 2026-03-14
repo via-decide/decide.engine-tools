@@ -5,6 +5,32 @@ Create tools/engine/live-event-scheduler/. Build a Vanilla JS admin dashboard to
 
 CONSTRAINTS
 pure Vanilla JS; standalone execution; do not modify existing tools; use standard Orchard CSS variables.
+Create tools/engine/server-tournament-engine/. Build a headless Vanilla JS logic controller that listens for engine:events_updated and polls the current time. If an event of type 'tournament' is active (Harvest Race, Root Challenge, Seed Auction, Pest Hunt, Water Trial), it reads local player progression via localStorage.getItem('orchard_engine_player_state') and simulates submitting scores to a mock global leaderboard (localStorage.getItem('orchard_engine_mock_leaderboard')). Dispatch engine:tournament_started and engine:tournament_ended (with payload {rank, reward}).
+
+CONSTRAINTS
+pure Vanilla JS; no UI rendering; standalone background execution; do not modify existing game loop.
+Create tools/engine/server-boss-engine/. Build a headless Vanilla JS logic controller handling collective challenges (The Blight, The Drought, Locust King, The Frost). It must listen for player action events (e.g., engine:research_completed, engine:pest_cleared) and incrementally update a mock global progress counter stored in localStorage.getItem('orchard_engine_boss_progress'). It must evaluate if the targetGoal from the active event is reached within the timeframe and dispatch engine:boss_defeated or engine:boss_failed.
+Add a new standalone tool called memory-match in tools/games/memory-match/. Title: "Memory Match". Description: "Card flip memory game with scoring and timer.". Category: "games". The tool must contain: config.json, index.html, tool.js. The game must run in browser, use vanilla JS, have simple UI, no external frameworks. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
+Add a new standalone tool called pricing-calculator in tools/pricing-calculator/. Title: "Pricing Calculator". Description: "Compare pricing models: freemium, tiered, usage-based.". Category: "business". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
+Add a new standalone tool called okr-planner in tools/okr-planner/. Title: "OKR Planner". Description: "Define objectives and key results with progress tracking.". Category: "business". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
+Add a new standalone tool called swot-analyzer in tools/swot-analyzer/. Title: "SWOT Analyzer". Description: "Structured SWOT analysis with export.". Category: "business". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
+Create candidate-comparison-view tool in tools/engine/candidate-comparison-view/ with config.json, index.html, tool.js. Enables recruiters to select multiple players and visually compare their root fundamentals, branch depth, trust scores, and fruit yields side-by-side. Vanilla JS, standalone UI.
+Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.js. Rewrite the "Magnetic Button" logic to use GSAP's gsap.to() for buttery-smooth spring physics instead of native CSS transitions. Also, create a GSAP timeline function to trigger the "Shimmering Text" and "Glowing Border" evolution alerts in the growth-milestone-engine.
+
+CONSTRAINTS
+pure Vanilla JS; no UI rendering; standalone execution; decouple logic from specific tool implementations.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
