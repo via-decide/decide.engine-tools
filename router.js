@@ -1,204 +1,597 @@
-(() => {
+/**
+ * ViaDecide Router — VDRouter v3.0
+ * ════════════════════════════════════════════════════════════
+ * SPA router for the ViaDecide modular platform.
+ *
+ * Features:
+ *  · pushState routing  — URL updates on every navigation
+ *  · popstate handler   — browser back/forward works correctly
+ *  · Modal overlay nav  — tools open in iframe modal, URL synced
+ *  · Dynamic module load — fetches /modules/*.html into #app
+ *  · GitHub Pages 404   — sessionStorage redirect restore
+ *  · Prefetch on hover  — <link rel="prefetch"> for speed
+ *  · Event bus          — VDRouter.on() / VDRouter.emit()
+ *  · Full routesMap     — all ViaDecide slugs registered
+ *
+ * Backward-compatible API surface (same as v2):
+ *  VDRouter.go(slug, options)
+ *  VDRouter.openOverlay(file, options)
+ *  VDRouter.resolve(slugOrPath)
+ *  VDRouter.prefetch(slug)
+ *  VDRouter.routes()
+ *  VDRouter.on(event, cb)
+ *  VDRouter.emit(event, data)
+ *  VDRouter.bindLinks()
+ *  VDRouter.init()
+ *
+ * New in v3:
+ *  VDRouter.navigate(path, push)   — raw SPA navigate
+ *  VDRouter.back()                 — history.back() w/ fallback
+ *  VDRouter.current()              — current route string
+ * ════════════════════════════════════════════════════════════
+ */
+
+(function (global) {
   'use strict';
 
-  /* ── Navigation (scroll-based sections on index.html) ── */
-  const navLinks = [...document.querySelectorAll('[data-route]')];
-  const sections = [...document.querySelectorAll('main section[id]')];
-
-  const legacyToolPathMap = {
-    promptalchemy: 'tools/promptalchemy/index.html',
-    'script-generator': 'tools/script-generator/index.html',
-    'spec-builder': 'tools/spec-builder/index.html',
-    'code-generator': 'tools/code-generator/index.html',
-    'code-reviewer': 'tools/code-reviewer/index.html',
-    'tool-router': 'tools/tool-router/index.html',
-    'export-studio': 'tools/export-studio/index.html',
-    'template-vault': 'tools/template-vault/index.html'
+  /* ══════════════════════════════════════════════════════════
+   * ROUTE REGISTRY
+   * Maps slug → HTML file (relative to site root, no leading /)
+   * ══════════════════════════════════════════════════════════ */
+  var routesMap = {
+    // Decision Tools
+    'alchemist':                      'alchemist.html',
+    'memory':                         'memory.html',
+    'prompt-alchemy':                 'prompt-alchemy.html',
+    'viaguide':                       'ViaGuide.html',
+    'studyos':                        'StudyOS.html',
+    'brief':                          'brief.html',
+    'student-research':               'student-research.html',
+    'app-generator':                  'app-generator.html',
+    'agent':                          'agent.html',
+    'swipeos':                        'SwipeOS.html',
+    'swipeos-gandhidham':             'SwipeOS-gandhidham.html',
+    'interview-prep':                 'interview-prep.html',
+    'sales-dashboard':                'sales-dashboard.html',
+    'finance-dashboard-msme':         'finance-dashboard-msme.html',
+    'payment-register':               'payment-register.html',
+    'laptops-under-50000':            'laptops-under-50000.html',
+    // Commerce
+    'ondc-demo':                      'ONDC-demo.html',
+    'engine-deals':                   'engine-deals.html',
+    'discounts':                      'discounts.html',
+    'cashback-rules':                 'cashback-rules.html',
+    'cashback-claim':                 'cashback-claim.html',
+    // Games & Sims
+    'hexwars':                        'HexWars.html',
+    'wings-of-fire-quiz':             'wings-of-fire-quiz.html',
+    'mars-rover-simulator-game':      'mars-rover-simulator-game.html',
+    'hivaland':                       'HivaLand.html',
+    // Services
+    'decide-service':                 'decide-service.html',
+    'decide-foodrajkot':              'decide-foodrajkot.html',
+    'engine-license':                 'engine-license.html',
+    'cohort-apply-here':              'cohort-apply-here.html',
+    'customswipeengineform':          'CustomSwipeEngineForm.html',
+    'pricing':                        'pricing.html',
+    'engine-activation-request':      'Engine Activation Request.html',
+    // Store
+    'printbydd-store':                'printbydd-store/index.html',
+    'numberplate':                    'printbydd-store/numberplate.html',
+    'keychain':                       'printbydd-store/keychain.html',
+    'gifts-that-mean-more':           'printbydd-store/gifts-that-mean-more.html',
+    'smarttag-lite':                  'printbydd-store/smarttag-lite.html',
+    'products':                       'printbydd-store/products.html',
+    'gift-psychology':                'printbydd-store/gift-psychology.html',
+    // Blog & Content
+    'viadecide-blogs':                'Viadecide-blogs.html',
+    'the-decision-stack':             'The Decision Stack.html',
+    'decision-infrastructure-india':  'decision-infrastructure-india.html',
+    'ondc-for-bharat':                'ondc-for-bharat.html',
+    'indiaai-mission-2025':           'indiaai-mission-2025.html',
+    'multi-source-research-explained':'multi-source-research-explained.html',
+    'decision-brief-guide':           'decision-brief-guide.html',
+    'viadecide-public-beta':          'viadecide-public-beta.html',
+    'decision-brief':                 'decision-brief.html',
+    // Finance
+    'jalaram-food-court-rajkot':      'Jalaram-food-court-rajkot.html',
+    // Personal
+    'dharamdaxini':                   'DharamDaxini/index.html',
+    'dharamdaxini-legacy':            'DharamDaxini.html',
+    'founder':                        'founder.html',
+    // Utility
+    'contact':                        'contact.html',
+    'privacy':                        'privacy.html',
+    'terms':                          'terms.html',
+    'workflow-template-gallery':      'workflow-template-gallery.html',
   };
 
-  const setActive = (id) => {
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('data-route') === id);
+  /* Module metadata — icon + display name per slug */
+  var moduleMetaMap = {
+    'alchemist':                      { icon: '✨', name: 'Alchemist' },
+    'memory':                         { icon: '🧠', name: 'Memory Engine' },
+    'prompt-alchemy':                 { icon: '⚗️', name: 'Prompt Alchemy' },
+    'viaguide':                       { icon: '📚', name: 'ViaGuide' },
+    'studyos':                        { icon: '📖', name: 'StudyOS' },
+    'brief':                          { icon: '📋', name: 'Decision Brief' },
+    'student-research':               { icon: '🔬', name: 'Student Research' },
+    'app-generator':                  { icon: '🔧', name: 'App Generator' },
+    'agent':                          { icon: '✦',  name: 'ViaDecide Agent' },
+    'swipeos':                        { icon: '👆', name: 'SwipeOS' },
+    'ondc-demo':                      { icon: '🛒', name: 'ONDC Demo' },
+    'engine-deals':                   { icon: '🤝', name: 'Engine Deals' },
+    'discounts':                      { icon: '🏷️', name: 'Discounts Hub' },
+    'cashback-rules':                 { icon: '💸', name: 'Cashback Rules' },
+    'cashback-claim':                 { icon: '🧾', name: 'Cashback Claim' },
+    'hexwars':                        { icon: '⬡',  name: 'HexWars' },
+    'wings-of-fire-quiz':             { icon: '🔥', name: 'Wings of Fire Quiz' },
+    'mars-rover-simulator-game':      { icon: '🚀', name: 'Mars Rover' },
+    'hivaland':                       { icon: '🌍', name: 'HivaLand' },
+    'decide-service':                 { icon: '🎯', name: 'Decide.Service' },
+    'decide-foodrajkot':              { icon: '🍽️', name: 'Decide Food · Rajkot' },
+    'engine-license':                 { icon: '⚙️', name: 'Engine License' },
+    'cohort-apply-here':              { icon: '🧪', name: 'Cohort Program' },
+    'pricing':                        { icon: '💰', name: 'Pricing' },
+    'engine-activation-request':      { icon: '⚡', name: 'Engine Activation' },
+    'printbydd-store':                { icon: '🛍️', name: 'PrintByDD Store' },
+    'numberplate':                    { icon: '🚗', name: 'Numberplates' },
+    'keychain':                       { icon: '🔑', name: 'NFC Keychains' },
+    'gifts-that-mean-more':           { icon: '🎁', name: 'Gifts That Mean More' },
+    'smarttag-lite':                  { icon: '📲', name: 'SmartTag Lite' },
+    'products':                       { icon: '🛍️', name: 'All Products' },
+    'viadecide-blogs':                { icon: '✍️', name: 'ViaDecide Blogs' },
+    'the-decision-stack':             { icon: '📚', name: 'The Decision Stack' },
+    'decision-infrastructure-india':  { icon: '🏛️', name: 'Decision Infrastructure' },
+    'ondc-for-bharat':                { icon: '🇮🇳', name: 'ONDC for Bharat' },
+    'indiaai-mission-2025':           { icon: '🤖', name: 'IndiaAI Mission 2025' },
+    'multi-source-research-explained':{ icon: '🔍', name: 'Multi-Source Research' },
+    'decision-brief-guide':           { icon: '📋', name: 'Build a Policy Brief' },
+    'viadecide-public-beta':          { icon: '🚀', name: 'Public Beta' },
+    'decision-brief':                 { icon: '🏗️', name: 'Decision Architecture' },
+    'finance-dashboard-msme':         { icon: '💰', name: 'FinTrack Dashboard' },
+    'sales-dashboard':                { icon: '📊', name: 'MSME Sales Dashboard' },
+    'payment-register':               { icon: '👥', name: 'Payroll Register' },
+    'interview-prep':                 { icon: '🎤', name: 'Interview Simulator' },
+    'jalaram-food-court-rajkot':      { icon: '🍽️', name: 'Jalaram Food Court' },
+    'dharamdaxini':                   { icon: '🧭', name: 'Dharam Daxini · 1:1' },
+    'founder':                        { icon: '👤', name: 'Founder' },
+    'contact':                        { icon: '✉️', name: 'Contact' },
+    'privacy':                        { icon: '🔒', name: 'Privacy' },
+    'terms':                          { icon: '📄', name: 'Terms' },
+    'laptops-under-50000':            { icon: '💻', name: 'Laptops Under ₹50,000' },
+    'customswipeengineform':          { icon: '👆', name: 'Custom Swipe Engine' },
+    'hivaland':                       { icon: '🌍', name: 'HivaLand' },
+  };
+
+  /* ══════════════════════════════════════════════════════════
+   * INTERNAL STATE
+   * ══════════════════════════════════════════════════════════ */
+  var _events           = {};
+  var _prefetched       = {};
+  var _currentRoute     = null;
+  var _originalCloseModal = null;
+  var _isNavigating     = false;
+
+  /* ══════════════════════════════════════════════════════════
+   * EVENT BUS
+   * ══════════════════════════════════════════════════════════ */
+  function on(event, cb) {
+    if (!_events[event]) _events[event] = [];
+    _events[event].push(cb);
+  }
+
+  function emit(event, data) {
+    var handlers = _events[event];
+    if (handlers) handlers.forEach(function (cb) { cb(data); });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * ROUTE RESOLUTION
+   * ══════════════════════════════════════════════════════════ */
+  function resolve(pathOrSlug) {
+    if (!pathOrSlug) return '';
+    var clean = pathOrSlug.replace(/^\/+|\/+$/g, '');
+    var lowerSlug = clean.toLowerCase()
+      .replace(/\.html?$/i, '')
+      .replace(/\/index$/i, '');
+    if (routesMap[lowerSlug]) return routesMap[lowerSlug];
+    if (clean.endsWith('.html') || clean.endsWith('.htm')) return clean;
+    if (clean.endsWith('/index')) return clean + '.html';
+    if (clean.indexOf('/') === -1) return clean + '.html';
+    return clean + '/index.html';
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * PREFETCH
+   * ══════════════════════════════════════════════════════════ */
+  function prefetch(slug) {
+    var file = resolve(slug);
+    if (!file || _prefetched[file]) return;
+    _prefetched[file] = true;
+    var link = document.createElement('link');
+    link.rel  = 'prefetch';
+    link.href = file;
+    link.as   = 'document';
+    document.head.appendChild(link);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * openOverlay() — open a file in the iframe modal
+   * ══════════════════════════════════════════════════════════ */
+  function openOverlay(file, options) {
+    options = options || {};
+    var icon = '🔬';
+    var name = 'Tool';
+
+    if (options.title) {
+      var t = options.title;
+      var thinIdx = t.indexOf('\u2009');
+      if (thinIdx !== -1) {
+        icon = t.slice(0, thinIdx);
+        name = t.slice(thinIdx + 1);
+      } else {
+        var match = t.match(/^([\uD800-\uDBFF][\uDC00-\uDFFF]|\S)\s*(.*)/);
+        if (match) { icon = match[1]; name = match[2]; }
+        else        { name = t; }
+      }
+    }
+
+    // Sync URL
+    var url = new URL(window.location.href);
+    url.searchParams.delete('m');
+    url.searchParams.set('m', encodeURIComponent(file));
+
+    var curState = window.history.state;
+    if (!curState || curState.file !== file) {
+      window.history.pushState({ modalOpen: true, file: file, icon: icon, name: name }, '', url.toString());
+    }
+
+    _currentRoute = file;
+
+    if (typeof window._modalSetup === 'function') {
+      window._modalSetup(file, icon, name);
+    }
+
+    emit('routechange', { type: 'overlay', file: file, icon: icon, name: name });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * go() — primary public navigation function
+   * ══════════════════════════════════════════════════════════ */
+  function go(slug, options) {
+    options = options || {};
+    var file = resolve(slug);
+
+    if (options.overlay) {
+      if (!options.title) {
+        var meta = moduleMetaMap[slug.toLowerCase()];
+        if (meta) options.title = meta.icon + '\u2009' + meta.name;
+        else       options.title = slug.replace(/-/g, ' ');
+      }
+      openOverlay(file, options);
+    } else {
+      window.location.href = file;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * navigate() — SPA pushState navigation (v3 new)
+   * Loads /modules/<slug>.html into #app if available,
+   * otherwise opens as overlay modal.
+   * ══════════════════════════════════════════════════════════ */
+  function navigate(path, push) {
+    if (push === undefined) push = true;
+    if (_isNavigating) return;
+
+    var slug = (path || '').replace(/^\/+/, '').toLowerCase();
+    if (!slug) return;
+
+    _isNavigating = true;
+    _currentRoute = '/' + slug;
+
+    if (push) {
+      window.history.pushState({ route: slug }, '', '/' + slug);
+    }
+
+    var moduleFile = 'modules/' + slug + '.html';
+
+    _fetchModule(moduleFile, function (html) {
+      if (html !== null) {
+        var mount = document.getElementById('app');
+        if (mount) _mountHTML(mount, html);
+      } else {
+        // No static module file — fall back to overlay modal
+        var meta = moduleMetaMap[slug] || {};
+        var file = resolve(slug);
+        openOverlay(file, {
+          title: (meta.icon || '🔬') + '\u2009' + (meta.name || slug.replace(/-/g, ' '))
+        });
+      }
+      emit('routechange', { type: 'navigate', path: '/' + slug, slug: slug });
+      _isNavigating = false;
     });
-  };
+  }
 
-  const goToRoute = (id) => {
-    const section = document.getElementById(id);
-    if (!section) return;
-    history.replaceState(null, '', `#${id}`);
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setActive(id);
-  };
+  function _fetchModule(url, cb) {
+    if (typeof fetch === 'undefined') { cb(null); return; }
+    fetch(url)
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (html) { cb(html); })
+      .catch(function () { cb(null); });
+  }
 
-  const resolveToolPath = (toolRef) => {
-    if (!toolRef) return null;
-  /* ── Complete tool path map ── */
+  function _mountHTML(el, html) {
+    el.style.transition = 'opacity 100ms ease, transform 100ms ease';
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(6px)';
+    setTimeout(function () {
+      el.innerHTML = html;
+      _executeScripts(el);
+      el.style.opacity   = '1';
+      el.style.transform = 'translateY(0)';
+    }, 110);
+  }
 
-  /* Root-level standalone tools */
-  const rootTools = {
-    'agent':                             'agent/index.html',
-    'app-generator':                     'app-generator/index.html',
-    'decision-brief-guide':              'decision-brief-guide/index.html',
-    'founder':                           'founder/index.html',
-    'interview-prep':                    'interview-prep/index.html',
-    'multi-source-research-explained':   'multi-source-research-explained/index.html',
-    'prompt-alchemy-main':               'prompt-alchemy/index.html',
-    'prompt-alchemy':                    'prompt-alchemy/index.html',
-    'sales-dashboard':                   'sales-dashboard/index.html',
-    'student-research':                  'student-research/index.html',
-    'wings-of-fire-quiz':                'wings-of-fire-quiz/index.html'
-  };
+  function _executeScripts(container) {
+    var scripts = Array.prototype.slice.call(container.querySelectorAll('script'));
+    scripts.forEach(function (old) {
+      var n = document.createElement('script');
+      var attrs = Array.prototype.slice.call(old.attributes);
+      attrs.forEach(function (a) { n.setAttribute(a.name, a.value); });
+      n.textContent = old.textContent;
+      old.parentNode.replaceChild(n, old);
+    });
+  }
 
-  /* Modular tools under tools/ */
-  const modularTools = {
-    'promptalchemy':                     'tools/promptalchemy/index.html',
-    'script-generator':                  'tools/script-generator/index.html',
-    'spec-builder':                      'tools/spec-builder/index.html',
-    'code-generator':                    'tools/code-generator/index.html',
-    'code-reviewer':                     'tools/code-reviewer/index.html',
-    'tool-router':                       'tools/tool-router/index.html',
-    'export-studio':                     'tools/export-studio/index.html',
-    'template-vault':                    'tools/template-vault/index.html'
-  };
+  /* ══════════════════════════════════════════════════════════
+   * back() / current() / routes()
+   * ══════════════════════════════════════════════════════════ */
+  function back() {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = 'index.html';
+  }
 
-  /* Engine tools under tools/engine/ */
-  const engineTools = {
-    'player-signup':                     'tools/engine/player-signup/index.html',
-    'orchard-profile-builder':           'tools/engine/orchard-profile-builder/index.html',
-    'starter-farm-generator':            'tools/engine/starter-farm-generator/index.html',
-    'root-strength-calculator':          'tools/engine/root-strength-calculator/index.html',
-    'trunk-growth-calculator':           'tools/engine/trunk-growth-calculator/index.html',
-    'fruit-yield-engine':                'tools/engine/fruit-yield-engine/index.html',
-    'daily-quest-generator':             'tools/engine/daily-quest-generator/index.html',
-    'weekly-harvest-engine':             'tools/engine/weekly-harvest-engine/index.html',
-    'thirty-day-promotion-engine':       'tools/engine/thirty-day-promotion-engine/index.html',
-    'fair-ranking-engine':               'tools/engine/fair-ranking-engine/index.html',
-    'seed-exchange':                     'tools/engine/seed-exchange/index.html',
-    'fruit-sharing':                     'tools/engine/fruit-sharing/index.html',
-    'circle-builder':                    'tools/engine/circle-builder/index.html',
-    'peer-validation-engine':            'tools/engine/peer-validation-engine/index.html',
-    'trust-score-engine':                'tools/engine/trust-score-engine/index.html',
-    'recruiter-dashboard':               'tools/engine/recruiter-dashboard/index.html',
-    'orchard-discovery-search':          'tools/engine/orchard-discovery-search/index.html',
-    'hire-readiness-scorer':             'tools/engine/hire-readiness-scorer/index.html',
-    'four-direction-pipeline':           'tools/engine/four-direction-pipeline/index.html',
-    'growth-path-recommender':           'tools/engine/growth-path-recommender/index.html',
-    'ai-coach-console':                  'tools/engine/ai-coach-console/index.html',
-    'simulation-runner':                 'tools/engine/simulation-runner/index.html',
-    'meta-health-dashboard':             'tools/engine/meta-health-dashboard/index.html',
-    'synthetic-player-generator':        'tools/engine/synthetic-player-generator/index.html',
-    'wave1-simulation-runner':           'tools/engine/wave1-simulation-runner/index.html',
-    'balance-dashboard':                 'tools/engine/balance-dashboard/index.html'
-  };
+  function current() { return _currentRoute; }
+  function routes()  { return routesMap; }
 
-  /* Merged lookup table */
-  const allToolPaths = Object.assign({}, rootTools, modularTools, engineTools);
+  /* ══════════════════════════════════════════════════════════
+   * bindLinks() — wire <a data-router> elements
+   * ══════════════════════════════════════════════════════════ */
+  function bindLinks() {
+    document.querySelectorAll('a[data-router]').forEach(function (el) {
+      if (el._routerBound) return;
+      el._routerBound = true;
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        var slug = el.getAttribute('href').replace(/^\/+/, '');
+        var isOverlay = el.hasAttribute('data-overlay');
+        go(slug, { overlay: isOverlay });
+      });
+    });
+  }
 
-  /* ── Tool path resolution ── */
-  const resolveToolPath = (toolRef) => {
-    if (!toolRef) return null;
+  /* ══════════════════════════════════════════════════════════
+   * POPSTATE — back/forward button handler
+   * ══════════════════════════════════════════════════════════ */
+  function _handlePopState() {
+    window.addEventListener('popstate', function (e) {
+      var state = e.state || {};
 
-    /* Direct path: if it contains a slash, treat as literal path */
-    if (toolRef.includes('/')) {
-      return toolRef.endsWith('.html') ? toolRef : `${toolRef}/index.html`;
+      if (state.modalOpen) {
+        // Forward nav: re-open the modal
+        if (typeof window._modalSetup === 'function') {
+          window._modalSetup(state.file, state.icon || '🔬', state.name || '');
+        }
+      } else if (state.route) {
+        // SPA navigate forward
+        navigate(state.route, false);
+      } else {
+        // Back out of modal: close it
+        var closeFn = _originalCloseModal || global.closeModal;
+        if (typeof closeFn === 'function') {
+          closeFn();
+        } else {
+          var modal = document.getElementById('modal');
+          if (modal) {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(function () {
+              var frame = document.getElementById('modal-frame');
+              if (frame) { frame.src = 'about:blank'; frame.style.display = 'block'; }
+              var err = document.getElementById('modal-err');
+              if (err) err.classList.remove('show');
+            }, 400);
+          }
+        }
+        // Clean ?m= from URL
+        var url = new URL(window.location.href);
+        if (url.searchParams.has('m')) {
+          url.searchParams.delete('m');
+          var search = url.search && url.search !== '?' ? url.search : '';
+          window.history.replaceState({ modalOpen: false }, '', url.pathname + search);
+        }
+      }
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * postMessage listener — receives VD_CLOSE_MODAL from iframe
+   * subpages (sent by vd-nav-fix.js when user clicks Back/Close)
+   * ══════════════════════════════════════════════════════════ */
+  function _handleIframeMessages() {
+    window.addEventListener('message', function (e) {
+      if (!e.data || typeof e.data !== 'object') return;
+
+      if (e.data.type === 'VD_CLOSE_MODAL') {
+        // Trigger close via the hooked closeModal() so history stays in sync
+        var closeFn = global.closeModal || _originalCloseModal;
+        if (typeof closeFn === 'function') {
+          closeFn();
+        } else {
+          // Bare fallback
+          var modal = document.getElementById('modal');
+          if (modal) {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+          if (window.history.state && window.history.state.modalOpen) {
+            window.history.back();
+          }
+        }
+      }
+
+      if (e.data.type === 'VD_HOME') {
+        // Navigate to index, closing any open modal first
+        var closeFn2 = global.closeModal || _originalCloseModal;
+        if (typeof closeFn2 === 'function') closeFn2();
+        window.location.href = 'index.html';
+      }
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+   * GitHub Pages 404 redirect restore
+   * ══════════════════════════════════════════════════════════ */
+  function _handle404Redirect() {
+    // Never run inside an iframe — prevents sessionStorage feedback loops
+    try { if (window.self !== window.top) return; } catch (e) { return; }
+    try {
+      var rp = sessionStorage.getItem('__vd_redirect__');
+      if (!rp) return;
+      sessionStorage.removeItem('__vd_redirect__');
+
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('m')) return;
+
+      var slug = rp.replace(/^\/+|\/+$/g, '').split('/')[0];
+      if (!slug) return;
+
+      var meta  = moduleMetaMap[slug] || {};
+      var title = (meta.icon || '🔬') + '\u2009' + (meta.name || slug.replace(/-/g, ' '));
+
+      setTimeout(function () { go(slug, { overlay: true, title: title }); }, 200);
+    } catch (e) {}
+  }
+
+  /* Handle ?m= direct URL visits (bookmarks, shared links) */
+  function _handleModalParam() {
+    // Never run inside an iframe — the modal lives only on the top frame
+    try { if (window.self !== window.top) return; } catch (e) { return; }
+    var url    = new URL(window.location.href);
+    var mParam = url.searchParams.get('m');
+
+    if (!mParam) {
+      window.history.replaceState({ modalOpen: false }, '', window.location.href);
+      return;
     }
 
-    if (legacyToolPathMap[toolRef]) return legacyToolPathMap[toolRef];
+    var decodedFile = decodeURIComponent(mParam);
+    var slug  = decodedFile.replace(/\.html?$/i, '').replace(/^\/+/, '').split('/')[0];
+    var meta  = moduleMetaMap[slug] || {};
 
-    /* Exact match in static map */
-    if (allToolPaths[toolRef]) return allToolPaths[toolRef];
+    setTimeout(function () {
+      if (typeof window._modalSetup === 'function') {
+        window._modalSetup(decodedFile, meta.icon || '🔬', meta.name || 'ViaDecide Tool');
+      }
+      window.history.replaceState(
+        { modalOpen: true, file: decodedFile, icon: meta.icon || '🔬', name: meta.name || 'ViaDecide Tool' },
+        '',
+        window.location.href
+      );
+    }, 300);
+  }
 
-    /* Async fallback to registry */
-    if (globalThis.ToolRegistry && typeof globalThis.ToolRegistry.findById === 'function') {
-      return globalThis.ToolRegistry.findById(toolRef).then((tool) => tool?.entry || null);
+  /* ══════════════════════════════════════════════════════════
+   * Prefetch wiring — hover over cards
+   * ══════════════════════════════════════════════════════════ */
+  function _wirePrefetch() {
+    function _prefetchFromEl(el) {
+      var oc   = el.getAttribute('onclick') || '';
+      var href = el.getAttribute('href')    || '';
+
+      var m1 = oc.match(/openModal\('([^']+)'/);
+      if (m1) prefetch(m1[1].replace(/\.html?$/i, '').replace(/^\.?\//,''));
+
+      var m2 = oc.match(/VDRouter\.go\('([^']+)'/);
+      if (m2) prefetch(m2[1]);
+
+      if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('mailto:')) {
+        prefetch(href.replace(/^\/+/, '').replace(/\.html?$/i, ''));
+      }
     }
 
-    return null;
-  };
+    var sel = '.tc[onclick],.pt-card[onclick],.build-card[onclick],.nav-chip,.orb-chip[onclick]';
+    document.querySelectorAll(sel).forEach(function (el) {
+      el.addEventListener('mouseenter', function () { _prefetchFromEl(el); }, { once: true, passive: true });
+      el.addEventListener('touchstart', function () { _prefetchFromEl(el); }, { once: true, passive: true });
+    });
+  }
 
-  /* ── Deep-link handler: ?tool=id ── */
-  const openToolFromQuery = async () => {
-    const params = new URLSearchParams(window.location.search);
-    const toolRef = params.get('tool');
-    if (!toolRef) return;
+  /* ══════════════════════════════════════════════════════════
+   * Monkey-patch closeModal from index.html so ✕ / Escape
+   * also pushes a history.back() to keep URL in sync.
+   * ══════════════════════════════════════════════════════════ */
+  function _patchCloseModal() {
+    if (typeof global.closeModal !== 'function' || global._vdRouterHooked) return;
 
-    const resolved = await resolveToolPath(toolRef);
-    if (!resolved) return;
+    _originalCloseModal = global.closeModal;
+    global.closeModal = function () {
+      if (window.history.state && window.history.state.modalOpen) {
+        window.history.back();
+      } else {
+        _originalCloseModal();
+        var url = new URL(window.location.href);
+        if (url.searchParams.has('m')) {
+          url.searchParams.delete('m');
+          var search = url.search && url.search !== '?' ? url.search : '';
+          window.history.replaceState({ modalOpen: false }, '', url.pathname + search);
+        }
+      }
+    };
+    global._vdRouterHooked = true;
+  }
 
-    window.location.href = resolved;
-  };
+  /* ══════════════════════════════════════════════════════════
+   * INIT
+   * ══════════════════════════════════════════════════════════ */
+  function init() {
+    _handle404Redirect();
+    _handleModalParam();
+    _handlePopState();
+    _handleIframeMessages();
+    bindLinks();
+    on('routechange', bindLinks);
+    _wirePrefetch();
+    setTimeout(_patchCloseModal, 100);
 
     try {
-      const resolved = await resolveToolPath(toolRef);
-      if (resolved) {
-        window.location.href = resolved;
-        return;
-      }
-    } catch (e) {
-      /* fall through to error display */
-    }
+      console.info('[VDRouter v3] Ready — ' + Object.keys(routesMap).length + ' routes registered.');
+    } catch (e) {}
+  }
 
-    /* Tool not found — show inline error instead of silent fail */
-    const container = document.getElementById('categorized-tools') || document.querySelector('main');
-    if (container) {
-      const notice = document.createElement('div');
-      notice.setAttribute('role', 'alert');
-      notice.style.cssText = 'background:#1e1225;border:1px solid #7f1d1d;border-radius:10px;padding:16px 20px;margin:18px 0;color:#fca5a5;font-size:0.95rem;';
-      notice.innerHTML = `<strong>Tool not found:</strong> <code>${toolRef.replace(/</g, '&lt;')}</code><br><span style="color:#94a3b8;font-size:0.85rem;">Check the tool ID and try again. Browse available tools below.</span>`;
-      container.prepend(notice);
-    }
-  };
-
-  /* ── Section navigation listeners ── */
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      const route = link.getAttribute('data-route');
-      if (!route) return;
-      event.preventDefault();
-      goToRoute(route);
-    });
+  document.addEventListener('DOMContentLoaded', function () {
+    init();
+    setTimeout(_patchCloseModal, 200);
   });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setActive(visible.target.id);
-    },
-    {
-      rootMargin: '-30% 0px -50% 0px',
-      threshold: [0.2, 0.5, 0.8]
-    }
-  );
+  /* ══════════════════════════════════════════════════════════
+   * EXPOSE
+   * ══════════════════════════════════════════════════════════ */
+  global.VDRouter = {
+    // v2 API (backward-compatible — index.html calls all of these)
+    on:          on,
+    emit:        emit,
+    routes:      routes,
+    resolve:     resolve,
+    prefetch:    prefetch,
+    openOverlay: openOverlay,
+    go:          go,
+    bindLinks:   bindLinks,
+    init:        init,
+    // v3 additions
+    navigate:    navigate,
+    back:        back,
+    current:     current,
+  };
 
-  sections.forEach((section) => observer.observe(section));
-  /* ── Scroll spy ── */
-  if (sections.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { rootMargin: '-30% 0px -50% 0px', threshold: [0.2, 0.5, 0.8] }
-    );
-    sections.forEach((s) => observer.observe(s));
-  }
-
-  /* ── Initial state ── */
-  const initial = window.location.hash.replace('#', '');
-  if (initial && document.getElementById(initial)) {
-    setTimeout(() => goToRoute(initial), 50);
-  } else {
-    setActive('home');
-  }
-
-  openToolFromQuery();
-  /* ── Process ?tool= query ── */
-  openToolFromQuery();
-
-  /* ── Expose for external use ── */
-  globalThis.Router = { resolveToolPath, allToolPaths };
-})();
+})(window);
