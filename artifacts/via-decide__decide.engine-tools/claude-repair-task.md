@@ -4,9 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Suggests potential circle members or project partners by matching complementary branch specializations and root strengths. Vanilla JS, standalone interface.
-Create circle-leaderboard tool in tools/engine/circle-leaderboard/ with config.json, index.html, tool.js. Ranks player circles based on collective trust scores, combined fruit yield, and successful seed exchanges. Vanilla JS, standalone dashboard view.
-Create knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-challenge/ with config.json, index.html, tool.js. A mini-game where players answer timed questions based on high-quality seeds shared by the community to earn extra minerals. Vanilla JS, standalone playable mini-game.
+add a progress-timeline tool in tools/progress-timeline with config.json index.html and tool.js - users enter milestones with dates and see a visual timeline
 
 RULES
 1. Audit touched files first and identify regressions.
