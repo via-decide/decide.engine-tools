@@ -1,9 +1,9 @@
-Branch: simba/create-toolsenginestreet-food-event-deck-build-a
-Title: Create tools/engine/street-food-event-deck/. Build a logic intercepto...
+Branch: simba/create-toolsengineupsc-master-os-take-the-provid
+Title: Create tools/engine/upsc-master-os/. Take the provided monolithic "UP...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: A content-swapping utility that injects culturally relevant, highly relatable daily swipe tasks specific to the Street Food Cart skin.
+- Goal: A fully functional, beautifully routed, standalone UPSC 2026 Master OS tool cleanly integrated into the engine repository.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
