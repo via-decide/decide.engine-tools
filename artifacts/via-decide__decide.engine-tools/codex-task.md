@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/upsc-csat-trainer/. Build a highly focused quiz UI containing a local JSON bank of logical reasoning and quantitative aptitude questions. Render 5 random questions per daily session. Implement a hidden timer that tracks exactly how many seconds the user spends on each specific question before selecting an option. Save these time-to-solve metrics to localStorage.getItem('upsc_csat_metrics') and render a post-session chart showing their speed bottlenecks.
+
+CONSTRAINTS
+pure Vanilla JS; use Chart.js (via CDN) for the post-session metrics display; standalone execution.
 Create tools/engine/upsc-current-affairs/. Build a Vanilla JS RSS feed reader that fetches daily updates from public Indian news feeds (using a free CORS proxy like api.allorigins.win if necessary). Render a clean, ad-free list of daily headlines and summaries. Add a "Track" button next to each article that dispatches window.dispatchEvent(new CustomEvent('engine:mission_added', { detail: { text: "Read: " + article.title, type: "Study" } })).
 
 CONSTRAINTS
