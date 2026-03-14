@@ -5,6 +5,7 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 fix shared/tool-registry.js - the file has a syntax error caused by an unclosed TOOL_OVERRIDES object literal and triple-declared const variables in normalizeTool(); rewrite the file as a single clean IIFE with one TOOL_OVERRIDES object, one normalizeTool function, and no duplicate declarations; preserve all existing tool IDs in importableToolDirs and ENGINE_TOOL_IDS
+fix shared/tool-graph.js - the file has a syntax error from a duplicate IIFE header, a broken unclosed init() function, and a misplaced comment that splits a return statement; rewrite as a single clean IIFE with use strict at top, one set of const declarations, one init() function with error handling, and no duplicate code
 
 RULES
 1. Audit touched files first and identify regressions.

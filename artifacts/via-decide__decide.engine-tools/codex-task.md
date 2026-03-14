@@ -5,6 +5,10 @@ fix shared/tool-registry.js - the file has a syntax error caused by an unclosed 
 
 CONSTRAINTS
 edit shared/tool-registry.js only; do not touch any other file; preserve all importableToolDirs entries
+fix shared/tool-graph.js - the file has a syntax error from a duplicate IIFE header, a broken unclosed init() function, and a misplaced comment that splits a return statement; rewrite as a single clean IIFE with use strict at top, one set of const declarations, one init() function with error handling, and no duplicate code
+
+CONSTRAINTS
+edit shared/tool-graph.js only; do not touch any other file; preserve all graph rendering and pan/zoom logic
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
