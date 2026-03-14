@@ -5,6 +5,10 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 add tools/games/resource-puzzle/ with config.json index.html tool.js - resource allocation puzzle where player distributes 100 water/nutrients across 3 tree slots to maximize fruit yield score, uses orchard palette colors, saves high score to localStorage
+add tools/games/quiz-engine/ with config.json index.html tool.js - JSON-driven quiz tool, 5 hardcoded orchard/career questions, multiple choice, score at end, emits engine:quiz_completed with {score, total} on finish
+add tools/games/typing-speed/ with config.json index.html tool.js - vanilla JS WPM typing test, random orchard-themed sentences, 60s timer, accuracy and WPM display, saves best WPM to localStorage key orchard_engine_typing_best, emits engine:skill_measured on completion
+add tools/games/memory-match/ with config.json index.html tool.js - vanilla JS card flip memory game with 16 cards, move counter, timer, win detection, saves best time to localStorage key orchard_engine_memory_best
+add tools/games/snake-game/ with config.json index.html tool.js - vanilla JS canvas snake game, arrow key controls, score tracking, saves high score to localStorage key orchard_engine_snake_score, emits engine:score_achieved on new high score
 
 RULES
 1. Audit touched files first and identify regressions.
