@@ -5,6 +5,10 @@ rewrite tools/engine/seed-exchange/tool.js only - replace generic stub with: hyd
 
 CONSTRAINTS
 edit tools/engine/seed-exchange/tool.js and tools/engine/seed-exchange/index.html only; do not touch router.js tool-registry.js config.json README or any file outside this folder
+in tools/engine/growth-milestone-engine/tool.js fix the animate3D function to pause rendering when the tab is hidden - add document.addEventListener visibilitychange to set a paused flag and only call requestAnimationFrame when document.visibilityState is visible; also add a once flag to wireIncomingEvents so listeners are never duplicated if init fires more than once
+
+CONSTRAINTS
+minimal edit to existing tool.js only; do not change index.html or config.json; preserve all existing game logic
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
