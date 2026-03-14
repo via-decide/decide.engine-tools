@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-employer-job-posting-tool-in-toolsengineempl
+Title: Add employer-job-posting tool in tools/engine/employer-job-posting/ w...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working employer-job-posting tool that allows creation and management of market listings
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
