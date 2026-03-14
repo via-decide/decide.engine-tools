@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Improve repository via-decide/decide.engine-tools
+
+CONSTRAINTS
+Preserve existing code; prefer additive changes.
 review, repair, validate, and push the new standalone tool batch safely
 
 CONSTRAINTS

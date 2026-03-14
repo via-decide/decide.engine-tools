@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Improve repository via-decide/decide.engine-tools
 review, repair, validate, and push the new standalone tool batch safely
 
 RULES
