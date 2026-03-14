@@ -2,6 +2,7 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 add memory-match tool in tools/memory-match/ with config.json index.html tool.js. Card flip memory game with timer and scoring.
+add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
 
 CONSTRAINTS
 preserve existing tools; register in tool-registry.js and router.js

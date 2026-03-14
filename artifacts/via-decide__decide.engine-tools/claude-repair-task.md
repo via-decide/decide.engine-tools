@@ -5,6 +5,7 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 add memory-match tool in tools/memory-match/ with config.json index.html tool.js. Card flip memory game with timer and scoring.
+add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
 
 RULES
 1. Audit touched files first and identify regressions.
