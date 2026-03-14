@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-add a progress-timeline tool in tools/progress-timeline with config.json index.html and tool.js - users enter milestones with dates and see a visual timeline
+Add seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Analyzes reusable knowledge (seeds) submitted by players and assigns a quality score based on originality, structure, and peer validation metrics. Vanilla JS, standalone logic.
 
 CONSTRAINTS
-preserve all existing tools; preserve standalone behavior; update router.js and shared/tool-registry.js only
+preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
