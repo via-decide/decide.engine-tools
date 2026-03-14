@@ -201,6 +201,8 @@
 
   function animate3D() {
     requestAnimationFrame(animate3D);
+    if (animPaused) return;
+
     if (currentPlant) {
       currentPlant.rotation.y += 0.01;
       if (isBurning) {
@@ -215,7 +217,6 @@
       }
       currentPlant.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
-    if (!animPaused) renderer.render(scene, camera);
     renderer.render(scene, camera);
   }
 
