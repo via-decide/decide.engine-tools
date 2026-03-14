@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/live-event-scheduler/. Build a Vanilla JS admin dashboard to manage scheduled server events. UI should allow creating entries for Tournaments and Bosses with fields: id, type, startTime, endTime, reward, and targetGoal. The tool must save an array of these objects to localStorage.getItem('orchard_engine_scheduled_events') and dispatch window.dispatchEvent(new CustomEvent('engine:events_updated')) when changes are saved.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; do not modify existing tools; use standard Orchard CSS variables.
 Create tools/engine/server-tournament-engine/. Build a headless Vanilla JS logic controller that listens for engine:events_updated and polls the current time. If an event of type 'tournament' is active (Harvest Race, Root Challenge, Seed Auction, Pest Hunt, Water Trial), it reads local player progression via localStorage.getItem('orchard_engine_player_state') and simulates submitting scores to a mock global leaderboard (localStorage.getItem('orchard_engine_mock_leaderboard')). Dispatch engine:tournament_started and engine:tournament_ended (with payload {rank, reward}).
 
 CONSTRAINTS

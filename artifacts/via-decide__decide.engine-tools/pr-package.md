@@ -1,3 +1,9 @@
+Branch: simba/create-toolsenginelive-event-scheduler-build-a-v
+Title: Create tools/engine/live-event-scheduler/. Build a Vanilla JS admin d...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A functional admin interface to queue and manage the lifecycle of global server events.
 Branch: simba/create-toolsengineserver-tournament-engine-build
 Title: Create tools/engine/server-tournament-engine/. Build a headless Vanil...
 
