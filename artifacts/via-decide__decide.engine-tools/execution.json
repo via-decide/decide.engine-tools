@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/create-toolsenginestreet-food-event-deck-build-a",
+  "branch": "simba/create-toolsengineskin-street-food-theme-build-a",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
