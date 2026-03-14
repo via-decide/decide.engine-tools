@@ -1,3 +1,9 @@
+Branch: simba/create-circle-leaderboard-tool-in-toolsenginecir
+Title: Create circle-leaderboard tool in tools/engine/circle-leaderboard/ wi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working circle-leaderboard tool that displays competitive rankings of player groups
 Branch: simba/create-knowledge-quiz-challenge-tool-in-toolseng
 Title: Create knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-c...
 
