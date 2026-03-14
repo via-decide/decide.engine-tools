@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tools/engine/street-food-event-deck/. Build a logic interceptor for the Layer 1 Swipe Crucible. When the active skin is street-food-cart, this script overwrites localStorage.getItem('orchard_engine_swipe_deck') with thematic card objects: { type: 'prep', text: 'Prep ingredients' }, { type: 'serve', text: 'Take order' }, { type: 'pest', text: 'Power cut! Save the fridge' }, { type: 'growth', text: 'Handle customer complaint' }. Dispatch window.dispatchEvent(new CustomEvent('engine:swipe_deck_reloaded')) so the crucible UI refreshes with the new cards.
+Create tools/engine/skin-street-food-theme/. Build a CSS/JS utility that activates when orchard_engine_active_skin equals street-food-cart. It must dynamically overwrite the root CSS variables with the Indian street cart palette: --color-soil-dark (Terracotta/Charcoal #2A1F1D), --color-leaf-green (Mint Chutney #4ade80), --color-water-blue (Turmeric Yellow #fbbf24 for ingredients), and --color-mineral-gold (Saffron #f97316). Ensure these colors pass accessibility contrast checks against white text.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; must preserve the underlying logic tags (type: 'prep' acts identically to type: 'water' in the base game).
+pure Vanilla JS; must inject or modify CSS variables at the :root level; no external stylesheets.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
