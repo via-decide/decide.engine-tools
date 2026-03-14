@@ -47,6 +47,14 @@
     'growth-milestone-engine'
   ]);
 
+  const FEATURED_TOOL_OVERRIDES = {
+    'starter-farm-generator': {
+      isEngineTool: false,
+      featured: true,
+      entry: './tools/engine/starter-farm-generator/index.html'
+    }
+  };
+
   function inferEngineTool(meta, normalizedCategory, defaultEntry, id) {
     if (typeof meta.isEngineTool === 'boolean') return meta.isEngineTool;
     if (typeof meta.hidden === 'boolean') return meta.hidden;
@@ -251,6 +259,10 @@
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const category = normalizeCategory(meta.category);
     const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
+    const override = FEATURED_TOOL_OVERRIDES[id] || {};
+    const isEngineTool = (typeof override.isEngineTool === 'boolean')
+      ? override.isEngineTool
+      : inferEngineTool(meta, category, defaultEntry, id);
     const isEngineTool = inferEngineTool(meta, category, defaultEntry, id);
     return {
       id,
@@ -258,11 +270,12 @@
       description: meta.description || '',
       category,
       isEngineTool,
+      featured: (typeof override.featured === 'boolean') ? override.featured : !!meta.featured,
       audience: Array.isArray(meta.audience) ? meta.audience : [],
       inputs: Array.isArray(meta.inputs) ? meta.inputs : [],
       outputs: Array.isArray(meta.outputs) ? meta.outputs : [],
       relatedTools: Array.isArray(meta.relatedTools) ? meta.relatedTools : [],
-      entry: meta.entry || defaultEntry,
+      entry: override.entry || meta.entry || defaultEntry,
       tags: Array.isArray(meta.tags) ? meta.tags : []
     };
   }
