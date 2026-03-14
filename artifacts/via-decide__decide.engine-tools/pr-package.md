@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-knowledge-quiz-challenge-tool-in-toolsengine
+Title: Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-chal...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working knowledge-quiz-challenge tool that provides an interactive trivia mini-game
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
