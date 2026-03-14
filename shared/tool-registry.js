@@ -284,6 +284,7 @@
   function normalizeTool(meta, fallbackDir) {
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const normalizedCategory = normalizeCategory(meta.category);
+    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
     const defaultEntry = fallbackDir ? fallbackDir + '/index.html' : '';
     const override = TOOL_OVERRIDES[id] || {};
     const category = override.category || normalizedCategory;
