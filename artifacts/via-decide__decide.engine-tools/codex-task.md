@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
+Create resource-optimization-puzzle tool in tools/engine/resource-optimization-puzzle/ with config.json, index.html, tool.js. A mini-game requiring players to allocate a limited set of water and minerals across a simulated branch network to maximize temporary fruit yield. Vanilla JS, standalone puzzle interface.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
