@@ -1,9 +1,9 @@
-Branch: simba/add-regex-tester-tool-in-toolsregex-tester-with-
-Title: add regex-tester tool in tools/regex-tester/ with config.json index.h...
+Branch: simba/add-color-palette-generator-tool-in-toolscolor-p
+Title: add color-palette-generator tool in tools/color-palette-generator/ wi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working regex-tester tool with PR
+- Goal: working color-palette-generator tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
