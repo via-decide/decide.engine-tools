@@ -1,15 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
-  "mode": "live",
-  "branch": "simba/resume-improvement-for-via-decidedecideengine-to",
   "mode": "codex_then_claude",
-  "branch": "simba/add-tetris-game-tool-in-toolstetris-game-with-co",
-  "branch": "simba/add-color-palette-generator-tool-in-toolscolor-p",
-  "branch": "simba/add-flashcard-engine-tool-in-toolsflashcard-engi",
-  "branch": "simba/add-json-formatter-tool-in-toolsjson-formatter-w",
-  "branch": "simba/add-regex-tester-tool-in-toolsregex-tester-with-",
-  "branch": "simba/add-memory-match-tool-in-toolsmemory-match-with-",
-  "branch": "simba/add-swot-analyzer-tool-in-toolsswot-analyzer-wit",
+  "branch": "simba/create-seed-quality-scorer-tool-in-toolsenginese",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",

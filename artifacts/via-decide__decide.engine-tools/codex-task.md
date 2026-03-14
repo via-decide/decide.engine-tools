@@ -1,20 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Resume improvement for via-decide/decide.engine-tools
+Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Evaluates the usefulness of shared knowledge (seeds) based on peer validation, originality, and impact. Assigns a quality tier to each seed. Vanilla JS, standalone UI.
 
 CONSTRAINTS
-Preserve existing code; prefer additive changes.
-add tetris-game tool in tools/tetris-game/ with config.json index.html tool.js. Falling block puzzle, vanilla JS, standalone.
-add color-palette-generator tool in tools/color-palette-generator/ with config.json index.html tool.js. Generate harmonious color palettes from seed color.
-add flashcard-engine tool in tools/flashcard-engine/ with config.json index.html tool.js. Spaced repetition flashcards with JSON deck support.
-add json-formatter tool in tools/json-formatter/ with config.json index.html tool.js. Paste JSON, get formatted and validated output.
-add regex-tester tool in tools/regex-tester/ with config.json index.html tool.js. Live regex pattern testing with match highlights.
-add memory-match tool in tools/memory-match/ with config.json index.html tool.js. Card flip memory game with timer and scoring.
-add swot-analyzer tool in tools/swot-analyzer/ with config.json index.html tool.js. Structured SWOT analysis with copy and download.
-
-CONSTRAINTS
-preserve existing tools; register in tool-registry.js and router.js
+preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
