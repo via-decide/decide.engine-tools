@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-speed-coding-challenge-tool-in-toolsenginesp
+Title: Add speed-coding-challenge tool in tools/engine/speed-coding-challeng...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working speed-coding-challenge tool that gamifies rapid text output
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
