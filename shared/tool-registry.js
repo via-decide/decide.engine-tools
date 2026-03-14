@@ -174,6 +174,7 @@
     'tools/engine/growth-path-recommender',
     'tools/engine/ai-coach-console',
     'tools/engine/simulation-runner',
+    'tools/engine/seed-quality-scorer',
     'tools/engine/meta-health-dashboard',
     'tools/engine/synthetic-player-generator',
     'tools/engine/wave1-simulation-runner',
