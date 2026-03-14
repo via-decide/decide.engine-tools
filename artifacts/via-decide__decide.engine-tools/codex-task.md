@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+rewrite tools/engine/seed-exchange/tool.js to add hydrateState() pulling from localStorage key orchard_engine_player_state, syncState() pushing back on every exchange, emitEvent(name, data) for engine:seed_exchanged events, and a credits guard that blocks exchange if state.credits is less than 1; add Orchard palette inline styles to index.html matching Soil #1A1614 Leaf #52B756 Water #29B6F6 Gold #FFCA28
+
+CONSTRAINTS
+additive rewrite of tool.js; update index.html style block only; do not touch config.json or shared files
 rewrite tools/engine/seed-exchange/tool.js only - replace generic stub with: hydrateState() reading localStorage.getItem('orchard_engine_player_state'), syncState() writing back after each exchange, emitEvent dispatching engine:seed_exchanged, and a guard returning early if state.credits<1; add a <style> block inside tools/engine/seed-exchange/index.html only setting body background #1A1614 and button accent #FFCA28
 
 CONSTRAINTS

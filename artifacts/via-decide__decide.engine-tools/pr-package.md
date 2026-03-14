@@ -1,3 +1,9 @@
+Branch: simba/rewrite-toolsengineseed-exchangetooljs-to-add-hy
+Title: rewrite tools/engine/seed-exchange/tool.js to add hydrateState() pull...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: seed-exchange syncs with orchard master state, emits exchange events, blocks zero-credit actions
 Branch: simba/rewrite-toolsengineseed-exchangetooljs-only---re
 Title: rewrite tools/engine/seed-exchange/tool.js only - replace generic stu...
 
