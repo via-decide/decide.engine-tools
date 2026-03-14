@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+rewrite tools/engine/seed-exchange/tool.js only - replace generic stub with: hydrateState() reading localStorage.getItem('orchard_engine_player_state'), syncState() writing back after each exchange, emitEvent dispatching engine:seed_exchanged, and a guard returning early if state.credits<1; add a <style> block inside tools/engine/seed-exchange/index.html only setting body background #1A1614 and button accent #FFCA28
+
+CONSTRAINTS
+edit tools/engine/seed-exchange/tool.js and tools/engine/seed-exchange/index.html only; do not touch router.js tool-registry.js config.json README or any file outside this folder
 in tools/engine/growth-milestone-engine/tool.js fix the animate3D function to pause rendering when the tab is hidden - add document.addEventListener visibilitychange to set a paused flag and only call requestAnimationFrame when document.visibilityState is visible; also add a once flag to wireIncomingEvents so listeners are never duplicated if init fires more than once
 
 CONSTRAINTS
