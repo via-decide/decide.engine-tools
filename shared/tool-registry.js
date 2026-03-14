@@ -47,6 +47,38 @@
     'growth-milestone-engine'
   ]);
 
+  const TOOL_OVERRIDES = {
+    'starter-farm-generator': {
+      isEngineTool: false,
+      featured: true,
+      category: 'Layer 1 - Farm',
+      gameIcon: '🌱',
+      gameDescription: 'Initialize your farm identity and start your orchard run.',
+      entry: './tools/engine/starter-farm-generator/index.html'
+    },
+    'orchard-profile-builder': {
+      isEngineTool: false,
+      category: 'Layer 1 - Farm',
+      gameIcon: '🪪',
+      gameDescription: 'Shape your orchard profile, role, and growth direction.'
+    },
+    'daily-quest-generator': {
+      isEngineTool: false,
+      category: 'Layer 1 - Farm',
+      gameIcon: '📜',
+      gameDescription: 'Generate your daily quest loop and actionable growth tasks.'
+    },
+    'weekly-harvest-engine': {
+      isEngineTool: false,
+      category: 'Layer 2 - Commons',
+      gameIcon: '🧺',
+      gameDescription: 'Convert your weekly actions into measurable harvest outcomes.'
+    },
+    'seed-exchange': {
+      isEngineTool: false,
+      category: 'Layer 3 - Market',
+      gameIcon: '🛒',
+      gameDescription: 'Trade seeds and unlock better orchard opportunities.'
   const FEATURED_TOOL_OVERRIDES = {
     'starter-farm-generator': {
       isEngineTool: false,
@@ -257,8 +289,13 @@
 
   function normalizeTool(meta, fallbackDir) {
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
-    const category = normalizeCategory(meta.category);
+    const normalizedCategory = normalizeCategory(meta.category);
     const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
+    const override = TOOL_OVERRIDES[id] || {};
+    const category = override.category || normalizedCategory;
+    const isEngineTool = (typeof override.isEngineTool === 'boolean')
+      ? override.isEngineTool
+      : inferEngineTool(meta, normalizedCategory, defaultEntry, id);
     const override = FEATURED_TOOL_OVERRIDES[id] || {};
     const isEngineTool = (typeof override.isEngineTool === 'boolean')
       ? override.isEngineTool
@@ -271,6 +308,8 @@
       category,
       isEngineTool,
       featured: (typeof override.featured === 'boolean') ? override.featured : !!meta.featured,
+      gameIcon: override.gameIcon || meta.gameIcon || '',
+      gameDescription: override.gameDescription || meta.gameDescription || '',
       audience: Array.isArray(meta.audience) ? meta.audience : [],
       inputs: Array.isArray(meta.inputs) ? meta.inputs : [],
       outputs: Array.isArray(meta.outputs) ? meta.outputs : [],
