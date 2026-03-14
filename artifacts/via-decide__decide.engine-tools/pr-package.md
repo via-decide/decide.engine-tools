@@ -1,9 +1,9 @@
-Branch: simba/add-snake-game-tool-in-toolssnake-game-with-conf
-Title: add snake-game tool in tools/snake-game/ with config.json index.html ...
+Branch: simba/add-json-formatter-tool-in-toolsjson-formatter-w
+Title: add json-formatter tool in tools/json-formatter/ with config.json ind...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working snake-game tool with PR
+- Goal: working json-formatter tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
