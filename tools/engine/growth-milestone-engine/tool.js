@@ -452,22 +452,6 @@
         checkEvolution();
         updateUI();
         syncState();
-          window.dispatchEvent(new CustomEvent('engine:pest_outbreak', {
-            detail: { pestCount: state.pests }
-          }));
-        }
-
-        window.dispatchEvent(new CustomEvent('engine:research_completed', {
-          detail: {
-            rootsGained: finalG,
-            waterSpent: 5,
-            creditsEarned: 12
-          }
-        }));
-
-        checkEvolution();
-        updateUI();
-        saveState();
         els.btnSimulate.disabled = state.water < 5;
         els.btnSimulate.innerHTML = '📚 Research (-5💧)';
       }, 500);
