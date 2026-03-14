@@ -58,7 +58,15 @@
     'code-reviewer':                     'tools/code-reviewer/index.html',
     'tool-router':                       'tools/tool-router/index.html',
     'export-studio':                     'tools/export-studio/index.html',
-    'template-vault':                    'tools/template-vault/index.html'
+    'template-vault':                    'tools/template-vault/index.html',
+    'idea-remixer':                      'tools/idea-remixer/index.html',
+    'task-splitter':                     'tools/task-splitter/index.html',
+    'prompt-compare':                    'tools/prompt-compare/index.html',
+    'repo-improvement-brief':            'tools/repo-improvement-brief/index.html',
+    'workflow-template-gallery':         'tools/workflow-template-gallery/index.html',
+    'tool-search-discovery':             'tools/tool-search-discovery/index.html',
+    'context-packager':                  'tools/context-packager/index.html',
+    'output-evaluator':                  'tools/output-evaluator/index.html'
   };
 
   /* Engine tools under tools/engine/ */

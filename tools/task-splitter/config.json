@@ -1,0 +1,13 @@
+{
+  "id": "task-splitter",
+  "name": "Task Splitter",
+  "title": "Task Splitter",
+  "description": "Break a high-level goal into executable subtasks with owners, dependencies, and completion checks.",
+  "inputs": ["goal", "scope", "deadline"],
+  "outputs": ["task_breakdown"],
+  "relatedTools": ["spec-builder", "repo-improvement-brief", "workflow-template-gallery"],
+  "category": "coders",
+  "audience": ["operators", "coders", "founders"],
+  "entry": "tools/task-splitter/index.html",
+  "tags": ["planning", "execution", "simba-workflows"]
+}

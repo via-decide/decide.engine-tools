@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Task Splitter</title>
+  <link rel="stylesheet" href="../../shared/shared.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Task Splitter</h1>
+      <p>Convert a goal into a concrete execution plan Simba can follow safely.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <label for="goal">Goal</label>
+        <textarea id="goal" placeholder="What should be achieved?"></textarea>
+
+        <label for="scope">Scope boundaries</label>
+        <textarea id="scope" placeholder="What is in/out of scope?"></textarea>
+
+        <label for="deadline">Timeline / deadline</label>
+        <input id="deadline" placeholder="e.g., 2 days, by Friday" />
+
+        <div class="toolbar">
+          <button id="generate" class="primary">Split Tasks</button>
+          <button id="copy">Copy</button>
+          <button id="download">Download</button>
+        </div>
+      </article>
+      <article class="card">
+        <h2>Execution Breakdown</h2>
+        <pre id="output" class="output"></pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="../../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>
