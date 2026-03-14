@@ -1,15 +1,9 @@
-Branch: simba/improve-repository-via-decidedecideengine-tools
-Title: Improve repository via-decide/decide.engine-tools
+Branch: simba/add-snake-game-tool-in-toolssnake-game-with-conf
+Title: add snake-game tool in tools/snake-game/ with config.json index.html ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Improve via-decide/decide.engine-tools via Simba pipeline
-Branch: simba/review-repair-validate-and-push-the-new-standalo
-Title: review, repair, validate, and push the new standalone tool batch safely
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: verify the 8 new tools, fix integration issues, validate router/index/registry/README, and push corrected files
+- Goal: working snake-game tool with PR
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

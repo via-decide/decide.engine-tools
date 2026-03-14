@@ -1,14 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Improve repository via-decide/decide.engine-tools
+add snake-game tool in tools/snake-game/ with config.json index.html tool.js. Classic snake game, vanilla JS, standalone browser tool.
 
 CONSTRAINTS
-Preserve existing code; prefer additive changes.
-review, repair, validate, and push the new standalone tool batch safely
-
-CONSTRAINTS
-preserve existing tools; preserve standalone behavior; do not break category routing; use minimal corrective edits; push fixed version if possible
+preserve existing tools; register in tool-registry.js and router.js
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
