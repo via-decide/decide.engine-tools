@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineskin-selector-ui-build-a-playe
+Title: Create tools/engine/skin-selector-ui/. Build a player-facing gallery ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: An interactive gallery where players can preview, purchase, and equip different thematic skins.
 Branch: simba/create-toolsengineskin-pack-manager-build-a-head
 Title: Create tools/engine/skin-pack-manager/. Build a headless Vanilla JS u...
 

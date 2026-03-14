@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/skin-selector-ui/. Build a player-facing gallery UI displaying the 5 defined skins (Space Colony, Dojo, Kitchen, Scholar, Street Food). Read orchard_engine_owned_skins to determine state. For owned skins, show an "Equip" button that updates orchard_engine_active_skin and dispatches engine:skin_changed. For unowned skins, show a "Unlock (X Gems)" button that interfaces with the skin-pack-manager. Display visual previews of the color palettes and term changes for each skin.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; UI must use standard Orchard panel styling.
 Create tools/engine/skin-pack-manager/. Build a headless Vanilla JS utility that manages skin ownership. Initialize a default array in localStorage.getItem('orchard_engine_owned_skins') containing only the base farming skin. Implement functions to check if a skin is owned and a function to purchase a skin, which deducts 'Harvest Gems' via localStorage and adds the skin ID to the owned array. Dispatch engine:skin_unlocked on successful purchase.
 
 CONSTRAINTS
