@@ -1,8 +1,9 @@
 (() => {
   'use strict';
 
-  const navLinks = [...document.querySelectorAll('[data-route]')];
+  const navLinks = [...document.querySelectorAll('.nl[data-route]')];
   const sections = [...document.querySelectorAll('main section[id]')];
+  const routeAliases = { researchers: 'research' };
 
   const routeAliases = {
     researchers: 'research'
@@ -86,7 +87,33 @@
 
   /* ── Navigation helpers ── */
 
+  const normalizeRoute = (id) => routeAliases[id] || id;
+
   const setActive = (id) => {
+    const routeId = normalizeRoute(id);
+    navLinks.forEach((link) => {
+      link.classList.toggle('on', link.getAttribute('data-route') === routeId);
+    });
+  };
+
+  const goToRoute = (id) => {
+    const routeId = normalizeRoute(id);
+    const section = document.getElementById(routeId);
+    if (!section) return;
+    history.replaceState(null, '', `#${routeId}`);
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setActive(routeId);
+  };
+
+  const routeFromHash = () => normalizeRoute(window.location.hash.replace('#', ''));
+
+  const syncFromHash = () => {
+    const route = routeFromHash();
+    if (route && document.getElementById(route)) {
+      goToRoute(route);
+      return;
+    }
+    setActive('home');
     const canonicalId = canonicalRoute(id);
     navLinks.forEach((link) => {
       link.classList.toggle('active', canonicalRoute(link.getAttribute('data-route')) === canonicalId);
@@ -174,6 +201,11 @@
     sections.forEach((section) => observer.observe(section));
   }
 
+  window.addEventListener('hashchange', syncFromHash);
+
+  const initial = routeFromHash();
+  if (initial && document.getElementById(initial)) {
+    setTimeout(() => goToRoute(initial), 50);
   const initial = window.location.hash.replace('#', '');
   const canonicalInitial = canonicalRoute(initial);
   if (canonicalInitial && document.getElementById(canonicalInitial)) {
