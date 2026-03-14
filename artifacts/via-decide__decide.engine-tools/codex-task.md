@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add seed-quality-scorer tool in tools/engine/seed-quality-scorer/ with config.json, index.html, tool.js. Analyzes reusable knowledge (seeds) submitted by players and assigns a quality score based on originality, structure, and peer validation metrics. Vanilla JS, standalone logic.
+Add collaboration-matchmaker tool in tools/engine/collaboration-matchmaker/ with config.json, index.html, tool.js. Recommends peers to form circles based on complementary root strengths and branch specializations. Utilizes data structures simulating player profiles to output match percentages. Vanilla JS.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
