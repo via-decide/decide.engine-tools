@@ -1,3 +1,9 @@
+Branch: simba/create-toolsengineserver-tournament-engine-build
+Title: Create tools/engine/server-tournament-engine/. Build a headless Vanil...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A background system that manages active tournaments and calculates mock leaderboard rankings based on local player data.
 Branch: simba/create-toolsengineserver-boss-engine-build-a-hea
 Title: Create tools/engine/server-boss-engine/. Build a headless Vanilla JS ...
 Branch: simba/add-a-new-standalone-tool-called-memory-match-in
