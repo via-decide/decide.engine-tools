@@ -1,9 +1,9 @@
-Branch: simba/create-seed-quality-scorer-tool-in-toolsenginese
-Title: Create seed-quality-scorer tool in tools/engine/seed-quality-scorer/ ...
+Branch: simba/create-abuse-detection-dashboard-tool-in-toolsen
+Title: Create abuse-detection-dashboard tool in tools/engine/abuse-detection...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seed-quality-scorer tool that grades shared knowledge based on community impact
+- Goal: working abuse-detection-dashboard tool for monitoring and maintaining game integrity
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
