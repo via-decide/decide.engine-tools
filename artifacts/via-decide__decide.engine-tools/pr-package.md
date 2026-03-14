@@ -1,9 +1,9 @@
-Branch: simba/add-collaboration-matchmaker-tool-in-toolsengine
-Title: Add collaboration-matchmaker tool in tools/engine/collaboration-match...
+Branch: simba/add-daily-weather-replenisher-tool-in-toolsengin
+Title: Add daily-weather-replenisher tool in tools/engine/daily-weather-repl...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working collaboration-matchmaker tool that suggests optimal peer groupings
+- Goal: working daily-weather-replenisher tool to manage the daily energy economy
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
