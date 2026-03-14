@@ -2,6 +2,7 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 Add llm-action-parser tool in tools/engine/llm-action-parser/ with config.json, index.html, tool.js. Backend testing UI that accepts plain-text real-world actions (e.g., "Read React docs"). Simulates the 4-pipeline logic (Absorption, Consolidation, Specialization, Yield) to generate a strict JSON payload mapping the action to game stat changes (Root increase, Water cost). Vanilla JS.
+Add genesis-seed-initializer tool in tools/engine/genesis-seed-initializer/ with config.json, index.html, tool.js. Interface for new players to receive an ID and select their "Soil" (industry/domain). Initializes the player profile in localStorage with 0 roots, 10 starting Water, and "Dormant Seed" status. Vanilla JS, UI based on global-theme.css.
 
 CONSTRAINTS
 preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed

@@ -4,6 +4,12 @@ Title: Add llm-action-parser tool in tools/engine/llm-action-parser/ with co...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: working llm-action-parser tool that maps real-world effort to strict JSON engine stats
+Branch: simba/add-genesis-seed-initializer-tool-in-toolsengine
+Title: Add genesis-seed-initializer tool in tools/engine/genesis-seed-initia...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working genesis-seed-initializer tool to establish initial player state and environment
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
