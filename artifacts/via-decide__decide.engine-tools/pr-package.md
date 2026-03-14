@@ -4,6 +4,12 @@ Title: Improve repository via-decide/decide.engine-tools
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: Improve via-decide/decide.engine-tools via Simba pipeline
+Branch: simba/review-repair-validate-and-push-the-new-standalo
+Title: review, repair, validate, and push the new standalone tool batch safely
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: verify the 8 new tools, fix integration issues, validate router/index/registry/README, and push corrected files
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

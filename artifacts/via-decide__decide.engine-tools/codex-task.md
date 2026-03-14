@@ -5,6 +5,10 @@ Improve repository via-decide/decide.engine-tools
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
+review, repair, validate, and push the new standalone tool batch safely
+
+CONSTRAINTS
+preserve existing tools; preserve standalone behavior; do not break category routing; use minimal corrective edits; push fixed version if possible
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
