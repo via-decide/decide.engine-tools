@@ -1,12 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/add-toolscreatorssocial-content-generator-with-c",
-  "branch": "simba/add-toolsgamesresource-puzzle-with-configjson-in",
-  "branch": "simba/add-toolsgamesquiz-engine-with-configjson-indexh",
-  "branch": "simba/add-toolsgamestyping-speed-with-configjson-index",
-  "branch": "simba/add-toolsgamesmemory-match-with-configjson-index",
-  "branch": "simba/add-toolsgamessnake-game-with-configjson-indexht",
+  "branch": "simba/integrate-the-vanilla-version-of-tsparticles-via",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
