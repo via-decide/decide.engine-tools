@@ -1,3 +1,9 @@
+Branch: simba/add-toolsgamesresource-puzzle-with-configjson-in
+Title: add tools/games/resource-puzzle/ with config.json index.html tool.js ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working puzzle game, standalone
 Branch: simba/add-toolsgamesquiz-engine-with-configjson-indexh
 Title: add tools/games/quiz-engine/ with config.json index.html tool.js - JS...
 

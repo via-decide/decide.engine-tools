@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+add tools/games/resource-puzzle/ with config.json index.html tool.js - resource allocation puzzle where player distributes 100 water/nutrients across 3 tree slots to maximize fruit yield score, uses orchard palette colors, saves high score to localStorage
+
+CONSTRAINTS
+edit tools/games/resource-puzzle/ only; no frameworks; no shared file changes
 add tools/games/quiz-engine/ with config.json index.html tool.js - JSON-driven quiz tool, 5 hardcoded orchard/career questions, multiple choice, score at end, emits engine:quiz_completed with {score, total} on finish
 
 CONSTRAINTS
