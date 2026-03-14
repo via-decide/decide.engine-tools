@@ -48,19 +48,6 @@
     'growth-milestone-engine'
   ]);
 
-    'engine-state-manager', 'llm-action-parser', 'daily-weather-replenisher',
-    'admin-moderation-panel', 'simulation-runner', 'player-signup',
-    'orchard-profile-builder', 'starter-farm-generator', 'root-strength-calculator',
-    'trunk-growth-calculator', 'fruit-yield-engine', 'daily-quest-generator',
-    'weekly-harvest-engine', 'thirty-day-promotion-engine', 'fair-ranking-engine',
-    'seed-exchange', 'fruit-sharing', 'circle-builder', 'peer-validation-engine',
-    'trust-score-engine', 'recruiter-dashboard', 'orchard-discovery-search',
-    'hire-readiness-scorer', 'four-direction-pipeline', 'growth-path-recommender',
-    'ai-coach-console', 'seed-quality-scorer', 'meta-health-dashboard',
-    'synthetic-player-generator', 'wave1-simulation-runner', 'balance-dashboard',
-    'growth-milestone-engine'
-  ]);
-
   // Per-tool overrides — used by the hub to surface player-facing metadata
   const TOOL_OVERRIDES = {
     'starter-farm-generator': {
@@ -102,9 +89,6 @@
     'seed-exchange': {
       isEngineTool: false,
       category: 'Layer 3 - Market',
-      gameIcon: '🛒',
-      gameDescription: 'Trade seeds and unlock better orchard opportunities.'
-      category: 'engine',
       gameIcon: '🛒',
       gameDescription: 'Trade seeds and unlock better orchard opportunities.'
     },
@@ -298,7 +282,6 @@
   function normalizeTool(meta, fallbackDir) {
     const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
     const normalizedCategory = normalizeCategory(meta.category);
-    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
     const defaultEntry = fallbackDir ? fallbackDir + '/index.html' : '';
     const override = TOOL_OVERRIDES[id] || {};
     const category = override.category || normalizedCategory;

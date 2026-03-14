@@ -118,13 +118,13 @@
         tooltip.innerHTML = '<strong>' + escapeHtml(node.tool.name) + '</strong>' +
           '<br>' + escapeHtml(node.tool.description || '') +
           '<br><span style="color:#64748b;font-size:0.8em">' + escapeHtml(node.tool.entry || '') + '</span>';
-        tooltip.style.display = 'block';
+        tooltip.classList.add('show');
         tooltip.style.left = (e.clientX + 12) + 'px';
         tooltip.style.top = (e.clientY - 8) + 'px';
       });
 
       g.addEventListener('mouseleave', function () {
-        if (tooltip) tooltip.style.display = 'none';
+        if (tooltip) tooltip.classList.remove('show');
       });
 
       g.addEventListener('click', function () {
