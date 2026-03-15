@@ -6,54 +6,30 @@ Title: Implement the native View Transitions API (or a CSS fade/scale fallba...
 - Goal: working smooth page transitions between the root launcher and standalone tools
 Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
 Title: Integrate swup.js via CDN into the root index.html to handle page rou...
+Branch: simba/create-a-new-branch-featureux-particle-system-cr
+Title: > Create a new branch feature/ux-particle-system. Create a file share...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seamless SPA-like page transitions across standalone HTML files
-Branch: simba/integrate-the-vanilla-version-of-tsparticles-via
-Title: Integrate the vanilla version of tsparticles via CDN into _assets/js/...
+- Goal: > Make every positive interaction in the app feel incredibly rewarding with physical, bursting visual feedback. /end_task
+Branch: simba/create-a-new-branch-featureux-audio-manager-crea
+Title: > Create a new branch feature/ux-audio-manager. Create a file shared/...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working high-performance interactive particle backgrounds tied to engine state
-Branch: simba/create-a-new-branch-featureagent-tool-registry-c
-Title: > Create a new branch feature/agent-tool-registry. Create a new direc...
+- Goal: > Provide crucial non-visual feedback so the platform feels tactile, responsive, and alive. /end_task
+Branch: simba/create-a-new-branch-featureux-view-transitions-c
+Title: > Create a new branch feature/ux-view-transitions. Create a file shar...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A successfully opened Pull Request containing the global Tool Registry that defines the atomic actions available to AI agents. /end_task
-Branch: simba/create-a-new-branch-featureagent-platform-routin
-Title: > Create a new branch feature/agent-platform-routing. Update index.ht...
+- Goal: > Eliminate jarring screen snaps when navigating, replacing them with buttery-smooth, morphing layout shifts. /end_task
+Branch: simba/create-a-new-branch-featureux-achievement-toasts
+Title: > Create a new branch feature/ux-achievement-toasts. Create a file sh...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > Wire all the new standalone HTML files into the centralized OS dashboard for a unified user experience. /end_task
-Branch: simba/create-a-new-branch-featureupdate-tool-graph-ref
-Title: > Create a new branch feature/update-tool-graph. Refactor the existin...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A visual map showing the macro architecture of which automated Agents are calling which underlying Tools. /end_task
-Branch: simba/create-a-new-branch-featureexecution-console-ui-
-Title: > Create a new branch feature/execution-console-ui. Create a new file...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A real-time developer terminal to trigger saved agents and monitor their step-by-step API executions and state changes. /end_task
-Branch: simba/create-a-new-branch-featureagent-builder-ui-refa
-Title: > Create a new branch feature/agent-builder-ui. Refactor the existing...
-Branch: simba/create-a-new-branch-featureagent-runtime-create-
-Title: > Create a new branch feature/agent-runtime. Create a file named shar...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A successfully opened Pull Request containing the execution brain that parses and runs the JSON-based agent workflows. /end_task
-Branch: simba/create-a-new-branch-featureagent-execution-logge
-Title: > Create a new branch feature/agent-execution-logger. Create a file n...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A Zapier-style vertical step editor that outputs a clean, sequential JSON workflow for the AgentRuntime to follow. /end_task
+- Goal: > A non-intrusive, highly rewarding way to notify the user of successes, background agent completions, and system states. /end_task
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
