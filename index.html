@@ -49,5 +49,444 @@
   <script src="./shared/components.js?v=2"></script>
   <script src="./tools/registry.js?v=2"></script>
   <script src="./router.js?v=2"></script>
+  <!-- RESEARCHERS / STUDENTS (Featured Hardcoded Section) -->
+  <section id="research">
+    <div class="w">
+      <div class="sh">
+        <h2>🔬 For Researchers &amp; Students</h2>
+        <p>Structure your learning, synthesise sources, prep for interviews, and evaluate your outputs.</p>
+      </div>
+      <div class="grid">
+        <div class="card" onclick="App.openTool('Student Research')">
+          <div class="card-top"><span class="chip c-education">Students</span><span class="card-icon">📚</span></div>
+          <h3>Student Research</h3>
+          <p>Structure your research process — define your question, organise sources, and build your summary.</p>
+          <span class="card-link">Launch Tool</span>
+        </div>
+        <div class="card" onclick="App.openTool('Multi-Source Research')">
+          <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
+          <h3>Multi-Source Research</h3>
+          <p>Synthesise findings from multiple sources into one coherent, structured research output.</p>
+          <span class="card-link">Launch Tool</span>
+        </div>
+        <div class="card" onclick="App.openTool('Interview Prep')">
+          <div class="card-top"><span class="chip c-education">Career</span><span class="card-icon">🎯</span></div>
+          <h3>Interview Prep</h3>
+          <p>Build structured answers for any interview question — behavioural, technical, or case-based.</p>
+          <span class="card-link">Launch Tool</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- ALL TOOLS (Dynamic JS Engine) -->
+  <section id="all">
+    <div class="w">
+      <div class="sh">
+        <h2>🧰 The Tool Engine</h2>
+        <p>Explore the complete collection of micro-apps. Filter, sort, and launch instantly.</p>
+      </div>
+      
+      <!-- Interactive Tabs -->
+      <div class="tabs" id="tab-row">
+        <button class="tab on" data-c="all">All Tools</button>
+        <button class="tab" data-c="creators">Creators</button>
+        <button class="tab" data-c="coders">Builders</button>
+        <button class="tab" data-c="researchers">Research</button>
+        <button class="tab" data-c="business">Business</button>
+        <button class="tab" data-c="education">Students</button>
+        <button class="tab" data-c="system">Simulations</button>
+      </div>
+      
+      <!-- Controls -->
+      <div class="tools-controls">
+        <div class="tools-meta" id="tool-count">Loading tools...</div>
+        <div class="tools-toggles">
+          <button class="toggle-btn active" id="sort-toggle" onclick="App.toggleSort()">Sort: A → Z</button>
+          <label class="toggle-check">
+            <input id="engine-toggle" type="checkbox" onchange="App.toggleEngineFilters()">
+            Include Engine/Sim Tools
+          </label>
+        </div>
+      </div>
+      
+      <!-- Dynamic Grid -->
+      <div class="grid" id="all-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- GAMES & SIMULATIONS (New Featured Section) -->
+  <section id="games">
+    <div class="w">
+        <div class="sh">
+            <h2>🎮 Engine Simulations</h2>
+            <p>Interactive system dynamics and management games running directly in your browser.</p>
+        </div>
+        
+        <!-- MARS GAME HERO -->
+        <div class="mars-hero" style="margin-bottom: 24px;">
+            <div class="mars-left">
+                <div class="mars-badge">Survival Engine</div>
+                <h2 class="mars-title">Mars Colony Simulator</h2>
+                <p class="mars-desc">Manage resources, build habitats, and ensure the survival of humanity's first off-world colony. A complex system dynamics game built entirely in the browser.</p>
+                <button class="btn-sim btn-mars" onclick="App.openTool('Mars Colony')">▶ Initialize Mission</button>
+            </div>
+            <div class="sim-visual">
+                <div class="mars-planet"></div>
+            </div>
+        </div>
+
+        <!-- ORCHARD GAME HERO -->
+        <div class="orchard-hero" style="margin-bottom: 24px;">
+            <div class="mars-left">
+                <div class="orchard-badge">Ecological Engine</div>
+                <h2 class="mars-title">Orchard Ecosystem</h2>
+                <p class="mars-desc">Balance soil nutrients, manage water tables, and cultivate a thriving, sustainable farm ecosystem. A relaxing but deeply strategic simulation.</p>
+                <button class="btn-sim btn-orchard" onclick="App.openTool('Orchard Sim')">▶ Enter Orchard</button>
+            </div>
+            <div class="sim-visual">
+                <div class="orchard-planet"></div>
+            </div>
+        </div>
+
+        <!-- ADDITIONAL GAMES GRID -->
+        <div class="grid">
+            <div class="card is-engine" onclick="App.openTool('Grid Evolution')">
+                <div class="card-top"><span class="chip c-system">Simulation</span><span class="card-icon">🧬</span></div>
+                <h3>Grid Evolution</h3>
+                <p>Cellular automata simulator. Define rules and watch artificial life evolve over generations.</p>
+                <span class="card-link">Launch Sim</span>
+            </div>
+            <div class="card is-engine" onclick="App.openTool('Market Dynamics')">
+                <div class="card-top"><span class="chip c-business">Business</span><span class="card-icon">📉</span></div>
+                <h3>Market Dynamics</h3>
+                <p>Control supply, demand, and pricing in a volatile simulated global economy.</p>
+                <span class="card-link">Launch Sim</span>
+            </div>
+            <div class="card is-engine" onclick="App.openTool('Traffic Router')">
+                <div class="card-top"><span class="chip c-system">Logistics</span><span class="card-icon">🚦</span></div>
+                <h3>Traffic Router</h3>
+                <p>Design city road networks to prevent gridlock. Optimization puzzle game.</p>
+                <span class="card-link">Launch Sim</span>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- MISSION CTA -->
+  <section id="mission">
+    <div class="w">
+      <div class="mission-wrap">
+        <div class="mission-text">
+          <div class="eyebrow">Open Source · Free Forever</div>
+          <h2 class="mission-title">
+            Think better.<br>Build faster.<br><em style="color:var(--leaf);font-style:normal">Decide with clarity.</em>
+          </h2>
+          <p class="mission-copy">Join the open-source movement. No hidden fees, no data harvesting. Just pure, functional tools designed to amplify human intellect.</p>
+          <div class="btn-row">
+            <button class="btn-green" onclick="App.openTool('GitHub Repo')">⭐ Star on GitHub</button>
+            <button class="btn-ghost" onclick="document.querySelector('.nl[data-s=\'all\']').click()">Browse Directory</button>
+          </div>
+        </div>
+        <div class="mission-stats">
+          <div class="mstat"><div class="mstat-n counter" data-target="44">0</div><div class="mstat-l">Live Tools</div></div>
+          <div class="mstat"><div class="mstat-n">∞</div><div class="mstat-l">Free Use</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="w footer-meta">
+    <span>© 2026 ViaDecide · Free browser tools for practical thinkers</span>
+    <div class="footer-links">
+      <a href="#github">GitHub Repository</a>
+      <a href="#graph">Knowledge Graph</a>
+    </div>
+  </div>
+</footer>
+
+<!-- UNIVERSAL SEARCH MODAL -->
+<div id="search-modal">
+    <div class="search-box">
+        <div class="search-header">
+            <span>&#10024;</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search for tools, games, or categories..." autocomplete="off">
+            <button class="close-search" onclick="SearchUI.close()">ESC</button>
+        </div>
+        <div class="search-results" id="search-results">
+            <!-- JS Injected -->
+            <div class="empty" style="padding: 24px; text-align: center;">Type to search all 44+ tools...</div>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">
+    <span>🚀</span>
+    <span id="toast-msg">Initializing module...</span>
+</div>
+
+<!-- =========================================
+     JAVASCRIPT ENGINE
+     ========================================= -->
+<script>
+// --- 1. MOCK TOOL DATABASE (Now explicitly including all games) ---
+const TOOLS_DB = [
+    { name: "Student Research", cat: "education", desc: "Define your question and organise sources.", icon: "📚", engine: false },
+    { name: "Multi-Source Synthesizer", cat: "researchers", desc: "Combine findings from multiple papers into one output.", icon: "🧩", engine: false },
+    { name: "Interview Prep Framework", cat: "education", desc: "Build STAR methodology answers for interviews.", icon: "🎯", engine: false },
+    { name: "Context Packager", cat: "system", desc: "Bundle project context for LLM handoffs.", icon: "📦", engine: true },
+    { name: "Workflow Gallery", cat: "system", desc: "Browse reusable SOPs and workflow templates.", icon: "🗂️", engine: true },
+    { name: "Color Palette Generator", cat: "creators", desc: "Extract and generate accessible UI palettes.", icon: "🎨", engine: false },
+    { name: "Typography Scale Calculator", cat: "creators", desc: "Generate fluid CSS typographic scales.", icon: "Aa", engine: false },
+    { name: "JSON Formatter", cat: "coders", desc: "Validate, format, and minify JSON payloads.", icon: "{ }", engine: false },
+    { name: "RegEx Tester", cat: "coders", desc: "Test regular expressions safely in the browser.", icon: "🔍", engine: false },
+    { name: "Revenue Forecaster", cat: "business", desc: "Model SaaS MRR growth and churn.", icon: "📈", engine: false },
+    { name: "Meeting Cost Calculator", cat: "business", desc: "Calculate the literal cost of meetings.", icon: "⏱️", engine: false },
+    { name: "Pomodoro Timer", cat: "misc", desc: "Classic focus timer with ambient noise.", icon: "🍅", engine: false },
+    
+    // Simulations & Games from Repo
+    { name: "Mars Colony", cat: "system", desc: "System dynamics survival simulation engine.", icon: "🚀", engine: true },
+    { name: "Orchard Sim", cat: "system", desc: "Ecological farming and resource simulator.", icon: "🌳", engine: true },
+    { name: "Grid Evolution", cat: "system", desc: "Cellular automata artificial life simulator.", icon: "🧬", engine: true },
+    { name: "Market Dynamics", cat: "business", desc: "Global economy supply and demand simulator.", icon: "📉", engine: true },
+    { name: "Traffic Router", cat: "system", desc: "City road network optimization puzzle.", icon: "🚦", engine: true }
+];
+
+// Configuration Maps
+const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc' };
+const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other' };
+
+// --- 2. CORE APP ENGINE ---
+const App = {
+    state: { tab: 'all', sortAlpha: true, includeEngine: false },
+
+    init() {
+        this.renderGrid();
+        this.initTabs();
+        this.initScrollSpy();
+        this.animateNumbers();
+    },
+
+    renderGrid() {
+        const grid = document.getElementById('all-grid');
+        const count = document.getElementById('tool-count');
+        
+        // Filter
+        let filtered = TOOLS_DB.filter(t => {
+            const matchTab = this.state.tab === 'all' || t.cat === this.state.tab;
+            const matchEngine = this.state.includeEngine || !t.engine;
+            return matchTab && matchEngine;
+        });
+
+        // Sort
+        if(this.state.sortAlpha) {
+            filtered.sort((a,b) => a.name.localeCompare(b.name));
+        }
+
+        // Render
+        if(filtered.length === 0) {
+            grid.innerHTML = `<div class="empty" style="grid-column: 1/-1; text-align:center; padding: 40px; font-weight:500;">No tools found matching criteria. Toggle "Include Engine Tools" to see simulations.</div>`;
+            count.innerText = `0 tools visible`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map((t, index) => {
+            const chipClass = CAT_MAP[t.cat] || 'c-misc';
+            const label = LABEL_MAP[t.cat] || t.cat;
+            const delay = (index * 0.04) > 0.5 ? 0 : index * 0.04; 
+            const engineBorder = t.engine ? 'is-engine' : '';
+            
+            return `
+            <div class="card grid-anim-enter ${engineBorder}" style="animation-delay: ${delay}s" onclick="App.openTool('${t.name}')">
+                <div class="card-top">
+                    <span class="chip ${chipClass}">${label}</span>
+                    <span class="card-icon">${t.icon}</span>
+                </div>
+                <h3>${t.name}</h3>
+                <p>${t.desc}</p>
+                <span class="card-link">Launch</span>
+            </div>`;
+        }).join('');
+
+        count.innerText = `Showing ${filtered.length} tools`;
+    },
+
+    initTabs() {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                tabs.forEach(t => t.classList.remove('on'));
+                e.target.classList.add('on');
+                this.state.tab = e.target.getAttribute('data-c');
+                this.renderGrid();
+            });
+        });
+    },
+
+    toggleSort() {
+        this.state.sortAlpha = !this.state.sortAlpha;
+        const btn = document.getElementById('sort-toggle');
+        btn.classList.toggle('active');
+        btn.innerText = this.state.sortAlpha ? "Sort: A → Z" : "Sort: Category";
+        this.renderGrid();
+    },
+
+    toggleEngineFilters() {
+        this.state.includeEngine = document.getElementById('engine-toggle').checked;
+        this.renderGrid();
+    },
+
+    openTool(name) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-msg').innerText = `Booting ${name} module...`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    },
+
+    initScrollSpy() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nl[data-s]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.toggle('on', link.getAttribute('data-s') === entry.target.id);
+                    });
+                }
+            });
+        }, { threshold: 0.4 });
+
+        sections.forEach(sec => observer.observe(sec));
+    },
+
+    animateNumbers() {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 150;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => observer.observe(counter));
+    }
+};
+
+// --- 3. UNIVERSAL SEARCH (ORB) ---
+const SearchUI = {
+    isOpen: false,
+    
+    open() {
+        this.isOpen = true;
+        const modal = document.getElementById('search-modal');
+        modal.classList.add('active');
+        setTimeout(() => document.getElementById('search-input').focus(), 100);
+        document.body.style.overflow = 'hidden';
+    },
+    
+    close() {
+        this.isOpen = false;
+        document.getElementById('search-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+        document.getElementById('search-input').value = '';
+    },
+
+    handleInput(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const resultsBox = document.getElementById('search-results');
+        
+        if(!query) {
+            resultsBox.innerHTML = '<div class="empty" style="padding: 24px; text-align: center;">Type to search tools and simulations...</div>';
+            return;
+        }
+
+        const matches = TOOLS_DB.filter(t => 
+            t.name.toLowerCase().includes(query) || 
+            t.desc.toLowerCase().includes(query) || 
+            t.cat.toLowerCase().includes(query)
+        );
+
+        if(matches.length === 0) {
+            resultsBox.innerHTML = `<div class="empty" style="padding: 24px; text-align: center;">No tools found matching "${query}".</div>`;
+            return;
+        }
+
+        resultsBox.innerHTML = matches.map(t => `
+            <div class="search-item" onclick="SearchUI.execute('${t.name}')">
+                <div class="si-icon">${t.icon}</div>
+                <div class="si-text">
+                    <div class="si-title">${t.name}</div>
+                    <div class="si-desc">${t.desc}</div>
+                </div>
+                <span class="chip ${CAT_MAP[t.cat]||'c-misc'}">${LABEL_MAP[t.cat]||t.cat}</span>
+            </div>
+        `).join('');
+    },
+
+    execute(toolName) {
+        this.close();
+        App.openTool(toolName);
+    }
+};
+
+// --- 4. EVENT BINDINGS ---
+document.addEventListener('DOMContentLoaded', () => {
+    App.init();
+
+    // Smooth scroll for nav links manually as fallback
+    document.querySelectorAll('.nl').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSec = document.getElementById(targetId);
+            if(targetSec) {
+                targetSec.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    document.getElementById('search-input').addEventListener('input', (e) => SearchUI.handleInput(e));
+    document.getElementById('search-modal').addEventListener('click', (e) => {
+        if(e.target.id === 'search-modal') SearchUI.close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            SearchUI.isOpen ? SearchUI.close() : SearchUI.open();
+        }
+        if (e.key === 'Escape' && SearchUI.isOpen) SearchUI.close();
+    });
+});
+</script>
 </body>
 </html>
