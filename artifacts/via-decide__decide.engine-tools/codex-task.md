@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create a utility script _assets/js/magnetic-buttons.js and update global-theme.css to implement "Magnetic Buttons" (inspired by modern React UI). Add Vanilla JS mousemove listeners to .btn elements so they gently pull towards the cursor on hover, and add a CSS ripple/glow effect on click. Must work without frameworks.
+
+CONSTRAINTS
+preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
 Add "Shimmer Text" and "Animated Glowing Borders" utilities to _assets/css/global-theme.css. Create pure CSS @keyframes for a light sweep effect across text (class .text-shimmer) and rotating conic-gradient borders (class .border-glow). Apply these classes to the milestone evolution states in the growth-milestone-engine for premium visual feedback.
 
 CONSTRAINTS

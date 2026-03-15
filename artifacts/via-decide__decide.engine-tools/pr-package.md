@@ -1,3 +1,9 @@
+Branch: simba/create-a-utility-script-assetsjsmagnetic-buttons
+Title: Create a utility script _assets/js/magnetic-buttons.js and update glo...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working magnetic and tactile cursor-aware buttons across the engine
 Branch: simba/add-shimmer-text-and-animated-glowing-borders-ut
 Title: Add "Shimmer Text" and "Animated Glowing Borders" utilities to _asset...
 

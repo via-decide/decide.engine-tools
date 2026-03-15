@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Create a utility script _assets/js/magnetic-buttons.js and update global-theme.css to implement "Magnetic Buttons" (inspired by modern React UI). Add Vanilla JS mousemove listeners to .btn elements so they gently pull towards the cursor on hover, and add a CSS ripple/glow effect on click. Must work without frameworks.
 Add "Shimmer Text" and "Animated Glowing Borders" utilities to _assets/css/global-theme.css. Create pure CSS @keyframes for a light sweep effect across text (class .text-shimmer) and rotating conic-gradient borders (class .border-glow). Apply these classes to the milestone evolution states in the growth-milestone-engine for premium visual feedback.
 Create a new utility _assets/js/environment-particles.js that uses HTML5 Canvas to render dynamic particle backgrounds (inspired by React Bits particle components). Logic must read the current environment state (rain, sun, toxic pests) and spawn lightweight falling raindrops, floating sun dust, or sickly green spores using requestAnimationFrame. Integrate into growth-milestone-engine.
 Implement the native View Transitions API (or a CSS fade/scale fallback in Vanilla JS) in the root router logic. When a user clicks a game card on the main index.html launcher to open a specific tool (like starter-farm-generator), the UI should smoothly morph/fade into the new view instead of a harsh page load cut.
