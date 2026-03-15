@@ -1,6 +1,12 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create a new utility _assets/js/environment-particles.js that uses HTML5 Canvas to render dynamic particle backgrounds (inspired by React Bits particle components). Logic must read the current environment state (rain, sun, toxic pests) and spawn lightweight falling raindrops, floating sun dust, or sickly green spores using requestAnimationFrame. Integrate into growth-milestone-engine.
+
+CONSTRAINTS
+preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
+Integrate swup.js via CDN into the root index.html to handle page routing. Wrap the main content areas in <main id="swup" class="transition-fade">. Configure Swup so that clicking a game card in the launcher smoothly fades out the index and fades in the specific tool's UI (like starter-farm-generator) without a hard browser refresh.
+> Create a new branch feature/ui-theme-engine. Create a new file shared/theme-engine.js. Build a utility object ThemeEngine that injects and modifies CSS variables (e.g., --bg-color, --text-color, --accent) at the document.documentElement level. Define three default themes: "Light" (clean white/gray), "Dark" (deep slate), and "Midnight" (pure black with neon accents). Read the user's preferred theme from localStorage.getItem('engine_theme') on initialization. Create a small floating UI toggle (or a function to bind to a settings menu) that cycles through these themes dynamically without reloading the page. Commit the changes with the message "feat: implement global CSS variable theme engine". Push the branch and open a Pull Request to main with the title "Feat: Global Theme Engine" and a description mentioning dynamic CSS custom properties.
 Implement the native View Transitions API (or a CSS fade/scale fallback in Vanilla JS) in the root router logic. When a user clicks a game card on the main index.html launcher to open a specific tool (like starter-farm-generator), the UI should smoothly morph/fade into the new view instead of a harsh page load cut.
 
 CONSTRAINTS

@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-a-new-utility-assetsjsenvironment-particl",
   "branch": "simba/implement-the-native-view-transitions-api-or-a-c",
   "branch": "simba/integrate-swupjs-via-cdn-into-the-root-indexhtml",
   "branch": "simba/integrate-the-vanilla-version-of-tsparticles-via",
@@ -11,6 +12,10 @@
   "branch": "simba/create-a-new-branch-featureagent-builder-ui-refa",
   "branch": "simba/create-a-new-branch-featureagent-runtime-create-",
   "branch": "simba/create-a-new-branch-featureagent-execution-logge",
+  "branch": "simba/create-a-new-branch-featureui-theme-engine-creat",
+  "branch": "simba/create-a-new-branch-featureui-template-gallery-c",
+  "branch": "simba/create-a-new-branch-featureui-smart-visualizer-u",
+  "branch": "simba/create-a-new-branch-featureui-drag-drop-refactor",
   "branch": "simba/create-a-new-branch-featureux-particle-system-cr",
   "branch": "simba/create-a-new-branch-featureux-audio-manager-crea",
   "branch": "simba/create-a-new-branch-featureux-view-transitions-c",

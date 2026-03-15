@@ -1,3 +1,13 @@
+Branch: simba/create-a-new-utility-assetsjsenvironment-particl
+Title: Create a new utility _assets/js/environment-particles.js that uses HT...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working Vanilla JS canvas particle system tied to engine weather states
+Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
+Title: Integrate swup.js via CDN into the root index.html to handle page rou...
+Branch: simba/create-a-new-branch-featureui-theme-engine-creat
+Title: > Create a new branch feature/ui-theme-engine. Create a new file shar...
 Branch: simba/implement-the-native-view-transitions-api-or-a-c
 Title: Implement the native View Transitions API (or a CSS fade/scale fallba...
 
