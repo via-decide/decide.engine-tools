@@ -4,6 +4,12 @@ Title: > Create a new branch feature/ux-view-transitions. Create a file shar...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: > Eliminate jarring screen snaps when navigating, replacing them with buttery-smooth, morphing layout shifts. /end_task
+Branch: simba/create-a-new-branch-featureux-achievement-toasts
+Title: > Create a new branch feature/ux-achievement-toasts. Create a file sh...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > A non-intrusive, highly rewarding way to notify the user of successes, background agent completions, and system states. /end_task
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

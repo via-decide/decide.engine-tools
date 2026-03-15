@@ -5,6 +5,10 @@ MISSION
 
 CONSTRAINTS
 > Pure Vanilla JS and CSS. Do not break the existing routing logic, only wrap the DOM mutation step. Ensure the fallback works seamlessly on older browsers (Safari/Firefox).
+> Create a new branch feature/ux-achievement-toasts. Create a file shared/toast-system.js. Build a ToastSystem utility that creates beautiful, floating notification cards at the bottom-right or top-center of the screen. It must support queuing: if 3 notifications fire at once, they should stack vertically with smooth CSS translation animations, rather than overlapping. Implement a progress bar inside the toast that shrinks over 3-5 seconds before the toast auto-dismisses. Allow the toast to accept an icon/emoji, title, and description. Hook this up to listen to wallet:earned, agent:run_completed, and growth:stage_evolved events to display premium "Achievement Unlocked" style popups. Commit the changes with the message "feat: add queue-based stacking toast notification system". Push the branch and open a Pull Request to main with the title "Feat: Achievement & Toast System" and a description mentioning it replaces native alerts.
+
+CONSTRAINTS
+> Pure Vanilla JS and CSS. Ensure the toasts can be swiped away manually on mobile. Handle DOM cleanup properly when a toast disappears.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
