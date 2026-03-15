@@ -1,3 +1,9 @@
+Branch: simba/create-assetsjsstudyos-integrationsjs-extract-da
+Title: Create _assets/js/studyos-integrations.js. Extract Dashboard (Chart.j...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: An isolated integrations file handling heavy visual computing and external APIs without bloating the main engine logic.
 Branch: simba/create-assetsjsstudyos-modulesjs-extract-studyen
 Title: Create _assets/js/studyos-modules.js. Extract StudyEngine, Missions, ...
 

@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create _assets/js/studyos-integrations.js. Extract Dashboard (Chart.js logic), YouTubeAPI, PDFExtractor (pdf.js logic), AIEval, and Orb. Refactor the Dashboard.updateCharts() to listen for studyos:state_updated. Refactor PDFExtractor to dispatch a studyos:pdf_extracted event containing the parsed syllabus items, which the core state manager will listen to and merge.
+
+CONSTRAINTS
+pure Vanilla JS; assume CDN scripts (Chart.js, PDF.js) are loaded in the global scope; keep heavy processing non-blocking.
 Create _assets/js/studyos-modules.js. Extract StudyEngine, Missions, Tracker, Vault, and PYQ logic from index.html. Refactor these objects to listen for the studyos:state_updated event to trigger their respective render() functions, rather than being manually called. Update all module interaction methods (like Missions.addTask or Tracker.addError) to update the state via AppStore and rely on the event bus to trigger the UI re-render.
 
 CONSTRAINTS
