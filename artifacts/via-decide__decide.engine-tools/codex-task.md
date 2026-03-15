@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/ui-theme-engine. Create a new file shared/theme-engine.js. Build a utility object ThemeEngine that injects and modifies CSS variables (e.g., --bg-color, --text-color, --accent) at the document.documentElement level. Define three default themes: "Light" (clean white/gray), "Dark" (deep slate), and "Midnight" (pure black with neon accents). Read the user's preferred theme from localStorage.getItem('engine_theme') on initialization. Create a small floating UI toggle (or a function to bind to a settings menu) that cycles through these themes dynamically without reloading the page. Commit the changes with the message "feat: implement global CSS variable theme engine". Push the branch and open a Pull Request to main with the title "Feat: Global Theme Engine" and a description mentioning dynamic CSS custom properties.
+
+CONSTRAINTS
+> Pure Vanilla JS. Must modify :root CSS variables dynamically. Avoid hardcoded colors in other HTML files; they must rely on these variables.
 > Create a new branch feature/ui-template-gallery. Create a new file agent-templates.html. Design a sleek grid UI showcasing at least 3 pre-built Agent Blueprints (e.g., "Web Content Summarizer", "Daily Data Fetcher", "Math Auto-Solver"). Store the JSON definitions for these templates as a constant array in the script. When a user clicks "Use Template" on a card, take the JSON, save it to localStorage.getItem('engine_agent_plans') with a new unique ID, and redirect the user to agent-builder.html to view the imported workflow. Commit the changes with the message "feat: add pre-built agent template gallery UI". Push the branch and open a Pull Request to main with the title "Feat: Agent Template Gallery" and a description mentioning it reduces friction for new users.
 
 CONSTRAINTS
