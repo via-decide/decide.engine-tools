@@ -5,6 +5,10 @@ MISSION
 
 CONSTRAINTS
 > Pure Vanilla JS. Do not use external Markdown parsers (write a simple regex parser for headers, bold, and lists). Keep the terminal scroll performant.
+> Create a new branch feature/ui-drag-drop. Refactor the agent-builder.html file. Implement the native HTML5 Drag and Drop API (draggable="true", ondragstart, ondragover, ondrop) on the workflow step containers. Allow users to click and drag a step to reorder its position in the sequential flow. Upon a successful drop, automatically update the underlying JSON array in memory to reflect the new execution order, and re-render the step numbers. Add visual feedback (like a dashed drop-zone border or slight opacity change) while a step is being dragged. Commit the changes with the message "feat: add HTML5 drag-and-drop sorting to agent builder". Push the branch and open a Pull Request to main with the title "Feat: Drag and Drop Step Sorter" and a description mentioning it improves UX for modifying workflows.
+
+CONSTRAINTS
+> Pure Vanilla JS. Do not use external libraries like SortableJS. Handle drag events efficiently to prevent flickering. Ensure the JSON state strictly matches the DOM order after a drop.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
