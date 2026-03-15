@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add a new standalone tool called study-timer in tools/study-timer/. Title: "Study Timer". Description: "Pomodoro-style study timer with session tracking.". Category: "education". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
 Add a new standalone tool called note-summarizer in tools/note-summarizer/. Title: "Note Summarizer". Description: "Paste notes, get structured summary with key points.". Category: "education". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
 
 CONSTRAINTS

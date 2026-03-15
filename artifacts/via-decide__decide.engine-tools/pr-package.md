@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-study-timer-in-
+Title: Add a new standalone tool called study-timer in tools/study-timer/. T...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working study-timer tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-note-summarizer
 Title: Add a new standalone tool called note-summarizer in tools/note-summar...
 
