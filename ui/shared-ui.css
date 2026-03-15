@@ -1,0 +1,93 @@
+/* Shared UI blocks for composed homepage sections */
+.ui-grid-auto{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:10px;
+}
+.ui-grid-fill{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:11px;
+}
+.ui-mb-24{margin-bottom:24px}
+.ui-mb-20{margin-bottom:20px}
+.ui-mt-18{margin-top:18px}
+
+.orchard-layer-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-top:3px solid var(--layer-color,var(--leaf));
+  border-radius:var(--r);
+  padding:16px;
+}
+.orchard-layer-label{
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--layer-color,var(--leaf));
+  margin-bottom:6px;
+}
+.orchard-layer-title{font-weight:700;margin-bottom:6px}
+.orchard-layer-desc{font-size:.82rem;color:var(--muted)}
+
+.live-events-row{
+  background:rgba(82,183,86,.06);
+  border:1px solid rgba(82,183,86,.2);
+  border-radius:var(--r);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.live-events-title{
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--leaf);
+}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap}
+.event-pill{
+  font-size:.8rem;
+  padding:4px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+  color:var(--muted);
+}
+.event-pill-highlight{
+  background:rgba(255,202,40,.1);
+  border-color:rgba(255,202,40,.2);
+  color:var(--gold);
+}
+
+.card-main-game{
+  border-color:rgba(82,183,86,.35);
+  background:linear-gradient(135deg,rgba(82,183,86,.08),var(--bg2));
+}
+.chip-main-game{background:rgba(82,183,86,.15);color:var(--leaf)}
+.card-coming-soon{opacity:.65;border-style:dashed}
+.chip-in-dev{background:rgba(255,202,40,.1);color:var(--gold)}
+.coming-soon-label{font-size:.8rem;color:var(--muted)}
+
+.feat-card-violet{border-color:rgba(139,92,246,.3);background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(26,22,20,.97))}
+.feat-card-orange{border-color:rgba(251,146,60,.3);background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(26,22,20,.97))}
+.chip-violet{background:rgba(139,92,246,.15);color:#a78bfa}
+.chip-orange{background:rgba(251,146,60,.15);color:#fb923c}
+.btn-violet{background:#7c3aed;color:#fff;box-shadow:0 4px 0 #4c1d95}
+.btn-orange{background:#ea580c;color:#fff;box-shadow:0 4px 0 #7c2d12}
+
+.mars-link-wrap{margin-top:18px}
+.footer-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-links{display:flex;gap:14px}
+
+.mission-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:900;
+  line-height:1.1;
+  margin:12px 0;
+}
+.mission-copy{color:var(--muted);max-width:480px;margin-bottom:24px}
