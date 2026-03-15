@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-> Create a new branch feature/agent-execution-logger. Create a file named shared/agent-logger.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: add global agent execution logger". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Execution Logger" and a description mentioning it captures runtime events for the console UI. Code Payload for agent-logger.js: const AgentLogger = {
+> Create a new branch feature/agent-builder-ui. Refactor the existing workflow-builder.html into agent-builder.html (or create a new file if it doesn't exist). Remove any 2D node-diagram canvas logic. Replace it with a vertical, step-based plan editor UI. Users must be able to click "Add Step", select a tool from window.ToolRegistry, and map inputs using variables from previous steps (e.g., {{step1.output}}). Add a "Save Agent" button that compiles this vertical plan into a strict JSON array and saves it to localStorage.getItem('engine_agent_plans'). Commit the changes with the message "feat: add step-based agent builder UI". Push the branch and open a Pull Request to main with the title "Feat: Agent Builder UI" and a description mentioning it replaces node diagrams with linear JSON step arrays.
 
 RULES
 1. Audit touched files first and identify regressions.
