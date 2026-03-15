@@ -6,67 +6,26 @@ Create tools/engine/locust-king-view/. Build an interactive UI for "The Locust K
 CONSTRAINTS
 pure Vanilla JS; standalone execution; must handle rapid event dispatching smoothly without UI lag.
 Create tools/engine/blight-boss-view/. Build a dramatic, high-stakes UI for "The Blight" server boss. Read orchard_engine_boss_progress and the target goal (50,000 pests) from the active event. Render a massive, collective progress bar. Include a local contribution counter showing how many pests the current player has cleared during the event timeframe. Update dynamically by listening to the server-boss-engine.
+Create shared/agent-runtime.js. Build a Vanilla JS class/object AgentRuntime. It takes a JSON plan from engine_agent_plans. It executes the array of steps sequentially. It must maintain a context object to store outputs from step 1 to pass into step 2. Wrap executions in try/catch blocks. Dispatch custom events (agent:step_started, agent:step_success, agent:step_failed) during the loop so the UI can react.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; utilize intense, urgent CSS styling (e.g., pulsing alerts or toxic color accents) that adapts to the active skin.
-Create tools/engine/water-trial-view/. Build a player-facing UI for the "Water Trial" consistency tournament. Display a 7-day calendar grid tracking daily login/session completions. The UI must highlight unbroken streaks and compare the player's consistency score against the tournament threshold needed to win rewards. Read local streak data and tournament status.
+pure Vanilla JS; asynchronous execution loop (support Promises/async-await for API calls); strictly isolated variable context per agent run.
+Refactor shared/tool-registry.js. Define a standard schema for tools that agents can use. Each tool must have an id, name, description, inputs (array of expected variables), and an execute function placeholder. Create a new tool-registry.html page to serve as a UI directory where users can view all available tools and their required schemas.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; must use data-skin-label attributes.
-Create tools/engine/root-challenge-view/. Build a player-facing UI for the "Root Challenge". Focus the visual hierarchy on "Root Strength" gain over the current week. Render a line chart or visual growth indicator comparing the player's local root progression against a simulated average competitor score. Read state from server-tournament-engine.
+pure Vanilla JS; do not break existing routing; tools must be exportable/accessible to the global scope or event bus.
+Create execution-console.html. Build a developer-style dashboard that listens to window.OrchardBus (or window.dispatchEvent) for agent execution events (agent:step_started, etc.). Display a real-time, auto-scrolling terminal/log feed of active agent runs. Show the exact JSON input/output payload for each step as it succeeds or fails.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; avoid external chart libraries if possible (use simple HTML/CSS bar graphs).
-Create tools/engine/harvest-race-view/. Build a player-facing UI specific to the "Harvest Race" tournament. Display a simulated global leaderboard reading from orchard_engine_mock_leaderboard. Emphasize the player's current "Fruit Output" metric. Provide real-time UI feedback (progress bars, rank changes) by listening to updates from the server-tournament-engine.
+pure Vanilla JS; use a monospace font for logs; ensure it can handle rapid event firing without freezing the DOM.
+Refactor tool-graph.html. Update the visualization logic to map the new Agent ecosystem. The graph should read engine_agent_plans and tool-registry.js. Render Agents as primary nodes, and draw directed edges to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; must utilize data-skin-label attributes for terminology consistency.
-Create tools/engine/skin-selector-ui/. Build a player-facing gallery UI displaying the 5 defined skins (Space Colony, Dojo, Kitchen, Scholar, Street Food). Read orchard_engine_owned_skins to determine state. For owned skins, show an "Equip" button that updates orchard_engine_active_skin and dispatches engine:skin_changed. For unowned skins, show a "Unlock (X Gems)" button that interfaces with the skin-pack-manager. Display visual previews of the color palettes and term changes for each skin.
+pure Vanilla JS; reuse existing Canvas/SVG/D3 setup; do not build a new graph engine from scratch.
+Update index.html and router.js. Integrate the new agent-builder.html, tool-registry.html, execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the navigation menu reflects this new "Agent Platform" architecture. Verify shared/agent-runtime.js is loaded globally so agents can be triggered from anywhere in the OS.
 
 CONSTRAINTS
-pure Vanilla JS; standalone execution; UI must use standard Orchard panel styling.
-Create tools/engine/skin-pack-manager/. Build a headless Vanilla JS utility that manages skin ownership. Initialize a default array in localStorage.getItem('orchard_engine_owned_skins') containing only the base farming skin. Implement functions to check if a skin is owned and a function to purchase a skin, which deducts 'Harvest Gems' via localStorage and adds the skin ID to the owned array. Dispatch engine:skin_unlocked on successful purchase.
-
-CONSTRAINTS
-pure Vanilla JS; no UI rendering; ensure robust validation before deducting currency.
-Create tools/engine/skin-engine/. Build a foundational Vanilla JS script that runs on initialization. It must read localStorage.getItem('orchard_engine_active_skin') (defaulting to the farming theme). The script must select all DOM elements with specific data-skin-label attributes (e.g., data-skin-label="roots") and update their innerText based on the active skin's dictionary. It must also remap the root CSS variables (--color-soil-dark, etc.) to the active skin's palette by applying styles to the document.documentElement. Listen for engine:skin_changed to trigger a re-render.
-
-CONSTRAINTS
-pure Vanilla JS; must be globally accessible or easily imported; fallback gracefully if skin data is missing.
-Create tools/engine/event-notification-hub/. Build a player-facing UI panel that reads orchard_engine_scheduled_events and displays a tabbed inbox: "Active", "Upcoming", and "Completed". Listen for engine:tournament_started, engine:boss_defeated, etc., to render visual alerts. Use a clean, list-based layout with countdown timers for active events.
-
-CONSTRAINTS
-pure Vanilla JS; use Orchard CSS variables; standalone execution.
-Create tools/engine/live-event-scheduler/. Build a Vanilla JS admin dashboard to manage scheduled server events. UI should allow creating entries for Tournaments and Bosses with fields: id, type, startTime, endTime, reward, and targetGoal. The tool must save an array of these objects to localStorage.getItem('orchard_engine_scheduled_events') and dispatch window.dispatchEvent(new CustomEvent('engine:events_updated')) when changes are saved.
-
-CONSTRAINTS
-pure Vanilla JS; standalone execution; do not modify existing tools; use standard Orchard CSS variables.
-Create tools/engine/server-tournament-engine/. Build a headless Vanilla JS logic controller that listens for engine:events_updated and polls the current time. If an event of type 'tournament' is active (Harvest Race, Root Challenge, Seed Auction, Pest Hunt, Water Trial), it reads local player progression via localStorage.getItem('orchard_engine_player_state') and simulates submitting scores to a mock global leaderboard (localStorage.getItem('orchard_engine_mock_leaderboard')). Dispatch engine:tournament_started and engine:tournament_ended (with payload {rank, reward}).
-
-CONSTRAINTS
-pure Vanilla JS; no UI rendering; standalone background execution; do not modify existing game loop.
-Create tools/engine/server-boss-engine/. Build a headless Vanilla JS logic controller handling collective challenges (The Blight, The Drought, Locust King, The Frost). It must listen for player action events (e.g., engine:research_completed, engine:pest_cleared) and incrementally update a mock global progress counter stored in localStorage.getItem('orchard_engine_boss_progress'). It must evaluate if the targetGoal from the active event is reached within the timeframe and dispatch engine:boss_defeated or engine:boss_failed.
-Add a new standalone tool called memory-match in tools/games/memory-match/. Title: "Memory Match". Description: "Card flip memory game with scoring and timer.". Category: "games". The tool must contain: config.json, index.html, tool.js. The game must run in browser, use vanilla JS, have simple UI, no external frameworks. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
-
-CONSTRAINTS
-preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
-Add a new standalone tool called pricing-calculator in tools/pricing-calculator/. Title: "Pricing Calculator". Description: "Compare pricing models: freemium, tiered, usage-based.". Category: "business". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
-
-CONSTRAINTS
-preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
-Add a new standalone tool called okr-planner in tools/okr-planner/. Title: "OKR Planner". Description: "Define objectives and key results with progress tracking.". Category: "business". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
-
-CONSTRAINTS
-preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
-Add a new standalone tool called swot-analyzer in tools/swot-analyzer/. Title: "SWOT Analyzer". Description: "Structured SWOT analysis with export.". Category: "business". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
-
-CONSTRAINTS
-preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
-Create candidate-comparison-view tool in tools/engine/candidate-comparison-view/ with config.json, index.html, tool.js. Enables recruiters to select multiple players and visually compare their root fundamentals, branch depth, trust scores, and fruit yields side-by-side. Vanilla JS, standalone UI.
-Integrate GSAP (GreenSock) via CDN into _assets/js/magnetic-buttons.js. Rewrite the "Magnetic Button" logic to use GSAP's gsap.to() for buttery-smooth spring physics instead of native CSS transitions. Also, create a GSAP timeline function to trigger the "Shimmering Text" and "Glowing Border" evolution alerts in the growth-milestone-engine.
-
-CONSTRAINTS
-pure Vanilla JS; no UI rendering; standalone execution; decouple logic from specific tool implementations.
+maintain existing history pushState routing; do not break any remaining legacy tools that the user still wants access to.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
@@ -115,6 +74,15 @@ Rules for coding agents in this repository:
 5. Tools must remain standalone HTML apps.
 6. Routing must never break existing tools.
 7. If reorganizing tools, move them safely and update references.
+ENGINE-TOOLS ARCHITECTURE (mandatory compliance)
+Tool directory: tools/<tool>/
+Required files: config.json, index.html, tool.js
+Shared dependencies to import: shared/tool-storage.js, shared/shared.css
+config.json must include: id, name, description, category, audience, inputs, outputs, tags
+Registration: append "tools/<tool>" to importableToolDirs[] in shared/tool-registry.js
+Router: add tool ID → entry path to static map in router.js
+Do NOT modify any existing tool folder or shared utility file.
+Do NOT use external frameworks, CDN packages, or bundlers.
 
 OUTPUT REQUIREMENTS
 - Include: implementation summary, checks run, risks, rollback notes.

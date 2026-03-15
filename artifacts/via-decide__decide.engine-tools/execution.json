@@ -23,6 +23,11 @@
   "branch": "simba/create-assetsjsengine-busjs-this-is-the-central-",
   "branch": "simba/update-orchard-routerjs-and-global-themecss-to-a",
   "branch": "simba/create-a-new-core-script-assetsjsorchard-routerj",
+  "branch": "simba/create-sharedagent-runtimejs-build-a-vanilla-js-",
+  "branch": "simba/refactor-sharedtool-registryjs-define-a-standard",
+  "branch": "simba/create-execution-consolehtml-build-a-developer-s",
+  "branch": "simba/refactor-tool-graphhtml-update-the-visualization",
+  "branch": "simba/update-indexhtml-and-routerjs-integrate-the-new-",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
