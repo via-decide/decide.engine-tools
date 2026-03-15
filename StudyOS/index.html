@@ -4,298 +4,365 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>StudyOS — Modular Learning Platform</title>
-    
-    <!-- External Dependencies -->
+
+    <!-- Tailwind CSS Config injected properly to ensure dark mode works -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#fffbeb', 100: '#fef3c7', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' },
+                        surface: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                    }
+                }
+            }
+        };
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
-        /* StudyOS Design System Variables */
+        /* Base Variables */
         :root {
             --bg-base: #f8fafc;
             --bg-surface: #ffffff;
-            --bg-nav: #ffffff;
             --bg-header: #0f172a;
             --text-primary: #0f172a;
-            --text-secondary: #475569;
             --text-muted: #64748b;
-            --text-header: #f8fafc;
             --border-color: #e2e8f0;
-            --btn-bg: #1e293b;
-            --btn-text: #ffffff;
-            --btn-hover: #334155;
-            --accent-primary: #b45309; 
+            --accent-primary: #b45309;
             --accent-bg: #fffbeb;
-            --accent-header: #d97706;
+            --success: #059669;
+            --danger: #dc2626;
         }
 
-        /* Tailwind 'dark' class will activate these variables */
         html.dark, [data-theme="dark"] {
             --bg-base: #0f172a;
             --bg-surface: #1e293b;
-            --bg-nav: #1e293b;
             --bg-header: #020617;
             --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
-            --text-header: #f8fafc;
             --border-color: #334155;
-            --btn-bg: #f8fafc;
-            --btn-text: #0f172a;
-            --btn-hover: #e2e8f0;
             --accent-primary: #f59e0b;
             --accent-bg: #451a03;
-            --accent-header: #f59e0b;
+            --success: #34d399;
+            --danger: #f87171;
         }
 
-        /* Core Resets & Mobile Optimizations */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-base); 
-            color: var(--text-primary); 
-            -webkit-tap-highlight-color: transparent; 
-            touch-action: manipulation; 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        button, input, select { touch-action: manipulation; outline: none; }
+        button, input, select, textarea { touch-action: manipulation; outline: none; }
 
-        /* UI Components */
-        .os-card { 
-            background: var(--bg-surface); 
-            border: 1px solid var(--border-color); 
-            border-radius: 12px; 
-            padding: 16px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02); 
-            transition: box-shadow 0.2s, background-color 0.3s, border-color 0.3s; 
+        /* Shared Card UI */
+        .os-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s, background-color 0.3s, border-color 0.3s;
         }
 
-        .os-input { 
-            width: 100%; padding: 12px 16px; background: var(--bg-surface); color: var(--text-primary);
-            border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; 
-            transition: border-color 0.2s, background-color 0.3s; 
+        .os-input {
+            width: 100%; padding: 14px 16px; background: var(--bg-surface); color: var(--text-primary);
+            border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; transition: all 0.2s;
         }
         .os-input:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 2px rgba(180, 83, 9, 0.1); }
-        
-        .os-btn { 
-            padding: 12px 20px; background: var(--btn-bg); color: var(--btn-text); border-radius: 8px; 
-            font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; border: none;
+
+        .os-btn {
+            padding: 14px 20px; background: #1e293b; color: #ffffff; border-radius: 8px; font-size: 15px;
+            font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; border: none;
         }
-        .os-btn:hover { background: var(--btn-hover); }
-        .os-btn:active { transform: scale(0.97); }
-        
-        /* Layer Management */
+        html.dark .os-btn { background: #f8fafc; color: #0f172a; }
+        .os-btn:active { transform: scale(0.96); }
+        .os-btn-outline {
+            padding: 14px 20px; background: transparent; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; border: 1px solid var(--border-color); color: var(--text-primary);
+        }
+
+        /* Layers */
         .view-layer { display: none; opacity: 0; transition: opacity 0.4s ease; min-height: 100dvh; }
         .view-layer.active { display: flex; opacity: 1; }
 
         /* =========================================
-           WIZARD BLOCK UI (ONBOARDING)
+           RECTANGULAR WIZARD BLOCKS (Auto-Scroll)
            ========================================= */
         #chat-container {
             scroll-behavior: smooth;
-            padding-bottom: 50vh; /* Pushes the latest item to the center of the screen */
+            padding-bottom: 60vh; /* Massive padding ensures items can scroll to the exact middle of the screen */
         }
 
         .wizard-block {
-            width: 100%; 
-            padding: 24px; 
-            border-radius: 12px; 
-            margin-bottom: 20px;
-            background: var(--bg-surface); 
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            width: 100%; max-width: 768px; margin: 0 auto 24px auto; padding: 28px;
+            border-radius: 12px; background: var(--bg-surface); border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            scroll-margin-top: 100px;
         }
-        
+
         .wizard-block.ai { border-top: 4px solid var(--accent-primary); }
-        .wizard-block.user { background: var(--bg-base); border-left: 4px solid var(--accent-primary); }
+        .wizard-block.user { 
+            background: var(--bg-base); border: 1px solid var(--border-color); 
+            border-left: 4px solid var(--text-muted); padding: 20px 28px; 
+        }
 
         .ai-header {
-            font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-primary);
-            font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+            font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-primary);
+            font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
         }
 
         .wizard-options-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 24px;
+            display: flex; flex-direction: column; gap: 10px; margin-top: 24px;
         }
 
         .wizard-opt-btn {
-            display: block; width: 100%; padding: 16px; text-align: center;
-            border: 2px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary);
-            border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; transition: all 0.2s;
-            -webkit-user-select: none; user-select: none;
+            display: block; width: 100%; padding: 18px; text-align: left;
+            border: 1px solid var(--border-color); background: var(--bg-base); color: var(--text-primary);
+            border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.2s;
         }
-        .wizard-opt-btn:active { transform: scale(0.98); background: var(--accent-bg); border-color: var(--accent-primary); }
+        
+        .wizard-opt-btn:active { transform: scale(0.98); }
+        .wizard-opt-btn.selected { border-color: var(--accent-primary); background: var(--accent-bg); color: var(--accent-primary); }
+        .wizard-opt-btn.faded { opacity: 0.4; pointer-events: none; background: transparent; border-color: transparent; }
 
         @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        /* =========================================
-           DASHBOARD & NAV UI 
-           ========================================= */
+        /* Dashboard Navigation */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.35s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
+        
         .nav-wrapper { -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
-        .nav-btn { color: var(--text-muted); padding: 14px 16px; white-space: nowrap; transition: all 0.2s; cursor: pointer; border-bottom: 2px solid transparent; font-weight: 500; font-size: 15px;}
+        .nav-btn { color: var(--text-muted); padding: 16px 20px; white-space: nowrap; transition: all 0.2s; cursor: pointer; border-bottom: 2px solid transparent; font-weight: 500; font-size: 15px; background: transparent; border-top:none; border-left:none; border-right:none;}
         .nav-btn:active { transform: scale(0.95); }
         .nav-btn.active { color: var(--accent-primary); border-bottom-color: var(--accent-primary); font-weight: 700; background: var(--accent-bg); }
-        
-        .os-btn-outline { padding: 12px 20px; background: transparent; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; border: 1px solid var(--border-color); color: var(--text-primary); }
-        .os-btn-outline:active { transform: scale(0.97); }
 
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .chart-box { position: relative; width: 100%; height: 260px; }
+        
+        /* Pills & Badges */
+        .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; border: 1px solid var(--border-color); background: var(--bg-base); color: var(--text-secondary); }
     </style>
 </head>
 
-<body class="antialiased flex flex-col min-h-screen relative">
+<body class="antialiased flex flex-col min-h-[100dvh] relative">
 
 <!-- ===================== 1. ONBOARDING WIZARD LAYER ===================== -->
 <div id="view-onboarding" class="view-layer flex-col w-full relative bg-[var(--bg-base)]">
     
     <!-- Fixed Header -->
-    <div class="fixed top-0 left-0 right-0 p-6 z-20 pointer-events-none flex justify-center">
-        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-[var(--accent-primary)] pointer-events-auto bg-[var(--bg-surface)] px-6 py-3 rounded-full border border-[var(--border-color)] shadow-sm">
-            StudyOS Setup
-        </h1>
+    <div class="fixed top-0 left-0 right-0 p-4 sm:p-6 z-20 pointer-events-none flex justify-center">
+        <div class="pointer-events-auto flex flex-col items-center gap-2">
+            <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-[var(--text-primary)] bg-[var(--bg-surface)] px-6 py-3 rounded-full border border-[var(--border-color)] shadow-sm flex items-center gap-2">
+                <span class="text-[var(--accent-primary)]">&#10024;</span> System Setup
+            </h1>
+        </div>
     </div>
 
     <!-- The Block Feed -->
-    <div class="flex-grow flex justify-center w-full z-10">
-        <div id="chat-container" class="w-full max-w-2xl pt-28 px-4 sm:px-8 overflow-y-auto flex flex-col hide-scrollbar relative">
-            <!-- Blocks render here dynamically -->
+    <div class="flex-grow flex justify-center w-full z-10 pt-28">
+        <div id="chat-container" class="w-full px-4 sm:px-8 overflow-y-auto flex flex-col hide-scrollbar relative">
+            <!-- Rectangular Blocks render here dynamically -->
         </div>
     </div>
 </div>
 
 <!-- ===================== 2. MAIN APP LAYER ===================== -->
-<div id="view-app" class="view-layer flex-col w-full relative">
+<div id="view-app" class="view-layer flex-col w-full relative bg-[var(--bg-base)]">
     
     <!-- Header -->
-    <header style="background: var(--bg-header); border-bottom: 4px solid var(--accent-header);" class="text-[var(--text-header)] pt-8 pb-4 px-4 sm:px-8 shadow-md">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+    <header style="background: var(--bg-header); border-bottom: 4px solid var(--accent-primary);" class="pt-8 pb-5 px-4 sm:px-8 shadow-md text-[var(--text-header)]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-5">
             <div>
-                <p id="app-subtitle" class="text-[var(--accent-header)] text-xs font-bold uppercase tracking-widest mb-1">StudyOS Engine</p>
-                <h1 id="app-title" class="text-3xl font-extrabold tracking-tight">Workspace</h1>
+                <p id="app-subtitle" class="text-[var(--accent-primary)] text-xs font-bold uppercase tracking-widest mb-1">StudyOS Engine</p>
+                <h1 id="app-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight">Workspace</h1>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="pill bg-white/10 text-white border-white/20" id="combo-pill">Combo 0 / 720</span>
+                </div>
             </div>
             <div class="flex gap-2 w-full md:w-auto text-sm">
-                <button onclick="AppStore.clear()" class="text-xs text-[var(--text-muted)] hover:text-white transition-colors mr-2 p-2">Reset OS</button>
-                <button onclick="SystemData.exportSync()" class="os-btn-outline border-[var(--border-color)] text-[var(--text-muted)] hover:bg-[var(--bg-surface)] flex-1 md:flex-none">Backup</button>
-                <button onclick="document.getElementById('importFile').click()" class="os-btn flex-1 md:flex-none">Restore</button>
+                <button onclick="AppStore.clear()" class="text-xs text-white/60 hover:text-white transition-colors mr-2 p-2 font-medium">Reset OS</button>
+                <button onclick="SystemData.exportSync()" class="os-btn !bg-white/10 hover:!bg-white/20 !text-white flex-1 md:flex-none">Backup</button>
+                <button onclick="document.getElementById('importFile').click()" class="os-btn !bg-[var(--accent-primary)] !text-white flex-1 md:flex-none">Restore</button>
                 <input type="file" id="importFile" class="hidden" accept=".json" onchange="SystemData.importSync(event)">
             </div>
         </div>
     </header>
 
     <!-- Navigation -->
-    <nav class="bg-[var(--bg-nav)] border-b border-[var(--border-color)] sticky top-0 z-40 shadow-sm transition-colors">
-        <div class="max-w-7xl mx-auto flex gap-2 nav-wrapper hide-scrollbar shrink-0 overflow-x-auto px-4 sm:px-8" id="navBar">
+    <nav class="bg-[var(--bg-surface)] border-b border-[var(--border-color)] sticky top-0 z-40 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto flex gap-1 nav-wrapper hide-scrollbar shrink-0 overflow-x-auto px-4 sm:px-8" id="navBar">
             <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
             <button class="nav-btn" data-tab="engine">Study Engine</button>
             <button class="nav-btn" data-tab="missions">Missions</button>
             <button class="nav-btn" data-tab="vault">Vault</button>
             <button class="nav-btn" data-tab="tracker">Tracker</button>
             <button class="nav-btn" data-tab="pyq">Simulator</button>
+            <button class="nav-btn" data-tab="ai">AI Eval</button>
         </div>
     </nav>
 
-    <!-- Main Content Routing -->
-    <main class="max-w-7xl mx-auto px-4 w-full sm:px-8 py-6 flex-grow relative" id="app-mount-point">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 w-full sm:px-8 py-8 flex-grow relative" id="app-mount-point">
         
         <!-- Dashboard Tab -->
         <section id="dashboard" class="tab-content active space-y-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <div class="os-card text-center bg-gradient-to-br from-slate-800 to-slate-900 text-white p-4 !border-none">
-                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest mb-1">Overall Progress</div>
-                    <div class="text-3xl md:text-4xl font-bold text-amber-500" id="dash-prog-text">0%</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="os-card text-center bg-gradient-to-br from-slate-800 to-slate-900 text-white p-5 border-none shadow-lg">
+                    <div class="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest mb-1 font-bold">Overall Progress</div>
+                    <div class="text-4xl font-extrabold text-amber-500" id="dash-prog-text">0%</div>
                 </div>
-                <div class="os-card text-center p-4">
-                    <div class="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-widest mb-1">Missions Done</div>
-                    <div class="text-3xl md:text-4xl font-bold" id="dash-missions-text">0</div>
+                <div class="os-card text-center p-5">
+                    <div class="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-widest mb-1 font-bold">Missions Done</div>
+                    <div class="text-4xl font-extrabold" id="dash-missions-text">0</div>
                 </div>
-                <div class="os-card text-center p-4">
-                    <div class="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-widest mb-1">Avg Score</div>
-                    <div class="text-3xl md:text-4xl font-bold text-emerald-600" id="dash-avg-mock">0</div>
+                <div class="os-card text-center p-5">
+                    <div class="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-widest mb-1 font-bold">Avg Score</div>
+                    <div class="text-4xl font-extrabold text-[var(--success)]" id="dash-avg-mock">0</div>
                 </div>
-                <div class="os-card text-center p-4">
-                    <div class="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-widest mb-1">Pending Errors</div>
-                    <div class="text-3xl md:text-4xl font-bold text-red-500" id="dash-rev-text">0</div>
+                <div class="os-card text-center p-5">
+                    <div class="text-[10px] md:text-xs text-[var(--text-muted)] uppercase tracking-widest mb-1 font-bold">Pending Errors</div>
+                    <div class="text-4xl font-extrabold text-[var(--danger)]" id="dash-rev-text">0</div>
                 </div>
             </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <div class="os-card xl:col-span-2">
+                    <h3 class="font-bold text-lg mb-4">Workspace Configurations</h3>
+                    <div id="preference-summary" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+                <div class="os-card">
+                    <h3 class="font-bold text-lg mb-4">Combination Matrix</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between border-b border-[var(--border-color)] pb-2"><span class="text-[var(--text-muted)] font-medium">Categories</span><span id="matrix-categories" class="font-bold">0</span></div>
+                        <div class="flex justify-between border-b border-[var(--border-color)] pb-2"><span class="text-[var(--text-muted)] font-medium">Subjects each</span><span id="matrix-subjects" class="font-bold">0</span></div>
+                        <div class="flex justify-between border-b border-[var(--border-color)] pb-2"><span class="text-[var(--text-muted)] font-medium">Themes</span><span id="matrix-themes" class="font-bold">0</span></div>
+                        <div class="flex justify-between border-b border-[var(--border-color)] pb-2"><span class="text-[var(--text-muted)] font-medium">Layouts</span><span id="matrix-layouts" class="font-bold">0</span></div>
+                        <div class="flex justify-between border-b border-[var(--border-color)] pb-2"><span class="text-[var(--text-muted)] font-medium">Languages</span><span id="matrix-languages" class="font-bold">0</span></div>
+                        <div class="flex justify-between font-extrabold pt-2 text-[var(--accent-primary)]"><span>Total Permutations</span><span id="matrix-total">720</span></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="os-card"><h3 class="font-bold mb-4">Score Trajectory</h3><div class="relative w-full h-[250px]"><canvas id="mockChart"></canvas></div></div>
-                <div class="os-card"><h3 class="font-bold mb-4">Syllabus Coverage</h3><div class="relative w-full h-[250px]"><canvas id="sylChart"></canvas></div></div>
+                <div class="os-card"><h3 class="font-bold text-lg mb-4">Score Trajectory</h3><div class="chart-box"><canvas id="mockChart"></canvas></div></div>
+                <div class="os-card"><h3 class="font-bold text-lg mb-4">Syllabus Coverage</h3><div class="chart-box"><canvas id="sylChart"></canvas></div></div>
             </div>
         </section>
 
         <!-- Engine Tab -->
         <section id="engine" class="tab-content space-y-6">
-            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div><h2 class="text-2xl font-bold">Dynamic Study Engine</h2><p class="text-sm text-[var(--text-muted)]">Your personalized curriculum based on your setup.</p></div>
-                <div class="w-full md:w-auto flex gap-2">
+            <div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold">Study Engine</h2>
+                    <p class="text-sm text-[var(--text-muted)] mt-1">Your dynamic curriculum based on your UI/UX combination.</p>
+                </div>
+                <div class="w-full md:w-auto flex gap-3 flex-col sm:flex-row">
                     <input type="file" id="pdf-upload" accept="application/pdf" class="hidden">
-                    <button onclick="document.getElementById('pdf-upload').click(); setTimeout(()=>PDFExtractor.processFile(), 500);" class="os-btn bg-indigo-600 hover:bg-indigo-700 w-full md:w-auto text-white flex gap-2 items-center justify-center">
+                    <button onclick="document.getElementById('pdf-upload').click(); setTimeout(()=>PDFExtractor.processFile(), 500);" class="os-btn !bg-indigo-600 hover:!bg-indigo-700 !text-white w-full sm:w-auto flex justify-center items-center gap-2">
                         <span>&#128196;</span> Extract PDF
                     </button>
-                    <button onclick="YouTubeAPI.searchFromPrompt()" class="os-btn bg-red-600 hover:bg-red-700 text-white w-full md:w-auto flex gap-2 items-center justify-center">
+                    <button onclick="YouTubeAPI.searchFromPrompt()" class="os-btn !bg-red-600 hover:!bg-red-700 !text-white w-full sm:w-auto flex justify-center items-center gap-2">
                         <span>&#9654;</span> YouTube Search
                     </button>
                 </div>
             </div>
-            <div id="syllabus-container" class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6"></div>
+            <div id="pdf-status" class="text-sm font-bold text-indigo-600"></div>
+            <div id="syllabus-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4"></div>
         </section>
 
         <!-- Missions Tab -->
         <section id="missions" class="tab-content space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                 <div><h2 class="text-2xl font-bold">Mission Control</h2></div>
-                <div class="text-sm font-semibold text-[var(--accent-primary)] bg-[var(--accent-bg)] px-4 py-1.5 rounded-full border border-[var(--border-color)]" id="date-display"></div>
+                <div class="text-sm font-semibold text-[var(--accent-primary)] bg-[var(--accent-bg)] px-4 py-2 rounded-lg border border-[var(--border-color)]" id="date-display"></div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="os-card col-span-1 h-fit">
-                    <h3 class="font-bold mb-3">Deploy Mission</h3>
-                    <div class="space-y-3">
+                    <h3 class="font-bold text-lg mb-4">Deploy Mission</h3>
+                    <div class="space-y-4">
                         <input type="text" id="task-input" class="os-input" placeholder="e.g., Complete Chapter 1">
-                        <select id="task-type" class="os-input"><option value="Study">New Study</option><option value="Revision">Revision</option><option value="Practice">Practice</option></select>
+                        <select id="task-type" class="os-input">
+                            <option value="Study">New Study</option>
+                            <option value="Revision">Revision</option>
+                            <option value="Practice">Practice</option>
+                        </select>
                         <button onclick="Missions.addTask()" class="os-btn w-full">Add Task</button>
                     </div>
                 </div>
                 <div class="os-card col-span-1 lg:col-span-2">
-                    <div class="flex justify-between items-center mb-4"><h3 class="font-bold">Active Objectives</h3><span class="text-xs bg-[var(--bg-base)] text-[var(--text-muted)] px-2 py-1 rounded font-bold" id="task-count">0/0</span></div>
-                    <div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden mb-4"><div class="h-full bg-[var(--accent-primary)] transition-all duration-500" id="task-prog-bar" style="width: 0%"></div></div>
-                    <ul id="task-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-2 pb-10"></ul>
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="font-bold text-lg">Active Objectives</h3>
+                        <span class="text-sm bg-[var(--bg-base)] text-[var(--text-primary)] px-3 py-1 rounded-md font-bold border border-[var(--border-color)]" id="task-count">0/0</span>
+                    </div>
+                    <div class="w-full bg-[var(--border-color)] h-3 rounded-full overflow-hidden mb-6">
+                        <div class="h-full bg-[var(--accent-primary)] transition-all duration-500" id="task-prog-bar" style="width: 0%"></div>
+                    </div>
+                    <ul id="task-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-2 pb-4"></ul>
                 </div>
             </div>
         </section>
 
         <!-- Vault Tab -->
         <section id="vault" class="tab-content space-y-4">
-            <div class="mb-6"><h2 class="text-2xl font-bold">Research Vault</h2><p class="text-sm text-[var(--text-muted)]">Offline-ready database generated for your profile.</p></div>
-            <div class="space-y-4" id="vault-container"></div>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold">Research Vault</h2>
+                <p class="text-sm text-[var(--text-muted)] mt-1">Offline-ready database generated for your profile.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="vault-container"></div>
         </section>
 
         <!-- Tracker Tab -->
         <section id="tracker" class="tab-content space-y-6">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="os-card col-span-1">
-                    <h3 class="font-bold mb-3">Log Mock</h3>
-                    <div class="space-y-3"><input type="date" id="mock-date" class="os-input"><input type="text" id="mock-name" class="os-input" placeholder="Test Name"><input type="number" id="mock-score" class="os-input" placeholder="Score"><button onclick="Tracker.addMock()" class="os-btn w-full">Save Score</button></div>
-                    <h3 class="font-bold mt-8 mb-3">Log Error</h3>
-                    <div class="space-y-3"><input type="text" id="err-topic" class="os-input" placeholder="Topic"><input type="text" id="err-desc" class="os-input" placeholder="Error detail"><input type="date" id="err-rev-date" class="os-input"><button onclick="Tracker.addError()" class="os-btn w-full !bg-red-500 !text-white hover:!bg-red-600">Save Error</button></div>
+                    <h3 class="font-bold text-lg mb-4">Log Mock Test</h3>
+                    <div class="space-y-4">
+                        <input type="date" id="mock-date" class="os-input">
+                        <input type="text" id="mock-name" class="os-input" placeholder="Test Name">
+                        <input type="number" id="mock-score" class="os-input" placeholder="Score">
+                        <button onclick="Tracker.addMock()" class="os-btn w-full">Save Score</button>
+                    </div>
+                    <hr class="my-8 border-[var(--border-color)]">
+                    <h3 class="font-bold text-lg mb-4">Log Error</h3>
+                    <div class="space-y-4">
+                        <input type="text" id="err-topic" class="os-input" placeholder="Topic">
+                        <input type="text" id="err-desc" class="os-input" placeholder="Error detail">
+                        <input type="date" id="err-rev-date" class="os-input">
+                        <button onclick="Tracker.addError()" class="os-btn w-full !bg-[var(--danger)] !text-white">Save Error</button>
+                    </div>
                 </div>
-                <div class="os-card col-span-1 lg:col-span-2 overflow-hidden flex flex-col p-4">
-                    <h3 class="font-bold mb-4">Error Database</h3>
-                    <div class="w-full overflow-x-auto flex-grow"><table class="w-full text-left min-w-[500px]"><thead><tr class="bg-[var(--bg-base)] text-[var(--text-secondary)] text-xs uppercase"><th class="p-3">Topic</th><th class="p-3">Description</th><th class="p-3">Revise</th><th class="p-3">Status</th></tr></thead><tbody id="error-list" class="divide-y divide-[var(--border-color)] text-sm"></tbody></table></div>
+                <div class="os-card col-span-1 lg:col-span-2 flex flex-col">
+                    <h3 class="font-bold text-lg mb-4">Error Database</h3>
+                    <div class="w-full overflow-x-auto flex-grow">
+                        <table class="w-full text-left min-w-[600px]">
+                            <thead>
+                                <tr class="bg-[var(--bg-base)] text-[var(--text-secondary)] text-xs uppercase tracking-wider">
+                                    <th class="p-4 rounded-tl-lg font-bold">Topic</th>
+                                    <th class="p-4 font-bold">Description</th>
+                                    <th class="p-4 font-bold">Revise</th>
+                                    <th class="p-4 rounded-tr-lg font-bold">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="error-list" class="divide-y divide-[var(--border-color)] text-sm"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -303,38 +370,61 @@
         <!-- PYQ Tab -->
         <section id="pyq" class="tab-content">
             <div class="max-w-3xl mx-auto os-card">
-                <div class="flex justify-between items-center mb-6 border-b border-[var(--border-color)] pb-4"><h2 class="text-2xl font-bold">Simulator</h2><div class="text-sm bg-[var(--bg-base)] px-3 py-1 rounded font-bold">Accuracy: <span id="pyq-acc" class="text-[var(--accent-primary)]">0%</span></div></div>
+                <div class="flex justify-between items-center mb-6 border-b border-[var(--border-color)] pb-4">
+                    <h2 class="text-2xl font-bold">Simulator</h2>
+                    <div class="text-sm bg-[var(--bg-base)] px-3 py-1 rounded font-bold border border-[var(--border-color)]">Accuracy: <span id="pyq-acc" class="text-[var(--accent-primary)]">0%</span></div>
+                </div>
                 <div id="pyq-container" class="space-y-6">
-                    <div class="text-sm text-[var(--text-muted)] font-bold uppercase mb-2" id="pyq-year"></div>
-                    <p class="text-lg font-medium" id="pyq-q">Loading...</p>
-                    <div class="space-y-3 mt-4 flex flex-col" id="pyq-options"></div>
-                    <div id="pyq-feedback" class="hidden mt-6 p-4 rounded-lg text-sm border"><strong id="pyq-status" class="text-lg"></strong><p id="pyq-exp" class="mt-2 opacity-90 text-base"></p><button onclick="PYQ.next()" class="mt-4 os-btn w-full sm:w-auto">Next Question</button></div>
+                    <div class="text-sm text-[var(--text-muted)] font-bold uppercase tracking-widest" id="pyq-year"></div>
+                    <p class="text-xl font-medium leading-relaxed" id="pyq-q">Loading...</p>
+                    <div class="space-y-3 mt-6 flex flex-col" id="pyq-options"></div>
+                    <div id="pyq-feedback" class="hidden mt-6 p-5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-base)]">
+                        <strong id="pyq-status" class="text-xl block mb-2"></strong>
+                        <p id="pyq-exp" class="opacity-90 text-base leading-relaxed"></p>
+                        <button onclick="PYQ.next()" class="mt-6 os-btn w-full sm:w-auto">Next Question</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-    </main>
-
-    <!-- UNIVERSAL ORB (Isolated inside the App layer to prevent overlapping Onboarding) -->
-    <button id="orb-trigger" class="fixed bottom-6 right-6 z-[60] w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-600 to-amber-500 text-white shadow-2xl flex items-center justify-center text-3xl active:scale-90 transition-transform" onclick="Orb.open()" style="touch-action: manipulation;">&#10024;</button>
-
-    <!-- ORB MODAL -->
-    <div id="orb-modal" class="hidden fixed inset-0 z-[200] bg-slate-900/80 backdrop-blur-md flex items-start justify-center pt-16 px-4 transition-opacity">
-        <div class="w-full max-w-2xl bg-[var(--bg-surface)] rounded-2xl shadow-2xl flex flex-col overflow-hidden" id="orb-modal-inner">
-            <div class="p-2 border-b border-[var(--border-color)] flex items-center gap-2">
-                <span class="text-2xl pl-3">&#10024;</span>
-                <input type="text" id="orb-input" class="w-full text-xl p-4 border-none outline-none bg-transparent text-[var(--text-primary)] placeholder-[var(--text-muted)]" placeholder="Search the OS..." autocomplete="off">
-                <button onclick="Orb.close()" class="p-3 text-[var(--text-muted)] text-3xl">&times;</button>
+        <!-- AI Tab -->
+        <section id="ai" class="tab-content">
+            <div class="max-w-4xl mx-auto os-card">
+                <h2 class="text-2xl font-bold mb-2">Subjective Auto-Evaluator</h2>
+                <p class="text-sm text-[var(--text-muted)] mb-6">Paste your written answer below to get instant structural feedback.</p>
+                <textarea id="ai-input" class="os-input font-mono text-sm mb-6" rows="12" placeholder="Start typing your answer here... (Target 150-250 words)"></textarea>
+                <button onclick="AIEval.evaluate()" class="os-btn w-full mb-8">Run Heuristic Evaluation</button>
+                <div id="ai-feedback" class="hidden space-y-6">
+                    <div class="grid grid-cols-3 gap-3 md:gap-6 text-center">
+                        <div class="bg-[var(--bg-base)] p-4 rounded-xl border border-[var(--border-color)]"><div class="text-xs text-[var(--text-muted)] uppercase font-bold tracking-wider mb-1">Words</div><div class="text-2xl font-bold" id="ai-wc">0</div></div>
+                        <div class="bg-[var(--bg-base)] p-4 rounded-xl border border-[var(--border-color)]"><div class="text-xs text-[var(--text-muted)] uppercase font-bold tracking-wider mb-1">Structure</div><div class="text-2xl font-bold" id="ai-struct">Pending</div></div>
+                        <div class="bg-[var(--bg-base)] p-4 rounded-xl border border-[var(--border-color)]"><div class="text-xs text-[var(--text-muted)] uppercase font-bold tracking-wider mb-1">Est. Score</div><div class="text-2xl font-bold text-[var(--success)]" id="ai-score">- / 10</div></div>
+                    </div>
+                    <div class="bg-[var(--bg-base)] border border-[var(--border-color)] p-6 rounded-xl text-sm leading-relaxed" id="ai-notes"></div>
+                </div>
             </div>
-            <div class="bg-[var(--bg-base)] overflow-y-auto max-h-[60vh] hide-scrollbar" id="orb-results"></div>
+        </section>
+    </main>
+</div>
+
+<!-- ==================== UNIVERSAL ORB ==================== -->
+<button id="orb-trigger" class="hidden fixed bottom-6 right-6 z-[60] w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-600 to-[var(--accent-primary)] text-white shadow-2xl flex items-center justify-center text-3xl active:scale-90 transition-transform" onclick="Orb.open()">&#10024;</button>
+
+<div id="orb-modal" class="hidden fixed inset-0 z-[200] bg-slate-900/80 backdrop-blur-md items-start justify-center pt-16 px-4 transition-opacity">
+    <div class="w-full max-w-2xl bg-[var(--bg-surface)] rounded-2xl shadow-2xl flex flex-col overflow-hidden" id="orb-modal-inner">
+        <div class="p-3 border-b border-[var(--border-color)] flex items-center gap-3">
+            <span class="text-3xl pl-3 text-[var(--accent-primary)]">&#10024;</span>
+            <input type="text" id="orb-input" class="w-full text-xl p-4 border-none outline-none bg-transparent text-[var(--text-primary)] placeholder-[var(--text-muted)] font-medium" placeholder="Search your OS..." autocomplete="off">
+            <button onclick="Orb.close()" class="p-3 text-[var(--text-muted)] hover:text-[var(--text-primary)] text-3xl font-light">&times;</button>
         </div>
+        <div class="bg-[var(--bg-base)] overflow-y-auto max-h-[60vh] hide-scrollbar" id="orb-results"></div>
     </div>
 </div>
 
 <!-- ===================== JAVASCRIPT SYSTEM ===================== -->
 <script>
 /**
- * 1. Global State & Combos Generator (The 720 Workspace Engine)
+ * 1. Global State & Combos Generator
  */
 const Dictionary = {
     "UPSC": ["Prelims", "Mains", "Optional", "Interview"],
@@ -344,196 +434,250 @@ const Dictionary = {
     "Productivity": ["Time Management", "Note Taking", "Workflows", "Habits"]
 };
 
+const UIUXMatrix = {
+    themes: ["Light mode", "Dark mode", "Auto (System)"],
+    layouts: ["Analytics Dashboard", "Mission Control", "Study Engine"],
+    languages: ["English", "Hindi", "Gujarati", "Other"],
+
+    getAllCombinations() {
+        const combinations = []; let index = 1;
+        Object.entries(Dictionary).forEach(([category, subjects]) => {
+            subjects.forEach(subject => {
+                this.themes.forEach(theme => {
+                    this.layouts.forEach(layout => {
+                        this.languages.forEach(language => {
+                            combinations.push({ id: index++, category, subject, theme, layout, language });
+                        });
+                    });
+                });
+            });
+        });
+        return combinations;
+    },
+
+    getCombinationIndex(config) {
+        if(!config) return 0;
+        const all = this.getAllCombinations();
+        const found = all.find(item => item.category === config.category && item.subject === config.subject && item.theme === config.theme && item.layout === config.layout && item.language === config.language );
+        return found ? found.id : 0;
+    },
+
+    summary() {
+        return { categories: Object.keys(Dictionary).length, subjectsEach: 4, themes: this.themes.length, layouts: this.layouts.length, languages: this.languages.length, total: this.getAllCombinations().length };
+    }
+};
+
 const DataGenerator = {
     build(category, subject) {
         let syllabus = []; let missions = []; let vault = {};
         
-        if (category === 'UPSC') {
+        if (category === "UPSC") {
             syllabus = [
-                { id: "pol", title: "Polity & Governance", total: 4, items: [ { id: "pol-1", text: "Constitution" }, { id: "pol-2", text: "Parliament" }, { id: "pol-3", text: "Judiciary" }, { id: "pol-4", text: "Local Govt" } ] },
-                { id: "eco", title: "Indian Economy", total: 3, items: [ { id: "eco-1", text: "Macroeconomics" }, { id: "eco-2", text: "Banking & RBI" }, { id: "eco-3", text: "Budget" } ] }
+                { id: "pol", title: "Polity & Governance", total: 4, items: [{ id: "pol-1", text: "Constitution" }, { id: "pol-2", text: "Parliament" }, { id: "pol-3", text: "Judiciary" }, { id: "pol-4", text: "Local Govt" }] },
+                { id: "eco", title: "Indian Economy", total: 3, items: [{ id: "eco-1", text: "Macroeconomics" }, { id: "eco-2", text: "Banking & RBI" }, { id: "eco-3", text: "Budget" }] }
             ];
-            missions = [ { id: Date.now(), text: `Read The Hindu Editorial`, type: "Study", done: false } ];
-            vault["doc1"] = { category: "Current Affairs", title: "Economic Survey Summary", size: "12 KB", content: "Growth at 7.2%..." };
-        } else if (category === 'Programming') {
+            missions = [{ id: Date.now(), text: "Read Editorial & Make Notes", type: "Study", done: false }];
+            vault.doc1 = { category: "Current Affairs", title: "Survey Summary", size: "12 KB", content: "Growth at 7.2%, fiscal trends, and sectoral highlights." };
+        } else if (category === "Programming") {
             syllabus = [
-                { id: "mod1", title: `${subject} Fundamentals`, total: 4, items: [{id:"m1-1", text:"Syntax & Variables"}, {id:"m1-2", text:"Control Flow"}, {id:"m1-3", text:"Functions"}, {id:"m1-4", text:"DOM/API Basics"}] },
-                { id: "mod2", title: `Advanced ${subject}`, total: 3, items: [{id:"m2-1", text:"State Management"}, {id:"m2-2", text:"Security"}, {id:"m2-3", text:"Performance"}] }
+                { id: "mod1", title: `${subject} Fundamentals`, total: 4, items: [{ id: "m1-1", text: "Syntax & Variables" }, { id: "m1-2", text: "Control Flow" }, { id: "m1-3", text: "Functions" }, { id: "m1-4", text: "DOM/API Basics" }] },
+                { id: "mod2", title: `Advanced ${subject}`, total: 3, items: [{ id: "m2-1", text: "State Management" }, { id: "m2-2", text: "Security" }, { id: "m2-3", text: "Performance" }] }
             ];
-            missions = [ { id: Date.now(), text: `Complete ${subject} environment setup`, type: "Study", done: false } ];
-            vault["doc1"] = { category: "Documentation", title: `${subject} Best Practices`, size: "8 KB", content: "Always use strict type checking..." };
+            missions = [{ id: Date.now(), text: `Setup ${subject} environment`, type: "Study", done: false }];
+            vault.doc1 = { category: "Documentation", title: `${subject} Practices`, size: "8 KB", content: "Use clear naming, modular components, testing." };
         } else {
-            // Generic fallback for the rest of the 720 combos
             syllabus = [
-                { id: "mod1", title: `Introduction to ${subject}`, total: 3, items: [{id:"m1-1", text:"Core Concepts"}, {id:"m1-2", text:"Historical Context"}, {id:"m1-3", text:"Key Principles"}] },
-                { id: "mod2", title: `${category} Masterclass`, total: 3, items: [{id:"m2-1", text:"Advanced Techniques"}, {id:"m2-2", text:"Case Studies"}, {id:"m2-3", text:"Practical Application"}] }
+                { id: "mod1", title: `Intro to ${subject}`, total: 3, items: [{ id: "m1-1", text: "Core Concepts" }, { id: "m1-2", text: "Context" }, { id: "m1-3", text: "Principles" }] },
+                { id: "mod2", title: `Masterclass`, total: 3, items: [{ id: "m2-1", text: "Techniques" }, { id: "m2-2", text: "Case Studies" }, { id: "m2-3", text: "Application" }] }
             ];
-            missions = [ { id: Date.now(), text: `Review introductory materials for ${subject}`, type: "Study", done: false } ];
-            vault["doc1"] = { category: "Resources", title: `${subject} Cheat Sheet`, size: "5 KB", content: "Key formulas and principles for quick recall..." };
+            missions = [{ id: Date.now(), text: `Review materials for ${subject}`, type: "Study", done: false }];
+            vault.doc1 = { category: "Resources", title: `${subject} Cheat Sheet`, size: "5 KB", content: "Key formulas and principles." };
         }
-        
         return { syllabus, missions, vault };
     }
 };
 
 const AppStore = {
-    config: null, data: null, 
-    
+    config: null, data: null,
+
     init() {
-        const savedConfig = localStorage.getItem('os_config_v4');
+        const savedConfig = localStorage.getItem("os_config_final");
         if (savedConfig) this.config = JSON.parse(savedConfig);
-        const savedData = localStorage.getItem('os_data_v4');
+        const savedData = localStorage.getItem("os_data_final");
         if (savedData) this.data = JSON.parse(savedData);
     },
 
     createWorkspace(config) {
         this.config = config;
         const generated = DataGenerator.build(config.category, config.subject);
-        
         this.data = {
-            baseSyllabus: generated.syllabus,
-            syllabusProgress: {}, customModules: [],
-            missions: generated.missions,
-            vaultData: generated.vault,
+            baseSyllabus: generated.syllabus, syllabusProgress: {}, customModules: [],
+            missions: generated.missions, vaultData: generated.vault,
             mocks: [], errors: [], pyqStats: { attempted: 0, correct: 0 }
         };
-        
-        localStorage.setItem('os_config_v4', JSON.stringify(this.config));
+        localStorage.setItem("os_config_final", JSON.stringify(this.config));
         this.saveData();
     },
 
     saveData() {
-        localStorage.setItem('os_data_v4', JSON.stringify(this.data));
-        if(window.Dashboard) window.Dashboard.updateMetrics();
+        localStorage.setItem("os_data_final", JSON.stringify(this.data));
+        if (window.Dashboard) window.Dashboard.updateMetrics();
     },
 
-    clear() {
-        localStorage.removeItem('os_config_v4'); localStorage.removeItem('os_data_v4'); location.reload();
-    }
+    clear() { localStorage.removeItem("os_config_final"); localStorage.removeItem("os_data_final"); location.reload(); }
 };
 
 const SystemData = {
     exportSync() {
         const payload = { config: AppStore.config, data: AppStore.data };
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
-        const node = document.createElement('a'); node.setAttribute("href", dataStr); node.setAttribute("download", `Workspace_${AppStore.config.category}.json`);
+        const node = document.createElement("a"); node.setAttribute("href", dataStr);
+        node.setAttribute("download", `Workspace_${AppStore.config.category}_${AppStore.config.subject}.json`);
         document.body.appendChild(node); node.click(); node.remove();
     },
     importSync(e) {
-        const file = e.target.files[0]; if (!file) return; const reader = new FileReader();
-        reader.onload = (ev) => { try { const imported = JSON.parse(ev.target.result); if(imported.config) { AppStore.config = imported.config; AppStore.data = imported.data; AppStore.saveData(); localStorage.setItem('os_config_v4', JSON.stringify(AppStore.config)); location.reload(); } } catch (err) { alert("Invalid OS File"); } };
-        reader.readAsText(file);
+        const file = e.target.files?.[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            try {
+                const imported = JSON.parse(ev.target.result);
+                if (imported.config && imported.data) {
+                    AppStore.config = imported.config; AppStore.data = imported.data;
+                    localStorage.setItem("os_config_final", JSON.stringify(AppStore.config));
+                    AppStore.saveData(); location.reload();
+                } else { alert("Invalid OS file"); }
+            } catch(e) { alert("Error reading file."); }
+        };
+        reader.readAsText(file); e.target.value = "";
     }
 };
 
 const ThemeEngine = {
     apply(themeStr) {
-        if (!themeStr) return;
         const html = document.documentElement;
-        if (themeStr === 'Auto' || themeStr === 'Auto (System)') {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                html.classList.add('dark'); html.setAttribute('data-theme', 'dark');
-            } else {
-                html.classList.remove('dark'); html.removeAttribute('data-theme');
-            }
-        } else if (themeStr === 'Dark mode') {
-            html.classList.add('dark'); html.setAttribute('data-theme', 'dark');
-        } else {
-            html.classList.remove('dark'); html.removeAttribute('data-theme');
-        }
+        if (themeStr === "Auto (System)") {
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) { html.classList.add("dark"); html.setAttribute("data-theme", "dark"); }
+            else { html.classList.remove("dark"); html.removeAttribute("data-theme"); }
+        } else if (themeStr === "Dark mode") { html.classList.add("dark"); html.setAttribute("data-theme", "dark"); } 
+        else { html.classList.remove("dark"); html.removeAttribute("data-theme"); }
     }
 };
 
 /**
- * 2. Onboarding Engine
+ * 2. Onboarding Engine (True Chat Auto-Scroll)
  */
 const OnboardingEngine = {
     steps: [
-        { key: 'category', aiResp: "What domain are you preparing for?", options: Object.keys(Dictionary) },
-        { key: 'subject', aiResp: "What is your specific target?", options: [] }, 
-        { key: 'theme', aiResp: "Interface theme preference?", options: ["Light mode", "Dark mode", "Auto (System)"] },
-        { key: 'layout', aiResp: "What is your default learning layout?", options: ["Analytics Dashboard", "Mission Control", "Study Engine"] },
-        { key: 'language', aiResp: "Primary UI Language?", options: ["English", "Hindi", "Gujarati", "Other"] }
+        { key: "category", aiResp: "Select your primary learning domain.", options: Object.keys(Dictionary) },
+        { key: "subject", aiResp: "Select your specific target focus.", options: [] },
+        { key: "theme", aiResp: "Select your UI theme preference.", options: UIUXMatrix.themes },
+        { key: "layout", aiResp: "Select your default dashboard layout.", options: UIUXMatrix.layouts },
+        { key: "language", aiResp: "Select primary OS language.", options: UIUXMatrix.languages }
     ],
     currentStep: 0, userChoices: {}, chatContainer: null,
 
     start() {
-        this.chatContainer = document.getElementById('chat-container');
-        this.chatContainer.innerHTML = '';
-        setTimeout(() => this.renderBlock(this.steps[0]), 300);
+        this.currentStep = 0; this.userChoices = {};
+        this.chatContainer = document.getElementById("chat-container");
+        this.chatContainer.innerHTML = "";
+        setTimeout(() => this.renderIntro(), 100);
+    },
+
+    renderIntro() {
+        const matrix = UIUXMatrix.summary();
+        const block = document.createElement("div");
+        block.className = "wizard-block ai";
+        block.innerHTML = `
+            <div class="ai-header"><span>&#10024;</span> Combination Engine</div>
+            <p class="font-semibold text-xl text-[var(--text-primary)]">Building dynamic UI/UX combination.</p>
+            <p class="mt-3 text-[var(--text-secondary)] leading-relaxed">System holds ${matrix.categories} categories × ${matrix.subjectsEach} subjects × ${matrix.themes} themes × ${matrix.layouts} layouts × ${matrix.languages} languages = <strong>${matrix.total}</strong> distinct workspace configurations.</p>
+        `;
+        this.chatContainer.appendChild(block);
+        setTimeout(() => this.renderBlock(this.steps[0]), 800);
     },
 
     renderBlock(stepObj) {
-        const block = document.createElement('div');
-        block.className = 'wizard-block ai';
-        
+        const block = document.createElement("div");
+        block.className = "wizard-block ai";
+
         let opts = stepObj.options;
-        if (stepObj.key === 'subject') opts = Dictionary[this.userChoices.category] || ["General Mastery"];
+        if (stepObj.key === "subject") opts = Dictionary[this.userChoices.category] || ["General Mastery"];
 
-        let grid = '<div class="wizard-options-grid">';
-        opts.forEach(opt => {
-            grid += `<button class="wizard-opt-btn" type="button" data-val="${opt}">${opt}</button>`;
-        });
-        grid += '</div>';
+        const grid = `
+            <div class="wizard-options-grid">
+                ${opts.map(opt => `<button class="wizard-opt-btn" type="button" data-val="${opt}">${opt}</button>`).join("")}
+            </div>
+        `;
 
-        block.innerHTML = `<div class="ai-header"><span>&#10024;</span> System Query</div><p class="font-semibold text-xl">${stepObj.aiResp}</p>${grid}`;
+        block.innerHTML = `<div class="ai-header"><span>&#10024;</span> System Query</div><p class="font-semibold text-xl text-[var(--text-primary)]">${stepObj.aiResp}</p>${grid}`;
         this.chatContainer.appendChild(block);
         
         this.scrollToCenter(block);
 
-        const btns = block.querySelectorAll('.wizard-opt-btn');
-        btns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+        block.querySelectorAll(".wizard-opt-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
                 e.preventDefault();
-                this.handleChoice(btn.getAttribute('data-val'), block);
+                this.handleChoice(btn, block);
             });
         });
     },
 
-    handleChoice(choice, blockRef) {
-        // Prevent double taps
-        if(blockRef.dataset.locked === 'true') return;
-        blockRef.dataset.locked = 'true';
+    handleChoice(btnElement, blockRef) {
+        if (blockRef.dataset.locked === "true") return;
+        blockRef.dataset.locked = "true";
 
-        const grid = blockRef.querySelector('.wizard-options-grid');
-        if(grid) grid.style.display = 'none';
+        const choice = btnElement.getAttribute("data-val");
+        
+        // Highlight selection, fade out others smoothly
+        const allBtns = blockRef.querySelectorAll(".wizard-opt-btn");
+        allBtns.forEach(b => {
+            if(b === btnElement) { b.classList.add("selected"); } 
+            else { b.classList.add("faded"); }
+        });
 
         const key = this.steps[this.currentStep].key;
         this.userChoices[key] = choice;
 
-        const userBlock = document.createElement('div');
-        userBlock.className = 'wizard-block user';
-        userBlock.innerHTML = `<div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-1 font-bold">Your Selection</div><div class="text-xl font-bold">${choice}</div>`;
+        const userBlock = document.createElement("div");
+        userBlock.className = "wizard-block user";
+        userBlock.innerHTML = `<div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-2 font-bold">User Input</div><div class="text-xl font-bold text-[var(--text-primary)]">${choice}</div>`;
         this.chatContainer.appendChild(userBlock);
         
         this.scrollToCenter(userBlock);
 
-        if (key === 'theme') ThemeEngine.apply(choice);
+        if (key === "theme") ThemeEngine.apply(choice);
 
         setTimeout(() => {
-            this.currentStep++;
-            if (this.currentStep < this.steps.length) this.renderBlock(this.steps[this.currentStep]);
-            else this.complete();
-        }, 500);
+            this.currentStep += 1;
+            if (this.currentStep < this.steps.length) {
+                this.renderBlock(this.steps[this.currentStep]);
+            } else {
+                this.complete();
+            }
+        }, 600);
     },
 
     complete() {
-        const block = document.createElement('div');
-        block.className = 'wizard-block ai';
-        block.innerHTML = `<div class="ai-header"><span>&#10024;</span> Initializing</div><p class="font-bold text-2xl mb-2">Generating Workspace...</p><p class="text-[var(--text-muted)]">Creating ${this.userChoices.category} > ${this.userChoices.subject} syllabus.</p>`;
+        const comboId = UIUXMatrix.getCombinationIndex(this.userChoices);
+        const block = document.createElement("div");
+        block.className = "wizard-block ai";
+        block.innerHTML = `
+            <div class="ai-header"><span>&#10024;</span> System Ready</div>
+            <p class="font-bold text-[var(--text-primary)] text-2xl mb-2">Generating Workspace...</p>
+            <p class="text-[var(--text-muted)]">Creating ${this.userChoices.category} > ${this.userChoices.subject} with configuration <strong>#${comboId}</strong>.</p>
+        `;
         this.chatContainer.appendChild(block);
         this.scrollToCenter(block);
 
         setTimeout(() => {
             AppStore.createWorkspace(this.userChoices);
-            Bootloader.switchLayer('view-app');
-        }, 2000);
+            Bootloader.switchLayer("view-app");
+        }, 1500);
     },
 
     scrollToCenter(element) {
         setTimeout(() => {
-            // Using block: center aligns the item perfectly in the middle of mobile viewports
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.scrollIntoView({ behavior: "smooth", block: "center" });
         }, 50);
     }
 };
@@ -545,19 +689,23 @@ const Bootloader = {
     init() {
         AppStore.init();
         if (!AppStore.config) {
-            this.switchLayer('view-onboarding');
+            this.switchLayer("view-onboarding");
             OnboardingEngine.start();
         } else {
             ThemeEngine.apply(AppStore.config.theme);
-            this.switchLayer('view-app');
+            this.switchLayer("view-app");
         }
     },
+
     switchLayer(id) {
-        document.querySelectorAll('.view-layer').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll(".view-layer").forEach(el => el.classList.remove("active"));
         setTimeout(() => {
-            document.getElementById(id).classList.add('active');
-            if (id === 'view-app') {
-                document.getElementById('app-subtitle').innerText = `${AppStore.config.category} — ${AppStore.config.subject}`;
+            const target = document.getElementById(id);
+            target.classList.add("active");
+
+            if (id === "view-app") {
+                document.getElementById("app-subtitle").innerText = `${AppStore.config.category} — ${AppStore.config.subject}`;
+                document.getElementById('orb-trigger').style.display = 'flex'; 
                 UIEngine.init();
             }
         }, 50);
@@ -566,31 +714,54 @@ const Bootloader = {
 
 const UIEngine = {
     init() {
-        const navBtns = document.querySelectorAll('.nav-btn'); 
-        const tabs = document.querySelectorAll('.tab-content');
-        
+        const navBtns = document.querySelectorAll(".nav-btn");
+        const tabs = document.querySelectorAll(".tab-content");
+
         navBtns.forEach(btn => {
-            btn.onclick = () => {
-                navBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
-                tabs.forEach(t => t.classList.remove('active')); document.getElementById(btn.dataset.tab).classList.add('active');
-                if (btn.dataset.tab === 'dashboard') window.Dashboard.updateCharts();
-                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            };
+            btn.addEventListener("click", () => {
+                navBtns.forEach(b => b.classList.remove("active")); btn.classList.add("active");
+                tabs.forEach(t => t.classList.remove("active")); document.getElementById(btn.dataset.tab).classList.add("active");
+                if (btn.dataset.tab === "dashboard") window.Dashboard.updateCharts();
+                btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            });
         });
-        
+
+        this.renderPreferenceSummary();
+
         const prefMap = { "Analytics Dashboard": "dashboard", "Mission Control": "missions", "Study Engine": "engine" };
         const route = prefMap[AppStore.config.layout] || "dashboard";
         const targetBtn = document.querySelector(`.nav-btn[data-tab="${route}"]`);
-        if(targetBtn) targetBtn.click();
+        if (targetBtn) targetBtn.click();
+
+        document.getElementById("date-display").innerText = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+
+        const matrix = UIUXMatrix.summary();
+        document.getElementById("matrix-categories").textContent = matrix.categories;
+        document.getElementById("matrix-subjects").textContent = matrix.subjectsEach;
+        document.getElementById("matrix-themes").textContent = matrix.themes;
+        document.getElementById("matrix-layouts").textContent = matrix.layouts;
+        document.getElementById("matrix-languages").textContent = matrix.languages;
+        document.getElementById("matrix-total").textContent = matrix.total;
+
+        window.StudyEngine.render(); window.Missions.render(); window.Tracker.renderErrors(); window.Vault.render(); window.PYQ.render(); window.Dashboard.initCharts();
+    },
+
+    renderPreferenceSummary() {
+        const container = document.getElementById("preference-summary");
+        const comboIndex = UIUXMatrix.getCombinationIndex(AppStore.config);
+        document.getElementById("combo-pill").textContent = `Combo ${comboIndex} / 720`;
         
-        document.getElementById('date-display').innerText = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-        
-        window.StudyEngine.render();
-        window.Missions.render();
-        window.Tracker.renderErrors();
-        window.Vault.render();
-        window.PYQ.render();
-        window.Dashboard.initCharts();
+        const cards = [
+            { label: "Category", value: AppStore.config.category }, { label: "Subject", value: AppStore.config.subject },
+            { label: "Theme", value: AppStore.config.theme }, { label: "Layout", value: AppStore.config.layout }, { label: "Language", value: AppStore.config.language }
+        ];
+
+        container.innerHTML = cards.map(card => `
+            <div class="rounded-xl border border-[var(--border-color)] p-4 bg-[var(--bg-base)] shadow-sm">
+                <div class="text-xs uppercase tracking-widest text-[var(--text-muted)] mb-1 font-bold">${card.label}</div>
+                <div class="font-bold text-[var(--text-primary)] text-lg">${card.value}</div>
+            </div>
+        `).join("");
     }
 };
 
@@ -599,144 +770,418 @@ const UIEngine = {
  */
 window.Dashboard = {
     mChart: null, sChart: null,
-    initCharts() { Chart.defaults.font.family = "Inter"; Chart.defaults.color = "#94a3b8"; this.updateCharts(); },
+
+    initCharts() { Chart.defaults.font.family = "Inter"; this.updateCharts(); },
+
     updateCharts() {
-        const mCtx = document.getElementById('mockChart'); const sCtx = document.getElementById('sylChart');
-        if(!mCtx || !sCtx || !AppStore.data) return;
-        
-        const mData = AppStore.data.mocks; 
-        if(this.mChart) this.mChart.destroy();
-        this.mChart = new Chart(mCtx, { type: 'line', data: { labels: mData.map(d=>d.name), datasets: [{ label:'Score', data: mData.map(d=>d.score), borderColor: '#10b981', tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false } });
-        
-        const labels = AppStore.data.baseSyllabus.map(s => s.title);
-        const dataVals = AppStore.data.baseSyllabus.map(s => {
-            let checked = 0;
-            s.items.forEach(i => { if(AppStore.data.syllabusProgress[i.id]) checked++; });
-            return s.total ? Math.round((checked/s.total)*100) : 0;
+        const mCtx = document.getElementById("mockChart"); const sCtx = document.getElementById("sylChart");
+        if (!mCtx || !sCtx || !AppStore.data) return;
+
+        const isDark = document.documentElement.classList.contains('dark') || document.documentElement.getAttribute('data-theme') === 'dark';
+        const gridColor = isDark ? '#334155' : '#e2e8f0';
+        const textColor = isDark ? '#94a3b8' : '#64748b';
+
+        const mockLabels = AppStore.data.mocks.map(d => d.name || d.date);
+        const mockScores = AppStore.data.mocks.map(d => d.score);
+
+        if (this.mChart) this.mChart.destroy();
+        this.mChart = new Chart(mCtx, {
+            type: "line",
+            data: { labels: mockLabels.length ? mockLabels : ["No Data"], datasets: [{ label: "Score", data: mockScores.length ? mockScores : [0], borderColor: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.1)', fill: true, tension: 0.3 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: textColor } } }, scales: { x: { ticks: { color: textColor }, grid: { color: gridColor } }, y: { ticks: { color: textColor }, grid: { color: gridColor }, beginAtZero: true } } }
         });
-        if(AppStore.data.customModules.length > 0) { labels.push("Custom"); dataVals.push(100); } 
-        
-        if(this.sChart) this.sChart.destroy();
-        this.sChart = new Chart(sCtx, { type: 'radar', data: { labels: labels, datasets: [{ label:'% Done', data: dataVals, backgroundColor: 'rgba(217, 119, 6, 0.2)', borderColor: '#d97706' }] }, options: { responsive: true, maintainAspectRatio: false, scales: {r:{min:0, max:100, ticks:{display:false}}} } });
+
+        const allModules = [...AppStore.data.baseSyllabus, ...AppStore.data.customModules];
+        const labels = allModules.map(s => s.title);
+        const dataVals = allModules.map(s => {
+            const total = Array.isArray(s.items) ? s.items.length : 0;
+            const checked = (s.items || []).filter(i => AppStore.data.syllabusProgress[i.id]).length;
+            return total ? Math.round((checked / total) * 100) : 0;
+        });
+
+        if (this.sChart) this.sChart.destroy();
+        this.sChart = new Chart(sCtx, {
+            type: "radar",
+            data: { labels: labels.length ? labels : ["No syllabus"], datasets: [{ label: "% Done", data: dataVals.length ? dataVals : [0], backgroundColor: "rgba(217, 119, 6, 0.2)", borderColor: '#d97706' }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: textColor } } }, scales: { r: { min: 0, max: 100, angleLines: { color: gridColor }, grid: { color: gridColor }, pointLabels: { color: textColor }, ticks: { display: false } } } }
+        });
+
         this.updateMetrics();
     },
+
     updateMetrics() {
-        if(!AppStore.data) return;
-        let total = AppStore.data.baseSyllabus.reduce((acc, m) => acc + m.total, 0);
-        let done = Object.values(AppStore.data.syllabusProgress).filter(v=>v).length;
-        document.getElementById('dash-prog-text').innerText = `${total===0?0:Math.round((done/total)*100)}%`;
-        document.getElementById('dash-missions-text').innerText = AppStore.data.missions.filter(m=>m.done).length;
-        const mks = AppStore.data.mocks; document.getElementById('dash-avg-mock').innerText = mks.length ? Math.round(mks.reduce((s, m)=>s+m.score,0)/mks.length) : 0;
+        if (!AppStore.data) return;
+        const allModules = [...AppStore.data.baseSyllabus, ...AppStore.data.customModules];
+        const total = allModules.reduce((acc, module) => acc + ((module.items || []).length), 0);
+        const done = Object.values(AppStore.data.syllabusProgress).filter(Boolean).length;
+        const completedMissions = AppStore.data.missions.filter(m => m.done).length;
+        const mocks = AppStore.data.mocks;
+        const avgMock = mocks.length ? Math.round(mocks.reduce((sum, item) => sum + Number(item.score || 0), 0) / mocks.length) : 0;
+        const pendingErrors = AppStore.data.errors.filter(e => e.status !== "Fixed").length;
+
+        document.getElementById("dash-prog-text").innerText = `${total === 0 ? 0 : Math.round((done / total) * 100)}%`;
+        document.getElementById("dash-missions-text").innerText = completedMissions;
+        document.getElementById("dash-avg-mock").innerText = avgMock;
+        document.getElementById("dash-rev-text").innerText = pendingErrors;
     }
 };
 
 window.StudyEngine = {
     render() {
-        const c = document.getElementById('syllabus-container'); if(!c) return; c.innerHTML = '';
+        const container = document.getElementById("syllabus-container");
+        if (!container || !AppStore.data) return;
+        container.innerHTML = "";
+
         const all = [...AppStore.data.baseSyllabus, ...AppStore.data.customModules];
         all.forEach(sub => {
-            const card = document.createElement('div'); card.className = "os-card mb-4";
-            if(sub.isCustom) card.classList.add("border-l-4", "border-indigo-500");
-            let checked = 0; let html = '';
-            sub.items.forEach(i => {
-                const isC = AppStore.data.syllabusProgress[i.id] ? 'checked' : ''; if(isC) checked++;
-                html += `<label class="flex items-start gap-3 p-2 text-base cursor-pointer select-none border-b border-[var(--border-color)] last:border-0 hover:bg-[var(--bg-base)]">
-                    <input type="checkbox" onchange="StudyEngine.toggle('${i.id}', this.checked)" class="mt-1 w-5 h-5 accent-[var(--accent-primary)] cursor-pointer" ${isC}>
-                    <span class="${isC ? 'line-through opacity-50' : ''}">${i.text}</span>
-                </label>`;
-            });
-            const pct = sub.total ? Math.round((checked/sub.total)*100) : 0;
-            const delBtn = sub.isCustom ? `<button onclick="StudyEngine.del('${sub.id}')" class="text-red-500 text-sm font-bold">X</button>` : '';
-            card.innerHTML = `<div class="flex justify-between items-center mb-3"><h4 class="font-bold text-lg">${sub.isCustom?'&#128196; ':''}${sub.title}</h4><div class="flex items-center gap-2">${delBtn}<span class="text-sm font-bold text-[var(--accent-primary)] bg-[var(--accent-bg)] px-2 py-1 rounded">${pct}%</span></div></div><div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden mb-4"><div class="h-full ${sub.isCustom?'bg-indigo-600':'bg-[var(--accent-primary)]'} transition-all" style="width: ${pct}%"></div></div><div>${html}</div>`;
-            c.appendChild(card);
+            const card = document.createElement("div");
+            card.className = "os-card mb-4";
+            if (sub.isCustom) card.classList.add("border-l-4", "border-indigo-500");
+
+            const total = Array.isArray(sub.items) ? sub.items.length : 0;
+            const checked = (sub.items || []).filter(i => AppStore.data.syllabusProgress[i.id]).length;
+
+            const html = (sub.items || []).map(i => {
+                const checkedAttr = AppStore.data.syllabusProgress[i.id] ? "checked" : "";
+                const textClass = checkedAttr ? "line-through opacity-50 text-[var(--text-muted)]" : "text-[var(--text-primary)]";
+                return `
+                    <label class="flex items-start gap-3 p-3 text-base cursor-pointer select-none border-b border-[var(--border-color)] last:border-0 hover:bg-[var(--bg-base)]">
+                        <input type="checkbox" onchange="StudyEngine.toggle('${i.id}', this.checked)" class="mt-1 w-5 h-5 accent-[var(--accent-primary)] cursor-pointer" ${checkedAttr}>
+                        <span class="font-medium ${textClass}">${i.text}</span>
+                    </label>
+                `;
+            }).join("");
+
+            const pct = total ? Math.round((checked / total) * 100) : 0;
+            const delBtn = sub.isCustom ? `<button onclick="StudyEngine.del('${sub.id}')" class="text-red-500 text-sm font-bold">X</button>` : "";
+
+            card.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="font-bold text-lg text-[var(--text-primary)]">${sub.isCustom ? '&#128196; ' : ''}${sub.title}</h4>
+                    <div class="flex items-center gap-2">
+                        ${delBtn}
+                        <span class="text-sm font-bold text-[var(--accent-primary)] bg-[var(--accent-bg)] border border-[var(--border-color)] px-2 py-1 rounded">${pct}%</span>
+                    </div>
+                </div>
+                <div class="w-full bg-[var(--border-color)] h-2 rounded-full overflow-hidden mb-5">
+                    <div class="h-full ${sub.isCustom ? 'bg-indigo-600' : 'bg-[var(--accent-primary)]'} transition-all" style="width: ${pct}%"></div>
+                </div>
+                <div class="bg-[var(--bg-surface)] border border-[var(--border-color)] rounded-lg overflow-hidden">${html}</div>
+            `;
+            container.appendChild(card);
         });
     },
-    toggle(id, stat) { AppStore.data.syllabusProgress[id] = stat; AppStore.saveData(); this.render(); },
-    del(id) { AppStore.data.customModules = AppStore.data.customModules.filter(m=>m.id!==id); AppStore.saveData(); this.render(); }
+
+    toggle(id, state) {
+        AppStore.data.syllabusProgress[id] = state; AppStore.saveData(); this.render(); window.Dashboard.updateCharts();
+    },
+
+    del(id) {
+        AppStore.data.customModules = AppStore.data.customModules.filter(m => m.id !== id); AppStore.saveData(); this.render(); window.Dashboard.updateCharts();
+    }
 };
 
 window.Missions = {
     render() {
-        const l = document.getElementById('task-list'); if(!l) return; l.innerHTML = ''; let dC = 0;
+        const list = document.getElementById("task-list");
+        if (!list || !AppStore.data) return;
+        list.innerHTML = "";
+
+        let doneCount = 0;
         AppStore.data.missions.forEach(m => {
-            if(m.done) dC++; const style = m.done ? "line-through opacity-50" : "";
-            l.innerHTML += `<li class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-base)] hover:brightness-95 gap-3 sm:gap-0 mb-3">
-                <div class="flex items-start sm:items-center gap-4">
-                    <input type="checkbox" class="mt-1 w-6 h-6 cursor-pointer accent-[var(--accent-primary)]" onchange="Missions.toggle(${m.id})" ${m.done ? 'checked' : ''}>
-                    <span class="text-base font-semibold ${style}">${m.text}</span>
-                </div>
-                <div class="flex items-center gap-3 self-end sm:self-auto">
-                    <span class="text-[10px] uppercase font-extrabold px-3 py-1 rounded bg-[var(--border-color)]">${m.type}</span>
-                    <button onclick="Missions.del(${m.id})" class="text-red-500 font-bold text-lg px-2 py-1 bg-red-50 dark:bg-red-900/30 rounded">✕</button>
-                </div>
-            </li>`;
+            if (m.done) doneCount += 1;
+            const style = m.done ? "line-through opacity-50 text-[var(--text-muted)]" : "text-[var(--text-primary)]";
+            
+            const badge = m.type === 'Revision' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' 
+                        : m.type === 'Practice' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' 
+                        : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300';
+
+            list.innerHTML += `
+                <li class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border border-[var(--border-color)] rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--bg-base)] transition-colors gap-3 sm:gap-0 mb-3 shadow-sm">
+                    <div class="flex items-start sm:items-center gap-4">
+                        <input type="checkbox" class="mt-1 sm:mt-0 w-6 h-6 cursor-pointer accent-[var(--accent-primary)]" onchange="Missions.toggle(${m.id})" ${m.done ? "checked" : ""}>
+                        <span class="text-base font-semibold ${style}">${m.text}</span>
+                    </div>
+                    <div class="flex items-center gap-3 self-end sm:self-auto">
+                        <span class="text-[10px] uppercase font-extrabold px-3 py-1 rounded border border-[var(--border-color)] ${badge}">${m.type}</span>
+                        <button onclick="Missions.del(${m.id})" class="text-red-500 font-bold text-lg px-2 py-1 bg-red-50 dark:bg-red-900/30 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50">✕</button>
+                    </div>
+                </li>
+            `;
         });
-        const t = AppStore.data.missions.length; document.getElementById('task-count').innerText = `${dC}/${t} Done`; document.getElementById('task-prog-bar').style.width = t===0?'0%':`${(dC/t)*100}%`; window.Dashboard.updateMetrics();
+
+        const total = AppStore.data.missions.length;
+        document.getElementById("task-count").innerText = `${doneCount}/${total} Done`;
+        document.getElementById("task-prog-bar").style.width = total === 0 ? "0%" : `${(doneCount / total) * 100}%`;
+        window.Dashboard.updateMetrics();
     },
-    addTask() { const i = document.getElementById('task-input'), t = document.getElementById('task-type'); if(!i.value.trim()) return; AppStore.data.missions.push({id:Date.now(), text:i.value.trim(), type:t.value, done:false}); i.value=''; AppStore.saveData(); this.render(); },
-    toggle(id) { const tk = AppStore.data.missions.find(x=>x.id===id); if(tk) tk.done = !tk.done; AppStore.saveData(); this.render(); },
-    del(id) { AppStore.data.missions = AppStore.data.missions.filter(x=>x.id!==id); AppStore.saveData(); this.render(); }
+
+    addTask() {
+        const input = document.getElementById("task-input"); const type = document.getElementById("task-type");
+        const value = input.value.trim(); if (!value) return;
+        AppStore.data.missions.push({ id: Date.now(), text: value, type: type.value, done: false });
+        input.value = ""; AppStore.saveData(); this.render();
+    },
+
+    toggle(id) {
+        const task = AppStore.data.missions.find(x => x.id === id); if (task) task.done = !task.done; AppStore.saveData(); this.render();
+    },
+
+    del(id) {
+        AppStore.data.missions = AppStore.data.missions.filter(x => x.id !== id); AppStore.saveData(); this.render();
+    }
 };
 
 window.Tracker = {
     renderErrors() {
-        const tb = document.getElementById('error-list'); if(!tb) return; tb.innerHTML = '';
+        const tb = document.getElementById("error-list");
+        if (!tb || !AppStore.data) return;
+        tb.innerHTML = "";
+
         AppStore.data.errors.forEach(e => {
-            tb.innerHTML += `<tr><td class="p-3 font-medium">${e.topic}</td><td class="p-3">${e.desc}</td><td class="p-3 font-bold">${e.revDate}</td><td class="p-3"><select onchange="Tracker.upd(${e.id}, this.value)" class="p-2 border rounded"><option value="Pending" ${e.status==='Pending'?'selected':''}>Pending</option><option value="Fixed" ${e.status==='Fixed'?'selected':''}>Fixed</option></select></td></tr>`;
+            const badgeClass = e.status === "Fixed" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300" : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
+
+            tb.innerHTML += `
+                <tr class="hover:bg-[var(--bg-base)]">
+                    <td class="p-4 font-medium text-[var(--text-primary)] border-b border-[var(--border-color)]">${e.topic}</td>
+                    <td class="p-4 text-[var(--text-secondary)] border-b border-[var(--border-color)]">${e.desc}</td>
+                    <td class="p-4 font-bold text-[var(--text-primary)] border-b border-[var(--border-color)]">${e.revDate}</td>
+                    <td class="p-4 border-b border-[var(--border-color)]">
+                        <div class="flex items-center gap-2">
+                            <select onchange="Tracker.upd(${e.id}, this.value)" class="p-2 border border-[var(--border-color)] rounded bg-[var(--bg-surface)] text-sm font-semibold text-[var(--text-primary)]">
+                                <option value="Pending" ${e.status === "Pending" ? "selected" : ""}>Pending</option>
+                                <option value="Fixed" ${e.status === "Fixed" ? "selected" : ""}>Fixed</option>
+                            </select>
+                            <span class="text-[10px] font-bold uppercase px-2 py-1 rounded ${badgeClass}">${e.status}</span>
+                        </div>
+                    </td>
+                </tr>
+            `;
         });
+        window.Dashboard.updateMetrics();
     },
-    addError() { const t=document.getElementById('err-topic').value, d=document.getElementById('err-desc').value, dt=document.getElementById('err-rev-date').value; if(!t||!d||!dt) return; AppStore.data.errors.push({id:Date.now(),topic:t,desc:d,revDate:dt,status:'Pending'}); AppStore.saveData(); this.renderErrors(); document.getElementById('err-topic').value=''; document.getElementById('err-desc').value=''; },
-    upd(id, val) { const e = AppStore.data.errors.find(x=>x.id===id); if(e) e.status=val; AppStore.saveData(); this.renderErrors(); },
-    addMock() { const d=document.getElementById('mock-date').value, n=document.getElementById('mock-name').value, s=parseFloat(document.getElementById('mock-score').value); if(!d||!n||isNaN(s)) return; AppStore.data.mocks.push({date:d,name:n,score:s}); AppStore.saveData(); window.Dashboard.updateCharts(); }
+
+    addError() {
+        const topicEl = document.getElementById("err-topic"); const descEl = document.getElementById("err-desc"); const dateEl = document.getElementById("err-rev-date");
+        const topic = topicEl.value.trim(); const desc = descEl.value.trim(); const revDate = dateEl.value;
+        if (!topic || !desc || !revDate) return;
+        AppStore.data.errors.push({ id: Date.now(), topic, desc, revDate, status: "Pending" });
+        topicEl.value = ""; descEl.value = ""; dateEl.value = ""; AppStore.saveData(); this.renderErrors();
+    },
+
+    upd(id, value) {
+        const error = AppStore.data.errors.find(x => x.id === id); if (error) error.status = value; AppStore.saveData(); this.renderErrors();
+    },
+
+    addMock() {
+        const dateEl = document.getElementById("mock-date"); const nameEl = document.getElementById("mock-name"); const scoreEl = document.getElementById("mock-score");
+        const date = dateEl.value; const name = nameEl.value.trim(); const score = parseFloat(scoreEl.value);
+        if (!date || !name || Number.isNaN(score)) return;
+        AppStore.data.mocks.push({ date, name, score });
+        dateEl.value = ""; nameEl.value = ""; scoreEl.value = ""; AppStore.saveData(); window.Dashboard.updateCharts();
+    }
 };
 
 window.Vault = {
     render() {
-        const c = document.getElementById('vault-container'); if(!c) return; c.innerHTML = '';
+        const container = document.getElementById("vault-container");
+        if (!container || !AppStore.data) return;
+        container.innerHTML = "";
+
         const db = AppStore.data.vaultData || {};
-        for(let k in db) {
-            const doc = db[k];
-            c.innerHTML += `<div class="os-card flex justify-between items-center mb-4"><div class="pr-4"><h4 class="font-bold text-lg">${doc.title}</h4><p class="text-sm text-[var(--text-muted)] mt-1">${doc.category} | ${doc.size}</p></div><button onclick="Vault.download('${doc.title}', '${encodeURIComponent(doc.content)}')" class="os-btn !bg-[var(--accent-primary)] font-bold shadow-md">Download</button></div>`;
-        }
+        Object.keys(db).forEach(key => {
+            const doc = db[key];
+            const payload = encodeURIComponent(doc.content || "");
+            container.innerHTML += `
+                <div class="os-card flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 bg-[var(--bg-surface)] hover:border-[var(--accent-primary)] transition-colors">
+                    <div class="w-full border-b border-[var(--border-color)] sm:border-0 pb-3 sm:pb-0 pr-4">
+                        <div class="text-[10px] font-bold uppercase text-[var(--accent-primary)] tracking-widest mb-1">${doc.category}</div>
+                        <h4 class="font-bold text-xl text-[var(--text-primary)]">${doc.title}</h4>
+                        <p class="text-sm text-[var(--text-muted)] mt-1">Local File • ${doc.size}</p>
+                    </div>
+                    <button onclick="Vault.download('${doc.title}', '${payload}')" class="os-btn !bg-[var(--bg-base)] !text-[var(--text-primary)] border border-[var(--border-color)] font-bold shadow-sm w-full sm:w-auto flex items-center justify-center gap-2">
+                        <span>&#11015;</span> Download
+                    </button>
+                </div>
+            `;
+        });
     },
+
     download(title, encodedContent) {
         const blob = new Blob([decodeURIComponent(encodedContent)], { type: "text/plain;charset=utf-8" }); const url = URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.href = url; a.download = title.replace(/\s+/g, '_') + '.txt'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        const a = document.createElement("a"); a.href = url; a.download = String(title).replace(/\s+/g, "_") + ".txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
     }
 };
 
 window.PYQ = {
-    c: 0,
+    c: 0, db: [],
+
+    buildDB() {
+        return [
+            { year: "2025", q: `According to standard practices for ${AppStore.config.subject}, which is the best approach?`, opts: ["Focus on basics first", "Skip to advanced", "Ignore practical application"], ans: 0, exp: "Fundamentals always lay the groundwork for complex topics." },
+            { year: "2024", q: `In the context of ${AppStore.config.category}, consistency is measured by:`, opts: ["Hours logged", "Tasks completed", "Output quality", "All of the above"], ans: 3, exp: "True learning involves tracking time, execution, and retention." }
+        ];
+    },
+
     render() {
-        const qEl = document.getElementById('pyq-q'); if(!qEl) return;
-        const db = [{year:"2025", q:"Sample question for " + AppStore.config.subject, opts:["Opt A", "Opt B", "Opt C"], ans:0, exp:"A is correct."}]; 
-        if(this.c >= db.length) this.c = 0; const q = db[this.c];
-        document.getElementById('pyq-year').innerText = `${AppStore.config.category} Mock Q`; qEl.innerText = q.q;
-        const optEl = document.getElementById('pyq-options'); optEl.innerHTML = '';
-        q.opts.forEach((o, i) => { optEl.innerHTML += `<button type="button" onclick="PYQ.guess(${i})" class="w-full text-left p-4 border border-[var(--border-color)] bg-[var(--bg-base)] rounded-xl font-medium text-lg hover:border-[var(--accent-primary)] transition-colors mb-3">${o}</button>`; });
-        document.getElementById('pyq-feedback').classList.add('hidden');
+        const qEl = document.getElementById("pyq-q");
+        if (!qEl || !AppStore.config) return;
+
+        this.db = this.buildDB(); if (this.c >= this.db.length) this.c = 0; const q = this.db[this.c];
+        document.getElementById("pyq-year").innerText = `${AppStore.config.category} Mock Q • ${q.year}`; qEl.innerText = q.q;
+
+        const optEl = document.getElementById("pyq-options"); optEl.innerHTML = "";
+        q.opts.forEach((o, i) => {
+            optEl.innerHTML += `<button type="button" onclick="PYQ.guess(${i})" class="w-full text-left p-5 border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-xl font-semibold text-lg hover:border-[var(--accent-primary)] hover:bg-[var(--bg-base)] transition-colors mb-3 shadow-sm">${o}</button>`;
+        });
+
+        document.getElementById("pyq-feedback").classList.add("hidden"); this.updateAccuracy();
     },
+
     guess(idx) {
-        document.getElementById('pyq-feedback').classList.remove('hidden');
-        document.getElementById('pyq-status').innerText = idx === 0 ? "Correct!" : "Incorrect!";
-        document.getElementById('pyq-status').className = idx === 0 ? "text-emerald-600 font-bold text-xl" : "text-red-600 font-bold text-xl";
+        const q = this.db[this.c]; const correct = idx === q.ans;
+
+        AppStore.data.pyqStats.attempted += 1; if (correct) AppStore.data.pyqStats.correct += 1; AppStore.saveData();
+
+        document.getElementById("pyq-feedback").classList.remove("hidden");
+        document.getElementById("pyq-status").innerText = correct ? "Correct! ✓" : "Incorrect ✕";
+        document.getElementById("pyq-status").className = correct ? "text-[var(--success)] font-extrabold text-2xl block mb-2" : "text-[var(--danger)] font-extrabold text-2xl block mb-2";
+        document.getElementById("pyq-exp").innerText = q.exp;
+        this.updateAccuracy();
     },
-    next() { this.c++; this.render(); }
+
+    updateAccuracy() {
+        const { attempted, correct } = AppStore.data.pyqStats;
+        const accuracy = attempted ? Math.round((correct / attempted) * 100) : 0;
+        document.getElementById("pyq-acc").textContent = `${accuracy}%`;
+    },
+
+    next() { this.c += 1; this.render(); }
 };
 
-window.YouTubeAPI = { searchFromPrompt() { const p = prompt("What concept do you want to learn?"); if(p) window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(p + " " + AppStore.config.subject)}`, '_blank'); } };
-window.PDFExtractor = { processFile() { alert("Hook up pdf.js worker paths to enable PDF text extraction natively."); } };
+window.YouTubeAPI = {
+    searchFromPrompt() {
+        const promptValue = window.prompt("What concept do you want to search on YouTube?");
+        if (!promptValue) return;
+        const query = `${promptValue} ${AppStore.config.subject} ${AppStore.config.category}`;
+        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, "_blank", "noopener");
+    }
+};
+
+window.PDFExtractor = {
+    async processFile() {
+        const fileInput = document.getElementById("pdf-upload"); const status = document.getElementById("pdf-status"); const file = fileInput.files?.[0];
+        if (!file) { status.textContent = ""; return; }
+        
+        status.textContent = `Reading ${file.name}...`;
+
+        try {
+            const buffer = await file.arrayBuffer(); const pdf = await pdfjsLib.getDocument({ data: buffer }).promise; let extracted = "";
+            for (let pageNum = 1; pageNum <= Math.min(pdf.numPages, 3); pageNum += 1) {
+                const page = await pdf.getPage(pageNum); const content = await page.getTextContent();
+                extracted += content.items.map(item => item.str).join(" ") + "\n";
+            }
+
+            const cleanText = extracted.trim() || "No extractable text found."; const docId = `pdf-${Date.now()}`;
+            AppStore.data.vaultData[docId] = {
+                category: "PDF Extract", title: file.name.replace(/\.pdf$/i, ""),
+                size: `${Math.max(1, Math.round(file.size / 1024))} KB`, content: cleanText.slice(0, 15000)
+            };
+
+            let extractedTopics = []; const chapterRegex = /(?:Chapter|Unit|Module|Topic)\s*\d+[\s:\.\-]+([A-Za-z0-9\s,&]+)/gi; let match;
+            while((match = chapterRegex.exec(cleanText)) !== null) { let tn = match[1].trim(); if(tn.length > 3 && tn.length < 60) extractedTopics.push(tn); }
+            if(extractedTopics.length < 2) extractedTopics = ["Introduction", "Core Concepts", "Analysis", "Summary"];
+            extractedTopics = [...new Set(extractedTopics)].slice(0, 10);
+            
+            AppStore.data.customModules.push({ 
+                id: docId, title: file.name.replace(/\.pdf$/i, ""), total: extractedTopics.length, isCustom: true, 
+                items: extractedTopics.map((txt, i) => ({ id: `${docId}_${i}`, text: txt })) 
+            });
+
+            AppStore.saveData(); Vault.render(); StudyEngine.render(); Dashboard.updateCharts();
+            status.textContent = `Successfully extracted checklist and text from ${file.name}.`;
+        } catch (error) { status.textContent = "PDF extraction failed. Try a non-scanned PDF."; } finally { fileInput.value = ""; }
+    }
+};
+
+window.AIEval = {
+    evaluate() {
+        const text = document.getElementById("ai-input").value.trim(); if (!text) return alert("Please write an answer first.");
+        const wc = text.split(/\s+/).filter(w => w.length > 0).length; document.getElementById("ai-wc").innerText = wc;
+        let scoreBase = 3; let notes = [];
+        
+        if (wc < 50) { notes.push("❌ Answer is too short. Target 150-250 words."); document.getElementById("ai-struct").innerText = "Poor"; } 
+        else {
+            const lines = text.split("\n").filter(l => l.trim().length > 0);
+            if (lines.length >= 3) { notes.push("✅ Basic multi-paragraph structure detected."); scoreBase += 1; } else { notes.push("⚠️ Break your answer into Intro, Body, and Conclusion paragraphs."); }
+            if (text.includes("-") || text.includes("1.") || text.includes("•")) { notes.push("✅ Good use of points/bullets for readability."); scoreBase += 1.5; } else { notes.push("⚠️ Consider using bullet points in the body."); }
+            if (text.toLowerCase().match(/(therefore|thus|conclusion|way forward|in summary)/)) { notes.push("✅ Distinct conclusion/way forward identified."); scoreBase += 1; }
+            if (wc > 120 && wc < 260) { scoreBase += 1; document.getElementById("ai-struct").innerText = "Good"; } else if (wc >= 260) { notes.push("⚠️ Word limit exceeded. Be concise."); document.getElementById("ai-struct").innerText = "Avg"; }
+        }
+        
+        document.getElementById("ai-score").innerText = `${Math.min(scoreBase, 8.5)}/10`;
+        document.getElementById("ai-notes").innerHTML = notes.map(n => `<p class="mb-2 font-medium">${n}</p>`).join("");
+        document.getElementById("ai-feedback").classList.remove("hidden");
+    }
+};
 
 window.Orb = {
     isOpen: false,
-    open() { this.isOpen = true; document.getElementById('orb-modal').classList.remove('hidden'); setTimeout(()=>document.getElementById('orb-input')?.focus(), 50); },
-    close() { this.isOpen = false; document.getElementById('orb-modal').classList.add('hidden'); }
+
+    open() {
+        this.isOpen = true; const modal = document.getElementById("orb-modal");
+        modal.classList.remove("hidden"); modal.classList.add("flex");
+        document.getElementById("orb-results").innerHTML = `<div class="p-8 text-center text-sm text-[var(--text-muted)]">Search syllabus, missions, errors, and vault content.</div>`;
+        setTimeout(() => document.getElementById("orb-input")?.focus(), 50);
+    },
+
+    close() {
+        this.isOpen = false; const modal = document.getElementById("orb-modal");
+        modal.classList.add("hidden"); modal.classList.remove("flex"); document.getElementById("orb-input").value = "";
+    },
+
+    search(term) {
+        const results = document.getElementById("orb-results"); const query = term.trim().toLowerCase();
+        if (!query) { results.innerHTML = `<div class="p-8 text-center text-sm text-[var(--text-muted)]">Search syllabus, missions, errors, and vault content.</div>`; return; }
+
+        const matches = [];
+        [...AppStore.data.baseSyllabus, ...AppStore.data.customModules].forEach(module => {
+            (module.items || []).forEach(item => {
+                if (`${module.title} ${item.text}`.toLowerCase().includes(query)) matches.push({ type: "Syllabus", title: module.title, detail: item.text, tab: 'engine' });
+            });
+        });
+
+        AppStore.data.missions.forEach(m => {
+            if (`${m.text} ${m.type}`.toLowerCase().includes(query)) matches.push({ type: "Mission", title: m.text, detail: m.type, tab: 'missions' });
+        });
+
+        AppStore.data.errors.forEach(err => {
+            if (`${err.topic} ${err.desc} ${err.status}`.toLowerCase().includes(query)) matches.push({ type: "Error", title: err.topic, detail: `${err.desc} • ${err.status}`, tab: 'tracker' });
+        });
+
+        Object.values(AppStore.data.vaultData || {}).forEach(doc => {
+            if (`${doc.title} ${doc.category} ${doc.content}`.toLowerCase().includes(query)) matches.push({ type: "Vault", title: doc.title, detail: doc.category, tab: 'vault' });
+        });
+
+        if (!matches.length) { results.innerHTML = `<div class="p-8 text-center text-sm text-[var(--text-muted)]">No results found.</div>`; return; }
+
+        results.innerHTML = matches.slice(0, 20).map(item => `
+            <div class="p-4 border-b border-[var(--border-color)] hover:bg-[var(--bg-base)] cursor-pointer transition-colors" onclick="Orb.execute('${item.tab}')">
+                <div class="text-xs uppercase tracking-widest text-[var(--accent-primary)] font-bold mb-1">${item.type}</div>
+                <div class="font-bold text-[var(--text-primary)] text-base">${item.title}</div>
+                <div class="text-sm text-[var(--text-muted)] mt-1">${item.detail}</div>
+            </div>
+        `).join("");
+    },
+
+    execute(tab) {
+        this.close(); const tabBtn = document.querySelector(`.nav-btn[data-tab="${tab}"]`); if (tabBtn) tabBtn.click();
+    }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     Bootloader.init();
 });
-
 </script>
 </body>
 </html>
