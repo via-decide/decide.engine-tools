@@ -1,3 +1,9 @@
+Branch: simba/create-execution-consolehtml-build-a-developer-s
+Title: Create execution-console.html. Build a developer-style dashboard that...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A real-time monitoring console that visualizes exactly what an agent is thinking and doing at every step.
 Branch: simba/refactor-tool-graphhtml-update-the-visualization
 Title: Refactor tool-graph.html. Update the visualization logic to map the n...
 

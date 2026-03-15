@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create execution-console.html. Build a developer-style dashboard that listens to window.OrchardBus (or window.dispatchEvent) for agent execution events (agent:step_started, etc.). Display a real-time, auto-scrolling terminal/log feed of active agent runs. Show the exact JSON input/output payload for each step as it succeeds or fails.
+
+CONSTRAINTS
+pure Vanilla JS; use a monospace font for logs; ensure it can handle rapid event firing without freezing the DOM.
 Refactor tool-graph.html. Update the visualization logic to map the new Agent ecosystem. The graph should read engine_agent_plans and tool-registry.js. Render Agents as primary nodes, and draw directed edges to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies.
 
 CONSTRAINTS
