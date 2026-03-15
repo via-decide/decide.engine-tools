@@ -5,6 +5,18 @@ Create _assets/js/studyos-integrations.js. Extract Dashboard (Chart.js logic), Y
 
 CONSTRAINTS
 pure Vanilla JS; assume CDN scripts (Chart.js, PDF.js) are loaded in the global scope; keep heavy processing non-blocking.
+Create _assets/js/studyos-modules.js. Extract StudyEngine, Missions, Tracker, Vault, and PYQ logic from index.html. Refactor these objects to listen for the studyos:state_updated event to trigger their respective render() functions, rather than being manually called. Update all module interaction methods (like Missions.addTask or Tracker.addError) to update the state via AppStore and rely on the event bus to trigger the UI re-render.
+
+CONSTRAINTS
+pure Vanilla JS; ensure DOM updates are efficient and only re-render when necessary.
+Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatrix, and OnboardingEngine from the main index.html. Refactor OnboardingEngine.complete() so that instead of calling Bootloader.switchLayer, it dispatches window.dispatchEvent(new CustomEvent('studyos:workspace_created', { detail: this.userChoices })).
+
+CONSTRAINTS
+pure Vanilla JS; preserve the exact auto-scroll physics and animation classes from the original prototype.
+Create _assets/js/studyos-core.js. Extract AppStore, SystemData, and DataGenerator from the main index.html. Refactor AppStore.saveData() to automatically dispatch window.dispatchEvent(new CustomEvent('studyos:state_updated', { detail: AppStore.data })) instead of directly calling UI functions. Ensure localStorage keys (os_config_final, os_data_final) are maintained.
+
+CONSTRAINTS
+pure Vanilla JS; do not modify DOM elements here; establish strict separation of data and UI.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
