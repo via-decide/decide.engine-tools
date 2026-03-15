@@ -18,6 +18,10 @@
       "metaPath": "tools/context-packager/config.json"
     },
     {
+      "toolDir": "tools/eco-engine-test",
+      "metaPath": "tools/eco-engine-test/config.json"
+    },
+    {
       "toolDir": "tools/engine/ai-coach-console",
       "metaPath": "tools/engine/ai-coach-console/config.json"
     },
