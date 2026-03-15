@@ -1,9 +1,9 @@
-Branch: simba/create-a-new-branch-featureagent-execution-logge
-Title: > Create a new branch feature/agent-execution-logger. Create a file n...
+Branch: simba/create-a-new-branch-featureagent-builder-ui-refa
+Title: > Create a new branch feature/agent-builder-ui. Refactor the existing...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A successfully opened Pull Request containing the persistence layer that records all agent activity for the Execution Console. /end_task
+- Goal: > A Zapier-style vertical step editor that outputs a clean, sequential JSON workflow for the AgentRuntime to follow. /end_task
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
