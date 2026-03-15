@@ -1,4 +1,4 @@
-(() => {
+(function (global) {
   'use strict';
 
   const navLinks = [...document.querySelectorAll('.nl[data-route]')];
@@ -39,8 +39,37 @@
       setActive('home');
     }
   };
+  const BASE_PATH = '/decide.engine-tools';
+  const routes = {
+    '/': { id: 'dashboard', title: 'Dashboard', view: './ui/studyos.html' },
+    '/studyos': { id: 'studyos', title: 'StudyOS', view: './ui/studyos.html' },
+    '/tools': { id: 'tool-graph', title: 'Tool Graph', view: './ui/tool-graph.html' },
+    '/workflow': { id: 'workflow-builder', title: 'Workflow Builder', view: './ui/workflow-builder.html' }
+  };
 
-  /* ── Tool path resolution ── */
+  const outlet = document.getElementById('app-outlet');
+  const routeTitle = document.getElementById('route-title');
+  const navLinks = Array.from(document.querySelectorAll('[data-route]'));
+
+  function normalizeRoute(inputPath) {
+    if (!inputPath) return '/';
+    let path = inputPath;
+
+    if (path.startsWith(BASE_PATH)) {
+      path = path.slice(BASE_PATH.length) || '/';
+    }
+
+    if (path.startsWith('/#')) {
+      path = path.replace('/#', '');
+    }
+
+    if (path.startsWith('#')) {
+      path = path.slice(1);
+    }
+
+    if (!path.startsWith('/')) {
+      path = `/${path}`;
+    }
 
   const normalizeDirectPathRef = (toolRef) => {
     if (!toolRef || !toolRef.includes('/')) return null;
@@ -48,21 +77,33 @@
     if (normalized.endsWith('.html')) return normalized;
     return `${normalized.replace(/\/+$/, '')}/index.html`;
   };
+    return routes[path] ? path : '/';
+  }
 
-  const resolveToolPath = async (toolRef) => {
-    if (!toolRef) return null;
-
-    const directPath = normalizeDirectPathRef(toolRef);
-    if (directPath) return directPath;
-
-    if (globalThis.ToolRegistry && typeof globalThis.ToolRegistry.findById === 'function') {
-      const canonicalId = legacyToolAliases[toolRef] || toolRef;
-      const tool = await globalThis.ToolRegistry.findById(canonicalId);
-      return tool?.entry || null;
+  function currentRoutePath() {
+    if (global.location.hash && global.location.hash.startsWith('#/')) {
+      return normalizeRoute(global.location.hash.slice(1));
     }
 
-    return null;
-  };
+    return normalizeRoute('/');
+  }
+
+  function setActiveNav(path) {
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.dataset.route === path);
+    });
+  }
+
+  function mountRoute(path) {
+    const route = routes[path] || routes['/'];
+    routeTitle.textContent = route.title;
+    setActiveNav(path);
+    outlet.innerHTML = global.Components.frame(route.view, `${route.title} view`);
+  }
+
+  function go(path, { replace = false } = {}) {
+    const normalized = normalizeRoute(path);
+    const historyPath = `${BASE_PATH}/#${normalized}`;
 
   const openToolFromQuery = async () => {
     const params = new URLSearchParams(window.location.search);
@@ -95,27 +136,24 @@
     link.addEventListener('click', (event) => {
       const route = link.getAttribute('data-route') || link.getAttribute('data-s');
       if (!route) return;
+    if (replace) {
+      global.history.replaceState({ path: normalized }, '', historyPath);
+    } else {
+      global.history.pushState({ path: normalized }, '', historyPath);
+    }
+
+    mountRoute(normalized);
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
       event.preventDefault();
-      goToRoute(route);
+      go(link.dataset.route);
     });
   });
 
-  if (sections.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      {
-        rootMargin: '-30% 0px -50% 0px',
-        threshold: [0.2, 0.5, 0.8]
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-  }
+  global.addEventListener('popstate', () => mountRoute(currentRoutePath()));
+  global.addEventListener('hashchange', () => mountRoute(currentRoutePath()));
 
   window.addEventListener('hashchange', syncFromHash);
 
@@ -123,11 +161,15 @@
   const initial = routeFromHash();
   if (initial && document.getElementById(initial)) {
     setTimeout(() => goToRoute(initial, { smooth: false }), 50);
+  if (!global.location.hash || !global.location.hash.startsWith('#/')) {
+    go('/', { replace: true });
   } else {
-    setActive('home');
+    mountRoute(currentRoutePath());
   }
 
   openToolFromQuery();
 
   globalThis.Router = { resolveToolPath, legacyToolAliases, canonicalRoute, routeAliases };
 })();
+  global.Router = { routes, go, normalizeRoute };
+})(window);

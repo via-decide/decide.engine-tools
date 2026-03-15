@@ -41,7 +41,7 @@
 
   navContainer.innerHTML = navItems
     .map(({ id, label }, index) => (
-      `<a class="nl${index === 0 ? ' on' : ''}" href="#${id}" data-route="${id}">${label}</a>`
+      `<a class="nl${index === 0 ? ' on' : ''}" href="#${id}" data-s="${id}">${label}</a>`
     ))
     .join('');
 })();
