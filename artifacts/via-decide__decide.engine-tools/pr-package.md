@@ -4,6 +4,12 @@ Title: Create tools/engine/skin-street-food-theme/. Build a CSS/JS utility t...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: A dynamic styling script that instantly transforms the game's aesthetic into a vibrant, recognizable Indian street food color palette.
+Branch: simba/update-indexhtml-and-routerjs-integrate-the-new-
+Title: Update index.html and router.js. Integrate the new agent-builder.html...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A unified, seamless single-page-application feel for the new lightweight AI agent platform.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

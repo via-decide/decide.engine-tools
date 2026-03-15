@@ -5,6 +5,7 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 Create tools/engine/skin-street-food-theme/. Build a CSS/JS utility that activates when orchard_engine_active_skin equals street-food-cart. It must dynamically overwrite the root CSS variables with the Indian street cart palette: --color-soil-dark (Terracotta/Charcoal #2A1F1D), --color-leaf-green (Mint Chutney #4ade80), --color-water-blue (Turmeric Yellow #fbbf24 for ingredients), and --color-mineral-gold (Saffron #f97316). Ensure these colors pass accessibility contrast checks against white text.
+Update index.html and router.js. Integrate the new agent-builder.html, tool-registry.html, execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the navigation menu reflects this new "Agent Platform" architecture. Verify shared/agent-runtime.js is loaded globally so agents can be triggered from anywhere in the OS.
 
 RULES
 1. Audit touched files first and identify regressions.

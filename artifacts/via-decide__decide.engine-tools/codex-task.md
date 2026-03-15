@@ -5,6 +5,10 @@ Create tools/engine/skin-street-food-theme/. Build a CSS/JS utility that activat
 
 CONSTRAINTS
 pure Vanilla JS; must inject or modify CSS variables at the :root level; no external stylesheets.
+Update index.html and router.js. Integrate the new agent-builder.html, tool-registry.html, execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the navigation menu reflects this new "Agent Platform" architecture. Verify shared/agent-runtime.js is loaded globally so agents can be triggered from anywhere in the OS.
+
+CONSTRAINTS
+maintain existing history pushState routing; do not break any remaining legacy tools that the user still wants access to.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
@@ -53,6 +57,15 @@ Rules for coding agents in this repository:
 5. Tools must remain standalone HTML apps.
 6. Routing must never break existing tools.
 7. If reorganizing tools, move them safely and update references.
+ENGINE-TOOLS ARCHITECTURE (mandatory compliance)
+Tool directory: tools/<tool>/
+Required files: config.json, index.html, tool.js
+Shared dependencies to import: shared/tool-storage.js, shared/shared.css
+config.json must include: id, name, description, category, audience, inputs, outputs, tags
+Registration: append "tools/<tool>" to importableToolDirs[] in shared/tool-registry.js
+Router: add tool ID → entry path to static map in router.js
+Do NOT modify any existing tool folder or shared utility file.
+Do NOT use external frameworks, CDN packages, or bundlers.
 
 OUTPUT REQUIREMENTS
 - Include: implementation summary, checks run, risks, rollback notes.
