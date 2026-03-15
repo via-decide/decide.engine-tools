@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureagent-platform-routin
+Title: > Create a new branch feature/agent-platform-routing. Update index.ht...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > Wire all the new standalone HTML files into the centralized OS dashboard for a unified user experience. /end_task
 Branch: simba/create-a-new-branch-featureupdate-tool-graph-ref
 Title: > Create a new branch feature/update-tool-graph. Refactor the existin...
 

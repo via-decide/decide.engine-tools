@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/agent-platform-routing. Update index.html and router.js (or your primary routing utility). Integrate the new agent-builder.html, tool-registry.html (if created), execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the main navigation menu reflects this new "Agent Platform" architecture (e.g., links for "Builder", "Console", "Tools"). Verify shared/agent-runtime.js, shared/tool-registry.js, and shared/agent-logger.js are loaded globally via <script> tags in the root index.html so agents can be triggered from anywhere. Commit the changes with the message "feat: integrate agent platform pages into main OS routing". Push the branch and open a Pull Request to main with the title "Feat: OS Routing Integration" and a description mentioning navigation updates.
+
+CONSTRAINTS
+> Maintain existing history pushState routing. Do not break any remaining legacy tools that the user still wants access to.
 > Create a new branch feature/update-tool-graph. Refactor the existing tool-graph.html file. Update the visualization logic to map the new Agent ecosystem. The graph must read from localStorage.getItem('engine_agent_plans') and window.ToolRegistry. Render Agents as primary nodes, and draw directed edges (arrows) to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies. Commit the changes with the message "feat: update tool graph to map agent dependencies". Push the branch and open a Pull Request to main with the title "Feat: Agent Ecosystem Visualizer" and a description mentioning it parses JSON plans to draw tool connections.
 
 CONSTRAINTS
