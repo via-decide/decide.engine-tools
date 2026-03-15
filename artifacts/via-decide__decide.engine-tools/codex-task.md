@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add "Shimmer Text" and "Animated Glowing Borders" utilities to _assets/css/global-theme.css. Create pure CSS @keyframes for a light sweep effect across text (class .text-shimmer) and rotating conic-gradient borders (class .border-glow). Apply these classes to the milestone evolution states in the growth-milestone-engine for premium visual feedback.
+
+CONSTRAINTS
+preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
 Create a new utility _assets/js/environment-particles.js that uses HTML5 Canvas to render dynamic particle backgrounds (inspired by React Bits particle components). Logic must read the current environment state (rain, sun, toxic pests) and spawn lightweight falling raindrops, floating sun dust, or sickly green spores using requestAnimationFrame. Integrate into growth-milestone-engine.
 
 CONSTRAINTS

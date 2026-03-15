@@ -1,3 +1,9 @@
+Branch: simba/add-shimmer-text-and-animated-glowing-borders-ut
+Title: Add "Shimmer Text" and "Animated Glowing Borders" utilities to _asset...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working pure CSS shimmer and glow animations for premium alerts
 Branch: simba/create-a-new-utility-assetsjsenvironment-particl
 Title: Create a new utility _assets/js/environment-particles.js that uses HT...
 
