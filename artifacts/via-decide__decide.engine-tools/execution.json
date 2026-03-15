@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/refactor-sharedtool-registryjs-define-a-standard",
   "branch": "simba/create-execution-consolehtml-build-a-developer-s",
   "branch": "simba/refactor-tool-graphhtml-update-the-visualization",
   "branch": "simba/update-indexhtml-and-routerjs-integrate-the-new-",

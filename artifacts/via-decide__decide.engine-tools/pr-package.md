@@ -1,3 +1,9 @@
+Branch: simba/refactor-sharedtool-registryjs-define-a-standard
+Title: Refactor shared/tool-registry.js. Define a standard schema for tools ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Establish a standardized registry of functions/tools that the AI agents can call during their workflow execution.
 Branch: simba/create-execution-consolehtml-build-a-developer-s
 Title: Create execution-console.html. Build a developer-style dashboard that...
 

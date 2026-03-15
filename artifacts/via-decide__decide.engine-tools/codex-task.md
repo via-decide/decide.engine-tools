@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Refactor shared/tool-registry.js. Define a standard schema for tools that agents can use. Each tool must have an id, name, description, inputs (array of expected variables), and an execute function placeholder. Create a new tool-registry.html page to serve as a UI directory where users can view all available tools and their required schemas.
+
+CONSTRAINTS
+pure Vanilla JS; do not break existing routing; tools must be exportable/accessible to the global scope or event bus.
 Create execution-console.html. Build a developer-style dashboard that listens to window.OrchardBus (or window.dispatchEvent) for agent execution events (agent:step_started, etc.). Display a real-time, auto-scrolling terminal/log feed of active agent runs. Show the exact JSON input/output payload for each step as it succeeds or fails.
 
 CONSTRAINTS
