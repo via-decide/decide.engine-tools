@@ -29,6 +29,15 @@ export function renderGamesSection() {
       cardStyle: 'border-color:rgba(14,165,233,.3);background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(26,22,20,.97))',
       links: [{ href: './tools/games/skillhex-mission-control/index.html', label: '🛸 Launch Control', style: 'background:#0284c7;color:#fff;box-shadow:0 4px 0 #075985' }]
     })}
+
+    ${createFeaturedCard({
+      chip: '🐍 Classic Arcade',
+      chipStyle: 'background:rgba(34,197,94,.15);color:#4ade80',
+      title: 'Decision Snake',
+      description: 'Classic snake gameplay tuned for fast decision-making. Survive longer, chain clean moves, and beat your best score.',
+      cardStyle: 'border-color:rgba(34,197,94,.3);background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(26,22,20,.97))',
+      links: [{ href: './tools/games/snake-game/index.html', label: '🐍 Play Snake', style: 'background:#16a34a;color:#fff;box-shadow:0 4px 0 #14532d' }]
+    })}
   </div>`;
 
   return `<div class="w">
@@ -72,6 +81,15 @@ export function renderSection(container) {
           <p>A mission control dashboard interface. Complete tasks, deploy squads, and earn experience points in a stunning sci-fi environment.</p>
           <div class="btn-row">
             <a class="btn" style="background:#0284c7;color:#fff;box-shadow:0 4px 0 #075985" href="./tools/games/skillhex-mission-control/index.html">🛸 Launch Control</a>
+          </div>
+        </div>
+
+        <div class="feat-card" style="border-color:rgba(34,197,94,.3);background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(26,22,20,.97))">
+          <div class="chip" style="background:rgba(34,197,94,.15);color:#4ade80">🐍 Classic Arcade</div>
+          <h3>Decision Snake</h3>
+          <p>Classic snake gameplay tuned for fast decision-making. Survive longer, chain clean moves, and beat your best score.</p>
+          <div class="btn-row">
+            <a class="btn" style="background:#16a34a;color:#fff;box-shadow:0 4px 0 #14532d" href="./tools/games/snake-game/index.html">🐍 Play Snake</a>
           </div>
         </div>
 

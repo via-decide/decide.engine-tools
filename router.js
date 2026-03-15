@@ -4,6 +4,21 @@
   const routeAliases = { research: 'researchers' };
   const canonicalRoute = (route = '') => routeAliases[route] || route;
 
+  const directRoutes = {
+    '/snake-game': '/tools/games/snake-game/index.html'
+  };
+
+  const directTarget = directRoutes[window.location.pathname];
+  if (directTarget && window.location.pathname !== directTarget) {
+    window.location.replace(directTarget);
+    return;
+  }
+
+  const canonicalRoute = (route = '') => routeAliases[route] || route;
+
+  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
+  const sections = [...document.querySelectorAll('main section[id]')];
+
   const navLinks = [...document.querySelectorAll('.nl[data-s]')];
   const sections = [...document.querySelectorAll('main section[id]')];
 
