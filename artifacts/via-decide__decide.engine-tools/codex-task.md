@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/agent-tool-registry. Create a new directory shared/ if it does not exist. Inside, create a file named tool-registry.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: establish core AI agent tool registry". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Tool Registry" and a description mentioning it standardizes the tools agents can call. Code Payload for tool-registry.js: const ToolRegistry = {
+
+CONSTRAINTS
+> Do not modify the provided code payload. Ensure the directory path is exactly shared/tool-registry.js. The PR must target main. Pure Vanilla JS only.
 > Create a new branch feature/agent-platform-routing. Update index.html and router.js (or your primary routing utility). Integrate the new agent-builder.html, tool-registry.html (if created), execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the main navigation menu reflects this new "Agent Platform" architecture (e.g., links for "Builder", "Console", "Tools"). Verify shared/agent-runtime.js, shared/tool-registry.js, and shared/agent-logger.js are loaded globally via <script> tags in the root index.html so agents can be triggered from anywhere. Commit the changes with the message "feat: integrate agent platform pages into main OS routing". Push the branch and open a Pull Request to main with the title "Feat: OS Routing Integration" and a description mentioning navigation updates.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureagent-tool-registry-c
+Title: > Create a new branch feature/agent-tool-registry. Create a new direc...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > A successfully opened Pull Request containing the global Tool Registry that defines the atomic actions available to AI agents. /end_task
 Branch: simba/create-a-new-branch-featureagent-platform-routin
 Title: > Create a new branch feature/agent-platform-routing. Update index.ht...
 
