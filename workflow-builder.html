@@ -159,6 +159,8 @@
             <button id="clear-canvas" class="btn" type="button">Clear Canvas</button>
             <button id="export-workflow" class="btn" type="button">Export JSON</button>
             <label class="btn" style="cursor:pointer">Import JSON<input id="import-workflow" type="file" accept="application/json" style="display:none"></label>
+            <button id="export-workflow" class="btn" type="button">Export</button>
+            <label class="btn" style="cursor:pointer">Import<input id="import-workflow" type="file" accept="application/json" style="display:none"></label>
           </div>
           <div class="row">
             <select id="saved-workflows" aria-label="Saved workflows"></select>
@@ -178,6 +180,7 @@
         </div>
 
         <div id="autosave-status" style="margin-top:8px;color:var(--muted);font-size:0.8rem;">Autosave ready</div>
+        <div id="autosave-status" style="color: var(--muted); font-size: 0.8rem; margin-top:8px;">Autosave ready</div>
         <pre id="workflow-steps-preview" aria-label="Workflow JSON preview"></pre>
       </section>
     </div>
