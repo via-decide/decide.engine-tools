@@ -23,6 +23,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="../shared/tool-registry.js"></script>
     <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -326,6 +327,18 @@
                 <p class="text-sm text-[var(--text-muted)] mt-1">Offline-ready database generated for your profile.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="vault-container"></div>
+
+            <div class="os-card mt-8">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+                    <div>
+                        <h3 class="text-xl font-bold">Tool Directory</h3>
+                        <p class="text-sm text-[var(--text-muted)]">Auto-synced from the shared Tool Registry.</p>
+                    </div>
+                    <span id="tools-count" class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Loading tools...</span>
+                </div>
+                <div id="tools-filter-bar" class="flex flex-wrap gap-2 mb-5"></div>
+                <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
         </section>
 
         <!-- Tracker Tab -->
@@ -422,6 +435,7 @@
 </div>
 
 <!-- ===================== JAVASCRIPT SYSTEM ===================== -->
+<script src="./tool-integration.js"></script>
 <script>
 /**
  * 1. Global State & Combos Generator
@@ -744,6 +758,7 @@ const UIEngine = {
         document.getElementById("matrix-total").textContent = matrix.total;
 
         window.StudyEngine.render(); window.Missions.render(); window.Tracker.renderErrors(); window.Vault.render(); window.PYQ.render(); window.Dashboard.initCharts();
+        if (window.ToolIntegration?.boot) window.ToolIntegration.boot();
     },
 
     renderPreferenceSummary() {
@@ -1185,5 +1200,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-
 
