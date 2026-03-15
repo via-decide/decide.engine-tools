@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T01:32:11.476Z",
+  "generatedAt": "2026-03-15T08:14:57.627Z",
   "entries": [
     {
       "toolDir": "tools/ai-tool-generator",
@@ -144,6 +144,10 @@
     {
       "toolDir": "tools/games/hex-wars",
       "metaPath": "tools/games/hex-wars/config.json"
+    },
+    {
+      "toolDir": "tools/games/snake-game",
+      "metaPath": "tools/games/snake-game/config.json"
     },
     {
       "toolDir": "tools/games/wings-of-fire-quiz",

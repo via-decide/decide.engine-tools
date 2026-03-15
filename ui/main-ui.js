@@ -1,50 +1,3 @@
-(function () {
-  'use strict';
-
-  document.querySelectorAll('.nl[data-s]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const section = document.getElementById(link.dataset.s);
-      if (section) section.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  const sections = [...document.querySelectorAll('section[id]')];
-  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach((link) => link.classList.toggle('on', link.dataset.s === entry.target.id));
-    });
-  }, { threshold: 0.35 });
-
-  sections.forEach((section) => observer.observe(section));
-})();
-(() => {
-  'use strict';
-
-  const navContainer = document.getElementById('main-nav-links');
-  if (!navContainer) return;
-
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'creators', label: 'Creators' },
-    { id: 'builders', label: 'Builders' },
-    { id: 'researchers', label: 'Research' },
-
-    { id: 'business', label: 'Business' },
-    { id: 'orchard', label: '🌳 Orchard Game' },
-    { id: 'games', label: '🎮 Games' },
-    { id: 'mars', label: '🚀 Mars' },
-    { id: 'all', label: 'All Tools' }
-  ];
-
-  navContainer.innerHTML = navItems
-    .map(({ id, label }, index) => (
-      `<a class="nl${index === 0 ? ' on' : ''}" href="#${id}" data-s="${id}">${label}</a>`
-    ))
-    .join('');
-})();
 import { headerMarkup, footerMarkup } from './shell-parts.js';
 import { renderSection as renderHero } from './sections/hero.js';
 import { renderSection as renderCreators } from './sections/creators.js';
@@ -83,29 +36,6 @@ sections.forEach((renderSection, index) => {
     app.insertAdjacentHTML('beforeend', '<div class="div"></div>');
   }
 });
-
-// Smooth scroll nav
-for (const link of document.querySelectorAll('.nl[data-s]')) {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    const section = document.getElementById(link.dataset.s);
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
-  });
-}
-
-// Active nav on scroll
-const sectionEls = [...document.querySelectorAll('section[id]')];
-const navLinks = [...document.querySelectorAll('.nl[data-s]')];
-const observer = new IntersectionObserver((entries) => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) {
-      for (const link of navLinks) {
-        link.classList.toggle('on', link.dataset.s === entry.target.id);
-      }
-    }
-  }
-}, { threshold: 0.35 });
-sectionEls.forEach((section) => observer.observe(section));
 
 const CAT = {
   creators: 'c-creators',
