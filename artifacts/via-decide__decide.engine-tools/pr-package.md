@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-lean-canvas-in-
+Title: Add a new standalone tool called lean-canvas in tools/lean-canvas/. T...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working lean-canvas tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-flashcard-engin
 Title: Add a new standalone tool called flashcard-engine in tools/flashcard-...
 
