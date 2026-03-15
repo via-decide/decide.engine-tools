@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/refactor-the-main-indexhtml-remove-all-the-inlin",
   "branch": "simba/create-assetsjsstudyos-integrationsjs-extract-da",
   "branch": "simba/create-assetsjsstudyos-modulesjs-extract-studyen",
   "branch": "simba/create-assetsjsstudyos-onboardingjs-extract-dict",

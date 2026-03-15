@@ -1,3 +1,9 @@
+Branch: simba/refactor-the-main-indexhtml-remove-all-the-inlin
+Title: Refactor the main index.html. Remove all the inline JavaScript blocks...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A perfectly clean, modular index.html that relies entirely on decoupled backend JavaScript files.
 Branch: simba/create-assetsjsstudyos-integrationsjs-extract-da
 Title: Create _assets/js/studyos-integrations.js. Extract Dashboard (Chart.j...
 

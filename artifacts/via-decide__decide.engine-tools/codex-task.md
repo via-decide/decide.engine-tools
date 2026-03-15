@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Refactor the main index.html. Remove all the inline JavaScript blocks. Add <script> tags linking to the newly created _assets/js/studyos-core.js, studyos-onboarding.js, studyos-modules.js, and studyos-integrations.js. Extract the Bootloader, UIEngine, and ThemeEngine into a final _assets/js/studyos-router.js script. Wire the router to listen to studyos:workspace_created to switch from the onboarding layer to the main app layer.
+
+CONSTRAINTS
+Maintain all Tailwind classes, CSS variables, and HTML structure. Ensure scripts are loaded in the correct dependency order.
 Create _assets/js/studyos-integrations.js. Extract Dashboard (Chart.js logic), YouTubeAPI, PDFExtractor (pdf.js logic), AIEval, and Orb. Refactor the Dashboard.updateCharts() to listen for studyos:state_updated. Refactor PDFExtractor to dispatch a studyos:pdf_extracted event containing the parsed syllabus items, which the core state manager will listen to and merge.
 
 CONSTRAINTS
