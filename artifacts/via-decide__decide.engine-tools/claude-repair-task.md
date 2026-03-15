@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Create shared/agent-runtime.js. Build a Vanilla JS class/object AgentRuntime. It takes a JSON plan from engine_agent_plans. It executes the array of steps sequentially. It must maintain a context object to store outputs from step 1 to pass into step 2. Wrap executions in try/catch blocks. Dispatch custom events (agent:step_started, agent:step_success, agent:step_failed) during the loop so the UI can react.
 Refactor shared/tool-registry.js. Define a standard schema for tools that agents can use. Each tool must have an id, name, description, inputs (array of expected variables), and an execute function placeholder. Create a new tool-registry.html page to serve as a UI directory where users can view all available tools and their required schemas.
 Create execution-console.html. Build a developer-style dashboard that listens to window.OrchardBus (or window.dispatchEvent) for agent execution events (agent:step_started, etc.). Display a real-time, auto-scrolling terminal/log feed of active agent runs. Show the exact JSON input/output payload for each step as it succeeds or fails.
 Refactor tool-graph.html. Update the visualization logic to map the new Agent ecosystem. The graph should read engine_agent_plans and tool-registry.js. Render Agents as primary nodes, and draw directed edges to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies.

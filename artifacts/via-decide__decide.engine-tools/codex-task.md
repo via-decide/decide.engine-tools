@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create shared/agent-runtime.js. Build a Vanilla JS class/object AgentRuntime. It takes a JSON plan from engine_agent_plans. It executes the array of steps sequentially. It must maintain a context object to store outputs from step 1 to pass into step 2. Wrap executions in try/catch blocks. Dispatch custom events (agent:step_started, agent:step_success, agent:step_failed) during the loop so the UI can react.
+
+CONSTRAINTS
+pure Vanilla JS; asynchronous execution loop (support Promises/async-await for API calls); strictly isolated variable context per agent run.
 Refactor shared/tool-registry.js. Define a standard schema for tools that agents can use. Each tool must have an id, name, description, inputs (array of expected variables), and an execute function placeholder. Create a new tool-registry.html page to serve as a UI directory where users can view all available tools and their required schemas.
 
 CONSTRAINTS

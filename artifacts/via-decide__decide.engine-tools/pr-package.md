@@ -1,3 +1,9 @@
+Branch: simba/create-sharedagent-runtimejs-build-a-vanilla-js-
+Title: Create shared/agent-runtime.js. Build a Vanilla JS class/object Agent...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A robust, invisible execution engine that runs sequential step-based JSON workflows and broadcasts its state.
 Branch: simba/refactor-sharedtool-registryjs-define-a-standard
 Title: Refactor shared/tool-registry.js. Define a standard schema for tools ...
 
