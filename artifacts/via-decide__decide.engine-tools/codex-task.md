@@ -1,26 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tools/engine/skin-street-food-config/. Build a standalone JSON configuration tool that injects the Street Food Cart skin definition into localStorage.getItem('orchard_engine_available_skins'). The config must include id: 'street-food-cart', labels: { roots: 'Recipes', water: 'Fresh Ingredients', pests: 'Health Inspector', fruit: 'Orders Served', seed: 'Secret Masala', session: 'Service Shift' }. Set the seasonName to 'Festival Season'. Dispatch window.dispatchEvent(new CustomEvent('engine:skins_registry_updated')) upon successful injection.
+Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatrix, and OnboardingEngine from the main index.html. Refactor OnboardingEngine.complete() so that instead of calling Bootloader.switchLayer, it dispatches window.dispatchEvent(new CustomEvent('studyos:workspace_created', { detail: this.userChoices })).
 
 CONSTRAINTS
-pure Vanilla JS; no visual rendering; must strictly match the structure of the existing Skin System config.
-Create tools/engine/upsc-csat-trainer/. Build a highly focused quiz UI containing a local JSON bank of logical reasoning and quantitative aptitude questions. Render 5 random questions per daily session. Implement a hidden timer that tracks exactly how many seconds the user spends on each specific question before selecting an option. Save these time-to-solve metrics to localStorage.getItem('upsc_csat_metrics') and render a post-session chart showing their speed bottlenecks.
-
-CONSTRAINTS
-pure Vanilla JS; use Chart.js (via CDN) for the post-session metrics display; standalone execution.
-Create tools/engine/upsc-current-affairs/. Build a Vanilla JS RSS feed reader that fetches daily updates from public Indian news feeds (using a free CORS proxy like api.allorigins.win if necessary). Render a clean, ad-free list of daily headlines and summaries. Add a "Track" button next to each article that dispatches window.dispatchEvent(new CustomEvent('engine:mission_added', { detail: { text: "Read: " + article.title, type: "Study" } })).
-
-CONSTRAINTS
-pure Vanilla JS; handle fetch errors gracefully; strictly informative and text-heavy UI matching the OS theme.
-Create tools/engine/upsc-mains-simulator/. Build a strict, timed text-editor UI. Users select a question type (10-marker or 15-marker) which starts an un-pausable countdown (7 or 11 minutes). Disable paste events (onpaste="return false"). Include a live Word Count and WPM tracker. Upon timeout or manual submit, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_mains_written', { detail: { answerText } })) to send the payload to the OS AI Evaluator.
-
-CONSTRAINTS
-pure Vanilla JS; strictly block external copy-pasting to simulate exam conditions; clean, distraction-free writing interface.
-Create tools/engine/upsc-swipe-deck/. Build a Vanilla JS swipe-based flashcard application. The UI must feature a central stack of cards holding UPSC facts (e.g., "Article 14", "Simlipal National Park location"). Implement mouse/touch drag physics. Swipe Right marks it "Known", Swipe Left marks it "Forgot". When a card is swiped left, dispatch window.dispatchEvent(new CustomEvent('engine:upsc_error_logged', { detail: { topic: card.topic, desc: card.fact, revDate: nextDay } })) to feed the main OS error tracker.
-
-CONSTRAINTS
-pure Vanilla JS and CSS for swipe physics (no external swipe libraries); standalone execution; integrate seamlessly with standard Orchard CSS variables.
+pure Vanilla JS; preserve the exact auto-scroll physics and animation classes from the original prototype.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
