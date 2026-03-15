@@ -1,239 +1,140 @@
 (function () {
   'use strict';
 
-  var CATEGORY_ORDER = ['creators', 'coders', 'researchers', 'business', 'education', 'games', 'simulations', 'system', 'misc'];
+  const TYPE_COLORS = { tool: '#60a5fa', agent: '#f59e0b', workflow: '#34d399' };
 
-  var CATEGORY_LABELS = {
-    creators: 'Creators', coders: 'Coders', researchers: 'Researchers',
-    business: 'Business', education: 'Education', games: 'Games',
-    simulations: 'Simulations', system: 'System', misc: 'Misc'
-  };
-
-  var CATEGORY_COLORS = {
-    creators: '#f59e0b', coders: '#60a5fa', researchers: '#34d399',
-    business: '#f472b6', education: '#a78bfa', games: '#fb7185',
-    simulations: '#22d3ee', system: '#94a3b8', misc: '#cbd5e1'
-  };
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
   }
 
   function buildLegend(container) {
-    if (!container) return;
-    container.innerHTML = CATEGORY_ORDER.map(function (key) {
-      return '<div class="legend-item">' +
-        '<span class="swatch" style="background:' + CATEGORY_COLORS[key] + '"></span>' +
-        CATEGORY_LABELS[key] + '</div>';
-    }).join('');
+    container.innerHTML = [
+      { label: 'Tool', color: TYPE_COLORS.tool },
+      { label: 'Agent', color: TYPE_COLORS.agent },
+      { label: 'Workflow', color: TYPE_COLORS.workflow }
+    ].map((item) => `<div class="legend-item"><span class="swatch" style="background:${item.color}"></span>${item.label}</div>`).join('');
   }
 
-  function layoutNodes(tools, width, height) {
-    var grouped = new Map(CATEGORY_ORDER.map(function (k) { return [k, []]; }));
-    tools.forEach(function (tool) {
-      var key = grouped.has(tool.category) ? tool.category : 'misc';
-      grouped.get(key).push(tool);
-    });
+  function buildAgentNodes(agents) {
+    const nodes = [];
+    const edges = [];
 
-    var cols = CATEGORY_ORDER.filter(function (k) { return grouped.get(k).length > 0; }).length;
-    var colW = cols > 0 ? width / cols : width;
-    var nodes = [];
-    var colIdx = 0;
+    agents.forEach((agent) => {
+      const agentNodeId = `agent:${agent.id}`;
+      nodes.push({ id: agentNodeId, label: agent.name || agent.id, nodeType: 'agent', description: `Agent (${(agent.steps || []).length} steps)` });
 
-    CATEGORY_ORDER.forEach(function (cat) {
-      var group = grouped.get(cat) || [];
-      if (!group.length) return;
-      var cx = colW * colIdx + colW / 2;
-      group.forEach(function (tool, row) {
-        var rowH = height / (group.length + 1);
-        nodes.push({ tool: tool, x: cx, y: rowH * (row + 1), category: cat });
+      const workflowNodeId = `workflow:${agent.id}`;
+      nodes.push({ id: workflowNodeId, label: `${agent.id}-workflow`, nodeType: 'workflow', description: 'Workflow definition' });
+      edges.push({ from: agentNodeId, to: workflowNodeId, relation: 'owns' });
+
+      (agent.steps || []).forEach((step, idx) => {
+        if (!step.toolId) return;
+        edges.push({ from: workflowNodeId, to: step.toolId, relation: 'step', label: `S${idx + 1}` });
       });
-      colIdx++;
     });
 
-    return nodes;
+    return { nodes, edges };
   }
 
-  function renderGraph(opts) {
-    var svg = opts.svg;
-    var graphRoot = opts.graphRoot;
-    var edgesGroup = opts.edgesGroup;
-    var nodesGroup = opts.nodesGroup;
-    var labelsGroup = opts.labelsGroup;
-    var tools = opts.tools;
-    var tooltip = opts.tooltip;
+  function renderGraph(svg, graphRoot, nodesGroup, edgesGroup, tooltip, nodes, edges) {
+    const width = svg.clientWidth || 1000;
+    const height = svg.clientHeight || 700;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
-    var W = svg.clientWidth || 900;
-    var H = svg.clientHeight || 600;
-    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    const radius = Math.min(width, height) * 0.35;
+    const cx = width / 2;
+    const cy = height / 2;
 
-    var nodes = layoutNodes(tools, W, H);
-    var byId = new Map(tools.map(function (t) { return [t.id, t]; }));
+    const laidOut = nodes.map((node, index) => {
+      const angle = (Math.PI * 2 * index) / Math.max(nodes.length, 1);
+      return { ...node, x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius };
+    });
 
-    // Draw edges
+    const byId = new Map(laidOut.map((node) => [node.id, node]));
+
     edgesGroup.innerHTML = '';
-    nodes.forEach(function (node) {
-      var relatedTools = node.tool.relatedTools || [];
-      relatedTools.forEach(function (relId) {
-        var target = nodes.find(function (n) { return n.tool.id === relId; });
-        if (!target) return;
-        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', node.x); line.setAttribute('y1', node.y);
-        line.setAttribute('x2', target.x); line.setAttribute('y2', target.y);
-        line.setAttribute('stroke', '#334155'); line.setAttribute('stroke-width', '1');
-        edgesGroup.appendChild(line);
-      });
+    edges.forEach((edge) => {
+      const source = byId.get(edge.from);
+      const target = byId.get(edge.to);
+      if (!source || !target) return;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', source.x);
+      line.setAttribute('y1', source.y);
+      line.setAttribute('x2', target.x);
+      line.setAttribute('y2', target.y);
+      line.setAttribute('stroke', '#334155');
+      line.setAttribute('stroke-width', edge.relation === 'step' ? '1.8' : '1');
+      edgesGroup.appendChild(line);
     });
 
-    // Draw nodes
     nodesGroup.innerHTML = '';
-    nodes.forEach(function (node) {
-      var color = CATEGORY_COLORS[node.category] || '#cbd5e1';
-      var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    laidOut.forEach((node) => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.setAttribute('class', 'node');
-      g.setAttribute('transform', 'translate(' + node.x + ',' + node.y + ')');
-      g.setAttribute('tabindex', '0');
-      g.setAttribute('aria-label', node.tool.name);
+      g.setAttribute('transform', `translate(${node.x},${node.y})`);
 
-      var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('r', '10');
-      circle.setAttribute('fill', color);
-      circle.setAttribute('stroke', '#1e293b');
-      circle.setAttribute('stroke-width', '2');
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('r', node.nodeType === 'tool' ? '11' : '13');
+      circle.setAttribute('fill', TYPE_COLORS[node.nodeType] || '#cbd5e1');
 
-      var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      text.setAttribute('y', '22');
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('font-size', '9');
-      text.setAttribute('fill', '#94a3b8');
-      text.textContent = node.tool.name.slice(0, 18);
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('y', '24');
+      text.textContent = node.label.slice(0, 16);
 
       g.appendChild(circle);
       g.appendChild(text);
 
-      g.addEventListener('mouseenter', function (e) {
-        if (!tooltip) return;
-        tooltip.innerHTML = '<strong>' + escapeHtml(node.tool.name) + '</strong>' +
-          '<br>' + escapeHtml(node.tool.description || '') +
-          '<br><span style="color:#64748b;font-size:0.8em">' + escapeHtml(node.tool.entry || '') + '</span>';
+      g.addEventListener('mouseenter', (event) => {
+        tooltip.innerHTML = `<strong>${escapeHtml(node.label)}</strong><br>${escapeHtml(node.description || '')}`;
         tooltip.classList.add('show');
-        tooltip.style.left = (e.clientX + 12) + 'px';
-        tooltip.style.top = (e.clientY - 8) + 'px';
+        tooltip.style.left = `${event.clientX + 10}px`;
+        tooltip.style.top = `${event.clientY - 10}px`;
       });
-
-      g.addEventListener('mouseleave', function () {
-        if (tooltip) tooltip.classList.remove('show');
-      });
-
-      g.addEventListener('click', function () {
-        if (node.tool.entry) window.location.href = node.tool.entry;
-      });
+      g.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
 
       nodesGroup.appendChild(g);
     });
 
-    // Category labels
-    labelsGroup.innerHTML = '';
-    var usedCols = new Map();
-    nodes.forEach(function (node) {
-      if (!usedCols.has(node.category)) usedCols.set(node.category, node.x);
-    });
-    usedCols.forEach(function (cx, cat) {
-      var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      label.setAttribute('x', cx);
-      label.setAttribute('y', '18');
-      label.setAttribute('text-anchor', 'middle');
-      label.setAttribute('font-size', '11');
-      label.setAttribute('font-weight', '700');
-      label.setAttribute('fill', CATEGORY_COLORS[cat] || '#94a3b8');
-      label.textContent = CATEGORY_LABELS[cat] || cat;
-      labelsGroup.appendChild(label);
-    });
-
-    // Pan and zoom
-    var state = { scale: 1, tx: 0, ty: 0 };
-
-    function applyTransform() {
-      graphRoot.setAttribute('transform',
-        'translate(' + state.tx + ',' + state.ty + ') scale(' + state.scale + ')'
-      );
-    }
-
-    var panning = false;
-    var panStart = null;
-
-    svg.addEventListener('pointerdown', function (e) {
-      if (e.target.closest && e.target.closest('.node')) return;
-      panning = true;
-      panStart = { x: e.clientX, y: e.clientY, tx: state.tx, ty: state.ty };
-      svg.setPointerCapture(e.pointerId);
-    });
-
-    svg.addEventListener('pointermove', function (e) {
-      if (!panning || !panStart) return;
-      state.tx = panStart.tx + (e.clientX - panStart.x);
-      state.ty = panStart.ty + (e.clientY - panStart.y);
-      applyTransform();
-    });
-
-    function stopPan(e) {
-      panning = false;
-      panStart = null;
-      try { if (typeof e.pointerId === 'number') svg.releasePointerCapture(e.pointerId); } catch (_) {}
-    }
-
-    svg.addEventListener('pointerup', stopPan);
-    svg.addEventListener('pointercancel', stopPan);
-
-    svg.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      var delta = e.deltaY > 0 ? 0.9 : 1.1;
-      state.scale = Math.min(4, Math.max(0.2, state.scale * delta));
-      applyTransform();
-    }, { passive: false });
-
-    var resetBtn = document.getElementById('reset-view');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', function () {
-        state.scale = 1; state.tx = 0; state.ty = 0;
-        applyTransform();
-      });
-    }
+    const state = { scale: 1, tx: 0, ty: 0 };
+    const apply = () => graphRoot.setAttribute('transform', `translate(${state.tx},${state.ty}) scale(${state.scale})`);
+    svg.onwheel = (event) => {
+      event.preventDefault();
+      state.scale = Math.max(0.3, Math.min(3, state.scale * (event.deltaY > 0 ? 0.9 : 1.1)));
+      apply();
+    };
+    document.getElementById('reset-view').onclick = () => {
+      state.scale = 1; state.tx = 0; state.ty = 0; apply();
+    };
   }
 
   async function init() {
-    var svg = document.getElementById('graph');
-    var viewport = svg ? (svg.closest('.viewport') || svg.parentElement) : null;
+    const svg = document.getElementById('graph');
+    const graphRoot = document.getElementById('graph-root');
+    const edgesGroup = document.getElementById('edges');
+    const nodesGroup = document.getElementById('nodes');
+    const tooltip = document.getElementById('tooltip');
 
-    if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') {
-      if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Tool registry failed to load.</div>';
-      return;
-    }
+    buildLegend(document.getElementById('legend'));
 
-    var tools;
-    try {
-      tools = await window.ToolRegistry.loadAll();
-    } catch (e) {
-      if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Error: ' + escapeHtml(e.message) + '</div>';
-      return;
-    }
+    const registry = await window.ToolRegistry.getGraph();
+    const tools = registry.nodes || [];
+    const toolEdges = registry.edges || [];
+    const agents = window.AgentStorage ? window.AgentStorage.loadAll() : [];
+    const agentGraph = buildAgentNodes(agents);
 
-    if (!tools || !tools.length) {
-      if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#94a3b8;">No tools found.</div>';
-      return;
-    }
-
-    var legend    = document.getElementById('legend');
-    var graphRoot = document.getElementById('graph-root');
-    var edgesGroup = document.getElementById('edges');
-    var nodesGroup = document.getElementById('nodes');
-    var labelsGroup = document.getElementById('category-labels');
-    var tooltip   = document.getElementById('tooltip');
-
-    buildLegend(legend);
-    renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, tooltip });
+    renderGraph(
+      svg,
+      graphRoot,
+      nodesGroup,
+      edgesGroup,
+      tooltip,
+      [...tools, ...agentGraph.nodes],
+      [...toolEdges, ...agentGraph.edges]
+    );
   }
 
   init();
