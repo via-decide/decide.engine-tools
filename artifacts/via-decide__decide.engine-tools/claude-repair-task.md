@@ -4,11 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Refactor the main index.html. Remove all the inline JavaScript blocks. Add <script> tags linking to the newly created _assets/js/studyos-core.js, studyos-onboarding.js, studyos-modules.js, and studyos-integrations.js. Extract the Bootloader, UIEngine, and ThemeEngine into a final _assets/js/studyos-router.js script. Wire the router to listen to studyos:workspace_created to switch from the onboarding layer to the main app layer.
-Create _assets/js/studyos-integrations.js. Extract Dashboard (Chart.js logic), YouTubeAPI, PDFExtractor (pdf.js logic), AIEval, and Orb. Refactor the Dashboard.updateCharts() to listen for studyos:state_updated. Refactor PDFExtractor to dispatch a studyos:pdf_extracted event containing the parsed syllabus items, which the core state manager will listen to and merge.
-Create _assets/js/studyos-modules.js. Extract StudyEngine, Missions, Tracker, Vault, and PYQ logic from index.html. Refactor these objects to listen for the studyos:state_updated event to trigger their respective render() functions, rather than being manually called. Update all module interaction methods (like Missions.addTask or Tracker.addError) to update the state via AppStore and rely on the event bus to trigger the UI re-render.
-Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatrix, and OnboardingEngine from the main index.html. Refactor OnboardingEngine.complete() so that instead of calling Bootloader.switchLayer, it dispatches window.dispatchEvent(new CustomEvent('studyos:workspace_created', { detail: this.userChoices })).
-Create _assets/js/studyos-core.js. Extract AppStore, SystemData, and DataGenerator from the main index.html. Refactor AppStore.saveData() to automatically dispatch window.dispatchEvent(new CustomEvent('studyos:state_updated', { detail: AppStore.data })) instead of directly calling UI functions. Ensure localStorage keys (os_config_final, os_data_final) are maintained.
+Refactor tool-graph.html. Update the visualization logic to map the new Agent ecosystem. The graph should read engine_agent_plans and tool-registry.js. Render Agents as primary nodes, and draw directed edges to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies.
 
 RULES
 1. Audit touched files first and identify regressions.
