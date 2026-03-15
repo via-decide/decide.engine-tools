@@ -1,3 +1,11 @@
+Branch: simba/implement-the-native-view-transitions-api-or-a-c
+Title: Implement the native View Transitions API (or a CSS fade/scale fallba...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working smooth page transitions between the root launcher and standalone tools
+Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
+Title: Integrate swup.js via CDN into the root index.html to handle page rou...
 Branch: simba/create-a-new-branch-featureux-particle-system-cr
 Title: > Create a new branch feature/ux-particle-system. Create a file share...
 
