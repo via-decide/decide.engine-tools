@@ -5,6 +5,10 @@ MISSION
 
 CONSTRAINTS
 > Do not modify the provided code payload. Ensure the directory path is exactly shared/agent-runtime.js. The PR must target main. Must handle asynchronous tool execution and variable injection.
+> Create a new branch feature/agent-execution-logger. Create a file named shared/agent-logger.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: add global agent execution logger". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Execution Logger" and a description mentioning it captures runtime events for the console UI. Code Payload for agent-logger.js: const AgentLogger = {
+
+CONSTRAINTS
+> Do not modify the provided code payload. Ensure the directory path is exactly shared/agent-logger.js. The PR must target main. Must utilize localStorage safely.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
