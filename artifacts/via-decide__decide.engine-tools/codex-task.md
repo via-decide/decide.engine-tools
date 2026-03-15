@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/ui-template-gallery. Create a new file agent-templates.html. Design a sleek grid UI showcasing at least 3 pre-built Agent Blueprints (e.g., "Web Content Summarizer", "Daily Data Fetcher", "Math Auto-Solver"). Store the JSON definitions for these templates as a constant array in the script. When a user clicks "Use Template" on a card, take the JSON, save it to localStorage.getItem('engine_agent_plans') with a new unique ID, and redirect the user to agent-builder.html to view the imported workflow. Commit the changes with the message "feat: add pre-built agent template gallery UI". Push the branch and open a Pull Request to main with the title "Feat: Agent Template Gallery" and a description mentioning it reduces friction for new users.
+
+CONSTRAINTS
+> Pure Vanilla JS. Responsive CSS Grid layout. Ensure templates utilize tools that actually exist in the ToolRegistry.
 > Create a new branch feature/ui-smart-visualizer. Update the execution-console.html file. Instead of dumping raw JSON.stringify() outputs into the terminal feed, build a SmartVisualizer utility. When an agent logs an event, check the payload: 1. If it's a flat JSON object, render it as a clean HTML table or a list of pill-shaped key-value pairs. 2. If the payload contains a string with markdown (e.g., ### Title), use a basic regex replacer to render it as actual HTML headers/bold text inside the log card. 3. Highlight success events in green, errors in red, and system events in blue. Commit the changes with the message "feat: add smart JSON/Markdown visualizer to execution terminal". Push the branch and open a Pull Request to main with the title "Feat: Smart Data Visualizer" and a description mentioning it makes AI outputs human-readable.
 
 CONSTRAINTS

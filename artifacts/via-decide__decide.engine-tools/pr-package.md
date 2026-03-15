@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureui-template-gallery-c
+Title: > Create a new branch feature/ui-template-gallery. Create a new file ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > A frictionless onboarding experience that allows users to instantly deploy useful AI agents without building them from scratch. /end_task
 Branch: simba/create-a-new-branch-featureui-smart-visualizer-u
 Title: > Create a new branch feature/ui-smart-visualizer. Update the executi...
 
