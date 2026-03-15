@@ -1,3 +1,11 @@
+Branch: simba/create-toolsenginelocust-king-view-build-an-inte
+Title: Create tools/engine/locust-king-view/. Build an interactive UI for "T...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: An action-oriented boss fight UI combining swipe mechanics with a collective global health pool visualization.
+Branch: simba/create-toolsengineblight-boss-view-build-a-drama
+Title: Create tools/engine/blight-boss-view/. Build a dramatic, high-stakes ...
 Branch: simba/create-sharedagent-runtimejs-build-a-vanilla-js-
 Title: Create shared/agent-runtime.js. Build a Vanilla JS class/object Agent...
 

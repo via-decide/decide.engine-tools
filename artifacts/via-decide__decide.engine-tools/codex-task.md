@@ -1,6 +1,11 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create tools/engine/locust-king-view/. Build an interactive UI for "The Locust King" boss. Display a large HP bar (100,000 HP). Integrate a swipe-card mini-interface directly in this view, where dispatching correct swipe events immediately decrements the local visual HP and sends updates to the server-boss-engine. Display the community's total damage dealt versus the player's personal damage contribution.
+
+CONSTRAINTS
+pure Vanilla JS; standalone execution; must handle rapid event dispatching smoothly without UI lag.
+Create tools/engine/blight-boss-view/. Build a dramatic, high-stakes UI for "The Blight" server boss. Read orchard_engine_boss_progress and the target goal (50,000 pests) from the active event. Render a massive, collective progress bar. Include a local contribution counter showing how many pests the current player has cleared during the event timeframe. Update dynamically by listening to the server-boss-engine.
 Create shared/agent-runtime.js. Build a Vanilla JS class/object AgentRuntime. It takes a JSON plan from engine_agent_plans. It executes the array of steps sequentially. It must maintain a context object to store outputs from step 1 to pass into step 2. Wrap executions in try/catch blocks. Dispatch custom events (agent:step_started, agent:step_success, agent:step_failed) during the loop so the UI can react.
 
 CONSTRAINTS
