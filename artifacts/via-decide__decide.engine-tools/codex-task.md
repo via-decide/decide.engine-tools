@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Refactor tool-graph.html. Update the visualization logic to map the new Agent ecosystem. The graph should read engine_agent_plans and tool-registry.js. Render Agents as primary nodes, and draw directed edges to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies.
+
+CONSTRAINTS
+pure Vanilla JS; reuse existing Canvas/SVG/D3 setup; do not build a new graph engine from scratch.
 Update index.html and router.js. Integrate the new agent-builder.html, tool-registry.html, execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the navigation menu reflects this new "Agent Platform" architecture. Verify shared/agent-runtime.js is loaded globally so agents can be triggered from anywhere in the OS.
 
 CONSTRAINTS
