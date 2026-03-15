@@ -13,6 +13,7 @@ export const headerMarkup = String.raw`<nav class="nav">
       <a class="nl"    href="#mission"     data-s="mission">Mission</a>
       <a class="nl"    href="#all"         data-s="all">All Tools</a>
     </div>
+    <a class="nav-cta" href="./tools/eco-engine-test/index.html">🌿 Play Game</a>
   </div>
 </nav>`;
 
