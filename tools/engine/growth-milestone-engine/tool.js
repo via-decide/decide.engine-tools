@@ -113,10 +113,6 @@
     return true;
   }
 
-  function saveState() {
-    localStorage.setItem(MASTER_STATE_KEY, JSON.stringify(state));
-  }
-
   function init3D() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
@@ -201,6 +197,8 @@
 
   function animate3D() {
     requestAnimationFrame(animate3D);
+    if (animPaused) return;
+
     if (currentPlant) {
       currentPlant.rotation.y += 0.01;
       if (isBurning) {
@@ -215,7 +213,6 @@
       }
       currentPlant.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
-    if (!animPaused) renderer.render(scene, camera);
     renderer.render(scene, camera);
   }
 
@@ -325,11 +322,6 @@
     syncState();
 
     emitEvent('engine:crop_burn', { rootDamage, stressReset: true });
-    saveState();
-
-    window.dispatchEvent(new CustomEvent('engine:crop_burn', {
-      detail: { rootDamage, stressReset: true }
-    }));
 
     setTimeout(() => {
       isBurning = false;
@@ -365,12 +357,6 @@
       if (state.stress >= 100) triggerCropBurn();
       log('🌙 Rested. Paid 15🪙.', 'system');
       emitEvent('engine:day_advanced', { currentDay: state.day, cost: 15 });
-      saveState();
-      if (state.stress >= 100) triggerCropBurn();
-      log('🌙 Rested. Paid 15🪙.', 'system');
-      window.dispatchEvent(new CustomEvent('engine:day_advanced', {
-        detail: { currentDay: state.day, cost: 15 }
-      }));
       els.canvasContainer.style.transform = 'scale(0.95)';
       setTimeout(() => { els.canvasContainer.style.transform = 'scale(1.0)'; }, 150);
     });
@@ -390,10 +376,6 @@
 
     els.btnPesticide.addEventListener('click', () => {
       if (!canPerformAction()) return;
-      saveState();
-    });
-
-    els.btnPesticide.addEventListener('click', () => {
       const p = PEST_TYPES[els.selPest.value];
       if (state.credits < p.cost) return log(`❌ Need ${p.cost}🪙 for ${p.name}.`, 'warn');
       state.credits -= p.cost;
@@ -410,10 +392,6 @@
 
     els.btnSimulate.addEventListener('click', () => {
       if (!canPerformAction()) return;
-      saveState();
-    });
-
-    els.btnSimulate.addEventListener('click', () => {
       let stressG = 0;
       if (state.water < 10) stressG += 20;
       if (state.actionFatigue >= 2) stressG += 15 * state.actionFatigue;
@@ -452,22 +430,6 @@
         checkEvolution();
         updateUI();
         syncState();
-          window.dispatchEvent(new CustomEvent('engine:pest_outbreak', {
-            detail: { pestCount: state.pests }
-          }));
-        }
-
-        window.dispatchEvent(new CustomEvent('engine:research_completed', {
-          detail: {
-            rootsGained: finalG,
-            waterSpent: 5,
-            creditsEarned: 12
-          }
-        }));
-
-        checkEvolution();
-        updateUI();
-        saveState();
         els.btnSimulate.disabled = state.water < 5;
         els.btnSimulate.innerHTML = '📚 Research (-5💧)';
       }, 500);
@@ -476,20 +438,17 @@
     els.selSoil.addEventListener('change', () => {
       state.environment.soil = els.selSoil.value;
       syncState();
-      saveState();
     });
 
     els.selSun.addEventListener('change', () => {
       state.environment.sunlightMultiplier = parseFloat(els.selSun.value);
       syncState();
-      saveState();
     });
 
     els.selWeather.addEventListener('change', () => {
       state.environment.weather = els.selWeather.value;
       updateUI();
       syncState();
-      saveState();
     });
   }
 
@@ -500,7 +459,6 @@
       state.environment.weather = e.detail.newWeather;
       updateUI();
       syncState();
-      saveState();
       log(`🌦️ Weather synced from external tool: ${e.detail.newWeather}.`, 'system');
     });
 
@@ -508,7 +466,6 @@
       state.credits += Number(e.detail.credits) || 0;
       updateUI();
       syncState();
-      saveState();
       log(`💹 Market reward received: +${Number(e.detail.credits) || 0} credits.`, 'success');
     });
   }
@@ -520,7 +477,6 @@
     checkEvolution();
     updateUI();
     syncState();
-    saveState();
   }
 
   window.addEventListener('load', init);
