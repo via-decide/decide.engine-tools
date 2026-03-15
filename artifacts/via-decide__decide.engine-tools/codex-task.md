@@ -5,6 +5,14 @@ MISSION
 
 CONSTRAINTS
 > Pure Vanilla JS. Use synthesized oscillator sounds or incredibly tiny base64 strings to avoid loading external asset files. Respect the browser's autoplay policies (require a user interaction first).
+> Create a new branch feature/ux-view-transitions. Create a file shared/transition-engine.js. Update the existing routing/tab-switching logic. Wrap DOM updates (when changing tabs or switching pages) inside document.startViewTransition(() => { ... }). If the browser does not support the View Transitions API, fallback gracefully to a standard CSS opacity fade in/out. In your CSS, define custom ::view-transition-old and ::view-transition-new animations (e.g., a slight slide-up and fade effect). Commit the changes with the message "feat: implement native view transitions for routing". Push the branch and open a Pull Request to main with the title "Feat: Dynamic View Transitions" and a description mentioning native app-like routing.
+
+CONSTRAINTS
+> Pure Vanilla JS and CSS. Do not break the existing routing logic, only wrap the DOM mutation step. Ensure the fallback works seamlessly on older browsers (Safari/Firefox).
+> Create a new branch feature/ux-achievement-toasts. Create a file shared/toast-system.js. Build a ToastSystem utility that creates beautiful, floating notification cards at the bottom-right or top-center of the screen. It must support queuing: if 3 notifications fire at once, they should stack vertically with smooth CSS translation animations, rather than overlapping. Implement a progress bar inside the toast that shrinks over 3-5 seconds before the toast auto-dismisses. Allow the toast to accept an icon/emoji, title, and description. Hook this up to listen to wallet:earned, agent:run_completed, and growth:stage_evolved events to display premium "Achievement Unlocked" style popups. Commit the changes with the message "feat: add queue-based stacking toast notification system". Push the branch and open a Pull Request to main with the title "Feat: Achievement & Toast System" and a description mentioning it replaces native alerts.
+
+CONSTRAINTS
+> Pure Vanilla JS and CSS. Ensure the toasts can be swiped away manually on mobile. Handle DOM cleanup properly when a toast disappears.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
