@@ -1,113 +1,42 @@
 (function (global) {
-  const CATEGORY_MAP = {
-    creators: 'creators',
-    coders: 'coders',
-    researchers: 'researchers',
+  'use strict';
+
+  const DEFAULT_CATEGORY = 'misc';
+  const PLUGIN_STORAGE_KEY = 'viadecide.tool-registry.plugins';
+
+  const CATEGORY_ALIASES = {
     operators: 'business',
     founders: 'business',
     students: 'education',
-    gamers: 'games',
-    engine: 'simulations',
-    system: 'system',
-    misc: 'misc'
+    engine: 'simulations'
   };
 
-  const builtinTools = [
+  const BUILTIN_TOOLS = [
     {
-      id: 'prompt-alchemy-main',
-      name: 'PromptAlchemy (Main)',
-      description: 'First-render prompt pack engine for creators.',
-      category: 'creators',
-      audience: ['creators', 'founders', 'operators'],
-      inputs: ['platform', 'format', 'idea', 'brand'],
-      outputs: ['prompt_pack'],
-      relatedTools: ['promptalchemy', 'script-generator', 'spec-builder'],
-      entry: 'prompt-alchemy/index.html',
-      tags: ['legacy', 'main-tool', 'prompting']
+      id: 'workflow-builder',
+      name: 'Agent Plan Editor',
+      description: 'Build step-based agent workflows and run previews.',
+      category: 'coders',
+      tags: ['workflow', 'agent'],
+      entry: 'workflow-builder.html',
+      outputs: ['agent_workflow_json']
     },
     {
-      id: 'agent',
+      id: 'tool-graph',
+      name: 'Agent Tool Graph',
+      description: 'Visualize tool, workflow and agent relationships.',
+      category: 'system',
+      tags: ['graph', 'registry'],
+      entry: 'tool-graph.html'
+    },
+    {
+      id: 'agent-builder',
       name: 'Agent Builder',
-      description: 'Design simple AI agents and workflows.',
+      description: 'Create and save agents as JSON documents.',
       category: 'coders',
-      audience: ['coders', 'operators'],
-      inputs: ['task', 'constraints'],
-      outputs: ['agent_workflow'],
-      relatedTools: ['app-generator', 'spec-builder'],
-      entry: 'agent/index.html',
-      tags: ['legacy', 'workflow']
-    },
-    {
-      id: 'app-generator',
-      name: 'App Generator',
-      description: 'Create lightweight tools and micro-apps.',
-      category: 'coders',
-      audience: ['coders', 'founders'],
-      inputs: ['idea', 'features'],
-      outputs: ['app_plan'],
-      relatedTools: ['code-generator', 'code-reviewer'],
-      entry: 'app-generator/index.html',
-      tags: ['legacy', 'generation']
-    },
-    {
-      id: 'interview-prep',
-      name: 'Interview Prep',
-      description: 'Prepare structured interview responses.',
-      category: 'education',
-      audience: ['students'],
-      inputs: ['role', 'experience'],
-      outputs: ['interview_answers'],
-      relatedTools: ['spec-builder'],
-      entry: 'interview-prep/index.html',
-      tags: ['legacy', 'career']
-    },
-    {
-      id: 'student-research',
-      name: 'Student Research',
-      description: 'Structure learning and research insights.',
-      category: 'education',
-      audience: ['students', 'researchers'],
-      inputs: ['topic', 'sources'],
-      outputs: ['research_summary'],
-      relatedTools: ['multi-source-research-explained', 'export-studio'],
-      entry: 'student-research/index.html',
-      tags: ['legacy', 'research']
-    },
-    {
-      id: 'decision-brief-guide',
-      name: 'Decision Brief Guide',
-      description: 'Convert analysis into concise decision briefs.',
-      category: 'business',
-      audience: ['operators', 'founders'],
-      inputs: ['context', 'decision'],
-      outputs: ['decision_brief'],
-      relatedTools: ['spec-builder', 'export-studio'],
-      entry: 'decision-brief-guide/index.html',
-      tags: ['legacy', 'decision']
-    },
-    {
-      id: 'multi-source-research-explained',
-      name: 'Multi Source Research Explained',
-      description: 'Synthesize findings from multiple sources.',
-      category: 'researchers',
-      audience: ['researchers', 'students'],
-      inputs: ['question', 'sources'],
-      outputs: ['synthesis'],
-      relatedTools: ['student-research', 'export-studio'],
-      entry: 'multi-source-research-explained/index.html',
-      tags: ['legacy', 'research']
-    },
-    {
-      id: 'sales-dashboard',
-      name: 'Sales Dashboard',
-      description: 'Track and review sales performance snapshots.',
-      category: 'business',
-      audience: ['operators', 'founders'],
-      inputs: ['metrics'],
-      outputs: ['dashboard_summary'],
-      relatedTools: ['decision-brief-guide'],
-      entry: 'sales-dashboard/index.html',
-      tags: ['legacy', 'analytics']
+      tags: ['agent', 'builder'],
+      entry: 'agent-builder.html',
+      outputs: ['agent_json']
     },
     {
       id: 'founder',
@@ -122,63 +51,48 @@
       tags: ['legacy', 'positioning']
     },
     {
-      id: 'wings-of-fire-quiz',
-      name: 'Wings of Fire Quiz',
-      description: 'Interactive quiz tool.',
-      category: 'games',
-      audience: ['students'],
-      inputs: ['answers'],
-      outputs: ['score'],
-      relatedTools: [],
-      entry: 'wings-of-fire-quiz/index.html',
-      tags: ['legacy', 'quiz']
+      id: 'tool-registry-console',
+      name: 'Tool Registry Console',
+      description: 'Inspect and manage registered tools and plugins.',
+      category: 'system',
+      tags: ['registry'],
+      entry: 'tool-registry.html'
+    },
+    {
+      id: 'execution-console',
+      name: 'Execution Console',
+      description: 'Run saved agents and inspect sequential execution logs.',
+      category: 'system',
+      tags: ['runtime', 'execution'],
+      entry: 'execution-console.html',
+      outputs: ['execution_log']
     }
   ];
 
+
   const importableToolDirs = [
-    'tools/promptalchemy',
-    'tools/script-generator',
-    'tools/spec-builder',
-    'tools/code-generator',
-    'tools/code-reviewer',
-    'tools/tool-router',
-    'tools/export-studio',
-    'tools/template-vault',
-    'tools/idea-remixer',
-    'tools/task-splitter',
-    'tools/prompt-compare',
-    'tools/repo-improvement-brief',
-    'tools/workflow-template-gallery',
-    'tools/tool-search-discovery',
-    'tools/context-packager',
-    'tools/output-evaluator',
-    'tools/engine/player-signup',
-    'tools/engine/orchard-profile-builder',
-    'tools/engine/starter-farm-generator',
-    'tools/engine/root-strength-calculator',
-    'tools/engine/trunk-growth-calculator',
-    'tools/engine/fruit-yield-engine',
-    'tools/engine/daily-quest-generator',
-    'tools/engine/weekly-harvest-engine',
-    'tools/engine/thirty-day-promotion-engine',
-    'tools/engine/fair-ranking-engine',
-    'tools/engine/seed-exchange',
-    'tools/engine/fruit-sharing',
-    'tools/engine/circle-builder',
-    'tools/engine/peer-validation-engine',
-    'tools/engine/trust-score-engine',
-    'tools/engine/recruiter-dashboard',
-    'tools/engine/orchard-discovery-search',
-    'tools/engine/hire-readiness-scorer',
-    'tools/engine/four-direction-pipeline',
-    'tools/engine/growth-path-recommender',
-    'tools/engine/ai-coach-console',
-    'tools/engine/simulation-runner',
-    'tools/engine/seed-quality-scorer',
-    'tools/engine/meta-health-dashboard',
-    'tools/engine/synthetic-player-generator',
-    'tools/engine/wave1-simulation-runner',
-    'tools/engine/balance-dashboard'
+    'tools/promptalchemy', 'tools/script-generator', 'tools/spec-builder',
+    'tools/code-generator', 'tools/code-reviewer', 'tools/tool-router',
+    'tools/export-studio', 'tools/template-vault', 'tools/idea-remixer',
+    'tools/task-splitter', 'tools/prompt-compare', 'tools/repo-improvement-brief',
+    'tools/workflow-template-gallery', 'tools/tool-search-discovery',
+    'tools/context-packager', 'tools/output-evaluator',
+    'tools/engine/player-signup', 'tools/engine/orchard-profile-builder',
+    'tools/engine/starter-farm-generator', 'tools/engine/root-strength-calculator',
+    'tools/engine/trunk-growth-calculator', 'tools/engine/fruit-yield-engine',
+    'tools/engine/daily-quest-generator', 'tools/engine/weekly-harvest-engine',
+    'tools/engine/thirty-day-promotion-engine', 'tools/engine/fair-ranking-engine',
+    'tools/engine/seed-exchange', 'tools/engine/fruit-sharing',
+    'tools/engine/circle-builder', 'tools/engine/peer-validation-engine',
+    'tools/engine/trust-score-engine', 'tools/engine/recruiter-dashboard',
+    'tools/engine/orchard-discovery-search', 'tools/engine/hire-readiness-scorer',
+    'tools/engine/four-direction-pipeline', 'tools/engine/growth-path-recommender',
+    'tools/engine/ai-coach-console', 'tools/engine/simulation-runner',
+    'tools/engine/seed-quality-scorer', 'tools/engine/meta-health-dashboard',
+    'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
+    'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine',
+    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz',
+    'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible'
   ];
 
   function repoBasePath() {
@@ -196,67 +110,91 @@
     if (!BASE) return path;
     return BASE + path;
   }
-
   function normalizeCategory(category) {
-    return CATEGORY_MAP[category] || category || 'misc';
+    const raw = String(category || '').trim().toLowerCase();
+    return CATEGORY_ALIASES[raw] || raw || DEFAULT_CATEGORY;
   }
 
-  function normalizeTool(meta, fallbackDir) {
-    const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
+  function normalizeTool(meta, toolDir) {
+    const id = String(meta.id || toolDir.split('/').pop() || 'unknown').trim();
+    const entry = String(meta.entry || `${toolDir}/index.html`).replace(/^\.\//, '');
     const category = normalizeCategory(meta.category);
-    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
+
     return {
       id,
       name: meta.name || id,
       description: meta.description || '',
       category,
       audience: Array.isArray(meta.audience) ? meta.audience : [],
+      tags: Array.isArray(meta.tags) ? meta.tags : [],
       inputs: Array.isArray(meta.inputs) ? meta.inputs : [],
       outputs: Array.isArray(meta.outputs) ? meta.outputs : [],
       relatedTools: Array.isArray(meta.relatedTools) ? meta.relatedTools : [],
-      entry: meta.entry || defaultEntry,
-      tags: Array.isArray(meta.tags) ? meta.tags : []
+      featured: Boolean(meta.featured),
+      isEngineTool: Boolean(meta.isEngineTool) || entry.startsWith('tools/engine/'),
+      entry
     };
   }
 
-  function getBuiltinTools() {
-    return builtinTools.map((tool) => normalizeTool(tool));
+  function getPersistedPlugins() {
+    try {
+      const raw = localStorage.getItem(PLUGIN_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_error) {
+      return [];
+    }
   }
 
-  async function loadImportedTools() {
-    const loaded = await Promise.all(
-      importableToolDirs.map(async (dir) => {
-        try {
-          const response = await fetch(resolve(`${dir}/config.json`), { cache: 'no-cache' });
-          if (!response.ok) return null;
-          const meta = await response.json();
-          return normalizeTool(meta, dir);
-        } catch (error) {
-          return null;
-        }
-      })
-    );
-    return loaded.filter(Boolean);
+  function savePlugins(plugins) {
+    try {
+      localStorage.setItem(PLUGIN_STORAGE_KEY, JSON.stringify(plugins));
+      return true;
+    } catch (_error) {
+      return false;
+    }
   }
 
-  function getTools() {
-    const ids = [
-      ...builtinTools.map((tool) => tool.id),
-      ...importableToolDirs.map((path) => path.split('/').pop())
-    ];
-    return Array.from(new Set(ids));
+  async function loadManifest() {
+    try {
+      const res = await fetch(resolve('tools-manifest.json'), { cache: 'no-cache' });
+      if (!res.ok) return [];
+      const payload = await res.json();
+      return Array.isArray(payload.entries) ? payload.entries : [];
+    } catch (_error) {
+      return [];
+    }
   }
 
-  function isRegistered(id) {
-    return getTools().includes(id);
+  async function loadToolMeta({ toolDir, metaPath }) {
+    try {
+      const res = await fetch(resolve(metaPath), { cache: 'no-cache' });
+      if (!res.ok) return null;
+      const json = await res.json();
+      return normalizeTool(json, toolDir);
+    } catch (_error) {
+      return null;
+    }
   }
 
   async function loadAll() {
-    const imported = await loadImportedTools();
-    const merged = [...getBuiltinTools(), ...imported];
-    const deduped = new Map();
-    merged.forEach((tool) => deduped.set(tool.id, tool));
-    return Array.from(deduped.values());
+    const [entries, manifest] = await Promise.all([
+      Promise.resolve(BUILTIN_TOOLS.map((tool) => normalizeTool(tool, tool.id))),
+      loadManifest()
+    ]);
+
+    const loaded = await Promise.all(manifest.map(loadToolMeta));
+    const plugins = getPersistedPlugins().map((tool) => normalizeTool(tool, tool.toolDir || 'tools/plugin'));
+    const runtimePlugins = Array.isArray(global.TOOL_REGISTRY_PLUGINS)
+      ? global.TOOL_REGISTRY_PLUGINS.map((tool) => normalizeTool(tool, tool.toolDir || 'tools/plugin'))
+      : [];
+
+    const merged = new Map();
+    [...loaded.filter(Boolean), ...entries, ...plugins, ...runtimePlugins].forEach((tool) => {
+      merged.set(tool.id, tool);
+    });
+
+    return Array.from(merged.values()).sort((a, b) => a.name.localeCompare(b.name));
   }
 
   async function findById(id) {
@@ -264,14 +202,58 @@
     return all.find((tool) => tool.id === id) || null;
   }
 
+  async function getCategories() {
+    const all = await loadAll();
+    return Array.from(new Set(all.map((tool) => tool.category))).sort();
+  }
+
+  function registerPlugin(pluginMeta) {
+    if (!pluginMeta || typeof pluginMeta !== 'object') return null;
+    const plugins = getPersistedPlugins();
+    const normalized = normalizeTool(pluginMeta, pluginMeta.toolDir || 'tools/plugin');
+    const next = plugins.filter((tool) => tool.id !== normalized.id);
+    next.push(normalized);
+    savePlugins(next);
+    return normalized;
+  }
+
+  function registerPlugins(plugins) {
+    if (!Array.isArray(plugins)) return [];
+    return plugins.map(registerPlugin).filter(Boolean);
+  }
+
+  async function getGraph() {
+    const tools = await loadAll();
+    const nodes = tools.map((tool) => ({
+      id: tool.id,
+      label: tool.name,
+      category: tool.category,
+      nodeType: 'tool',
+      entry: tool.entry,
+      description: tool.description
+    }));
+
+    const edges = [];
+    const known = new Set(tools.map((tool) => tool.id));
+    tools.forEach((tool) => {
+      (tool.relatedTools || []).forEach((target) => {
+        if (known.has(target)) {
+          edges.push({ from: tool.id, to: target, relation: 'related' });
+        }
+      });
+    });
+
+    return { nodes, edges, tools };
+  }
+
   global.ToolRegistry = {
     normalizeCategory,
     normalizeTool,
-    getBuiltinTools,
-    loadImportedTools,
     loadAll,
     findById,
-    getTools,
-    isRegistered
+    getCategories,
+    registerPlugin,
+    registerPlugins,
+    getGraph
   };
 })(window);
