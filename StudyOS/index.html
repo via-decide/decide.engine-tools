@@ -194,6 +194,7 @@
                 <h1 id="app-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight">Workspace</h1>
                 <div class="mt-4 flex flex-wrap gap-2">
                     <span class="pill bg-white/10 text-white border-white/20" id="combo-pill">Combo 0 / 720</span>
+                    <span class="pill bg-white/10 text-white border-white/20" id="offline-status" aria-live="polite">Offline cache: preparing…</span>
                 </div>
             </div>
             <div class="flex gap-2 w-full md:w-auto text-sm">
@@ -1179,8 +1180,43 @@ window.Orb = {
     }
 };
 
+async function registerServiceWorker() {
+    const offlineStatus = document.getElementById("offline-status");
+    const setOfflineStatus = (message, isReady = false) => {
+        if (!offlineStatus) return;
+        offlineStatus.textContent = message;
+        offlineStatus.classList.toggle("!text-emerald-300", isReady);
+        offlineStatus.classList.toggle("border-emerald-300/50", isReady);
+    };
+
+    if (!("serviceWorker" in navigator)) {
+        setOfflineStatus("Offline cache: unavailable");
+        return;
+    }
+
+    const handleServiceWorkerMessage = (event) => {
+        if (event.data?.type === "OFFLINE_READY") {
+            setOfflineStatus("Offline cache: ready", true);
+        }
+    };
+
+    navigator.serviceWorker.addEventListener("message", handleServiceWorkerMessage);
+
+    const registration = await navigator.serviceWorker.register("./sw.js");
+    if (registration.active) {
+        setOfflineStatus("Offline cache: ready", true);
+    }
+
+    await navigator.serviceWorker.ready;
+    setOfflineStatus("Offline cache: ready", true);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     Bootloader.init();
+    registerServiceWorker().catch(() => {
+        const offlineStatus = document.getElementById("offline-status");
+        if (offlineStatus) offlineStatus.textContent = "Offline cache: error";
+    });
 });
 </script>
 </body>
