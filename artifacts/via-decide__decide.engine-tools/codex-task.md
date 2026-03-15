@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-> Create a new branch feature/agent-execution-logger. Create a file named shared/agent-logger.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: add global agent execution logger". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Execution Logger" and a description mentioning it captures runtime events for the console UI. Code Payload for agent-logger.js: const AgentLogger = {
+> Create a new branch feature/execution-console-ui. Create a new file named execution-console.html. Build a developer-style dashboard that lists all agents saved in localStorage.getItem('engine_agent_plans'). Add a "Run Agent" button next to each plan that instantiates window.AgentRuntime and calls .run(). Create a visual terminal window in the UI that listens to window.addEventListener('agent:log_updated') (fired by AgentLogger). Display a real-time, auto-scrolling log feed of the active agent run, showing the JSON input/output payload for each step as it succeeds or fails. Commit the changes with the message "feat: add real-time execution console dashboard". Push the branch and open a Pull Request to main with the title "Feat: Execution Console" and a description mentioning it monitors live AgentRuntime events.
 
 CONSTRAINTS
-> Do not modify the provided code payload. Ensure the directory path is exactly shared/agent-logger.js. The PR must target main. Must utilize localStorage safely.
+> Pure Vanilla JS. Use a monospace font for the logs. Ensure it can handle rapid event firing without freezing the DOM.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
