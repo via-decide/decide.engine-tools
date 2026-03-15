@@ -6,23 +6,34 @@
     <title>StudyOS — Modular Learning Platform</title>
 
     <!-- Tailwind CSS Config injected properly to ensure dark mode works -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./vendor/tailwindcss-runtime-3.4.16.js"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { 50: '#fffbeb', 100: '#fef3c7', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' },
-                        surface: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+        if (window.tailwind) {
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: { 50: '#fffbeb', 100: '#fef3c7', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' },
+                            surface: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                        }
                     }
                 }
-            }
-        };
+            };
+        }
+    </script>
+    
+    <script src="./vendor/chart.umd.min.js"></script>
+    <script src="./vendor/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib?.GlobalWorkerOptions) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = './vendor/pdf.worker.min.js';
+        }
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="../shared/tool-registry.js"></script>
     <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -55,7 +66,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-base);
             color: var(--text-primary);
             -webkit-tap-highlight-color: transparent;
@@ -194,6 +205,7 @@
                 <h1 id="app-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight">Workspace</h1>
                 <div class="mt-4 flex flex-wrap gap-2">
                     <span class="pill bg-white/10 text-white border-white/20" id="combo-pill">Combo 0 / 720</span>
+                    <span class="pill bg-white/10 text-white border-white/20" id="offline-status" aria-live="polite">Offline cache: preparing…</span>
                 </div>
             </div>
             <div class="flex gap-2 w-full md:w-auto text-sm">
@@ -264,6 +276,7 @@
                 <div class="os-card"><h3 class="font-bold text-lg mb-4">Score Trajectory</h3><div class="chart-box"><canvas id="mockChart"></canvas></div></div>
                 <div class="os-card"><h3 class="font-bold text-lg mb-4">Syllabus Coverage</h3><div class="chart-box"><canvas id="sylChart"></canvas></div></div>
             </div>
+            <div id="chart-lib-status" class="text-sm font-semibold text-[var(--danger)]"></div>
         </section>
 
         <!-- Engine Tab -->
@@ -283,6 +296,7 @@
                     </button>
                 </div>
             </div>
+            <div id="pdf-lib-status" class="text-sm font-semibold text-[var(--danger)] mb-1"></div>
             <div id="pdf-status" class="text-sm font-bold text-indigo-600"></div>
             <div id="syllabus-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4"></div>
         </section>
@@ -326,6 +340,18 @@
                 <p class="text-sm text-[var(--text-muted)] mt-1">Offline-ready database generated for your profile.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="vault-container"></div>
+
+            <div class="os-card mt-8">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+                    <div>
+                        <h3 class="text-xl font-bold">Tool Directory</h3>
+                        <p class="text-sm text-[var(--text-muted)]">Auto-synced from the shared Tool Registry.</p>
+                    </div>
+                    <span id="tools-count" class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Loading tools...</span>
+                </div>
+                <div id="tools-filter-bar" class="flex flex-wrap gap-2 mb-5"></div>
+                <div id="tools-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
         </section>
 
         <!-- Tracker Tab -->
@@ -423,6 +449,7 @@
 
 <!-- ===================== JAVASCRIPT SYSTEM ===================== -->
 <script src="./storage.js"></script>
+<script src="./tool-integration.js"></script>
 <script>
 /**
  * 1. Global State & Combos Generator
@@ -759,6 +786,8 @@ const UIEngine = {
         document.getElementById("matrix-total").textContent = matrix.total;
 
         window.StudyEngine.render(); window.Missions.render(); window.Tracker.renderErrors(); window.Vault.render(); window.PYQ.render(); window.Dashboard.initCharts();
+        if (window.ToolIntegration?.boot) window.ToolIntegration.boot();
+        window.StudyEngine.render(); window.Missions.render(); window.Tracker.renderErrors(); window.Vault.render(); window.PYQ.render(); ThirdPartyDeps.initNotices(); window.Dashboard.initCharts();
     },
 
     renderPreferenceSummary() {
@@ -780,17 +809,46 @@ const UIEngine = {
     }
 };
 
+const ThirdPartyDeps = {
+    chartReady: typeof window.Chart !== "undefined",
+    pdfReady: typeof window.pdfjsLib !== "undefined",
+
+    initNotices() {
+        const chartNotice = document.getElementById("chart-lib-status");
+        if (chartNotice && !this.chartReady) {
+            chartNotice.textContent = "Charts are unavailable because vendor/chart.umd.min.js is missing.";
+        }
+
+        const pdfNotice = document.getElementById("pdf-lib-status");
+        if (pdfNotice && !this.pdfReady) {
+            pdfNotice.textContent = "PDF extraction is unavailable because vendor/pdf.min.js is missing.";
+        }
+    }
+};
+
 /**
  * 4. Modules
  */
 window.Dashboard = {
     mChart: null, sChart: null,
 
-    initCharts() { Chart.defaults.font.family = "Inter"; this.updateCharts(); },
+    initCharts() {
+        if (!ThirdPartyDeps.chartReady) {
+            this.updateMetrics();
+            return;
+        }
+
+        Chart.defaults.font.family = "Inter";
+        this.updateCharts();
+    },
 
     updateCharts() {
         const mCtx = document.getElementById("mockChart"); const sCtx = document.getElementById("sylChart");
-        if (!mCtx || !sCtx || !AppStore.data) return;
+        if (!AppStore.data) return;
+        if (!ThirdPartyDeps.chartReady || !mCtx || !sCtx) {
+            this.updateMetrics();
+            return;
+        }
 
         const isDark = document.documentElement.classList.contains('dark') || document.documentElement.getAttribute('data-theme') === 'dark';
         const gridColor = isDark ? '#334155' : '#e2e8f0';
@@ -1088,6 +1146,11 @@ window.PDFExtractor = {
         const fileInput = document.getElementById("pdf-upload"); const status = document.getElementById("pdf-status"); const file = fileInput.files?.[0];
         if (!file) { status.textContent = ""; return; }
         
+        if (!ThirdPartyDeps.pdfReady) {
+            status.textContent = "PDF extraction is unavailable because vendor/pdf.min.js could not be loaded.";
+            return;
+        }
+
         status.textContent = `Reading ${file.name}...`;
 
         try {
@@ -1194,8 +1257,43 @@ window.Orb = {
     }
 };
 
+async function registerServiceWorker() {
+    const offlineStatus = document.getElementById("offline-status");
+    const setOfflineStatus = (message, isReady = false) => {
+        if (!offlineStatus) return;
+        offlineStatus.textContent = message;
+        offlineStatus.classList.toggle("!text-emerald-300", isReady);
+        offlineStatus.classList.toggle("border-emerald-300/50", isReady);
+    };
+
+    if (!("serviceWorker" in navigator)) {
+        setOfflineStatus("Offline cache: unavailable");
+        return;
+    }
+
+    const handleServiceWorkerMessage = (event) => {
+        if (event.data?.type === "OFFLINE_READY") {
+            setOfflineStatus("Offline cache: ready", true);
+        }
+    };
+
+    navigator.serviceWorker.addEventListener("message", handleServiceWorkerMessage);
+
+    const registration = await navigator.serviceWorker.register("./sw.js");
+    if (registration.active) {
+        setOfflineStatus("Offline cache: ready", true);
+    }
+
+    await navigator.serviceWorker.ready;
+    setOfflineStatus("Offline cache: ready", true);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     Bootloader.init();
+    registerServiceWorker().catch(() => {
+        const offlineStatus = document.getElementById("offline-status");
+        if (offlineStatus) offlineStatus.textContent = "Offline cache: error";
+    });
 });
 </script>
 </body>
