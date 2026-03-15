@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-> Create a new branch feature/agent-execution-logger. Create a file named shared/agent-logger.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: add global agent execution logger". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Execution Logger" and a description mentioning it captures runtime events for the console UI. Code Payload for agent-logger.js: const AgentLogger = {
+> Create a new branch feature/agent-platform-routing. Update index.html and router.js (or your primary routing utility). Integrate the new agent-builder.html, tool-registry.html (if created), execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the main navigation menu reflects this new "Agent Platform" architecture (e.g., links for "Builder", "Console", "Tools"). Verify shared/agent-runtime.js, shared/tool-registry.js, and shared/agent-logger.js are loaded globally via <script> tags in the root index.html so agents can be triggered from anywhere. Commit the changes with the message "feat: integrate agent platform pages into main OS routing". Push the branch and open a Pull Request to main with the title "Feat: OS Routing Integration" and a description mentioning navigation updates.
 
 CONSTRAINTS
-> Do not modify the provided code payload. Ensure the directory path is exactly shared/agent-logger.js. The PR must target main. Must utilize localStorage safely.
+> Maintain existing history pushState routing. Do not break any remaining legacy tools that the user still wants access to.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
