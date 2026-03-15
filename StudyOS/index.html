@@ -422,6 +422,7 @@
 </div>
 
 <!-- ===================== JAVASCRIPT SYSTEM ===================== -->
+<script src="./storage.js"></script>
 <script>
 /**
  * 1. Global State & Combos Generator
@@ -500,14 +501,18 @@ const DataGenerator = {
 const AppStore = {
     config: null, data: null,
 
-    init() {
-        const savedConfig = localStorage.getItem("os_config_final");
-        if (savedConfig) this.config = JSON.parse(savedConfig);
-        const savedData = localStorage.getItem("os_data_final");
-        if (savedData) this.data = JSON.parse(savedData);
+    async init() {
+        try {
+            this.config = await window.StudyOSStorage.getConfig();
+            this.data = await window.StudyOSStorage.getData();
+        } catch (error) {
+            console.warn("Failed to initialize storage. Recovering with empty session.", error);
+            this.config = null;
+            this.data = null;
+        }
     },
 
-    createWorkspace(config) {
+    async createWorkspace(config) {
         this.config = config;
         const generated = DataGenerator.build(config.category, config.subject);
         this.data = {
@@ -515,36 +520,46 @@ const AppStore = {
             missions: generated.missions, vaultData: generated.vault,
             mocks: [], errors: [], pyqStats: { attempted: 0, correct: 0 }
         };
-        localStorage.setItem("os_config_final", JSON.stringify(this.config));
-        this.saveData();
+        await window.StudyOSStorage.saveConfig(this.config);
+        await this.saveData();
     },
 
-    saveData() {
-        localStorage.setItem("os_data_final", JSON.stringify(this.data));
+    async saveData() {
+        await window.StudyOSStorage.saveData(this.data);
         if (window.Dashboard) window.Dashboard.updateMetrics();
     },
 
-    clear() { localStorage.removeItem("os_config_final"); localStorage.removeItem("os_data_final"); location.reload(); }
+    clear() {
+        Promise.all([
+            window.StudyOSStorage.saveConfig(null),
+            window.StudyOSStorage.saveData(null)
+        ]).finally(() => location.reload());
+    }
 };
 
 const SystemData = {
-    exportSync() {
-        const payload = { config: AppStore.config, data: AppStore.data };
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
-        const node = document.createElement("a"); node.setAttribute("href", dataStr);
-        node.setAttribute("download", `Workspace_${AppStore.config.category}_${AppStore.config.subject}.json`);
-        document.body.appendChild(node); node.click(); node.remove();
+    async exportSync() {
+        try {
+            const payload = await window.StudyOSStorage.exportAll();
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+            const node = document.createElement("a"); node.setAttribute("href", dataStr);
+            node.setAttribute("download", `Workspace_${AppStore.config.category}_${AppStore.config.subject}.json`);
+            document.body.appendChild(node); node.click(); node.remove();
+        } catch (error) {
+            alert("Unable to export data.");
+        }
     },
     importSync(e) {
         const file = e.target.files?.[0]; if (!file) return;
         const reader = new FileReader();
-        reader.onload = (ev) => {
+        reader.onload = async (ev) => {
             try {
                 const imported = JSON.parse(ev.target.result);
                 if (imported.config && imported.data) {
                     AppStore.config = imported.config; AppStore.data = imported.data;
-                    localStorage.setItem("os_config_final", JSON.stringify(AppStore.config));
-                    AppStore.saveData(); location.reload();
+                    await window.StudyOSStorage.importAll({ config: AppStore.config, data: AppStore.data });
+                    await AppStore.saveData();
+                    location.reload();
                 } else { alert("Invalid OS file"); }
             } catch(e) { alert("Error reading file."); }
         };
@@ -669,8 +684,8 @@ const OnboardingEngine = {
         this.chatContainer.appendChild(block);
         this.scrollToCenter(block);
 
-        setTimeout(() => {
-            AppStore.createWorkspace(this.userChoices);
+        setTimeout(async () => {
+            await AppStore.createWorkspace(this.userChoices);
             Bootloader.switchLayer("view-app");
         }, 1500);
     },
@@ -686,8 +701,8 @@ const OnboardingEngine = {
  * 3. App Core
  */
 const Bootloader = {
-    init() {
-        AppStore.init();
+    async init() {
+        await AppStore.init();
         if (!AppStore.config) {
             this.switchLayer("view-onboarding");
             OnboardingEngine.start();
@@ -1185,5 +1200,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-
 
