@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/ux-audio-manager. Create a file shared/audio-manager.js. Build an AudioManager that initializes the Web Audio API or uses simple HTMLAudioElement objects. It should preload 3-4 very short, subtle base64-encoded sound strings (or simple synthesized oscillators): a "pop" for clicks, a "chime" for success, and a "low thud" for errors. Implement a vibrate(pattern) method using the navigator.vibrate API for mobile devices. Add a global "Mute" toggle state stored in localStorage. Listen for global custom events (e.g., agent:step_success, growth:stage_evolved) to play the corresponding sound and haptic pattern automatically. Commit the changes with the message "feat: add global audio and haptic feedback manager". Push the branch and open a Pull Request to main with the title "Feat: Audio & Haptic Manager" and a description mentioning tactile game feedback.
+
+CONSTRAINTS
+> Pure Vanilla JS. Use synthesized oscillator sounds or incredibly tiny base64 strings to avoid loading external asset files. Respect the browser's autoplay policies (require a user interaction first).
 > Create a new branch feature/ux-view-transitions. Create a file shared/transition-engine.js. Update the existing routing/tab-switching logic. Wrap DOM updates (when changing tabs or switching pages) inside document.startViewTransition(() => { ... }). If the browser does not support the View Transitions API, fallback gracefully to a standard CSS opacity fade in/out. In your CSS, define custom ::view-transition-old and ::view-transition-new animations (e.g., a slight slide-up and fade effect). Commit the changes with the message "feat: implement native view transitions for routing". Push the branch and open a Pull Request to main with the title "Feat: Dynamic View Transitions" and a description mentioning native app-like routing.
 
 CONSTRAINTS
