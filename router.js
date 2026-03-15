@@ -2,6 +2,7 @@
   'use strict';
 
   const routeAliases = { research: 'researchers' };
+  const canonicalRoute = (route = '') => routeAliases[route] || route;
 
   const directRoutes = {
     '/snake-game': '/tools/games/snake-game/index.html'
@@ -14,6 +15,9 @@
   }
 
   const canonicalRoute = (route = '') => routeAliases[route] || route;
+
+  const navLinks = [...document.querySelectorAll('.nl[data-s]')];
+  const sections = [...document.querySelectorAll('main section[id]')];
 
   const navLinks = [...document.querySelectorAll('.nl[data-s]')];
   const sections = [...document.querySelectorAll('main section[id]')];
