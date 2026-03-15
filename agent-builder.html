@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Builder • decide.engine</title>
+  <style>body{margin:0;font-family:Inter,system-ui;background:#060916;color:#eef3ff}.page{max-width:980px;margin:0 auto;padding:20px}.panel{background:#11162a;border:1px solid #202a47;border-radius:12px;padding:12px}input,textarea{width:100%;margin-top:6px;background:#0d142a;color:#eef3ff;border:1px solid #202a47;border-radius:8px;padding:8px}.row{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #202a47;background:transparent;color:#eef3ff;border-radius:10px;padding:8px 12px;cursor:pointer;text-decoration:none}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="row" style="justify-content:space-between"><h1>Agent Builder</h1><a class="btn" href="index.html">Back</a></div>
+    <section class="panel">
+      <label>Agent ID<input id="agent-id" placeholder="agent-sprint-planner"></label>
+      <label>Name<input id="agent-name" placeholder="Sprint Planner Agent"></label>
+      <label>Steps JSON<textarea id="agent-steps" rows="10">[
+  {"id":"step-1","title":"Collect context","toolId":"context-packager","action":"collect"},
+  {"id":"step-2","title":"Generate draft","toolId":"code-generator","action":"execute"}
+]</textarea></label>
+      <div class="row"><button id="save-agent" class="btn">Save Agent JSON</button><button id="load-agent" class="btn">Load</button><select id="agent-list"></select></div>
+      <pre id="preview"></pre>
+    </section>
+  </main>
+  <script src="shared/agent-storage.js"></script>
+  <script>
+    const el=(id)=>document.getElementById(id);
+    function refresh(){const agents=window.AgentStorage.loadAll();el('agent-list').innerHTML='<option value="">Select</option>'+agents.map(a=>`<option value="${a.id}">${a.name||a.id}</option>`).join('');}
+    function current(){return {id:el('agent-id').value.trim(),name:el('agent-name').value.trim(),type:'agent',steps:JSON.parse(el('agent-steps').value||'[]')};}
+    el('save-agent').onclick=()=>{const agent=current();window.AgentStorage.save(agent);el('preview').textContent=JSON.stringify(agent,null,2);refresh();};
+    el('load-agent').onclick=()=>{const id=el('agent-list').value;const agent=window.AgentStorage.findById(id);if(!agent)return;el('agent-id').value=agent.id||'';el('agent-name').value=agent.name||'';el('agent-steps').value=JSON.stringify(agent.steps||[],null,2);el('preview').textContent=JSON.stringify(agent,null,2);};
+    refresh();
+  </script>
+</body>
+</html>
