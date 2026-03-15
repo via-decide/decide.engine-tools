@@ -5,6 +5,8 @@
   const sections = [...document.querySelectorAll('main section[id], section[id]')];
   const routeAliases = { researchers: 'research' };
   const legacyToolAliases = { 'prompt-alchemy': 'prompt-alchemy-main' };
+
+  const canonicalRoute = (id) => routeAliases[id] || id;
   const state = {
     tools: [],
     filteredTools: [],

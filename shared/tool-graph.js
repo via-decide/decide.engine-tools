@@ -63,6 +63,7 @@
     var nodesGroup = opts.nodesGroup;
     var labelsGroup = opts.labelsGroup;
     var tools = opts.tools;
+    var graphEdges = opts.graphEdges || [];
     var tooltip = opts.tooltip;
 
     var W = svg.clientWidth || 900;
@@ -74,17 +75,18 @@
 
     // Draw edges
     edgesGroup.innerHTML = '';
-    nodes.forEach(function (node) {
-      var relatedTools = node.tool.relatedTools || [];
-      relatedTools.forEach(function (relId) {
-        var target = nodes.find(function (n) { return n.tool.id === relId; });
-        if (!target) return;
-        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', node.x); line.setAttribute('y1', node.y);
-        line.setAttribute('x2', target.x); line.setAttribute('y2', target.y);
-        line.setAttribute('stroke', '#334155'); line.setAttribute('stroke-width', '1');
-        edgesGroup.appendChild(line);
-      });
+    var byNodeId = new Map(nodes.map(function (node) { return [node.tool.id, node]; }));
+    graphEdges.forEach(function (edge) {
+      var source = byNodeId.get(edge.from);
+      var target = byNodeId.get(edge.to);
+      if (!source || !target) return;
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', source.x); line.setAttribute('y1', source.y);
+      line.setAttribute('x2', target.x); line.setAttribute('y2', target.y);
+      line.setAttribute('stroke', edge.relation === 'dependency' ? '#7dd3fc' : '#334155');
+      line.setAttribute('stroke-width', edge.relation === 'dependency' ? '1.6' : '1');
+      line.setAttribute('stroke-dasharray', edge.relation === 'dependency' ? '2 3' : '');
+      edgesGroup.appendChild(line);
     });
 
     // Draw nodes
@@ -213,9 +215,11 @@
     }
 
     var tools;
+    var graphEdges = [];
     try {
       const graph = await window.ToolRegistry.getGraph();
       tools = graph.tools || [];
+      graphEdges = graph.edges || [];
     } catch (e) {
       if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Error: ' + escapeHtml(e.message) + '</div>';
       return;
@@ -234,7 +238,7 @@
     var tooltip   = document.getElementById('tooltip');
 
     buildLegend(legend);
-    renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, tooltip });
+    renderGraph({ svg, graphRoot, edgesGroup, nodesGroup, labelsGroup, tools, graphEdges, tooltip });
   }
 
   init();
