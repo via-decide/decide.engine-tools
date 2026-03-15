@@ -5,6 +5,10 @@ Refactor tool-graph.html. Update the visualization logic to map the new Agent ec
 
 CONSTRAINTS
 pure Vanilla JS; reuse existing Canvas/SVG/D3 setup; do not build a new graph engine from scratch.
+Update index.html and router.js. Integrate the new agent-builder.html, tool-registry.html, execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the navigation menu reflects this new "Agent Platform" architecture. Verify shared/agent-runtime.js is loaded globally so agents can be triggered from anywhere in the OS.
+
+CONSTRAINTS
+maintain existing history pushState routing; do not break any remaining legacy tools that the user still wants access to.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
