@@ -249,6 +249,13 @@
     'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible'
   ];
 
+  function fallbackManifestEntries() {
+    return importableToolDirs.map((dir) => ({
+      toolDir: dir,
+      metaPath: `${dir}/config.json`
+    }));
+  }
+
   function repoBasePath() {
     const current = document.currentScript;
     if (!current || !current.src) return '';
@@ -301,14 +308,37 @@
     return builtinTools.map((tool) => normalizeTool(tool));
   }
 
+  async function loadManifestEntries() {
+    try {
+      const response = await fetch(resolve('tools-manifest.json'), { cache: 'no-cache' });
+      if (!response.ok) return fallbackManifestEntries();
+
+      const manifest = await response.json();
+      if (!manifest || !Array.isArray(manifest.entries)) return fallbackManifestEntries();
+
+      return manifest.entries
+        .map((entry) => {
+          if (!entry || typeof entry !== 'object') return null;
+          const toolDir = typeof entry.toolDir === 'string' ? entry.toolDir : '';
+          const metaPath = typeof entry.metaPath === 'string' ? entry.metaPath : '';
+          if (!toolDir || !metaPath) return null;
+          return { toolDir, metaPath };
+        })
+        .filter(Boolean);
+    } catch (_) {
+      return fallbackManifestEntries();
+    }
+  }
+
   async function loadImportedTools() {
+    const manifestEntries = await loadManifestEntries();
     const loaded = await Promise.all(
-      importableToolDirs.map(async (dir) => {
+      manifestEntries.map(async ({ toolDir, metaPath }) => {
         try {
-          const response = await fetch(resolve(dir + '/config.json'), { cache: 'no-cache' });
+          const response = await fetch(resolve(metaPath), { cache: 'no-cache' });
           if (!response.ok) return null;
           const meta = await response.json();
-          return normalizeTool(meta, dir);
+          return normalizeTool(meta, toolDir);
         } catch (_) {
           return null;
         }
