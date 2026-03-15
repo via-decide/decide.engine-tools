@@ -21,6 +21,7 @@ export function renderResearchSection(toolsById) {
     })}
     ${createGridLayout(gridCards)}
   </div>`;
+}
 export function renderSection(container) {
   container.insertAdjacentHTML('beforeend', String.raw`<section id="researchers">
     <div class="w">

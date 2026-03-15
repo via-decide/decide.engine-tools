@@ -8,7 +8,8 @@ const cards = [
   { id: 'repo-improvement-brief', chipLabel: 'Dev', chipClass: 'c-coders', icon: '🔧' },
   { id: 'code-generator', chipLabel: 'Code', chipClass: 'c-coders', icon: '⚡' },
   { id: 'code-reviewer', chipLabel: 'Review', chipClass: 'c-coders', icon: '🔍' },
-  { id: 'agent-builder', name: 'Agent Builder', description: 'Design simple multi-agent workflows with role cards, prompts, and handoff sequencing.', entry: 'agent/index.html', category: 'coders', chipLabel: 'AI', chipClass: 'c-coders', icon: '🤖' }
+  { id: 'agent', name: 'Agent Builder', description: 'Design simple multi-agent workflows with role cards, prompts, and handoff sequencing.', entry: 'agent/index.html', category: 'coders', chipLabel: 'AI', chipClass: 'c-coders', icon: '🤖' }
+
 ];
 
 export function renderBuildersSection(toolsById) {
@@ -21,6 +22,7 @@ export function renderBuildersSection(toolsById) {
     })}
     ${createGridLayout(gridCards)}
   </div>`;
+}
 export function renderSection(container) {
   container.insertAdjacentHTML('beforeend', String.raw`<section id="builders">
     <div class="w">

@@ -39,6 +39,62 @@
       outputs: ['agent_json']
     },
     {
+      id: 'founder',
+      name: 'Founder Narrative Builder',
+      description: 'Build founder positioning and narrative assets.',
+      category: 'business',
+      audience: ['founders', 'creators'],
+      inputs: ['story', 'offer'],
+      outputs: ['founder_narrative'],
+      relatedTools: ['prompt-alchemy-main', 'script-generator'],
+      entry: 'founder/index.html',
+      tags: ['legacy', 'positioning']
+    }
+  ];
+
+
+
+  const importableToolDirs = [
+    'tools/promptalchemy', 'tools/script-generator', 'tools/spec-builder',
+    'tools/code-generator', 'tools/code-reviewer', 'tools/tool-router',
+    'tools/export-studio', 'tools/template-vault', 'tools/idea-remixer',
+    'tools/task-splitter', 'tools/prompt-compare', 'tools/repo-improvement-brief',
+    'tools/workflow-template-gallery', 'tools/tool-search-discovery',
+    'tools/context-packager', 'tools/output-evaluator',
+    'tools/engine/player-signup', 'tools/engine/orchard-profile-builder',
+    'tools/engine/starter-farm-generator', 'tools/engine/root-strength-calculator',
+    'tools/engine/trunk-growth-calculator', 'tools/engine/fruit-yield-engine',
+    'tools/engine/daily-quest-generator', 'tools/engine/weekly-harvest-engine',
+    'tools/engine/thirty-day-promotion-engine', 'tools/engine/fair-ranking-engine',
+    'tools/engine/seed-exchange', 'tools/engine/fruit-sharing',
+    'tools/engine/circle-builder', 'tools/engine/peer-validation-engine',
+    'tools/engine/trust-score-engine', 'tools/engine/recruiter-dashboard',
+    'tools/engine/orchard-discovery-search', 'tools/engine/hire-readiness-scorer',
+    'tools/engine/four-direction-pipeline', 'tools/engine/growth-path-recommender',
+    'tools/engine/ai-coach-console', 'tools/engine/simulation-runner',
+    'tools/engine/seed-quality-scorer', 'tools/engine/meta-health-dashboard',
+    'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
+    'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine',
+    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz',
+    'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible'
+  ];
+
+  function repoBasePath() {
+    const current = document.currentScript;
+    if (!current || !current.src) return '';
+    const marker = '/shared/tool-registry.js';
+    const idx = current.src.indexOf(marker);
+    if (idx === -1) return '';
+    return current.src.slice(0, idx + 1);
+  }
+
+  const BASE = repoBasePath();
+
+  function resolve(path) {
+    if (!BASE) return path;
+    return BASE + path;
+  }
+
       id: 'tool-registry-console',
       name: 'Tool Registry Console',
       description: 'Inspect and manage registered tools and plugins.',
