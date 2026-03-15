@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add a new standalone tool called note-summarizer in tools/note-summarizer/. Title: "Note Summarizer". Description: "Paste notes, get structured summary with key points.". Category: "education". The tool must contain: config.json, index.html, tool.js. The tool must be standalone, use vanilla JS, load shared.css and tool-storage.js. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
 Upgrade the root index.html game launcher to use a "Glassmorphism Bento Grid" UI (inspired by React Bits). Update _assets/css/global-theme.css and index.html to wrap game cards in translucent panels using CSS backdrop-filter: blur(12px), subtle rgba borders, and a smooth hover-lift physics effect. Pure CSS and HTML5.
 
 CONSTRAINTS

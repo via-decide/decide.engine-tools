@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-a-new-standalone-tool-called-note-summarizer",
   "branch": "simba/upgrade-the-root-indexhtml-game-launcher-to-use-",
   "branch": "simba/create-a-utility-script-assetsjsmagnetic-buttons",
   "branch": "simba/add-shimmer-text-and-animated-glowing-borders-ut",

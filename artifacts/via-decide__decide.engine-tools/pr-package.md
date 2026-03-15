@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-note-summarizer
+Title: Add a new standalone tool called note-summarizer in tools/note-summar...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working note-summarizer tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/upgrade-the-root-indexhtml-game-launcher-to-use-
 Title: Upgrade the root index.html game launcher to use a "Glassmorphism Ben...
 
