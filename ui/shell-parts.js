@@ -10,6 +10,7 @@ export const headerMarkup = String.raw`<nav class="nav">
       <a class="nl"    href="#orchard"     data-s="orchard">🌳 Orchard Game</a>
       <a class="nl"    href="#games"       data-s="games">🎮 Games</a>
       <a class="nl"    href="#mars"        data-s="mars">🚀 Mars</a>
+      <a class="nl"    href="#mission"     data-s="mission">Mission</a>
       <a class="nl"    href="#all"         data-s="all">All Tools</a>
     </div>
   </div>

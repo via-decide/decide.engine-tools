@@ -1,7 +1,7 @@
 import { renderBuildersSection } from './builders.js';
 import { renderBusinessSection } from './business.js';
 import { renderCreatorsSection } from './creators.js';
-import { renderGamesSection } from './games.js';
+import { renderSection as renderGamesSection } from './games.js';
 import { renderResearchSection } from './research.js';
 
 export async function renderHomeSections() {

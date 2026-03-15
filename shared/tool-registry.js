@@ -49,9 +49,25 @@
       relatedTools: ['prompt-alchemy-main', 'script-generator'],
       entry: 'founder/index.html',
       tags: ['legacy', 'positioning']
+    },
+    {
+      id: 'tool-registry-console',
+      name: 'Tool Registry Console',
+      description: 'Inspect and manage registered tools and plugins.',
+      category: 'system',
+      tags: ['registry'],
+      entry: 'tool-registry.html'
+    },
+    {
+      id: 'execution-console',
+      name: 'Execution Console',
+      description: 'Run saved agents and inspect sequential execution logs.',
+      category: 'system',
+      tags: ['runtime', 'execution'],
+      entry: 'execution-console.html',
+      outputs: ['execution_log']
     }
   ];
-
 
 
   const importableToolDirs = [
@@ -94,25 +110,6 @@
     if (!BASE) return path;
     return BASE + path;
   }
-
-      id: 'tool-registry-console',
-      name: 'Tool Registry Console',
-      description: 'Inspect and manage registered tools and plugins.',
-      category: 'system',
-      tags: ['registry'],
-      entry: 'tool-registry.html'
-    },
-    {
-      id: 'execution-console',
-      name: 'Execution Console',
-      description: 'Run saved agents and inspect sequential execution logs.',
-      category: 'system',
-      tags: ['runtime', 'execution'],
-      entry: 'execution-console.html',
-      outputs: ['execution_log']
-    }
-  ];
-
   function normalizeCategory(category) {
     const raw = String(category || '').trim().toLowerCase();
     return CATEGORY_ALIASES[raw] || raw || DEFAULT_CATEGORY;
@@ -160,7 +157,7 @@
 
   async function loadManifest() {
     try {
-      const res = await fetch('tools-manifest.json', { cache: 'no-cache' });
+      const res = await fetch(resolve('tools-manifest.json'), { cache: 'no-cache' });
       if (!res.ok) return [];
       const payload = await res.json();
       return Array.isArray(payload.entries) ? payload.entries : [];
@@ -171,7 +168,7 @@
 
   async function loadToolMeta({ toolDir, metaPath }) {
     try {
-      const res = await fetch(metaPath, { cache: 'no-cache' });
+      const res = await fetch(resolve(metaPath), { cache: 'no-cache' });
       if (!res.ok) return null;
       const json = await res.json();
       return normalizeTool(json, toolDir);
