@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create a new branch feature/eco-engine-test. Create a new directory at the root level called tools/eco-engine-test/. Inside this directory, create an index.html file and populate it exactly with the code payload provided below. After creating the file, commit the changes with the message "feat: add isolated test environment for unified auth, wallet, and plant engine logic". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Eco-Hack Engine Foundation" and a description mentioning it establishes async state management. Code Payload for index.html: <!doctype html> <html lang="en"> <head> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width,initial-scale=1.0"/> <title>Eco-Hack Engine Test</title> <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet"/> <style> :root {
+Create a new branch feature/agent-tool-registry. Create a new directory shared/ if it does not exist. Inside, create a file named tool-registry.js and populate it exactly with the code payload provided below. After creating the file, commit the changes with the message "feat: establish core AI agent tool registry". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Tool Registry" and a description mentioning it standardizes the tools agents can call. Code Payload for tool-registry.js: const ToolRegistry = {
 
 RULES
 1. Audit touched files first and identify regressions.
