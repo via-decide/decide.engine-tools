@@ -246,7 +246,8 @@
     'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
     'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine',
     'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz',
-    'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible'
+    'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible',
+    'tools/ai-tool-generator'
   ];
 
   function fallbackManifestEntries() {
@@ -266,6 +267,7 @@
   }
 
   const BASE = repoBasePath();
+  const PLUGIN_STORAGE_KEY = 'viadecide.tool-registry.plugins';
 
   function resolve(path) {
     if (!BASE) return path;
@@ -347,6 +349,71 @@
     return loaded.filter(Boolean);
   }
 
+
+
+  const pluginTools = [];
+
+
+
+  function loadPersistedPlugins() {
+    try {
+      const raw = localStorage.getItem(PLUGIN_STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function persistPlugins() {
+    try {
+      localStorage.setItem(PLUGIN_STORAGE_KEY, JSON.stringify(pluginTools));
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function registerPlugin(pluginMeta) {
+    if (!pluginMeta || typeof pluginMeta !== 'object') return null;
+    const normalized = normalizeTool(pluginMeta, pluginMeta.toolDir || 'tools/plugin');
+    const index = pluginTools.findIndex((tool) => tool.id === normalized.id);
+    if (index >= 0) pluginTools[index] = normalized;
+    else pluginTools.push(normalized);
+    persistPlugins();
+    return normalized;
+  }
+
+  function registerPlugins(plugins) {
+    if (!Array.isArray(plugins)) return [];
+    return plugins.map(registerPlugin).filter(Boolean);
+  }
+
+  async function getCategories() {
+    const all = await loadAll();
+    return Array.from(new Set(all.map((tool) => tool.category))).sort();
+  }
+
+  async function getGraph() {
+    const tools = await loadAll();
+    if (window.ToolIntelligenceEngine && typeof window.ToolIntelligenceEngine.analyze === 'function') {
+      const graph = window.ToolIntelligenceEngine.analyze(tools);
+      return { ...graph, tools };
+    }
+
+    const byId = new Set(tools.map((tool) => tool.id));
+    const nodes = tools.map((tool) => ({ id: tool.id, label: tool.name, category: tool.category }));
+    const edges = [];
+    tools.forEach((tool) => {
+      (tool.relatedTools || []).forEach((targetId) => {
+        if (!byId.has(targetId)) return;
+        edges.push({ from: tool.id, to: targetId, relation: 'related' });
+      });
+    });
+    return { nodes, edges, tools };
+  }
+
   function getTools() {
     const ids = [
       ...builtinTools.map((t) => t.id),
@@ -360,8 +427,10 @@
   }
 
   async function loadAll() {
+    if (pluginTools.length === 0) registerPlugins(loadPersistedPlugins());
+    if (Array.isArray(window.TOOL_REGISTRY_PLUGINS)) registerPlugins(window.TOOL_REGISTRY_PLUGINS);
     const imported = await loadImportedTools();
-    const merged = [...getBuiltinTools(), ...imported];
+    const merged = [...getBuiltinTools(), ...imported, ...pluginTools];
     const deduped = new Map();
     merged.forEach((tool) => deduped.set(tool.id, tool));
     return Array.from(deduped.values());
@@ -380,7 +449,11 @@
     loadAll,
     findById,
     getTools,
-    isRegistered
+    isRegistered,
+    registerPlugin,
+    registerPlugins,
+    getCategories,
+    getGraph
   };
 
 })(window);

@@ -311,9 +311,12 @@
         <button class="tab" data-c="education">Students</button>
         <button class="tab" data-c="system">System</button>
       </div>
+
       <div class="tools-controls">
         <div class="tools-meta" id="featured-count">0 featured</div>
         <div class="tools-toggles">
+          <input id="tool-search-input" type="search" placeholder="Search tools" style="background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 12px;color:var(--text);min-width:180px">
+          <select id="tool-category-select" style="background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:6px 12px;color:var(--text)"><option value="all">All categories</option></select>
           <button class="toggle-btn" id="sort-alpha-toggle" type="button" aria-pressed="true">Sort: A → Z</button>
           <label class="toggle-check" for="include-engine-toggle">
             <input id="include-engine-toggle" type="checkbox">

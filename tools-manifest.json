@@ -1,6 +1,10 @@
 {
-  "generatedAt": "2026-03-15T00:53:38.204Z",
+  "generatedAt": "2026-03-15T01:32:11.476Z",
   "entries": [
+    {
+      "toolDir": "tools/ai-tool-generator",
+      "metaPath": "tools/ai-tool-generator/config.json"
+    },
     {
       "toolDir": "tools/code-generator",
       "metaPath": "tools/code-generator/config.json"

@@ -157,10 +157,21 @@
             <button id="save-workflow" class="btn primary" type="button">Save Workflow</button>
             <button id="run-workflow" class="btn primary" type="button">Run Workflow</button>
             <button id="clear-canvas" class="btn" type="button">Clear Canvas</button>
+            <button id="export-workflow" class="btn" type="button">Export JSON</button>
+            <label class="btn" style="cursor:pointer">Import JSON<input id="import-workflow" type="file" accept="application/json" style="display:none"></label>
           </div>
           <div class="row">
             <select id="saved-workflows" aria-label="Saved workflows"></select>
             <button id="load-workflow" class="btn" type="button">Load Workflow</button>
+          </div>
+
+          <label>
+            Agent Task Prompt
+            <input id="agent-task-prompt" type="text" placeholder="e.g. review code quality and generate delivery brief" />
+          </label>
+          <div class="row">
+            <button id="build-agent-workflow" class="btn" type="button">Build Agent Workflow</button>
+            <button id="run-agent-workflow" class="btn" type="button">Run Agent Preview</button>
           </div>
         </div>
 
@@ -175,6 +186,7 @@
           <div id="workflow-nodes"></div>
         </div>
 
+        <div id="autosave-status" style="margin-top:8px;color:var(--muted);font-size:0.8rem;">Autosave ready</div>
         <pre id="workflow-steps-preview" aria-label="Workflow JSON preview"></pre>
       </section>
     </div>
@@ -184,6 +196,7 @@
   <script src="shared/tool-bridge.js"></script>
   <script src="shared/workflow-storage.js"></script>
   <script src="shared/workflow-engine.js"></script>
+  <script src="shared/agent-layer.js"></script>
   <script src="shared/workflow-ui.js"></script>
   <script>
     window.WorkflowUI.init();
