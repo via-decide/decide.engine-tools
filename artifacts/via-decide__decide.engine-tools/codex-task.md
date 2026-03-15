@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/ux-particle-system. Create a file shared/particle-engine.js. Build a Vanilla JS ParticleEngine object. It should dynamically generate absolute-positioned <div> elements (confetti, sparks, stars) that animate outwards from a given (x,y) coordinate using CSS transitions, and then automatically remove themselves from the DOM after the animation completes (e.g., 800ms). Include pre-configured burst profiles: burstXP(x, y) (green/gold sparks), burstError(x, y) (red shake), and burstClick(x, y) (subtle white rings). Attach global listeners to trigger these bursts on existing engine events (like wallet:earned or swipe:card_swiped). Commit the changes with the message "feat: implement DOM-based particle effects engine". Push the branch and open a Pull Request to main with the title "Feat: Particle Effects Engine" and a description mentioning it adds visual 'juice' to interactions.
+
+CONSTRAINTS
+> Pure Vanilla JS. Do not use Canvas if DOM elements suffice (for better accessibility and crispness). Ensure it does not cause memory leaks by properly garbage-collecting the DOM elements.
 > Create a new branch feature/ux-audio-manager. Create a file shared/audio-manager.js. Build an AudioManager that initializes the Web Audio API or uses simple HTMLAudioElement objects. It should preload 3-4 very short, subtle base64-encoded sound strings (or simple synthesized oscillators): a "pop" for clicks, a "chime" for success, and a "low thud" for errors. Implement a vibrate(pattern) method using the navigator.vibrate API for mobile devices. Add a global "Mute" toggle state stored in localStorage. Listen for global custom events (e.g., agent:step_success, growth:stage_evolved) to play the corresponding sound and haptic pattern automatically. Commit the changes with the message "feat: add global audio and haptic feedback manager". Push the branch and open a Pull Request to main with the title "Feat: Audio & Haptic Manager" and a description mentioning tactile game feedback.
 
 CONSTRAINTS

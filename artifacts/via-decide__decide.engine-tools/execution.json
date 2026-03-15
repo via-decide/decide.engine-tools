@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-a-new-branch-featureux-particle-system-cr",
   "branch": "simba/create-a-new-branch-featureux-audio-manager-crea",
   "branch": "simba/create-a-new-branch-featureux-view-transitions-c",
   "branch": "simba/create-a-new-branch-featureux-achievement-toasts",

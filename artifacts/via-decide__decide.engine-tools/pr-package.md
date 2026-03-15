@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureux-particle-system-cr
+Title: > Create a new branch feature/ux-particle-system. Create a file share...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > Make every positive interaction in the app feel incredibly rewarding with physical, bursting visual feedback. /end_task
 Branch: simba/create-a-new-branch-featureux-audio-manager-crea
 Title: > Create a new branch feature/ux-audio-manager. Create a file shared/...
 
