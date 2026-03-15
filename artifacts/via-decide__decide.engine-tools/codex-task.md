@@ -5,6 +5,14 @@ Create execution-console.html. Build a developer-style dashboard that listens to
 
 CONSTRAINTS
 pure Vanilla JS; use a monospace font for logs; ensure it can handle rapid event firing without freezing the DOM.
+Refactor tool-graph.html. Update the visualization logic to map the new Agent ecosystem. The graph should read engine_agent_plans and tool-registry.js. Render Agents as primary nodes, and draw directed edges to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies.
+
+CONSTRAINTS
+pure Vanilla JS; reuse existing Canvas/SVG/D3 setup; do not build a new graph engine from scratch.
+Update index.html and router.js. Integrate the new agent-builder.html, tool-registry.html, execution-console.html, and the updated tool-graph.html into the main application layout and routing system. Ensure the navigation menu reflects this new "Agent Platform" architecture. Verify shared/agent-runtime.js is loaded globally so agents can be triggered from anywhere in the OS.
+
+CONSTRAINTS
+maintain existing history pushState routing; do not break any remaining legacy tools that the user still wants access to.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
