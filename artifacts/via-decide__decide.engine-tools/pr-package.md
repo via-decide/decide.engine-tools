@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-flashcard-engin
+Title: Add a new standalone tool called flashcard-engine in tools/flashcard-...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working flashcard-engine tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-study-timer-in-
 Title: Add a new standalone tool called study-timer in tools/study-timer/. T...
 
