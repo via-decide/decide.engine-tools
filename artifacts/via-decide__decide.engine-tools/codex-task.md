@@ -1,6 +1,11 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add a new standalone tool called typing-speed in tools/games/typing-speed/. Title: "Typing Speed Test". Description: "Measure words-per-minute with accuracy tracking.". Category: "games". The tool must contain: config.json, index.html, tool.js. The game must run in browser, use vanilla JS, have simple UI, no external frameworks. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
+
+CONSTRAINTS
+preserve all existing tool folders; preserve standalone behavior; do not break category routing; update router/index/registry/README only as needed; use minimal corrective edits
+Add a new standalone tool called memory-match in tools/games/memory-match/. Title: "Memory Match". Description: "Card flip memory game with scoring and timer.". Category: "games". The tool must contain: config.json, index.html, tool.js. The game must run in browser, use vanilla JS, have simple UI, no external frameworks. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
 Add a new standalone tool called quiz-engine in tools/games/quiz-engine/. Title: "Quiz Engine". Description: "Configurable quiz tool with JSON-driven questions.". Category: "games". The tool must contain: config.json, index.html, tool.js. The game must run in browser, use vanilla JS, have simple UI, no external frameworks. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
 
 CONSTRAINTS

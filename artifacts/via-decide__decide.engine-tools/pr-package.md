@@ -1,3 +1,11 @@
+Branch: simba/add-a-new-standalone-tool-called-typing-speed-in
+Title: Add a new standalone tool called typing-speed in tools/games/typing-s...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working typing-speed tool with config.json, index.html, tool.js, registered and routed.
+Branch: simba/add-a-new-standalone-tool-called-memory-match-in
+Title: Add a new standalone tool called memory-match in tools/games/memory-m...
 Branch: simba/add-a-new-standalone-tool-called-quiz-engine-in-
 Title: Add a new standalone tool called quiz-engine in tools/games/quiz-engi...
 
