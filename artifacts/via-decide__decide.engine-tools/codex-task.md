@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Upgrade the root index.html game launcher to use a "Glassmorphism Bento Grid" UI (inspired by React Bits). Update _assets/css/global-theme.css and index.html to wrap game cards in translucent panels using CSS backdrop-filter: blur(12px), subtle rgba borders, and a smooth hover-lift physics effect. Pure CSS and HTML5.
+
+CONSTRAINTS
+preserve existing tools; preserve standalone behavior; register in tool-registry.js and router.js; update README if needed
 Create a utility script _assets/js/magnetic-buttons.js and update global-theme.css to implement "Magnetic Buttons" (inspired by modern React UI). Add Vanilla JS mousemove listeners to .btn elements so they gently pull towards the cursor on hover, and add a CSS ripple/glow effect on click. Must work without frameworks.
 
 CONSTRAINTS

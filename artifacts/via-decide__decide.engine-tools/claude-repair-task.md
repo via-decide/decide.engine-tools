@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Upgrade the root index.html game launcher to use a "Glassmorphism Bento Grid" UI (inspired by React Bits). Update _assets/css/global-theme.css and index.html to wrap game cards in translucent panels using CSS backdrop-filter: blur(12px), subtle rgba borders, and a smooth hover-lift physics effect. Pure CSS and HTML5.
 Create a utility script _assets/js/magnetic-buttons.js and update global-theme.css to implement "Magnetic Buttons" (inspired by modern React UI). Add Vanilla JS mousemove listeners to .btn elements so they gently pull towards the cursor on hover, and add a CSS ripple/glow effect on click. Must work without frameworks.
 Add "Shimmer Text" and "Animated Glowing Borders" utilities to _assets/css/global-theme.css. Create pure CSS @keyframes for a light sweep effect across text (class .text-shimmer) and rotating conic-gradient borders (class .border-glow). Apply these classes to the milestone evolution states in the growth-milestone-engine for premium visual feedback.
 Create a new utility _assets/js/environment-particles.js that uses HTML5 Canvas to render dynamic particle backgrounds (inspired by React Bits particle components). Logic must read the current environment state (rain, sun, toxic pests) and spawn lightweight falling raindrops, floating sun dust, or sickly green spores using requestAnimationFrame. Integrate into growth-milestone-engine.

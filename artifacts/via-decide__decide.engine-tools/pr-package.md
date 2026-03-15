@@ -1,3 +1,9 @@
+Branch: simba/upgrade-the-root-indexhtml-game-launcher-to-use-
+Title: Upgrade the root index.html game launcher to use a "Glassmorphism Ben...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working Glassmorphism bento grid UI for the main game launcher
 Branch: simba/create-a-utility-script-assetsjsmagnetic-buttons
 Title: Create a utility script _assets/js/magnetic-buttons.js and update glo...
 
