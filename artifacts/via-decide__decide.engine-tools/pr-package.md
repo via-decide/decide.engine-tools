@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureexecution-console-ui-
+Title: > Create a new branch feature/execution-console-ui. Create a new file...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > A real-time developer terminal to trigger saved agents and monitor their step-by-step API executions and state changes. /end_task
 Branch: simba/create-a-new-branch-featureagent-builder-ui-refa
 Title: > Create a new branch feature/agent-builder-ui. Refactor the existing...
 Branch: simba/create-a-new-branch-featureagent-runtime-create-
