@@ -66,6 +66,15 @@ export function renderSection(container) {
           </div>
         </div>
 
+        <div class="feat-card" style="border-color:rgba(14,165,233,.3);background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(26,22,20,.97))">
+          <div class="chip" style="background:rgba(14,165,233,.15);color:#38bdf8">🌌 Sci-Fi Strategy</div>
+          <h3>SkillHex Mission Control</h3>
+          <p>A mission control dashboard interface. Complete tasks, deploy squads, and earn experience points in a stunning sci-fi environment.</p>
+          <div class="btn-row">
+            <a class="btn" style="background:#0284c7;color:#fff;box-shadow:0 4px 0 #075985" href="./tools/games/skillhex-mission-control/index.html">🛸 Launch Control</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>`);

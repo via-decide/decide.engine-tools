@@ -15,6 +15,13 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.card,
+button,
+.tab,
+.btn {
+  user-select: none;
+}
+
 *:focus {
   outline: none;
 }
