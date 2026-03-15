@@ -209,20 +209,10 @@
       relatedTools: ['prompt-alchemy-main', 'script-generator'],
       entry: 'founder/index.html',
       tags: ['legacy', 'positioning']
-    },
-    {
-      id: 'wings-of-fire-quiz',
-      name: 'Wings of Fire Quiz',
-      description: 'Interactive quiz tool.',
-      category: 'games',
-      audience: ['students'],
-      inputs: ['answers'],
-      outputs: ['score'],
-      relatedTools: [],
-      entry: 'wings-of-fire-quiz/index.html',
-      tags: ['legacy', 'quiz']
     }
   ];
+
+
 
   const importableToolDirs = [
     'tools/promptalchemy', 'tools/script-generator', 'tools/spec-builder',

@@ -40,6 +40,7 @@ export function renderCreatorsSection(toolsById) {
     ${featured}
     ${createGridLayout(gridCards)}
   </div>`;
+}
 export function renderSection(container) {
   container.insertAdjacentHTML('beforeend', String.raw`<section id="creators">
     <div class="w">
