@@ -6,54 +6,30 @@ Title: Create a new utility _assets/js/environment-particles.js that uses HT...
 - Goal: working Vanilla JS canvas particle system tied to engine weather states
 Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
 Title: Integrate swup.js via CDN into the root index.html to handle page rou...
+Branch: simba/create-a-new-branch-featureui-theme-engine-creat
+Title: > Create a new branch feature/ui-theme-engine. Create a new file shar...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working seamless SPA-like page transitions across standalone HTML files
-Branch: simba/integrate-the-vanilla-version-of-tsparticles-via
-Title: Integrate the vanilla version of tsparticles via CDN into _assets/js/...
+- Goal: > A premium, customizable aesthetic layer that gives the platform a cohesive, modern feel across all pages. /end_task
+Branch: simba/create-a-new-branch-featureui-template-gallery-c
+Title: > Create a new branch feature/ui-template-gallery. Create a new file ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: working high-performance interactive particle backgrounds tied to engine state
-Branch: simba/create-a-new-branch-featureagent-tool-registry-c
-Title: > Create a new branch feature/agent-tool-registry. Create a new direc...
+- Goal: > A frictionless onboarding experience that allows users to instantly deploy useful AI agents without building them from scratch. /end_task
+Branch: simba/create-a-new-branch-featureui-smart-visualizer-u
+Title: > Create a new branch feature/ui-smart-visualizer. Update the executi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A successfully opened Pull Request containing the global Tool Registry that defines the atomic actions available to AI agents. /end_task
-Branch: simba/create-a-new-branch-featureagent-platform-routin
-Title: > Create a new branch feature/agent-platform-routing. Update index.ht...
+- Goal: > Transform the execution console from a raw data dump into a polished, readable dashboard of AI decisions and outputs. /end_task
+Branch: simba/create-a-new-branch-featureui-drag-drop-refactor
+Title: > Create a new branch feature/ui-drag-drop. Refactor the agent-builde...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > Wire all the new standalone HTML files into the centralized OS dashboard for a unified user experience. /end_task
-Branch: simba/create-a-new-branch-featureupdate-tool-graph-ref
-Title: > Create a new branch feature/update-tool-graph. Refactor the existin...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A visual map showing the macro architecture of which automated Agents are calling which underlying Tools. /end_task
-Branch: simba/create-a-new-branch-featureexecution-console-ui-
-Title: > Create a new branch feature/execution-console-ui. Create a new file...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A real-time developer terminal to trigger saved agents and monitor their step-by-step API executions and state changes. /end_task
-Branch: simba/create-a-new-branch-featureagent-builder-ui-refa
-Title: > Create a new branch feature/agent-builder-ui. Refactor the existing...
-Branch: simba/create-a-new-branch-featureagent-runtime-create-
-Title: > Create a new branch feature/agent-runtime. Create a file named shar...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A successfully opened Pull Request containing the execution brain that parses and runs the JSON-based agent workflows. /end_task
-Branch: simba/create-a-new-branch-featureagent-execution-logge
-Title: > Create a new branch feature/agent-execution-logger. Create a file n...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A Zapier-style vertical step editor that outputs a clean, sequential JSON workflow for the AgentRuntime to follow. /end_task
+- Goal: > A tactile, intuitive way for users to reorganize their AI agent's execution sequence without deleting and recreating steps. /end_task
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

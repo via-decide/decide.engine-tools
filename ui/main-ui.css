@@ -36,6 +36,9 @@
     .nav-links{display:flex;gap:4px;flex-wrap:wrap}
     .nl{color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 11px;border-radius:999px;border:1px solid transparent;transition:all .15s}
     .nl:hover,.nl.on{color:var(--text);border-color:var(--border)}
+    .nav-cta{margin-left:auto;font-size:.82rem;font-weight:700;padding:7px 12px;border-radius:999px;border:1px solid var(--leaf);color:var(--leaf);background:rgba(82,183,86,.08);transition:all .15s;white-space:nowrap}
+    .nav-cta:hover{color:#0a1a0a;background:var(--leaf);box-shadow:0 6px 18px rgba(82,183,86,.24)}
+    @media(max-width:760px){.nav-cta{margin-left:0}}
 
     /* ── HERO ── */
     .hero{padding:60px 0 52px}

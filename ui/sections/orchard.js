@@ -39,6 +39,13 @@ export function renderSection(container) {
       <!-- GAME TOOLS GRID -->
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:11px" id="orchard-tools-grid">
 
+        <a class="card" href="./tools/eco-engine-test/index.html" style="border-color:rgba(41,182,246,.35);background:linear-gradient(135deg,rgba(41,182,246,.1),var(--bg2))">
+          <div class="card-top"><span class="chip" style="background:rgba(41,182,246,.16);color:var(--water)">🔐 Player Login</span><span class="card-icon">🪪</span></div>
+          <h3>Create Your Account</h3>
+          <p>Sign up free. Track your plant, earn Focus Drops, and build your Orchard. Your progress saves to the cloud.</p>
+          <span class="card-link" style="color:var(--water)">Login / Register →</span>
+        </a>
+
         <!-- Growth Milestone Engine — THE MAIN GAME -->
         <a class="card" href="./tools/engine/growth-milestone-engine/index.html" style="border-color:rgba(82,183,86,.35);background:linear-gradient(135deg,rgba(82,183,86,.08),var(--bg2))">
           <div class="card-top"><span class="chip cat-engine" style="background:rgba(82,183,86,.15);color:var(--leaf)">🎮 Main Game</span><span class="card-icon">🌳</span></div>
