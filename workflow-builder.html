@@ -166,6 +166,15 @@
             <select id="saved-workflows" aria-label="Saved workflows"></select>
             <button id="load-workflow" class="btn" type="button">Load Workflow</button>
           </div>
+
+          <label>
+            Agent Task Prompt
+            <input id="agent-task-prompt" type="text" placeholder="e.g. review code quality and generate delivery brief" />
+          </label>
+          <div class="row">
+            <button id="build-agent-workflow" class="btn" type="button">Build Agent Workflow</button>
+            <button id="run-agent-workflow" class="btn" type="button">Run Agent Preview</button>
+          </div>
         </div>
 
         <div id="workflow-canvas" class="canvas" aria-label="Workflow canvas" tabindex="0">
@@ -190,6 +199,7 @@
   <script src="shared/tool-bridge.js"></script>
   <script src="shared/workflow-storage.js"></script>
   <script src="shared/workflow-engine.js"></script>
+  <script src="shared/agent-layer.js"></script>
   <script src="shared/workflow-ui.js"></script>
   <script>
     window.WorkflowUI.init();

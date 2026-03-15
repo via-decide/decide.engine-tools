@@ -45,6 +45,39 @@
 
   }
 
+  function setAutosaveStatus(text) {
+    const node = el('autosave-status');
+    if (node) node.textContent = text;
+  }
+
+  function scheduleAutosave() {
+    clearTimeout(state.autosaveTimer);
+    state.autosaveTimer = setTimeout(() => {
+      const draft = {
+        id: el('workflow-id').value.trim() || 'untitled-workflow',
+        nodes: state.nodes,
+        edges: state.edges
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      setAutosaveStatus(`Autosaved at ${new Date().toLocaleTimeString()}`);
+    }, 250);
+  }
+
+  function currentWorkflow() {
+    const id = el('workflow-id').value.trim() || 'untitled-workflow';
+    return global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
+  }
+
+  function syncPreview(extra = null) {
+    const output = {
+      workflow: currentWorkflow(),
+      runtime: extra
+    };
+    el('workflow-steps-preview').textContent = JSON.stringify(output, null, 2);
+  }
+
+  }
+
   function scheduleAutosave() {
     clearTimeout(state.autosaveTimer);
     state.autosaveTimer = setTimeout(() => {
@@ -103,6 +136,9 @@
     nodesLayer.querySelectorAll('.wf-node').forEach((nodeEl) => {
       const instanceId = nodeEl.getAttribute('data-instance-id');
 
+      nodeEl.addEventListener('pointerdown', (event) => {
+        if (event.target.tagName === 'BUTTON' || event.target.tagName === 'SELECT') return;
+        const node = state.nodes.find((n) => n.instanceId === instanceId);
       nodeEl.addEventListener('pointerdown', (event) => {
         if (event.target.tagName === 'BUTTON' || event.target.tagName === 'SELECT') return;
         const node = state.nodes.find((n) => n.instanceId === instanceId);
@@ -175,6 +211,14 @@
         const move = (e) => { node.x = Math.max(8, ox + e.clientX - startX); node.y = Math.max(8, oy + e.clientY - startY); syncCanvas(); };
         const up = () => { global.removeEventListener('pointermove', move); global.removeEventListener('pointerup', up); };
         global.addEventListener('pointermove', move); global.addEventListener('pointerup', up);
+      });
+
+      const typeSelect = nodeEl.querySelector('select[data-action="node-type"]');
+      typeSelect?.addEventListener('change', () => {
+        const node = state.nodes.find((n) => n.instanceId === instanceId);
+        if (!node) return;
+        node.nodeType = typeSelect.value;
+        syncCanvas();
       });
 
       const typeSelect = nodeEl.querySelector('select[data-action="node-type"]');
@@ -276,6 +320,15 @@
     syncCanvas();
   }
 
+  function loadAgentWorkflow(agentWorkflow) {
+    if (!agentWorkflow) return;
+    el('workflow-id').value = agentWorkflow.id || 'agent-workflow';
+    state.nodes = Array.isArray(agentWorkflow.nodes) ? agentWorkflow.nodes.map((n) => ({ ...n })) : [];
+    state.edges = Array.isArray(agentWorkflow.edges) ? agentWorkflow.edges.map((e) => ({ ...e })) : [];
+    state.connectFrom = null;
+    syncCanvas();
+  }
+
   function refreshSavedList() {
     const select = el('saved-workflows');
     const items = global.WorkflowStorage.loadAll();
@@ -322,6 +375,17 @@
     state.edges = Array.isArray(workflow.edges) ? workflow.edges.map((e) => ({ ...e })) : [];
     state.connectFrom = null;
     syncCanvas();
+  }
+
+  function exportWorkflow() {
+    const workflow = currentWorkflow();
+    const blob = new Blob([JSON.stringify(workflow, null, 2)], { type: 'application/json' });
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = `${workflow.id}.json`;
+    link.click();
+    URL.revokeObjectURL(href);
   }
 
   function exportWorkflow() {
@@ -432,6 +496,56 @@
         alert('Invalid workflow JSON file.');
       }
       event.target.value = '';
+    });
+
+    el('export-workflow')?.addEventListener('click', exportWorkflow);
+    el('import-workflow')?.addEventListener('change', async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const parsed = JSON.parse(await file.text());
+        loadWorkflow(parsed);
+      } catch (_error) {
+        alert('Invalid workflow JSON file.');
+      }
+      event.target.value = '';
+    });
+
+    el('workflow-id')?.addEventListener('input', scheduleAutosave);
+
+    el('build-agent-workflow')?.addEventListener('click', () => {
+      if (!global.AgentLayer) {
+        alert('Agent layer is unavailable.');
+        return;
+      }
+      const taskPrompt = el('agent-task-prompt')?.value.trim() || '';
+      if (!taskPrompt) {
+        alert('Enter an agent task prompt first.');
+        return;
+      }
+      const plan = global.AgentLayer.createAgentWorkflow('Agent Workspace Plan', taskPrompt, state.tools);
+      loadAgentWorkflow(plan);
+      syncPreview({ message: 'Agent workflow generated.', selectedTools: plan.selectedTools?.map((tool) => tool.id) || [] });
+    });
+
+    el('run-agent-workflow')?.addEventListener('click', () => {
+      if (!global.AgentLayer) {
+        alert('Agent layer is unavailable.');
+        return;
+      }
+      const taskPrompt = el('agent-task-prompt')?.value.trim() || '';
+      if (!taskPrompt) {
+        alert('Enter an agent task prompt first.');
+        return;
+      }
+      const plan = global.AgentLayer.createAgentWorkflow('Agent Workspace Plan', taskPrompt, state.tools);
+      loadAgentWorkflow(plan);
+      const result = global.AgentLayer.runAgentTask(plan, state.tools, { navigate: false });
+      if (!result.ok) {
+        alert(result.message);
+        return;
+      }
+      syncPreview({ message: result.message, logs: result.logs, selectedTools: plan.selectedTools?.map((tool) => tool.id) || [] });
     });
 
     el('workflow-id')?.addEventListener('input', scheduleAutosave);
