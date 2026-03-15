@@ -207,14 +207,15 @@
     var svg = document.getElementById('graph');
     var viewport = svg ? (svg.closest('.viewport') || svg.parentElement) : null;
 
-    if (!window.ToolRegistry || typeof window.ToolRegistry.loadAll !== 'function') {
+    if (!window.ToolRegistry || typeof window.ToolRegistry.getGraph !== 'function') {
       if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Tool registry failed to load.</div>';
       return;
     }
 
     var tools;
     try {
-      tools = await window.ToolRegistry.loadAll();
+      const graph = await window.ToolRegistry.getGraph();
+      tools = graph.tools || [];
     } catch (e) {
       if (viewport) viewport.innerHTML = '<div style="padding:40px;text-align:center;color:#fca5a5;">Error: ' + escapeHtml(e.message) + '</div>';
       return;

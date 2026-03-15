@@ -1,165 +1,116 @@
-(() => {
+(function (global) {
   'use strict';
 
-  const navLinks = [...document.querySelectorAll('.nl[data-route]')];
-  const sections = [...document.querySelectorAll('main section[id]')];
-  const routeAliases = { researchers: 'research' };
-
-  const routeAliases = {
-    researchers: 'research'
+  const state = {
+    tools: [],
+    filteredTools: [],
+    activeToolId: null,
+    ui: null
   };
 
-  const canonicalRoute = (id) => routeAliases[id] || id;
+  function routeToToolId(url) {
+    const params = new URL(url, global.location.origin).searchParams;
+    return params.get('tool') || '';
+  }
 
-  const legacyToolAliases = {
-    'prompt-alchemy': 'prompt-alchemy-main'
-  };
+  function setStatus(message) {
+    if (state.ui?.state) state.ui.state.textContent = message;
+  }
 
-  /* ── Navigation helpers ── */
+  function renderList() {
+    if (!state.ui?.list) return;
 
-  const normalizeRoute = (id) => routeAliases[id] || id;
+    state.ui.list.innerHTML = state.filteredTools
+      .map((tool) => `<button class="tool-item${tool.id === state.activeToolId ? ' active' : ''}" type="button" data-tool-id="${tool.id}">
+          <strong>${tool.name}</strong>
+          <span>${tool.category}</span>
+        </button>`)
+      .join('') || '<p class="muted">No tools match your filters.</p>';
+  }
 
-  const setActive = (id) => {
-    const routeId = normalizeRoute(id);
-    navLinks.forEach((link) => {
-      link.classList.toggle('on', link.getAttribute('data-route') === routeId);
+  function applyFilters() {
+    const search = (state.ui?.search?.value || '').trim().toLowerCase();
+    const category = state.ui?.category?.value || 'all';
+
+    state.filteredTools = state.tools.filter((tool) => {
+      const byCategory = category === 'all' || tool.category === category;
+      const haystack = `${tool.name} ${tool.description} ${(tool.tags || []).join(' ')}`.toLowerCase();
+      const bySearch = !search || haystack.includes(search);
+      return byCategory && bySearch;
     });
-  };
 
-  const goToRoute = (id) => {
-    const routeId = normalizeRoute(id);
-    const section = document.getElementById(routeId);
-    if (!section) return;
-    history.replaceState(null, '', `#${routeId}`);
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setActive(routeId);
-  };
+    renderList();
+  }
 
-  const routeFromHash = () => normalizeRoute(window.location.hash.replace('#', ''));
-
-  const syncFromHash = () => {
-    const route = routeFromHash();
-    if (route && document.getElementById(route)) {
-      goToRoute(route);
+  async function loadTool(toolId, { pushHistory = true } = {}) {
+    const tool = state.tools.find((item) => item.id === toolId);
+    if (!tool) {
+      setStatus(`Tool "${toolId}" was not found in the registry.`);
       return;
     }
-    setActive('home');
-    const canonicalId = canonicalRoute(id);
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', canonicalRoute(link.getAttribute('data-route')) === canonicalId);
-    });
-  };
 
-  const goToRoute = (id, { smooth = true, updateHash = true } = {}) => {
-    const canonicalId = canonicalRoute(id);
-    const section = document.getElementById(canonicalId);
-    if (!section) return;
-    if (updateHash) history.replaceState(null, '', `#${canonicalId}`);
-    section.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    setActive(canonicalId);
-  };
+    state.activeToolId = tool.id;
+    state.ui.frame.src = tool.entry;
+    setStatus(`Loaded ${tool.name}.`);
+    renderList();
 
-  /* ── Tool path resolution ── */
-
-  const normalizeDirectPathRef = (toolRef) => {
-    if (!toolRef || !toolRef.includes('/')) return null;
-
-    const normalized = toolRef.replace(/^\.\//, '').replace(/^\//, '');
-    if (normalized.endsWith('.html')) return normalized;
-    return `${normalized.replace(/\/+$/, '')}/index.html`;
-  };
-
-  const resolveToolPath = async (toolRef) => {
-    if (!toolRef) return null;
-
-    const directPath = normalizeDirectPathRef(toolRef);
-    if (directPath) return directPath;
-
-    if (globalThis.ToolRegistry && typeof globalThis.ToolRegistry.findById === 'function') {
-      const canonicalId = legacyToolAliases[toolRef] || toolRef;
-      const tool = await globalThis.ToolRegistry.findById(canonicalId);
-      return tool?.entry || null;
+    if (pushHistory) {
+      const url = new URL(global.location.href);
+      url.searchParams.set('tool', tool.id);
+      global.history.pushState({ toolId: tool.id }, '', url);
     }
-
-    return null;
-  };
-
-  const openToolFromQuery = async () => {
-    const params = new URLSearchParams(window.location.search);
-    const toolRef = params.get('tool');
-    if (!toolRef) return;
-
-    try {
-      const resolved = await resolveToolPath(toolRef);
-      if (resolved) {
-        window.location.href = resolved;
-        return;
-      }
-    } catch (_) {
-      // fall through
-    }
-
-    const container = document.getElementById('categorized-tools') || document.querySelector('main');
-    if (!container) return;
-
-    const notice = document.createElement('div');
-    notice.setAttribute('role', 'alert');
-    notice.style.cssText = 'background:#1e1225;border:1px solid #7f1d1d;border-radius:10px;padding:16px 20px;margin:18px 0;color:#fca5a5;font-size:0.95rem;';
-    notice.innerHTML = `<strong>Tool not found:</strong> <code>${toolRef.replace(/</g, '&lt;')}</code><br><span style="color:#94a3b8;font-size:0.85rem;">Check the tool ID and try again. Browse available tools below.</span>`;
-    container.prepend(notice);
-  };
-
-  /* ── Event wiring ── */
-
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      const route = link.getAttribute('data-route');
-      if (!route) return;
-      event.preventDefault();
-      goToRoute(route);
-    });
-  });
-
-  if (sections.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      {
-        rootMargin: '-30% 0px -50% 0px',
-        threshold: [0.2, 0.5, 0.8]
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
   }
 
-  window.addEventListener('hashchange', syncFromHash);
+  function bindEvents() {
+    state.ui.list.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-tool-id]');
+      if (!button) return;
+      loadTool(button.getAttribute('data-tool-id'));
+    });
 
-  const initial = routeFromHash();
-  if (initial && document.getElementById(initial)) {
-    setTimeout(() => goToRoute(initial), 50);
-  const initial = window.location.hash.replace('#', '');
-  const canonicalInitial = canonicalRoute(initial);
-  if (canonicalInitial && document.getElementById(canonicalInitial)) {
-    setTimeout(() => goToRoute(canonicalInitial, { smooth: false }), 50);
-  } else {
-    setActive('home');
+    state.ui.nav.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-tool-id]');
+      if (!button) return;
+      loadTool(button.getAttribute('data-tool-id'));
+    });
+
+    state.ui.search.addEventListener('input', applyFilters);
+    state.ui.category.addEventListener('change', applyFilters);
+
+    global.addEventListener('popstate', () => {
+      const id = routeToToolId(global.location.href);
+      if (id) loadTool(id, { pushHistory: false });
+    });
   }
 
-  window.addEventListener('hashchange', () => {
-    const hash = window.location.hash.replace('#', '');
-    if (!hash) return;
-    const canonicalHash = canonicalRoute(hash);
-    if (!document.getElementById(canonicalHash)) return;
-    goToRoute(canonicalHash, { smooth: false, updateHash: false });
-  });
+  async function init() {
+    if (!global.ToolRegistry?.loadAll || !global.PlatformLayout?.renderLayout) return;
 
-  openToolFromQuery();
+    state.tools = await global.ToolRegistry.loadAll();
+    const navItems = state.tools.slice(0, 8);
+    state.ui = global.PlatformLayout.renderLayout({
+      mount: document.getElementById('app'),
+      title: 'decide.engine connected tools',
+      navItems
+    });
 
-  globalThis.Router = { resolveToolPath, legacyToolAliases, normalizeDirectPathRef };
-  globalThis.Router = { resolveToolPath, allToolPaths, canonicalRoute, routeAliases };
-})();
+    const categories = Array.from(new Set(state.tools.map((tool) => tool.category))).sort();
+    state.ui.category.insertAdjacentHTML('beforeend', categories.map((cat) => `<option value="${cat}">${cat}</option>`).join(''));
+
+    state.filteredTools = state.tools.slice();
+    renderList();
+    bindEvents();
+
+    const fromRoute = routeToToolId(global.location.href);
+    if (fromRoute) {
+      loadTool(fromRoute, { pushHistory: false });
+      return;
+    }
+
+    if (state.tools.length) {
+      loadTool(state.tools[0].id, { pushHistory: false });
+    }
+  }
+
+  global.Router = { init, loadTool };
+})(window);
