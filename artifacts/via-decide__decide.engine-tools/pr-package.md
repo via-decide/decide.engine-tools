@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-quiz-engine-in-
+Title: Add a new standalone tool called quiz-engine in tools/games/quiz-engi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working quiz-engine tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-lean-canvas-in-
 Title: Add a new standalone tool called lean-canvas in tools/lean-canvas/. T...
 
