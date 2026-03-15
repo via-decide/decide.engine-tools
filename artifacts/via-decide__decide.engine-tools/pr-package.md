@@ -1,3 +1,9 @@
+Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
+Title: Integrate swup.js via CDN into the root index.html to handle page rou...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working seamless SPA-like page transitions across standalone HTML files
 Branch: simba/integrate-the-vanilla-version-of-tsparticles-via
 Title: Integrate the vanilla version of tsparticles via CDN into _assets/js/...
 

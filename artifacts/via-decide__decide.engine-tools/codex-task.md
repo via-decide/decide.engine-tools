@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Integrate swup.js via CDN into the root index.html to handle page routing. Wrap the main content areas in <main id="swup" class="transition-fade">. Configure Swup so that clicking a game card in the launcher smoothly fades out the index and fades in the specific tool's UI (like starter-farm-generator) without a hard browser refresh.
+
+CONSTRAINTS
+preserve existing tools; use CDN for Swup; pure Vanilla JS implementation
 Integrate the vanilla version of tsparticles via CDN into _assets/js/environment-particles.js. Replace the custom canvas drawing logic with a tsparticles configuration. Create three config profiles: 'Rain' (falling blue drops), 'Sun' (floating golden dust), and 'Toxic' (erratic green spores). Hook these profiles to listen to the engine:weather_changed event.
 
 CONSTRAINTS
