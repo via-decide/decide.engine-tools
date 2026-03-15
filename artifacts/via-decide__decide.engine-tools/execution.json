@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/integrate-the-vanilla-version-of-tsparticles-via",
   "branch": "simba/create-a-new-branch-featureagent-tool-registry-c",
   "branch": "simba/create-a-new-branch-featureagent-platform-routin",
   "branch": "simba/create-a-new-branch-featureupdate-tool-graph-ref",

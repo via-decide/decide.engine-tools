@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Integrate the vanilla version of tsparticles via CDN into _assets/js/environment-particles.js. Replace the custom canvas drawing logic with a tsparticles configuration. Create three config profiles: 'Rain' (falling blue drops), 'Sun' (floating golden dust), and 'Toxic' (erratic green spores). Hook these profiles to listen to the engine:weather_changed event.
+
+CONSTRAINTS
+preserve existing tools; use CDN for tsparticles; pure Vanilla JS implementation
 > Create a new branch feature/agent-tool-registry. Create a new directory shared/ if it does not exist. Inside, create a file named tool-registry.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: establish core AI agent tool registry". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Tool Registry" and a description mentioning it standardizes the tools agents can call. Code Payload for tool-registry.js: const ToolRegistry = {
 
 CONSTRAINTS

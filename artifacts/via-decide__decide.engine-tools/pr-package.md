@@ -1,3 +1,9 @@
+Branch: simba/integrate-the-vanilla-version-of-tsparticles-via
+Title: Integrate the vanilla version of tsparticles via CDN into _assets/js/...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working high-performance interactive particle backgrounds tied to engine state
 Branch: simba/create-a-new-branch-featureagent-tool-registry-c
 Title: > Create a new branch feature/agent-tool-registry. Create a new direc...
 
