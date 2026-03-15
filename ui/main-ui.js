@@ -30,7 +30,8 @@
     { id: 'home', label: 'Home' },
     { id: 'creators', label: 'Creators' },
     { id: 'builders', label: 'Builders' },
-    { id: 'research', label: 'Research' },
+    { id: 'researchers', label: 'Research' },
+
     { id: 'business', label: 'Business' },
     { id: 'orchard', label: '🌳 Orchard Game' },
     { id: 'games', label: '🎮 Games' },

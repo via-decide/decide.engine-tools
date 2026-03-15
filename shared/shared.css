@@ -10,7 +10,20 @@
   --warn: #f59e0b;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
 
 body {
   margin: 0;
@@ -81,7 +94,9 @@ textarea {
 button {
   cursor: pointer;
   font-weight: 600;
+  user-select: none;
 }
+
 
 button.primary {
   border: none;

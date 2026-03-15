@@ -20,6 +20,15 @@ export function renderGamesSection() {
       cardStyle: 'border-color:rgba(251,146,60,.3);background:linear-gradient(135deg,rgba(251,146,60,.1),rgba(26,22,20,.97))',
       links: [{ href: './tools/games/wings-of-fire-quiz/index.html', label: '🔥 Play Quiz', style: 'background:#ea580c;color:#fff;box-shadow:0 4px 0 #7c2d12' }]
     })}
+
+    ${createFeaturedCard({
+      chip: '🌌 Sci-Fi Strategy',
+      chipStyle: 'background:rgba(14,165,233,.15);color:#38bdf8',
+      title: 'SkillHex Mission Control',
+      description: 'A mission control dashboard interface. Complete tasks, deploy squads, and earn experience points in a stunning sci-fi environment.',
+      cardStyle: 'border-color:rgba(14,165,233,.3);background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(26,22,20,.97))',
+      links: [{ href: './tools/games/skillhex-mission-control/index.html', label: '🛸 Launch Control', style: 'background:#0284c7;color:#fff;box-shadow:0 4px 0 #075985' }]
+    })}
   </div>`;
 
   return `<div class="w">
@@ -29,6 +38,7 @@ export function renderGamesSection() {
     })}
     ${featured}
   </div>`;
+}
 export function renderSection(container) {
   container.insertAdjacentHTML('beforeend', String.raw`<section id="games">
     <div class="w">

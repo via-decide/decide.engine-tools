@@ -25,6 +25,7 @@
       --system:#94a3b8;
       --r:12px;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color:transparent}
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     *:focus{outline:none}
@@ -114,6 +115,24 @@
     .div {height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent); margin: 20px 0;}
 
     /* ── SECTION ── */
+    section{padding:44px 0;scroll-margin-top:68px}
+    .sh{margin-bottom:22px}
+    .sh h2{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;margin-bottom:5px}
+    .sh p{color:var(--muted);font-size:.88rem}
+
+    /* ── TABS ── */
+    .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+    .tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.83rem;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+    .tab:hover{border-color:var(--border2);color:var(--text)}
+    .tab.on{background:var(--leaf);border-color:var(--leaf);color:#0a1a0a}
+    .tab, .btn, .card { user-select: none; }
+    .tools-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:-8px 0 16px}
+    .tools-meta{font-size:.78rem;color:var(--muted)}
+    .tools-toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .toggle-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.76rem;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+    .toggle-btn[aria-pressed='true']{border-color:var(--leaf);color:var(--leaf)}
+    .toggle-check{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.76rem;border:1px solid var(--border);padding:5px 9px;border-radius:999px}
+    .toggle-check input{accent-color:var(--leaf)}
     section {padding:60px 0;scroll-margin-top:80px; position: relative;}
     .sh {margin-bottom:32px}
     .sh h2 {font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;margin-bottom:8px; letter-spacing: -0.2px;}
@@ -378,7 +397,6 @@
   </div>
 </nav>
 
-<main>
 
   <!-- HERO -->
   <section id="home" class="hero">
@@ -1086,4 +1104,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 </body>
+
 </html>
