@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureagent-execution-logge
+Title: Create a new branch feature/agent-execution-logger. Create a file nam...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A successfully opened Pull Request containing the persistence layer that records all agent activity for the Execution Console.
 Branch: simba/create-a-new-branch-featureagent-runtime-create-
 Title: Create a new branch feature/agent-runtime. Create a file named shared...
 
