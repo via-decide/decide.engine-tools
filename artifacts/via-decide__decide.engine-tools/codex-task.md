@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create a new branch feature/update-tool-graph. Refactor the existing tool-graph.html file. Update the visualization logic to map the new Agent ecosystem. The graph must read from localStorage.getItem('engine_agent_plans') and window.ToolRegistry. Render Agents as primary nodes, and draw directed edges (arrows) to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies. Commit the changes with the message "feat: update tool graph to map agent dependencies". Push the branch and open a Pull Request to main with the title "Feat: Agent Ecosystem Visualizer" and a description mentioning it parses JSON plans to draw tool connections.
+
+CONSTRAINTS
+> Pure Vanilla JS. Reuse existing Canvas/SVG logic in the file; do not build a new graph engine from scratch.
 > Create a new branch feature/execution-console-ui. Create a new file named execution-console.html. Build a developer-style dashboard that lists all agents saved in localStorage.getItem('engine_agent_plans'). Add a "Run Agent" button next to each plan that instantiates window.AgentRuntime and calls .run(). Create a visual terminal window in the UI that listens to window.addEventListener('agent:log_updated') (fired by AgentLogger). Display a real-time, auto-scrolling log feed of the active agent run, showing the JSON input/output payload for each step as it succeeds or fails. Commit the changes with the message "feat: add real-time execution console dashboard". Push the branch and open a Pull Request to main with the title "Feat: Execution Console" and a description mentioning it monitors live AgentRuntime events.
 
 CONSTRAINTS
