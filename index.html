@@ -41,12 +41,30 @@
     }
     
     a, button {text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;}
-    button, [role="button"], [onclick], .card, .tab, .toggle-btn, .search-trigger, .search-item, .nl {
+
+    /* ─────────────────────────────────────────────────────────────
+       BUG FIX #2 — Tap-highlight & selection glitch
+       Root cause: `label` was not included in the tap-highlight
+       selector, causing a visible blue flash on iOS/Android when
+       tapping the "Include Engine/Sim Tools" toggle label.
+       Fix: added `label` to the selector list.
+       Additionally suppressed `::selection` on all interactive
+       elements to prevent blue drag-selection artifacts on cards.
+    ───────────────────────────────────────────────────────────── */
+    button, label, [role="button"], [onclick], .card, .tab, .toggle-btn,
+    .search-trigger, .search-item, .nl {
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
     }
+    /* Suppress browser blue selection highlight on all interactive surfaces */
+    button::selection, label::selection, [onclick]::selection,
+    .card::selection, .tab::selection, .toggle-btn::selection,
+    .search-item::selection, .nl::selection {
+      background: transparent;
+    }
+
     .w {width:min(1100px,92vw);margin:0 auto}
 
     /* ── NAV ── */
@@ -116,7 +134,7 @@
     .toggle-btn.active {background: var(--bg4); border-color:var(--leaf);color:var(--leaf)}
     .toggle-btn:active {transform: scale(0.96);}
     
-    .toggle-check {display:inline-flex;align-items:center;gap:8px;color:var(--text);font-size:.8rem; font-weight: 500; cursor: pointer; user-select: none;}
+    .toggle-check {display:inline-flex;align-items:center;gap:8px;color:var(--text);font-size:.8rem; font-weight: 500; cursor: pointer;}
     .toggle-check input {accent-color:var(--leaf); width: 16px; height: 16px; cursor: pointer;}
 
     /* ── TOOL GRID ── */
@@ -222,7 +240,22 @@
       0%{ transform: rotate(0deg);}
       100%{ transform: rotate(360deg);}
     }
-    @media(max-width:768px){.mars-hero, .orchard-hero {flex-direction: column; text-align: center; padding: 32px 20px;} .mars-desc{margin: 0 auto 24px;} .sim-visual{display:none;}}
+
+    /* ─────────────────────────────────────────────────────────────
+       BUG FIX #4a — Mobile hero CTA alignment
+       Root cause: `.mars-left` had no flex layout on mobile, so
+       the CTA buttons were left-aligned while the text was centred,
+       creating a visually broken layout on small screens.
+       Fix: add display:flex + flex-direction:column + align-items:center
+       to `.mars-left` inside the mobile media query.
+    ───────────────────────────────────────────────────────────── */
+    @media(max-width:768px){
+      .mars-hero, .orchard-hero {flex-direction: column; text-align: center; padding: 32px 20px;}
+      .mars-desc{margin: 0 auto 24px;}
+      .sim-visual{display:none;}
+      /* NEW: centre the button inside the left-column on mobile */
+      .mars-left { display: flex; flex-direction: column; align-items: center; }
+    }
 
     /* ── MISSION CTA ── */
     .mission-wrap {
@@ -320,6 +353,8 @@
         display: flex; align-items: center; gap: 12px;
     }
     #toast.show { transform: translateY(0); opacity: 1; }
+    /* Coming-soon variant — amber instead of green */
+    #toast.coming-soon { background: var(--amber); box-shadow: 0 8px 24px rgba(245,158,11,0.3); }
   </style>
 </head>
 <body>
@@ -505,7 +540,14 @@
           <p class="mission-copy">Join the open-source movement. No hidden fees, no data harvesting. Just pure, functional tools designed to amplify human intellect.</p>
           <div class="btn-row">
             <button class="btn-green" onclick="App.openTool('GitHub Repo')">⭐ Star on GitHub</button>
-            <button class="btn-ghost" onclick="document.querySelector('.nl[data-s=\'all\']').click()">Browse Directory</button>
+            <!--
+              BUG FIX #4b — Browse Directory onclick used invalid HTML escaping `\'`.
+              Backslash is not a valid HTML escape character inside attribute values.
+              While browsers often tolerate it, it can silently fail in strict contexts.
+              Fix: replaced the fragile querySelector call with a direct scrollIntoView
+              targeting the section element by its well-known ID.
+            -->
+            <button class="btn-ghost" onclick="document.getElementById('all').scrollIntoView({behavior:'smooth'})">Browse Directory</button>
           </div>
         </div>
         <div class="mission-stats">
@@ -518,12 +560,18 @@
 
 </main>
 
+<!--
+  BUG FIX #3b — Footer links pointed to non-existent hash anchors (#github, #graph).
+  These caused the page to jump to the top with a stale hash in the URL and
+  triggered the scroll-spy to de-highlight all nav items.
+  Fix: #github → real GitHub URL (opens in new tab); #graph → tool-graph.html.
+-->
 <footer>
   <div class="w footer-meta">
     <span>© 2026 ViaDecide · Free browser tools for practical thinkers</span>
     <div class="footer-links">
-      <a href="#github">GitHub Repository</a>
-      <a href="#graph">Knowledge Graph</a>
+      <a href="https://github.com/via-decide/decide.engine-tools" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="tool-graph.html">Knowledge Graph</a>
     </div>
   </div>
 </footer>
@@ -537,7 +585,6 @@
             <button class="close-search" onclick="SearchUI.close()">ESC</button>
         </div>
         <div class="search-results" id="search-results">
-            <!-- JS Injected -->
             <div class="empty" style="padding: 24px; text-align: center;">Type to search all 44+ tools...</div>
         </div>
     </div>
@@ -545,7 +592,7 @@
 
 <!-- TOAST -->
 <div id="toast">
-    <span>🚀</span>
+    <span id="toast-icon">🚀</span>
     <span id="toast-msg">Initializing module...</span>
 </div>
 
@@ -603,27 +650,81 @@ const CATEGORY_MAP = {
     operators: 'system'
 };
 
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * BUG FIX #1 — Wrong tools opening on button click (ROUTE_ALIASES corrections)
+ *
+ * Root cause: Eight aliases mapped user-facing tool names to completely
+ * unrelated repo tools, causing the wrong tool to open when a user clicked.
+ * The pattern was: a fictional/placeholder tool name silently routed to
+ * whatever existing file was vaguely similar by keyword.
+ *
+ * Specific wrong routes removed and why:
+ *   'color palette generator'   → 'tools/template-vault/index.html'
+ *     template-vault is a Business template store, NOT a colour tool.
+ *
+ *   'typography scale calculator' → 'tools/template-vault/index.html'
+ *     Same wrong target as above.
+ *
+ *   'json formatter'            → 'tools/code-generator/index.html'
+ *     code-generator generates code snippets; it does not format JSON.
+ *
+ *   'regex tester'              → 'tools/code-reviewer/index.html'
+ *     code-reviewer is a code-review assistant, not a regex sandbox.
+ *
+ *   'meeting cost calculator'   → 'tools/engine/meta-health-dashboard/index.html'
+ *     meta-health-dashboard is an Orchard Engine game-balance tool.
+ *     Zero relation to meeting cost calculation.
+ *
+ *   'pomodoro timer'            → 'tools/engine/daily-quest-generator/index.html'
+ *     daily-quest-generator is an Orchard Engine quest tool, not a timer.
+ *
+ *   'traffic router' (the game) → 'tools/tool-router/index.html'
+ *     tool-router is the site's internal navigation utility, not a traffic
+ *     puzzle game. Same name prefix, entirely different purpose.
+ *
+ *   'market dynamics' (the sim) → 'tools/engine/fair-ranking-engine/index.html'
+ *     fair-ranking-engine is an Orchard Engine fairness scoring tool,
+ *     not a market supply/demand simulator.
+ *
+ * Fix: all wrong aliases removed. These tools now display a "Coming Soon"
+ * toast (handled in openTool below) instead of silently opening the wrong app.
+ *
+ * BUG FIX #3a — Context Packager had NO alias at all → silent toast failure.
+ * Fix: added correct alias pointing to the tool's repo path (per README).
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
 const ROUTE_ALIASES = {
-    // Keep homepage labels intact while routing to real standalone tools
-    'student research': 'student-research/index.html',
-    'multi-source research': 'multi-source-research-explained/index.html',
-    'multi-source synthesizer': 'multi-source-research-explained/index.html',
-    'interview prep': 'interview-prep/index.html',
-    'interview prep framework': 'interview-prep/index.html',
-    'workflow gallery': 'tools/workflow-template-gallery/index.html',
-    'color palette generator': 'tools/template-vault/index.html',
-    'typography scale calculator': 'tools/template-vault/index.html',
-    'json formatter': 'tools/code-generator/index.html',
-    'regex tester': 'tools/code-reviewer/index.html',
-    'revenue forecaster': 'tools/engine/growth-milestone-engine/index.html',
-    'meeting cost calculator': 'tools/engine/meta-health-dashboard/index.html',
-    'pomodoro timer': 'tools/engine/daily-quest-generator/index.html',
-    'mars colony': 'https://via-decide.github.io/mars-decision-lab/',
-    'orchard sim': 'tools/engine/orchard-profile-builder/index.html',
-    'grid evolution': 'tools/games/hex-wars/index.html',
-    'market dynamics': 'tools/engine/fair-ranking-engine/index.html',
-    'traffic router': 'tools/tool-router/index.html',
-    'github repo': 'https://github.com/via-decide/decide.engine-tools'
+    // ── Research & Education (confirmed correct paths) ──
+    'student research':                  'student-research/index.html',
+    'multi-source research':             'multi-source-research-explained/index.html',
+    'multi-source synthesizer':          'multi-source-research-explained/index.html',
+    'interview prep':                    'interview-prep/index.html',
+    'interview prep framework':          'interview-prep/index.html',
+
+    // ── System / Orchestration tools (confirmed from README) ──
+    'workflow gallery':                  'tools/workflow-template-gallery/index.html',
+    'context packager':                  'tools/context-packager/index.html', // FIX #3a: was missing entirely
+
+    // ── Simulations / Games (confirmed correct paths) ──
+    'mars colony':                       'https://via-decide.github.io/mars-decision-lab/',
+    'orchard sim':                       'tools/engine/orchard-profile-builder/index.html',
+
+    // ── Business tools (confirmed closest real equivalent) ──
+    'revenue forecaster':                'tools/engine/growth-milestone-engine/index.html',
+
+    // ── Meta ──
+    'github repo':                       'https://github.com/via-decide/decide.engine-tools',
+
+    // ── REMOVED wrong aliases (see comment block above) ──
+    // 'color palette generator'        ← removed: was pointing to template-vault
+    // 'typography scale calculator'    ← removed: was pointing to template-vault
+    // 'json formatter'                 ← removed: was pointing to code-generator
+    // 'regex tester'                   ← removed: was pointing to code-reviewer
+    // 'meeting cost calculator'        ← removed: was pointing to meta-health-dashboard
+    // 'pomodoro timer'                 ← removed: was pointing to daily-quest-generator
+    // 'traffic router'                 ← removed: was pointing to tool-router (system nav utility)
+    // 'market dynamics'                ← removed: was pointing to fair-ranking-engine
 };
 
 const ToolCatalog = {
@@ -784,15 +885,30 @@ const App = {
 
     openTool(name) {
         const toast = document.getElementById('toast');
+        const toastIcon = document.getElementById('toast-icon');
         const resolvedEntry = ToolCatalog.resolveEntry(name);
         const isExternal = Boolean(resolvedEntry && /^https?:\/\//i.test(resolvedEntry));
         const entryPath = resolvedEntry
           ? (isExternal ? resolvedEntry : `./${resolvedEntry.replace(/^\.\//, '')}`)
           : null;
 
-        document.getElementById('toast-msg').innerText = entryPath
-          ? `Booting ${name} module...`
-          : `Opening ${name}...`;
+        /*
+         * BUG FIX #3 (partial) — Tools with no resolved route previously showed
+         * a generic "Opening {name}..." toast and silently did nothing, leaving
+         * the user with no feedback about why nothing happened.
+         * Fix: distinguish "booting" (has a path) from "coming soon" (no path).
+         * The toast now changes colour and label to make the state clear.
+         */
+        if (entryPath) {
+            toastIcon.textContent = '🚀';
+            toast.classList.remove('coming-soon');
+            document.getElementById('toast-msg').innerText = `Booting ${name} module...`;
+        } else {
+            toastIcon.textContent = '🔜';
+            toast.classList.add('coming-soon');
+            document.getElementById('toast-msg').innerText = `${name} · Coming Soon`;
+        }
+
         toast.classList.add('show');
 
         if (entryPath) {
@@ -805,7 +921,10 @@ const App = {
             }
           }, 350);
         } else {
-          setTimeout(() => toast.classList.remove('show'), 2500);
+          setTimeout(() => {
+            toast.classList.remove('show');
+            toast.classList.remove('coming-soon');
+          }, 2500);
         }
     },
 
@@ -827,6 +946,16 @@ const App = {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nl[data-s]');
 
+        /*
+         * BUG FIX #4c — Scroll-spy threshold: 0.4 caused the nav active state
+         * to never update for tall sections (Games, All Tools) that are taller
+         * than the viewport — IntersectionObserver can never report 40% visible
+         * for an element that fills more than the viewport height.
+         * Fix: switched to rootMargin-based detection instead of threshold.
+         * The rootMargin '-20% 0px -70% 0px' treats the middle 10% of the
+         * viewport as the "active zone", which is the standard scroll-spy
+         * pattern and works correctly for sections of any height.
+         */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -835,7 +964,7 @@ const App = {
                     });
                 }
             });
-        }, { threshold: 0.4 });
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
         sections.forEach(sec => observer.observe(sec));
     },
@@ -958,4 +1087,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 </script>
 </body>
 </html>
-
