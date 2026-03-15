@@ -20,6 +20,7 @@
       line-height:1.6;min-height:100vh;
     }
     a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+    button,[role="button"],[onclick],.card,.tab,.btn,.nl{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
     .w{width:min(1100px,92vw);margin:0 auto}
 
     /* ── NAV ── */
