@@ -64,6 +64,9 @@
   </style>
   <script src="../../shared/vd-nav-fix.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../../shared/reward-wallet.js"></script>
+  <script src="../../shared/growth-stage-engine.js"></script>
+  <script src="../../shared/season-engine.js"></script>
 </head>
 <body>
   <main class="app">
@@ -196,6 +199,17 @@
         return 'Something went wrong. Please try again.';
       };
 
+
+      window.addEventListener('growth:stage_evolved', (e) => {
+        logAction('🌿 Plant evolved to ' + e.detail.stage.name + '!');
+      });
+      window.addEventListener('season:day_advanced', (e) => {
+        logAction('🗓️ Day ' + e.detail.day + ' — ' + e.detail.weather.name + ' ' + e.detail.weather.emoji);
+      });
+      window.addEventListener('wallet:insufficient', (e) => {
+        logAction('Not enough ' + e.detail.currency + ' — need ' + e.detail.needed + ', have ' + e.detail.have);
+      });
+
       const sanitizeEmail = (value) => value.trim().toLowerCase();
       const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       const validatePassword = (password) => password.length >= 8 && /\d/.test(password);
@@ -226,6 +240,13 @@
           logAction('Wallet loaded');
         }
 
+        async addDrops(amount) {
+          const next = `${125 + Number(amount || 0)} 🌿`;
+          walletValue.textContent = next;
+          logAction(`Wallet credited +${amount} drops`);
+          if (window.RewardWallet) window.RewardWallet.earn('drops', amount, 'eco_engine');
+        }
+
         hasPendingWrites() {
           return this.pendingWrites > 0;
         }
@@ -239,6 +260,16 @@
         async loadPlant() {
           plantLevel.textContent = '🌿 Level 3';
           logAction('Plant loaded');
+        }
+
+        async waterPlant() {
+          logAction('Plant watered');
+          if (window.GrowthStageEngine) window.GrowthStageEngine.waterPlant(30);
+        }
+
+        async evolvePlant() {
+          logAction('Plant evolved');
+          if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(200);
         }
 
         resetUI() {
@@ -259,6 +290,8 @@
           this.restoreFromLocalFastPath();
           await this.checkSession();
           this.startSilentRefresh();
+          if (window.GrowthStageEngine) window.GrowthStageEngine.applyTick();
+          if (window.SeasonEngine) window.SeasonEngine.getTodayWeather();
         }
 
         bindEvents() {

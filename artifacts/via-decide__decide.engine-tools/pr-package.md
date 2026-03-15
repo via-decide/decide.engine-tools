@@ -8,28 +8,38 @@ Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
 Title: Integrate swup.js via CDN into the root index.html to handle page rou...
 Branch: simba/create-a-new-branch-featureui-theme-engine-creat
 Title: > Create a new branch feature/ui-theme-engine. Create a new file shar...
+Branch: simba/implement-the-native-view-transitions-api-or-a-c
+Title: Implement the native View Transitions API (or a CSS fade/scale fallba...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A premium, customizable aesthetic layer that gives the platform a cohesive, modern feel across all pages. /end_task
-Branch: simba/create-a-new-branch-featureui-template-gallery-c
-Title: > Create a new branch feature/ui-template-gallery. Create a new file ...
+- Goal: working smooth page transitions between the root launcher and standalone tools
+Branch: simba/integrate-swupjs-via-cdn-into-the-root-indexhtml
+Title: Integrate swup.js via CDN into the root index.html to handle page rou...
+Branch: simba/create-a-new-branch-featureux-particle-system-cr
+Title: > Create a new branch feature/ux-particle-system. Create a file share...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A frictionless onboarding experience that allows users to instantly deploy useful AI agents without building them from scratch. /end_task
-Branch: simba/create-a-new-branch-featureui-smart-visualizer-u
-Title: > Create a new branch feature/ui-smart-visualizer. Update the executi...
+- Goal: > Make every positive interaction in the app feel incredibly rewarding with physical, bursting visual feedback. /end_task
+Branch: simba/create-a-new-branch-featureux-audio-manager-crea
+Title: > Create a new branch feature/ux-audio-manager. Create a file shared/...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > Transform the execution console from a raw data dump into a polished, readable dashboard of AI decisions and outputs. /end_task
-Branch: simba/create-a-new-branch-featureui-drag-drop-refactor
-Title: > Create a new branch feature/ui-drag-drop. Refactor the agent-builde...
+- Goal: > Provide crucial non-visual feedback so the platform feels tactile, responsive, and alive. /end_task
+Branch: simba/create-a-new-branch-featureux-view-transitions-c
+Title: > Create a new branch feature/ux-view-transitions. Create a file shar...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: > A tactile, intuitive way for users to reorganize their AI agent's execution sequence without deleting and recreating steps. /end_task
+- Goal: > Eliminate jarring screen snaps when navigating, replacing them with buttery-smooth, morphing layout shifts. /end_task
+Branch: simba/create-a-new-branch-featureux-achievement-toasts
+Title: > Create a new branch feature/ux-achievement-toasts. Create a file sh...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > A non-intrusive, highly rewarding way to notify the user of successes, background agent completions, and system states. /end_task
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
