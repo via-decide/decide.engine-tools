@@ -1,5 +1,13 @@
 Branch: simba/create-a-new-branch-featureagent-builder-ui-refa
 Title: > Create a new branch feature/agent-builder-ui. Refactor the existing...
+Branch: simba/create-a-new-branch-featureagent-runtime-create-
+Title: > Create a new branch feature/agent-runtime. Create a file named shar...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > A successfully opened Pull Request containing the execution brain that parses and runs the JSON-based agent workflows. /end_task
+Branch: simba/create-a-new-branch-featureagent-execution-logge
+Title: > Create a new branch feature/agent-execution-logger. Create a file n...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
