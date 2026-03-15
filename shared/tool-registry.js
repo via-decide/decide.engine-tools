@@ -87,6 +87,49 @@
     return loaded.filter(Boolean);
   }
 
+
+
+  const pluginTools = [];
+
+  function registerPlugin(pluginMeta) {
+    if (!pluginMeta || typeof pluginMeta !== 'object') return null;
+    const normalized = normalizeTool(pluginMeta, pluginMeta.toolDir || 'tools/plugin');
+    const index = pluginTools.findIndex((tool) => tool.id === normalized.id);
+    if (index >= 0) pluginTools[index] = normalized;
+    else pluginTools.push(normalized);
+    return normalized;
+  }
+
+  function registerPlugins(plugins) {
+    if (!Array.isArray(plugins)) return [];
+    return plugins.map(registerPlugin).filter(Boolean);
+  }
+
+  async function getCategories() {
+    const all = await loadAll();
+    return Array.from(new Set(all.map((tool) => tool.category))).sort();
+  }
+
+  async function getGraph() {
+    const tools = await loadAll();
+    const byId = new Set(tools.map((tool) => tool.id));
+    const nodes = tools.map((tool) => ({ id: tool.id, label: tool.name, category: tool.category }));
+    const edges = [];
+    tools.forEach((tool) => {
+      (tool.relatedTools || []).forEach((targetId) => {
+        if (!byId.has(targetId)) return;
+        edges.push({ from: tool.id, to: targetId, relation: 'related' });
+      });
+    });
+    return { nodes, edges, tools };
+  }
+
+  function getTools() {
+    const ids = [
+      ...builtinTools.map((t) => t.id),
+      ...importableToolDirs.map((p) => p.split('/').pop())
+    ];
+    return Array.from(new Set(ids));
   async function loadAll() {
     const [manifestEntries, rootTools] = await Promise.all([loadManifest(), loadRootTools()]);
     const loadedManifest = await Promise.all(manifestEntries.map(loadToolMeta));
@@ -103,6 +146,13 @@
     return tools.find((tool) => tool.id === id) || null;
   }
 
+  async function loadAll() {
+    if (Array.isArray(window.TOOL_REGISTRY_PLUGINS)) registerPlugins(window.TOOL_REGISTRY_PLUGINS);
+    const imported = await loadImportedTools();
+    const merged = [...getBuiltinTools(), ...imported, ...pluginTools];
+    const deduped = new Map();
+    merged.forEach((tool) => deduped.set(tool.id, tool));
+    return Array.from(deduped.values());
   async function getCategories() {
     const tools = await loadAll();
     return Array.from(new Set(tools.map((tool) => tool.category))).sort();
@@ -129,6 +179,10 @@
     normalizeTool,
     loadAll,
     findById,
+    getTools,
+    isRegistered,
+    registerPlugin,
+    registerPlugins,
     getCategories,
     getGraph
   };
