@@ -1,94 +1,24 @@
 (function (global) {
   'use strict';
 
-  const CATEGORY_MAP = {
-    creators: 'creators',
-    coders: 'coders',
-    researchers: 'researchers',
+  const ROOT_TOOL_DIRS = [
+    'prompt-alchemy',
+    'app-generator',
+    'interview-prep',
+    'student-research',
+    'decision-brief-guide',
+    'sales-dashboard',
+    'founder',
+    'wings-of-fire-quiz',
+    'workflow-builder',
+    'tool-graph'
+  ];
+
+  const CATEGORY_ALIASES = {
     operators: 'business',
     founders: 'business',
     students: 'education',
-    gamers: 'games',
-    engine: 'simulations',
-    system: 'system',
-    misc: 'misc'
-  };
-
-  const ENGINE_TOOL_IDS = new Set([
-    'engine-state-manager',
-    'llm-action-parser',
-    'daily-weather-replenisher',
-    'admin-moderation-panel',
-    'simulation-runner',
-    'player-signup',
-    'orchard-profile-builder',
-    'root-strength-calculator',
-    'trunk-growth-calculator',
-    'fruit-yield-engine',
-    'daily-quest-generator',
-    'weekly-harvest-engine',
-    'thirty-day-promotion-engine',
-    'fair-ranking-engine',
-    'seed-exchange',
-    'fruit-sharing',
-    'circle-builder',
-    'peer-validation-engine',
-    'trust-score-engine',
-    'recruiter-dashboard',
-    'orchard-discovery-search',
-    'hire-readiness-scorer',
-    'four-direction-pipeline',
-    'growth-path-recommender',
-    'ai-coach-console',
-    'seed-quality-scorer',
-    'meta-health-dashboard',
-    'synthetic-player-generator',
-    'wave1-simulation-runner',
-    'balance-dashboard',
-    'growth-milestone-engine'
-  ]);
-
-  // Per-tool overrides — used by the hub to surface player-facing metadata
-  const TOOL_OVERRIDES = {
-    'starter-farm-generator': {
-      isEngineTool: false,
-      featured: true,
-      category: 'engine',
-      gameIcon: '🌱',
-      gameDescription: 'Initialize your farm identity and start your orchard run.',
-      entry: 'tools/engine/starter-farm-generator/index.html'
-    },
-    'orchard-profile-builder': {
-      isEngineTool: false,
-      category: 'engine',
-      gameIcon: '🪪',
-      gameDescription: 'Shape your orchard profile, role, and growth direction.',
-      entry: 'tools/engine/orchard-profile-builder/index.html'
-    },
-    'daily-quest-generator': {
-      isEngineTool: false,
-      category: 'engine',
-      gameIcon: '📜',
-      gameDescription: 'Generate your daily quest loop and actionable growth tasks.'
-    },
-    'weekly-harvest-engine': {
-      isEngineTool: false,
-      category: 'engine',
-      gameIcon: '🧺',
-      gameDescription: 'Convert your weekly actions into measurable harvest outcomes.'
-    },
-    'seed-exchange': {
-      isEngineTool: false,
-      category: 'engine',
-      gameIcon: '🛒',
-      gameDescription: 'Trade seeds and unlock better orchard opportunities.'
-    },
-    'growth-milestone-engine': {
-      isEngineTool: false,
-      category: 'engine',
-      gameIcon: '📈',
-      gameDescription: 'Track root strength, manage pests, and evolve your tree.'
-    }
+    engine: 'simulations'
   };
 
   function inferEngineTool(meta, normalizedCategory, defaultEntry, id) {
@@ -256,14 +186,14 @@
       metaPath: `${dir}/config.json`
     }));
   }
+  const DEFAULT_CATEGORY = 'misc';
 
-  function repoBasePath() {
-    const current = document.currentScript;
-    if (!current || !current.src) return '';
+  function resolveBase() {
+    const script = document.currentScript;
+    if (!script || !script.src) return '';
     const marker = '/shared/tool-registry.js';
-    const idx = current.src.indexOf(marker);
-    if (idx === -1) return '';
-    return current.src.slice(0, idx + 1);
+    const idx = script.src.indexOf(marker);
+    return idx === -1 ? '' : script.src.slice(0, idx + 1);
   }
 
   const BASE = repoBasePath();
@@ -273,79 +203,59 @@
     if (!BASE) return path;
     return BASE + path;
   }
+  const BASE = resolveBase();
+  const abs = (path) => (BASE ? `${BASE}${path}` : path);
 
   function normalizeCategory(category) {
-    return CATEGORY_MAP[category] || category || 'misc';
+    const raw = String(category || '').trim();
+    return CATEGORY_ALIASES[raw] || raw || DEFAULT_CATEGORY;
   }
 
-  function normalizeTool(meta, fallbackDir) {
-    const id = meta.id || (fallbackDir ? fallbackDir.split('/').pop() : 'unknown-tool');
-    const normalizedCategory = normalizeCategory(meta.category);
-    const defaultEntry = fallbackDir ? `${fallbackDir}/index.html` : '';
-    const override = TOOL_OVERRIDES[id] || {};
-    const category = override.category || normalizedCategory;
-    const isEngineTool = (typeof override.isEngineTool === 'boolean')
-      ? override.isEngineTool
-      : inferEngineTool(meta, normalizedCategory, defaultEntry, id);
+  function normalizeTool(meta, toolDir) {
+    const id = String(meta.id || toolDir.split('/').pop() || 'unknown').trim();
+    const category = normalizeCategory(meta.category);
+    const entry = String(meta.entry || `${toolDir}/index.html`).replace(/^\.\//, '');
 
     return {
       id,
       name: meta.name || id,
       description: meta.description || '',
       category,
-      isEngineTool,
-      featured: (typeof override.featured === 'boolean') ? override.featured : !!meta.featured,
-      gameIcon: override.gameIcon || meta.gameIcon || '',
-      gameDescription: override.gameDescription || meta.gameDescription || '',
       audience: Array.isArray(meta.audience) ? meta.audience : [],
+      tags: Array.isArray(meta.tags) ? meta.tags : [],
       inputs: Array.isArray(meta.inputs) ? meta.inputs : [],
       outputs: Array.isArray(meta.outputs) ? meta.outputs : [],
       relatedTools: Array.isArray(meta.relatedTools) ? meta.relatedTools : [],
-      entry: override.entry || meta.entry || defaultEntry,
-      tags: Array.isArray(meta.tags) ? meta.tags : []
+      featured: Boolean(meta.featured),
+      isEngineTool: category === 'simulations' || entry.startsWith('tools/engine/'),
+      entry
     };
   }
 
-  function getBuiltinTools() {
-    return builtinTools.map((tool) => normalizeTool(tool));
-  }
-
-  async function loadManifestEntries() {
+  async function loadManifest() {
     try {
-      const response = await fetch(resolve('tools-manifest.json'), { cache: 'no-cache' });
-      if (!response.ok) return fallbackManifestEntries();
-
-      const manifest = await response.json();
-      if (!manifest || !Array.isArray(manifest.entries)) return fallbackManifestEntries();
-
-      return manifest.entries
-        .map((entry) => {
-          if (!entry || typeof entry !== 'object') return null;
-          const toolDir = typeof entry.toolDir === 'string' ? entry.toolDir : '';
-          const metaPath = typeof entry.metaPath === 'string' ? entry.metaPath : '';
-          if (!toolDir || !metaPath) return null;
-          return { toolDir, metaPath };
-        })
-        .filter(Boolean);
-    } catch (_) {
-      return fallbackManifestEntries();
+      const res = await fetch(abs('tools-manifest.json'), { cache: 'no-cache' });
+      if (!res.ok) throw new Error('manifest unavailable');
+      const payload = await res.json();
+      return Array.isArray(payload.entries) ? payload.entries : [];
+    } catch (_error) {
+      return [];
     }
   }
 
-  async function loadImportedTools() {
-    const manifestEntries = await loadManifestEntries();
-    const loaded = await Promise.all(
-      manifestEntries.map(async ({ toolDir, metaPath }) => {
-        try {
-          const response = await fetch(resolve(metaPath), { cache: 'no-cache' });
-          if (!response.ok) return null;
-          const meta = await response.json();
-          return normalizeTool(meta, toolDir);
-        } catch (_) {
-          return null;
-        }
-      })
-    );
+  async function loadToolMeta({ toolDir, metaPath }) {
+    try {
+      const res = await fetch(abs(metaPath), { cache: 'no-cache' });
+      if (!res.ok) return null;
+      return normalizeTool(await res.json(), toolDir);
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  async function loadRootTools() {
+    const roots = ROOT_TOOL_DIRS.map((dir) => ({ toolDir: dir, metaPath: `${dir}/config.json` }));
+    const loaded = await Promise.all(roots.map(loadToolMeta));
     return loaded.filter(Boolean);
   }
 
@@ -420,10 +330,20 @@
       ...importableToolDirs.map((p) => p.split('/').pop())
     ];
     return Array.from(new Set(ids));
+  async function loadAll() {
+    const [manifestEntries, rootTools] = await Promise.all([loadManifest(), loadRootTools()]);
+    const loadedManifest = await Promise.all(manifestEntries.map(loadToolMeta));
+
+    const combined = [...loadedManifest.filter(Boolean), ...rootTools];
+    const deduped = new Map();
+    combined.forEach((tool) => deduped.set(tool.id, tool));
+
+    return Array.from(deduped.values()).sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  function isRegistered(id) {
-    return getTools().includes(id);
+  async function findById(id) {
+    const tools = await loadAll();
+    return tools.find((tool) => tool.id === id) || null;
   }
 
   async function loadAll() {
@@ -434,18 +354,30 @@
     const deduped = new Map();
     merged.forEach((tool) => deduped.set(tool.id, tool));
     return Array.from(deduped.values());
+  async function getCategories() {
+    const tools = await loadAll();
+    return Array.from(new Set(tools.map((tool) => tool.category))).sort();
   }
 
-  async function findById(id) {
-    const all = await loadAll();
-    return all.find((tool) => tool.id === id) || null;
+  async function getGraph() {
+    const tools = await loadAll();
+    const nodes = tools.map((tool) => ({ id: tool.id, category: tool.category, label: tool.name }));
+    const nodeIds = new Set(nodes.map((node) => node.id));
+    const edges = [];
+
+    tools.forEach((tool) => {
+      (tool.relatedTools || []).forEach((targetId) => {
+        if (!nodeIds.has(targetId)) return;
+        edges.push({ from: tool.id, to: targetId, type: 'related' });
+      });
+    });
+
+    return { nodes, edges, tools };
   }
 
   global.ToolRegistry = {
     normalizeCategory,
     normalizeTool,
-    getBuiltinTools,
-    loadImportedTools,
     loadAll,
     findById,
     getTools,
@@ -455,5 +387,4 @@
     getCategories,
     getGraph
   };
-
 })(window);
