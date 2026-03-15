@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-assetsjsstudyos-modulesjs-extract-studyen",
   "branch": "simba/create-assetsjsstudyos-onboardingjs-extract-dict",
   "branch": "simba/create-assetsjsstudyos-corejs-extract-appstore-s",
   "files_to_create": [
