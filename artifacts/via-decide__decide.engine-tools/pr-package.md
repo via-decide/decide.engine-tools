@@ -4,6 +4,18 @@ Title: Create _assets/js/studyos-modules.js. Extract StudyEngine, Missions, ...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: A dedicated controller for the core study tools that strictly follows the reactive, event-driven rendering pattern.
+Branch: simba/create-assetsjsstudyos-onboardingjs-extract-dict
+Title: Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatr...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A decoupled onboarding controller that generates the workspace matrix and alerts the core system when setup is complete.
+Branch: simba/create-assetsjsstudyos-corejs-extract-appstore-s
+Title: Create _assets/js/studyos-core.js. Extract AppStore, SystemData, and ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A centralized, event-driven state manager that handles all data persistence and broadcasts state changes to the rest of the OS.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

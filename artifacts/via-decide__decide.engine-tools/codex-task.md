@@ -5,6 +5,14 @@ Create _assets/js/studyos-modules.js. Extract StudyEngine, Missions, Tracker, Va
 
 CONSTRAINTS
 pure Vanilla JS; ensure DOM updates are efficient and only re-render when necessary.
+Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatrix, and OnboardingEngine from the main index.html. Refactor OnboardingEngine.complete() so that instead of calling Bootloader.switchLayer, it dispatches window.dispatchEvent(new CustomEvent('studyos:workspace_created', { detail: this.userChoices })).
+
+CONSTRAINTS
+pure Vanilla JS; preserve the exact auto-scroll physics and animation classes from the original prototype.
+Create _assets/js/studyos-core.js. Extract AppStore, SystemData, and DataGenerator from the main index.html. Refactor AppStore.saveData() to automatically dispatch window.dispatchEvent(new CustomEvent('studyos:state_updated', { detail: AppStore.data })) instead of directly calling UI functions. Ensure localStorage keys (os_config_final, os_data_final) are maintained.
+
+CONSTRAINTS
+pure Vanilla JS; do not modify DOM elements here; establish strict separation of data and UI.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
