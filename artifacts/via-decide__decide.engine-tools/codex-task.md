@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-> Create a new branch feature/agent-execution-logger. Create a file named shared/agent-logger.js and populate it exactly with the code payload provided below. Commit the changes with the message "feat: add global agent execution logger". Push the branch to origin and open a Pull Request to the main branch with the title "Feat: Agent Execution Logger" and a description mentioning it captures runtime events for the console UI. Code Payload for agent-logger.js: const AgentLogger = {
+> Create a new branch feature/update-tool-graph. Refactor the existing tool-graph.html file. Update the visualization logic to map the new Agent ecosystem. The graph must read from localStorage.getItem('engine_agent_plans') and window.ToolRegistry. Render Agents as primary nodes, and draw directed edges (arrows) to the specific Tools they utilize in their JSON steps. This allows the user to visually see which tools are heavily relied upon and which agents share dependencies. Commit the changes with the message "feat: update tool graph to map agent dependencies". Push the branch and open a Pull Request to main with the title "Feat: Agent Ecosystem Visualizer" and a description mentioning it parses JSON plans to draw tool connections.
 
 CONSTRAINTS
-> Do not modify the provided code payload. Ensure the directory path is exactly shared/agent-logger.js. The PR must target main. Must utilize localStorage safely.
+> Pure Vanilla JS. Reuse existing Canvas/SVG logic in the file; do not build a new graph engine from scratch.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
