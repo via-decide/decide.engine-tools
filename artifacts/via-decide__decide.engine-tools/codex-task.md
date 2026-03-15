@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatrix, and OnboardingEngine from the main index.html. Refactor OnboardingEngine.complete() so that instead of calling Bootloader.switchLayer, it dispatches window.dispatchEvent(new CustomEvent('studyos:workspace_created', { detail: this.userChoices })).
+
+CONSTRAINTS
+pure Vanilla JS; preserve the exact auto-scroll physics and animation classes from the original prototype.
 Create _assets/js/studyos-core.js. Extract AppStore, SystemData, and DataGenerator from the main index.html. Refactor AppStore.saveData() to automatically dispatch window.dispatchEvent(new CustomEvent('studyos:state_updated', { detail: AppStore.data })) instead of directly calling UI functions. Ensure localStorage keys (os_config_final, os_data_final) are maintained.
 
 CONSTRAINTS

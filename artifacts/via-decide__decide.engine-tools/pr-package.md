@@ -1,3 +1,9 @@
+Branch: simba/create-assetsjsstudyos-onboardingjs-extract-dict
+Title: Create _assets/js/studyos-onboarding.js. Extract Dictionary, UIUXMatr...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: A decoupled onboarding controller that generates the workspace matrix and alerts the core system when setup is complete.
 Branch: simba/create-assetsjsstudyos-corejs-extract-appstore-s
 Title: Create _assets/js/studyos-core.js. Extract AppStore, SystemData, and ...
 
