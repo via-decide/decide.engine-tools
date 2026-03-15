@@ -6,19 +6,29 @@
     <title>StudyOS — Modular Learning Platform</title>
 
     <!-- Tailwind CSS Config injected properly to ensure dark mode works -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./vendor/tailwindcss-runtime-3.4.16.js"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { 50: '#fffbeb', 100: '#fef3c7', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' },
-                        surface: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+        if (window.tailwind) {
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: { 50: '#fffbeb', 100: '#fef3c7', 500: '#f59e0b', 600: '#d97706', 700: '#b45309' },
+                            surface: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+                        }
                     }
                 }
-            }
-        };
+            };
+        }
+    </script>
+    
+    <script src="./vendor/chart.umd.min.js"></script>
+    <script src="./vendor/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib?.GlobalWorkerOptions) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = './vendor/pdf.worker.min.js';
+        }
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -56,7 +66,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-base);
             color: var(--text-primary);
             -webkit-tap-highlight-color: transparent;
@@ -265,6 +275,7 @@
                 <div class="os-card"><h3 class="font-bold text-lg mb-4">Score Trajectory</h3><div class="chart-box"><canvas id="mockChart"></canvas></div></div>
                 <div class="os-card"><h3 class="font-bold text-lg mb-4">Syllabus Coverage</h3><div class="chart-box"><canvas id="sylChart"></canvas></div></div>
             </div>
+            <div id="chart-lib-status" class="text-sm font-semibold text-[var(--danger)]"></div>
         </section>
 
         <!-- Engine Tab -->
@@ -284,6 +295,7 @@
                     </button>
                 </div>
             </div>
+            <div id="pdf-lib-status" class="text-sm font-semibold text-[var(--danger)] mb-1"></div>
             <div id="pdf-status" class="text-sm font-bold text-indigo-600"></div>
             <div id="syllabus-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4"></div>
         </section>
@@ -759,6 +771,7 @@ const UIEngine = {
 
         window.StudyEngine.render(); window.Missions.render(); window.Tracker.renderErrors(); window.Vault.render(); window.PYQ.render(); window.Dashboard.initCharts();
         if (window.ToolIntegration?.boot) window.ToolIntegration.boot();
+        window.StudyEngine.render(); window.Missions.render(); window.Tracker.renderErrors(); window.Vault.render(); window.PYQ.render(); ThirdPartyDeps.initNotices(); window.Dashboard.initCharts();
     },
 
     renderPreferenceSummary() {
@@ -780,17 +793,46 @@ const UIEngine = {
     }
 };
 
+const ThirdPartyDeps = {
+    chartReady: typeof window.Chart !== "undefined",
+    pdfReady: typeof window.pdfjsLib !== "undefined",
+
+    initNotices() {
+        const chartNotice = document.getElementById("chart-lib-status");
+        if (chartNotice && !this.chartReady) {
+            chartNotice.textContent = "Charts are unavailable because vendor/chart.umd.min.js is missing.";
+        }
+
+        const pdfNotice = document.getElementById("pdf-lib-status");
+        if (pdfNotice && !this.pdfReady) {
+            pdfNotice.textContent = "PDF extraction is unavailable because vendor/pdf.min.js is missing.";
+        }
+    }
+};
+
 /**
  * 4. Modules
  */
 window.Dashboard = {
     mChart: null, sChart: null,
 
-    initCharts() { Chart.defaults.font.family = "Inter"; this.updateCharts(); },
+    initCharts() {
+        if (!ThirdPartyDeps.chartReady) {
+            this.updateMetrics();
+            return;
+        }
+
+        Chart.defaults.font.family = "Inter";
+        this.updateCharts();
+    },
 
     updateCharts() {
         const mCtx = document.getElementById("mockChart"); const sCtx = document.getElementById("sylChart");
-        if (!mCtx || !sCtx || !AppStore.data) return;
+        if (!AppStore.data) return;
+        if (!ThirdPartyDeps.chartReady || !mCtx || !sCtx) {
+            this.updateMetrics();
+            return;
+        }
 
         const isDark = document.documentElement.classList.contains('dark') || document.documentElement.getAttribute('data-theme') === 'dark';
         const gridColor = isDark ? '#334155' : '#e2e8f0';
@@ -1088,6 +1130,11 @@ window.PDFExtractor = {
         const fileInput = document.getElementById("pdf-upload"); const status = document.getElementById("pdf-status"); const file = fileInput.files?.[0];
         if (!file) { status.textContent = ""; return; }
         
+        if (!ThirdPartyDeps.pdfReady) {
+            status.textContent = "PDF extraction is unavailable because vendor/pdf.min.js could not be loaded.";
+            return;
+        }
+
         status.textContent = `Reading ${file.name}...`;
 
         try {
