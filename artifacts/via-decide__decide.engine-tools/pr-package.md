@@ -1,3 +1,9 @@
+Branch: simba/create-a-new-branch-featureui-smart-visualizer-u
+Title: > Create a new branch feature/ui-smart-visualizer. Update the executi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > Transform the execution console from a raw data dump into a polished, readable dashboard of AI decisions and outputs. /end_task
 Branch: simba/create-a-new-branch-featureui-drag-drop-refactor
 Title: > Create a new branch feature/ui-drag-drop. Refactor the agent-builde...
 
