@@ -1,11 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
-  "branch": "simba/create-toolsengineskin-street-food-config-build-",
-  "branch": "simba/create-toolsengineupsc-csat-trainer-build-a-high",
-  "branch": "simba/create-toolsengineupsc-current-affairs-build-a-v",
-  "branch": "simba/create-toolsengineupsc-mains-simulator-build-a-s",
-  "branch": "simba/create-toolsengineupsc-swipe-deck-build-a-vanill",
+  "branch": "simba/create-assetsjsstudyos-integrationsjs-extract-da",
   "files_to_create": [
     "codex-task.md",
     "claude-repair-task.md",
