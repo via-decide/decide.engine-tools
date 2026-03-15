@@ -47,10 +47,10 @@
     countdown: document.getElementById('countdown'),
     cardHost: document.getElementById('cardHost'),
     cardProgress: document.getElementById('cardProgress'),
-    xpLine: document.getElementById('xpLine'),
+    xpLine: document.getElementById('result-xp') || document.getElementById('xpLine'),
     rootLine: document.getElementById('rootLine'),
     accLine: document.getElementById('accLine'),
-    streakLine: document.getElementById('streakLine')
+    streakLine: document.getElementById('result-streak') || document.getElementById('streakLine')
   };
 
   const CARD_POOL = {
@@ -112,6 +112,17 @@
   }
 
   function generateDeck() {
+    if (cards.length) {
+      return cards.map((card, i) => ({
+        id: `${card.type}-${i}-${Date.now()}`,
+        type: card.type,
+        icon: TYPE_META[card.type]?.icon || '🌿',
+        text: card.text,
+        xp: card.xp,
+        correctDirection: TYPE_META[card.type]?.correctDirection || 'either'
+      }));
+    }
+
     const count = 5 + Math.floor(Math.random() * 4);
     const cards = [];
     for (let i = 0; i < count; i += 1) {
@@ -220,6 +231,12 @@
 
   function commitSwipe(node, card, direction) {
     const correct = isCorrect(card, direction);
+    if (direction === 'right') {
+      if (window.SwipeEngine) window.SwipeEngine.swipeCard('right');
+    }
+    if (direction === 'left') {
+      if (window.SwipeEngine) window.SwipeEngine.swipeCard('left');
+    }
     sessionTotal += 1;
     if (correct) {
       sessionCorrect += 1;
@@ -288,6 +305,7 @@
     el.rootLine.textContent = `Root Growth: +${rootGrowth}`;
     el.accLine.textContent = `Accuracy: ${Math.round(accuracy * 100)}%`;
     el.streakLine.textContent = `Streak: ${state.currentStreak} days 🔥`;
+    if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(dailyXP);
   }
 
   function startSessionIfEligible() {
@@ -316,6 +334,17 @@
     updateHeader();
     renderCurrentCard();
   }
+
+  window.addEventListener('swipe:session_completed', (e) => {
+    const xp = e.detail.xpEarned;
+    const streak = e.detail.streak;
+    // inject into existing results UI if elements exist
+    const xpEl = document.getElementById('result-xp');
+    const streakEl = document.getElementById('result-streak');
+    if (xpEl) xpEl.textContent = '+' + xp + ' XP';
+    if (streakEl) streakEl.textContent = '🔥 ' + streak + ' day streak';
+    if (window.RewardWallet) window.RewardWallet.earn('drops', Math.floor(xp / 5), 'swipe_session');
+  });
 
   startSessionIfEligible();
 })();

@@ -6,6 +6,9 @@
   <title>Growth Milestone Engine</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="../../../shared/growth-stage-engine.js"></script>
+  <script src="../../../shared/reward-wallet.js"></script>
+  <script src="../../../shared/season-engine.js"></script>
   <style>
     /* =========================================
        ORCHARD ENGINE - GLOBAL THEME & COMPONENTS
@@ -241,6 +244,7 @@
   </style>
 </head>
 <body>
+  <div id="stage-banner" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#52B756;color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;z-index:9999;font-size:.9rem;"></div>
 
   <div class="dashboard">
     <div class="orchard-panel">
@@ -397,6 +401,35 @@
     };
 
     // --- DOM ELEMENTS ---
+
+
+    // — engine sync —
+    (function syncEngines() {
+      if (!window.GrowthStageEngine) return;
+      const tick = window.GrowthStageEngine.applyTick();
+      let water = state.water;
+      let nutrients = state.nutrients;
+      let pestCount = state.pests;
+      // push ticked values into existing UI vars if they exist
+      if (typeof water !== 'undefined') water = tick.water;
+      if (typeof nutrients !== 'undefined') nutrients = tick.nutrients;
+      if (typeof pestCount !== 'undefined') pestCount = tick.pests;
+      state.water = water;
+      state.nutrients = nutrients;
+      state.pests = pestCount;
+      // listen for stage evolution
+      window.addEventListener('growth:stage_evolved', (e) => {
+        console.log('Stage evolved to', e.detail.stage.name);
+        // show a toast or banner if the page has one
+        const banner = document.getElementById('stage-banner');
+        if (banner) {
+          banner.textContent = '✨ Evolved to ' + e.detail.stage.name + '!';
+          banner.style.display = 'block';
+          setTimeout(() => banner.style.display = 'none', 3000);
+        }
+      });
+    })();
+
     const els = {
       visualizer: document.getElementById('visualizer'),
       canvasContainer: document.getElementById('canvas-container'),
@@ -559,6 +592,8 @@
       state.credits -= 15; state.day++;
       
       state.water = Math.min(state.maxWater, state.water + state.maxWater); // Refill water
+      if (window.GrowthStageEngine) window.GrowthStageEngine.waterPlant(30);
+      if (window.RewardWallet) window.RewardWallet.spend('drops', 10, 'water_plant');
       state.actionFatigue = 0;
       
       // The Interconnected Drain: Pests eat nutrients and add stress overnight
@@ -623,6 +658,7 @@
         
         state.credits += 12;
         state.rootStrength += finalG;
+        if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(finalG);
         state.water -= 5;
         state.nutrients -= 15;
         state.actionFatigue++;
