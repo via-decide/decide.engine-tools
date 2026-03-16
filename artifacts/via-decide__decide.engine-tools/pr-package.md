@@ -1,3 +1,9 @@
+Branch: simba/add-achievement-badge-system-tool-in-toolsengine
+Title: Add achievement-badge-system tool in tools/engine/achievement-badge-s...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working achievement-badge-system tool that tracks and visualizes earned milestones
 Branch: simba/add-seasonal-events-engine-tool-in-toolsenginese
 Title: Add seasonal-events-engine tool in tools/engine/seasonal-events-engin...
 

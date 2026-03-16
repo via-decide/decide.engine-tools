@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Add achievement-badge-system tool in tools/engine/achievement-badge-system/ with config.json, index.html, tool.js. Tracks player milestones across farm/commons/market layers and awards badges for specific actions (first-fruit, 7-day-streak, etc.). Displays earned badges with dates and progress toward the next tier. Vanilla JS.
 Add seasonal-events-engine tool in tools/engine/seasonal-events-engine/ with config.json, index.html, tool.js. Defines and runs time-bound game modifiers affecting global soil quality and sunlight exposure, prompting players to adapt their daily quests for maximum yield. Vanilla JS.
 Add weather-system tool in tools/engine/weather-system/ with config.json, index.html, tool.js. Simulates external randomized factors introducing daily modifiers to available water and minerals, directly impacting trunk and branch growth rates. Includes UI for current weather forecast. Vanilla JS.
 Add progress-timeline-visualization tool in tools/engine/progress-timeline-visualization/ with config.json, index.html, tool.js. Renders a graphical timeline charting a player's historical growth from initial roots to harvested fruits and market promotions over time. Vanilla JS using Canvas or DOM elements.
