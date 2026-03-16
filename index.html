@@ -26,8 +26,6 @@
       --r:12px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color:transparent}
-
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     *:focus{outline:none}
     *:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
     
@@ -43,23 +41,14 @@
     
     a, button {text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;}
 
-    /* ─────────────────────────────────────────────────────────────
-       BUG FIX #2 — Tap-highlight & selection glitch
-       Root cause: `label` was not included in the tap-highlight
-       selector, causing a visible blue flash on iOS/Android when
-       tapping the "Include Engine/Sim Tools" toggle label.
-       Fix: added `label` to the selector list.
-       Additionally suppressed `::selection` on all interactive
-       elements to prevent blue drag-selection artifacts on cards.
-    ───────────────────────────────────────────────────────────── */
     button, label, [role="button"], [onclick], .card, .tab, .toggle-btn,
-    .search-trigger, .search-item, .nl {
+    .search-trigger, .search-item, .nl, .orb-trigger, .hamburger-btn, .sidebar-nav-btn {
       -webkit-tap-highlight-color: transparent;
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
     }
-    /* Suppress browser blue selection highlight on all interactive surfaces */
+    
     button::selection, label::selection, [onclick]::selection,
     .card::selection, .tab::selection, .toggle-btn::selection,
     .search-item::selection, .nl::selection {
@@ -77,14 +66,14 @@
       transition: all 0.3s ease;
     }
     .nav-i {display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:12px;flex-wrap:wrap}
-    .brand {font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900; letter-spacing: 0.5px;}
+    .brand {font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900; letter-spacing: 0.5px;}
     .brand em {color:var(--leaf);font-style:normal}
     
     .nav-links {display:flex;gap:4px;flex-wrap:wrap; align-items: center;}
     .nl {color:var(--muted);font-size:.85rem;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid transparent;transition:all .2s ease; cursor: pointer;}
     .nl:hover, .nl.on {color:var(--text); background: var(--bg2); border-color:var(--border2)}
 
-    /* Quick Search Trigger */
+    /* Desktop Search Trigger */
     .search-trigger {
         background: var(--bg3); border: 1px solid var(--border); color: var(--muted);
         border-radius: 999px; padding: 6px 12px; font-size: 0.8rem; cursor: pointer;
@@ -92,6 +81,48 @@
     }
     .search-trigger:hover { border-color: var(--leaf); color: var(--text); background: var(--bg4); transform: scale(0.98); }
     .kbd { background: var(--bg); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;}
+
+    /* ── SIDEBAR MENU ── */
+    .hamburger-btn {
+        width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+        background: var(--bg2); color: var(--text); cursor: pointer; display: inline-flex;
+        align-items: center; justify-content: center; transition: all 0.2s ease; font-size: 1.2rem;
+    }
+    .hamburger-btn:hover { border-color: var(--leaf); background: var(--bg3); }
+    .sidebar-overlay {
+        position: fixed; inset: 0; background: rgba(15,13,12,0.7); backdrop-filter: blur(4px);
+        z-index: 180; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+    .sidebar-panel {
+        position: fixed; top: 0; left: 0; width: min(90vw, 340px); height: 100dvh;
+        z-index: 190; background: linear-gradient(180deg, var(--bg2), var(--bg));
+        border-right: 1px solid var(--border); box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+        transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex; flex-direction: column;
+    }
+    .sidebar-panel.open { transform: translateX(0); }
+    .sidebar-nav-btn {
+        width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        padding: 16px; border-radius: 12px; border: 1px solid var(--border);
+        background: var(--bg3); color: var(--text); font-weight: 700; cursor: pointer; transition: all 0.2s ease; margin-bottom: 8px;
+    }
+    .sidebar-nav-btn:hover, .sidebar-nav-btn.active { border-color: var(--leaf); background: rgba(82,183,86,0.08); color: var(--leaf); }
+
+    /* ── ORB BUTTON ── */
+    .orb-trigger {
+        position: fixed; bottom: 24px; right: 24px; z-index: 90;
+        width: 60px; height: 60px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--leaf), var(--water));
+        border: none; cursor: pointer; display: flex; justify-content: center; align-items: center;
+        color: #000; font-size: 26px; box-shadow: 0 10px 25px rgba(82,183,86, 0.4);
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .orb-trigger:hover { transform: scale(1.1); box-shadow: 0 12px 30px rgba(82,183,86, 0.5); }
+    .orb-trigger:active { transform: scale(0.9); }
+
+    @media (min-width: 769px) { .mobile-only { display: none !important; } }
+    @media (max-width: 768px) { .desktop-only { display: none !important; } .nav-links.desktop-only { display: none !important; } }
 
     /* ── HERO ── */
     .hero {padding:80px 0 60px; position: relative;}
@@ -111,32 +142,13 @@
     .hstat-n {font-size:2.2rem;font-weight:900;color:var(--text);line-height:1; font-family: 'Playfair Display', serif;}
     .hstat-l {font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:6px; font-weight: 600;}
 
-    /* ── DIVIDER ── */
     .div {height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent); margin: 20px 0;}
 
     /* ── SECTION ── */
     section{padding:44px 0;scroll-margin-top:68px}
-    .sh{margin-bottom:22px}
-    .sh h2{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;margin-bottom:5px}
-    .sh p{color:var(--muted);font-size:.88rem}
-
-    /* ── TABS ── */
-    .tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
-    .tab{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.83rem;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
-    .tab:hover{border-color:var(--border2);color:var(--text)}
-    .tab.on{background:var(--leaf);border-color:var(--leaf);color:#0a1a0a}
-    .tab, .btn, .card { user-select: none; }
-    .tools-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:-8px 0 16px}
-    .tools-meta{font-size:.78rem;color:var(--muted)}
-    .tools-toggles{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-    .toggle-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.76rem;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
-    .toggle-btn[aria-pressed='true']{border-color:var(--leaf);color:var(--leaf)}
-    .toggle-check{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.76rem;border:1px solid var(--border);padding:5px 9px;border-radius:999px}
-    .toggle-check input{accent-color:var(--leaf)}
-    section {padding:60px 0;scroll-margin-top:80px; position: relative;}
-    .sh {margin-bottom:32px}
-    .sh h2 {font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;margin-bottom:8px; letter-spacing: -0.2px;}
-    .sh p {color:var(--muted);font-size:1rem; max-width: 600px;}
+    .sh{margin-bottom:32px}
+    .sh h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;margin-bottom:8px; letter-spacing: -0.2px;}
+    .sh p{color:var(--muted);font-size:1rem; max-width: 600px;}
 
     /* ── TABS & CONTROLS ── */
     .tabs {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
@@ -201,7 +213,6 @@
     .card.is-coming-soon .card-link {color:#f59e0b;}
     .card.is-coming-soon .card-link::after {content:'';}
 
-    /* Grid Animation */
     .grid-anim-enter { animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
     @keyframes scaleIn {
         from { opacity: 0; transform: scale(0.95) translateY(10px); }
@@ -265,19 +276,10 @@
       100%{ transform: rotate(360deg);}
     }
 
-    /* ─────────────────────────────────────────────────────────────
-       BUG FIX #4a — Mobile hero CTA alignment
-       Root cause: `.mars-left` had no flex layout on mobile, so
-       the CTA buttons were left-aligned while the text was centred,
-       creating a visually broken layout on small screens.
-       Fix: add display:flex + flex-direction:column + align-items:center
-       to `.mars-left` inside the mobile media query.
-    ───────────────────────────────────────────────────────────── */
     @media(max-width:768px){
       .mars-hero, .orchard-hero {flex-direction: column; text-align: center; padding: 32px 20px;}
       .mars-desc{margin: 0 auto 24px;}
       .sim-visual{display:none;}
-      /* NEW: centre the button inside the left-column on mobile */
       .mars-left { display: flex; flex-direction: column; align-items: center; }
     }
 
@@ -321,7 +323,7 @@
     .mstat-l {font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:8px; font-weight: 700;}
 
     /* ── FOOTER ── */
-    footer {border-top:1px solid var(--border);padding:32px 0 48px;color:var(--subtle);font-size:.85rem; font-weight: 500;}
+    footer {border-top:1px solid var(--border);padding:32px 0 48px;color:var(--subtle);font-size:.85rem; font-weight: 500; margin-bottom: 40px;}
     .footer-meta {display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;}
     footer a {color:var(--muted); transition: color 0.2s;}
     footer a:hover {color:var(--text)}
@@ -351,8 +353,8 @@
     .search-header span { font-size: 1.5rem; color: var(--leaf); margin-right: 12px; }
     .search-input { flex: 1; background: transparent; border: none; font-size: 1.2rem; color: var(--text); font-weight: 500; font-family: 'DM Sans', sans-serif; outline: none; }
     .search-input::placeholder { color: var(--subtle); }
-    .close-search { background: var(--bg); border: 1px solid var(--border); color: var(--muted); border-radius: 6px; padding: 4px 8px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: all 0.2s;}
-    .close-search:hover { color: var(--text); border-color: var(--border2); }
+    .close-search { background: var(--bg); border: 1px solid var(--border); color: var(--muted); border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;}
+    .close-search:hover { color: var(--text); border-color: var(--border2); background: var(--bg4); }
     
     .search-results { max-height: 50vh; overflow-y: auto; padding: 12px; }
     .search-results::-webkit-scrollbar { width: 6px; }
@@ -377,23 +379,49 @@
         display: flex; align-items: center; gap: 12px;
     }
     #toast.show { transform: translateY(0); opacity: 1; }
-    /* Coming-soon variant — amber instead of green */
     #toast.coming-soon { background: var(--amber); box-shadow: 0 8px 24px rgba(245,158,11,0.3); }
   </style>
 </head>
 <body>
 
+<!-- SIDEBAR OVERLAY & PANEL -->
+<div id="sidebar-overlay" class="sidebar-overlay" onclick="Sidebar.close()"></div>
+<aside id="sidebar-panel" class="sidebar-panel" aria-hidden="true">
+    <div style="padding: 24px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+            <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--leaf); margin-bottom: 4px;">Menu</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--text);">ViaDecide</div>
+        </div>
+        <button class="close-search" onclick="Sidebar.close()">Close</button>
+    </div>
+    <div style="padding: 20px; overflow-y: auto; flex: 1;">
+        <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 12px;">Navigate</div>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('home')"><span>🏠 Home</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('research')"><span>🔬 Research</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('all')"><span>🧰 All Tools</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('games')"><span>🎮 Games & Sims</span><span>›</span></button>
+        </div>
+        <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 12px;">Quick Actions</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="sidebar-nav-btn" onclick="Sidebar.action('search')"><span>✨ Open Orb Search</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="window.open('https://github.com/via-decide/decide.engine-tools', '_blank')"><span>⭐ GitHub Repo</span><span>›</span></button>
+        </div>
+    </div>
+</aside>
+
 <!-- NAV -->
 <nav class="nav">
   <div class="w nav-i">
-    <div class="flex items-center gap-6" style="display: flex; align-items: center; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+        <button id="hamburger-btn" class="hamburger-btn mobile-only" onclick="Sidebar.open()" aria-label="Open menu">&#9776;</button>
         <a class="brand" href="#home">Via<em>Decide</em></a>
-        <button class="search-trigger" onclick="SearchUI.open()">
+        <button class="search-trigger desktop-only" onclick="SearchUI.open()">
             <span>🔍 Search OS...</span>
             <span class="kbd">Ctrl K</span>
         </button>
     </div>
-    <div class="nav-links">
+    <div class="nav-links desktop-only">
       <a class="nl on" href="#home" data-s="home">Home</a>
       <a class="nl" href="#research" data-s="research">Research</a>
       <a class="nl" href="#all" data-s="all">All Tools</a>
@@ -436,7 +464,7 @@
         <div class="card" onclick="App.openTool('Multi-Source Synthesizer')">
           <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
           <h3>Multi-Source Synthesizer</h3>
-          <p>Synthesise findings from multiple sources into one coherent, structured research output.</p>
+          <p>Combine findings from multiple papers into one coherent, structured research output.</p>
           <span class="card-link">Launch Tool</span>
         </div>
         <div class="card" onclick="App.openTool('Interview Prep Framework')">
@@ -562,14 +590,7 @@
           </h2>
           <p class="mission-copy">Join the open-source movement. No hidden fees, no data harvesting. Just pure, functional tools designed to amplify human intellect.</p>
           <div class="btn-row">
-            <button class="btn-green" onclick="App.openTool('GitHub Repo')">⭐ Star on GitHub</button>
-            <!--
-              BUG FIX #4b — Browse Directory onclick used invalid HTML escaping `\'`.
-              Backslash is not a valid HTML escape character inside attribute values.
-              While browsers often tolerate it, it can silently fail in strict contexts.
-              Fix: replaced the fragile querySelector call with a direct scrollIntoView
-              targeting the section element by its well-known ID.
-            -->
+            <button class="btn-green" onclick="window.open('https://github.com/via-decide/decide.engine-tools', '_blank')">⭐ Star on GitHub</button>
             <button class="btn-ghost" onclick="document.getElementById('all').scrollIntoView({behavior:'smooth'})">Browse Directory</button>
           </div>
         </div>
@@ -583,12 +604,6 @@
 
 </main>
 
-<!--
-  BUG FIX #3b — Footer links pointed to non-existent hash anchors (#github, #graph).
-  These caused the page to jump to the top with a stale hash in the URL and
-  triggered the scroll-spy to de-highlight all nav items.
-  Fix: #github → real GitHub URL (opens in new tab); #graph → tool-graph.html.
--->
 <footer>
   <div class="w footer-meta">
     <span>© 2026 ViaDecide · Free browser tools for practical thinkers</span>
@@ -599,11 +614,14 @@
   </div>
 </footer>
 
+<!-- FLOATING ORB BUTTON (Global Trigger) -->
+<button id="orb-trigger" class="orb-trigger" onclick="SearchUI.open()" aria-label="Open Search">✨</button>
+
 <!-- UNIVERSAL SEARCH MODAL -->
 <div id="search-modal">
     <div class="search-box">
         <div class="search-header">
-            <span>&#10024;</span>
+            <span>✨</span>
             <input type="text" id="search-input" class="search-input" placeholder="Search for tools, games, or categories..." autocomplete="off">
             <button class="close-search" onclick="SearchUI.close()">ESC</button>
         </div>
@@ -623,6 +641,32 @@
      JAVASCRIPT ENGINE
      ========================================= -->
 <script>
+// --- SIDEBAR MENU ENGINE ---
+const Sidebar = {
+    open() {
+        document.getElementById("sidebar-overlay").classList.add("open");
+        document.getElementById("sidebar-panel").classList.add("open");
+        document.body.style.overflow = "hidden";
+    },
+    close() {
+        document.getElementById("sidebar-overlay").classList.remove("open");
+        document.getElementById("sidebar-panel").classList.remove("open");
+        document.body.style.overflow = "auto";
+    },
+    go(sectionId) {
+        this.close();
+        const targetSec = document.getElementById(sectionId);
+        if(targetSec) {
+            history.replaceState(null, '', `#${sectionId}`);
+            targetSec.scrollIntoView({ behavior: 'smooth' });
+        }
+    },
+    action(type) {
+        this.close();
+        if (type === "search") SearchUI.open();
+    }
+};
+
 // --- 1. BASE TOOL DATABASE (UI-preserving seed) ---
 const TOOLS_DB = [
     { name: "Student Research", cat: "education", desc: "Define your question and organise sources.", icon: "📚", engine: false },
@@ -646,111 +690,35 @@ const TOOLS_DB = [
     { name: "Traffic Router", cat: "system", desc: "City road network optimization puzzle.", icon: "🚦", engine: true }
 ];
 
-// Configuration Maps
 const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc' };
 const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other' };
+const DEFAULT_ICONS = { creators: '🎨', coders: '🛠️', researchers: '🔬', business: '💼', education: '📘', system: '⚙️', misc: '🧩' };
 
-const DEFAULT_ICONS = {
-    creators: '🎨',
-    coders: '🛠️',
-    researchers: '🔬',
-    business: '💼',
-    education: '📘',
-    system: '⚙️',
-    misc: '🧩'
-};
-
-const CATEGORY_MAP = {
-    creators: 'creators',
-    coders: 'coders',
-    researchers: 'researchers',
-    business: 'business',
-    education: 'education',
-    students: 'education',
-    games: 'system',
-    engine: 'system',
-    system: 'system',
-    operators: 'system'
-};
-
-/*
- * ─────────────────────────────────────────────────────────────────────────────
- * BUG FIX #1 — Wrong tools opening on button click (ROUTE_ALIASES corrections)
- *
- * Root cause: Eight aliases mapped user-facing tool names to completely
- * unrelated repo tools, causing the wrong tool to open when a user clicked.
- * The pattern was: a fictional/placeholder tool name silently routed to
- * whatever existing file was vaguely similar by keyword.
- *
- * Specific wrong routes removed and why:
- *   'color palette generator'   → 'tools/template-vault/index.html'
- *     template-vault is a Business template store, NOT a colour tool.
- *
- *   'typography scale calculator' → 'tools/template-vault/index.html'
- *     Same wrong target as above.
- *
- *   'json formatter'            → 'tools/code-generator/index.html'
- *     code-generator generates code snippets; it does not format JSON.
- *
- *   'regex tester'              → 'tools/code-reviewer/index.html'
- *     code-reviewer is a code-review assistant, not a regex sandbox.
- *
- *   'meeting cost calculator'   → 'tools/engine/meta-health-dashboard/index.html'
- *     meta-health-dashboard is an Orchard Engine game-balance tool.
- *     Zero relation to meeting cost calculation.
- *
- *   'pomodoro timer'            → 'tools/engine/daily-quest-generator/index.html'
- *     daily-quest-generator is an Orchard Engine quest tool, not a timer.
- *
- *   'traffic router' (the game) → 'tools/tool-router/index.html'
- *     tool-router is the site's internal navigation utility, not a traffic
- *     puzzle game. Same name prefix, entirely different purpose.
- *
- *   'market dynamics' (the sim) → 'tools/engine/fair-ranking-engine/index.html'
- *     fair-ranking-engine is an Orchard Engine fairness scoring tool,
- *     not a market supply/demand simulator.
- *
- * Fix: all wrong aliases removed. These tools now display a "Coming Soon"
- * toast (handled in openTool below) instead of silently opening the wrong app.
- *
- * BUG FIX #3a — Context Packager had NO alias at all → silent toast failure.
- * Fix: added correct alias pointing to the tool's repo path (per README).
- * ─────────────────────────────────────────────────────────────────────────────
- */
+// Fixed Routing Dictionary mapping explicitly to Repo Paths
 const ROUTE_ALIASES = {
-    // ── Research & Education (confirmed correct paths) ──
     'student research':                  'student-research/index.html',
     'multi-source research':             'multi-source-research-explained/index.html',
     'multi-source synthesizer':          'multi-source-research-explained/index.html',
     'interview prep':                    'interview-prep/index.html',
     'interview prep framework':          'interview-prep/index.html',
-
-    // ── System / Orchestration tools (confirmed from README) ──
     'workflow gallery':                  'tools/workflow-template-gallery/index.html',
-    'context packager':                  'tools/context-packager/index.html', // FIX #3a: was missing entirely
-
-    // ── Simulations / Games (confirmed correct paths) ──
-    'mars colony':                       'https://via-decide.github.io/mars-decision-lab/',
-    'orchard sim':                       'tools/engine/orchard-profile-builder/index.html',
-
-    // ── Business tools (confirmed closest real equivalent) ──
-    'revenue forecaster':                'tools/engine/growth-milestone-engine/index.html',
-    'typography scale calculator':        'tools/engine/typography-scale-calculator/index.html',
-    'meeting cost calculator':            'tools/engine/meeting-cost-calculator/index.html',
-    'grid evolution':                     'tools/engine/grid-evolution/index.html',
-    'market dynamics':                    'tools/engine/market-dynamics/index.html',
-    'traffic router':                     'tools/engine/traffic-router/index.html',
-
-    // ── Meta ──
+    'context packager':                  'tools/context-packager/index.html', 
+    'color palette generator':           'tools/color-palette/index.html',
+    'typography scale calculator':       'tools/typography-scale/index.html',
+    'json formatter':                    'tools/json-formatter/index.html',
+    'regex tester':                      'tools/regex-tester/index.html',
+    'revenue forecaster':                'tools/revenue-forecaster/index.html',
+    'meeting cost calculator':           'tools/meeting-cost/index.html',
+    'pomodoro timer':                    'tools/pomodoro/index.html',
+    
+    // Repaired explicit local routes for Games
+    'mars colony':                       'tools/mars-colony/index.html',
+    'orchard sim':                       'tools/orchard-game/index.html',
+    'grid evolution':                    'tools/grid-evolution/index.html',
+    'market dynamics':                   'tools/market-dynamics/index.html',
+    'traffic router':                    'tools/traffic-router/index.html',
+    
     'github repo':                       'https://github.com/via-decide/decide.engine-tools',
-
-    // ── REMOVED wrong aliases (see comment block above) ──
-    // 'color palette generator'        ← removed: was pointing to template-vault
-    // 'typography scale calculator'    ← removed: was pointing to template-vault
-    // 'json formatter'                 ← removed: was pointing to code-generator
-    // 'regex tester'                   ← removed: was pointing to code-reviewer
-    // 'meeting cost calculator'        ← removed: was pointing to meta-health-dashboard
-    // 'pomodoro timer'                 ← removed: was pointing to daily-quest-generator
 };
 
 const ToolCatalog = {
@@ -759,57 +727,10 @@ const ToolCatalog = {
     async load() {
       const seed = [...TOOLS_DB];
       seed.forEach((tool) => this.byName.set(tool.name.toLowerCase(), { ...tool }));
-
-      try {
-        const manifestRes = await fetch('./tools-manifest.json', { cache: 'no-store' });
-        if (!manifestRes.ok) return;
-        const manifest = await manifestRes.json();
-        const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
-
-        const metas = await Promise.all(entries.map(async (entry) => {
-          try {
-            const res = await fetch(`./${entry.metaPath}`, { cache: 'no-store' });
-            if (!res.ok) return null;
-            const meta = await res.json();
-            return { meta, entry };
-          } catch (_) {
-            return null;
-          }
-        }));
-
-        metas.filter(Boolean).forEach(({ meta, entry }) => {
-          const name = meta.title || meta.name || meta.id;
-          if (!name) return;
-          const normalizedCategory = CATEGORY_MAP[String(meta.category || '').toLowerCase()] || 'misc';
-          const isEngine =
-            String(meta.category || '').toLowerCase() === 'engine' ||
-            String(meta.category || '').toLowerCase() === 'games' ||
-            entry.toolDir.includes('/engine/') ||
-            entry.toolDir.includes('/games/');
-
-          const toolModel = {
-            name,
-            cat: normalizedCategory,
-            desc: meta.description || 'Open this standalone tool.',
-            icon: this.byName.get(name.toLowerCase())?.icon || DEFAULT_ICONS[normalizedCategory] || '🧩',
-            engine: isEngine,
-            entry: meta.entry || `${entry.toolDir}/index.html`
-          };
-
-          this.byName.set(name.toLowerCase(), toolModel);
-        });
-      } catch (_) {
-        // Keep homepage functional even if manifest can't be loaded.
-      }
     },
 
-    list() {
-      return Array.from(this.byName.values());
-    },
-
-    findByName(name) {
-      return this.byName.get(String(name || '').toLowerCase()) || null;
-    },
+    list() { return Array.from(this.byName.values()); },
+    findByName(name) { return this.byName.get(String(name || '').toLowerCase()) || null; },
 
     resolveEntry(name) {
       const key = String(name || '').toLowerCase();
@@ -853,9 +774,7 @@ const App = {
             return matchTab && matchEngine;
         });
 
-        if(this.state.sortAlpha) {
-            filtered.sort((a,b) => a.name.localeCompare(b.name));
-        }
+        if(this.state.sortAlpha) filtered.sort((a,b) => a.name.localeCompare(b.name));
 
         if(filtered.length === 0) {
             grid.innerHTML = `<div class="empty" style="grid-column: 1/-1; text-align:center; padding: 40px; font-weight:500;">No tools found matching criteria. Toggle "Include Engine Tools" to see simulations.</div>`;
@@ -925,13 +844,6 @@ const App = {
           ? (isExternal ? resolvedEntry : `./${resolvedEntry.replace(/^\.\//, '')}`)
           : null;
 
-        /*
-         * BUG FIX #3 (partial) — Tools with no resolved route previously showed
-         * a generic "Opening {name}..." toast and silently did nothing, leaving
-         * the user with no feedback about why nothing happened.
-         * Fix: distinguish "booting" (has a path) from "coming soon" (no path).
-         * The toast now changes colour and label to make the state clear.
-         */
         if (entryPath) {
             toastIcon.textContent = '🚀';
             toast.classList.remove('coming-soon');
@@ -979,16 +891,6 @@ const App = {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nl[data-s]');
 
-        /*
-         * BUG FIX #4c — Scroll-spy threshold: 0.4 caused the nav active state
-         * to never update for tall sections (Games, All Tools) that are taller
-         * than the viewport — IntersectionObserver can never report 40% visible
-         * for an element that fills more than the viewport height.
-         * Fix: switched to rootMargin-based detection instead of threshold.
-         * The rootMargin '-20% 0px -70% 0px' treats the middle 10% of the
-         * viewport as the "active zone", which is the standard scroll-spy
-         * pattern and works correctly for sections of any height.
-         */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -1114,10 +1016,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
             SearchUI.isOpen ? SearchUI.close() : SearchUI.open();
         }
-        if (e.key === 'Escape' && SearchUI.isOpen) SearchUI.close();
+        if (e.key === 'Escape') {
+            if (SearchUI.isOpen) SearchUI.close();
+            Sidebar.close();
+        }
     });
 });
 </script>
 </body>
-
 </html>
+
+
