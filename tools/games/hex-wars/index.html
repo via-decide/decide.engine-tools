@@ -11,6 +11,10 @@
 <meta name="description" content="Conquer the hex battlefield with your knowledge. Timed quiz meets territory strategy."/>
 <title>HexWars — ViaDecide Arena</title>
 <script defer src="../../../shared/vd-nav-fix.js"></script>
+<script src="../../../shared/vd-wallet.js"></script>
+<script src="../../../shared/engine-utils.js"></script>
+<script src="../../../shared/engine-balance.js"></script>
+<script src="../../../shared/tool-bridge.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 
@@ -795,6 +799,7 @@ function loadQuestion(){
   updateStats();
   if(currentQ >= QUESTIONS.length){
     stopTimer();
+    saveGameCredits();
     showResult();
     return;
   }
@@ -897,8 +902,9 @@ function checkAnswer(ans, clickedEl){
     const pts=calcPoints(q.diff, timeTaken);
     score += pts;
     tokens += Math.max(1, Math.floor(pts/6));
-    // VDWallet incremental update (will bulk-save on game end)
-    // No need to save per-question — showResult() handles final save
+    if (window.ToolStorage) {
+      ToolStorage.set('hexwars', 'session', { score, tokens, streak, elo });
+    }
     elo += 5*q.diff;
     claimHex();
     haptic('correct');
@@ -948,26 +954,27 @@ function showResult(){
   document.getElementById('resultGrade').textContent =
     `${q_correct} hexes claimed  ·  ${Math.round(pct*100)}% map covered`;
 
-  VDWallet.earn('hexTokens', tokens, 'hexwars-game');
-  VDWallet.earn('focusDrops', Math.floor(score / 10), 'hexwars-score');
-  if (streak >= 5) VDWallet.earn('lumina', Math.floor(streak / 5), 'hexwars-streak');
-  const w = VDWallet.get();
-  console.log('[HexWars] Game saved. Total hexTokens:', w.hexTokens);
-
-  const prev = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
-  if (!prev.score || score > prev.score) {
-    localStorage.setItem('hexwars-best', JSON.stringify({
-      score, tokens, elo,
-      date: new Date().toLocaleDateString()
-    }));
-  }
-
   const best = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
   setText('r-best', best.score || score);
 
   const overlay=document.getElementById('resultOverlay');
   overlay.classList.add('show');
   document.getElementById('restartBtn').addEventListener('click',restart,{once:true});
+}
+
+function saveGameCredits() {
+  if (typeof window.VDWallet === 'undefined') return;
+  const dropsEarned = Math.floor(score / 10);
+  const luminaEarned = streak >= 5 ? Math.floor(streak / 5) : 0;
+  window.VDWallet.earn('hexTokens', tokens, 'hexwars');
+  window.VDWallet.earn('focusDrops', dropsEarned, 'hexwars-score');
+  if (luminaEarned > 0) window.VDWallet.earn('lumina', luminaEarned, 'hexwars-streak');
+  const prev = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
+  if (!prev.score || score > prev.score) {
+    localStorage.setItem('hexwars-best', JSON.stringify({
+      score, tokens, elo, date: new Date().toLocaleDateString()
+    }));
+  }
 }
 
 function restart(){

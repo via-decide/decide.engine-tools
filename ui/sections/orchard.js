@@ -55,19 +55,21 @@ export function renderSection(container) {
         </a>
 
         <!-- Layer 1 Swipe — LIVE -->
-        <a class="card" href="./tools/engine/layer1-swipe-crucible/index.html" style="border-color:rgba(255,202,40,.35);background:linear-gradient(135deg,rgba(255,202,40,.06),var(--bg2))">
-          <div class="card-top"><span class="chip" style="background:rgba(255,202,40,.12);color:var(--gold);font-size:.69rem;font-weight:700;padding:3px 8px;border-radius:999px">👆 Layer 1</span><span class="card-icon">👆</span></div>
+        <a class="card" href="./tools/engine/layer1-swipe-crucible/index.html"
+             style="border-color:rgba(255,202,40,.3);background:linear-gradient(135deg,rgba(255,202,40,.06),var(--bg2))">
+          <div class="card-top"><span class="chip cat-engine" style="background:rgba(255,202,40,.1);color:var(--gold)">👆 Layer 1</span><span class="card-icon">👆</span></div>
           <h3>Layer 1 — Swipe Crucible</h3>
           <p>Daily swipe-card sessions. Drag left/right to complete micro-tasks. 5–8 cards per session. Streak tracking.</p>
-          <span class="card-link" style="color:var(--gold)">Start Daily Session</span>
+          <span class="card-link" style="color:var(--gold)">Start Session</span>
         </a>
 
         <!-- Season Engine — LIVE -->
-        <a class="card" href="./tools/engine/growth-milestone-engine/index.html" style="border-color:rgba(56,189,248,.35);background:linear-gradient(135deg,rgba(56,189,248,.06),var(--bg2))">
-          <div class="card-top"><span class="chip" style="background:rgba(56,189,248,.12);color:var(--water);font-size:.69rem;font-weight:700;padding:3px 8px;border-radius:999px">🗓️ Active</span><span class="card-icon">🗓️</span></div>
+        <a class="card" href="./tools/engine/growth-milestone-engine/index.html"
+             style="border-color:rgba(82,183,86,.25);background:linear-gradient(135deg,rgba(82,183,86,.05),var(--bg2))">
+          <div class="card-top"><span class="chip cat-engine" style="background:rgba(82,183,86,.1);color:var(--leaf)">🗓️ Active</span><span class="card-icon">🗓️</span></div>
           <h3>Season Engine</h3>
           <p>30-day season track. Daily weather events. Season XP tiers. Monsoon → Summer → Harvest → Winter.</p>
-          <span class="card-link" style="color:var(--water)">View Season</span>
+          <span class="card-link" style="color:var(--leaf)">View Season</span>
         </a>
 
         <!-- Circle Manager — COMING -->
@@ -79,11 +81,12 @@ export function renderSection(container) {
         </div>
 
         <!-- Reward Wallet — LIVE -->
-        <a class="card" href="./tools/eco-engine-test/index.html" style="border-color:rgba(251,191,36,.35);background:linear-gradient(135deg,rgba(251,191,36,.06),var(--bg2))">
-          <div class="card-top"><span class="chip" style="background:rgba(251,191,36,.12);color:var(--gold);font-size:.69rem;font-weight:700;padding:3px 8px;border-radius:999px">💰 Live</span><span class="card-icon">💰</span></div>
+        <a class="card" href="./tools/eco-engine-test/index.html"
+             style="border-color:rgba(41,182,246,.3);background:linear-gradient(135deg,rgba(41,182,246,.06),var(--bg2))">
+          <div class="card-top"><span class="chip cat-engine" style="background:rgba(41,182,246,.1);color:var(--water)">💰 Live</span><span class="card-icon">💰</span></div>
           <h3>Reward Wallet</h3>
           <p>Three currencies: 🌊 Water Drops, 🌰 Orchard Coins, 💎 Harvest Gems. Earned through play, never bought.</p>
-          <span class="card-link" style="color:var(--gold)">Open Wallet</span>
+          <span class="card-link" style="color:var(--water)">Open Wallet</span>
         </a>
 
         <!-- Server Tournament — COMING -->

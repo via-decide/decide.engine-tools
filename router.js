@@ -65,6 +65,3 @@
   window.Router = { canonicalRoute, routeAliases, goToRoute, syncFromHash };
 })();
 
-export const canonicalRoute = (...args) => window.Router?.canonicalRoute?.(...args);
-export const goToRoute = (...args) => window.Router?.goToRoute?.(...args);
-export const syncFromHash = (...args) => window.Router?.syncFromHash?.(...args);
