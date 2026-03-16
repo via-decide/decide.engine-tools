@@ -243,6 +243,13 @@
 
   </style>
   <script src="../../../shared/vd-nav-fix.js"></script>
+<script src="../../../shared/vd-wallet.js"></script>
+<script src="../../../shared/engine-utils.js"></script>
+<script src="../../../shared/engine-models.js"></script>
+<script src="../../../shared/simulation-utils.js"></script>
+<script src="../../../shared/engine-balance.js"></script>
+<script src="../../../shared/tool-bridge.js"></script>
+<script src="../../../shared/tool-storage.js"></script>
 </head>
 <body>
   <div id="stage-banner" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#52B756;color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;z-index:9999;font-size:.9rem;"></div>
@@ -565,6 +572,12 @@
         update3DModel(nS.stageId); els.canvasContainer.style.transform = "scale(1.1)";
         setTimeout(() => { els.status.innerText = nS.name; els.status.style.backgroundColor = nS.color; els.canvasContainer.style.transform = "scale(1.0)"; }, 300);
         log(`Evolution! You are now a [${nS.name}]. Max Water increased to ${state.maxWater}.`, 'success');
+        if (window.VDWallet) VDWallet.earn('lumina', 10, 'growth-stage-up');
+        if (window.ToolBridge) {
+          ToolBridge.sendContext('growth-milestone-engine', 'eco-engine-test', {
+            event: 'stage_evolved', stage: nS.name, totalXP: state.rootStrength
+          });
+        }
       }
 
       els.rootVal.innerText = state.rootStrength;
@@ -594,6 +607,7 @@
       
       state.water = Math.min(state.maxWater, state.water + state.maxWater); // Refill water
       if (window.GrowthStageEngine) window.GrowthStageEngine.waterPlant(30);
+      if (window.VDWallet) VDWallet.earn('focusDrops', 5, 'growth-water');
       if (window.RewardWallet) window.RewardWallet.spend('drops', 10, 'water_plant');
       state.actionFatigue = 0;
       
@@ -659,7 +673,9 @@
         
         state.credits += 12;
         state.rootStrength += finalG;
-        if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(finalG);
+        if (window.VDWallet) VDWallet.earn('focusDrops', Math.floor(finalG / 10), 'growth-engine');
+        if (window.GrowthStageEngine) GrowthStageEngine.addXP(finalG);
+        if (window.ToolStorage) ToolStorage.set('growth-engine', 'state', { xp: state.rootStrength, stage: state.currentStageIndex });
         state.water -= 5;
         state.nutrients -= 15;
         state.actionFatigue++;

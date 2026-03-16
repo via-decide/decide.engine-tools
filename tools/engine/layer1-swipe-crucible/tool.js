@@ -305,7 +305,16 @@
     el.rootLine.textContent = `Root Growth: +${rootGrowth}`;
     el.accLine.textContent = `Accuracy: ${Math.round(accuracy * 100)}%`;
     el.streakLine.textContent = `Streak: ${state.currentStreak} days 🔥`;
-    if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(dailyXP);
+    if (window.VDWallet) {
+      VDWallet.earn('focusDrops', Math.floor(dailyXP / 5), 'swipe-session');
+      if (state.currentStreak >= 3) VDWallet.earn('lumina', 1, 'swipe-streak');
+    }
+    if (window.GrowthStageEngine) GrowthStageEngine.addXP(dailyXP);
+    if (window.ToolBridge) {
+      ToolBridge.sendContext('layer1-swipe-crucible', 'growth-milestone-engine', {
+        xpEarned: dailyXP, streak: state.currentStreak, completed: true
+      });
+    }
   }
 
   function startSessionIfEligible() {

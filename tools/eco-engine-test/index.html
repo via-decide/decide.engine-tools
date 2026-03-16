@@ -67,6 +67,9 @@
   <script src="../../shared/growth-stage-engine.js"></script>
   <script src="../../shared/season-engine.js"></script>
   <script src="../../shared/vd-nav-fix.js"></script>
+<script src="../../shared/tool-bridge.js"></script>
+<script src="../../shared/vd-wallet.js"></script>
+<script src="../../shared/tool-storage.js"></script>
 </head>
 <body>
   <main class="app">
@@ -157,7 +160,7 @@
      */
     (() => {
       const SUPABASE_URL = 'https://bfocxgtlemhxfwfuhlxn.supabase.co';
-      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY_HERE';
+      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY';
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       window.EcoDB = db;
 
@@ -662,6 +665,30 @@
       window.WalletManager = WalletManager;
       window.PlantManager = PlantManager;
       authManager.init();
+
+      // listen for incoming game credits via ToolBridge
+      window.addEventListener('toolbridge:send', (e) => {
+        const data = e.detail?.data;
+        if (!data || !data.game) return;
+        logAction(`Game credit received from ${data.game}`);
+        if (data.dropsEarned > 0 && authManager.session) {
+          authManager.walletManager.addDrops(data.dropsEarned);
+        }
+        if (data.luminaEarned > 0 && authManager.session) {
+          authManager.walletManager.addLumina(data.luminaEarned);
+        }
+      });
+
+      // on load, check if any game sent credits while offline
+      const pending = ToolBridge.receiveContext('eco-engine-test');
+      if (pending?.data) {
+        logAction(`Pending game credits found: ${JSON.stringify(pending.data)}`);
+      }
+
+      // show VDWallet local totals in action log on load
+      const localWallet = VDWallet.get();
+      logAction(`Local wallet — Drops: ${localWallet.focusDrops}, Lumina: ${localWallet.lumina}, HexTokens: ${localWallet.hexTokens}, MissionXP: ${localWallet.missionXP}`);
+
       logAction('Eco-Hack auth system booted');
     })();
   </script>
