@@ -99,6 +99,8 @@
         <div style="display:flex;align-items:center;gap:8px;">
           <span id="auth-status" class="muted" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;">Not signed in</span>
           <button id="logout-btn" style="display:none">Logout</button>
+          <span id="auth-status" class="muted" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;">Logged out</span>
+          <button id="logout-btn">Logout</button>
         </div>
       </div>
       <div id="logout-confirm">
@@ -186,6 +188,7 @@
      */
     (() => {
       const SUPABASE_URL = 'https://bfocxgtlemhxfwfuhlxn.supabase.co';
+      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY || localStorage.getItem('eco_supabase_anon_key') || 'YOUR_ANON_KEY';
       const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY';
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -265,6 +268,12 @@
         return 'Something went wrong. Please try again.';
       };
 
+
+
+      if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'YOUR_ANON_KEY') {
+        authError.textContent = 'Supabase key missing. Set window.ECO_SUPABASE_ANON_KEY or localStorage eco_supabase_anon_key.';
+        logAction('Auth warning: Supabase anon key is not configured.');
+      }
 
       const setAuthTab = (mode) => {
         const loginOn = mode === 'login';
@@ -722,12 +731,14 @@
           authScreen.style.display = 'none';
           dashboard.style.display = 'block';
           renderAuthView();
+          if (authStatus) authStatus.textContent = `Logged in: ${this.session?.user?.email || 'yes'}`;
         }
 
         showAuth() {
           authScreen.style.display = 'block';
           dashboard.style.display = 'none';
           renderAuthView();
+          if (authStatus) authStatus.textContent = 'Logged out';
         }
       }
 

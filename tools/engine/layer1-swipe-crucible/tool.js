@@ -310,6 +310,7 @@
       if (state.currentStreak >= 3) VDWallet.earn('lumina', 1, 'swipe-streak');
     }
     if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(dailyXP);
+    if (window.GrowthStageEngine) GrowthStageEngine.addXP(dailyXP);
     if (window.ToolBridge) {
       ToolBridge.sendContext('layer1-swipe-crucible', 'growth-milestone-engine', {
         xpEarned: dailyXP, streak: state.currentStreak, completed: true
