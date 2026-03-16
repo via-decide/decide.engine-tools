@@ -1,3 +1,9 @@
+Branch: simba/add-daily-streak-tracker-tool-in-toolsenginedail
+Title: Add daily-streak-tracker tool in tools/engine/daily-streak-tracker/ w...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working daily-streak-tracker tool that calculates and displays consistency rewards
 Branch: simba/add-admin-moderation-panel-tool-in-toolsenginead
 Title: Add admin-moderation-panel tool in tools/engine/admin-moderation-pane...
 
