@@ -1,3 +1,9 @@
+Branch: simba/add-resource-optimization-puzzle-tool-in-toolsen
+Title: Add resource-optimization-puzzle tool in tools/engine/resource-optimi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working resource-optimization-puzzle tool that tests spatial and resource management skills
 Branch: simba/add-a-new-standalone-tool-called-snake-game-in-t
 Title: Add a new standalone tool called snake-game in tools/games/snake-game...
 
