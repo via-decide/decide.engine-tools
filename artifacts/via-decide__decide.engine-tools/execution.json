@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-a-new-standalone-tool-called-snake-game-in-t",
   "branch": "simba/add-a-new-standalone-tool-called-tetris-game-in-",
   "branch": "simba/add-a-new-standalone-tool-called-puzzle-generato",
   "branch": "simba/add-a-new-standalone-tool-called-quiz-engine-in-",

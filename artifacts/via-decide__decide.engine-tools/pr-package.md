@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-snake-game-in-t
+Title: Add a new standalone tool called snake-game in tools/games/snake-game...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working snake-game tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-tetris-game-in-
 Title: Add a new standalone tool called tetris-game in tools/games/tetris-ga...
 
