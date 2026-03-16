@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-tetris-game-in-
+Title: Add a new standalone tool called tetris-game in tools/games/tetris-ga...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working tetris-game tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-puzzle-generato
 Title: Add a new standalone tool called puzzle-generator in tools/games/puzz...
 
