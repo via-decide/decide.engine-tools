@@ -61,6 +61,23 @@
     .stat { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; min-width: 120px; }
     #action-log { max-height: 220px; overflow: auto; font-size: 13px; line-height: 1.45; }
     .muted { color: var(--muted); }
+    .auth-tabs { display:flex; gap:8px; margin: 0 0 12px; }
+    .auth-tab { flex:1; min-height:40px; border-radius:10px; }
+    .auth-tab.on { background: var(--accent); border-color: var(--accent); color:#fff; }
+    .auth-card { background: var(--surface2); border:1px solid var(--border); border-radius:10px; padding:12px; }
+    .auth-meta { margin:8px 0 12px; font-size:12px; color: var(--muted); }
+    .auth-summary { display:none; margin-top:10px; padding:10px; border-radius:8px; border:1px solid var(--border); background: var(--surface2); font-size:12px; }
+    .toast { position: fixed; right: 14px; bottom: 14px; z-index: 9999; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); opacity: 0; transform: translateY(6px); transition: .2s; pointer-events:none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.ok { border-color: var(--success); }
+    .toast.err { border-color: var(--danger); }
+    @media (max-width: 760px) {
+      .app { padding: 12px; }
+      .panel { padding: 12px; }
+      .auth-grid { grid-template-columns: 1fr; }
+      .row { min-height: 40px; }
+      button { min-height: 40px; }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../../shared/reward-wallet.js"></script>
@@ -80,6 +97,8 @@
           <p class="muted" style="margin:4px 0 0">Unified Auth + Wallet + Plant testbed</p>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
+          <span id="auth-status" class="muted" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;">Not signed in</span>
+          <button id="logout-btn" style="display:none">Logout</button>
           <span id="auth-status" class="muted" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;">Logged out</span>
           <button id="logout-btn">Logout</button>
         </div>
@@ -94,12 +113,16 @@
     <section id="auth-screen" class="panel">
       <div id="confirm-banner">Check your inbox to confirm your email</div>
       <div id="auth-error"></div>
+      <div class="auth-tabs" role="tablist" aria-label="Authentication forms">
+        <button type="button" id="tab-login" class="auth-tab on" role="tab" aria-selected="true">Login</button>
+        <button type="button" id="tab-register" class="auth-tab" role="tab" aria-selected="false">Register</button>
+      </div>
       <div class="auth-grid">
-        <form id="login-form" novalidate>
-          <h2>Login</h2>
+        <form id="login-form" class="auth-card" novalidate>
+          <h2 style="margin:0 0 8px">Login</h2>
           <div class="field">
             <label for="login-email">Email</label>
-            <input id="login-email" type="email" autocomplete="email" required />
+            <input id="login-email" type="email" autocomplete="email" inputmode="email" required />
             <div class="inline-error" id="login-email-error"></div>
           </div>
           <div class="field">
@@ -114,14 +137,15 @@
             <input id="remember-me" type="checkbox" checked />
             <label for="remember-me">Stay signed in</label>
           </div>
+          <div class="auth-meta" id="persistence-mode">Persistence: device remembered</div>
           <button id="login-btn" class="primary" type="submit">Sign in</button>
         </form>
 
-        <form id="register-form" novalidate>
-          <h2>Register</h2>
+        <form id="register-form" class="auth-card" novalidate style="display:none">
+          <h2 style="margin:0 0 8px">Register</h2>
           <div class="field">
             <label for="register-email">Email</label>
-            <input id="register-email" type="email" autocomplete="email" required />
+            <input id="register-email" type="email" autocomplete="email" inputmode="email" required />
             <div class="inline-error" id="register-email-error"></div>
           </div>
           <div class="field">
@@ -135,6 +159,7 @@
           <button id="register-btn" class="primary" type="submit">Create account</button>
         </form>
       </div>
+      <div class="auth-summary" id="auth-summary"></div>
     </section>
 
     <section id="dashboard" class="panel">
@@ -151,6 +176,8 @@
       <div id="action-log"></div>
     </section>
   </main>
+
+  <div id="auth-toast" class="toast" aria-live="polite"></div>
 
   <script>
     /*
@@ -182,6 +209,11 @@
       const loginForm = document.getElementById('login-form');
       const registerForm = document.getElementById('register-form');
       const rememberMe = document.getElementById('remember-me');
+      const authToast = document.getElementById('auth-toast');
+      const authSummary = document.getElementById('auth-summary');
+      const persistenceMode = document.getElementById('persistence-mode');
+      const tabLogin = document.getElementById('tab-login');
+      const tabRegister = document.getElementById('tab-register');
 
       const LOCK_WINDOW_MS = 60000;
       const LOCK_ATTEMPTS = 5;
@@ -195,6 +227,31 @@
         const p = document.createElement('div');
         p.textContent = `[${formatTime()}] ${text}`;
         actionLog.prepend(p);
+      };
+
+      const logAuthEvent = (event, detail='') => {
+        logAction(`auth_event:${event}${detail ? ' — ' + detail : ''}`);
+      };
+
+      const showToast = (message, kind='ok') => {
+        if (!authToast) return;
+        authToast.textContent = message;
+        authToast.className = `toast ${kind === 'error' ? 'err' : 'ok'} show`;
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => { authToast.className = 'toast'; }, 1800);
+      };
+
+      const renderAuthView = () => {
+        const hasSession = Boolean(authManager?.session?.user?.id);
+        logoutBtn.style.display = hasSession ? 'inline-flex' : 'none';
+        authStatus.textContent = hasSession ? 'Signed in' : 'Not signed in';
+        if (hasSession) {
+          authSummary.style.display = 'block';
+          authSummary.textContent = `Authenticated as ${authManager.session.user.email || '-'} · user_id: ${authManager.session.user.id || '-'}`;
+        } else {
+          authSummary.style.display = 'none';
+          authSummary.textContent = '';
+        }
       };
 
       const friendlyError = (message = '') => {
@@ -211,6 +268,22 @@
         authError.textContent = 'Supabase key missing. Set window.ECO_SUPABASE_ANON_KEY or localStorage eco_supabase_anon_key.';
         logAction('Auth warning: Supabase anon key is not configured.');
       }
+
+      const setAuthTab = (mode) => {
+        const loginOn = mode === 'login';
+        loginForm.style.display = loginOn ? 'block' : 'none';
+        registerForm.style.display = loginOn ? 'none' : 'block';
+        tabLogin.classList.toggle('on', loginOn);
+        tabRegister.classList.toggle('on', !loginOn);
+        tabLogin.setAttribute('aria-selected', String(loginOn));
+        tabRegister.setAttribute('aria-selected', String(!loginOn));
+      };
+      tabLogin.addEventListener('click', () => setAuthTab('login'));
+      tabRegister.addEventListener('click', () => setAuthTab('register'));
+      rememberMe.addEventListener('change', () => {
+        persistenceMode.textContent = rememberMe.checked ? 'Persistence: device remembered' : 'Persistence: 1-hour session only';
+        logAction(`persistence_mode:${rememberMe.checked ? 'remembered' : 'ephemeral'}`);
+      });
 
       window.addEventListener('growth:stage_evolved', (e) => {
         logAction('🌿 Plant evolved to ' + e.detail.stage.name + '!');
@@ -243,31 +316,7 @@
       };
 
 
-      const VDWallet = {
-        KEY: 'vd_wallet',
-        get() {
-          try {
-            return JSON.parse(localStorage.getItem(this.KEY)) || this._default();
-          } catch (_err) {
-            return this._default();
-          }
-        },
-        _default() {
-          return { focusDrops: 0, lumina: 0, hexTokens: 0, missionXP: 0, totalEarned: 0, lastUpdated: '' };
-        },
-        save(w) {
-          w.lastUpdated = new Date().toISOString();
-          localStorage.setItem(this.KEY, JSON.stringify(w));
-        },
-        earn(field, amount, source) {
-          const w = this.get();
-          w[field] = (w[field] || 0) + amount;
-          w.totalEarned = (w.totalEarned || 0) + amount;
-          this.save(w);
-          console.log(`[VDWallet] +${amount} ${field} from ${source}`);
-          return w;
-        }
-      };
+      const VDWallet = window.VDWallet;
 
       class WalletManager {
         constructor() {
@@ -408,7 +457,7 @@
 
           window.addEventListener('storage', (event) => {
             if (event.key === 'eco_session' && !event.newValue && this.session) {
-              logAction('Cross-tab logout detected');
+              logAuthEvent('logout_success', 'cross-tab logout detected');
               this.logout(false, { suppressRemote: true });
             }
           });
@@ -444,14 +493,16 @@
               await this.ensureUserRow();
               userEmail.textContent = session.user?.email || '—';
               this.showDashboard();
+              renderAuthView();
               await this.walletManager.fetchWallet();
               await this.plantManager.loadPlant();
             }
             if (event === 'SIGNED_OUT') {
               this.clearSessionCache();
               this.showAuth();
+              renderAuthView();
               this.resetUIState();
-              logAction('Logged out');
+              logAuthEvent('logout_success');
             }
           });
         }
@@ -475,7 +526,7 @@
             this.showDashboard();
             this.walletManager.fetchWallet();
             this.plantManager.loadPlant();
-            logAction('Session restored from localStorage fast-path');
+            logAuthEvent('session_restored', 'local fast-path');
           } catch (_error) {
             this.clearSessionCache();
           }
@@ -491,7 +542,7 @@
             this.showDashboard();
             await this.walletManager.fetchWallet();
             await this.plantManager.loadPlant();
-            logAction('Session restored from Supabase');
+            logAuthEvent('session_restored', 'supabase session');
           } else {
             this.showAuth();
           }
@@ -555,8 +606,11 @@
           authError.textContent = '';
           if (this.isLocked()) {
             authError.textContent = 'Too many attempts. Please wait 30 seconds.';
+            showToast('Temporarily locked after too many attempts', 'error');
             return;
           }
+
+          logAuthEvent('login_started');
 
           const { valid, email, password } = this.validateAuthForm('login');
           if (!valid) return;
@@ -577,13 +631,16 @@
             }
 
             this.showDashboard();
+            renderAuthView();
             await this.walletManager.fetchWallet();
             await this.plantManager.loadPlant();
-            logAction('Login successful');
+            logAuthEvent('login_success', rememberMe.checked ? 'mode=remembered' : 'mode=ephemeral');
+            showToast('Signed in successfully');
           } catch (error) {
             this.trackFailedAttempt();
             authError.textContent = friendlyError(error.message || '');
-            logAction(`Login failed: ${authError.textContent}`);
+            logAuthEvent('login_failed', authError.textContent);
+            showToast(authError.textContent, 'error');
           } finally {
             setButtonLoading(loginBtn, 'Signing in...', false);
           }
@@ -594,6 +651,7 @@
           authError.textContent = '';
           confirmBanner.style.display = 'none';
 
+          logAuthEvent('register_started');
           const { valid, email, password } = this.validateAuthForm('register');
           if (!valid) return;
 
@@ -605,7 +663,8 @@
 
             if (!data.session) {
               confirmBanner.style.display = 'block';
-              logAction('Registration complete; email confirmation required');
+              logAuthEvent('register_success', 'email confirmation required');
+              showToast('Account created. Check your email to confirm.');
               return;
             }
 
@@ -618,10 +677,12 @@
             await this.walletManager.addDrops(25);
             await this.walletManager.addLumina(5);
             logAction('🎁 Welcome bonus: +25 Drops, +5 Lumina');
-            logAction('Registration successful and session active');
+            logAuthEvent('register_success', 'session active');
+            showToast('Account created and signed in');
           } catch (error) {
             authError.textContent = friendlyError(error.message || '');
-            logAction(`Registration failed: ${authError.textContent}`);
+            logAuthEvent('register_failed', authError.textContent);
+            showToast(authError.textContent, 'error');
           } finally {
             setButtonLoading(registerBtn, 'Creating account...', false);
           }
@@ -643,7 +704,9 @@
           this.clearSessionCache();
           this.resetUIState();
           this.showAuth();
-          logAction('User logged out');
+          renderAuthView();
+          logAuthEvent('logout_success');
+          showToast('Signed out');
         }
 
         clearSessionCache() {
@@ -661,12 +724,14 @@
         showDashboard() {
           authScreen.style.display = 'none';
           dashboard.style.display = 'block';
+          renderAuthView();
           if (authStatus) authStatus.textContent = `Logged in: ${this.session?.user?.email || 'yes'}`;
         }
 
         showAuth() {
           authScreen.style.display = 'block';
           dashboard.style.display = 'none';
+          renderAuthView();
           if (authStatus) authStatus.textContent = 'Logged out';
         }
       }
@@ -676,6 +741,7 @@
       window.WalletManager = WalletManager;
       window.PlantManager = PlantManager;
       authManager.init();
+      renderAuthView();
 
       // listen for incoming game credits via ToolBridge
       window.addEventListener('toolbridge:send', (e) => {
