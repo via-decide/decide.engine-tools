@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-progress-timeline-visualization-tool-in-tool",
   "branch": "simba/add-daily-streak-tracker-tool-in-toolsenginedail",
   "branch": "simba/add-admin-moderation-panel-tool-in-toolsenginead",
   "branch": "simba/add-abuse-detection-dashboard-tool-in-toolsengin",
