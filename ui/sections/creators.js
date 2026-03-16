@@ -16,10 +16,7 @@ export function renderCreatorsSection(toolsById) {
       chipClass: 'c-creators',
       title: 'PromptAlchemy',
       description: 'Turn a raw idea into a structured prompt pack ready for any AI tool. Works for social, video, writing, and product.',
-      links: [
-        { className: 'btn-green', href: './prompt-alchemy/index.html', label: 'Open Tool' },
-        { className: 'btn-ghost', href: './tools/promptalchemy/index.html', label: 'New Version' }
-      ]
+      links: [{ className: 'btn-green', href: './tools/promptalchemy/index.html', label: 'Open Tool' }]
     })}
     ${createFeaturedCard({
       chip: 'Popular',
@@ -54,8 +51,7 @@ export function renderSection(container) {
           <h3>PromptAlchemy</h3>
           <p>Turn a raw idea into a structured prompt pack ready for any AI tool. Works for social, video, writing, and product.</p>
           <div class="btn-row">
-            <a class="btn btn-green" href="./prompt-alchemy/index.html">Open Tool</a>
-            <a class="btn btn-ghost" href="./tools/promptalchemy/index.html">New Version</a>
+            <a class="btn btn-green" href="./tools/promptalchemy/index.html">Open Tool</a>
           </div>
         </div>
         <div class="feat-card">

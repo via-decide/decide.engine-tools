@@ -3,7 +3,16 @@
     if (document.querySelector('[data-vd-nav-fix="true"]')) return;
 
     const bar = document.createElement('a');
-    bar.href = '/';
+    bar.href = (() => {
+      // walk up from current path to find the repo root
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      // on GH Pages: ['decide.engine-tools', 'tools', 'games', 'hex-wars']
+      // we need: /decide.engine-tools/
+      if (parts.length > 0) {
+        return '/' + parts[0] + '/';
+      }
+      return '/';
+    })();
     bar.dataset.vdNavFix = 'true';
     bar.textContent = '← Back to ViaDecide';
     bar.setAttribute('aria-label', 'Back to ViaDecide home');
