@@ -716,6 +716,15 @@
       }, 500);
     });
 
+    window.addEventListener('growth:state_updated', function(e) {
+      if (typeof window.VDWallet === 'undefined') return;
+      const xp = e.detail && e.detail.xp ? e.detail.xp : 0;
+      if (xp > 0 && xp % 100 === 0) {
+        window.VDWallet.earn('focusDrops', 1, 'growth-xp-milestone');
+      }
+    });
+
+    window.onload = () => { init3D(); updateUI(); };
     window.onload = () => { 
       init3D(); 
       updateUI(); 

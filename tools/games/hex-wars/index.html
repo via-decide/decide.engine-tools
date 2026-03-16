@@ -801,6 +801,7 @@ function loadQuestion(){
   updateStats();
   if(currentQ >= QUESTIONS.length){
     stopTimer();
+    saveGameCredits();
     showResult();
     return;
   }
@@ -985,6 +986,21 @@ function showResult(){
   const overlay=document.getElementById('resultOverlay');
   overlay.classList.add('show');
   document.getElementById('restartBtn').addEventListener('click',restart,{once:true});
+}
+
+function saveGameCredits() {
+  if (typeof window.VDWallet === 'undefined') return;
+  const dropsEarned = Math.floor(score / 10);
+  const luminaEarned = streak >= 5 ? Math.floor(streak / 5) : 0;
+  window.VDWallet.earn('hexTokens', tokens, 'hexwars');
+  window.VDWallet.earn('focusDrops', dropsEarned, 'hexwars-score');
+  if (luminaEarned > 0) window.VDWallet.earn('lumina', luminaEarned, 'hexwars-streak');
+  const prev = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
+  if (!prev.score || score > prev.score) {
+    localStorage.setItem('hexwars-best', JSON.stringify({
+      score, tokens, elo, date: new Date().toLocaleDateString()
+    }));
+  }
 }
 
 function restart(){

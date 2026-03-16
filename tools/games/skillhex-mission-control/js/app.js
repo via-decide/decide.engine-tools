@@ -62,7 +62,6 @@ async function initApp() {
     missions,
     missionIndex: new Map(missions.map((mission) => [mission.id, mission]))
   };
-  window.SkillHex._lastSyncedScore = window.SkillHex.state.score || 0;
 
   if (!window.SkillHex.state.currentMission && missions.length) {
     window.SkillHex.state.currentMission = missions[0].id;

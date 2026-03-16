@@ -895,6 +895,7 @@ function selectAnswer(btn, selected){
   const me=state.players.find(p=>p.id===state.myId);
   if(me) me.score=state.myScore;
 
+  awardQuizCredits(isCorrect);
   if (window.VDWallet) {
     VDWallet.earn('quizStars', 1, 'wings-quiz-round');
     if (isCorrect) VDWallet.earn('focusDrops', 2, 'wings-quiz-correct');
@@ -915,6 +916,12 @@ function selectAnswer(btn, selected){
   
   showResultBanner(isCorrect, pts, q.exp);
   setTimeout(()=>showLeaderboard(isCorrect), 1800);
+}
+
+function awardQuizCredits(isCorrect) {
+  if (typeof window.VDWallet === 'undefined') return;
+  window.VDWallet.earn('quizStars', 1, 'wings-quiz-round');
+  if (isCorrect) window.VDWallet.earn('focusDrops', 2, 'wings-quiz-correct');
 }
 
 function timeOut(){

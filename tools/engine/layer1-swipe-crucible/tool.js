@@ -297,6 +297,13 @@
       cardsCompleted: sessionCorrect,
       cardsTotal: sessionTotal
     });
+    // wallet sync
+    if (typeof window.VDWallet !== 'undefined') {
+      window.VDWallet.earn('focusDrops', Math.floor(dailyXP / 5), 'swipe-session');
+      if (state.currentStreak >= 3) {
+        window.VDWallet.earn('lumina', 1, 'swipe-streak');
+      }
+    }
     emitEvent('engine:day_advanced', { currentDay: state.day });
 
     el.gamePanel.classList.add('hide');
