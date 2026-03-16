@@ -1,3 +1,9 @@
+Branch: simba/create-branch-featurelayer2-commons-view-create-
+Title: > Create branch feature/layer2-commons-view. Create file views/layer2...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > The promised land-a beautiful hub that justifies the effort spent in Layer 1. /end_task
 Branch: simba/create-branch-featureascension-cinematic-ux-crea
 Title: > Create branch feature/ascension-cinematic-ux. Create file shared/as...
 

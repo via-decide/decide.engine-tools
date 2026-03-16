@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create branch feature/layer2-commons-view. Create file views/layer2-commons.html. Build a new dashboard view specific to Layer 2. It must contain two sections: 1. "Seed Inventory": Reads from localStorage.getItem('forged_seeds_inventory') and renders beautiful UI cards for each seed, showing its rarity and stats. 2. "Circle Hub": Integrates with the existing CircleManager, showing current clan members and the active Pest Siege status. Update the main index.html OS navigation menu to include a locked button for "The Commons". Add logic in the OS router to check ProgressionEngine.getState().unlockedLayer >= 2 before allowing navigation to this view. If locked, show a padlock icon. Commit with message "feat: add Layer 2 Commons UI dashboard". Push branch and open PR to main titled "Feat: Layer 2 Commons Dashboard"
+
+CONSTRAINTS
+> Pure Vanilla JS and CSS. Responsive grid layout for the seed cards. Properly secure the route so Layer 1 players cannot bypass the grind.
 > Create branch feature/ascension-cinematic-ux. Create file shared/ascension-ux.js. Build a utility AscensionCinematic that listens for window.addEventListener('progression:layer2_unlocked', ...). When fired, dynamically inject a massive, full-screen <div> overlay with a dark, glowing purple/gold CSS background. Animate text that says "Crucible Survived. Layer 2 Unlocked: The Commons." After 4 seconds, fade out the overlay and trigger the SeedForge.forgeSeed() function automatically to grant their first seed. Commit with message "feat: add full-screen ascension cinematic UX". Push branch and open PR to main titled "Feat: Ascension Cinematic UX"
 
 CONSTRAINTS
