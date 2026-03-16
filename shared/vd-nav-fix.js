@@ -1,14 +1,15 @@
 (() => {
+  const getHomeHref = () => {
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const repoSegment = parts[0] === 'decide.engine-tools' ? `/${parts[0]}/` : '/';
+    return repoSegment;
+  };
+
   const addNav = () => {
     if (document.querySelector('[data-vd-nav-fix="true"]')) return;
 
     const bar = document.createElement('a');
-    bar.href = (function() {
-      var parts = window.location.pathname.split('/').filter(Boolean);
-    bar.href = (() => {
-      const parts = window.location.pathname.split('/').filter(Boolean);
-      return parts.length > 0 ? '/' + parts[0] + '/' : '/';
-    })();
+    bar.href = getHomeHref();
     bar.dataset.vdNavFix = 'true';
     bar.textContent = '← Back to ViaDecide';
     bar.setAttribute('aria-label', 'Back to ViaDecide home');
@@ -29,8 +30,12 @@
       '-webkit-tap-highlight-color:transparent'
     ].join(';');
 
-    bar.addEventListener('mouseenter', () => { bar.style.borderColor = 'rgba(34,197,94,.7)'; });
-    bar.addEventListener('mouseleave', () => { bar.style.borderColor = 'rgba(255,255,255,.24)'; });
+    bar.addEventListener('mouseenter', () => {
+      bar.style.borderColor = 'rgba(34,197,94,.7)';
+    });
+    bar.addEventListener('mouseleave', () => {
+      bar.style.borderColor = 'rgba(255,255,255,.24)';
+    });
 
     document.body.appendChild(bar);
   };
