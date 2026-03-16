@@ -4,7 +4,7 @@ import { createToolCard } from '../components/tool-card.js';
 
 const cards = [
   { id: 'student-research', chipLabel: 'Students', chipClass: 'c-education', icon: '📚', name: 'Student Research' },
-  { id: 'multi-source-research-explained', chipLabel: 'Research', chipClass: 'c-researchers', icon: '🧩', name: 'Multi-Source Research' },
+  { id: 'student-research', chipLabel: 'Research', chipClass: 'c-researchers', icon: '🧩', name: 'Multi-Source Research', description: 'Interactive multi-source synthesis powered by Wikimedia search sources.', entry: 'student-research/index.html' },
   { id: 'interview-prep', name: 'Interview Prep', description: 'Build structured answers for any interview question — behavioural, technical, or case-based.', entry: 'interview-prep/index.html', category: 'education', chipLabel: 'Career', chipClass: 'c-education', icon: '🎯' },
   { id: 'context-packager', chipLabel: 'Workflow', chipClass: 'c-system', icon: '📦' },
   { id: 'workflow-template-gallery', chipLabel: 'Templates', chipClass: 'c-system', icon: '🗂️' },
@@ -36,7 +36,7 @@ export function renderSection(container) {
           <p>Structure your research process — define your question, organise sources, and build your summary.</p>
           <span class="card-link">Open</span>
         </a>
-        <a class="card" href="./multi-source-research-explained/index.html">
+        <a class="card" href="./student-research/index.html">
           <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
           <h3>Multi-Source Research</h3>
           <p>Synthesise findings from multiple sources into one coherent, structured research output.</p>

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Wings of Fire — Multiplayer Quiz</title>
 <script defer src="../../../shared/vd-nav-fix.js"></script>
+<script src="../../../shared/vd-wallet.js"></script>
+<script src="../../../shared/tool-bridge.js"></script>
+<script src="../../../shared/tool-storage.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 * { -webkit-tap-highlight-color: transparent !important; }
@@ -891,6 +894,12 @@ function selectAnswer(btn, selected){
   // Update my player's score
   const me=state.players.find(p=>p.id===state.myId);
   if(me) me.score=state.myScore;
+
+  if (window.VDWallet) {
+    VDWallet.earn('quizStars', 1, 'wings-quiz-round');
+    if (isCorrect) VDWallet.earn('focusDrops', 2, 'wings-quiz-correct');
+  }
+
   
   // Broadcast score if multiplayer
   if(state.mode!=='solo'){
@@ -1015,6 +1024,14 @@ function showFinal(){
   }).join('');
   
   showScreen('s-final');
+  if (window.ToolBridge) {
+    const myPlayer = state.players.find(p => p.id === state.myId);
+    if (myPlayer) {
+      ToolBridge.sendContext('wings-of-fire-quiz', 'eco-engine-test', {
+        game: 'wings-quiz', score: myPlayer.score
+      });
+    }
+  }
   if(isWinner) launchConfetti();
 }
 
