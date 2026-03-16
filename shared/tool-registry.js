@@ -35,7 +35,7 @@
       description: 'Create and save agents as JSON documents.',
       category: 'coders',
       tags: ['agent', 'builder'],
-      entry: 'agent-builder.html',
+      entry: 'agent/index.html',
       outputs: ['agent_json']
     },
     {

@@ -399,6 +399,16 @@
       </div>
 
       <div class="panel-section">
+        <div class="section-title" style="margin-top:0">Topic</div>
+        <input id="panel-topic" placeholder="Set custom topic for quick actions" style="width:100%;padding:10px;border-radius:8px;border:1px solid #2a3442;background:#0b1119;color:#d6dde8;" />
+        <div style="height:8px"></div>
+        <div class="panel-actions">
+          <button class="btn btn-mini" onclick="setPanelTopic()">SAVE TOPIC</button>
+          <button class="btn btn-mini" onclick="openYouTubeSearch(getCurrentTopic())">YOUTUBE</button>
+          <button class="btn btn-mini" onclick="openWikipedia(getCurrentTopic())">WIKIPEDIA</button>
+          <button class="btn btn-mini" onclick="downloadSynthesisFile()">SYNTHESIS .MD</button>
+        </div>
+
         <div class="section-title" style="margin-top:0">Actions</div>
         <div class="panel-actions">
           <button class="btn btn-mini" onclick="goHome()">HOME</button>
@@ -687,6 +697,35 @@ function confidenceFor(source) {
 
 /* ---------- External actions ---------- */
 const AMZN_TAG = "decideos-21";
+let CUSTOM_TOPIC = "";
+function getCurrentTopic(){
+  return CUSTOM_TOPIC || ENGINE_STATE?.research_nodes?.[0]?.title || document.getElementById("search-input")?.value?.trim() || "";
+}
+function setPanelTopic(){
+  const v = (document.getElementById("panel-topic")?.value || "").trim();
+  if (!v) return showToast("TYPE A TOPIC");
+  CUSTOM_TOPIC = v;
+  showToast("TOPIC SAVED");
+}
+function downloadSynthesisFile(){
+  const nodes = ENGINE_STATE?.research_nodes || [];
+  const syn = ENGINE_STATE?.synthesis || {};
+  if (!nodes.length) return showToast("NO NODES");
+  const lines = ["# Decision Research Synthesis", "", "Topic: " + (getCurrentTopic() || "-"), "", "## Thesis", syn.thesis || "-", "", "## Key Takeaways"];
+  const takeaways = syn.keyTakeaways || [];
+  (takeaways.length ? takeaways : ["No synthesized takeaways yet."]).forEach((x, i) => lines.push((i+1) + ". " + x));
+  lines.push("", "## Nodes");
+  nodes.forEach((n, i) => lines.push((i+1) + ". " + (n.title || "Untitled") + " - " + (n.sourceName || n.source || "source")));
+  const blob = new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "decision-research-synthesis.md";
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(a.href);
+  a.remove();
+  showToast("SYNTHESIS DOWNLOADED");
+}
 function openYouTubeSearch(topic) {
   const q = encodeURIComponent((topic || "") + " explained");
   window.open(`https://www.youtube.com/results?search_query=${q}`, '_blank');
