@@ -1,259 +1,218 @@
 (function (global) {
-  const state = {
-    tools: [],
-    nodes: [],
-    edges: [],
-    connectFrom: null
-  };
+  'use strict';
 
-  function uid(prefix) {
-    return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
+  const DRAFT_KEY = 'viadecide.workflow-builder.plan-draft';
+  const state = { tools: [], steps: [] };
+
+  const el = (id) => document.getElementById(id);
+
+  function uid() {
+    return `step-${Math.random().toString(36).slice(2, 8)}`;
   }
 
-  function el(id) {
-    return document.getElementById(id);
+  function currentAgent() {
+    const id = el('workflow-id').value.trim() || `agent-${Date.now()}`;
+    const name = el('workflow-name').value.trim() || id;
+    return {
+      id,
+      name,
+      type: 'agent',
+      createdAt: new Date().toISOString(),
+      steps: state.steps.map((step, index) => global.WorkflowEngine.createStep({ ...step, id: step.id || `step-${index + 1}` }, index))
+    };
   }
 
-  function renderSidebar() {
-    const list = el('tool-list');
-    list.innerHTML = state.tools
-      .slice()
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map((tool) => `
-        <button class="tool-chip" draggable="true" data-tool-id="${tool.id}" title="${tool.description || ''}">
-          <strong>${tool.name}</strong>
-          <span>${tool.id}</span>
-        </button>
-      `)
+  function saveDraft() {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(currentAgent()));
+    const status = el('autosave-status');
+    if (status) status.textContent = `Autosaved ${new Date().toLocaleTimeString()}`;
+  }
+
+  function renderToolOptions(selectedId) {
+    return state.tools
+      .map((tool) => `<option value="${tool.id}"${tool.id === selectedId ? ' selected' : ''}>${tool.name}</option>`)
       .join('');
-
-    list.querySelectorAll('[draggable="true"]').forEach((chip) => {
-      chip.addEventListener('dragstart', (event) => {
-        event.dataTransfer.setData('text/tool-id', chip.getAttribute('data-tool-id'));
-      });
-    });
   }
 
-  function toolById(id) {
-    return state.tools.find((tool) => tool.id === id) || null;
+  function updatePreview(extra) {
+    const payload = { agent: currentAgent(), runtime: extra || null };
+    el('workflow-steps-preview').textContent = JSON.stringify(payload, null, 2);
   }
 
-  function uniqueEdgePush(from, to) {
-    if (from === to) return;
-    const exists = state.edges.some((e) => e.from === from && e.to === to);
-    if (!exists) state.edges.push({ from, to });
-  }
+  function bindStepInputs() {
+    el('steps-list').querySelectorAll('[data-step-id]').forEach((row) => {
+      const id = row.getAttribute('data-step-id');
+      const step = state.steps.find((item) => item.id === id);
+      if (!step) return;
 
-  function syncCanvas() {
-    const canvas = el('workflow-canvas');
-    const edgesLayer = el('workflow-edges');
-    const nodesLayer = el('workflow-nodes');
-
-    nodesLayer.innerHTML = state.nodes.map((node) => {
-      const tool = toolById(node.toolId);
-      return `
-        <div class="wf-node${state.connectFrom === node.instanceId ? ' selected' : ''}" data-instance-id="${node.instanceId}" style="left:${node.x}px; top:${node.y}px;" tabindex="0" role="button" aria-label="Workflow node ${tool ? tool.name : node.toolId}">
-          <strong>${tool ? tool.name : node.toolId}</strong>
-          <small>${node.toolId}</small>
-          <div class="node-actions">
-            <button data-action="connect" type="button">Connect</button>
-            <button data-action="remove" type="button">Remove</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    const rect = canvas.getBoundingClientRect();
-    edgesLayer.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
-
-    const byId = new Map(state.nodes.map((node) => [node.instanceId, node]));
-    edgesLayer.innerHTML = state.edges.map((edge) => {
-      const a = byId.get(edge.from);
-      const b = byId.get(edge.to);
-      if (!a || !b) return '';
-      return `<line x1="${a.x + 110}" y1="${a.y + 34}" x2="${b.x + 10}" y2="${b.y + 34}" marker-end="url(#arrow)" />`;
-    }).join('');
-
-    bindNodeEvents();
-    syncStepsPreview();
-  }
-
-  function bindNodeEvents() {
-    const nodesLayer = el('workflow-nodes');
-
-    nodesLayer.querySelectorAll('.wf-node').forEach((nodeEl) => {
-      const instanceId = nodeEl.getAttribute('data-instance-id');
-
-      nodeEl.addEventListener('pointerdown', (event) => {
-        if (event.target.tagName === 'BUTTON') return;
-        const node = state.nodes.find((n) => n.instanceId === instanceId);
-        if (!node) return;
-        const startX = event.clientX;
-        const startY = event.clientY;
-        const originX = node.x;
-        const originY = node.y;
-
-        const onMove = (moveEvent) => {
-          node.x = Math.max(8, originX + (moveEvent.clientX - startX));
-          node.y = Math.max(8, originY + (moveEvent.clientY - startY));
-          syncCanvas();
-        };
-
-        const onUp = () => {
-          window.removeEventListener('pointermove', onMove);
-          window.removeEventListener('pointerup', onUp);
-        };
-
-        window.addEventListener('pointermove', onMove);
-        window.addEventListener('pointerup', onUp);
-      });
-
-      nodeEl.querySelectorAll('button').forEach((button) => {
-        button.addEventListener('click', () => {
-          const action = button.getAttribute('data-action');
-          if (action === 'remove') {
-            state.nodes = state.nodes.filter((n) => n.instanceId !== instanceId);
-            state.edges = state.edges.filter((e) => e.from !== instanceId && e.to !== instanceId);
-            if (state.connectFrom === instanceId) state.connectFrom = null;
-            syncCanvas();
-            return;
-          }
-
-          if (action === 'connect') {
-            if (!state.connectFrom) {
-              state.connectFrom = instanceId;
-              syncCanvas();
-              return;
-            }
-
-            if (state.connectFrom === instanceId) {
-              state.connectFrom = null;
-              syncCanvas();
-              return;
-            }
-
-            uniqueEdgePush(state.connectFrom, instanceId);
-            const exists = state.edges.some((e) => e.from === state.connectFrom && e.to === instanceId);
-            if (!exists) state.edges.push({ from: state.connectFrom, to: instanceId });
-            state.connectFrom = null;
-            syncCanvas();
-          }
+      row.querySelectorAll('[data-field]').forEach((input) => {
+        input.addEventListener('input', () => {
+          step[input.getAttribute('data-field')] = input.value;
+          updatePreview();
+          saveDraft();
         });
       });
-    });
-  }
 
-  function currentWorkflow() {
-    const id = el('workflow-id').value.trim() || 'untitled-workflow';
-    return global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
-  }
-
-  function syncStepsPreview() {
-    const output = el('workflow-steps-preview');
-    const workflow = currentWorkflow();
-  function syncStepsPreview() {
-    const output = el('workflow-steps-preview');
-    const id = el('workflow-id').value.trim() || 'untitled-workflow';
-    const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
-    output.textContent = JSON.stringify({ id: workflow.id, steps: workflow.steps }, null, 2);
-  }
-
-  function loadWorkflow(workflow) {
-    state.nodes = Array.isArray(workflow.nodes) ? workflow.nodes.map((n) => ({ ...n })) : [];
-    state.edges = Array.isArray(workflow.edges) ? workflow.edges.map((e) => ({ ...e })) : [];
-    state.connectFrom = null;
-    el('workflow-id').value = workflow.id || '';
-    syncCanvas();
-  }
-
-  function refreshSavedList() {
-    const select = el('saved-workflows');
-    const items = global.WorkflowStorage.loadAll();
-    select.innerHTML = '<option value="">Select saved workflow</option>' + items
-      .sort((a, b) => a.id.localeCompare(b.id))
-      .map((workflow) => `<option value="${workflow.id}">${workflow.id}</option>`)
-      .join('');
-  }
-
-  function setupCanvasDrop() {
-    const canvas = el('workflow-canvas');
-    canvas.addEventListener('dragover', (event) => event.preventDefault());
-    canvas.addEventListener('drop', (event) => {
-      event.preventDefault();
-      const toolId = event.dataTransfer.getData('text/tool-id');
-      if (!toolId) return;
-      const rect = canvas.getBoundingClientRect();
-      state.nodes.push({
-        instanceId: uid('node'),
-        toolId,
-        x: Math.max(8, event.clientX - rect.left - 56),
-        y: Math.max(8, event.clientY - rect.top - 24)
+      row.querySelector('[data-action="remove"]')?.addEventListener('click', () => {
+        state.steps = state.steps.filter((item) => item.id !== id);
+        render();
       });
-      syncCanvas();
+
+      row.querySelector('[data-action="up"]')?.addEventListener('click', () => {
+        const index = state.steps.findIndex((item) => item.id === id);
+        if (index <= 0) return;
+        [state.steps[index - 1], state.steps[index]] = [state.steps[index], state.steps[index - 1]];
+        render();
+      });
+
+      row.querySelector('[data-action="down"]')?.addEventListener('click', () => {
+        const index = state.steps.findIndex((item) => item.id === id);
+        if (index < 0 || index >= state.steps.length - 1) return;
+        [state.steps[index + 1], state.steps[index]] = [state.steps[index], state.steps[index + 1]];
+        render();
+      });
     });
   }
 
-  function ensureRunnable(workflow) {
-    if (!workflow.steps.length) {
-      return { ok: false, message: 'Add at least one tool node before saving or running.' };
-    }
-    return { ok: true };
+  function render() {
+    const host = el('steps-list');
+    host.innerHTML = state.steps.map((step, index) => `
+      <article class="step-card" data-step-id="${step.id}">
+        <header>
+          <strong>Step ${index + 1}</strong>
+          <div class="step-actions">
+            <button type="button" class="btn" data-action="up">↑</button>
+            <button type="button" class="btn" data-action="down">↓</button>
+            <button type="button" class="btn" data-action="remove">Remove</button>
+          </div>
+        </header>
+        <div class="step-grid">
+          <label>Title<input data-field="title" value="${step.title || ''}" /></label>
+          <label>Tool<select data-field="toolId">${renderToolOptions(step.toolId)}</select></label>
+          <label>Action<input data-field="action" value="${step.action || 'execute'}" /></label>
+          <label>Output Key<input data-field="outputKey" value="${step.outputKey || ''}" /></label>
+        </div>
+        <label>Input<textarea data-field="input" rows="2">${step.input || ''}</textarea></label>
+      </article>
+    `).join('') || '<p class="muted">No steps yet. Add a step to start your plan.</p>';
+
+    bindStepInputs();
+    updatePreview();
+    saveDraft();
+  }
+
+  function addStep(prefill) {
+    const first = state.tools[0] || { id: '' };
+    state.steps.push({
+      id: uid(),
+      title: 'New Step',
+      toolId: first.id,
+      action: 'execute',
+      input: '',
+      outputKey: '',
+      ...prefill
+    });
+    render();
+  }
+
+  function refreshSavedAgents() {
+    const select = el('saved-workflows');
+    const items = global.AgentStorage.loadAll().sort((a, b) => a.name.localeCompare(b.name));
+    select.innerHTML = '<option value="">Select saved agent</option>' + items.map((agent) => `<option value="${agent.id}">${agent.name}</option>`).join('');
+  }
+
+  function loadAgent(agent) {
+    if (!agent) return;
+    el('workflow-id').value = agent.id || '';
+    el('workflow-name').value = agent.name || '';
+    state.steps = Array.isArray(agent.steps) ? agent.steps.map((step) => ({ ...step, id: step.id || uid() })) : [];
+    render();
   }
 
   function bindControls() {
+    el('add-step').addEventListener('click', () => addStep());
     el('save-workflow').addEventListener('click', () => {
-      const id = el('workflow-id').value.trim();
-      if (!id) {
-        alert('Enter a workflow id before saving.');
-        return;
-      }
-      const workflow = currentWorkflow();
-      const check = ensureRunnable(workflow);
-      if (!check.ok) {
-        alert(check.message);
-        return;
-      }
-      const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
-      global.WorkflowStorage.save(workflow);
-      refreshSavedList();
+      const agent = currentAgent();
+      global.AgentStorage.save(agent);
+      refreshSavedAgents();
+      updatePreview({ message: 'Agent saved as JSON.' });
     });
 
     el('load-workflow').addEventListener('click', () => {
       const id = el('saved-workflows').value;
       if (!id) return;
-      const workflow = global.WorkflowStorage.findById(id);
-      if (workflow) loadWorkflow(workflow);
+      loadAgent(global.AgentStorage.findById(id));
     });
 
     el('run-workflow').addEventListener('click', () => {
-      const workflow = currentWorkflow();
-      const check = ensureRunnable(workflow);
-      if (!check.ok) {
-        alert(check.message);
-        return;
-      }
-      const id = el('workflow-id').value.trim() || 'untitled-workflow';
-      const workflow = global.WorkflowEngine.createWorkflow(id, id, state.nodes, state.edges);
-      const result = global.WorkflowEngine.runWorkflow(workflow, state.tools);
-      if (!result.ok) alert(result.message);
+      const result = global.AgentRuntime.runSequentially(currentAgent(), state.tools, { source: 'workflow-builder' });
+      updatePreview(result);
     });
 
     el('clear-canvas').addEventListener('click', () => {
-      state.nodes = [];
-      state.edges = [];
-      state.connectFrom = null;
-      syncCanvas();
+      state.steps = [];
+      render();
+    });
+
+    el('export-workflow').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(currentAgent(), null, 2)], { type: 'application/json' });
+      const href = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = `${currentAgent().id}.json`;
+      link.click();
+      URL.revokeObjectURL(href);
+    });
+
+    el('import-workflow').addEventListener('change', async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const parsed = JSON.parse(await file.text());
+        loadAgent(parsed);
+      } catch (_error) {
+        alert('Invalid JSON file.');
+      }
+      event.target.value = '';
+    });
+
+    el('build-agent-workflow').addEventListener('click', () => {
+      const prompt = el('agent-task-prompt').value.trim();
+      const candidateTools = global.AgentLayer.pickToolsForTask(prompt, state.tools, 4);
+      state.steps = candidateTools.map((tool, index) => ({
+        id: uid(),
+        title: `Auto Step ${index + 1}`,
+        toolId: tool.id,
+        action: index === 0 ? 'collect' : 'execute',
+        input: prompt,
+        outputKey: `step_${index + 1}`
+      }));
+      render();
+    });
+
+    el('run-agent-workflow').addEventListener('click', () => {
+      const result = global.AgentRuntime.runSequentially(currentAgent(), state.tools, { source: 'agent-preview' });
+      updatePreview(result);
     });
   }
 
+  function restoreDraft() {
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      loadAgent(JSON.parse(raw));
+    } catch (_error) {
+      // no-op
+    }
+  }
+
   async function init() {
-    if (!global.ToolRegistry || !global.WorkflowStorage || !global.WorkflowEngine) return;
     state.tools = await global.ToolRegistry.loadAll();
-    renderSidebar();
-    setupCanvasDrop();
     bindControls();
-    refreshSavedList();
-    syncCanvas();
+    refreshSavedAgents();
+    restoreDraft();
+    if (!state.steps.length) addStep();
+    else render();
   }
 
   global.WorkflowUI = { init };
