@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Execution Console • decide.engine</title>
+  <style>body{margin:0;font-family:Inter,system-ui;background:#060916;color:#eef3ff}.page{max-width:980px;margin:0 auto;padding:20px}.panel{background:#11162a;border:1px solid #202a47;border-radius:12px;padding:12px}.row{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #202a47;background:transparent;color:#eef3ff;border-radius:10px;padding:8px 12px;cursor:pointer;text-decoration:none}select{background:#0d142a;color:#eef3ff;border:1px solid #202a47;border-radius:8px;padding:8px}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="row" style="justify-content:space-between;align-items:center"><h1>Execution Console</h1><a class="btn" href="index.html">Back</a></div>
+    <section class="panel">
+      <div class="row"><select id="agent-list"></select><button id="run" class="btn">Run Agent</button><button id="refresh" class="btn">Refresh</button></div>
+      <pre id="output"></pre>
+    </section>
+  </main>
+  <script src="shared/agent-storage.js"></script>
+  <script src="shared/tool-registry.js"></script>
+  <script src="shared/workflow-engine.js"></script>
+  <script src="shared/agent-runtime.js"></script>
+  <script>
+    const el=(id)=>document.getElementById(id);
+    function refreshAgents(){const agents=window.AgentStorage.loadAll();el('agent-list').innerHTML='<option value="">Select agent</option>'+agents.map(a=>`<option value="${a.id}">${a.name||a.id}</option>`).join('');}
+    el('run').onclick=async()=>{const id=el('agent-list').value;const agent=window.AgentStorage.findById(id);if(!agent)return;const tools=await window.ToolRegistry.loadAll();const run=window.AgentRuntime.runSequentially(agent,tools,{source:'execution-console'});el('output').textContent=JSON.stringify(run,null,2);};
+    el('refresh').onclick=refreshAgents;refreshAgents();
+  </script>
+</body>
+</html>
