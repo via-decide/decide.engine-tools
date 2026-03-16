@@ -1,3 +1,9 @@
+Branch: simba/add-admin-moderation-panel-tool-in-toolsenginead
+Title: Add admin-moderation-panel tool in tools/engine/admin-moderation-pane...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working admin-moderation-panel tool for manual oversight of game systems
 Branch: simba/add-abuse-detection-dashboard-tool-in-toolsengin
 Title: Add abuse-detection-dashboard tool in tools/engine/abuse-detection-da...
 

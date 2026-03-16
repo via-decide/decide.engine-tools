@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add admin-moderation-panel tool in tools/engine/admin-moderation-panel/ with config.json, index.html, tool.js. Provides Game Masters with an interface to review flagged content, adjust trust scores, override ranks, and manage the overall health of the engine. Vanilla JS.
 Add abuse-detection-dashboard tool in tools/engine/abuse-detection-dashboard/ with config.json, index.html, tool.js. Scans mock transaction logs to flag suspicious activity like volume spamming, circle collusion, and automated botting based on engine anti-abuse rules. Vanilla JS.
 Add archetype-distribution-analyzer tool in tools/engine/archetype-distribution-analyzer/ with config.json, index.html, tool.js. Ingests player data to visualize the spread of branch specializations across the game population, helping identify meta imbalances or neglected skill trees. Vanilla JS.
 Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-challenge/ with config.json, index.html, tool.js. A mini-game testing a player's grasp of fundamentals (roots), rewarding rapid, correct answers with bonus mineral resources. Includes timer and scoring logic. Vanilla JS.
