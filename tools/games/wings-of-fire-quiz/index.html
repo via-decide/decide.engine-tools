@@ -896,6 +896,10 @@ function selectAnswer(btn, selected){
   if(me) me.score=state.myScore;
 
   awardQuizCredits(isCorrect);
+  if (window.VDWallet) {
+    VDWallet.earn('quizStars', 1, 'wings-quiz-round');
+    if (isCorrect) VDWallet.earn('focusDrops', 2, 'wings-quiz-correct');
+  }
 
   
   // Broadcast score if multiplayer

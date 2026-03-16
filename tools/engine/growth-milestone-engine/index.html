@@ -250,6 +250,13 @@
 <script src="../../../shared/engine-balance.js"></script>
 <script src="../../../shared/tool-bridge.js"></script>
 <script src="../../../shared/tool-storage.js"></script>
+  <script src="../../../shared/vd-wallet.js"></script>
+  <script src="../../../shared/engine-utils.js"></script>
+  <script src="../../../shared/engine-models.js"></script>
+  <script src="../../../shared/simulation-utils.js"></script>
+  <script src="../../../shared/engine-balance.js"></script>
+  <script src="../../../shared/tool-bridge.js"></script>
+  <script src="../../../shared/tool-storage.js"></script>
 </head>
 <body>
   <div id="stage-banner" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#52B756;color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;z-index:9999;font-size:.9rem;"></div>
@@ -408,27 +415,18 @@
       pestImmunity: 0    // Days remaining
     };
 
-    // --- DOM ELEMENTS ---
-
-
     // — engine sync —
     (function syncEngines() {
       if (!window.GrowthStageEngine) return;
       const tick = window.GrowthStageEngine.applyTick();
-      let water = state.water;
-      let nutrients = state.nutrients;
-      let pestCount = state.pests;
-      // push ticked values into existing UI vars if they exist
-      if (typeof water !== 'undefined') water = tick.water;
-      if (typeof nutrients !== 'undefined') nutrients = tick.nutrients;
-      if (typeof pestCount !== 'undefined') pestCount = tick.pests;
-      state.water = water;
-      state.nutrients = nutrients;
-      state.pests = pestCount;
-      // listen for stage evolution
+      if (tick) { // FIXED: Validate tick object to prevent undefined from destroying local state variables
+          if (typeof tick.water !== 'undefined') state.water = tick.water;
+          if (typeof tick.nutrients !== 'undefined') state.nutrients = tick.nutrients;
+          if (typeof tick.pests !== 'undefined') state.pests = tick.pests;
+      }
+      
       window.addEventListener('growth:stage_evolved', (e) => {
         console.log('Stage evolved to', e.detail.stage.name);
-        // show a toast or banner if the page has one
         const banner = document.getElementById('stage-banner');
         if (banner) {
           banner.textContent = '✨ Evolved to ' + e.detail.stage.name + '!';
@@ -566,12 +564,19 @@
       if(nextStage < state.currentStageIndex) { // Burn Downgrade
         state.currentStageIndex = nextStage; update3DModel(MILESTONES[nextStage].stageId);
         els.status.innerText = MILESTONES[nextStage].name; state.maxWater = MILESTONES[nextStage].maxWater;
+        els.status.style.backgroundColor = MILESTONES[nextStage].color; // FIXED: Update color on downgrade
       } else if (nextStage > state.currentStageIndex) { // Evolution
         const nS = MILESTONES[nextStage];
         state.currentStageIndex = nextStage; state.maxWater = nS.maxWater;
         update3DModel(nS.stageId); els.canvasContainer.style.transform = "scale(1.1)";
         setTimeout(() => { els.status.innerText = nS.name; els.status.style.backgroundColor = nS.color; els.canvasContainer.style.transform = "scale(1.0)"; }, 300);
         log(`Evolution! You are now a [${nS.name}]. Max Water increased to ${state.maxWater}.`, 'success');
+        if (window.VDWallet) VDWallet.earn('lumina', 10, 'growth-stage-up');
+        if (window.ToolBridge) {
+          ToolBridge.sendContext('growth-milestone-engine', 'eco-engine-test', {
+            event: 'stage_evolved', stage: nS.name, totalXP: state.rootStrength
+          });
+        }
       }
 
       els.rootVal.innerText = state.rootStrength;
@@ -591,16 +596,19 @@
       log(`🔥 CROP BURN! Pushed to 100% stress. Massive root damage!`, 'danger');
       state.rootStrength = Math.max(0, state.rootStrength - (Math.floor(state.rootStrength*0.4)+10));
       state.stress = 0; state.actionFatigue = 0; targetScale = 0.5;
+      updateUI(); // FIXED: Update immediately to visually clear the stress bar and reset states
       setTimeout(() => { isBurning = false; els.visualizer.classList.remove('burning'); targetScale = 1.0; checkEvolution(); updateUI(); }, 2000);
     }
 
     // --- ACTIONS ---
     els.btnRest.addEventListener('click', () => {
+      if(isBurning) return; // FIXED: Safety lock during burn animations
       if(state.credits < 15) return;
       state.credits -= 15; state.day++;
       
       state.water = Math.min(state.maxWater, state.water + state.maxWater); // Refill water
       if (window.GrowthStageEngine) window.GrowthStageEngine.waterPlant(30);
+      if (window.VDWallet) VDWallet.earn('focusDrops', 5, 'growth-water');
       if (window.RewardWallet) window.RewardWallet.spend('drops', 10, 'water_plant');
       state.actionFatigue = 0;
       
@@ -616,22 +624,32 @@
 
       if(state.pestImmunity > 0) state.pestImmunity--;
 
-      updateUI();
-      if(state.stress >= 100) triggerCropBurn();
       log(`🌙 Rested. Paid 15🪙.`, 'system');
       els.canvasContainer.style.transform = "scale(0.95)"; setTimeout(() => els.canvasContainer.style.transform="scale(1.0)", 150);
+
+      if(state.stress >= 100) {
+        triggerCropBurn();
+        return;
+      }
+      updateUI();
     });
 
     els.btnFertilize.addEventListener('click', () => {
+      if(isBurning) return; // FIXED: Safety lock during burn animations
       const f = FERT_TYPES[els.selFert.value];
       if(state.credits < f.cost) return log(`❌ Need ${f.cost}🪙 for ${f.name}.`, 'warn');
       state.credits -= f.cost; state.nutrients += f.nut; state.stress += f.stress;
       log(`🛒 Applied ${f.name}. Nutrients +${f.nut}%. Stress altered by ${f.stress}.`, 'success');
-      if(state.stress >= 100) triggerCropBurn();
+      
+      if(state.stress >= 100) {
+        triggerCropBurn();
+        return;
+      }
       updateUI();
     });
 
     els.btnPesticide.addEventListener('click', () => {
+      if(isBurning) return; // FIXED: Safety lock during burn animations
       const p = PEST_TYPES[els.selPest.value];
       if(state.credits < p.cost) return log(`❌ Need ${p.cost}🪙 for ${p.name}.`, 'warn');
       
@@ -642,17 +660,27 @@
       if(p.immunity > 0) state.pestImmunity = p.immunity;
 
       log(`🧪 Applied ${p.name}. Pests eliminated. Nutrients -${p.nutDrain}%, Stress +${p.stress}.`, 'toxic');
-      if(state.stress >= 100) triggerCropBurn();
+      
+      if(state.stress >= 100) {
+        triggerCropBurn();
+        return;
+      }
       updateUI();
     });
 
     els.btnSimulate.addEventListener('click', () => {
+      if(isBurning) return; // FIXED: Safety lock during burn animations
+      
       let stressG = 0;
       if(state.water < 10) stressG += 20;
       if(state.actionFatigue >= 2) stressG += 15 * state.actionFatigue;
       state.stress += stressG;
       if(stressG > 0) log(`⚠️ Plant stressed (+${stressG}%) from fatigue/low water.`, 'warn');
-      if(state.stress >= 100) return triggerCropBurn();
+      
+      if(state.stress >= 100) {
+        triggerCropBurn();
+        return; // FIXED: Prevent the rest of the simulation if the plant is burning
+      }
 
       els.btnSimulate.disabled = true; els.btnSimulate.innerText = "⏳ Processing...";
       setTimeout(() => {
@@ -666,7 +694,10 @@
         
         state.credits += 12;
         state.rootStrength += finalG;
+        if (window.VDWallet) VDWallet.earn('focusDrops', Math.floor(finalG / 10), 'growth-engine');
         if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(finalG);
+        if (window.GrowthStageEngine) GrowthStageEngine.addXP(finalG);
+        if (window.ToolStorage) ToolStorage.set('growth-engine', 'state', { xp: state.rootStrength, stage: state.currentStageIndex });
         state.water -= 5;
         state.nutrients -= 15;
         state.actionFatigue++;
@@ -694,6 +725,19 @@
     });
 
     window.onload = () => { init3D(); updateUI(); };
+    window.onload = () => { 
+      init3D(); 
+      updateUI(); 
+      
+      // FIXED: Actually apply the weather visual class when the dropdown changes
+      els.selWeather.addEventListener('change', (e) => {
+        state.environment.weather = e.target.value;
+        els.visualizer.classList.remove('weather-rain', 'weather-sun');
+        els.visualizer.classList.add(`weather-${e.target.value}`);
+      });
+    };
   </script>
 </body>
 </html>
+
+
