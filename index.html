@@ -642,6 +642,7 @@
 <!-- =========================================
      JAVASCRIPT ENGINE
      ========================================= -->
+<script src="./router.js"></script>
 <script>
 // --- SIDEBAR MENU ENGINE ---
 const Sidebar = {
@@ -753,8 +754,6 @@ const App = {
         this.updateCounterTargets();
         this.renderGrid();
         this.initTabs();
-        this.initScrollSpy();
-        this.bindHashNavigation();
         this.animateNumbers();
     },
 
@@ -790,7 +789,7 @@ const App = {
             const delay = (index * 0.04) > 0.5 ? 0 : index * 0.04;
             const engineBorder = t.engine ? 'is-engine' : '';
             const hasRoute = Boolean(ToolCatalog.resolveEntry(t.name));
-            const isComingSoon = !hasRoute;
+            const isComingSoon = !hasRoute || t.comingSoon === true;
             const cardClass = `${engineBorder} ${isComingSoon ? 'is-coming-soon' : ''}`.trim();
             const cardAction = isComingSoon ? '' : `onclick="App.openTool(${JSON.stringify(t.name)})"`;
             const chipMarkup = isComingSoon
@@ -873,37 +872,6 @@ const App = {
             toast.classList.remove('coming-soon');
           }, 2500);
         }
-    },
-
-    bindHashNavigation() {
-      const scrollToSection = () => {
-        const targetId = window.location.hash ? window.location.hash.slice(1) : 'home';
-        const targetSec = document.getElementById(targetId);
-        if (targetSec) {
-          targetSec.scrollIntoView({ behavior: 'smooth' });
-        }
-      };
-      window.addEventListener('hashchange', scrollToSection);
-      if (window.location.hash) {
-        setTimeout(scrollToSection, 0);
-      }
-    },
-
-    initScrollSpy() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nl[data-s]');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.toggle('on', link.getAttribute('data-s') === entry.target.id);
-                    });
-                }
-            });
-        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-
-        sections.forEach(sec => observer.observe(sec));
     },
 
     animateNumbers() {

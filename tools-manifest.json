@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T08:14:57.627Z",
+  "generatedAt": "2026-03-16T23:09:38.334Z",
   "entries": [
     {
       "toolDir": "tools/ai-tool-generator",
@@ -12,6 +12,10 @@
     {
       "toolDir": "tools/code-reviewer",
       "metaPath": "tools/code-reviewer/config.json"
+    },
+    {
+      "toolDir": "tools/color-palette",
+      "metaPath": "tools/color-palette/config.json"
     },
     {
       "toolDir": "tools/context-packager",
@@ -54,6 +58,10 @@
       "metaPath": "tools/engine/fruit-yield-engine/config.json"
     },
     {
+      "toolDir": "tools/engine/grid-evolution",
+      "metaPath": "tools/engine/grid-evolution/config.json"
+    },
+    {
       "toolDir": "tools/engine/growth-milestone-engine",
       "metaPath": "tools/engine/growth-milestone-engine/config.json"
     },
@@ -68,6 +76,14 @@
     {
       "toolDir": "tools/engine/layer1-swipe-crucible",
       "metaPath": "tools/engine/layer1-swipe-crucible/config.json"
+    },
+    {
+      "toolDir": "tools/engine/market-dynamics",
+      "metaPath": "tools/engine/market-dynamics/config.json"
+    },
+    {
+      "toolDir": "tools/engine/meeting-cost-calculator",
+      "metaPath": "tools/engine/meeting-cost-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/meta-health-dashboard",
@@ -126,12 +142,20 @@
       "metaPath": "tools/engine/thirty-day-promotion-engine/config.json"
     },
     {
+      "toolDir": "tools/engine/traffic-router",
+      "metaPath": "tools/engine/traffic-router/config.json"
+    },
+    {
       "toolDir": "tools/engine/trunk-growth-calculator",
       "metaPath": "tools/engine/trunk-growth-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/trust-score-engine",
       "metaPath": "tools/engine/trust-score-engine/config.json"
+    },
+    {
+      "toolDir": "tools/engine/typography-scale-calculator",
+      "metaPath": "tools/engine/typography-scale-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/wave1-simulation-runner",
@@ -162,8 +186,16 @@
       "metaPath": "tools/idea-remixer/config.json"
     },
     {
+      "toolDir": "tools/json-formatter",
+      "metaPath": "tools/json-formatter/config.json"
+    },
+    {
       "toolDir": "tools/output-evaluator",
       "metaPath": "tools/output-evaluator/config.json"
+    },
+    {
+      "toolDir": "tools/pomodoro",
+      "metaPath": "tools/pomodoro/config.json"
     },
     {
       "toolDir": "tools/prompt-compare",
@@ -174,8 +206,16 @@
       "metaPath": "tools/promptalchemy/config.json"
     },
     {
+      "toolDir": "tools/regex-tester",
+      "metaPath": "tools/regex-tester/config.json"
+    },
+    {
       "toolDir": "tools/repo-improvement-brief",
       "metaPath": "tools/repo-improvement-brief/config.json"
+    },
+    {
+      "toolDir": "tools/revenue-forecaster",
+      "metaPath": "tools/revenue-forecaster/config.json"
     },
     {
       "toolDir": "tools/script-generator",
@@ -204,26 +244,6 @@
     {
       "toolDir": "tools/workflow-template-gallery",
       "metaPath": "tools/workflow-template-gallery/config.json"
-    },
-    {
-      "toolDir": "tools/engine/grid-evolution",
-      "metaPath": "tools/engine/grid-evolution/config.json"
-    },
-    {
-      "toolDir": "tools/engine/market-dynamics",
-      "metaPath": "tools/engine/market-dynamics/config.json"
-    },
-    {
-      "toolDir": "tools/engine/traffic-router",
-      "metaPath": "tools/engine/traffic-router/config.json"
-    },
-    {
-      "toolDir": "tools/engine/typography-scale-calculator",
-      "metaPath": "tools/engine/typography-scale-calculator/config.json"
-    },
-    {
-      "toolDir": "tools/engine/meeting-cost-calculator",
-      "metaPath": "tools/engine/meeting-cost-calculator/config.json"
     }
   ]
 }
