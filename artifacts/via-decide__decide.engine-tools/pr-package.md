@@ -1,3 +1,9 @@
+Branch: simba/create-retention-funnel-tracker-tool-in-toolseng
+Title: Create retention-funnel-tracker tool in tools/engine/retention-funnel...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working retention-funnel-tracker tool to analyze player lifecycle bottlenecks
 Branch: simba/create-abuse-detection-dashboard-tool-in-toolsen
 Title: Create abuse-detection-dashboard tool in tools/engine/abuse-detection...
 

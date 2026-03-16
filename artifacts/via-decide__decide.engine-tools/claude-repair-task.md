@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Create retention-funnel-tracker tool in tools/engine/retention-funnel-tracker/ with config.json, index.html, tool.js. Admin analytics tool visualizing player drop-off rates from signup → first quest → first harvest → first promotion. Vanilla JS, standalone data visualization.
 Create abuse-detection-dashboard tool in tools/engine/abuse-detection-dashboard/ with config.json, index.html, tool.js. Admin tool to flag suspicious behavior, such as rapid low-quality fruit generation, unnatural peer validation rings (collusion), and spam seeds. Vanilla JS, standalone admin UI.
 Create progress-timeline-viz tool in tools/engine/progress-timeline-viz/ with config.json, index.html, tool.js. Renders a chronological visual history of a player's farm, showing trunk growth, branch unlocks, and major harvest events over time. Vanilla JS, standalone charting interface.
 Add employer-job-posting tool in tools/engine/employer-job-posting/ with config.json, index.html, tool.js. Interface for recruiters to define market opportunities, specifying required root fundamentals, branch specializations, and minimum trust scores. Stores postings in local state. Vanilla JS.
