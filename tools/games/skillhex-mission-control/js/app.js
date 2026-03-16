@@ -26,6 +26,31 @@ function renderCycle(latestResult = '') {
   updateLeaderboard(syncLeaderboard(window.SkillHex.state));
   saveState(window.SkillHex.state);
 
+  const prev = window.SkillHex._lastSyncedScore || 0;
+  const delta = window.SkillHex.state.score - prev;
+  if (delta > 0 && window.VDWallet) {
+    VDWallet.earn('missionXP', delta, 'skillhex');
+    if (Math.floor(window.SkillHex.state.score / 100) > Math.floor(prev / 100)) {
+      VDWallet.earn('focusDrops', 1, 'skillhex-milestone');
+    }
+    window.SkillHex._lastSyncedScore = window.SkillHex.state.score;
+  }
+
+  if (window.ToolStorage) {
+    ToolStorage.set('skillhex', 'session', {
+      score: window.SkillHex.state.score,
+      phase: window.SkillHex.state.phase
+    });
+  }
+
+  if (window.ToolBridge) {
+    ToolBridge.sendContext('skillhex-mission-control', 'eco-engine-test', {
+      game: 'skillhex',
+      score: window.SkillHex.state.score,
+      missionXP: window.VDWallet ? VDWallet.balance('missionXP') : 0
+    });
+  }
+
   attachChoiceListeners();
 }
 
@@ -56,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.SkillHex_reset = function() {
   import('./state.js').then(({ resetState }) => {
     window.SkillHex.state = resetState();
+    window.SkillHex._lastSyncedScore = 0;
     renderCycle();
   });
 };

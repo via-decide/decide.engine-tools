@@ -5,6 +5,8 @@
     const bar = document.createElement('a');
     bar.href = (function() {
       var parts = window.location.pathname.split('/').filter(Boolean);
+    bar.href = (() => {
+      const parts = window.location.pathname.split('/').filter(Boolean);
       return parts.length > 0 ? '/' + parts[0] + '/' : '/';
     })();
     bar.dataset.vdNavFix = 'true';

@@ -756,7 +756,9 @@ function updateStats(){
  */
 function calcPoints(diff, timeTaken){
   const base = 10*diff;
-  const speed = Math.max(0, TIMER_MAX-timeTaken);
+  const speed = window.EngineUtils
+    ? EngineUtils.clamp(TIMER_MAX - timeTaken, 0, TIMER_MAX)
+    : Math.max(0, TIMER_MAX - timeTaken);
   return base + speed + streak*2;
 }
 
@@ -953,6 +955,30 @@ function showResult(){
   setText('r-tokens', tokens);
   document.getElementById('resultGrade').textContent =
     `${q_correct} hexes claimed  ·  ${Math.round(pct*100)}% map covered`;
+
+  const dropsEarned = Math.floor(score / 10);
+  const luminaEarned = streak >= 5 ? Math.floor(streak / 5) : 0;
+  if (window.VDWallet) {
+    VDWallet.earn('hexTokens', tokens, 'hexwars');
+    VDWallet.earn('focusDrops', dropsEarned, 'hexwars-score');
+    if (luminaEarned > 0) VDWallet.earn('lumina', luminaEarned, 'hexwars-streak');
+  }
+
+  const prev = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
+  if (!prev.score || score > prev.score) {
+    localStorage.setItem('hexwars-best', JSON.stringify({
+      score, tokens, elo,
+      date: new Date().toLocaleDateString()
+    }));
+  }
+
+
+  if (window.ToolBridge) {
+    ToolBridge.sendContext('hex-wars', 'eco-engine-test', {
+      game: 'hexwars', score, tokens, streak, elo,
+      dropsEarned, luminaEarned
+    });
+  }
 
   const best = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
   setText('r-best', best.score || score);

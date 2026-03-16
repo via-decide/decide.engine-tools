@@ -58,6 +58,7 @@ export function renderSection(container) {
         <a class="card" href="./tools/engine/layer1-swipe-crucible/index.html"
              style="border-color:rgba(255,202,40,.3);background:linear-gradient(135deg,rgba(255,202,40,.06),var(--bg2))">
           <div class="card-top"><span class="chip cat-engine" style="background:rgba(255,202,40,.1);color:var(--gold)">👆 Layer 1</span><span class="card-icon">👆</span></div>
+          <div class="card-top"><span class="chip cat-engine" style="background:rgba(255,202,40,.12);color:var(--gold)">👆 Layer 1</span><span class="card-icon">👆</span></div>
           <h3>Layer 1 — Swipe Crucible</h3>
           <p>Daily swipe-card sessions. Drag left/right to complete micro-tasks. 5–8 cards per session. Streak tracking.</p>
           <span class="card-link" style="color:var(--gold)">Start Session</span>
@@ -66,6 +67,7 @@ export function renderSection(container) {
         <!-- Season Engine — LIVE -->
         <a class="card" href="./tools/engine/growth-milestone-engine/index.html"
              style="border-color:rgba(82,183,86,.25);background:linear-gradient(135deg,rgba(82,183,86,.05),var(--bg2))">
+             style="border-color:rgba(82,183,86,.25);background:linear-gradient(135deg,rgba(82,183,86,.04),var(--bg2))">
           <div class="card-top"><span class="chip cat-engine" style="background:rgba(82,183,86,.1);color:var(--leaf)">🗓️ Active</span><span class="card-icon">🗓️</span></div>
           <h3>Season Engine</h3>
           <p>30-day season track. Daily weather events. Season XP tiers. Monsoon → Summer → Harvest → Winter.</p>
@@ -84,6 +86,7 @@ export function renderSection(container) {
         <a class="card" href="./tools/eco-engine-test/index.html"
              style="border-color:rgba(41,182,246,.3);background:linear-gradient(135deg,rgba(41,182,246,.06),var(--bg2))">
           <div class="card-top"><span class="chip cat-engine" style="background:rgba(41,182,246,.1);color:var(--water)">💰 Live</span><span class="card-icon">💰</span></div>
+          <div class="card-top"><span class="chip cat-engine" style="background:rgba(41,182,246,.12);color:var(--water)">💰 Live</span><span class="card-icon">💰</span></div>
           <h3>Reward Wallet</h3>
           <p>Three currencies: 🌊 Water Drops, 🌰 Orchard Coins, 💎 Harvest Gems. Earned through play, never bought.</p>
           <span class="card-link" style="color:var(--water)">Open Wallet</span>

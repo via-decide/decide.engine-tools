@@ -193,6 +193,7 @@
 
         if (head.x === food.x && head.y === food.y) {
           score += 10;
+          if (window.VDWallet) VDWallet.earn('snakeCoins', 1, 'snake-game');
           scoreEl.textContent = score;
           food = spawnFood();
         } else {
