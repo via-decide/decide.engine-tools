@@ -67,6 +67,9 @@
   <script src="../../shared/growth-stage-engine.js"></script>
   <script src="../../shared/season-engine.js"></script>
   <script src="../../shared/vd-nav-fix.js"></script>
+<script src="../../shared/tool-bridge.js"></script>
+<script src="../../shared/vd-wallet.js"></script>
+<script src="../../shared/tool-storage.js"></script>
 </head>
 <body>
   <main class="app">
@@ -76,7 +79,8 @@
           <h1 style="margin:0">Eco-Hack Engine</h1>
           <p class="muted" style="margin:4px 0 0">Unified Auth + Wallet + Plant testbed</p>
         </div>
-        <div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="auth-status" class="muted" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;">Logged out</span>
           <button id="logout-btn">Logout</button>
         </div>
       </div>
@@ -157,7 +161,7 @@
      */
     (() => {
       const SUPABASE_URL = 'https://bfocxgtlemhxfwfuhlxn.supabase.co';
-      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY_HERE';
+      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY || localStorage.getItem('eco_supabase_anon_key') || 'YOUR_ANON_KEY';
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       window.EcoDB = db;
 
@@ -170,6 +174,7 @@
       const plantLevel = document.getElementById('plant-level');
       const userEmail = document.getElementById('user-email');
       const logoutBtn = document.getElementById('logout-btn');
+      const authStatus = document.getElementById('auth-status');
       const logoutConfirm = document.getElementById('logout-confirm');
       const logoutYes = document.getElementById('logout-yes');
       const logoutCancel = document.getElementById('logout-cancel');
@@ -199,6 +204,12 @@
         return 'Something went wrong. Please try again.';
       };
 
+
+
+      if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'YOUR_ANON_KEY') {
+        authError.textContent = 'Supabase key missing. Set window.ECO_SUPABASE_ANON_KEY or localStorage eco_supabase_anon_key.';
+        logAction('Auth warning: Supabase anon key is not configured.');
+      }
 
       window.addEventListener('growth:stage_evolved', (e) => {
         logAction('🌿 Plant evolved to ' + e.detail.stage.name + '!');
@@ -649,11 +660,13 @@
         showDashboard() {
           authScreen.style.display = 'none';
           dashboard.style.display = 'block';
+          if (authStatus) authStatus.textContent = `Logged in: ${this.session?.user?.email || 'yes'}`;
         }
 
         showAuth() {
           authScreen.style.display = 'block';
           dashboard.style.display = 'none';
+          if (authStatus) authStatus.textContent = 'Logged out';
         }
       }
 
@@ -662,6 +675,30 @@
       window.WalletManager = WalletManager;
       window.PlantManager = PlantManager;
       authManager.init();
+
+      // listen for incoming game credits via ToolBridge
+      window.addEventListener('toolbridge:send', (e) => {
+        const data = e.detail?.data;
+        if (!data || !data.game) return;
+        logAction(`Game credit received from ${data.game}`);
+        if (data.dropsEarned > 0 && authManager.session) {
+          authManager.walletManager.addDrops(data.dropsEarned);
+        }
+        if (data.luminaEarned > 0 && authManager.session) {
+          authManager.walletManager.addLumina(data.luminaEarned);
+        }
+      });
+
+      // on load, check if any game sent credits while offline
+      const pending = ToolBridge.receiveContext('eco-engine-test');
+      if (pending?.data) {
+        logAction(`Pending game credits found: ${JSON.stringify(pending.data)}`);
+      }
+
+      // show VDWallet local totals in action log on load
+      const localWallet = VDWallet.get();
+      logAction(`Local wallet — Drops: ${localWallet.focusDrops}, Lumina: ${localWallet.lumina}, HexTokens: ${localWallet.hexTokens}, MissionXP: ${localWallet.missionXP}`);
+
       logAction('Eco-Hack auth system booted');
     })();
   </script>
