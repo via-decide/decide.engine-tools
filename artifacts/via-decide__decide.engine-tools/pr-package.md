@@ -1,3 +1,9 @@
+Branch: simba/add-skills-gap-analyzer-tool-in-toolsengineskill
+Title: Add skills-gap-analyzer tool in tools/engine/skills-gap-analyzer/ wit...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working skills-gap-analyzer tool that visualizes the delta between player stats and market needs
 Branch: simba/add-achievement-badge-system-tool-in-toolsengine
 Title: Add achievement-badge-system tool in tools/engine/achievement-badge-s...
 
