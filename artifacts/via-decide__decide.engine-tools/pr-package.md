@@ -1,3 +1,9 @@
+Branch: simba/add-archetype-distribution-analyzer-tool-in-tool
+Title: Add archetype-distribution-analyzer tool in tools/engine/archetype-di...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working archetype-distribution-analyzer tool that visualizes population specialization trends
 Branch: simba/add-knowledge-quiz-challenge-tool-in-toolsengine
 Title: Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-chal...
 

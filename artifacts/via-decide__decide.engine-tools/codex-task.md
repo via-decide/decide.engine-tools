@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add archetype-distribution-analyzer tool in tools/engine/archetype-distribution-analyzer/ with config.json, index.html, tool.js. Ingests player data to visualize the spread of branch specializations across the game population, helping identify meta imbalances or neglected skill trees. Vanilla JS.
 Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-challenge/ with config.json, index.html, tool.js. A mini-game testing a player's grasp of fundamentals (roots), rewarding rapid, correct answers with bonus mineral resources. Includes timer and scoring logic. Vanilla JS.
 Add speed-coding-challenge tool in tools/engine/speed-coding-challenge/ with config.json, index.html, tool.js. A timed interactive text-area puzzle simulating specialized branch work. Evaluates typing speed and basic syntax matching to generate high-quality seeds upon completion. Vanilla JS.
 Add resource-optimization-puzzle tool in tools/engine/resource-optimization-puzzle/ with config.json, index.html, tool.js. A strategic mini-game where players drag and drop limited water and minerals into a grid to maximize potential fruit yield under constrained UI parameters. Vanilla JS.
