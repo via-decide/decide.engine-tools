@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-seasonal-events-engine-tool-in-toolsenginese",
   "branch": "simba/add-weather-system-tool-in-toolsengineweather-sy",
   "branch": "simba/add-progress-timeline-visualization-tool-in-tool",
   "branch": "simba/add-daily-streak-tracker-tool-in-toolsenginedail",

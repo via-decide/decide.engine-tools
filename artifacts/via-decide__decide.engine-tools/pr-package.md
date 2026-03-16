@@ -1,3 +1,9 @@
+Branch: simba/add-seasonal-events-engine-tool-in-toolsenginese
+Title: Add seasonal-events-engine tool in tools/engine/seasonal-events-engin...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working seasonal-events-engine tool that applies temporary global modifiers to game variables
 Branch: simba/add-weather-system-tool-in-toolsengineweather-sy
 Title: Add weather-system tool in tools/engine/weather-system/ with config.j...
 
