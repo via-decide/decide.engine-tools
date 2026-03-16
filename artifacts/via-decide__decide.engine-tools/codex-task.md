@@ -5,6 +5,18 @@ MISSION
 
 CONSTRAINTS
 > Pure Vanilla JS and CSS. Responsive grid layout for the seed cards. Properly secure the route so Layer 1 players cannot bypass the grind.
+> Create branch feature/ascension-cinematic-ux. Create file shared/ascension-ux.js. Build a utility AscensionCinematic that listens for window.addEventListener('progression:layer2_unlocked', ...). When fired, dynamically inject a massive, full-screen <div> overlay with a dark, glowing purple/gold CSS background. Animate text that says "Crucible Survived. Layer 2 Unlocked: The Commons." After 4 seconds, fade out the overlay and trigger the SeedForge.forgeSeed() function automatically to grant their first seed. Commit with message "feat: add full-screen ascension cinematic UX". Push branch and open PR to main titled "Feat: Ascension Cinematic UX"
+
+CONSTRAINTS
+> Pure Vanilla JS. Generate the HTML overlay purely via JS DOM manipulation so no extra HTML files are needed. Ensure z-index is high enough to cover the OS.
+> Create branch feature/seed-forge-system. Create file shared/seed-forge.js with the code payload below. Commit with message "feat: add seed forge prestige mechanic". Push branch and open PR to main titled "Feat: Seed Forge System"
+
+CONSTRAINTS
+> Pure Vanilla JS. Generates JSON objects containing the synthesized stats. Triggers an event to wipe local plant data so the loop can begin again.
+> Create branch feature/global-progression-gate. Create file shared/progression-engine.js with the code payload below. Commit with message "feat: add global progression engine to gate Layer 2". Push branch and open PR to main titled "Feat: Global Progression Engine"
+
+CONSTRAINTS
+> Pure Vanilla JS. Do not modify other files. Ensure it correctly hooks into 'growth:stage_evolved' if the GrowthStageEngine fires it.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
