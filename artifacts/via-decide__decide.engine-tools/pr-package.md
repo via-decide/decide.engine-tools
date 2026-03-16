@@ -1,3 +1,9 @@
+Branch: simba/add-weather-system-tool-in-toolsengineweather-sy
+Title: Add weather-system tool in tools/engine/weather-system/ with config.j...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working weather-system tool that injects randomized resource variables into the daily loop
 Branch: simba/add-progress-timeline-visualization-tool-in-tool
 Title: Add progress-timeline-visualization tool in tools/engine/progress-tim...
 

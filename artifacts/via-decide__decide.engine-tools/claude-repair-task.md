@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Add weather-system tool in tools/engine/weather-system/ with config.json, index.html, tool.js. Simulates external randomized factors introducing daily modifiers to available water and minerals, directly impacting trunk and branch growth rates. Includes UI for current weather forecast. Vanilla JS.
 Add progress-timeline-visualization tool in tools/engine/progress-timeline-visualization/ with config.json, index.html, tool.js. Renders a graphical timeline charting a player's historical growth from initial roots to harvested fruits and market promotions over time. Vanilla JS using Canvas or DOM elements.
 Add daily-streak-tracker tool in tools/engine/daily-streak-tracker/ with config.json, index.html, tool.js. Monitors continuous player logins and quest completions, calculating multipliers for consistency (water/energy accumulation). Includes visual calendar widget. Vanilla JS.
 Add admin-moderation-panel tool in tools/engine/admin-moderation-panel/ with config.json, index.html, tool.js. Provides Game Masters with an interface to review flagged content, adjust trust scores, override ranks, and manage the overall health of the engine. Vanilla JS.
