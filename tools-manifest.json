@@ -204,6 +204,26 @@
     {
       "toolDir": "tools/workflow-template-gallery",
       "metaPath": "tools/workflow-template-gallery/config.json"
+    },
+    {
+      "toolDir": "tools/engine/grid-evolution",
+      "metaPath": "tools/engine/grid-evolution/config.json"
+    },
+    {
+      "toolDir": "tools/engine/market-dynamics",
+      "metaPath": "tools/engine/market-dynamics/config.json"
+    },
+    {
+      "toolDir": "tools/engine/traffic-router",
+      "metaPath": "tools/engine/traffic-router/config.json"
+    },
+    {
+      "toolDir": "tools/engine/typography-scale-calculator",
+      "metaPath": "tools/engine/typography-scale-calculator/config.json"
+    },
+    {
+      "toolDir": "tools/engine/meeting-cost-calculator",
+      "metaPath": "tools/engine/meeting-cost-calculator/config.json"
     }
   ]
 }

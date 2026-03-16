@@ -195,6 +195,11 @@
     }
     .card-link::after {content:'→'}
     .card:hover .card-link {gap:10px}
+    .card.is-coming-soon {opacity:.86; border-style:dashed; border-color:rgba(245,158,11,.35); cursor:default; transform:none;}
+    .card.is-coming-soon:hover {transform:none; border-color:rgba(245,158,11,.5); box-shadow:none;}
+    .card .chip.soon-chip {background:rgba(245,158,11,.15); color:#f59e0b; border-color:rgba(245,158,11,.4);}
+    .card.is-coming-soon .card-link {color:#f59e0b;}
+    .card.is-coming-soon .card-link::after {content:'';}
 
     /* Grid Animation */
     .grid-anim-enter { animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
@@ -428,15 +433,15 @@
           <p>Structure your research process — define your question, organise sources, and build your summary.</p>
           <span class="card-link">Launch Tool</span>
         </div>
-        <div class="card" onclick="App.openTool('Multi-Source Research')">
+        <div class="card" onclick="App.openTool('Multi-Source Synthesizer')">
           <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
-          <h3>Multi-Source Research</h3>
+          <h3>Multi-Source Synthesizer</h3>
           <p>Synthesise findings from multiple sources into one coherent, structured research output.</p>
           <span class="card-link">Launch Tool</span>
         </div>
-        <div class="card" onclick="App.openTool('Interview Prep')">
+        <div class="card" onclick="App.openTool('Interview Prep Framework')">
           <div class="card-top"><span class="chip c-education">Career</span><span class="card-icon">🎯</span></div>
-          <h3>Interview Prep</h3>
+          <h3>Interview Prep Framework</h3>
           <p>Build structured answers for any interview question — behavioural, technical, or case-based.</p>
           <span class="card-link">Launch Tool</span>
         </div>
@@ -730,6 +735,11 @@ const ROUTE_ALIASES = {
 
     // ── Business tools (confirmed closest real equivalent) ──
     'revenue forecaster':                'tools/engine/growth-milestone-engine/index.html',
+    'typography scale calculator':        'tools/engine/typography-scale-calculator/index.html',
+    'meeting cost calculator':            'tools/engine/meeting-cost-calculator/index.html',
+    'grid evolution':                     'tools/engine/grid-evolution/index.html',
+    'market dynamics':                    'tools/engine/market-dynamics/index.html',
+    'traffic router':                     'tools/engine/traffic-router/index.html',
 
     // ── Meta ──
     'github repo':                       'https://github.com/via-decide/decide.engine-tools',
@@ -741,8 +751,6 @@ const ROUTE_ALIASES = {
     // 'regex tester'                   ← removed: was pointing to code-reviewer
     // 'meeting cost calculator'        ← removed: was pointing to meta-health-dashboard
     // 'pomodoro timer'                 ← removed: was pointing to daily-quest-generator
-    // 'traffic router'                 ← removed: was pointing to tool-router (system nav utility)
-    // 'market dynamics'                ← removed: was pointing to fair-ranking-engine
 };
 
 const ToolCatalog = {
@@ -860,16 +868,23 @@ const App = {
             const label = LABEL_MAP[t.cat] || t.cat;
             const delay = (index * 0.04) > 0.5 ? 0 : index * 0.04;
             const engineBorder = t.engine ? 'is-engine' : '';
+            const hasRoute = Boolean(ToolCatalog.resolveEntry(t.name));
+            const isComingSoon = !hasRoute;
+            const cardClass = `${engineBorder} ${isComingSoon ? 'is-coming-soon' : ''}`.trim();
+            const cardAction = isComingSoon ? '' : `onclick="App.openTool(${JSON.stringify(t.name)})"`;
+            const chipMarkup = isComingSoon
+              ? `<span class="chip soon-chip">Coming Soon</span>`
+              : `<span class="chip ${chipClass}">${label}</span>`;
 
             return `
-            <div class="card grid-anim-enter ${engineBorder}" style="animation-delay: ${delay}s" onclick="App.openTool(${JSON.stringify(t.name)})">
+            <div class="card grid-anim-enter ${cardClass}" style="animation-delay: ${delay}s" ${cardAction}>
                 <div class="card-top">
-                    <span class="chip ${chipClass}">${label}</span>
+                    ${chipMarkup}
                     <span class="card-icon">${t.icon}</span>
                 </div>
                 <h3>${t.name}</h3>
                 <p>${t.desc}</p>
-                <span class="card-link">Launch</span>
+                <span class="card-link">${isComingSoon ? 'In Development' : 'Launch'}</span>
             </div>`;
         }).join('');
 
