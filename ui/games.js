@@ -50,7 +50,7 @@
           <span class="mpill">🎯 Mission Objectives</span>
         </div>
         <div class="btn-row mars-link-wrap">
-          <a class="btn btn-mars" href="https://via-decide.github.io/mars-decision-lab/" target="_blank" rel="noopener">Launch Game →</a>
+          <a class="btn btn-mars" href="./mars.html">Launch Game →</a>
         </div>
       </div>
       <div class="mars-visual">

@@ -243,6 +243,13 @@
 
   </style>
   <script src="../../../shared/vd-nav-fix.js"></script>
+<script src="../../../shared/vd-wallet.js"></script>
+<script src="../../../shared/engine-utils.js"></script>
+<script src="../../../shared/engine-models.js"></script>
+<script src="../../../shared/simulation-utils.js"></script>
+<script src="../../../shared/engine-balance.js"></script>
+<script src="../../../shared/tool-bridge.js"></script>
+<script src="../../../shared/tool-storage.js"></script>
   <script src="../../../shared/vd-wallet.js"></script>
   <script src="../../../shared/engine-utils.js"></script>
   <script src="../../../shared/engine-models.js"></script>
@@ -688,6 +695,7 @@
         state.credits += 12;
         state.rootStrength += finalG;
         if (window.VDWallet) VDWallet.earn('focusDrops', Math.floor(finalG / 10), 'growth-engine');
+        if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(finalG);
         if (window.GrowthStageEngine) GrowthStageEngine.addXP(finalG);
         if (window.ToolStorage) ToolStorage.set('growth-engine', 'state', { xp: state.rootStrength, stage: state.currentStageIndex });
         state.water -= 5;

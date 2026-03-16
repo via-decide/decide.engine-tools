@@ -309,6 +309,7 @@
       VDWallet.earn('focusDrops', Math.floor(dailyXP / 5), 'swipe-session');
       if (state.currentStreak >= 3) VDWallet.earn('lumina', 1, 'swipe-streak');
     }
+    if (window.GrowthStageEngine) window.GrowthStageEngine.addXP(dailyXP);
     if (window.GrowthStageEngine) GrowthStageEngine.addXP(dailyXP);
     if (window.ToolBridge) {
       ToolBridge.sendContext('layer1-swipe-crucible', 'growth-milestone-engine', {

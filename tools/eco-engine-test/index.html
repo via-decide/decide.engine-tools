@@ -79,7 +79,8 @@
           <h1 style="margin:0">Eco-Hack Engine</h1>
           <p class="muted" style="margin:4px 0 0">Unified Auth + Wallet + Plant testbed</p>
         </div>
-        <div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="auth-status" class="muted" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:999px;">Logged out</span>
           <button id="logout-btn">Logout</button>
         </div>
       </div>
@@ -160,6 +161,7 @@
      */
     (() => {
       const SUPABASE_URL = 'https://bfocxgtlemhxfwfuhlxn.supabase.co';
+      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY || localStorage.getItem('eco_supabase_anon_key') || 'YOUR_ANON_KEY';
       const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY';
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       window.EcoDB = db;
@@ -173,6 +175,7 @@
       const plantLevel = document.getElementById('plant-level');
       const userEmail = document.getElementById('user-email');
       const logoutBtn = document.getElementById('logout-btn');
+      const authStatus = document.getElementById('auth-status');
       const logoutConfirm = document.getElementById('logout-confirm');
       const logoutYes = document.getElementById('logout-yes');
       const logoutCancel = document.getElementById('logout-cancel');
@@ -202,6 +205,12 @@
         return 'Something went wrong. Please try again.';
       };
 
+
+
+      if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'YOUR_ANON_KEY') {
+        authError.textContent = 'Supabase key missing. Set window.ECO_SUPABASE_ANON_KEY or localStorage eco_supabase_anon_key.';
+        logAction('Auth warning: Supabase anon key is not configured.');
+      }
 
       window.addEventListener('growth:stage_evolved', (e) => {
         logAction('🌿 Plant evolved to ' + e.detail.stage.name + '!');
@@ -652,11 +661,13 @@
         showDashboard() {
           authScreen.style.display = 'none';
           dashboard.style.display = 'block';
+          if (authStatus) authStatus.textContent = `Logged in: ${this.session?.user?.email || 'yes'}`;
         }
 
         showAuth() {
           authScreen.style.display = 'block';
           dashboard.style.display = 'none';
+          if (authStatus) authStatus.textContent = 'Logged out';
         }
       }
 
