@@ -13,6 +13,42 @@
   <header id="shell-header"></header>
   <main id="app"></main>
   <div id="shell-footer"></div>
+  <div id="toast"><span id="toast-msg"></span></div>
   <script type="module" src="./ui/main-ui.js"></script>
+  <script>
+    const App = {
+      openTool(name) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-msg').innerText = `Booting ${name} module...`;
+        toast.classList.add('show');
+
+        // Route Dictionary
+        const toolRoutes = {
+          'Mars Colony': 'https://via-decide.github.io/mars-decision-lab/',
+          'Orchard Sim': './tools/orchard-game/index.html',
+          'Grid Evolution': './tools/grid-evolution/index.html',
+          'Market Dynamics': './tools/market-dynamics/index.html',
+          'Traffic Router': './tools/traffic-router/index.html',
+          'Student Research': './student-research/index.html',
+          'Multi-Source Synthesizer': './multi-source-research-explained/index.html',
+          'Interview Prep Framework': './interview-prep/index.html'
+        };
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+          if (toolRoutes[name]) {
+            window.location.href = toolRoutes[name];
+          } else {
+            console.warn(`Route for "${name}" not found in dictionary.`);
+            document.getElementById('toast-msg').innerText = 'Module offline or missing.';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+          }
+        }, 1200);
+      }
+    };
+
+    window.App = App;
+  </script>
 </body>
 </html>
