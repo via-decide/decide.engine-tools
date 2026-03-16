@@ -5,6 +5,10 @@ MISSION
 
 CONSTRAINTS
 > Pure Vanilla JS. Generates JSON objects containing the synthesized stats. Triggers an event to wipe local plant data so the loop can begin again.
+> Create branch feature/global-progression-gate. Create file shared/progression-engine.js with the code payload below. Commit with message "feat: add global progression engine to gate Layer 2". Push branch and open PR to main titled "Feat: Global Progression Engine"
+
+CONSTRAINTS
+> Pure Vanilla JS. Do not modify other files. Ensure it correctly hooks into 'growth:stage_evolved' if the GrowthStageEngine fires it.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
