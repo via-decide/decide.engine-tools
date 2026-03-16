@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-branch-featureascension-cinematic-ux-crea",
   "branch": "simba/create-branch-featureseed-forge-system-create-fi",
   "branch": "simba/create-branch-featureglobal-progression-gate-cre",
   "files_to_create": [
