@@ -405,6 +405,7 @@
         <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 12px;">Quick Actions</div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
             <button class="sidebar-nav-btn" onclick="Sidebar.action('search')"><span>✨ Open Orb Search</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="window.location.href='./ui/studyos.html'"><span>📘 Study OS</span><span>›</span></button>
             <button class="sidebar-nav-btn" onclick="window.open('https://github.com/via-decide/decide.engine-tools', '_blank')"><span>⭐ GitHub Repo</span><span>›</span></button>
         </div>
     </div>
@@ -426,6 +427,7 @@
       <a class="nl" href="#research" data-s="research">Research</a>
       <a class="nl" href="#all" data-s="all">All Tools</a>
       <a class="nl" href="#games" data-s="games">Games</a>
+      <a class="nl" href="./ui/studyos.html" data-s="studyos">Study OS</a>
     </div>
   </div>
 </nav>
@@ -704,19 +706,19 @@ const ROUTE_ALIASES = {
     'workflow gallery':                  'tools/workflow-template-gallery/index.html',
     'context packager':                  'tools/context-packager/index.html', 
     'color palette generator':           'tools/color-palette/index.html',
-    'typography scale calculator':       'tools/typography-scale/index.html',
+    'typography scale calculator':       'tools/engine/typography-scale-calculator/index.html',
     'json formatter':                    'tools/json-formatter/index.html',
     'regex tester':                      'tools/regex-tester/index.html',
     'revenue forecaster':                'tools/revenue-forecaster/index.html',
-    'meeting cost calculator':           'tools/meeting-cost/index.html',
+    'meeting cost calculator':           'tools/engine/meeting-cost-calculator/index.html',
     'pomodoro timer':                    'tools/pomodoro/index.html',
     
     // Repaired explicit local routes for Games
-    'mars colony':                       'tools/mars-colony/index.html',
-    'orchard sim':                       'tools/orchard-game/index.html',
-    'grid evolution':                    'tools/grid-evolution/index.html',
-    'market dynamics':                   'tools/market-dynamics/index.html',
-    'traffic router':                    'tools/traffic-router/index.html',
+    'mars colony':                       'mars.html',
+    'orchard sim':                       'tools/eco-engine-test/index.html',
+    'grid evolution':                    'tools/engine/grid-evolution/index.html',
+    'market dynamics':                   'tools/engine/market-dynamics/index.html',
+    'traffic router':                    'tools/engine/traffic-router/index.html',
     
     'github repo':                       'https://github.com/via-decide/decide.engine-tools',
 };
