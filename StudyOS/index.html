@@ -49,13 +49,12 @@
             -webkit-touch-callout: none;
         }
 
-        /* 🚀 FIX: Prevent mobile word-breaking glitches on buttons */
         .break-normal-word {
             word-break: normal !important;
             overflow-wrap: break-word !important;
             white-space: normal !important;
             line-height: 1.4 !important;
-            user-select: auto !important; /* Prevents translation engines from glitching the layout */
+            user-select: auto !important;
             -webkit-user-select: auto !important;
         }
 
@@ -149,11 +148,41 @@
 
         .chart-box { position: relative; width: 100%; height: 260px; }
         .chip {font-size:.7rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:6px;white-space:nowrap; background:var(--bg4); border:1px solid var(--border2); color:var(--text);}
-        .check-item { cursor: pointer; user-select: none; display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); transition: all 0.2s;}
+
+        /* ── FIX 1: check-item no longer shifts layout on mobile ─────────────────
+           Removed padding-left change from hover (it shifts content inside
+           overflow:hidden containers, clipping the last 2 items on mobile).
+           Hover effects are now desktop-only via @media (hover:hover).
+           On touch devices items just show a gentle background tint on :active. */
+        .check-item {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 4px;                   /* uniform left/right – no more shift */
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s, border-color 0.2s;
+        }
         .check-item:last-child { border-bottom: none; }
-        .check-item:hover { background: var(--bg); padding-left: 8px; border-radius: 6px; border-bottom-color: transparent;}
-        .check-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; accent-color: var(--leaf); }
+
+        /* Desktop hover – safe because pointer:fine never sticks on touch */
+        @media (hover: hover) and (pointer: fine) {
+            .check-item:hover {
+                background: var(--bg);
+                border-radius: 6px;
+                border-bottom-color: transparent;
+                /* use transform instead of padding to avoid layout reflow */
+                transform: translateX(4px);
+            }
+        }
+
+        /* Touch tap feedback – no layout change */
+        .check-item:active { background: rgba(82,183,86,0.06); border-radius: 6px; }
+
+        .check-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; accent-color: var(--leaf); flex-shrink: 0; }
         .check-item input:checked + span { text-decoration: line-through; color: var(--muted); }
+
         .progress-track { width: 100%; background-color: var(--bg); height: 8px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
         .progress-fill { height: 100%; background-color: var(--leaf); width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
@@ -241,7 +270,20 @@
             .desktop-search{display:none !important;}
         }
 
-        /* 🚀 FIX: KINETIC SCROLLING BUG */
+        /* ── FIX 2: checklist wrapper – no more overflow:hidden clipping ──────────
+           overflow:hidden + border-radius was rounding off the bottom corners of
+           the last checklist items, visually cutting them on small screens.
+           Replaced with overflow:visible + explicit border-radius on items. */
+        .checklist-wrap {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0 12px;
+            /* overflow visible so rounded corners can't clip child content */
+            overflow: visible;
+        }
+
+        /* ── KINETIC SCROLLING ───────────────────────────────────────────────── */
         #k-stack-container {
             position:relative; width:100%; height:450px; margin:10px auto; perspective:1500px; 
             display:flex; align-items:center; justify-content:center; overflow:hidden;
@@ -576,7 +618,6 @@
 </div>
 
 <script>
-// 🚀 ADDED: General Knowledge to Onboarding Engine Dictionary
 const Dictionary = {
     "UPSC": ["Prelims", "Mains", "Optional", "Interview"],
     "Programming": ["Frontend", "Backend", "Fullstack", "DevOps"],
@@ -630,7 +671,6 @@ const Utils = {
     }
 };
 
-// 🚀 BACON UPDATED: Added General Knowledge generator parameters
 const DataGenerator = {
     build(category, subject) {
         let syllabus = []; let missions = []; let vault = {};
@@ -1082,6 +1122,7 @@ window.StudyEngine = {
             const pct = total ? Math.round((checked / total) * 100) : 0;
             const delBtn = sub.isCustom ? `<button onclick="StudyEngine.del('${sub.id}')" class="text-[var(--rose)] text-sm font-bold">X</button>` : "";
 
+            /* ── FIX: checklist wrapper uses .checklist-wrap (no overflow:hidden, no rounded+clip) */
             card.innerHTML = `
                 <div class="flex justify-between items-center mb-4">
                     <h4 class="text-lg">${sub.isCustom ? '&#128196; ' : ''}${Utils.esc(sub.title)}</h4>
@@ -1093,7 +1134,7 @@ window.StudyEngine = {
                 <div class="progress-track mb-5">
                     <div class="progress-fill" style="width: ${pct}%; ${sub.isCustom ? 'background:var(--water);' : ''}"></div>
                 </div>
-                <div class="bg-[var(--bg3)] border border-[var(--border)] rounded-lg overflow-hidden px-3">${html}</div>
+                <div class="checklist-wrap">${html}</div>
             `;
             container.appendChild(card);
         });
@@ -1253,7 +1294,6 @@ window.Vault = {
     }
 };
 
-/* 🚀 FIX: CONTEXT-AWARE PYQ SIMULATOR (The "Bacon") */
 const PYQDatabases = {
     "UPSC": [
         { year: "2023", q: "Which of the following is an essential feature of a federal constitution?", opts: ["Written Constitution", "Single Citizenship", "Flexible Constitution", "Integrated Judiciary"], ans: 0, exp: "A written constitution is essential for a federal structure to clearly delineate powers between the center and states." },
@@ -1276,7 +1316,6 @@ window.PYQ = {
         const cat = AppStore.config?.category || "Default";
         if (PYQDatabases[cat]) return PYQDatabases[cat];
         
-        // Fallback dynamic generator
         const subject = AppStore.config?.subject || 'this subject';
         return [
             { year: "2026", q: `What is the core principle of mastering ${subject}?`, opts: ["Memorization", "Consistent practice and review", "Skipping fundamentals", "Passive reading"], ans: 1, exp: "Active recall and consistent practice are scientifically proven to be the most effective learning methods." },
@@ -1293,7 +1332,6 @@ window.PYQ = {
 
         const optEl = document.getElementById("pyq-options"); optEl.innerHTML = "";
         q.opts.forEach((o, i) => {
-            /* 🚀 FIX: break-normal-word class applied here to stop Google Webview translations from breaking words */
             optEl.innerHTML += `<button type="button" onclick="PYQ.guess(${i})" class="break-normal-word w-full text-left p-5 border border-[var(--border)] bg-[var(--bg3)] text-[var(--text)] rounded-xl font-semibold text-lg hover:border-[var(--water)] transition-colors mb-3 shadow-sm">${Utils.esc(o)}</button>`;
         });
 
@@ -1451,7 +1489,6 @@ window.Orb = {
     }
 };
 
-/* 🚀 FIX: CONTEXT-AWARE KINETIC ENGINE (The "Bacon" Router) */
 const KineticDatabases = {
     "General Knowledge": [
         { "Question_ID": "GK_001", "Question_Text": "Which global organization publishes the annual 'World Economic Outlook' report?", "Correct_Answer": "International Monetary Fund (IMF)", "Distractor_1": "World Bank", "Distractor_2": "World Economic Forum", "Explanation_Short": "The IMF publishes the WEO twice a year to project global growth." },
@@ -1615,7 +1652,6 @@ window.KineticEngine = {
     renderCard(text, labels, callback, isSensors = true) {
         this.stackEl.innerHTML = "";
         const el = document.createElement("div"); el.className = "k-card";
-        /* 🚀 FIX: break-normal-word class applied here */
         el.innerHTML = `
             <div class="k-card-q break-normal-word">${chemText(text).replace(/\n/g,"<br>")}</div>
             <div class="k-swipe-label sl-up">${chemText(labels.up)||""}</div>
@@ -1735,5 +1771,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-
-
