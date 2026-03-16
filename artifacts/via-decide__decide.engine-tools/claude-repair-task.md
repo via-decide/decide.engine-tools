@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+> Create branch feature/seed-forge-system. Create file shared/seed-forge.js with the code payload below. Commit with message "feat: add seed forge prestige mechanic". Push branch and open PR to main titled "Feat: Seed Forge System"
 > Create branch feature/global-progression-gate. Create file shared/progression-engine.js with the code payload below. Commit with message "feat: add global progression engine to gate Layer 2". Push branch and open PR to main titled "Feat: Global Progression Engine"
 
 RULES

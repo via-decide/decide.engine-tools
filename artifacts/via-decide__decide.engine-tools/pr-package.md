@@ -1,3 +1,9 @@
+Branch: simba/create-branch-featureseed-forge-system-create-fi
+Title: > Create branch feature/seed-forge-system. Create file shared/seed-fo...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: > The core prestige mechanic that makes the 30-day grind infinitely replayable by granting permanent collectible rewards. /end_task
 Branch: simba/create-branch-featureglobal-progression-gate-cre
 Title: > Create branch feature/global-progression-gate. Create file shared/p...
 

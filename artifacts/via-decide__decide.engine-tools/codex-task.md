@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+> Create branch feature/seed-forge-system. Create file shared/seed-forge.js with the code payload below. Commit with message "feat: add seed forge prestige mechanic". Push branch and open PR to main titled "Feat: Seed Forge System"
+
+CONSTRAINTS
+> Pure Vanilla JS. Generates JSON objects containing the synthesized stats. Triggers an event to wipe local plant data so the loop can begin again.
 > Create branch feature/global-progression-gate. Create file shared/progression-engine.js with the code payload below. Commit with message "feat: add global progression engine to gate Layer 2". Push branch and open PR to main titled "Feat: Global Progression Engine"
 
 CONSTRAINTS
