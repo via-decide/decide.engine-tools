@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-called-puzzle-generato
+Title: Add a new standalone tool called puzzle-generator in tools/games/puzz...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working puzzle-generator tool with config.json, index.html, tool.js, registered and routed.
 Branch: simba/add-a-new-standalone-tool-called-typing-speed-in
 Title: Add a new standalone tool called typing-speed in tools/games/typing-s...
 
