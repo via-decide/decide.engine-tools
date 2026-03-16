@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create abuse-detection-dashboard tool in tools/engine/abuse-detection-dashboard/ with config.json, index.html, tool.js. Admin tool to flag suspicious behavior, such as rapid low-quality fruit generation, unnatural peer validation rings (collusion), and spam seeds. Vanilla JS, standalone admin UI.
 Create progress-timeline-viz tool in tools/engine/progress-timeline-viz/ with config.json, index.html, tool.js. Renders a chronological visual history of a player's farm, showing trunk growth, branch unlocks, and major harvest events over time. Vanilla JS, standalone charting interface.
 Add employer-job-posting tool in tools/engine/employer-job-posting/ with config.json, index.html, tool.js. Interface for recruiters to define market opportunities, specifying required root fundamentals, branch specializations, and minimum trust scores. Stores postings in local state. Vanilla JS.
 Add skills-gap-analyzer tool in tools/engine/skills-gap-analyzer/ with config.json, index.html, tool.js. Compares a player's current orchard profile against the requirements of specific employer job postings. Highlights deficient branches or roots visually. Vanilla JS.

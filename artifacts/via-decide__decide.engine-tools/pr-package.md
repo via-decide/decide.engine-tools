@@ -1,3 +1,9 @@
+Branch: simba/create-abuse-detection-dashboard-tool-in-toolsen
+Title: Create abuse-detection-dashboard tool in tools/engine/abuse-detection...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working abuse-detection-dashboard tool for monitoring and maintaining game integrity
 Branch: simba/create-progress-timeline-viz-tool-in-toolsengine
 Title: Create progress-timeline-viz tool in tools/engine/progress-timeline-v...
 
