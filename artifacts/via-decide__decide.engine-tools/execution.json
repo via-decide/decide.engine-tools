@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-progress-timeline-viz-tool-in-toolsengine",
   "branch": "simba/add-employer-job-posting-tool-in-toolsengineempl",
   "branch": "simba/add-skills-gap-analyzer-tool-in-toolsengineskill",
   "branch": "simba/add-achievement-badge-system-tool-in-toolsengine",
