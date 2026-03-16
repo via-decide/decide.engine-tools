@@ -62,11 +62,11 @@
     #action-log { max-height: 220px; overflow: auto; font-size: 13px; line-height: 1.45; }
     .muted { color: var(--muted); }
   </style>
-  <script src="../../shared/vd-nav-fix.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../../shared/reward-wallet.js"></script>
   <script src="../../shared/growth-stage-engine.js"></script>
   <script src="../../shared/season-engine.js"></script>
+  <script src="../../shared/vd-nav-fix.js"></script>
 </head>
 <body>
   <main class="app">
@@ -230,21 +230,98 @@
         button.innerHTML = isLoading ? `<span class="spinner"></span>${loadingText}` : button.dataset.defaultText;
       };
 
+
+      const VDWallet = {
+        KEY: 'vd_wallet',
+        get() {
+          try {
+            return JSON.parse(localStorage.getItem(this.KEY)) || this._default();
+          } catch (_err) {
+            return this._default();
+          }
+        },
+        _default() {
+          return { focusDrops: 0, lumina: 0, hexTokens: 0, missionXP: 0, totalEarned: 0, lastUpdated: '' };
+        },
+        save(w) {
+          w.lastUpdated = new Date().toISOString();
+          localStorage.setItem(this.KEY, JSON.stringify(w));
+        },
+        earn(field, amount, source) {
+          const w = this.get();
+          w[field] = (w[field] || 0) + amount;
+          w.totalEarned = (w.totalEarned || 0) + amount;
+          this.save(w);
+          console.log(`[VDWallet] +${amount} ${field} from ${source}`);
+          return w;
+        }
+      };
+
       class WalletManager {
         constructor() {
           this.pendingWrites = 0;
         }
 
         async fetchWallet() {
-          walletValue.textContent = '125 🌿';
-          logAction('Wallet loaded');
+          try {
+            const userId = authManager?.session?.user?.id;
+            if (userId) {
+              const { data, error } = await db
+                .from('users')
+                .select('focusDrops, lumina')
+                .eq('id', userId)
+                .single();
+              if (!error && data) {
+                walletValue.textContent = `${data.focusDrops || 0} 💧 · ${data.lumina || 0} ☀️`;
+                logAction(`Wallet: ${data.focusDrops || 0} Drops, ${data.lumina || 0} Lumina`);
+                return;
+              }
+            }
+          } catch (_err) {}
+
+          const w = VDWallet.get();
+          walletValue.textContent = `${w.focusDrops} 💧 · ${w.lumina} ☀️`;
+          logAction(`Wallet (local): ${w.focusDrops} Drops, ${w.lumina} Lumina`);
         }
 
         async addDrops(amount) {
-          const next = `${125 + Number(amount || 0)} 🌿`;
-          walletValue.textContent = next;
-          logAction(`Wallet credited +${amount} drops`);
-          if (window.RewardWallet) window.RewardWallet.earn('drops', amount, 'eco_engine');
+          this.pendingWrites++;
+          VDWallet.earn('focusDrops', amount, 'eco-engine');
+          try {
+            const userId = authManager?.session?.user?.id;
+            if (userId) {
+              const { data } = await db
+                .from('users').select('focusDrops').eq('id', userId).single();
+              if (data) {
+                await db.from('users')
+                  .update({ focusDrops: (data.focusDrops || 0) + amount })
+                  .eq('id', userId);
+              }
+            }
+          } catch (_err) {}
+          this.pendingWrites--;
+          await this.fetchWallet();
+          logAction(`+${amount} Focus Drops earned`);
+        }
+
+        async addLumina(amount) {
+          this.pendingWrites++;
+          VDWallet.earn('lumina', amount, 'eco-engine');
+          try {
+            const userId = authManager?.session?.user?.id;
+            if (userId) {
+              const { data } = await db
+                .from('users').select('lumina').eq('id', userId).single();
+              if (data) {
+                await db.from('users')
+                  .update({ lumina: (data.lumina || 0) + amount })
+                  .eq('id', userId);
+              }
+            }
+          } catch (_err) {}
+          this.pendingWrites--;
+          await this.fetchWallet();
+          logAction(`+${amount} Lumina earned`);
         }
 
         hasPendingWrites() {
@@ -258,8 +335,24 @@
 
       class PlantManager {
         async loadPlant() {
-          plantLevel.textContent = '🌿 Level 3';
-          logAction('Plant loaded');
+          try {
+            const userId = authManager?.session?.user?.id;
+            if (userId) {
+              const { data, error } = await db
+                .from('users')
+                .select('plantLevel, plantHydration, lastWatered')
+                .eq('id', userId)
+                .single();
+              if (!error && data) {
+                const emojis = ['', '🌱', '🌿', '🌳', '🎋', '🌲', '🌴', '🎄', '🏔️', '🌏', '✨'];
+                plantLevel.textContent = `${emojis[data.plantLevel] || '🌱'} Level ${data.plantLevel}`;
+                logAction(`Plant: Level ${data.plantLevel}, Hydration ${data.plantHydration}%`);
+                return;
+              }
+            }
+          } catch (_err) {}
+          plantLevel.textContent = '🌱 Level 1';
+          logAction('Plant (default): Level 1');
         }
 
         async waterPlant() {
@@ -316,6 +409,18 @@
           });
         }
 
+
+        async ensureUserRow() {
+          const userId = this.session?.user?.id;
+          if (!userId) return;
+          try {
+            await db.from('users').upsert(
+              { id: userId, focusDrops: 0, lumina: 0, plantLevel: 1, plantHydration: 100 },
+              { onConflict: 'id', ignoreDuplicates: true }
+            );
+          } catch (_err) {}
+        }
+
         bindAuthState() {
           db.auth.onAuthStateChange(async (event, session) => {
             if (event === 'TOKEN_REFRESHED') {
@@ -324,6 +429,7 @@
             if (session) {
               this.session = session;
               localStorage.setItem('eco_session', JSON.stringify(session));
+              await this.ensureUserRow();
               userEmail.textContent = session.user?.email || '—';
               this.showDashboard();
               await this.walletManager.fetchWallet();
@@ -368,6 +474,7 @@
           if (data?.session) {
             this.session = data.session;
             localStorage.setItem('eco_session', JSON.stringify(data.session));
+            await this.ensureUserRow();
             userEmail.textContent = data.session.user?.email || '—';
             this.showDashboard();
             await this.walletManager.fetchWallet();
@@ -450,6 +557,7 @@
 
             this.session = data.session;
             localStorage.setItem('eco_session', JSON.stringify(data.session));
+            await this.ensureUserRow();
             if (!rememberMe.checked) {
               localStorage.setItem('eco_session_ttl', String(Date.now() + 3600000));
             } else {
@@ -491,9 +599,13 @@
 
             this.session = data.session;
             localStorage.setItem('eco_session', JSON.stringify(data.session));
+            await this.ensureUserRow();
             this.showDashboard();
             await this.walletManager.fetchWallet();
             await this.plantManager.loadPlant();
+            await this.walletManager.addDrops(25);
+            await this.walletManager.addLumina(5);
+            logAction('🎁 Welcome bonus: +25 Drops, +5 Lumina');
             logAction('Registration successful and session active');
           } catch (error) {
             authError.textContent = friendlyError(error.message || '');

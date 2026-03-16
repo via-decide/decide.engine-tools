@@ -125,7 +125,7 @@ try {
   if (window.ToolRegistry?.loadAll) {
     tools = await window.ToolRegistry.loadAll();
     const countEl = document.querySelector('.hstat-n');
-    if (countEl) countEl.textContent = tools.length;
+    if (countEl) countEl.textContent = tools.filter((t) => !t.isEngineTool).length;
     renderAll();
   }
 } catch (error) {

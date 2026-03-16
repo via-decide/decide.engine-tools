@@ -22,7 +22,21 @@ function loadState() {
 }
 
 function saveState(state) {
+  const you = state.leaderboard?.find((e) => e.name === 'You');
+  if (!you || state.score > (you.score || 0)) {
+    state.leaderboard = (state.leaderboard || [])
+      .filter((e) => e.name !== 'You')
+      .concat([{ name: 'You', score: state.score }])
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8);
+  }
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-export { STORAGE_KEY, defaultState, loadState, saveState };
+function resetState() {
+  const fresh = { ...defaultState };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
+  return fresh;
+}
+
+export { STORAGE_KEY, defaultState, loadState, saveState, resetState };

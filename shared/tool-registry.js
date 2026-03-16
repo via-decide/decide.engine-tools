@@ -95,21 +95,6 @@
     'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible'
   ];
 
-  function repoBasePath() {
-    const current = document.currentScript;
-    if (!current || !current.src) return '';
-    const marker = '/shared/tool-registry.js';
-    const idx = current.src.indexOf(marker);
-    if (idx === -1) return '';
-    return current.src.slice(0, idx + 1);
-  }
-
-  const BASE = repoBasePath();
-
-  function resolve(path) {
-    if (!BASE) return path;
-    return BASE + path;
-  }
   function normalizeCategory(category) {
     const raw = String(category || '').trim().toLowerCase();
     return CATEGORY_ALIASES[raw] || raw || DEFAULT_CATEGORY;
@@ -157,7 +142,7 @@
 
   async function loadManifest() {
     try {
-      const res = await fetch(resolve('tools-manifest.json'), { cache: 'no-cache' });
+      const res = await fetch('tools-manifest.json', { cache: 'no-cache' });
       if (!res.ok) return [];
       const payload = await res.json();
       return Array.isArray(payload.entries) ? payload.entries : [];
@@ -168,7 +153,7 @@
 
   async function loadToolMeta({ toolDir, metaPath }) {
     try {
-      const res = await fetch(resolve(metaPath), { cache: 'no-cache' });
+      const res = await fetch(metaPath, { cache: 'no-cache' });
       if (!res.ok) return null;
       const json = await res.json();
       return normalizeTool(json, toolDir);
