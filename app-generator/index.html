@@ -188,6 +188,10 @@ html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:va
     <div class="hero-eyebrow"><span class="eline"></span>UNIVERSAL TOOL BUILDER<span class="eline"></span></div>
     <h1>Generate a <span>mini app</span><br>from any input</h1>
     <p class="hero-sub">Describe what you need. Select a subpage context. Get a fully functional HTML app delivered to your inbox.</p>
+    <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="cta-dl-btn" onclick="generateFreeStarterApp()">⚡ Generate Free Starter (.html)</button>
+      <span class="badge" style="margin-left:0">FREE FOREVER STARTER</span>
+    </div>
   </div>
   <div class="cta-section">
     <div class="cta-header">
@@ -552,6 +556,14 @@ function renderHistory(){
 function showErr(m){var b=document.getElementById('err-box');b.textContent='⚠ '+m;b.classList.add('visible');b.scrollIntoView({behavior:'smooth',block:'nearest'})}
 function clearErr(){document.getElementById('err-box').classList.remove('visible')}
 function escH(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function generateFreeStarterApp(){
+  var purpose=(document.getElementById('inp-purpose')?.value||'My App').trim()||'My App';
+  var safe=purpose.replace(/[<>&]/g,'');
+  var html='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+safe+'</title><style>body{font-family:system-ui;margin:0;padding:24px;background:#0b1020;color:#eaf0ff}main{max-width:760px;margin:auto;background:#121a30;border:1px solid #2b3557;border-radius:12px;padding:18px}button{padding:10px 12px;border-radius:8px;border:1px solid #34456f;background:#1c2a4a;color:#fff;cursor:pointer}</style></head><body><main><h1>'+safe+'</h1><p>Free starter app generated locally. No payment required.</p><button onclick="alert('Hello from your starter app!')">Run Action</button></main></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='starter-app.html';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},0);
+}
 
 buildGrid();buildFeats();buildStyles();renderHistory();
 document.querySelector('.sp-chip').click();

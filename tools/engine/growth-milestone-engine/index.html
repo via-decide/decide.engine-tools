@@ -243,6 +243,13 @@
 
   </style>
   <script src="../../../shared/vd-nav-fix.js"></script>
+<script src="../../../shared/vd-wallet.js"></script>
+<script src="../../../shared/engine-utils.js"></script>
+<script src="../../../shared/engine-models.js"></script>
+<script src="../../../shared/simulation-utils.js"></script>
+<script src="../../../shared/engine-balance.js"></script>
+<script src="../../../shared/tool-bridge.js"></script>
+<script src="../../../shared/tool-storage.js"></script>
 </head>
 <body>
   <div id="stage-banner" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#52B756;color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;z-index:9999;font-size:.9rem;"></div>
@@ -676,6 +683,14 @@
         checkEvolution(); updateUI();
         els.btnSimulate.disabled = state.water < 5; els.btnSimulate.innerHTML = "📚 Research (-5💧)";
       }, 500);
+    });
+
+    window.addEventListener('growth:state_updated', function(e) {
+      if (typeof window.VDWallet === 'undefined') return;
+      const xp = e.detail && e.detail.xp ? e.detail.xp : 0;
+      if (xp > 0 && xp % 100 === 0) {
+        window.VDWallet.earn('focusDrops', 1, 'growth-xp-milestone');
+      }
     });
 
     window.onload = () => { init3D(); updateUI(); };

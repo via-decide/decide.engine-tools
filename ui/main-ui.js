@@ -1,4 +1,4 @@
-import { headerMarkup, footerMarkup } from './shell-parts.js';
+import { headerMarkup, footerMarkup, orbMarkup } from './shell-parts.js';
 import { renderSection as renderHero } from './sections/hero.js';
 import { renderSection as renderCreators } from './sections/creators.js';
 import { renderSection as renderBuilders } from './sections/builders.js';
@@ -16,6 +16,7 @@ const footer = document.getElementById('shell-footer');
 
 if (header) header.innerHTML = headerMarkup;
 if (footer) footer.innerHTML = footerMarkup;
+document.body.insertAdjacentHTML('beforeend', orbMarkup);
 
 const sections = [
   renderHero,
@@ -125,7 +126,10 @@ try {
   if (window.ToolRegistry?.loadAll) {
     tools = await window.ToolRegistry.loadAll();
     const countEl = document.querySelector('.hstat-n');
-    if (countEl) countEl.textContent = tools.filter((t) => !t.isEngineTool).length;
+    if (countEl) {
+      const userTools = tools.filter(t => !t.isEngineTool);
+      countEl.textContent = userTools.length;
+    }
     renderAll();
   }
 } catch (error) {
@@ -133,3 +137,79 @@ try {
 }
 
 await import('../router.js');
+
+
+// ── SEARCH ORB ────────────────────────────────────────────
+const orbBtn      = document.getElementById('orb-btn');
+const overlay     = document.getElementById('search-overlay');
+const searchInput = document.getElementById('search-input');
+const searchRes   = document.getElementById('search-results');
+const closeBtn    = document.getElementById('search-close');
+
+function openSearch() {
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => searchInput.focus(), 80);
+}
+function closeSearch() {
+  overlay.style.display = 'none';
+  document.body.style.overflow = '';
+  searchInput.value = '';
+  searchRes.innerHTML = '';
+}
+window.closeSearch = closeSearch;
+
+orbBtn.addEventListener('click', openSearch);
+closeBtn.addEventListener('click', closeSearch);
+overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSearch(); });
+
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    overlay.style.display === 'flex' ? closeSearch() : openSearch();
+  }
+  if (e.key === 'Escape' && overlay.style.display === 'flex') closeSearch();
+});
+
+orbBtn.addEventListener('mouseenter', () => orbBtn.style.transform = 'scale(1.1)');
+orbBtn.addEventListener('mouseleave', () => orbBtn.style.transform = 'scale(1)');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) { searchRes.innerHTML = '<div style="padding:20px;text-align:center;color:#5a4e47;font-size:14px;">Type to search tools...</div>'; return; }
+  const matches = tools.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    (t.description || '').toLowerCase().includes(q) ||
+    (t.tags || []).some(tag => tag.toLowerCase().includes(q))
+  );
+  if (!matches.length) {
+    searchRes.innerHTML = '<div style="padding:20px;text-align:center;color:#5a4e47;font-size:14px;">No tools found.</div>';
+    return;
+  }
+  searchRes.innerHTML = matches.slice(0, 12).map(t => `
+    <a href="${t.entry}" onclick="closeSearch()"
+      style="display:flex;align-items:center;gap:14px;padding:12px 14px;
+             border-radius:8px;text-decoration:none;color:#f0e4d0;
+             border:1px solid transparent;margin-bottom:4px;transition:all .15s;"
+      onmouseover="this.style.background='#2d2623';this.style.borderColor='#4f3e36'"
+      onmouseout="this.style.background='';this.style.borderColor='transparent'">
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:700;font-size:14px;">${t.name}</div>
+        <div style="font-size:12px;color:#8a7568;margin-top:2px;
+                    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+          ${t.description || ''}
+        </div>
+      </div>
+      <span style="font-size:11px;color:#5a4e47;background:#1a1614;
+                   border:1px solid #3a2e28;padding:2px 8px;border-radius:4px;
+                   white-space:nowrap;">${t.category || ''}</span>
+    </a>`).join('');
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const first = searchRes.querySelector('a');
+    if (first) { closeSearch(); window.location.href = first.href; }
+  }
+});
+// ── END SEARCH ────────────────────────────────────────────

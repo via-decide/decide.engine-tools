@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Decision Snake · ViaDecide</title>
   <script defer src="../../../shared/vd-nav-fix.js"></script>
+<script src="../../../shared/vd-wallet.js"></script>
+<script src="../../../shared/tool-storage.js"></script>
   <style>
     :root {
       --bg: #071018;
@@ -178,6 +180,9 @@
           if (score > best) {
             best = score;
             localStorage.setItem(bestKey, String(best));
+            if (window.ToolStorage) {
+              ToolStorage.set('snake-game', 'best', { score: best, date: new Date().toLocaleDateString() });
+            }
             bestEl.textContent = best;
           }
           draw(true);
