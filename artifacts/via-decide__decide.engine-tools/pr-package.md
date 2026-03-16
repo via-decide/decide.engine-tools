@@ -1,3 +1,9 @@
+Branch: simba/add-employer-job-posting-tool-in-toolsengineempl
+Title: Add employer-job-posting tool in tools/engine/employer-job-posting/ w...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working employer-job-posting tool that allows creation and management of market listings
 Branch: simba/add-skills-gap-analyzer-tool-in-toolsengineskill
 Title: Add skills-gap-analyzer tool in tools/engine/skills-gap-analyzer/ wit...
 

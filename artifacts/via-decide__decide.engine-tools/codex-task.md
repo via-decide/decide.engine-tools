@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add employer-job-posting tool in tools/engine/employer-job-posting/ with config.json, index.html, tool.js. Interface for recruiters to define market opportunities, specifying required root fundamentals, branch specializations, and minimum trust scores. Stores postings in local state. Vanilla JS.
 Add skills-gap-analyzer tool in tools/engine/skills-gap-analyzer/ with config.json, index.html, tool.js. Compares a player's current orchard profile against the requirements of specific employer job postings. Highlights deficient branches or roots visually. Vanilla JS.
 Add achievement-badge-system tool in tools/engine/achievement-badge-system/ with config.json, index.html, tool.js. Tracks player milestones across farm/commons/market layers and awards badges for specific actions (first-fruit, 7-day-streak, etc.). Displays earned badges with dates and progress toward the next tier. Vanilla JS.
 Add seasonal-events-engine tool in tools/engine/seasonal-events-engine/ with config.json, index.html, tool.js. Defines and runs time-bound game modifiers affecting global soil quality and sunlight exposure, prompting players to adapt their daily quests for maximum yield. Vanilla JS.
