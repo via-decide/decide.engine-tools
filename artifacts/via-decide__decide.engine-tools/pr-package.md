@@ -1,3 +1,9 @@
+Branch: simba/create-employer-job-board-tool-in-toolsengineemp
+Title: Create employer-job-board tool in tools/engine/employer-job-board/ wi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working employer-job-board tool linking market demand to player capabilities
 Branch: simba/create-resource-optimization-puzzle-tool-in-tool
 Title: Create resource-optimization-puzzle tool in tools/engine/resource-opt...
 

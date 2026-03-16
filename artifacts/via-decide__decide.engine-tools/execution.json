@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/create-employer-job-board-tool-in-toolsengineemp",
   "branch": "simba/create-resource-optimization-puzzle-tool-in-tool",
   "branch": "simba/create-retention-funnel-tracker-tool-in-toolseng",
   "branch": "simba/create-abuse-detection-dashboard-tool-in-toolsen",
