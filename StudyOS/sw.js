@@ -1,18 +1,24 @@
-const CACHE_VERSION = 'studyos-v1';
+const CACHE_VERSION = 'studyos-v2';
 const PRECACHE_NAME = `${CACHE_VERSION}-precache`;
 const RUNTIME_STATIC_NAME = `${CACHE_VERSION}-runtime-static`;
+const RUNTIME_PAGE_NAME = `${CACHE_VERSION}-runtime-page`;
 const RUNTIME_CONFIG_NAME = `${CACHE_VERSION}-runtime-config`;
+
+const APP_SHELL = './index.html';
+const OFFLINE_FALLBACK = './privacy-policy.html';
 
 const REQUIRED_PRECACHE_URLS = [
   './',
-  './index.html',
+  APP_SHELL,
+  OFFLINE_FALLBACK,
+  './manifest.json',
   '../shared/tool-registry.js'
 ];
 
 const OPTIONAL_PRECACHE_URLS = [
   '../shared/tool-storage.js',
   '../shared/tool-bridge.js',
-  './vendor/tailwindcss.min.js',
+  './vendor/tailwindcss-runtime-3.4.16.js',
   './vendor/chart.umd.min.js',
   './vendor/pdf.min.js',
   './vendor/pdf.worker.min.js'
@@ -20,6 +26,10 @@ const OPTIONAL_PRECACHE_URLS = [
 
 function isSameOrigin(url) {
   return url.origin === self.location.origin;
+}
+
+function isNavigationRequest(request) {
+  return request.mode === 'navigate';
 }
 
 function isStaticAssetRequest(requestUrl, request) {
@@ -34,7 +44,8 @@ function isConfigOrManifestRequest(requestUrl) {
   if (!isSameOrigin(requestUrl)) return false;
   return requestUrl.pathname.endsWith('config.json') ||
     requestUrl.pathname.endsWith('manifest.json') ||
-    requestUrl.pathname.endsWith('manifest.webmanifest');
+    requestUrl.pathname.endsWith('manifest.webmanifest') ||
+    requestUrl.pathname.endsWith('assetlinks.json');
 }
 
 async function notifyClients(payload) {
@@ -69,7 +80,13 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
-    const validCacheNames = new Set([PRECACHE_NAME, RUNTIME_STATIC_NAME, RUNTIME_CONFIG_NAME]);
+    const validCacheNames = new Set([
+      PRECACHE_NAME,
+      RUNTIME_STATIC_NAME,
+      RUNTIME_PAGE_NAME,
+      RUNTIME_CONFIG_NAME
+    ]);
+
     const cacheNames = await caches.keys();
     await Promise.all(
       cacheNames
@@ -88,20 +105,41 @@ self.addEventListener('fetch', (event) => {
 
   const requestUrl = new URL(request.url);
 
+  if (isNavigationRequest(request)) {
+    event.respondWith((async () => {
+      const cache = await caches.open(RUNTIME_PAGE_NAME);
+
+      try {
+        const networkResponse = await fetch(request);
+        if (networkResponse.ok) {
+          cache.put(request, networkResponse.clone());
+        }
+        return networkResponse;
+      } catch (_) {
+        const cachedPage = await cache.match(request);
+        if (cachedPage) return cachedPage;
+        const shell = await caches.match(APP_SHELL);
+        if (shell) return shell;
+        return caches.match(OFFLINE_FALLBACK);
+      }
+    })());
+    return;
+  }
+
   if (isConfigOrManifestRequest(requestUrl)) {
     event.respondWith((async () => {
       const cache = await caches.open(RUNTIME_CONFIG_NAME);
       const cached = await cache.match(request);
-      const networkPromise = fetch(request)
-        .then((response) => {
-          if (response.ok) {
-            cache.put(request, response.clone());
-          }
-          return response;
-        })
-        .catch(() => cached);
 
-      return cached || networkPromise;
+      try {
+        const response = await fetch(request);
+        if (response.ok) {
+          cache.put(request, response.clone());
+        }
+        return response;
+      } catch (_) {
+        return cached || Response.error();
+      }
     })());
     return;
   }

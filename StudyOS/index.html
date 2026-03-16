@@ -4,6 +4,10 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>StudyOS · Modular Engine</title>
+    <meta name="theme-color" content="#0f0d0c"/>
+    <meta name="description" content="StudyOS is a modular study engine with planner, focus tools, mock tracker, and AI-assisted workflows."/>
+    <link rel="manifest" href="./manifest.json"/>
+    <link rel="apple-touch-icon" href="./icons/icon-192.png"/>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1818,6 +1822,14 @@ window.KineticEngine = {
 
 document.addEventListener("DOMContentLoaded", () => {
     Bootloader.init();
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch((error) => {
+                console.warn('Service worker registration failed:', error);
+            });
+        });
+    }
 
     document.getElementById("search-input")?.addEventListener("input", (e) => Orb.search(e.target.value));
     document.getElementById("search-input")?.addEventListener("keydown", (e) => {
