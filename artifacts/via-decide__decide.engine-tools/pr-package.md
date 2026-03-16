@@ -1,3 +1,9 @@
+Branch: simba/create-resource-optimization-puzzle-tool-in-tool
+Title: Create resource-optimization-puzzle tool in tools/engine/resource-opt...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working resource-optimization-puzzle mini-game for strategic resource management
 Branch: simba/create-retention-funnel-tracker-tool-in-toolseng
 Title: Create retention-funnel-tracker tool in tools/engine/retention-funnel...
 

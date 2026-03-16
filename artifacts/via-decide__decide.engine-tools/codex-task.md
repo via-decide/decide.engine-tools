@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create resource-optimization-puzzle tool in tools/engine/resource-optimization-puzzle/ with config.json, index.html, tool.js. A mini-game requiring players to allocate a limited set of water and minerals across a simulated branch network to maximize temporary fruit yield. Vanilla JS, standalone puzzle interface.
 Create retention-funnel-tracker tool in tools/engine/retention-funnel-tracker/ with config.json, index.html, tool.js. Admin analytics tool visualizing player drop-off rates from signup → first quest → first harvest → first promotion. Vanilla JS, standalone data visualization.
 Create abuse-detection-dashboard tool in tools/engine/abuse-detection-dashboard/ with config.json, index.html, tool.js. Admin tool to flag suspicious behavior, such as rapid low-quality fruit generation, unnatural peer validation rings (collusion), and spam seeds. Vanilla JS, standalone admin UI.
 Create progress-timeline-viz tool in tools/engine/progress-timeline-viz/ with config.json, index.html, tool.js. Renders a chronological visual history of a player's farm, showing trunk growth, branch unlocks, and major harvest events over time. Vanilla JS, standalone charting interface.
