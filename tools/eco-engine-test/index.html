@@ -191,6 +191,12 @@
       const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY || localStorage.getItem('eco_supabase_anon_key') || 'YOUR_ANON_KEY';
       const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY';
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      if (SUPABASE_ANON_KEY === 'YOUR_ANON_KEY') {
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#f85149;background:#0d1117;text-align:center;padding:24px;"><div><h2>⚠️ Setup Required</h2><p style="color:#8b949e;margin-top:8px;">Replace YOUR_ANON_KEY in eco-engine-test/index.html<br>with your Supabase anon public key.</p></div></div>';
+        return;
+      }
+
       window.EcoDB = db;
 
       const actionLog = document.getElementById('action-log');
