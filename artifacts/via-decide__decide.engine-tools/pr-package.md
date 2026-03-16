@@ -1,3 +1,9 @@
+Branch: simba/add-knowledge-quiz-challenge-tool-in-toolsengine
+Title: Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-chal...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working knowledge-quiz-challenge tool that provides an interactive trivia mini-game
 Branch: simba/add-resource-optimization-puzzle-tool-in-toolsen
 Title: Add resource-optimization-puzzle tool in tools/engine/resource-optimi...
 

@@ -1,6 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-challenge/ with config.json, index.html, tool.js. A mini-game testing a player's grasp of fundamentals (roots), rewarding rapid, correct answers with bonus mineral resources. Includes timer and scoring logic. Vanilla JS.
 Add speed-coding-challenge tool in tools/engine/speed-coding-challenge/ with config.json, index.html, tool.js. A timed interactive text-area puzzle simulating specialized branch work. Evaluates typing speed and basic syntax matching to generate high-quality seeds upon completion. Vanilla JS.
 Add resource-optimization-puzzle tool in tools/engine/resource-optimization-puzzle/ with config.json, index.html, tool.js. A strategic mini-game where players drag and drop limited water and minerals into a grid to maximize potential fruit yield under constrained UI parameters. Vanilla JS.
 Add a new standalone tool called snake-game in tools/games/snake-game/. Title: "Snake Game". Description: "Classic snake game — eat, grow, avoid walls.". Category: "games". The tool must contain: config.json, index.html, tool.js. The game must run in browser, use vanilla JS, have simple UI, no external frameworks. Register in shared/tool-registry.js importableToolDirs array. Add to router.js modularTools map. Ensure index.html dynamic render picks it up. Add to README.md tool list.
