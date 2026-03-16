@@ -18,6 +18,23 @@ export const headerMarkup = String.raw`<nav class="nav">
 </nav>`;
 
 
+export const orbMarkup = `
+<button id="orb-btn" aria-label="Search (Ctrl+K)"
+  style="position:fixed;bottom:24px;right:24px;z-index:200;width:56px;height:56px;
+         border-radius:50%;border:none;cursor:pointer;
+         background:linear-gradient(135deg,#52B756,#29B6F6);
+         color:#000;font-size:24px;
+         box-shadow:0 8px 24px rgba(82,183,86,.35);
+         display:flex;align-items:center;justify-content:center;
+         transition:transform .2s;-webkit-tap-highlight-color:transparent;">✨</button>
+<div id="search-overlay"
+  style="display:none;position:fixed;inset:0;z-index:300;
+         background:rgba(0,0,0,.78);backdrop-filter:blur(12px);
+         -webkit-backdrop-filter:blur(12px);
+         align-items:flex-start;justify-content:center;padding-top:12vh;">
+  <div style="width:100%;max-width:600px;margin:0 16px;
+              background:#1a1614;border:1px solid #3a2e28;border-radius:16px;
+              overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.6);">
 export const orbMarkup = String.raw`
 <button id="orb-btn" aria-label="Search tools" title="Search (Ctrl+K)"
   style="position:fixed;bottom:24px;right:24px;z-index:200;
@@ -47,6 +64,12 @@ export const orbMarkup = String.raw`
                font-size:1.1rem;color:#f0e4d0;font-family:inherit;"/>
       <button id="search-close"
         style="background:transparent;border:1px solid #3a2e28;color:#f0e4d0;
+               border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;
+               -webkit-tap-highlight-color:transparent;">ESC</button>
+    </div>
+    <div id="search-results"
+      style="max-height:55vh;overflow-y:auto;padding:10px;
+             scrollbar-width:thin;scrollbar-color:#3a2e28 transparent;"></div>
                border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;">
         ESC
       </button>

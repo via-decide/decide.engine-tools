@@ -127,6 +127,7 @@ try {
     tools = await window.ToolRegistry.loadAll();
     const countEl = document.querySelector('.hstat-n');
     if (countEl) {
+      countEl.textContent = tools.filter(t => !t.isEngineTool).length;
       const userTools = tools.filter(t => !t.isEngineTool);
       countEl.textContent = userTools.length;
     }
@@ -139,6 +140,87 @@ try {
 await import('../router.js');
 
 
+// ── SEARCH ORB ──────────────────────────────────────────────
+(function initSearch() {
+  const orbBtn  = document.getElementById('orb-btn');
+  const overlay = document.getElementById('search-overlay');
+  const input   = document.getElementById('search-input');
+  const results = document.getElementById('search-results');
+  const closeBtn= document.getElementById('search-close');
+  if (!orbBtn) return;
+
+  const EMPTY_MSG = '<div style="padding:20px;text-align:center;color:#5a4e47;font-size:14px;">Type to search 44+ tools...</div>';
+
+  function openSearch() {
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    results.innerHTML = EMPTY_MSG;
+    setTimeout(() => input.focus(), 80);
+  }
+  function closeSearch() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+    input.value = '';
+    results.innerHTML = '';
+  }
+
+  orbBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSearch(); });
+  orbBtn.addEventListener('mouseenter', () => { orbBtn.style.transform = 'scale(1.1)'; });
+  orbBtn.addEventListener('mouseleave', () => { orbBtn.style.transform = 'scale(1)'; });
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      overlay.style.display === 'flex' ? closeSearch() : openSearch();
+    }
+    if (e.key === 'Escape' && overlay.style.display === 'flex') closeSearch();
+  });
+
+  input.addEventListener('input', function() {
+    const q = this.value.trim().toLowerCase();
+    if (!q) { results.innerHTML = EMPTY_MSG; return; }
+    const allTools = typeof tools !== 'undefined' ? tools : [];
+    const matches = allTools.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      (t.description || '').toLowerCase().includes(q) ||
+      (t.tags || []).some(tag => tag.toLowerCase().includes(q))
+    );
+    if (!matches.length) {
+      results.innerHTML = '<div style="padding:20px;text-align:center;color:#5a4e47;font-size:14px;">No tools found.</div>';
+      return;
+    }
+    results.innerHTML = matches.slice(0, 12).map(t => `
+      <a href="${t.entry}"
+        style="display:flex;align-items:center;gap:14px;padding:12px 14px;
+               border-radius:8px;text-decoration:none;color:#f0e4d0;
+               border:1px solid transparent;margin-bottom:4px;
+               transition:background .12s,border-color .12s;"
+        onmouseover="this.style.background='#2d2623';this.style.borderColor='#4f3e36'"
+        onmouseout="this.style.background='';this.style.borderColor='transparent'"
+        onclick="(function(){overlay.style.display='none';document.body.style.overflow=''})()">
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:700;font-size:14px;">${t.name}</div>
+          <div style="font-size:12px;color:#8a7568;margin-top:2px;
+                      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            ${t.description || ''}
+          </div>
+        </div>
+        <span style="font-size:11px;color:#5a4e47;background:#1a1614;
+                     border:1px solid #3a2e28;padding:2px 8px;border-radius:4px;
+                     white-space:nowrap;flex-shrink:0;">${t.category || ''}</span>
+      </a>`).join('');
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const first = results.querySelector('a');
+      if (first) { closeSearch(); window.location.href = first.href; }
+    }
+  });
+})();
+// ── END SEARCH ORB ──────────────────────────────────────────
 // ── SEARCH ORB ────────────────────────────────────────────
 const orbBtn      = document.getElementById('orb-btn');
 const overlay     = document.getElementById('search-overlay');

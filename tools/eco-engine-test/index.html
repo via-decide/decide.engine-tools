@@ -83,6 +83,9 @@
   <script src="../../shared/reward-wallet.js"></script>
   <script src="../../shared/growth-stage-engine.js"></script>
   <script src="../../shared/season-engine.js"></script>
+<script src="../../shared/tool-bridge.js"></script>
+<script src="../../shared/vd-wallet.js"></script>
+<script src="../../shared/tool-storage.js"></script>
   <script src="../../shared/vd-nav-fix.js"></script>
 <script src="../../shared/tool-bridge.js"></script>
 <script src="../../shared/vd-wallet.js"></script>
@@ -193,6 +196,7 @@
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
       if (SUPABASE_ANON_KEY === 'YOUR_ANON_KEY') {
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#f85149;background:#0d1117;text-align:center;padding:24px;"><div><h2>⚠️ Setup Required</h2><p style="color:#8b949e;margin-top:12px;">Add your Supabase anon public key to this file.<br>Get it from: supabase.com → Settings → API → anon public</p></div></div>';
         document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#f85149;background:#0d1117;text-align:center;padding:24px;"><div><h2>⚠️ Setup Required</h2><p style="color:#8b949e;margin-top:8px;">Replace YOUR_ANON_KEY in eco-engine-test/index.html<br>with your Supabase anon public key.</p></div></div>';
         return;
       }
@@ -599,8 +603,11 @@
             valid = false;
           }
 
-          if (!validatePassword(password)) {
+          if (type === 'register' && !validatePassword(password)) {
             setFieldError(passInput, passErrorId, 'Password must be 8+ characters and include a number.');
+            valid = false;
+          } else if (type === 'login' && password.length === 0) {
+            setFieldError(passInput, passErrorId, 'Enter your password.');
             valid = false;
           }
 
