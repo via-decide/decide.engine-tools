@@ -156,8 +156,8 @@
      * New utilities introduced: friendly error mapper, auth attempt lock utility, button loading utility, field-level validator, localStorage session/TTL sync helper
      */
     (() => {
-      const SUPABASE_URL = window.ECO_SUPABASE_URL || 'https://example.supabase.co';
-      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'replace-with-anon-key';
+      const SUPABASE_URL = 'https://bfocxgtlemhxfwfuhlxn.supabase.co';
+      const SUPABASE_ANON_KEY = window.ECO_SUPABASE_ANON_KEY || 'YOUR_ANON_KEY_HERE';
       const db = window.EcoDB || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       window.EcoDB = db;
 
