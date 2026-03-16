@@ -59,6 +59,22 @@
       entry: 'tool-registry.html'
     },
     {
+      id: 'mars-decision-lab',
+      name: 'Mars Decision Lab',
+      description: 'Mars rover decision game launcher.',
+      category: 'education',
+      tags: ['game', 'mars', 'simulation'],
+      entry: 'mars.html'
+    },
+    {
+      id: 'vd-wallet',
+      name: 'VD Wallet',
+      description: 'Shared cross-game economy wallet using localStorage.',
+      category: 'system',
+      tags: ['wallet', 'economy', 'shared'],
+      entry: 'shared/vd-wallet.js'
+    },
+    {
       id: 'execution-console',
       name: 'Execution Console',
       description: 'Run saved agents and inspect sequential execution logs.',
