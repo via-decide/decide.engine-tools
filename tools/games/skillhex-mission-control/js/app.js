@@ -1,5 +1,30 @@
 /* CORE UI SYSTEM — DO NOT MODIFY */
-import { loadState, saveState } from './state.js';
+const VDWallet = {
+  KEY: 'vd_wallet',
+  get() {
+    try {
+      return JSON.parse(localStorage.getItem(this.KEY)) || this._default();
+    } catch (_err) {
+      return this._default();
+    }
+  },
+  _default() {
+    return { focusDrops: 0, lumina: 0, hexTokens: 0, missionXP: 0, totalEarned: 0, lastUpdated: '' };
+  },
+  save(w) {
+    w.lastUpdated = new Date().toISOString();
+    localStorage.setItem(this.KEY, JSON.stringify(w));
+  },
+  earn(field, amount, source) {
+    const w = this.get();
+    w[field] = (w[field] || 0) + amount;
+    w.totalEarned = (w.totalEarned || 0) + amount;
+    this.save(w);
+    console.log(`[VDWallet] +${amount} ${field} from ${source}`);
+    return w;
+  }
+};
+import { loadState, saveState, resetState } from './state.js';
 import { renderMission, renderChoices, renderResult, updateLeaderboard } from './ui.js';
 import { handleDecision, advanceMission, calculateScore } from './missionEngine.js';
 import { syncLeaderboard } from './leaderboard.js';
@@ -26,6 +51,17 @@ function renderCycle(latestResult = '') {
   renderResult(latestResult || `Current score: ${calculateScore()}`);
   updateLeaderboard(syncLeaderboard(window.SkillHex.state));
   saveState(window.SkillHex.state);
+
+  const prev = window.SkillHex._lastSyncedScore || 0;
+  const delta = window.SkillHex.state.score - prev;
+  if (delta > 0) {
+    VDWallet.earn('missionXP', delta, 'skillhex-mission');
+    if (Math.floor(window.SkillHex.state.score / 100) > Math.floor(prev / 100)) {
+      VDWallet.earn('focusDrops', 1, 'skillhex-milestone');
+    }
+    window.SkillHex._lastSyncedScore = window.SkillHex.state.score;
+  }
+
   attachChoiceListeners();
 }
 
@@ -37,6 +73,7 @@ async function initApp() {
     missions,
     missionIndex: new Map(missions.map((mission) => [mission.id, mission]))
   };
+  window.SkillHex._lastSyncedScore = window.SkillHex.state.score || 0;
 
   if (!window.SkillHex.state.currentMission && missions.length) {
     window.SkillHex.state.currentMission = missions[0].id;
@@ -51,3 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderResult('Failed to initialize app. Check missions.json');
   });
 });
+
+
+window.SkillHex_reset = function() {
+  if (!window.SkillHex) return;
+  window.SkillHex.state = resetState();
+  window.SkillHex._lastSyncedScore = 0;
+  renderCycle();
+};

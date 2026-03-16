@@ -513,7 +513,7 @@ body::before{
       <div class="stat" id="s-score"><span class="k">Score</span><span class="stat-val" id="score">0</span></div>
       <div class="stat" id="s-elo"><span class="k">ELO</span><span class="stat-val" id="elo">1000</span></div>
       <div class="stat" id="s-streak"><span class="k">Streak</span><span class="stat-val" id="streak">0🔥</span></div>
-      <div class="stat" id="s-tokens"><span class="k">Tokens</span><span class="stat-val" id="tokens">0</span></div>
+      <div class="stat" id="s-tokens"><span class="k">Total Tokens</span><span class="stat-val" id="tokens">0</span></div>
     </div>
   </div>
 </header>
@@ -592,6 +592,7 @@ body::before{
       <div class="rstat"><div class="rv" id="r-score">0</div><div class="rk">Score</div></div>
       <div class="rstat"><div class="rv" id="r-elo">1000</div><div class="rk">ELO</div></div>
       <div class="rstat"><div class="rv" id="r-tokens">0</div><div class="rk">Tokens</div></div>
+      <div class="rstat"><div class="rv" id="r-best">—</div><div class="rk">Best Score</div></div>
     </div>
     <div class="result-grade" id="resultGrade">Loading grade...</div>
     <button class="btn-restart" id="restartBtn">⚔️ Play Again</button>
@@ -619,6 +620,32 @@ body::before{
 </div>
 
 <script>
+const VDWallet = {
+  KEY: 'vd_wallet',
+  get() {
+    try {
+      return JSON.parse(localStorage.getItem(this.KEY)) || this._default();
+    } catch (_err) {
+      return this._default();
+    }
+  },
+  _default() {
+    return { focusDrops: 0, lumina: 0, hexTokens: 0, missionXP: 0, totalEarned: 0, lastUpdated: '' };
+  },
+  save(w) {
+    w.lastUpdated = new Date().toISOString();
+    localStorage.setItem(this.KEY, JSON.stringify(w));
+  },
+  earn(field, amount, source) {
+    const w = this.get();
+    w[field] = (w[field] || 0) + amount;
+    w.totalEarned = (w.totalEarned || 0) + amount;
+    this.save(w);
+    console.log(`[VDWallet] +${amount} ${field} from ${source}`);
+    return w;
+  }
+};
+
 /* ══════════════════════════════════════
    QUESTIONS
 ══════════════════════════════════════ */
@@ -692,7 +719,8 @@ function updateStats(){
   setText('score', score);
   setText('elo', elo);
   setText('streak', streak>0 ? streak+'🔥' : '0');
-  setText('tokens', tokens);
+  const wallet = VDWallet.get();
+  setText('tokens', wallet.hexTokens || 0);
   const pct = (currentQ/QUESTIONS.length*100).toFixed(0);
   document.getElementById('progressFill').style.width = pct+'%';
   document.getElementById('mapProgress').style.width = pct+'%';
@@ -710,6 +738,18 @@ function updateStats(){
   }
 }
 
+/*
+ * HEXWARS CREDIT RATES
+ * ─────────────────────────────────────────
+ * Score points: base(10×diff) + speed bonus + streak×2
+ * Focus Drops:  floor(totalScore / 10) per game
+ * Hex Tokens:   floor(pts / 6) per correct answer
+ * Lumina:       floor(streak / 5) per game (streak≥5 only)
+ * ─────────────────────────────────────────
+ * Example: diff=3, 8s remaining, streak=4
+ *   base=30, speed=12, streak=8 → 50 pts
+ *   tokens += floor(50/6) = +8 tokens
+ */
 function calcPoints(diff, timeTaken){
   const base = 10*diff;
   const speed = Math.max(0, TIMER_MAX-timeTaken);
@@ -857,6 +897,8 @@ function checkAnswer(ans, clickedEl){
     const pts=calcPoints(q.diff, timeTaken);
     score += pts;
     tokens += Math.max(1, Math.floor(pts/6));
+    // VDWallet incremental update (will bulk-save on game end)
+    // No need to save per-question — showResult() handles final save
     elo += 5*q.diff;
     claimHex();
     haptic('correct');
@@ -905,6 +947,23 @@ function showResult(){
   setText('r-tokens', tokens);
   document.getElementById('resultGrade').textContent =
     `${q_correct} hexes claimed  ·  ${Math.round(pct*100)}% map covered`;
+
+  VDWallet.earn('hexTokens', tokens, 'hexwars-game');
+  VDWallet.earn('focusDrops', Math.floor(score / 10), 'hexwars-score');
+  if (streak >= 5) VDWallet.earn('lumina', Math.floor(streak / 5), 'hexwars-streak');
+  const w = VDWallet.get();
+  console.log('[HexWars] Game saved. Total hexTokens:', w.hexTokens);
+
+  const prev = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
+  if (!prev.score || score > prev.score) {
+    localStorage.setItem('hexwars-best', JSON.stringify({
+      score, tokens, elo,
+      date: new Date().toLocaleDateString()
+    }));
+  }
+
+  const best = JSON.parse(localStorage.getItem('hexwars-best') || '{}');
+  setText('r-best', best.score || score);
 
   const overlay=document.getElementById('resultOverlay');
   overlay.classList.add('show');
@@ -1133,6 +1192,9 @@ if('serviceWorker' in navigator){
    BOOT
 ══════════════════════════════════════ */
 resetHexOwnership();
+const w = VDWallet.get();
+const lifetimeEl = document.getElementById('tokens');
+if (lifetimeEl) lifetimeEl.textContent = w.hexTokens;
 updateStats();
 loadQuestion();
 </script>
