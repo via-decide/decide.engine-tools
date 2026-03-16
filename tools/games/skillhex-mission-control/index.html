@@ -1338,25 +1338,6 @@ function submitWarmup() {
   showToast(`Warm-up applied · ${(missionWarmup.mult).toFixed(2)}x`, missionWarmup.mult > 1 ? 'ok' : 'info');
 }
 
-function skipWarmup() {
-  if (!missionWarmup) return;
-  missionWarmup.mult = 1.0;
-  missionWarmup.followUp = '';
-  renderWarmupBox();
-  showToast('Warm-up skipped · multiplier 1.00x', 'info');
-  const prior = INTERVIEW.answers.find(a => a.fromWarmup === picked.q);
-  const warmupKey = warmupKeyForMission(mission, missionIdx);
-  const prior = INTERVIEW.answers.find(a => a.warmupKey === warmupKey)
-    || INTERVIEW.answers.find(a => a.fromWarmup === true && a.q === picked.q);
-  const wc = prior ? wordsOf(prior.answer || '') : 0;
-  const mult = prior ? (wc >= 30 ? 1.3 : wc >= 15 ? 1.15 : 1.0) : 1.0;
-  return { ...picked, warmupKey, mult, prior: prior?.answer || '' };
-  const prior = INTERVIEW.answers.find(a => a.fromWarmup === picked.q);
-  const priorAnswer = prior?.answer || '';
-  const mult = calcWarmupMultiplier(priorAnswer);
-  return { ...picked, mult, prior: priorAnswer, skipped: !!prior?.skipped };
-}
-
 function applyWarmup() {
   if (!missionWarmup) return;
   const answerEl = document.getElementById('warmup-answer');
@@ -2114,19 +2095,6 @@ function highlightSector(idx) {
 function confirmSector(idx) {
   const modalOpen = document.getElementById('interview-modal')?.classList.contains('open');
   if (modalOpen) {
-    const sectorRounds = ['V07','V08','V09','V10'];
-    if (isPulled) {
-      skipInterviewQuestion('interview-modal-body');
-      showToast('Interview: skipped to next question', 'info');
-      updateKadaHUD('INTV', 'SKIP QUESTION');
-    } else {
-      const roundId = sectorRounds[idx % 4];
-      openInterviewModal(roundId);
-      showToast('Interview round: ' + (INTERVIEW_ROUNDS[roundId]?.label || roundId), 'info');
-      updateKadaHUD('INTV', roundId);
-    }
-    const round = INTERVIEW_ROUNDS[INTERVIEW.activeScene || 'V10'];
-    const cats = round?.cats || INTERVIEW_ROUNDS.V10.cats;
     const scene = INTERVIEW_WHEEL_SCENES[idx] || INTERVIEW.activeScene || 'V10';
     const round = INTERVIEW_ROUNDS[scene] || INTERVIEW_ROUNDS.V10;
     if (isPulled) {
