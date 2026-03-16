@@ -1,3 +1,9 @@
+Branch: simba/add-abuse-detection-dashboard-tool-in-toolsengin
+Title: Add abuse-detection-dashboard tool in tools/engine/abuse-detection-da...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: working abuse-detection-dashboard tool that highlights potential rule-breaking behavior
 Branch: simba/add-archetype-distribution-analyzer-tool-in-tool
 Title: Add archetype-distribution-analyzer tool in tools/engine/archetype-di...
 

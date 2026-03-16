@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_claude",
+  "branch": "simba/add-abuse-detection-dashboard-tool-in-toolsengin",
   "branch": "simba/add-archetype-distribution-analyzer-tool-in-tool",
   "branch": "simba/add-knowledge-quiz-challenge-tool-in-toolsengine",
   "branch": "simba/add-speed-coding-challenge-tool-in-toolsenginesp",

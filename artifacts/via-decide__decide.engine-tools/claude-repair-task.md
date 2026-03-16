@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Add abuse-detection-dashboard tool in tools/engine/abuse-detection-dashboard/ with config.json, index.html, tool.js. Scans mock transaction logs to flag suspicious activity like volume spamming, circle collusion, and automated botting based on engine anti-abuse rules. Vanilla JS.
 Add archetype-distribution-analyzer tool in tools/engine/archetype-distribution-analyzer/ with config.json, index.html, tool.js. Ingests player data to visualize the spread of branch specializations across the game population, helping identify meta imbalances or neglected skill trees. Vanilla JS.
 Add knowledge-quiz-challenge tool in tools/engine/knowledge-quiz-challenge/ with config.json, index.html, tool.js. A mini-game testing a player's grasp of fundamentals (roots), rewarding rapid, correct answers with bonus mineral resources. Includes timer and scoring logic. Vanilla JS.
 Add speed-coding-challenge tool in tools/engine/speed-coding-challenge/ with config.json, index.html, tool.js. A timed interactive text-area puzzle simulating specialized branch work. Evaluates typing speed and basic syntax matching to generate high-quality seeds upon completion. Vanilla JS.
