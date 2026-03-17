@@ -1,94 +1,104 @@
+import { emit, read, buildPipelineStatus } from '../../shared/tool-bus.js';
+
+const spec = document.getElementById('spec');
 const code = document.getElementById('code');
-const focus = document.getElementById('focus');
+const mode = document.getElementById('mode');
 const output = document.getElementById('output');
+const nextButton = document.getElementById('next');
 
-function toast(message, kind = 'ok') {
-  let el = document.getElementById('tool-toast');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'tool-toast';
-    el.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:9999;background:#111;color:#fff;padding:10px 12px;border-radius:10px;border:1px solid #333;font:12px system-ui;opacity:0;transition:.2s';
-    document.body.appendChild(el);
-  }
-  el.textContent = message;
-  el.style.borderColor = kind === 'error' ? '#c53030' : '#2f855a';
-  el.style.opacity = '1';
-  clearTimeout(toast._t);
-  toast._t = setTimeout(() => { el.style.opacity = '0'; }, 1400);
+const steps = ['context-packager', 'spec-builder', 'code-generator', 'code-reviewer'];
+document.getElementById('pipeline').innerHTML = buildPipelineStatus(steps, 'code-reviewer');
+
+const incoming = read('agent:spec-builder:output');
+if (incoming?.data?.spec) spec.value = incoming.data.spec;
+emit('agent:pipeline:active', { toolId: 'code-reviewer', steps });
+
+function copyText(text) {
+  if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+  const temp = document.createElement('textarea');
+  temp.value = text;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand('copy');
+  temp.remove();
+  return Promise.resolve();
 }
 
-function findUnusedVars(source) {
-  const vars = [...source.matchAll(/(?:const|let|var)\s+([a-zA-Z_$][\w$]*)/g)].map((m) => m[1]);
-  return vars.filter((v) => (source.match(new RegExp(`\\b${v}\\b`, 'g')) || []).length === 1);
+function extractCriteria(specText) {
+  return specText.split('\n').filter((line) => line.trim().startsWith('- [ ]')).map((line) => line.replace('- [ ]', '').trim());
 }
 
-function findInvalidHtmlTags(source) {
-  const known = new Set(['html','head','body','main','section','article','aside','header','footer','nav','div','span','p','h1','h2','h3','h4','h5','h6','a','button','input','label','textarea','select','option','ul','ol','li','table','thead','tbody','tr','th','td','img','canvas','svg','path','script','style','form','pre','code']);
-  const tags = [...source.matchAll(/<\/?([a-zA-Z][a-zA-Z0-9-]*)\b/g)].map((m) => m[1].toLowerCase());
-  return [...new Set(tags.filter((t) => !known.has(t) && !t.includes('-')))];
+function unclosedBrackets(text) {
+  const opens = (text.match(/[\[{(]/g) || []).length;
+  const closes = (text.match(/[\]})]/g) || []).length;
+  return opens !== closes;
 }
 
 function runReview() {
   const source = code.value;
-  const lines = source.split('\n').length;
-  const notes = [];
-
+  const issues = [];
   if (!source.trim()) {
-    output.textContent = 'Add code to review.';
-    toast('No code to review', 'error');
+    output.textContent = 'Please paste generated code before reviewing.';
     return;
   }
 
-  const unused = findUnusedVars(source);
-  if (unused.length) notes.push(`- Unused variables detected: ${unused.join(', ')}`);
+  if (/TODO|FIXME|placeholder/i.test(source)) issues.push({ sev: 'CRITICAL', message: 'Contains TODO/FIXME/placeholder markers.' });
+  if (/console\.log\(/.test(source)) issues.push({ sev: 'WARNING', message: 'Contains console.log statements.' });
+  if (/\bvar\b/.test(source)) issues.push({ sev: 'WARNING', message: 'Uses var; prefer let/const.' });
+  if (/[^=!]==[^=]/.test(source)) issues.push({ sev: 'WARNING', message: 'Uses == instead of ===.' });
+  if (unclosedBrackets(source)) issues.push({ sev: 'CRITICAL', message: 'Likely unclosed bracket/brace/parenthesis.' });
 
-  const invalidTags = findInvalidHtmlTags(source);
-  if (invalidTags.length && (focus.value === 'quality' || focus.value === 'accessibility')) {
-    notes.push(`- Possibly invalid HTML tags: ${invalidTags.join(', ')}`);
+  const criteria = extractCriteria(spec.value);
+  criteria.forEach((item) => {
+    const keyword = item.split(/\s+/).slice(0, 4).join(' ').toLowerCase();
+    if (!source.toLowerCase().includes(keyword) && mode.value === 'Deep') {
+      issues.push({ sev: 'WARNING', message: `Acceptance criteria may be missing: ${item}` });
+    }
+  });
+
+  let report;
+  if (issues.length) {
+    const list = issues.map((issue) => `- [${issue.sev}] ${issue.message}`).join('\n');
+    report = [
+      '## REPAIR REQUEST',
+      '### Original spec summary',
+      spec.value.trim().slice(0, 500) || 'No spec summary available.',
+      '### Issues found',
+      list,
+      '### Repair instructions for Codex',
+      'Return ONLY the corrected code. No explanation.',
+      'Preserve everything not mentioned in issues.'
+    ].join('\n');
+    nextButton.textContent = '→ Re-run through Code Generator';
+  } else {
+    report = [
+      '## ✅ CODE REVIEW PASSED',
+      `Spec: ${(read('agent:spec-builder:output')?.data?.feature || 'Feature')}`,
+      `Checks: ${5 + criteria.length} passed`,
+      '→ Ready for output-evaluator'
+    ].join('\n');
+    nextButton.textContent = '→ Send to Output Evaluator';
   }
 
-  if (!/alt=/.test(source) && /<img\b/.test(source)) notes.push('- Accessibility: add alt attributes to <img> elements.');
-  if (!/aria-/.test(source) && /(button|input|select|textarea)/.test(source) && focus.value === 'accessibility') notes.push('- Accessibility: add ARIA labels/roles for interactive controls where needed.');
-  if (/var\s+/.test(source)) notes.push('- Prefer const/let over var for clearer scope control.');
-  if (source.length > 1800) notes.push('- Large snippet detected; split into smaller functions/components.');
-
-  output.textContent = [
-    '# Code Review',
-    '',
-    `Focus: ${focus.value}`,
-    `Line count: ${lines}`,
-    '',
-    '## Suggestions',
-    ...(notes.length ? notes : ['- Looks clean; add tests or manual validation notes.'])
-  ].join('\n');
-
-  ToolStorage.write('code-reviewer.draft', { code: source, focus: focus.value, output: output.textContent });
-  toast('Review generated');
+  output.textContent = report;
+  ToolStorage.write('code-reviewer.draft', { spec: spec.value, code: code.value, mode: mode.value, output: report });
+  emit('agent:code-reviewer:feedback', { report, issues, passed: issues.length === 0 });
 }
-
-document.getElementById('review').addEventListener('click', runReview);
-document.getElementById('copy').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(output.textContent || ''); toast('Copied to clipboard'); }
-  catch (_e) { toast('Copy failed', 'error'); }
-});
-document.getElementById('download').addEventListener('click', () => {
-  try {
-    const blob = new Blob([output.textContent || ''], { type: 'text/plain;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'code-review.txt';
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    URL.revokeObjectURL(link.href);
-    link.remove();
-    toast('Download started');
-  } catch (_e) { toast('Download failed', 'error'); }
-});
 
 const saved = ToolStorage.read('code-reviewer.draft', null);
 if (saved) {
+  spec.value ||= saved.spec || '';
   code.value = saved.code || '';
-  focus.value = saved.focus || 'quality';
+  mode.value = saved.mode || 'Quick';
   output.textContent = saved.output || '';
+  nextButton.textContent = saved.output?.includes('PASSED') ? '→ Send to Output Evaluator' : '→ Re-run through Code Generator';
+} else {
+  nextButton.textContent = '→ Re-run through Code Generator';
 }
+
+document.getElementById('review').addEventListener('click', runReview);
+document.getElementById('copy').addEventListener('click', () => copyText(output.textContent || ''));
+nextButton.addEventListener('click', () => {
+  const target = output.textContent.includes('PASSED') ? '../../tools/output-evaluator/index.html' : '../../tools/code-generator/index.html';
+  window.location.href = target;
+});

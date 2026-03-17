@@ -6,38 +6,33 @@
   <title>Task Splitter</title>
   <link rel="stylesheet" href="../../shared/shared.css" />
   <script src="../../shared/vd-nav-fix.js"></script>
+  <script src="../../shared/tool-storage.js"></script>
+  <style>
+    .status-row { display:flex; justify-content:space-between; gap:10px; align-items:center; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; margin-top:12px; }
+    .badge { border:1px solid var(--line); border-radius:999px; padding:4px 8px; color:var(--muted); font-size:0.78rem; }
+  </style>
 </head>
-<body>
+<body data-tool-id="task-splitter">
   <main class="app">
     <header>
       <h1>Task Splitter</h1>
-      <p>Convert a goal into a concrete execution plan Simba can follow safely.</p>
+      <p>Split big work into atomic, dependency-aware tasks for Codex sessions.</p>
     </header>
-    <section class="grid">
-      <article class="card">
-        <label for="goal">Goal</label>
-        <textarea id="goal" placeholder="What should be achieved?"></textarea>
 
-        <label for="scope">Scope boundaries</label>
-        <textarea id="scope" placeholder="What is in/out of scope?"></textarea>
-
-        <label for="deadline">Timeline / deadline</label>
-        <input id="deadline" placeholder="e.g., 2 days, by Friday" />
-
-        <div class="toolbar">
-          <button id="generate" class="primary">Split Tasks</button>
-          <button id="copy">Copy</button>
-          <button id="download">Download</button>
-        </div>
-      </article>
-      <article class="card">
-        <h2>Execution Breakdown</h2>
-        <pre id="output" class="output"></pre>
-      </article>
+    <section class="card">
+      <label for="epic">Epic / large feature description</label>
+      <textarea id="epic" placeholder="Describe the full feature or project."></textarea>
+      <div class="toolbar">
+        <button id="split" class="primary">Split Tasks</button>
+        <button id="start" class="secondary">→ Start Pipeline with Task 1</button>
+      </div>
+      <p id="progress" class="small">0/0 tasks done</p>
     </section>
+
+    <section id="cards" class="cards"></section>
   </main>
 
-  <script src="../../shared/tool-storage.js"></script>
-  <script src="tool.js"></script>
+  <script type="module" src="tool.js"></script>
 </body>
 </html>
