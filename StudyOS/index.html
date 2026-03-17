@@ -49,7 +49,6 @@
             -webkit-touch-callout: none;
         }
 
-        /* 🚀 FIX: Prevent aggressive mobile word-breaking glitches */
         .break-normal-word {
             word-break: normal !important;
             overflow-wrap: break-word !important;
@@ -102,8 +101,18 @@
         .nav-links {display:flex;gap:4px;flex-wrap:nowrap; align-items: center; overflow-x: auto;}
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .nl {color:var(--muted);font-size:.85rem;font-weight:600;padding:8px 16px;border-radius:999px;border:1px solid transparent;transition:all .2s ease; cursor: pointer; white-space: nowrap;background:transparent;}
-        .nl:hover, .nl.active {color:var(--text); background: var(--bg2); border-color:var(--border2)}
+        /* UX FIX: stronger active tab indicator */
+        .nl {
+            color:var(--muted);font-size:.85rem;font-weight:600;padding:8px 16px;
+            border-radius:999px;border:1px solid transparent;transition:all .2s ease;
+            cursor: pointer; white-space: nowrap;background:transparent;
+            position: relative;
+        }
+        .nl:hover {color:var(--text); background: var(--bg2); border-color:var(--border2)}
+        .nl.active {
+            color:var(--leaf); background: rgba(82,183,86,0.1);
+            border-color:rgba(82,183,86,0.35); font-weight: 700;
+        }
 
         .os-card {
             background:var(--bg2);border:1px solid var(--border);
@@ -143,6 +152,20 @@
         .os-btn-water { background:var(--water); box-shadow:0 4px 0 var(--waterdk); color: #0a1a0a;}
         .os-btn-water:hover { box-shadow:0 6px 0 var(--waterdk); }
         .os-btn-water:active { box-shadow:0 0 0 var(--waterdk); }
+        /* UX FIX: small ghost button variant */
+        .os-btn-sm {
+            display:inline-flex;align-items:center;justify-content:center;gap:6px;
+            font-weight:700;font-size:.8rem;border:none;cursor:pointer;
+            border-radius:6px;padding:8px 14px;
+            background:var(--leaf);color:#0a1a0a;
+            transition:all 0.15s;
+        }
+        .os-btn-sm:hover { filter:brightness(1.1); }
+        .os-btn-sm.ghost-sm {
+            background: transparent; color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .os-btn-sm.ghost-sm:hover { border-color: var(--leaf); background:rgba(82,183,86,0.05); }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
@@ -163,6 +186,124 @@
         .os-table th { background: var(--bg3); text-align: left; padding: 14px; font-size: 13px; font-weight: 700; color: var(--text); border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 1px;}
         .os-table td { padding: 14px; font-size: 14px; border-bottom: 1px solid var(--border); color: var(--text);}
         .os-table tr:hover td { background: var(--bg); }
+
+        /* ──────────────────────────────────────────────────
+           UX FIX: Empty State Component
+        ────────────────────────────────────────────────── */
+        .empty-state {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 48px 24px; text-align: center;
+            border: 2px dashed var(--border); border-radius: 12px;
+            background: var(--bg3); gap: 12px;
+        }
+        .empty-state .es-icon { font-size: 2.5rem; opacity: 0.5; }
+        .empty-state .es-title { font-weight: 700; color: var(--muted); font-size: 1rem; }
+        .empty-state .es-sub { font-size: .85rem; color: var(--subtle); }
+
+        /* ──────────────────────────────────────────────────
+           UX FIX: Toast Notification System
+        ────────────────────────────────────────────────── */
+        #toast-container {
+            position: fixed; bottom: 100px; right: 24px; z-index: 500;
+            display: flex; flex-direction: column; gap: 10px; pointer-events: none;
+        }
+        .toast {
+            display: flex; align-items: center; gap: 10px;
+            padding: 14px 18px; border-radius: 10px;
+            background: var(--bg2); border: 1px solid var(--border2);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+            font-size: .88rem; font-weight: 600; color: var(--text);
+            pointer-events: auto;
+            animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            min-width: 220px; max-width: 320px;
+        }
+        .toast.toast-success { border-color: rgba(82,183,86,0.4); }
+        .toast.toast-error   { border-color: rgba(244,114,182,0.4); }
+        .toast.toast-info    { border-color: rgba(41,182,246,0.4); }
+        .toast.out { animation: toastOut 0.25s ease forwards; }
+        .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .toast-success .toast-dot { background: var(--leaf); }
+        .toast-error   .toast-dot { background: var(--rose); }
+        .toast-info    .toast-dot { background: var(--water); }
+        @keyframes toastIn  { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes toastOut { from { opacity: 1; transform: translateX(0);    } to { opacity: 0; transform: translateX(40px); } }
+
+        /* ──────────────────────────────────────────────────
+           UX FIX: Vault Reader Modal
+        ────────────────────────────────────────────────── */
+        #vault-reader-modal {
+            position: fixed; inset: 0; z-index: 1100;
+            background: rgba(10,8,7,0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            display: flex; align-items: flex-start; justify-content: center;
+            padding: 5vh 16px 5vh 16px; overflow-y: auto;
+            opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+        }
+        #vault-reader-modal.active { opacity: 1; pointer-events: auto; }
+        .vault-reader-inner {
+            width: 100%; max-width: 760px;
+            background: var(--bg2); border: 1px solid var(--border2);
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+            transform: scale(0.96) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #vault-reader-modal.active .vault-reader-inner { transform: scale(1) translateY(0); }
+        .vault-reader-header {
+            padding: 24px 28px; border-bottom: 1px solid var(--border);
+            background: var(--bg3);
+            display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+        }
+        .vault-reader-body {
+            padding: 32px 28px; max-height: 65vh; overflow-y: auto;
+            line-height: 1.75; font-size: 15px;
+        }
+        .vault-reader-body::-webkit-scrollbar { width: 6px; }
+        .vault-reader-body::-webkit-scrollbar-track { background: transparent; }
+        .vault-reader-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+        .vault-reader-footer {
+            padding: 20px 28px; border-top: 1px solid var(--border);
+            background: var(--bg3); display: flex; gap: 12px; flex-wrap: wrap;
+        }
+        /* Reader content formatting */
+        .vault-content-section { margin-bottom: 20px; }
+        .vault-content-h { 
+            font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700;
+            color: var(--leaf); margin-bottom: 10px; padding-bottom: 6px;
+            border-bottom: 1px solid rgba(82,183,86,0.2);
+        }
+        .vault-content-h2 {
+            font-weight: 700; font-size: .9rem; text-transform: uppercase;
+            letter-spacing: .08em; color: var(--amber); margin-bottom: 8px; margin-top: 16px;
+        }
+        .vault-content-bullet {
+            display: flex; gap: 10px; padding: 6px 0;
+            border-bottom: 1px solid rgba(58,46,40,0.5); font-size: 14px; color: var(--text);
+        }
+        .vault-content-bullet:last-child { border-bottom: none; }
+        .vault-content-bullet::before { content: "·"; color: var(--leaf); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+        .vault-content-p { color: var(--muted); font-size: 14px; margin-bottom: 8px; line-height: 1.7; }
+        .vault-content-numbered {
+            display: flex; gap: 12px; padding: 8px 0;
+            border-bottom: 1px solid rgba(58,46,40,0.4); font-size: 14px;
+        }
+        .vault-content-numbered:last-child { border-bottom: none; }
+        .vault-content-num { color: var(--gold); font-weight: 800; font-size: .8rem; min-width: 20px; margin-top: 2px; }
+
+        /* ──────────────────────────────────────────────────
+           UX FIX: Vault card content preview
+        ────────────────────────────────────────────────── */
+        .vault-preview {
+            font-size: 13px; color: var(--muted); line-height: 1.5;
+            margin: 10px 0 16px; padding: 12px; background: var(--bg);
+            border-radius: 8px; border: 1px solid var(--border);
+            overflow: hidden; display: -webkit-box;
+            -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+        }
+
+        /* ──────────────────────────────────────────────────
+           Scores table (was missing from tracker HTML)
+        ────────────────────────────────────────────────── */
+        #scores-panel { margin-top: 24px; }
 
         #search-modal {
             position: fixed; inset: 0; z-index: 1000;
@@ -189,6 +330,12 @@
         }
         .close-search:hover{border-color:var(--leaf); background:rgba(82,183,86,0.05);}
         .search-results { max-height: 50vh; overflow-y: auto; padding: 12px; }
+        /* UX FIX: search result count bar */
+        .search-count-bar {
+            padding: 8px 24px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .1em; color: var(--subtle); border-bottom: 1px solid var(--border);
+            background: var(--bg);
+        }
         .search-item {
             display: flex; align-items: center; gap: 16px; padding: 16px;
             border-radius: 8px; cursor: pointer; transition: all 0.2s;
@@ -283,18 +430,23 @@
 
 <body>
 
+<!-- ══════════════════════════════════════════════
+     VIEW: ONBOARDING
+══════════════════════════════════════════════ -->
 <div id="view-onboarding" class="view-layer">
     <div class="fixed top-0 left-0 right-0 p-4 sm:p-6 z-20 pointer-events-none flex justify-center">
         <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-white bg-[var(--bg2)] px-6 py-3 rounded-full border border-[var(--border)] shadow-xl flex items-center gap-2 pointer-events-auto">
             <span style="color:var(--leaf)">&#10024;</span> System Setup
         </h1>
     </div>
-
     <div class="flex-grow flex justify-center w-full z-10 pt-32">
         <div id="chat-container" class="w-full px-4 sm:px-8 flex flex-col hide-scrollbar relative overflow-y-auto"></div>
     </div>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     VIEW: MAIN APP
+══════════════════════════════════════════════ -->
 <div id="view-app" class="view-layer">
 
     <nav class="nav">
@@ -339,6 +491,8 @@
     </section>
 
     <main class="max-w-7xl mx-auto px-4 w-full sm:px-8 py-10 flex-grow relative" id="app-mount-point">
+
+        <!-- DASHBOARD -->
         <section id="dashboard" class="tab-content active space-y-8 !pt-0">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="os-card" style="background:linear-gradient(135deg,rgba(82,183,86,.1),rgba(26,22,20,.97)); border-color:rgba(82,183,86,.3); text-align: center;">
@@ -358,7 +512,6 @@
                     <div style="font-size:2.5rem;font-weight:900;color:var(--rose);line-height:1; font-family: 'Playfair Display', serif;" id="dash-rev-text">0</div>
                 </div>
             </div>
-
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div class="os-card xl:col-span-2">
                     <h3 class="mb-4 ui-translatable">Workspace Matrix</h3>
@@ -376,13 +529,13 @@
                     </div>
                 </div>
             </div>
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="os-card"><h3 class="mb-4 ui-translatable">Score Trajectory</h3><div class="chart-box"><canvas id="mockChart"></canvas></div></div>
                 <div class="os-card"><h3 class="mb-4 ui-translatable">Syllabus Coverage</h3><div class="chart-box"><canvas id="sylChart"></canvas></div></div>
             </div>
         </section>
 
+        <!-- STUDY ENGINE -->
         <section id="engine" class="tab-content space-y-6 !pt-0">
             <div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between mb-8">
                 <div>
@@ -403,6 +556,7 @@
             <div id="syllabus-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
         </section>
 
+        <!-- KINETIC SIMULATOR -->
         <section id="kinetic" class="tab-content !pt-0">
             <div class="max-w-2xl mx-auto os-card p-6 md:p-10" style="background:linear-gradient(135deg,rgba(255,214,0,.05),rgba(26,22,20,.97)); border-color:rgba(255,214,0,.2);">
                 <div class="flex justify-between items-center mb-4 border-b border-[var(--border)] pb-4">
@@ -414,19 +568,17 @@
                         <div class="chip" style="background:var(--bg3); font-size: 1rem; padding: 6px 12px;">XP: <span id="k-xp" style="color:var(--gold);">0</span> / <span id="k-total">0</span></div>
                     </div>
                 </div>
-
                 <div class="progress-track mb-6 bg-[var(--bg3)]"><div class="progress-fill bg-[var(--gold)]" id="k-progress"></div></div>
-
                 <div id="k-stack-container">
                     <div id="k-stack" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;"></div>
                 </div>
-
                 <div class="text-center mt-4 text-sm text-[var(--muted)] font-medium">
                     Swipe UP/DOWN/LEFT/RIGHT to answer. Drag with mouse or tilt device.
                 </div>
             </div>
         </section>
 
+        <!-- MISSIONS -->
         <section id="missions" class="tab-content space-y-6 !pt-0">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                 <div>
@@ -461,6 +613,7 @@
             </div>
         </section>
 
+        <!-- VAULT -->
         <section id="vault" class="tab-content space-y-6 !pt-0">
             <div class="mb-8">
                 <h2 class="ui-translatable" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900; letter-spacing: -0.2px;">Research Vault</h2>
@@ -469,6 +622,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="vault-container"></div>
         </section>
 
+        <!-- TRACKER -->
+        <!-- UX FIX: Added mock scores table and improved layout -->
         <section id="tracker" class="tab-content space-y-6 !pt-0">
             <div class="mb-8">
                 <h2 class="ui-translatable" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900; letter-spacing: -0.2px;">Error Tracker</h2>
@@ -480,7 +635,7 @@
                     <div class="space-y-4">
                         <input type="date" id="mock-date" class="os-input">
                         <input type="text" id="mock-name" class="os-input" placeholder="Test Name">
-                        <input type="number" id="mock-score" class="os-input" placeholder="Score">
+                        <input type="number" id="mock-score" class="os-input" placeholder="Score (0-100)">
                         <button onclick="Tracker.addMock()" class="os-btn break-normal-word w-full">Save Score</button>
                     </div>
                     <hr class="my-8 border-[var(--border)]">
@@ -492,25 +647,59 @@
                         <button onclick="Tracker.addError()" class="os-btn-danger break-normal-word w-full">Save Error</button>
                     </div>
                 </div>
-                <div class="os-card col-span-1 lg:col-span-2 flex flex-col">
-                    <h3 class="mb-4 ui-translatable">Error Database</h3>
-                    <div class="table-container flex-grow">
-                        <table class="os-table">
-                            <thead>
-                                <tr>
-                                    <th style="border-top-left-radius: 8px;">Topic</th>
-                                    <th>Description</th>
-                                    <th>Revise</th>
-                                    <th style="border-top-right-radius: 8px;">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="error-list"></tbody>
-                        </table>
+                <div class="col-span-1 lg:col-span-2 flex flex-col gap-6">
+                    <!-- UX FIX: Mock Scores Panel (was missing from HTML, now added) -->
+                    <div class="os-card" id="scores-panel">
+                        <h3 class="mb-4 ui-translatable">Mock Score History</h3>
+                        <div class="table-container">
+                            <table class="os-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Test Name</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="score-list"></tbody>
+                            </table>
+                        </div>
+                        <div id="score-empty" class="hidden mt-4">
+                            <div class="empty-state">
+                                <div class="es-icon">📊</div>
+                                <div class="es-title">No scores logged yet</div>
+                                <div class="es-sub">Add a mock test score using the form on the left.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Error Database -->
+                    <div class="os-card flex flex-col">
+                        <h3 class="mb-4 ui-translatable">Error Database</h3>
+                        <div class="table-container flex-grow">
+                            <table class="os-table">
+                                <thead>
+                                    <tr>
+                                        <th style="border-top-left-radius: 8px;">Topic</th>
+                                        <th>Description</th>
+                                        <th>Revise</th>
+                                        <th style="border-top-right-radius: 8px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="error-list"></tbody>
+                            </table>
+                        </div>
+                        <div id="error-empty" class="hidden mt-4">
+                            <div class="empty-state">
+                                <div class="es-icon">✅</div>
+                                <div class="es-title">No errors logged</div>
+                                <div class="es-sub">Great! Use the form to log mistakes for spaced revision.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- SIMULATOR -->
         <section id="pyq" class="tab-content !pt-0">
             <div class="max-w-3xl mx-auto os-card p-6 md:p-10" style="background:linear-gradient(135deg,rgba(41,182,246,.05),rgba(26,22,20,.97)); border-color:rgba(41,182,246,.2);">
                 <div class="flex justify-between items-center mb-8 border-b border-[var(--border)] pb-4">
@@ -536,6 +725,9 @@
     </footer>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════════ -->
 <div id="sidebar-overlay" class="sidebar-overlay" onclick="Sidebar.close()"></div>
 <aside id="sidebar-panel" class="sidebar-panel" aria-hidden="true">
     <div class="p-5 border-b border-[var(--border)] flex items-start justify-between gap-3">
@@ -549,10 +741,8 @@
     <div class="p-5 overflow-y-auto flex-1">
         <div class="text-xs uppercase tracking-[0.16em] font-extrabold text-[var(--muted)] mb-3">Preferences</div>
         <div id="sidebar-grid" class="grid grid-cols-2 gap-3 mb-6"></div>
-
         <div class="text-xs uppercase tracking-[0.16em] font-extrabold text-[var(--muted)] mb-3">Navigate</div>
         <div id="sidebar-nav" class="space-y-3 mb-6"></div>
-
         <div class="text-xs uppercase tracking-[0.16em] font-extrabold text-[var(--muted)] mb-3">Quick Actions</div>
         <div class="space-y-3">
             <button class="sidebar-nav-btn break-normal-word" onclick="Sidebar.action('search')"><span>✨ Open Search</span><span>›</span></button>
@@ -562,8 +752,12 @@
     </div>
 </aside>
 
-<button id="orb-trigger" class="hidden fixed bottom-8 right-8 z-[60] w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--leaf)] to-[var(--water)] text-[#0a1a0a] shadow-2xl flex items-center justify-center text-3xl active:scale-90 transition-transform orb-trigger" onclick="Orb.open()">&#10024;</button>
+<!-- FAB Orb -->
+<button id="orb-trigger" style="display:none;" class="fixed bottom-8 right-8 z-[60] w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--leaf)] to-[var(--water)] text-[#0a1a0a] shadow-2xl flex items-center justify-center text-3xl active:scale-90 transition-transform orb-trigger" onclick="Orb.open()">&#10024;</button>
 
+<!-- ══════════════════════════════════════════════
+     SEARCH MODAL
+══════════════════════════════════════════════ -->
 <div id="search-modal">
     <div class="search-box" id="orb-modal-inner">
         <div class="search-header">
@@ -571,26 +765,148 @@
             <input type="text" id="search-input" class="search-input" placeholder="Search the OS or type for YouTube..." autocomplete="off">
             <button onclick="Orb.close()" class="close-search">ESC</button>
         </div>
+        <div id="search-count-bar" class="search-count-bar" style="display:none;"></div>
         <div class="search-results hide-scrollbar" id="search-results"></div>
     </div>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     VAULT READER MODAL  (UX FIX)
+══════════════════════════════════════════════ -->
+<div id="vault-reader-modal">
+    <div class="vault-reader-inner">
+        <div class="vault-reader-header">
+            <div>
+                <div id="vr-category" class="text-[10px] font-bold uppercase text-[var(--leaf)] tracking-widest mb-1"></div>
+                <h3 id="vr-title" class="font-black text-xl" style="font-family:'Playfair Display',serif;"></h3>
+                <div id="vr-size" class="text-xs text-[var(--muted)] mt-1 font-semibold"></div>
+            </div>
+            <button onclick="VaultReader.close()" class="close-search flex-shrink-0">✕ Close</button>
+        </div>
+        <div class="vault-reader-body" id="vr-body"></div>
+        <div class="vault-reader-footer">
+            <button id="vr-download-btn" class="os-btn break-normal-word">⬇ Download Extract</button>
+            <button onclick="VaultReader.close()" class="os-btn-ghost break-normal-word">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TOAST CONTAINER  (UX FIX)
+══════════════════════════════════════════════ -->
+<div id="toast-container"></div>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
 <script>
-// 🚀 BACON UPGRADE: COMBO BRIDGE (Localization / Theme Router)
+// ──────────────────────────────────────────────────
+// TOAST NOTIFICATION SYSTEM  (UX FIX)
+// ──────────────────────────────────────────────────
+const Toast = {
+    show(msg, type = 'success', duration = 2800) {
+        const container = document.getElementById('toast-container');
+        const el = document.createElement('div');
+        el.className = `toast toast-${type}`;
+        el.innerHTML = `<div class="toast-dot"></div><span>${msg}</span>`;
+        container.appendChild(el);
+        setTimeout(() => {
+            el.classList.add('out');
+            setTimeout(() => el.remove(), 300);
+        }, duration);
+    }
+};
+
+// ──────────────────────────────────────────────────
+// VAULT READER MODAL  (UX FIX)
+// ──────────────────────────────────────────────────
+const VaultReader = {
+    _current: null,
+
+    open(doc) {
+        this._current = doc;
+        const modal = document.getElementById('vault-reader-modal');
+        document.getElementById('vr-category').textContent = doc.category || '';
+        document.getElementById('vr-title').textContent = doc.title || 'Document';
+        document.getElementById('vr-size').textContent = `Local File · ${doc.size || '—'}`;
+        document.getElementById('vr-body').innerHTML = this._formatContent(doc.content || '');
+
+        // Wire download
+        document.getElementById('vr-download-btn').onclick = () => {
+            const payload = encodeURIComponent(doc.content || '');
+            const title = encodeURIComponent(doc.title || 'document');
+            Vault.download(title, payload);
+            Toast.show('Download started', 'info');
+        };
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    },
+
+    close() {
+        document.getElementById('vault-reader-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    },
+
+    _formatContent(raw) {
+        if (!raw) return '<p class="vault-content-p">No content available.</p>';
+        const lines = raw.split('\n');
+        let html = '';
+        let inSection = false;
+
+        lines.forEach(line => {
+            const t = line.trim();
+            if (!t) { if (inSection) html += '</div>'; inSection = false; return; }
+
+            // H1 style: ALL CAPS + long line
+            if (t === t.toUpperCase() && t.length > 8 && !t.startsWith('*') && !t.match(/^\d/)) {
+                if (inSection) html += '</div>';
+                html += `<div class="vault-content-section"><div class="vault-content-h">${Utils.esc(t)}</div>`;
+                inSection = true;
+            }
+            // TABLE headers: --- prefix
+            else if (t.startsWith('---')) {
+                if (inSection) html += '</div>';
+                html += `<div class="vault-content-section"><div class="vault-content-h2">${Utils.esc(t.replace(/^-+\s*/, '').replace(/\s*-+$/, ''))}</div>`;
+                inSection = true;
+            }
+            // Numbered items
+            else if (/^\d+\./.test(t)) {
+                const num = t.match(/^(\d+)\./)[1];
+                const content = t.replace(/^\d+\.\s*/, '');
+                html += `<div class="vault-content-numbered"><span class="vault-content-num">${num}.</span><span>${Utils.esc(content)}</span></div>`;
+            }
+            // Bullet points
+            else if (t.startsWith('*')) {
+                html += `<div class="vault-content-bullet">${Utils.esc(t.replace(/^\*\s*/, ''))}</div>`;
+            }
+            // Regular paragraph
+            else {
+                html += `<p class="vault-content-p">${Utils.esc(t)}</p>`;
+            }
+        });
+
+        if (inSection) html += '</div>';
+        return html;
+    }
+};
+
+// ──────────────────────────────────────────────────
+// COMBO BRIDGE (Localization / Theme Router)
+// ──────────────────────────────────────────────────
 const ComboBridge = {
     t(text) {
         const lang = AppStore.config?.language || 'English';
         if (lang === 'English') return text;
-        
         const dict = {
-            "Hindi": { 
+            "Hindi": {
                 "Overall Progress": "कुल प्रगति", "Missions Done": "पूर्ण मिशन", "Avg Score": "औसत स्कोर", "Pending Errors": "लंबित त्रुटियां",
                 "Workspace Matrix": "कार्यक्षेत्र मैट्रिक्स", "System Combinations": "सिस्टम संयोजन",
                 "Study Engine": "अध्ययन इंजन", "Kinetic Simulator": "काइनेटिक सिम्युलेटर",
                 "Mission Control": "मिशन नियंत्रण", "Research Vault": "रिसर्च वॉल्ट", "Error Tracker": "त्रुटि ट्रैकर", "Simulator": "सिम्युलेटर",
                 "Deploy Mission": "मिशन तैनात करें", "Log Mock Test": "मॉक टेस्ट दर्ज करें", "Active Objectives": "सक्रिय उद्देश्य", "Error Database": "त्रुटि डेटाबेस"
             },
-            "Gujarati": { 
+            "Gujarati": {
                 "Overall Progress": "કુલ પ્રગતિ", "Missions Done": "પૂર્ણ મિશન", "Avg Score": "સરેરાશ સ્કોર", "Pending Errors": "બાકી ભૂલો",
                 "Workspace Matrix": "વર્કસ્પેસ મેટ્રિક્સ", "System Combinations": "સિસ્ટમ સંયોજનો",
                 "Study Engine": "અભ્યાસ એન્જિન", "Kinetic Simulator": "કાઇનેટિક સિમ્યુલેટર",
@@ -598,19 +914,14 @@ const ComboBridge = {
                 "Deploy Mission": "મિશન જમાવો", "Log Mock Test": "મોક ટેસ્ટ દાખલ કરો", "Active Objectives": "સક્રિય ઉદ્દેશ્યો", "Error Database": "ભૂલ ડેટાબેઝ"
             }
         };
-        
         if (dict[lang] && dict[lang][text]) return dict[lang][text];
-        
-        // Add dynamic tags to explicitly prove the bridge is active for generated arrays/DBs
         const tags = { 'Hindi': '[हिन्दी]', 'Gujarati': '[ગુજરાતી]', 'Other': '[A]' };
         return `${tags[lang] || ''} ${text}`;
     },
     applyUI() {
         const lang = AppStore.config?.language || 'English';
         if (lang === 'English') return;
-        
         document.documentElement.lang = lang === 'Hindi' ? 'hi' : lang === 'Gujarati' ? 'gu' : 'en';
-        
         const elementsToTranslate = document.querySelectorAll('.ui-translatable, .nav-links button, .sidebar-nav-btn span:first-child');
         elementsToTranslate.forEach(el => {
             Array.from(el.childNodes).forEach(node => {
@@ -632,7 +943,7 @@ const Dictionary = {
     "Design": ["UI/UX", "Graphic", "Product", "Web"],
     "AI": ["Machine Learning", "Data Science", "NLP", "Vision"],
     "Productivity": ["Time Management", "Note Taking", "Workflows", "Habits"],
-    "General Knowledge": ["Current Affairs", "World History", "Science & Tech", "Business & Economy"] 
+    "General Knowledge": ["Current Affairs", "World History", "Science & Tech", "Business & Economy"]
 };
 
 const UIUXMatrix = {
@@ -654,9 +965,12 @@ const UIUXMatrix = {
     },
 
     getCombinationIndex(config) {
-        if(!config) return 0;
+        if (!config) return 0;
         const all = this.getAllCombinations();
-        const found = all.find(item => item.category === config.category && item.subject === config.subject && item.layout === config.layout && item.language === config.language );
+        const found = all.find(item =>
+            item.category === config.category && item.subject === config.subject &&
+            item.layout === config.layout && item.language === config.language
+        );
         return found ? found.id : 0;
     },
 
@@ -668,17 +982,17 @@ const UIUXMatrix = {
 const Utils = {
     esc(s) {
         return String(s ?? "")
-            .replaceAll("&","&amp;")
-            .replaceAll("<","&lt;")
-            .replaceAll(">","&gt;")
-            .replaceAll('"',"&quot;")
-            .replaceAll("'","&#39;");
+            .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+            .replaceAll('"',"&quot;").replaceAll("'","&#39;");
     },
     safeParse(str, fallback) {
         try { return JSON.parse(str); } catch { return fallback; }
     }
 };
 
+// ──────────────────────────────────────────────────
+// DATA GENERATOR
+// ──────────────────────────────────────────────────
 const DataGenerator = {
     build(category, subject) {
         let syllabus = []; let missions = []; let vault = {};
@@ -758,6 +1072,9 @@ TABLE III: TERRITORY OF INDIA
     }
 };
 
+// ──────────────────────────────────────────────────
+// APP STORE
+// ──────────────────────────────────────────────────
 const AppStore = {
     config: null, data: null,
 
@@ -766,7 +1083,6 @@ const AppStore = {
         if (savedConfig) this.config = Utils.safeParse(savedConfig, null);
         const savedData = localStorage.getItem("os_data_via");
         if (savedData) this.data = Utils.safeParse(savedData, null);
-
         if (this.config && this.data) this.normalize();
     },
 
@@ -810,9 +1126,11 @@ const SystemData = {
     exportSync() {
         const payload = { config: AppStore.config, data: AppStore.data };
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
-        const node = document.createElement("a"); node.setAttribute("href", dataStr);
+        const node = document.createElement("a");
+        node.setAttribute("href", dataStr);
         node.setAttribute("download", `StudyOS_${AppStore.config.category}.json`);
         document.body.appendChild(node); node.click(); node.remove();
+        Toast.show('Backup downloaded', 'info');
     },
     importSync(e) {
         const file = e.target.files?.[0]; if (!file) return;
@@ -821,14 +1139,16 @@ const SystemData = {
             const imported = Utils.safeParse(ev.target.result, null);
             if (imported?.config && imported?.data) {
                 AppStore.config = imported.config; AppStore.data = imported.data;
-                AppStore.normalize();
-                AppStore.saveData(); location.reload();
-            } else { alert("Invalid OS file"); }
+                AppStore.normalize(); AppStore.saveData(); location.reload();
+            } else { Toast.show('Invalid OS file', 'error'); }
         };
         reader.readAsText(file); e.target.value = "";
     }
 };
 
+// ──────────────────────────────────────────────────
+// ONBOARDING ENGINE
+// ──────────────────────────────────────────────────
 const OnboardingEngine = {
     steps: [
         { key: "category", aiResp: "Select your primary learning domain.", options: Object.keys(Dictionary) },
@@ -933,6 +1253,9 @@ const OnboardingEngine = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// BOOTLOADER
+// ──────────────────────────────────────────────────
 const Bootloader = {
     init() {
         AppStore.init();
@@ -949,7 +1272,6 @@ const Bootloader = {
         setTimeout(() => {
             const target = document.getElementById(id);
             target.classList.add("active");
-
             if (id === "view-app") {
                 document.getElementById("app-subtitle").innerText = `${AppStore.config.category} — ${AppStore.config.subject}`;
                 document.getElementById("orb-trigger").style.display = "flex";
@@ -959,12 +1281,15 @@ const Bootloader = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// UI ENGINE
+// ──────────────────────────────────────────────────
 const UIEngine = {
     ready: false,
 
     init() {
-        ComboBridge.applyUI(); // 🚀 APPLY THEME BRIDGE TO ALL STATIC UI TEXT
-        
+        ComboBridge.applyUI();
+
         const navBtns = document.querySelectorAll(".nl");
         const tabs = document.querySelectorAll(".tab-content");
 
@@ -976,7 +1301,7 @@ const UIEngine = {
                     tabs.forEach(t => t.classList.remove("active"));
                     document.getElementById(btn.dataset.tab).classList.add("active");
                     if (btn.dataset.tab === "dashboard") window.Dashboard.updateCharts();
-                    if (btn.dataset.tab === "tracker") window.Tracker.renderErrors();
+                    if (btn.dataset.tab === "tracker") { window.Tracker.renderErrors(); window.Tracker.renderScores(); }
                     btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
                     Sidebar.render();
                 });
@@ -986,6 +1311,15 @@ const UIEngine = {
             document.getElementById("task-input").addEventListener("keydown", (e) => { if (e.key === "Enter") Missions.addTask(); });
             document.getElementById("mock-score").addEventListener("keydown", (e) => { if (e.key === "Enter") Tracker.addMock(); });
             document.getElementById("err-rev-date").addEventListener("keydown", (e) => { if (e.key === "Enter") Tracker.addError(); });
+
+            // UX FIX: ESC closes vault reader
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (document.getElementById('vault-reader-modal').classList.contains('active')) {
+                        VaultReader.close(); return;
+                    }
+                }
+            });
 
             this.ready = true;
         }
@@ -1009,11 +1343,12 @@ const UIEngine = {
         window.StudyEngine.render();
         window.Missions.render();
         window.Tracker.renderErrors();
+        window.Tracker.renderScores();
         window.Vault.render();
         window.PYQ.render();
         window.Dashboard.initCharts();
         window.Sidebar.render();
-        
+
         KineticEngine.init();
     },
 
@@ -1038,6 +1373,9 @@ const UIEngine = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// SIDEBAR
+// ──────────────────────────────────────────────────
 window.Sidebar = {
     render() {
         if (!AppStore.config) return;
@@ -1085,6 +1423,9 @@ window.Sidebar = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// DASHBOARD
+// ──────────────────────────────────────────────────
 window.Dashboard = {
     mChart: null, sChart: null,
 
@@ -1096,7 +1437,6 @@ window.Dashboard = {
 
         const gridColor = '#3a2e28';
         const textColor = '#8a7568';
-
         const mockLabels = AppStore.data.mocks.map(d => d.name || d.date);
         const mockScores = AppStore.data.mocks.map(d => d.score);
 
@@ -1142,6 +1482,9 @@ window.Dashboard = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// STUDY ENGINE
+// ──────────────────────────────────────────────────
 window.StudyEngine = {
     render() {
         const container = document.getElementById("syllabus-container");
@@ -1189,25 +1532,43 @@ window.StudyEngine = {
     },
 
     toggle(id, state) {
-        AppStore.data.syllabusProgress[id] = state; AppStore.saveData(); this.render(); window.Dashboard.updateCharts();
+        AppStore.data.syllabusProgress[id] = state;
+        AppStore.saveData(); this.render(); window.Dashboard.updateCharts();
     },
 
     del(id) {
-        AppStore.data.customModules = AppStore.data.customModules.filter(m => m.id !== id); AppStore.saveData(); this.render(); window.Dashboard.updateCharts();
+        AppStore.data.customModules = AppStore.data.customModules.filter(m => m.id !== id);
+        AppStore.saveData(); this.render(); window.Dashboard.updateCharts();
     }
 };
 
+// ──────────────────────────────────────────────────
+// MISSIONS
+// ──────────────────────────────────────────────────
 window.Missions = {
     render() {
         const list = document.getElementById("task-list");
         if (!list || !AppStore.data) return;
         list.innerHTML = "";
 
+        // UX FIX: empty state
+        if (!AppStore.data.missions.length) {
+            list.innerHTML = `
+                <div class="empty-state">
+                    <div class="es-icon">🎯</div>
+                    <div class="es-title">No missions deployed</div>
+                    <div class="es-sub">Add your first task using the form on the left.</div>
+                </div>`;
+            document.getElementById("task-count").innerText = `0/0 Done`;
+            document.getElementById("task-prog-bar").style.width = "0%";
+            window.Dashboard.updateMetrics();
+            return;
+        }
+
         let doneCount = 0;
         AppStore.data.missions.forEach(m => {
             if (m.done) doneCount += 1;
             const style = m.done ? "line-through opacity-50 text-[var(--muted)]" : "text-[var(--text)]";
-
             const badge = m.type === 'Revision' ? 'bg-[var(--bg3)] text-[var(--violet)] border border-[var(--violet)]'
                         : m.type === 'Practice' ? 'bg-[var(--bg3)] text-[var(--amber)] border border-[var(--amber)]'
                         : 'bg-[var(--bg3)] text-[var(--water)] border border-[var(--water)]';
@@ -1237,25 +1598,42 @@ window.Missions = {
         const value = input.value.trim(); if (!value) return;
         AppStore.data.missions.push({ id: Date.now(), text: value, type: type.value, done: false });
         input.value = ""; AppStore.saveData(); this.render();
+        Toast.show(`Mission deployed: ${value.slice(0, 30)}${value.length > 30 ? '...' : ''}`, 'success');
     },
 
     toggle(id) {
-        const task = AppStore.data.missions.find(x => x.id === id); if (task) task.done = !task.done; AppStore.saveData(); this.render();
+        const task = AppStore.data.missions.find(x => x.id === id);
+        if (task) { task.done = !task.done; }
+        AppStore.saveData(); this.render();
     },
 
     del(id) {
-        AppStore.data.missions = AppStore.data.missions.filter(x => x.id !== id); AppStore.saveData(); this.render();
+        AppStore.data.missions = AppStore.data.missions.filter(x => x.id !== id);
+        AppStore.saveData(); this.render();
     }
 };
 
+// ──────────────────────────────────────────────────
+// TRACKER
+// ──────────────────────────────────────────────────
 window.Tracker = {
     renderErrors() {
         const tb = document.getElementById("error-list");
+        const emptyEl = document.getElementById("error-empty");
         if (!tb || !AppStore.data) return;
         tb.innerHTML = "";
 
+        if (!AppStore.data.errors.length) {
+            emptyEl?.classList.remove('hidden');
+            window.Dashboard.updateMetrics();
+            return;
+        }
+        emptyEl?.classList.add('hidden');
+
         AppStore.data.errors.forEach(e => {
-            const badgeClass = e.status === "Fixed" ? "bg-[var(--bg3)] text-[var(--leaf)] border-[var(--leaf)]" : "bg-[var(--bg3)] text-[var(--rose)] border-[var(--rose)]";
+            const badgeClass = e.status === "Fixed"
+                ? "bg-[var(--bg3)] text-[var(--leaf)] border-[var(--leaf)]"
+                : "bg-[var(--bg3)] text-[var(--rose)] border-[var(--rose)]";
 
             tb.innerHTML += `
                 <tr class="hover:bg-[var(--bg3)] transition-colors">
@@ -1276,36 +1654,64 @@ window.Tracker = {
         });
         window.Dashboard.updateMetrics();
     },
+
+    // UX FIX: renderScores now targets the correct tbody id="score-list"
     renderScores() {
         const scoreTb = document.getElementById("score-list");
+        const emptyEl = document.getElementById("score-empty");
         if (!scoreTb || !AppStore.data) return;
         scoreTb.innerHTML = "";
-        AppStore.data.mocks.forEach(m => {
-            scoreTb.innerHTML += `<tr class="hover:bg-[var(--bg3)] transition-colors"><td style="padding:14px" class="border-b border-[var(--border)]">${Utils.esc(m.date)}</td><td style="padding:14px" class="border-b border-[var(--border)] break-normal-word">${Utils.esc(m.name)}</td><td style="padding:14px" class="font-bold text-[var(--water)] border-b border-[var(--border)]">${m.score}%</td></tr>`;
+
+        if (!AppStore.data.mocks.length) {
+            emptyEl?.classList.remove('hidden');
+            return;
+        }
+        emptyEl?.classList.add('hidden');
+
+        // Show newest first
+        [...AppStore.data.mocks].reverse().forEach(m => {
+            const scoreColor = m.score >= 70 ? 'var(--leaf)' : m.score >= 40 ? 'var(--amber)' : 'var(--rose)';
+            scoreTb.innerHTML += `
+                <tr class="hover:bg-[var(--bg3)] transition-colors">
+                    <td style="padding:14px" class="border-b border-[var(--border)] text-[var(--muted)]">${Utils.esc(m.date)}</td>
+                    <td style="padding:14px" class="border-b border-[var(--border)] break-normal-word font-medium">${Utils.esc(m.name)}</td>
+                    <td style="padding:14px; font-weight:800; color:${scoreColor};" class="border-b border-[var(--border)]">${m.score}%</td>
+                </tr>
+            `;
         });
     },
 
     addError() {
         const topicEl = document.getElementById("err-topic"); const descEl = document.getElementById("err-desc"); const dateEl = document.getElementById("err-rev-date");
         const topic = topicEl.value.trim(); const desc = descEl.value.trim(); const revDate = dateEl.value;
-        if (!topic || !desc || !revDate) return;
+        if (!topic || !desc || !revDate) { Toast.show('Fill all error fields', 'error'); return; }
         AppStore.data.errors.push({ id: Date.now(), topic, desc, revDate, status: "Pending" });
-        topicEl.value = ""; descEl.value = ""; dateEl.value = ""; AppStore.saveData(); this.renderErrors();
+        topicEl.value = ""; descEl.value = ""; dateEl.value = "";
+        AppStore.saveData(); this.renderErrors();
+        Toast.show('Error logged for revision', 'success');
     },
 
     upd(id, value) {
-        const error = AppStore.data.errors.find(x => x.id === id); if (error) error.status = value; AppStore.saveData(); this.renderErrors();
+        const error = AppStore.data.errors.find(x => x.id === id);
+        if (error) error.status = value;
+        AppStore.saveData(); this.renderErrors();
+        if (value === 'Fixed') Toast.show('Error marked as fixed ✓', 'success');
     },
 
     addMock() {
         const dateEl = document.getElementById("mock-date"); const nameEl = document.getElementById("mock-name"); const scoreEl = document.getElementById("mock-score");
         const date = dateEl.value; const name = nameEl.value.trim(); const score = parseFloat(scoreEl.value);
-        if (!date || !name || Number.isNaN(score)) return;
+        if (!date || !name || Number.isNaN(score)) { Toast.show('Fill all mock test fields', 'error'); return; }
         AppStore.data.mocks.push({ date: date || new Date().toLocaleDateString(), name, score });
-        dateEl.value = ""; nameEl.value = ""; scoreEl.value = ""; AppStore.saveData(); this.renderScores(); window.Dashboard.updateCharts();
+        dateEl.value = ""; nameEl.value = ""; scoreEl.value = "";
+        AppStore.saveData(); this.renderScores(); window.Dashboard.updateCharts();
+        Toast.show(`Score saved: ${name} — ${score}%`, 'success');
     }
 };
 
+// ──────────────────────────────────────────────────
+// VAULT  (UX FIX: Read button + content preview)
+// ──────────────────────────────────────────────────
 window.Vault = {
     render() {
         const container = document.getElementById("vault-container");
@@ -1313,23 +1719,51 @@ window.Vault = {
         container.innerHTML = "";
 
         const db = AppStore.data.vaultData || {};
-        Object.keys(db).forEach(key => {
+        const keys = Object.keys(db);
+
+        if (!keys.length) {
+            container.innerHTML = `
+                <div class="empty-state col-span-2">
+                    <div class="es-icon">🗂️</div>
+                    <div class="es-title">Vault is empty</div>
+                    <div class="es-sub">Your workspace vault docs will appear here.</div>
+                </div>`;
+            return;
+        }
+
+        keys.forEach(key => {
             const doc = db[key];
             const payload = encodeURIComponent(doc.content || "");
             const title = encodeURIComponent(doc.title || "document");
+            // Content preview: first 140 chars, stripped of markdown-ish chars
+            const preview = (doc.content || "").replace(/\*|---/g, '').replace(/\n+/g, ' ').trim().slice(0, 140);
+
             container.innerHTML += `
-                <div class="os-card flex flex-col justify-between items-start gap-4 mb-4 bg-[var(--bg2)] hover:border-[var(--leaf)] transition-colors">
+                <div class="os-card flex flex-col justify-between items-start gap-3 bg-[var(--bg2)] hover:border-[var(--leaf)] transition-colors" style="cursor:default;">
                     <div class="w-full border-b border-[var(--border)] pb-3">
                         <div class="text-[10px] font-bold uppercase text-[var(--leaf)] tracking-widest mb-1">${Utils.esc(doc.category)}</div>
                         <h4 class="font-bold text-xl text-[var(--text)] break-normal-word">${Utils.esc(doc.title)}</h4>
-                        <p class="text-sm text-[var(--muted)] mt-1">Local File • ${Utils.esc(doc.size)}</p>
+                        <p class="text-sm text-[var(--muted)] mt-1">Local File · ${Utils.esc(doc.size)}</p>
                     </div>
-                    <button onclick="Vault.download('${title}', '${payload}')" class="os-btn-ghost w-full flex items-center justify-center gap-2">
-                        <span>&#11015;</span> Download Extract
-                    </button>
+                    ${preview ? `<div class="vault-preview">${Utils.esc(preview + (doc.content?.length > 140 ? '…' : ''))}</div>` : ''}
+                    <div class="flex gap-3 w-full flex-wrap">
+                        <button onclick="Vault.read('${key}')" class="os-btn-sm flex-1 flex items-center justify-center gap-2 !py-2.5">
+                            📖 Read
+                        </button>
+                        <button onclick="Vault.download('${title}', '${payload}')" class="os-btn-sm ghost-sm flex-1 flex items-center justify-center gap-2 !py-2.5">
+                            ⬇ Download
+                        </button>
+                    </div>
                 </div>
             `;
         });
+    },
+
+    // UX FIX: Read opens inline reader modal
+    read(key) {
+        const doc = AppStore.data.vaultData[key];
+        if (!doc) return;
+        VaultReader.open(doc);
     },
 
     download(title, encodedContent) {
@@ -1342,7 +1776,9 @@ window.Vault = {
     }
 };
 
-/* 🚀 BACON UPGRADE: CONTEXT-AWARE PYQ SIMULATOR (Now bridges localized text) */
+// ──────────────────────────────────────────────────
+// PYQ SIMULATOR
+// ──────────────────────────────────────────────────
 const PYQDatabases = {
     "UPSC": [
         { year: "2023", q: "Which of the following is an essential feature of a federal constitution?", opts: ["Written Constitution", "Single Citizenship", "Flexible Constitution", "Integrated Judiciary"], ans: 0, exp: "A written constitution is essential for a federal structure to clearly delineate powers between the center and states." },
@@ -1353,7 +1789,7 @@ const PYQDatabases = {
         { year: "2023", q: "What is the primary purpose of a 'Promise' in JavaScript?", opts: ["To style UI components", "To handle asynchronous operations", "To query the DOM", "To create a loop"], ans: 1, exp: "Promises represent the eventual completion (or failure) of an asynchronous operation." }
     ],
     "General Knowledge": [
-        { year: "2024", q: "Which organization is responsible for calculating the global Multidimensional Poverty Index (MPI)?", opts: ["World Bank", "UNDP and OPHI", "World Economic Forum", "IMF"], ans: 1, exp: "The MPI is jointly published by the United Nations Development Programme (UNDP) and the Oxford Poverty and Human Development Initiative (OPHI)." },
+        { year: "2024", q: "Which organization is responsible for calculating the global Multidimensional Poverty Index (MPI)?", opts: ["World Bank", "UNDP and OPHI", "World Economic Forum", "IMF"], ans: 1, exp: "The MPI is jointly published by the UNDP and the Oxford Poverty and Human Development Initiative (OPHI)." },
         { year: "2023", q: "What is the primary objective of the 'Artemis Accords'?", opts: ["Regulating AI development", "Peaceful exploration of the Moon and space", "Global trade tariffs", "Ocean cleanup"], ans: 1, exp: "The Artemis Accords establish a framework for peaceful and cooperative space exploration, led by NASA." }
     ]
 };
@@ -1366,8 +1802,6 @@ window.PYQ = {
         const rawDb = PYQDatabases[cat] || [
             { year: "2026", q: `What is the core principle of mastering this module?`, opts: ["Memorization", "Consistent practice and review", "Skipping fundamentals", "Passive reading"], ans: 1, exp: "Active recall and consistent practice are scientifically proven to be the most effective learning methods." }
         ];
-
-        // 🚀 BRIDGE: Translate the dynamic questions to selected language
         return rawDb.map(item => ({
             year: item.year,
             q: ComboBridge.t(item.q),
@@ -1382,7 +1816,8 @@ window.PYQ = {
         if (!qEl || !AppStore.config) return;
 
         this.db = this.buildDB(); if (this.c >= this.db.length) this.c = 0; const q = this.db[this.c];
-        document.getElementById("pyq-year").innerText = `${AppStore.config.category} Mock Q • ${q.year}`; qEl.innerText = q.q;
+        document.getElementById("pyq-year").innerText = `${AppStore.config.category} Mock Q · ${q.year}`;
+        qEl.innerText = q.q;
 
         const optEl = document.getElementById("pyq-options"); optEl.innerHTML = "";
         q.opts.forEach((o, i) => {
@@ -1400,7 +1835,9 @@ window.PYQ = {
         this.locked = true;
         const q = this.db[this.c]; const correct = idx === q.ans;
 
-        AppStore.data.pyqStats.attempted += 1; if (correct) AppStore.data.pyqStats.correct += 1; AppStore.saveData();
+        AppStore.data.pyqStats.attempted += 1;
+        if (correct) AppStore.data.pyqStats.correct += 1;
+        AppStore.saveData();
 
         document.getElementById("pyq-feedback").classList.remove("hidden");
         document.getElementById("pyq-status").innerText = correct ? "Correct! ✓" : "Incorrect ✕";
@@ -1414,6 +1851,9 @@ window.PYQ = {
     next() { this.c += 1; this.render(); }
 };
 
+// ──────────────────────────────────────────────────
+// YOUTUBE API
+// ──────────────────────────────────────────────────
 window.YouTubeAPI = {
     searchFromPrompt() {
         const promptValue = window.prompt("What concept do you want to search on YouTube?");
@@ -1423,6 +1863,9 @@ window.YouTubeAPI = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// PDF EXTRACTOR
+// ──────────────────────────────────────────────────
 window.PDFExtractor = {
     async processFile() {
         const fileInput = document.getElementById("pdf-upload"); const status = document.getElementById("pdf-status"); const file = fileInput.files?.[0];
@@ -1445,11 +1888,11 @@ window.PDFExtractor = {
 
             let extractedTopics = [];
             const chapterRegex = /(?:Chapter|Unit|Module|Topic)\s*\d+[\s:\.\-]+([A-Za-z0-9\s,&]+)/gi; let match;
-            while((match = chapterRegex.exec(cleanText)) !== null) {
+            while ((match = chapterRegex.exec(cleanText)) !== null) {
                 const tn = match[1].trim();
-                if(tn.length > 3 && tn.length < 60) extractedTopics.push(tn);
+                if (tn.length > 3 && tn.length < 60) extractedTopics.push(tn);
             }
-            if(extractedTopics.length < 2) extractedTopics = ["Introduction", "Core Concepts", "Analysis", "Summary"];
+            if (extractedTopics.length < 2) extractedTopics = ["Introduction", "Core Concepts", "Analysis", "Summary"];
             extractedTopics = [...new Set(extractedTopics)].slice(0, 10);
 
             AppStore.data.customModules.push({
@@ -1459,14 +1902,19 @@ window.PDFExtractor = {
 
             AppStore.saveData(); Vault.render(); StudyEngine.render(); Dashboard.updateCharts();
             status.textContent = `Successfully extracted checklist and text from ${file.name}.`;
+            Toast.show(`PDF extracted: ${file.name.replace(/\.pdf$/i, '')}`, 'info');
         } catch (error) {
             status.textContent = "PDF extraction failed. Try a non-scanned PDF.";
+            Toast.show('PDF extraction failed', 'error');
         } finally {
             fileInput.value = "";
         }
     }
 };
 
+// ──────────────────────────────────────────────────
+// ORB / SEARCH MODAL  (UX FIX: result count bar)
+// ──────────────────────────────────────────────────
 window.Orb = {
     isOpen: false,
 
@@ -1476,6 +1924,7 @@ window.Orb = {
         const modal = document.getElementById("search-modal");
         modal.classList.add("active");
         document.getElementById("search-results").innerHTML = `<div class="empty" style="padding: 24px; text-align: center; color: var(--muted);">Search syllabus, missions, errors, vault content, or press Enter for YouTube.</div>`;
+        document.getElementById("search-count-bar").style.display = "none";
         setTimeout(() => document.getElementById("search-input")?.focus(), 100);
         document.body.style.overflow = "hidden";
     },
@@ -1485,15 +1934,18 @@ window.Orb = {
         const modal = document.getElementById("search-modal");
         modal.classList.remove("active");
         document.getElementById("search-input").value = "";
+        document.getElementById("search-count-bar").style.display = "none";
         document.body.style.overflow = "auto";
     },
 
     search(term) {
         const results = document.getElementById("search-results");
+        const countBar = document.getElementById("search-count-bar");
         const query = term.trim().toLowerCase();
 
         if (!query) {
             results.innerHTML = `<div class="empty" style="padding: 24px; text-align: center; color: var(--muted);">Search syllabus, missions, errors, vault content, or press Enter for YouTube.</div>`;
+            countBar.style.display = "none";
             return;
         }
 
@@ -1518,19 +1970,26 @@ window.Orb = {
             if (`${doc.title} ${doc.category} ${doc.content}`.toLowerCase().includes(query)) matches.push({ type: "Vault File", title: doc.title, detail: doc.category, icon: "🗂️", color: "var(--amber)" });
         });
 
+        // UX FIX: show result count
+        if (matches.length > 0) {
+            countBar.style.display = "block";
+            countBar.textContent = `${Math.min(matches.length, 20)} result${matches.length !== 1 ? 's' : ''} found`;
+        }
+
         if (!matches.length) {
+            countBar.style.display = "none";
             results.innerHTML = `<div class="empty" style="padding: 24px; text-align: center; color: var(--muted);">No results found. Press Enter to search YouTube.</div>`;
             return;
         }
 
         results.innerHTML = matches.slice(0, 20).map(item => `
             <div class="search-item" onclick="Orb.close()">
-                <div class="si-icon" style="color: ${item.color}">${item.icon}</div>
-                <div class="si-text">
-                    <div class="si-title break-normal-word">${Utils.esc(item.title)}</div>
-                    <div class="si-desc break-normal-word">${Utils.esc(item.detail)}</div>
+                <div style="color: ${item.color}; font-size: 1.2rem;">${item.icon}</div>
+                <div style="flex:1; min-width:0;">
+                    <div class="font-bold break-normal-word" style="font-size:.9rem;">${Utils.esc(item.title)}</div>
+                    <div class="break-normal-word" style="font-size:.78rem; color:var(--muted); margin-top:2px;">${Utils.esc(item.detail)}</div>
                 </div>
-                <span class="chip" style="background:var(--bg); border:1px solid var(--border);">${Utils.esc(item.type)}</span>
+                <span class="chip" style="background:var(--bg); border:1px solid var(--border); flex-shrink:0;">${Utils.esc(item.type)}</span>
             </div>
         `).join("");
     },
@@ -1543,7 +2002,9 @@ window.Orb = {
     }
 };
 
-/* 🚀 BACON UPGRADE: CONTEXT-AWARE KINETIC ENGINE (Now bridges localized text) */
+// ──────────────────────────────────────────────────
+// KINETIC DATABASES  (feat: UPSC Basu/Territory module)
+// ──────────────────────────────────────────────────
 const KineticDatabases = {
     "General Knowledge": [
         { "Question_ID": "GK_001", "Question_Text": "Which global organization publishes the annual 'World Economic Outlook' report?", "Correct_Answer": "International Monetary Fund (IMF)", "Distractor_1": "World Bank", "Distractor_2": "World Economic Forum", "Explanation_Short": "The IMF publishes the WEO twice a year to project global growth." },
@@ -1572,29 +2033,29 @@ const KineticDatabases = {
 
 const chemText = t => String(t||"").replace(/_(\d+)/g,"<sub>$1</sub>").replace(/\^([0-9+\-]+)/g,"<sup>$1</sup>").replace(/<->|↔/g,"⇌");
 
+// ──────────────────────────────────────────────────
+// PHYSICS CONTROLLER (Kinetic drag engine)
+// ──────────────────────────────────────────────────
 class PhysicsController {
     constructor(el, cbs, sensorsActive = true) {
-        this.el = el; this.cbs = cbs; 
-        this.qEl = el.querySelector(".k-card-q"); 
-        this.active = false; this.locked = false; this.awaitingRecenter = true; 
-        this.current = {x:0, y:0}; this.target = {x:0, y:0};  
-        
+        this.el = el; this.cbs = cbs;
+        this.qEl = el.querySelector(".k-card-q");
+        this.active = false; this.locked = false; this.awaitingRecenter = true;
+        this.current = {x:0, y:0}; this.target = {x:0, y:0};
+
         this.labels = {UP:el.querySelector(".sl-up"), LEFT:el.querySelector(".sl-left"), RIGHT:el.querySelector(".sl-right"), DOWN:el.querySelector(".sl-down")};
         this.el.classList.add('locked');
-        
-        const s = e => this.startDrag(e.touches?e.touches[0]:e); 
-        const m = e => this.move(e.touches?e.touches[0]:e); 
+
+        const s = e => this.startDrag(e.touches?e.touches[0]:e);
+        const m = e => this.move(e.touches?e.touches[0]:e);
         const e2 = () => this.end();
-        
+
         el.addEventListener("mousedown",s); window.addEventListener("mousemove",m); window.addEventListener("mouseup",e2);
-        el.addEventListener("touchstart",s,{passive:false}); 
-        el.addEventListener("touchmove",ev => { 
-            if(this.active) {
-                ev.preventDefault(); 
-                ev.stopPropagation();
-            }
-            m(ev); 
-        },{passive:false}); 
+        el.addEventListener("touchstart",s,{passive:false});
+        el.addEventListener("touchmove",ev => {
+            if(this.active) { ev.preventDefault(); ev.stopPropagation(); }
+            m(ev);
+        },{passive:false});
         el.addEventListener("touchend",e2);
 
         this.SPHERE_RADIUS_PX = 1000;
@@ -1616,7 +2077,7 @@ class PhysicsController {
     cleanup() { cancelAnimationFrame(this.raf); window.removeEventListener("deviceorientation", this.handleOrientation); }
 
     loop() {
-        if(this.active || this.locked) return; 
+        if(this.active || this.locked) return;
         this.current.x += (this.target.x - this.current.x) * this.BALL_WEIGHT;
         this.current.y += (this.target.y - this.current.y) * this.BALL_WEIGHT;
 
@@ -1637,7 +2098,7 @@ class PhysicsController {
 
     handleOrientation(event) {
         if(this.active || this.locked) return;
-        let g = event.gamma; let b = event.beta - 45; 
+        let g = event.gamma; let b = event.beta - 45;
         let radX = (g * Math.PI) / 180; let radY = (b * Math.PI) / 180;
         const MAX_RAD = 20 * Math.PI / 180;
         radX = Math.max(-MAX_RAD, Math.min(MAX_RAD, radX)); radY = Math.max(-MAX_RAD, Math.min(MAX_RAD, radY));
@@ -1646,7 +2107,7 @@ class PhysicsController {
     }
 
     commitWithAnimation(dx, dy) {
-        this.locked = true; this.cleanup(); 
+        this.locked = true; this.cleanup();
         const flyX = dx * 6; const flyY = dy * 6;
         this.el.style.transition = "0.4s cubic-bezier(0.2, 0.8, 0.2, 1)";
         this.el.style.transform = `translate(${flyX}px, ${flyY}px) rotate(${flyX/15}deg)`;
@@ -1684,25 +2145,27 @@ class PhysicsController {
     }
 }
 
+// ──────────────────────────────────────────────────
+// KINETIC ENGINE
+// ──────────────────────────────────────────────────
 window.KineticEngine = {
     stackEl: document.getElementById('k-stack'),
     xpEl: document.getElementById('k-xp'),
     totEl: document.getElementById('k-total'),
     progEl: document.getElementById('k-progress'),
-    
-    raw: [], pool: [], wrong: [], 
+
+    raw: [], pool: [], wrong: [],
     xp: 0, total: 0,
-    
+
     init() {
         const userCategory = AppStore.config ? AppStore.config.category : "General Knowledge";
         const selectedDB = KineticDatabases[userCategory] || KineticDatabases["Default"];
 
-        // 🚀 BRIDGE: Localize Question texts via ComboBridge
         this.raw = selectedDB.map(d => ({
-            id: d.Question_ID, 
+            id: d.Question_ID,
             q: ComboBridge.t(d.Question_Text),
-            u: ComboBridge.t(d.Correct_Answer), 
-            l: ComboBridge.t(d.Distractor_1), 
+            u: ComboBridge.t(d.Correct_Answer),
+            l: ComboBridge.t(d.Distractor_1),
             r: ComboBridge.t(d.Distractor_2),
             logic: ComboBridge.t(d.Explanation_Short)
         }));
@@ -1726,8 +2189,8 @@ window.KineticEngine = {
     },
 
     renderMenu() {
-        this.renderCard(ComboBridge.t(`ALCHEMIST ENGINE\n${this.raw.length} UNITS READY`), 
-            {up: ComboBridge.t("START QUIZ"), down: ComboBridge.t("ENABLE GYRO"), left: "", right: ""}, 
+        this.renderCard(ComboBridge.t(`ALCHEMIST ENGINE\n${this.raw.length} UNITS READY`),
+            {up: ComboBridge.t("START QUIZ"), down: ComboBridge.t("ENABLE GYRO"), left: "", right: ""},
             (dir) => {
                 if(dir === "UP") this.startQuiz();
                 else if (dir === "DOWN") this.requestGyro();
@@ -1748,7 +2211,7 @@ window.KineticEngine = {
     },
 
     startQuiz() {
-        this.pool = this.shuffle([...this.raw]).slice(0, 10); 
+        this.pool = this.shuffle([...this.raw]).slice(0, 10);
         this.total = this.pool.length;
         this.xp = 0; this.wrong = [];
         this.updateUI();
@@ -1764,16 +2227,16 @@ window.KineticEngine = {
         const d = this.pool.shift();
         const opts = this.shuffle([d.u, d.l, d.r]);
         const map = { up: opts[0], left: opts[1], right: opts[2] };
-        
+
         this.renderCard(d.q, map, (dir) => {
             let picked = null;
             if(dir==="UP") picked = map.up; if(dir==="LEFT") picked = map.left; if(dir==="RIGHT") picked = map.right;
-            
+
             if(picked && String(picked).trim() === String(d.u).trim()) {
-                this.xp++; 
+                this.xp++;
             } else {
-                if(picked) this.wrong.push(d); 
-                else this.pool.push(d); 
+                if(picked) this.wrong.push(d);
+                else this.pool.push(d);
             }
             this.updateUI();
             this.nextQ();
@@ -1782,7 +2245,7 @@ window.KineticEngine = {
 
     reviewMode() {
         const d = this.wrong[0];
-        this.renderCard(ComboBridge.t(`REVIEW NEEDED\n\n${d.logic}`), {up: ComboBridge.t("GOT IT (RETRY)"), down: "", left: "", right: ""}, (dir) => {
+        this.renderCard(ComboBridge.t(`REVIEW NEEDED\n\n${d.logic}`), {up: ComboBridge.t("GOT IT (RETRY)"), down: "", left: "", right: ""}, () => {
             this.wrong.shift(); this.pool.unshift(d);
             this.nextQ();
         }, false);
@@ -1790,13 +2253,14 @@ window.KineticEngine = {
 
     report() {
         const pct = Math.round((this.xp / this.total) * 100);
-        this.renderCard(ComboBridge.t(`MODULE COMPLETE\n\n${this.xp} / ${this.total} (${pct}%)\n\nSwipe UP to save score to OS.`), 
-            {up: ComboBridge.t("SAVE TO OS"), down: ComboBridge.t("RESTART")}, 
+        this.renderCard(ComboBridge.t(`MODULE COMPLETE\n\n${this.xp} / ${this.total} (${pct}%)\n\nSwipe UP to save score to OS.`),
+            {up: ComboBridge.t("SAVE TO OS"), down: ComboBridge.t("RESTART")},
             (dir) => {
                 if(dir === "UP") {
                     AppStore.data.mocks.push({ date: new Date().toLocaleDateString(), name: "Alchemist Kinetic Run", score: pct });
                     AppStore.saveData();
-                    document.querySelector('.nl[data-tab="tracker"]').click(); 
+                    Toast.show(`Kinetic score saved: ${pct}%`, 'success');
+                    document.querySelector('.nl[data-tab="tracker"]').click();
                     this.renderMenu();
                 } else {
                     this.renderMenu();
@@ -1813,17 +2277,18 @@ window.KineticEngine = {
     }
 };
 
+// ──────────────────────────────────────────────────
+// BOOT
+// ──────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
     Bootloader.init();
 
     document.getElementById("search-input")?.addEventListener("input", (e) => Orb.search(e.target.value));
     document.getElementById("search-input")?.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            Orb.submit(e.target.value);
-        }
+        if (e.key === "Enter") { e.preventDefault(); Orb.submit(e.target.value); }
     });
     document.getElementById("search-modal")?.addEventListener("click", (e) => { if (e.target.id === "search-modal") Orb.close(); });
+    document.getElementById("vault-reader-modal")?.addEventListener("click", (e) => { if (e.target.id === "vault-reader-modal") VaultReader.close(); });
     document.addEventListener("keydown", (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); Orb.isOpen ? Orb.close() : Orb.open(); }
         if (e.key === "Escape" && Orb.isOpen) Orb.close();
