@@ -1,13 +1,17 @@
 {
   "id": "context-packager",
   "name": "Context Packager",
-  "title": "Context Packager",
-  "description": "Collect key context and package it into a reusable handoff document for downstream tools.",
-  "inputs": ["task", "constraints", "artifacts"],
-  "outputs": ["context_package"],
-  "relatedTools": ["task-splitter", "repo-improvement-brief", "output-evaluator"],
-  "category": "system",
-  "audience": ["operators", "coders", "researchers"],
-  "entry": "tools/context-packager/index.html",
-  "tags": ["context", "handoff", "simba-workflows"]
+  "description": "Packages project context into a ranked brief for downstream coding agents.",
+  "category": "coders",
+  "audience": "developers",
+  "inputs": ["project", "stack", "existing", "task", "constraints"],
+  "outputs": ["context_packet"],
+  "tags": ["context", "handoff", "pipeline"],
+  "pipeline": {
+    "position": 1,
+    "next": "spec-builder",
+    "prev": null,
+    "busIn": null,
+    "busOut": "agent:context-packager:output"
+  }
 }

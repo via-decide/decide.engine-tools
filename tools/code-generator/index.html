@@ -6,34 +6,36 @@
   <title>Code Generator</title>
   <link rel="stylesheet" href="../../shared/shared.css" />
   <script src="../../shared/vd-nav-fix.js"></script>
+  <script src="../../shared/tool-storage.js"></script>
+  <style>
+    .banner { border:1px solid var(--line); border-radius:10px; padding:10px; margin-bottom:12px; color:var(--muted); }
+    .pipeline-step.active { color: var(--accent-2); font-weight: 700; }
+    .pipeline-step.past { color: var(--muted); }
+    .pipeline-step.future { color: var(--text); opacity: 0.7; }
+    .pipeline-arrow { margin: 0 6px; color: var(--muted); }
+  </style>
 </head>
-<body>
+<body data-tool-id="code-generator">
   <main class="app">
-    <header>
-      <h1>Code Generator</h1>
-      <p>Generate standalone HTML tool skeletons from prompts or specs.</p>
-    </header>
+    <header><h1>Code Generator</h1><p>Generate an optimized execution prompt for Codex.</p></header>
     <section class="grid">
       <article class="card">
-        <label for="toolName">Tool Name</label>
-        <input id="toolName" placeholder="e.g., Insight Mapper" />
-        <label for="description">Tool Description</label>
-        <textarea id="description"></textarea>
-        <label for="inputs">Input Fields (comma separated)</label>
-        <input id="inputs" placeholder="idea, context" />
+        <div id="banner" class="banner">Manual spec input mode.</div>
+        <label for="spec">Spec</label><textarea id="spec"></textarea>
+        <label for="lang">Target language/framework</label><input id="lang" placeholder="e.g. JavaScript + Vanilla JS" />
+        <label for="style">Style guide (optional)</label><input id="style" placeholder="ESM, async/await, no classes" />
+        <label for="test">Test requirement</label>
+        <select id="test"><option>none</option><option>unit</option><option>integration</option></select>
         <div class="toolbar">
-          <button id="generate" class="primary">Generate Skeleton</button>
+          <button id="generate" class="primary">Generate Prompt</button>
           <button id="copy">Copy</button>
-          <button id="download">Download</button>
+          <button id="pass" class="secondary">→ After running Codex, pass to Code Reviewer</button>
         </div>
       </article>
-      <article class="card">
-        <h2>Generated HTML Skeleton</h2>
-        <pre id="output" class="output"></pre>
-      </article>
+      <article class="card"><h2>Execution Prompt</h2><pre id="output" class="output"></pre></article>
     </section>
+    <section class="card" id="pipeline"></section>
   </main>
-  <script src="../../shared/tool-storage.js"></script>
-  <script src="tool.js"></script>
+  <script type="module" src="tool.js"></script>
 </body>
 </html>

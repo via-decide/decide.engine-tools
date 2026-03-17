@@ -281,7 +281,41 @@
       .mars-desc{margin: 0 auto 24px;}
       .sim-visual{display:none;}
       .mars-left { display: flex; flex-direction: column; align-items: center; }
+      .orchard-layer-grid { grid-template-columns: 1fr; }
+      .layer-wave-actions { grid-template-columns: 1fr; }
     }
+
+    .btn-orchard-outline {
+      background: transparent;
+      border: 1px solid var(--leaf);
+      box-shadow: none;
+      color: var(--text);
+    }
+    .btn-orchard-outline:hover { background: rgba(82,183,86,.08); filter: none; transform: translateY(-2px); }
+    .btn-orchard-outline:active { top: 0; transform: translateY(0); }
+    .small-orchard-note { margin-top: 12px; color: var(--muted); font-size: 0.9rem; }
+    .small-orchard-note a { color: var(--leaf); font-weight: 700; }
+
+    .layer-note { color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
+    .orchard-layer-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 14px; }
+    .layer-card { border: 1px solid var(--border); border-radius: var(--r); padding: 16px; background: var(--bg2); }
+    .layer-farm { border-color: var(--leaf); background: rgba(82,183,86,.05); }
+    .layer-commons { border-color: var(--amber); background: rgba(245,158,11,.05); }
+    .layer-market { border-color: var(--water); background: rgba(41,182,246,.05); }
+    .layer-sub { color: var(--muted); margin-bottom: 8px; }
+    .layer-status { display: inline-block; font-size: 0.78rem; font-weight: 700; margin-bottom: 10px; }
+    .layer-links { display: grid; gap: 8px; margin-top: 10px; }
+    .layer-links button,
+    .layer-links span {
+      display: inline-flex; justify-content: space-between; align-items: center;
+      width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg3); color: var(--text); font-size: 0.84rem;
+    }
+    .layer-links button { cursor: pointer; }
+    .layer-links.locked span { opacity: 0.5; cursor: default; }
+    .layer-wave { margin-top: 12px; border: 1px solid var(--border); border-radius: var(--r); padding: 16px; background: var(--bg2); }
+    .layer-wave-actions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin-top: 12px; }
+    .layer-wave-actions button { width: 100%; }
 
     /* ── MISSION CTA ── */
     .mission-wrap {
@@ -401,6 +435,7 @@
             <button class="sidebar-nav-btn" onclick="Sidebar.go('research')"><span>🔬 Research</span><span>›</span></button>
             <button class="sidebar-nav-btn" onclick="Sidebar.go('all')"><span>🧰 All Tools</span><span>›</span></button>
             <button class="sidebar-nav-btn" onclick="Sidebar.go('games')"><span>🎮 Games & Sims</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('orchard-engine')"><span>🌳 Orchard Engine</span><span>›</span></button>
         </div>
         <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 12px;">Quick Actions</div>
         <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -427,6 +462,7 @@
       <a class="nl" href="#research" data-s="research">Research</a>
       <a class="nl" href="#all" data-s="all">All Tools</a>
       <a class="nl" href="#games" data-s="games">Games</a>
+      <a class="nl" href="#orchard-engine" data-s="orchard-engine">Orchard</a>
       <a class="nl" href="./ui/studyos.html" data-s="studyos">Study OS</a>
     </div>
   </div>
@@ -548,7 +584,11 @@
                 <div class="orchard-badge">Ecological Engine</div>
                 <h2 class="mars-title">Orchard Ecosystem</h2>
                 <p class="mars-desc">Balance soil nutrients, manage water tables, and cultivate a thriving, sustainable farm ecosystem. A relaxing but deeply strategic simulation.</p>
-                <button class="btn-sim btn-orchard" onclick="App.openTool('Orchard Sim')">▶ Enter Orchard</button>
+                <div class="btn-row">
+                  <button class="btn-sim btn-orchard" onclick="App.openTool('Orchard Sim')">▶ Enter Orchard Simulation</button>
+                  <button class="btn-sim btn-orchard-outline" onclick="App.openTool('Player Signup')">🌱 Start Your Farm →</button>
+                </div>
+                <p class="small-orchard-note">New player? Start with <a href="#" onclick="App.openTool('Player Signup'); return false;">Player Signup</a> → <a href="#" onclick="App.openTool('Orchard Profile'); return false;">Orchard Profile</a> → <a href="#" onclick="App.openTool('Starter Farm'); return false;">Starter Farm</a></p>
             </div>
             <div class="sim-visual">
                 <div class="orchard-planet"></div>
@@ -576,6 +616,77 @@
                 <span class="card-link">Launch Sim</span>
             </div>
         </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <section id="orchard-engine">
+    <div class="w">
+      <div class="sh">
+        <div class="eyebrow">🌳 Orchard Engine · Merit-Based Career Game</div>
+        <h2>Three layers. One ecosystem.</h2>
+        <p>Build your farm. Join the commons. Enter the market.</p>
+        <p class="layer-note">Layer 2 and Layer 3 unlock after Layer 1 is validated.</p>
+      </div>
+
+      <div class="orchard-layer-grid">
+        <article class="layer-card layer-farm">
+          <h3>Layer 1 · Farm</h3>
+          <p class="layer-sub">Grow, earn, rank.</p>
+          <span class="layer-status">● Active — Validate First</span>
+          <p>Plant seeds, run daily quests, build root strength. Fair ranking is validated before Layer 2 opens.</p>
+          <div class="layer-links">
+            <button onclick="App.openTool('Player Signup')">🌱 Player Signup →</button>
+            <button onclick="App.openTool('Orchard Profile')">🧑‍🌾 Orchard Profile →</button>
+            <button onclick="App.openTool('Starter Farm')">🏡 Starter Farm →</button>
+            <button onclick="App.openTool('Root Calculator')">🌿 Root Calculator →</button>
+            <button onclick="App.openTool('Trunk Growth')">🌲 Trunk Growth →</button>
+            <button onclick="App.openTool('Fruit Yield')">🍎 Fruit Yield →</button>
+            <button onclick="App.openTool('Daily Quests')">📋 Daily Quests →</button>
+            <button onclick="App.openTool('Weekly Harvest')">🌾 Weekly Harvest →</button>
+            <button onclick="App.openTool('Fair Ranking')">🏆 Fair Ranking →</button>
+          </div>
+        </article>
+
+        <article class="layer-card layer-commons">
+          <h3>Layer 2 · Commons</h3>
+          <p class="layer-sub">Share, validate, trust.</p>
+          <span class="layer-status">🔒 Unlocks after Layer 1 validation</span>
+          <p>Seed exchange, peer circles, trust scoring. Collaboration tools that depend on a proven fair Layer 1.</p>
+          <div class="layer-links locked">
+            <span>🫘 Seed Exchange →</span>
+            <span>🤝 Fruit Sharing →</span>
+            <span>⭕ Circle Builder →</span>
+            <span>✅ Peer Validation →</span>
+            <span>⭐ Trust Score →</span>
+          </div>
+        </article>
+
+        <article class="layer-card layer-market">
+          <h3>Layer 3 · Market</h3>
+          <p class="layer-sub">Recruit, discover, hire.</p>
+          <span class="layer-status">🔒 Unlocks after Layer 2 validation</span>
+          <p>Recruiter dashboard, discovery search, hire readiness. The market layer amplifies trust built in Layer 2.</p>
+          <div class="layer-links locked">
+            <span>💼 Recruiter Dashboard →</span>
+            <span>🔍 Discovery Search →</span>
+            <span>🎯 Hire Readiness →</span>
+            <span>🤖 AI Coach →</span>
+            <span>📈 Growth Path →</span>
+          </div>
+        </article>
+      </div>
+
+      <article class="layer-wave">
+        <h3>Wave 1 — Validate Before Expanding</h3>
+        <p>Run synthetic players through the Layer 1 loop. Confirm fair ranking before Layer 2 goes live.</p>
+        <div class="layer-wave-actions">
+          <button onclick="App.openTool('Synthetic Players')">🧪 Synthetic Players</button>
+          <button onclick="App.openTool('Wave 1 Simulator')">🌊 Wave 1 Simulator</button>
+          <button onclick="App.openTool('Balance Dashboard')">⚖️ Balance Dashboard</button>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -684,14 +795,43 @@ const TOOLS_DB = [
     { name: "Revenue Forecaster", cat: "business", desc: "Model SaaS MRR growth and churn.", icon: "📈", engine: false },
     { name: "Meeting Cost Calculator", cat: "business", desc: "Calculate the literal cost of meetings.", icon: "⏱️", engine: false },
     { name: "Pomodoro Timer", cat: "misc", desc: "Classic focus timer with ambient noise.", icon: "🍅", engine: false },
-
-    // Simulations & Games from Repo
     { name: "Mars Colony", cat: "system", desc: "System dynamics survival simulation engine.", icon: "🚀", engine: true },
     { name: "Orchard Sim", cat: "system", desc: "Ecological farming and resource simulator.", icon: "🌳", engine: true },
     { name: "Grid Evolution", cat: "system", desc: "Cellular automata artificial life simulator.", icon: "🧬", engine: true },
     { name: "Market Dynamics", cat: "business", desc: "Global economy supply and demand simulator.", icon: "📉", engine: true },
-    { name: "Traffic Router", cat: "system", desc: "City road network optimization puzzle.", icon: "🚦", engine: true }
-];
+    { name: "Traffic Router", cat: "system", desc: "City road network optimization puzzle.", icon: "🚦", engine: true },
+
+    { name: "Player Signup", cat: "system", desc: "Create your orchard player profile and begin Layer 1.", icon: "🌱", engine: true },
+    { name: "Orchard Profile", cat: "system", desc: "Build and manage your orchard identity and stats.", icon: "🧑‍🌾", engine: true },
+    { name: "Starter Farm", cat: "system", desc: "Generate your initial farm layout and seed inventory.", icon: "🏡", engine: true },
+    { name: "Root Calculator", cat: "system", desc: "Calculate root strength from soil and growth inputs.", icon: "🌿", engine: true },
+    { name: "Trunk Growth", cat: "system", desc: "Model trunk growth over time using engine variables.", icon: "🌲", engine: true },
+    { name: "Fruit Yield", cat: "system", desc: "Compute expected fruit yield for a harvest cycle.", icon: "🍎", engine: true },
+    { name: "Daily Quests", cat: "system", desc: "Generate and track daily objectives in the orchard.", icon: "📋", engine: true },
+    { name: "Weekly Harvest", cat: "system", desc: "Run the weekly harvest engine and update scores.", icon: "🌾", engine: true },
+    { name: "Fair Ranking", cat: "system", desc: "Compute fair leaderboard positions across players.", icon: "🏆", engine: true },
+    { name: "Seed Exchange", cat: "system", desc: "Trade and share seeds within the commons layer.", icon: "🫘", engine: true },
+    { name: "Fruit Sharing", cat: "system", desc: "Commons-layer fruit distribution and gifting.", icon: "🤝", engine: true },
+    { name: "Circle Builder", cat: "system", desc: "Form and manage peer circles for collaboration.", icon: "⭕", engine: true },
+    { name: "Peer Validation", cat: "system", desc: "Validate contributions through peer review.", icon: "✅", engine: true },
+    { name: "Trust Score", cat: "system", desc: "Calculate and display player trust ratings.", icon: "⭐", engine: true },
+    { name: "Recruiter Dashboard", cat: "system", desc: "Discover and evaluate players for opportunities.", icon: "💼", engine: true },
+    { name: "Discovery Search", cat: "system", desc: "Search the orchard for players, skills, and farms.", icon: "🔍", engine: true },
+    { name: "Hire Readiness", cat: "system", desc: "Score a player's readiness for real-world roles.", icon: "🎯", engine: true },
+    { name: "AI Coach", cat: "system", desc: "Get AI-guided growth recommendations for your farm.", icon: "🤖", engine: true },
+    { name: "Growth Path", cat: "system", desc: "Visualise your recommended progression through layers.", icon: "📈", engine: true },
+    { name: "Synthetic Players", cat: "system", desc: "Generate test players for Layer 1 wave simulation.", icon: "🧪", engine: true },
+    { name: "Wave 1 Simulator", cat: "system", desc: "Run 30/60/90-day simulations of the Layer 1 loop.", icon: "🌊", engine: true },
+    { name: "Balance Dashboard", cat: "system", desc: "Analyse sim output and render a balance verdict.", icon: "⚖️", engine: true },
+
+    { name: "Prompt Alchemy", cat: "creators", desc: "Transform rough ideas into structured, powerful prompts.", icon: "⚗️", engine: false },
+    { name: "Sales Dashboard", cat: "business", desc: "Track sales pipeline and revenue metrics.", icon: "📊", engine: false },
+    { name: "Founder Toolkit", cat: "business", desc: "Essential frameworks and templates for founders.", icon: "🚀", engine: false },
+    { name: "Decision Brief", cat: "business", desc: "Structure complex decisions into clear briefs.", icon: "📋", engine: false },
+    { name: "Wings of Fire Quiz", cat: "education", desc: "Immersive quiz game set in the Wings of Fire world.", icon: "🐉", engine: false },
+    { name: "Agent Builder", cat: "coders", desc: "Design and configure AI agents and their workflows.", icon: "🤖", engine: false },
+    { name: "App Generator", cat: "coders", desc: "Scaffold complete app templates from a description.", icon: "⚡", engine: false }
+]
 
 const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc' };
 const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other' };
@@ -699,30 +839,56 @@ const DEFAULT_ICONS = { creators: '🎨', coders: '🛠️', researchers: '🔬'
 
 // Fixed Routing Dictionary mapping explicitly to Repo Paths
 const ROUTE_ALIASES = {
-    'student research':                  'student-research/index.html',
-    'multi-source research':             'multi-source-research-explained/index.html',
-    'multi-source synthesizer':          'multi-source-research-explained/index.html',
-    'interview prep':                    'interview-prep/index.html',
-    'interview prep framework':          'interview-prep/index.html',
-    'workflow gallery':                  'tools/workflow-template-gallery/index.html',
-    'context packager':                  'tools/context-packager/index.html', 
-    'color palette generator':           'tools/color-palette/index.html',
-    'typography scale calculator':       'tools/engine/typography-scale-calculator/index.html',
-    'json formatter':                    'tools/json-formatter/index.html',
-    'regex tester':                      'tools/regex-tester/index.html',
-    'revenue forecaster':                'tools/revenue-forecaster/index.html',
-    'meeting cost calculator':           'tools/engine/meeting-cost-calculator/index.html',
-    'pomodoro timer':                    'tools/pomodoro/index.html',
-    
-    // Repaired explicit local routes for Games
-    'mars colony':                       'mars.html',
-    'orchard sim':                       'tools/eco-engine-test/index.html',
-    'grid evolution':                    'tools/engine/grid-evolution/index.html',
-    'market dynamics':                   'tools/engine/market-dynamics/index.html',
-    'traffic router':                    'tools/engine/traffic-router/index.html',
-    
-    'github repo':                       'https://github.com/via-decide/decide.engine-tools',
-};
+    'student research': 'student-research/index.html',
+    'multi-source research': 'multi-source-research-explained/index.html',
+    'multi-source synthesizer': 'multi-source-research-explained/index.html',
+    'interview prep': 'interview-prep/index.html',
+    'interview prep framework': 'interview-prep/index.html',
+    'workflow gallery': 'tools/workflow-template-gallery/index.html',
+    'context packager': 'tools/context-packager/index.html',
+    'color palette generator': 'tools/color-palette/index.html',
+    'typography scale calculator': 'tools/engine/typography-scale-calculator/index.html',
+    'json formatter': 'tools/json-formatter/index.html',
+    'regex tester': 'tools/regex-tester/index.html',
+    'revenue forecaster': 'tools/revenue-forecaster/index.html',
+    'meeting cost calculator': 'tools/engine/meeting-cost-calculator/index.html',
+    'pomodoro timer': 'tools/pomodoro/index.html',
+    'mars colony': 'mars.html',
+    'orchard sim': 'tools/eco-engine-test/index.html',
+    'grid evolution': 'tools/engine/grid-evolution/index.html',
+    'market dynamics': 'tools/engine/market-dynamics/index.html',
+    'traffic router': 'tools/engine/traffic-router/index.html',
+    'player signup': 'tools/engine/player-signup/index.html',
+    'orchard profile': 'tools/engine/orchard-profile-builder/index.html',
+    'starter farm': 'tools/engine/starter-farm-generator/index.html',
+    'root calculator': 'tools/engine/root-strength-calculator/index.html',
+    'trunk growth': 'tools/engine/trunk-growth-calculator/index.html',
+    'fruit yield': 'tools/engine/fruit-yield-engine/index.html',
+    'daily quests': 'tools/engine/daily-quest-generator/index.html',
+    'weekly harvest': 'tools/engine/weekly-harvest-engine/index.html',
+    'fair ranking': 'tools/engine/fair-ranking-engine/index.html',
+    'seed exchange': 'tools/engine/seed-exchange/index.html',
+    'fruit sharing': 'tools/engine/fruit-sharing/index.html',
+    'circle builder': 'tools/engine/circle-builder/index.html',
+    'peer validation': 'tools/engine/peer-validation-engine/index.html',
+    'trust score': 'tools/engine/trust-score-engine/index.html',
+    'recruiter dashboard': 'tools/engine/recruiter-dashboard/index.html',
+    'discovery search': 'tools/engine/orchard-discovery-search/index.html',
+    'hire readiness': 'tools/engine/hire-readiness-scorer/index.html',
+    'ai coach': 'tools/engine/ai-coach-console/index.html',
+    'growth path': 'tools/engine/growth-path-recommender/index.html',
+    'synthetic players': 'tools/engine/synthetic-player-generator/index.html',
+    'wave 1 simulator': 'tools/engine/wave1-simulation-runner/index.html',
+    'balance dashboard': 'tools/engine/balance-dashboard/index.html',
+    'prompt alchemy': 'prompt-alchemy/index.html',
+    'sales dashboard': 'sales-dashboard/index.html',
+    'founder toolkit': 'founder/index.html',
+    'decision brief': 'decision-brief-guide/index.html',
+    'wings of fire quiz': 'wings-of-fire-quiz/index.html',
+    'agent builder': 'agent/index.html',
+    'app generator': 'app-generator/index.html',
+    'github repo': 'https://github.com/via-decide/decide.engine-tools'
+}
 
 const ToolCatalog = {
     byName: new Map(),
@@ -759,7 +925,7 @@ const App = {
 
     updateCounterTargets() {
         const total = this.tools.length;
-        document.querySelectorAll('.counter[data-target="44"]').forEach((node) => {
+        document.querySelectorAll('.counter[data-target]').forEach((node) => {
           node.setAttribute('data-target', String(total));
           node.innerText = '0';
         });
