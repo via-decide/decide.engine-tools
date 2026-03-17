@@ -8,6 +8,29 @@
 
   let session = null;
 
+  function getInitData() {
+    return window.Telegram?.WebApp?.initData || '';
+  }
+
+  async function validateSession(results) {
+    const initData = getInitData();
+    const response = await fetch('/api/swipe/validate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: initData ? `Bearer ${initData}` : ''
+      },
+      body: JSON.stringify({ initData, results })
+    });
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload?.ok) {
+      throw new Error(payload?.error || 'Swipe validation failed');
+    }
+
+    return payload;
+  }
+
   function pickCards() {
     const size = 6;
     const cards = [];
@@ -19,20 +42,37 @@
   }
 
   function startSession() {
-    session = { cards: pickCards(), cursor: 0, xpEarned: 0, streak: 1, completed: false };
+    session = { cards: pickCards(), cursor: 0, streak: 1, completed: false, results: [] };
     return session;
   }
 
-  function swipeCard(direction) {
+  async function completeSession() {
+    if (!session) return null;
+
+    const payload = await validateSession(session.results);
+    session.completed = true;
+    session.xpEarned = Number(payload.xpEarned || 0);
+    window.dispatchEvent(new CustomEvent('swipe:session_completed', { detail: { xpEarned: session.xpEarned, streak: session.streak, validated: true } }));
+    return { ...session };
+  }
+
+  async function swipeCard(direction) {
     if (!session || session.completed) return null;
     const card = session.cards[session.cursor];
     if (!card) return null;
-    if (direction === 'right') session.xpEarned += card.xp;
+
+    const accepted = direction === 'right';
+    session.results.push({ cardId: card.id, accepted });
     session.cursor += 1;
+
     if (session.cursor >= session.cards.length) {
-      session.completed = true;
-      window.dispatchEvent(new CustomEvent('swipe:session_completed', { detail: { xpEarned: session.xpEarned, streak: session.streak } }));
+      try {
+        await completeSession();
+      } catch (error) {
+        window.dispatchEvent(new CustomEvent('swipe:session_error', { detail: { error: String(error?.message || error) } }));
+      }
     }
+
     return { ...session };
   }
 
