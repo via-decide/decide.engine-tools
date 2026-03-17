@@ -1,22 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-> Create branch feature/layer2-commons-view. Create file views/layer2-commons.html. Build a new dashboard view specific to Layer 2. It must contain two sections: 1. "Seed Inventory": Reads from localStorage.getItem('forged_seeds_inventory') and renders beautiful UI cards for each seed, showing its rarity and stats. 2. "Circle Hub": Integrates with the existing CircleManager, showing current clan members and the active Pest Siege status. Update the main index.html OS navigation menu to include a locked button for "The Commons". Add logic in the OS router to check ProgressionEngine.getState().unlockedLayer >= 2 before allowing navigation to this view. If locked, show a padlock icon. Commit with message "feat: add Layer 2 Commons UI dashboard". Push branch and open PR to main titled "Feat: Layer 2 Commons Dashboard"
+Implement a new engine tool called agent-bounty-market. 1. Create directory tools/engine/agent-bounty-market/. 2. Create config.json with category "economy", tags ["trade", "lumina", "tasks"], and inputs ["auth_session", "wallet_state"]. 3. Create index.html and tool.js. The tool should display an active "Bazaar" where: - Users can post a computational task (e.g., "Summarize this 100-page PDF") and attach a bounty of 5 Lumina. - Other users' idle agents can "Claim" the task, execute it via the AgentRuntime, and collect the Lumina. 4. Use shared assets: Import shared/reward-wallet.js and link shared/shared.css. 5. The tool.js logic must validate that the user has enough Lumina via RewardWallet.spend() before posting a bounty, and fire a bounty:fulfilled event upon completion. 6. Register the tool in shared/tool-registry.js by adding its directory to the importableToolDirs array. 7. Add the tool route to the static map in router.js.
 
 CONSTRAINTS
-> Pure Vanilla JS and CSS. Responsive grid layout for the seed cards. Properly secure the route so Layer 1 players cannot bypass the grind.
-> Create branch feature/ascension-cinematic-ux. Create file shared/ascension-ux.js. Build a utility AscensionCinematic that listens for window.addEventListener('progression:layer2_unlocked', ...). When fired, dynamically inject a massive, full-screen <div> overlay with a dark, glowing purple/gold CSS background. Animate text that says "Crucible Survived. Layer 2 Unlocked: The Commons." After 4 seconds, fade out the overlay and trigger the SeedForge.forgeSeed() function automatically to grant their first seed. Commit with message "feat: add full-screen ascension cinematic UX". Push branch and open PR to main titled "Feat: Ascension Cinematic UX"
-
-CONSTRAINTS
-> Pure Vanilla JS. Generate the HTML overlay purely via JS DOM manipulation so no extra HTML files are needed. Ensure z-index is high enough to cover the OS.
-> Create branch feature/seed-forge-system. Create file shared/seed-forge.js with the code payload below. Commit with message "feat: add seed forge prestige mechanic". Push branch and open PR to main titled "Feat: Seed Forge System"
-
-CONSTRAINTS
-> Pure Vanilla JS. Generates JSON objects containing the synthesized stats. Triggers an event to wipe local plant data so the loop can begin again.
-> Create branch feature/global-progression-gate. Create file shared/progression-engine.js with the code payload below. Commit with message "feat: add global progression engine to gate Layer 2". Push branch and open PR to main titled "Feat: Global Progression Engine"
-
-CONSTRAINTS
-> Pure Vanilla JS. Do not modify other files. Ensure it correctly hooks into 'growth:stage_evolved' if the GrowthStageEngine fires it.
+Do NOT use any external CSS frameworks. Use Vanilla JS. Must strictly enforce the Reward Wallet cooldown and insufficient funds checks.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
@@ -31,40 +19,10 @@ REPO AUDIT CONTEXT
 - Description: 
 - Primary language: HTML
 - README snippet:
-# Decide Engine Tools + Orchard Engine Foundation
-
-This repository is a preservation-first browser-native tool mesh by **ViaDecide**.
-
-It hosts standalone decision and productivity tools that run directly in the browser with no build step, plus the **Orchard Engine** — a merit-based farming-career game system.
-
-## Preservation-first policy
-
-- Existing standalone tools are preserved.
-- New systems are additive.
-- No unrelated folder is deleted or replaced.
-- Tools remain standalone HTML/CSS/JS.
-
-## Tool categories
-
-Tools are organized into 9 categories. The index page at `index.html` renders them grouped automatically from registry metadata.
-
-| Category | Tools |
-|---|---|
-| **Creators** | PromptAlchemy, Script Generator |
-| **Coders** | Code Generator, Code Reviewer, Agent Builder, App Generator |
-| **Researchers** | Multi Source Research, Student Research |
-| **Business** | Sales Dashbo
+# Decide Engine Tools + Orchard Engine Foundation This repository is a preservation-first browser-native tool mesh by **ViaDecide**. It hosts standalone decision and productivity tools that run directly in the browser with no build step, plus the **Orchard Engine** — a merit-based farming-career g
 
 - AGENTS snippet:
-Rules for coding agents in this repository:
-
-1. Never delete tool folders.
-2. Never remove working code from tools.
-3. Never replace a tool with a placeholder.
-4. Prefer additive changes.
-5. Tools must remain standalone HTML apps.
-6. Routing must never break existing tools.
-7. If reorganizing tools, move them safely and update references.
+Rules for coding agents in this repository: 1. Never delete tool folders. 2. Never remove working code from tools. 3. Never replace a tool with a placeholder. 4. Prefer additive changes. 5. Tools must remain standalone HTML apps. 6. Routing must never break existing tools. 7. If reorganizing tools,
 ENGINE-TOOLS ARCHITECTURE (mandatory compliance)
 Tool directory: tools/<tool>/
 Required files: config.json, index.html, tool.js
@@ -74,6 +32,13 @@ Registration: append "tools/<tool>" to importableToolDirs[] in shared/tool-regis
 Router: add tool ID → entry path to static map in router.js
 Do NOT modify any existing tool folder or shared utility file.
 Do NOT use external frameworks, CDN packages, or bundlers.
+
+SOP: PRE-MODIFICATION PROTOCOL (MANDATORY)
+1. Adherence to Instructions: No deviations without explicit user approval.
+2. Mandatory Clarification: Immediately ask if instructions are ambiguous or incomplete.
+3. Proposal First: Always propose optimizations or fixes before implementing them.
+4. Scope Discipline: Do not add unrequested features or modify unrelated code.
+5. Vulnerability Check: Immediately flag and explain security risks.
 
 OUTPUT REQUIREMENTS
 - Include: implementation summary, checks run, risks, rollback notes.
