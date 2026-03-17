@@ -685,11 +685,50 @@ const DataGenerator = {
 
         if (category === "UPSC") {
             syllabus = [
-                { id: "pol", title: ComboBridge.t("Polity & Governance"), total: 4, items: [{ id: "pol-1", text: ComboBridge.t("Constitution") }, { id: "pol-2", text: ComboBridge.t("Parliament") }, { id: "pol-3", text: ComboBridge.t("Judiciary") }, { id: "pol-4", text: ComboBridge.t("Local Govt") }] },
-                { id: "eco", title: ComboBridge.t("Indian Economy"), total: 3, items: [{ id: "eco-1", text: ComboBridge.t("Macroeconomics") }, { id: "eco-2", text: ComboBridge.t("Banking & RBI") }, { id: "eco-3", text: ComboBridge.t("Budget") }] }
+                { id: "pol", title: ComboBridge.t("Polity & Constitution"), total: 4, items: [{ id: "pol-1", text: ComboBridge.t("Making of the Constitution (Tables I-III)") }, { id: "pol-2", text: ComboBridge.t("Territory of India (1949-2011)") }, { id: "pol-3", text: ComboBridge.t("States Reorganisation Act 1956") }, { id: "pol-4", text: ComboBridge.t("Article 1 to 4") }] },
+                { id: "his", title: ComboBridge.t("Modern History context"), total: 3, items: [{ id: "his-1", text: ComboBridge.t("Dhar Commission") }, { id: "his-2", text: ComboBridge.t("JVP Committee") }, { id: "his-3", text: ComboBridge.t("Fazal Ali Commission") }] }
             ];
-            missions = [{ id: Date.now(), text: ComboBridge.t("Read Editorial & Make Notes"), type: "Study", done: false }];
-            vault.doc1 = { category: ComboBridge.t("Current Affairs"), title: ComboBridge.t("Survey Summary"), size: "12 KB", content: ComboBridge.t("Growth at 7.2%, fiscal trends, and sectoral highlights.") };
+            missions = [
+                { id: Date.now(), text: ComboBridge.t("Read Vault Doc: Territory of India (1949-2011)"), type: "Study", done: false },
+                { id: Date.now()+1, text: ComboBridge.t("Play Kinetic Swipe: Territory & Tables"), type: "Practice", done: false }
+            ];
+            vault.doc1 = {
+                category: ComboBridge.t("Foundational Text"),
+                title: ComboBridge.t("Territory of India (1949-2011) & Basu Tables"),
+                size: "18 KB",
+                content: `UPSC Preparation: Constitution of India - Territory of India (1949 - 2011)
+
+Starting your UPSC preparation with a focus on the "Territory of India" as it stood in 1949, and progressing through the changes brought by the Seventh Amendment in 1956 up to 2011, is an excellent and highly recommended approach.
+
+Why this is an effective starting point:
+1. Foundational Understanding (1949): Beginning with the adopted Constitution allows you to understand the original scheme of the Indian Union, including the classification of states into Parts A, B, C, and D. You'll grasp Article 1 and its initial implications.
+2. Crucial Historical Turning Point (Seventh Amendment - 1956): The States Reorganisation Act, 1956, accompanied by the Seventh Constitutional Amendment, was a landmark event. It abolished the Part A, B, C, D classification, introduced Union Territories, and established the linguistic basis for state formation.
+3. Comprehensive Historical Trajectory (Up to 2011): Covering developments up to 2011 ensures you study significant events such as the creation of new states (Goa, Chhattisgarh, Uttarakhand, Jharkhand) and the evolution of UTs.
+
+Key Topics to Cover:
+* Article 1 of the Constitution: "India, that is Bharat, shall be a Union of States."
+* Original Classification: Parts A, B, C, D states.
+* Demand for Linguistic States: Dhar Commission and JVP Committee.
+* Fazal Ali Commission (1953): Recommendations and impact.
+* States Reorganisation Act & Seventh Constitutional Amendment Act (1956).
+* Subsequent Reorganizations: Maharashtra & Gujarat (1960), Nagaland (1963), Haryana (1966), creation of Chhattisgarh, Uttarakhand, Jharkhand (2000).
+
+--- DATA EXTRACTION: D.D. BASU TABLES ---
+
+TABLE I: FACTS TO START WITH
+* Constituent Assembly first sitting: 9-12-1946.
+* Adopted Constitution (26-11-1949): 395 Articles, 8 Schedules.
+* Voting age lowered to 18 in the 1989 election.
+
+TABLE II: CONSTITUENT ASSEMBLY MEMBERSHIP (Dec 31, 1947)
+* Total Members: 299
+* Provinces: 229 (Highest: United Provinces - 55)
+* Indian States: 70 (Highest: Mysore - 7)
+
+TABLE III: TERRITORY OF INDIA
+* 1949 Original Constitution: Andaman & Nicobar Islands were the sole entry in Part D.
+* Sikkim was added by the 36th Amendment Act, 1975.`
+            };
         } else if (category === "Programming") {
             syllabus = [
                 { id: "mod1", title: ComboBridge.t(`${subject} Fundamentals`), total: 4, items: [{ id: "m1-1", text: ComboBridge.t("Syntax & Variables") }, { id: "m1-2", text: ComboBridge.t("Control Flow") }, { id: "m1-3", text: ComboBridge.t("Functions") }, { id: "m1-4", text: ComboBridge.t("DOM/API Basics") }] },
@@ -1514,9 +1553,12 @@ const KineticDatabases = {
         { "Question_ID": "GK_005", "Question_Text": "In economics, what characterizes a 'Bear Market'?", "Correct_Answer": "A prolonged drop in asset prices (typically 20%+)", "Distractor_1": "A rapid increase in asset prices", "Distractor_2": "A stagnant market with no growth", "Explanation_Short": "A bear market occurs when prices fall 20% or more from recent highs amid widespread pessimism." }
     ],
     "UPSC": [
-        { "Question_ID": "U_001", "Question_Text": "According to Henrys Law what is the mathematical relationship between the partial pressure p of a gas and its mole fraction chi in the solution?", "Correct_Answer": "p equals K H times chi", "Distractor_1": "p equals K H divided by chi", "Distractor_2": "p equals chi divided by K H", "Explanation_Short": "Pressure is the product of Henrys constant and mole fraction." },
-        { "Question_ID": "U_002", "Question_Text": "Why does the solubility of gases in liquids generally decrease with an increase in temperature?", "Correct_Answer": "Dissolution is an exothermic process", "Distractor_1": "Dissolution is an endothermic process", "Distractor_2": "Gases become less dense at high temperatures", "Explanation_Short": "Exothermic dissolution implies heat hinders solubility." },
-        { "Question_ID": "U_003", "Question_Text": "In a Galvanic cell what is the polarity of the anode?", "Correct_Answer": "Negative", "Distractor_1": "Positive", "Distractor_2": "Neutral", "Explanation_Short": "Anode is the negative electron source." }
+        { "Question_ID": "U_001", "Question_Text": "When did the Constituent Assembly of India hold its very first sitting?", "Correct_Answer": "9th December 1946", "Distractor_1": "26th November 1949", "Distractor_2": "15th August 1947", "Explanation_Short": "According to Table I, the Constituent Assembly had its first sitting on 9-12-1946." },
+        { "Question_ID": "U_002", "Question_Text": "As of 31st Dec 1947, which province had the highest number of members in the Constituent Assembly?", "Correct_Answer": "United Provinces (55)", "Distractor_1": "Madras (49)", "Distractor_2": "Bombay (21)", "Explanation_Short": "Table II shows United Provinces had 55 members, the highest among all 229 Provincial members." },
+        { "Question_ID": "U_003", "Question_Text": "In the original 1949 Constitution, which territory was the sole entry under 'Part D'?", "Correct_Answer": "Andaman & Nicobar Islands", "Distractor_1": "Delhi", "Distractor_2": "Coorg", "Explanation_Short": "Table III indicates that Andaman and Nicobar Islands were the only territory listed under Part D." },
+        { "Question_ID": "U_004", "Question_Text": "Which Constitutional Amendment abolished the Part A, B, C, D classification of states?", "Correct_Answer": "7th Amendment Act (1956)", "Distractor_1": "1st Amendment Act (1951)", "Distractor_2": "42nd Amendment Act (1976)", "Explanation_Short": "The 7th Amendment (1956) abolished the A/B/C/D classification and introduced Union Territories." },
+        { "Question_ID": "U_005", "Question_Text": "Which commission's recommendations led to the States Reorganisation Act of 1956?", "Correct_Answer": "Fazal Ali Commission", "Distractor_1": "Dhar Commission", "Distractor_2": "JVP Committee", "Explanation_Short": "The Fazal Ali Commission (1953) laid the groundwork for the 1956 linguistic reorganization." },
+        { "Question_ID": "U_006", "Question_Text": "By which Constitutional Amendment was Sikkim officially added to the Union of India?", "Correct_Answer": "36th Amendment Act, 1975", "Distractor_1": "14th Amendment Act, 1962", "Distractor_2": "35th Amendment Act, 1974", "Explanation_Short": "Sikkim was made a full-fledged state by the 36th Amendment Act, 1975." }
     ],
     "Programming": [
         { "Question_ID": "P_001", "Question_Text": "What does CSS stand for?", "Correct_Answer": "Cascading Style Sheets", "Distractor_1": "Computer Style Sheets", "Distractor_2": "Creative Style Sheets", "Explanation_Short": "CSS defines how HTML elements are displayed on screen." },
