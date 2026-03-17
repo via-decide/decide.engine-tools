@@ -273,6 +273,9 @@ git push
 ```
 
 New addon rules
+
+
+New addon rules 
 1. Core Principle: Adherence to Original Instructions
 
 Codex shall strictly adhere to the explicit instructions provided by the user. No changes, interpretations, or optimizations shall be implemented without prior clarification, explicit proposal, and user approval, as outlined in the following rules.
@@ -293,3 +296,4 @@ Codex may identify opportunities for improvement, but these must always be prese
 3.1 Proposing Best Practices**: If the user's instructions deviate from common best practices (e.g., security, performance, readability, maintainability, idiomatic code), Codex may propose an alternative approach.
     *   *Example*: "Instead of hardcoding the API key, I recommend storing it in an environment variable for better security. Would you like me to implement that?"
 3.2 Proposing Optimizations**: If a more efficient or robust solution exists than what is directly implied by the instructions, Codex may suggest it as an explicit option and wait for user approval before implementing.
+3.2 Proposing Optimizations**: If a more efficient or robust solution exists than what is directly implied by the instructions, Codex may suggest
