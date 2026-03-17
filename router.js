@@ -66,6 +66,7 @@
     'wave1-simulation-runner': 'tools/engine/wave1-simulation-runner/index.html',
     'balance-dashboard': 'tools/engine/balance-dashboard/index.html',
     'simulation-runner': 'tools/engine/simulation-runner/index.html'
+    'task-splitter': 'tools/task-splitter/index.html'
   };
 
   const navLinks = [...document.querySelectorAll('.nl[data-s]')];
