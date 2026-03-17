@@ -82,6 +82,16 @@
       tags: ['runtime', 'execution'],
       entry: 'execution-console.html',
       outputs: ['execution_log']
+    },
+    {
+      id: 'llm_router',
+      name: 'LLM Router',
+      description: 'Routes prompts to Groq, Gemini, or Claude and normalizes output.',
+      category: 'system',
+      tags: ['llm', 'router', 'ai'],
+      entry: 'shared/tool-registry.js',
+      inputs: ['provider', 'prompt'],
+      outputs: ['text']
     }
   ];
 
@@ -247,6 +257,94 @@
     return { nodes, edges, tools };
   }
 
+
+
+  function normalizeLLMText(payload) {
+    if (!payload || typeof payload !== 'object') return '';
+
+    if (typeof payload.text === 'string') return payload.text;
+    if (typeof payload.output_text === 'string') return payload.output_text;
+
+    if (Array.isArray(payload.content)) {
+      const textParts = payload.content
+        .map((part) => {
+          if (typeof part === 'string') return part;
+          if (part && typeof part.text === 'string') return part.text;
+          return '';
+        })
+        .filter(Boolean);
+      if (textParts.length) return textParts.join('\n');
+    }
+
+    const choiceText = payload.choices && payload.choices[0] && payload.choices[0].message && payload.choices[0].message.content;
+    if (typeof choiceText === 'string') return choiceText;
+
+    const candidateText = payload.candidates && payload.candidates[0] && payload.candidates[0].content
+      && Array.isArray(payload.candidates[0].content.parts)
+      ? payload.candidates[0].content.parts.map((part) => part.text || '').join('\n')
+      : '';
+    if (candidateText) return candidateText;
+
+    return '';
+  }
+
+  async function llmRouter(input = {}, options = {}) {
+    const provider = String(input.provider || '').trim().toLowerCase();
+    const prompt = String(input.prompt || '').trim();
+
+    if (!provider || !['groq', 'gemini', 'claude'].includes(provider)) {
+      throw new Error('llm_router requires provider: groq | gemini | claude');
+    }
+    if (!prompt) {
+      throw new Error('llm_router requires a non-empty prompt');
+    }
+
+    const config = options.config || global.__GN8R_CONFIG__ || {};
+    const headers = { 'Content-Type': 'application/json' };
+    let endpoint = '';
+    let body = {};
+
+    if (provider === 'groq') {
+      if (config.groqApiKey) headers.Authorization = `Bearer ${config.groqApiKey}`;
+      endpoint = 'https://api.groq.com/openai/v1/chat/completions';
+      body = {
+        model: input.model || 'llama-3.1-8b-instant',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: Number.isFinite(input.temperature) ? input.temperature : 0.2
+      };
+    } else if (provider === 'gemini') {
+      endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(input.model || 'gemini-1.5-flash')}:generateContent${config.geminiApiKey ? `?key=${encodeURIComponent(config.geminiApiKey)}` : ''}`;
+      body = {
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: Number.isFinite(input.temperature) ? input.temperature : 0.2
+        }
+      };
+    } else {
+      if (config.claudeApiKey) headers['x-api-key'] = config.claudeApiKey;
+      headers['anthropic-version'] = '2023-06-01';
+      endpoint = 'https://api.anthropic.com/v1/messages';
+      body = {
+        model: input.model || 'claude-3-5-sonnet-latest',
+        max_tokens: input.maxTokens || 1024,
+        messages: [{ role: 'user', content: prompt }]
+      };
+    }
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`llm_router request failed (${provider}): ${response.status} ${errorText}`);
+    }
+
+    const payload = await response.json();
+    return { text: normalizeLLMText(payload) };
+  }
   global.ToolRegistry = {
     normalizeCategory,
     normalizeTool,
@@ -255,6 +353,7 @@
     getCategories,
     registerPlugin,
     registerPlugins,
-    getGraph
+    getGraph,
+    llmRouter
   };
 })(window);
