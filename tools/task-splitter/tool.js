@@ -1,77 +1,106 @@
-const goalInput = document.getElementById('goal');
-const scopeInput = document.getElementById('scope');
-const deadlineInput = document.getElementById('deadline');
-const output = document.getElementById('output');
+import { emit } from '../../shared/tool-bus.js';
 
-function createTaskPlan(goal, scope, deadline) {
-  const steps = [
-    ['Clarify objective', 'Capture success criteria and non-goals.', 'none'],
-    ['Audit current state', 'Review existing files, routing, and registry links.', 'Clarify objective'],
-    ['Draft implementation', 'Propose additive changes with low blast radius.', 'Audit current state'],
-    ['Implement in slices', 'Create/modify one component at a time and verify.', 'Draft implementation'],
-    ['Validate behavior', 'Run path and content checks to ensure no regressions.', 'Implement in slices'],
-    ['Prepare handoff', 'Summarize outputs, risks, and next actions.', 'Validate behavior']
+const PIPELINE_KEY = 'agent:task-splitter:tasks';
+const elEpic = document.getElementById('epic');
+const elCards = document.getElementById('cards');
+const elProgress = document.getElementById('progress');
+
+function buildTasks(epic) {
+  const title = epic.split(/\n|\./).find(Boolean)?.trim() || 'Feature';
+  const base = [
+    { name: 'Scope and contracts', dependsOn: 'none', complexity: 'low' },
+    { name: 'Core implementation', dependsOn: 'Task 1', complexity: 'medium' },
+    { name: 'Validation and QA', dependsOn: 'Task 2', complexity: 'medium' },
+    { name: 'Polish and handoff', dependsOn: 'Task 3', complexity: 'low' }
   ];
-
-  const taskLines = steps.map((step, index) => {
-    const [title, action, dependsOn] = step;
-    return [
-      `### Task ${index + 1}: ${title}`,
-      `- Action: ${action}`,
-      `- Depends on: ${dependsOn}`,
-      '- Owner: Simba agent / maintainer',
-      '- Done when: Deliverable is committed and reviewed.'
-    ].join('\n');
-  });
-
-  return [
-    '# Task Split Plan',
-    '',
-    '## Goal',
-    goal || '(missing goal)',
-    '',
-    '## Scope',
-    scope || '(missing scope)',
-    '',
-    '## Timeline',
-    deadline || '(not provided)',
-    '',
-    '## Subtasks',
-    ...taskLines,
-    '',
-    '## Completion Checklist',
-    '- [ ] New artifacts added safely',
-    '- [ ] Existing behavior preserved',
-    '- [ ] Registry and navigation validated',
-    '- [ ] Output packaged for downstream tool usage'
-  ].join('\n');
+  return base.map((task, index) => ({
+    id: `task-${index + 1}`,
+    label: `Task ${index + 1} — ${task.name}`,
+    feature: title,
+    input: index === 0 ? epic : `Output from Task ${index}`,
+    output: `Deliverable for ${task.name.toLowerCase()}`,
+    dependsOn: task.dependsOn,
+    complexity: task.complexity,
+    promptSeed: `Implement ${task.name.toLowerCase()} for ${title}.\nFollow existing patterns only.\nReturn complete code with no placeholders.`,
+    status: 'TODO'
+  }));
 }
 
-function splitTasks() {
-  const payload = {
-    goal: goalInput.value.trim(),
-    scope: scopeInput.value.trim(),
-    deadline: deadlineInput.value.trim()
-  };
-
-  output.textContent = createTaskPlan(payload.goal, payload.scope, payload.deadline);
-  ToolStorage.write('task-splitter.draft', { ...payload, output: output.textContent });
+function copy(text) {
+  if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+  const temp = document.createElement('textarea');
+  temp.value = text;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand('copy');
+  temp.remove();
+  return Promise.resolve();
 }
 
-document.getElementById('generate').addEventListener('click', splitTasks);
-document.getElementById('copy').addEventListener('click', () => navigator.clipboard.writeText(output.textContent));
-document.getElementById('download').addEventListener('click', () => {
-  const blob = new Blob([output.textContent], { type: 'text/markdown' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'task-splitter-output.md';
-  link.click();
+function save(tasks) {
+  ToolStorage.write(PIPELINE_KEY, tasks);
+  emit('agent:task-splitter:output', { tasks, epic: elEpic.value.trim() });
+  emit('agent:pipeline:active', { toolId: 'task-splitter' });
+}
+
+function render(tasks) {
+  const done = tasks.filter((task) => task.status === 'DONE').length;
+  elProgress.textContent = `${done}/${tasks.length} tasks done`;
+  elCards.innerHTML = tasks.map((task) => `
+    <article class="card" data-id="${task.id}">
+      <h3>${task.label}</h3>
+      <p><span class="badge">Depends on: ${task.dependsOn}</span> <span class="badge">${task.complexity}</span></p>
+      <p class="small">Input: ${task.input}</p>
+      <p class="small">Output: ${task.output}</p>
+      <pre class="output" style="min-height:80px;">${task.promptSeed}</pre>
+      <div class="toolbar">
+        <select data-role="status">
+          <option ${task.status === 'TODO' ? 'selected' : ''}>TODO</option>
+          <option ${task.status === 'IN PROGRESS' ? 'selected' : ''}>IN PROGRESS</option>
+          <option ${task.status === 'DONE' ? 'selected' : ''}>DONE</option>
+        </select>
+        <button data-role="send" class="primary">→ Spec Builder</button>
+      </div>
+    </article>
+  `).join('');
+}
+
+let tasks = ToolStorage.read(PIPELINE_KEY, []);
+if (tasks.length) render(tasks);
+
+document.getElementById('split').addEventListener('click', () => {
+  const epic = elEpic.value.trim();
+  if (!epic) return;
+  tasks = buildTasks(epic);
+  save(tasks);
+  render(tasks);
 });
 
-const saved = ToolStorage.read('task-splitter.draft', null);
-if (saved) {
-  goalInput.value = saved.goal || '';
-  scopeInput.value = saved.scope || '';
-  deadlineInput.value = saved.deadline || '';
-  output.textContent = saved.output || '';
-}
+elCards.addEventListener('change', (event) => {
+  if (event.target.dataset.role !== 'status') return;
+  const card = event.target.closest('[data-id]');
+  const task = tasks.find((item) => item.id === card.dataset.id);
+  if (!task) return;
+  task.status = event.target.value;
+  save(tasks);
+  render(tasks);
+});
+
+elCards.addEventListener('click', (event) => {
+  if (event.target.dataset.role !== 'send') return;
+  const card = event.target.closest('[data-id]');
+  const task = tasks.find((item) => item.id === card.dataset.id);
+  if (!task) return;
+  emit('agent:context-packager:output', { taskFromSplitter: task, source: 'task-splitter' });
+  emit('agent:pipeline:active', { toolId: 'context-packager' });
+  window.location.href = '../../tools/spec-builder/index.html';
+});
+
+document.getElementById('start').addEventListener('click', async () => {
+  const first = tasks[0];
+  if (!first) return;
+  await copy(first.promptSeed);
+  emit('agent:context-packager:output', { taskFromSplitter: first, source: 'task-splitter' });
+  emit('agent:pipeline:active', { toolId: 'context-packager' });
+  window.location.href = '../../tools/context-packager/index.html';
+});

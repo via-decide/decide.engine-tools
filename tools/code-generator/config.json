@@ -1,12 +1,17 @@
 {
   "id": "code-generator",
   "name": "Code Generator",
-  "description": "Convert prompts/specs into HTML tool skeletons",
-  "inputs": ["tool_name", "description", "input_fields"],
-  "outputs": ["html_skeleton"],
-  "relatedTools": ["promptalchemy", "spec-builder", "code-reviewer"],
+  "description": "Builds high-quality Codex execution prompts from technical specs.",
   "category": "coders",
-  "audience": ["coders"],
-  "entry": "tools/code-generator/index.html",
-  "tags": ["mesh-ready", "generation"]
+  "audience": "developers",
+  "inputs": ["spec", "target_language_framework", "style_guide", "test_requirement"],
+  "outputs": ["codex_execution_prompt"],
+  "tags": ["prompting", "generation", "pipeline"],
+  "pipeline": {
+    "position": 3,
+    "next": "code-reviewer",
+    "prev": "spec-builder",
+    "busIn": "agent:spec-builder:output",
+    "busOut": "agent:code-generator:output"
+  }
 }

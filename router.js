@@ -4,11 +4,20 @@
   const routeAliases = { research: 'researchers' };
   const canonicalRoute = (route = '') => routeAliases[route] || route;
 
+  const toolPathStaticMap = {
+    'context-packager': 'tools/context-packager/index.html',
+    'spec-builder': 'tools/spec-builder/index.html',
+    'code-generator': 'tools/code-generator/index.html',
+    'code-reviewer': 'tools/code-reviewer/index.html',
+    'output-evaluator': 'tools/output-evaluator/index.html',
+    'task-splitter': 'tools/task-splitter/index.html'
+  };
+
   const navLinks = [...document.querySelectorAll('.nl[data-s]')];
   const sections = [...document.querySelectorAll('main section[id]')];
 
   if (!navLinks.length || !sections.length) {
-    window.Router = { canonicalRoute, routeAliases };
+    window.Router = { canonicalRoute, routeAliases, toolPathStaticMap };
     return;
   }
 
@@ -62,6 +71,6 @@
   window.addEventListener('hashchange', syncFromHash);
   syncFromHash();
 
-  window.Router = { canonicalRoute, routeAliases, goToRoute, syncFromHash };
+  window.Router = { canonicalRoute, routeAliases, goToRoute, syncFromHash, toolPathStaticMap };
 })();
 
