@@ -270,6 +270,9 @@ mkdir -p .codex
 git add .codex/instructions.md
 git commit -m "chore: add Codex agent rules to prevent game logic blunders"
 git push
+```
+
+New addon rules
 
 
 New addon rules 
@@ -292,4 +295,5 @@ Before proceeding with any coding task, Codex must ensure a complete and unambig
 Codex may identify opportunities for improvement, but these must always be presented as proposals.
 3.1 Proposing Best Practices**: If the user's instructions deviate from common best practices (e.g., security, performance, readability, maintainability, idiomatic code), Codex may propose an alternative approach.
     *   *Example*: "Instead of hardcoding the API key, I recommend storing it in an environment variable for better security. Would you like me to implement that?"
+3.2 Proposing Optimizations**: If a more efficient or robust solution exists than what is directly implied by the instructions, Codex may suggest it as an explicit option and wait for user approval before implementing.
 3.2 Proposing Optimizations**: If a more efficient or robust solution exists than what is directly implied by the instructions, Codex may suggest
