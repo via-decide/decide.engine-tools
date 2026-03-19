@@ -1,22 +1,13 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-> Create branch feature/layer2-commons-view. Create file views/layer2-commons.html. Build a new dashboard view specific to Layer 2. It must contain two sections: 1. "Seed Inventory": Reads from localStorage.getItem('forged_seeds_inventory') and renders beautiful UI cards for each seed, showing its rarity and stats. 2. "Circle Hub": Integrates with the existing CircleManager, showing current clan members and the active Pest Siege status. Update the main index.html OS navigation menu to include a locked button for "The Commons". Add logic in the OS router to check ProgressionEngine.getState().unlockedLayer >= 2 before allowing navigation to this view. If locked, show a padlock icon. Commit with message "feat: add Layer 2 Commons UI dashboard". Push branch and open PR to main titled "Feat: Layer 2 Commons Dashboard"
+Add a new standalone tool "Snake Game" (id: snake-game) at tools/games/snake-game/. Description: "Classic snake game — eat, grow, avoid walls.". Category: "games" (normalized: "games"). Required files: tools/games/snake-game/config.json, tools/games/snake-game/index.html, tools/games/snake-game/tool.js. config.json must include: id, name, description, category ("games"), audience, inputs, outputs, tags. Load shared/tool-storage.js, shared/shared.css. Use ToolStorage for persistence. Do not use external frameworks. Register in shared/tool-registry.js: add "tools/games/snake-game" to importableToolDirs array. Register in router.js: add to the tool path static map and modularTools if present. Update index.html: confirm the categorized tool grid will discover the tool via registry. Update README.md: add tool entry under the correct category section. Do NOT modify any existing tool folder. Do NOT break existing shared utilities.
 
 CONSTRAINTS
-> Pure Vanilla JS and CSS. Responsive grid layout for the seed cards. Properly secure the route so Layer 1 players cannot bypass the grind.
-> Create branch feature/ascension-cinematic-ux. Create file shared/ascension-ux.js. Build a utility AscensionCinematic that listens for window.addEventListener('progression:layer2_unlocked', ...). When fired, dynamically inject a massive, full-screen <div> overlay with a dark, glowing purple/gold CSS background. Animate text that says "Crucible Survived. Layer 2 Unlocked: The Commons." After 4 seconds, fade out the overlay and trigger the SeedForge.forgeSeed() function automatically to grant their first seed. Commit with message "feat: add full-screen ascension cinematic UX". Push branch and open PR to main titled "Feat: Ascension Cinematic UX"
+preserve all existing tool folders and shared modules; additive changes only — never remove or overwrite existing files; do not break category routing or tool discovery; shared/tool-registry.js importableToolDirs: append only, do not reorder; router.js: add to static map only, do not restructure; config.json must pass normalizeTool() without errors; tool.js must work standalone in browser without bundler; use minimal corrective edits — prefer smallest safe changeset
 
-CONSTRAINTS
-> Pure Vanilla JS. Generate the HTML overlay purely via JS DOM manipulation so no extra HTML files are needed. Ensure z-index is high enough to cover the OS.
-> Create branch feature/seed-forge-system. Create file shared/seed-forge.js with the code payload below. Commit with message "feat: add seed forge prestige mechanic". Push branch and open PR to main titled "Feat: Seed Forge System"
-
-CONSTRAINTS
-> Pure Vanilla JS. Generates JSON objects containing the synthesized stats. Triggers an event to wipe local plant data so the loop can begin again.
-> Create branch feature/global-progression-gate. Create file shared/progression-engine.js with the code payload below. Commit with message "feat: add global progression engine to gate Layer 2". Push branch and open PR to main titled "Feat: Global Progression Engine"
-
-CONSTRAINTS
-> Pure Vanilla JS. Do not modify other files. Ensure it correctly hooks into 'growth:stage_evolved' if the GrowthStageEngine fires it.
+MEMORY CONTEXT
+No persistent memory for this chat.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
