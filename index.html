@@ -124,6 +124,56 @@
     @media (min-width: 769px) { .mobile-only { display: none !important; } }
     @media (max-width: 768px) { .desktop-only { display: none !important; } .nav-links.desktop-only { display: none !important; } }
 
+    /* ── AUTH UI ── */
+    .auth-area { display: flex; align-items: center; gap: 8px; margin-left: 8px; }
+    .auth-login-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--leaf); color: #000; font-weight: 700; font-size: 0.8rem;
+      padding: 7px 16px; border-radius: 999px; border: none; cursor: pointer;
+      transition: all 0.2s ease; white-space: nowrap;
+    }
+    .auth-login-btn:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(82,183,86,0.4); }
+    .auth-login-btn:active { transform: scale(0.97); }
+    .auth-login-btn svg { width: 16px; height: 16px; }
+    .auth-user {
+      display: flex; align-items: center; gap: 8px; cursor: pointer;
+      padding: 4px 10px 4px 4px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--bg2);
+      transition: all 0.2s ease; position: relative;
+    }
+    .auth-user:hover { border-color: var(--leaf); background: var(--bg3); }
+    .auth-avatar {
+      width: 30px; height: 30px; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--leaf); background: var(--bg3);
+    }
+    .auth-avatar-placeholder {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--leaf), var(--water));
+      display: flex; align-items: center; justify-content: center;
+      color: #000; font-weight: 700; font-size: 0.75rem;
+    }
+    .auth-name { font-size: 0.8rem; font-weight: 600; color: var(--text); max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .auth-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0; z-index: 200;
+      background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5); min-width: 200px;
+      display: none; overflow: hidden;
+    }
+    .auth-dropdown.open { display: block; animation: fadeSlideIn 0.15s ease; }
+    @keyframes fadeSlideIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    .auth-dropdown-header { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+    .auth-dropdown-email { font-size: 0.72rem; color: var(--muted); margin-top: 2px; word-break: break-all; }
+    .auth-dropdown-name { font-size: 0.85rem; font-weight: 700; }
+    .auth-dropdown-item {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      padding: 10px 14px; border: none; background: none; color: var(--text);
+      font-size: 0.82rem; cursor: pointer; transition: background 0.15s;
+      text-align: left;
+    }
+    .auth-dropdown-item:hover { background: var(--bg3); }
+    .auth-dropdown-item.danger { color: #EF5350; }
+    .auth-dropdown-item.danger:hover { background: rgba(239,83,80,0.08); }
+
     /* ── HERO ── */
     .hero {padding:80px 0 60px; position: relative;}
     .hero::before {
@@ -465,6 +515,26 @@
       <a class="nl" href="#orchard-engine" data-s="orchard-engine">Orchard</a>
       <a class="nl" href="./ui/studyos.html" data-s="studyos">Study OS</a>
     </div>
+    <!-- Auth Area -->
+    <div class="auth-area" id="auth-area">
+      <button class="auth-login-btn" id="auth-login-btn" onclick="ViaAuth.signIn()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Sign in with Google
+      </button>
+      <div class="auth-user" id="auth-user-btn" onclick="toggleAuthDropdown()" style="display:none">
+        <img class="auth-avatar" id="auth-avatar" src="" alt="" onerror="this.style.display='none';document.getElementById('auth-avatar-ph').style.display='flex'" />
+        <div class="auth-avatar-placeholder" id="auth-avatar-ph" style="display:none">?</div>
+        <span class="auth-name" id="auth-name"></span>
+        <div class="auth-dropdown" id="auth-dropdown">
+          <div class="auth-dropdown-header">
+            <div class="auth-dropdown-name" id="auth-dd-name"></div>
+            <div class="auth-dropdown-email" id="auth-dd-email"></div>
+          </div>
+          <button class="auth-dropdown-item" onclick="window.open('https://via-decide.github.io/Game-/','_blank')">🎮 Play Data Orchard</button>
+          <button class="auth-dropdown-item danger" onclick="ViaAuth.signOut()">🚪 Sign out</button>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -472,12 +542,12 @@
   <!-- HERO -->
   <section id="home" class="hero">
     <div class="w">
-      <div class="eyebrow">Free · No Login · Open Source</div>
+      <div class="eyebrow">Free · Open Source · Optional Sign-In</div>
       <h1>Tools that help you<br>think, build, <em>decide.</em></h1>
       <p class="sub">Practical browser tools for creators, students, researchers, and business builders. Instantly searchable, entirely local. Open any tool and start in seconds.</p>
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-n counter" data-target="44">0</div><div class="hstat-l">Live Tools</div></div>
-        <div class="hstat"><div class="hstat-n counter" data-target="0">0</div><div class="hstat-l">Logins Required</div></div>
+        <div class="hstat"><div class="hstat-n counter" data-target="48">0</div><div class="hstat-l">Live Tools</div></div>
+        <div class="hstat"><div class="hstat-n counter" data-target="0">0</div><div class="hstat-l">Paywalls</div></div>
         <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">Forever</div></div>
       </div>
     </div>
@@ -832,7 +902,9 @@ const TOOLS_DB = [
     { name: "Agent Builder", cat: "coders", desc: "Design and configure AI agents and their workflows.", icon: "🤖", engine: false },
     { name: "App Generator", cat: "coders", desc: "Scaffold complete app templates from a description.", icon: "⚡", engine: false },
     { name: "Decision Matrix", cat: "business", desc: "Weighted scoring across criteria — ranked results with reasoning.", icon: "⚖️", engine: false },
-    { name: "Scenario Planner", cat: "business", desc: "Map outcomes across futures with probability-weighted analysis.", icon: "🔭", engine: false }
+    { name: "Scenario Planner", cat: "business", desc: "Map outcomes across futures with probability-weighted analysis.", icon: "🔭", engine: false },
+    { name: "Data Orchard Game", cat: "system", desc: "Cultivate bio-genetic plants, breed hybrids, and trade on the market.", icon: "🌱", engine: true },
+    { name: "VIA Social", cat: "misc", desc: "Bharat's social platform — posts, deep dives, and community.", icon: "🤝", engine: false }
 ]
 
 const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc' };
@@ -891,6 +963,8 @@ const ROUTE_ALIASES = {
     'app generator': 'app-generator/index.html',
     'decision matrix': 'tools/decision-matrix/index.html',
     'scenario planner': 'tools/scenario-planner/index.html',
+    'data orchard game': 'https://via-decide.github.io/Game-/',
+    'via social': 'https://via-decide.github.io/game/',
     'github repo': 'https://github.com/via-decide/decide.engine-tools'
 }
 
@@ -1162,6 +1236,59 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
+
+// ── AUTH INTEGRATION ──
+function toggleAuthDropdown() {
+    const dd = document.getElementById('auth-dropdown');
+    dd.classList.toggle('open');
+    // Close on outside click
+    if (dd.classList.contains('open')) {
+        setTimeout(() => {
+            document.addEventListener('click', function closeDD(e) {
+                if (!document.getElementById('auth-user-btn').contains(e.target)) {
+                    dd.classList.remove('open');
+                    document.removeEventListener('click', closeDD);
+                }
+            });
+        }, 10);
+    }
+}
+
+function updateAuthUI(user) {
+    const loginBtn = document.getElementById('auth-login-btn');
+    const userBtn = document.getElementById('auth-user-btn');
+    const avatar = document.getElementById('auth-avatar');
+    const avatarPh = document.getElementById('auth-avatar-ph');
+    const nameEl = document.getElementById('auth-name');
+    const ddName = document.getElementById('auth-dd-name');
+    const ddEmail = document.getElementById('auth-dd-email');
+
+    if (user) {
+        loginBtn.style.display = 'none';
+        userBtn.style.display = 'flex';
+        if (user.photoURL) {
+            avatar.src = user.photoURL;
+            avatar.style.display = 'block';
+            avatarPh.style.display = 'none';
+        } else {
+            avatar.style.display = 'none';
+            avatarPh.style.display = 'flex';
+            avatarPh.textContent = (user.displayName || 'U').charAt(0).toUpperCase();
+        }
+        nameEl.textContent = (user.displayName || 'User').split(' ')[0];
+        ddName.textContent = user.displayName || 'User';
+        ddEmail.textContent = user.email || '';
+    } else {
+        loginBtn.style.display = 'inline-flex';
+        userBtn.style.display = 'none';
+    }
+}
+</script>
+<!-- Firebase Auth -->
+<script src="shared/auth.js"></script>
+<script>
+    ViaAuth.init();
+    ViaAuth.onAuthChange(updateAuthUI);
 </script>
 </body>
 </html>
