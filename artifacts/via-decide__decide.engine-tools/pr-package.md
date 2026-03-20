@@ -1,3 +1,9 @@
+Branch: simba/implement-a-high-performance-asynchronous-routin
+Title: Implement a high-performance, asynchronous routing engine called MtRo...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Turn the protocol into an active network. By implementing a central router, the engine can efficiently juggle thousands of independent tool executions from different users without cross-contaminating data or blocking the main event loop.
 Branch: simba/implement-the-mt-multi-tenant-message-transport-
 Title: Implement the MT (Multi-Tenant) Message Transport protocol using Prot...
 
