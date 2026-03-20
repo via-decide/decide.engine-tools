@@ -5,6 +5,10 @@ Implement a high-performance, asynchronous routing engine called MtRouter to man
 
 CONSTRAINTS
 The router must be strictly non-blocking. Use asynchronous event emitters or RXJS Observables to handle the stream flow. Maintain the case-sensitive repository name: decide.engine-tools.
+Implement the MT (Multi-Tenant) Message Transport protocol using Protobuf to establish a multiplexed, high-performance communication backbone. 1. Create the directory proto/decide/v1/ and a foundational file mt_protocol.proto. 2. Define syntax = "proto3"; and package decide.v1;. 3. Implement MtHeader: include string tenant_id, string trace_id, and fixed64 timestamp. 4. Define enum Priority { LOW = 0; HIGH = 1; CRITICAL = 2; } within the header. 5. Create a polymorphic MtEnvelope message using a oneof payload block to encapsulate different message types (e.g., ToolRequest, ToolResponse, Heartbeat). 6. Define the MtTransportService with a bidirectional gRPC stream: rpc Tunnel(stream MtEnvelope) returns (stream MtEnvelope);. 7. Implement MtError schema for protocol-level rejections (e.g., TENANT_LIMIT_EXCEEDED, AUTH_FAILURE). 8. Configure a buf.yaml or protoc build script to generate TypeScript and Rust bindings into the /gen directory.
+
+CONSTRAINTS
+Maintain strict case sensitivity for the repository name: decide.engine-tools. The tenant_id must be mandatory in all MtHeader instances to ensure strict data isolation. Use fixed64 for timestamps to optimize byte alignment and minimize CPU overhead during serialization.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
