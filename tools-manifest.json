@@ -252,6 +252,10 @@
     {
       "toolDir": "tools/scenario-planner",
       "metaPath": "tools/scenario-planner/config.json"
+    },
+    {
+      "toolDir": "tools/games/skillhex-mission-control",
+      "metaPath": "tools/games/skillhex-mission-control/config.json"
     }
   ]
 }
