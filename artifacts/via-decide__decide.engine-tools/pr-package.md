@@ -1,3 +1,9 @@
+Branch: simba/implement-a-grpc-compliant-securityinterceptor-t
+Title: Implement a gRPC-compliant SecurityInterceptor to validate tenant ide...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enforce a Zero-Trust architecture. By validating the identity at the protocol gate, you mathematically guarantee that an AI agent or user from "Tenant A" can never accidentally or maliciously execute tools or view data belonging to "Tenant B."
 Branch: simba/implement-a-high-performance-asynchronous-routin
 Title: Implement a high-performance, asynchronous routing engine called MtRo...
 
