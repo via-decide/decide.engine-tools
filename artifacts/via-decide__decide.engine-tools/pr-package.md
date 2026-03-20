@@ -1,3 +1,9 @@
+Branch: simba/implement-a-stateful-tenant-aware-load-balancer-
+Title: Implement a stateful, tenant-aware Load Balancer called MtLoadBalance...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enable infinite horizontal scaling. By implementing a tenant-aware load balancer, the engine can grow from a single server to a global cluster, distributing the compute-heavy AI tool executions evenly across your infrastructure.
 Branch: simba/implement-a-grpc-compliant-securityinterceptor-t
 Title: Implement a gRPC-compliant SecurityInterceptor to validate tenant ide...
 
