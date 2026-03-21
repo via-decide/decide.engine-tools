@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Headless Server Docker Packager (via-server-deploy). 1. Build a deployment script that takes the compiled C++ headless dedicated server binary. 2. Auto-generate a minimal Alpine Linux Dockerfile designed to run the server with the absolute lowest memory footprint possible. 3. Implement a CLI command that builds the container and pushes it to a private registry so the viadecide.com orchestrator can spin up game instances on demand.
+
+CONSTRAINTS
+@GN8RBot MUST commit the Dockerfile generator logic, the registry authentication handler, and the CLI argument parser independently.
 Implement the Local Matchmaking Mock Server (via-matchmaker-local). 1. Create a lightweight local WebSocket server designed to perfectly mimic the viadecide.com production matchmaking backend. 2. Build a simulated "player queue" that artificially pairs the local developer with fake bot accounts based on mock MMR (Matchmaking Rating). 3. Emit standard "MatchFound" and "ServerAllocated" JSON payloads to test the engine's lobby UI without hitting the live cloud infrastructure.
 
 CONSTRAINTS
