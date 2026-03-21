@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Headless Bot Swarm Orchestrator (via-swarm-test). 1. Create a CLI controller that can spawn and manage hundreds of headless (no-rendering) game engine client instances locally. 2. Implement a multiplexer that routes simulated inputs (movement, shooting, chatting) to all headless clients simultaneously to hammer the local server. 3. Aggregate the latency and packet-loss data from the swarm into a stress_test_report.json for the Operations Console.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST commit the process spawner, the input multiplexer, and the metrics aggregator as distinct, atomic features.
 Create the Headless Server Docker Packager (via-server-deploy). 1. Build a deployment script that takes the compiled C++ headless dedicated server binary. 2. Auto-generate a minimal Alpine Linux Dockerfile designed to run the server with the absolute lowest memory footprint possible. 3. Implement a CLI command that builds the container and pushes it to a private registry so the viadecide.com orchestrator can spin up game instances on demand.
 
 CONSTRAINTS

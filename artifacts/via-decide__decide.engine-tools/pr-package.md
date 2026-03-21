@@ -1,3 +1,9 @@
+Branch: simba/build-the-headless-bot-swarm-orchestrator-via-sw
+Title: Build the Headless Bot Swarm Orchestrator (via-swarm-test). 1. Create...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Stress-test the multiplayer netcode with simulated traffic while racking up granular commits across process management and network routing.
 Branch: simba/create-the-headless-server-docker-packager-via-s
 Title: Create the Headless Server Docker Packager (via-server-deploy). 1. Bu...
 
