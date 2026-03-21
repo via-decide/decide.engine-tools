@@ -1,3 +1,9 @@
+Branch: simba/develop-the-global-undoredo-state-manager-via-st
+Title: Develop the Global Undo/Redo State Manager (via-state-manager). 1. Im...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a bulletproof safety net for your designers, breaking the complex memory-management and state logic down into dozens of micro-commits.
 Branch: simba/build-the-inter-tool-message-bus-via-core-bus-1-
 Title: Build the Inter-Tool Message Bus (via-core-bus). 1. Create a high-per...
 

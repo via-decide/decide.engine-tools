@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Global Undo/Redo State Manager (via-state-manager). 1. Implement a centralized Command Pattern architecture that records every state mutation across all tools (e.g., moving a UI node, deleting an audio track, tweaking a shader). 2. Build an efficient delta-compression stack that stores the "before" and "after" states of these actions without eating up gigabytes of RAM. 3. Create a unified history panel in the Operations Console that allows designers to scrub back and forth through time across the entire project simultaneously.
+
+CONSTRAINTS
+Commit the Command interface, the delta-compression math, and the stack traversal logic independently. @GN8RBot MUST write strict unit tests for the undo/redo logic of complex edge cases (like undoing the deletion of a folder containing 100 assets).
 Build the Inter-Tool Message Bus (via-core-bus). 1. Create a high-performance Publish/Subscribe (PubSub) event broker in the backend that acts as the central nervous system for all engine tools. 2. Implement strongly-typed payload validators so if the Audio Tool broadcasts a "PlaySound" event, the Viewport Tool knows exactly how to deserialize and react to it. 3. Build a WebSocket/WebWorker bridge that allows tools running in different browser threads (on viadecide.com) to communicate seamlessly with zero-copy memory sharing where possible.
 
 CONSTRAINTS
