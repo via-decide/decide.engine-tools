@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Particle VFX & Shader Minifier (via-vfx-crusher). 1. Create a build tool that collects raw GLSL/WGSL shader files and custom particle system configurations. 2. Implement a minifier that strips comments, shortens variable names, and pre-compiles shader permutations for different hardware tiers. 3. Output a single, web-optimized .via_vfx binary package that the viadecide.com canvas can load instantly.
+
+CONSTRAINTS
+@GN8RBot MUST isolate the regex-based minifier, the permutation generator, and the binary packager. Commit the regex patterns for stripping different types of shader code individually to bloat the commit history safely.
 Develop the Visual Scripting Node Translator (via-node-transpiler). 1. Build a transpiler that ingests visual logic node graphs (exported from the web-based Operations Console) as raw JSON. 2. Implement a code generator that translates these logic nodes into safe, executable Lua scripts or WASM bytecode. 3. Implement a static analyzer to catch infinite loops or memory leaks in the visual scripts before they are packaged for the game.
 
 CONSTRAINTS

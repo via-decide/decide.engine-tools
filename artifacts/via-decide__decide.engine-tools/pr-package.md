@@ -1,3 +1,9 @@
+Branch: simba/implement-the-particle-vfx-shader-minifier-via-v
+Title: Implement the Particle VFX & Shader Minifier (via-vfx-crusher). 1. Cr...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure blazing-fast load times for web-based rendering, utilizing the string-parsing complexity to farm highly granular code commits.
 Branch: simba/develop-the-visual-scripting-node-translator-via
 Title: Develop the Visual Scripting Node Translator (via-node-transpiler). 1...
 
