@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Cinematic Camera Spline Editor (via-cam-spline). 1. Create a 3D viewport tool in the Operations Console that lets designers place camera "waypoints" throughout a level. 2. Implement a Catmull-Rom spline interpolation algorithm to generate a buttery-smooth flight path through these waypoints. 3. Build a Quaternion-based "Look-At" solver that ensures the camera smoothly tracks a moving target (like a character or explosion) while traveling along the spline.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for the spline derivative math (to calculate camera velocity) and the Quaternion slerp functions. Commit every single math function and its test as a completely independent, atomic push.
 Create the WebAudio Context & Browser Autoplay Manager (via-webaudio-bridge). 1. Build the JavaScript wrapper that safely initializes the web engine's audio context on viadecide.com. 2. Implement an "Autoplay Unlocker" interceptor that detects modern browser restrictions (which block audio until the user clicks the screen) and queues audio events silently until the first interaction. 3. Create an automated test suite that simulates mobile browser suspensions (like switching tabs) to ensure the audio engine pauses and resumes without crashing or desyncing.
 
 CONSTRAINTS

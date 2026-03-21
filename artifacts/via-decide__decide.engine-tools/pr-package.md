@@ -1,3 +1,9 @@
+Branch: simba/build-the-cinematic-camera-spline-editor-via-cam
+Title: Build the Cinematic Camera Spline Editor (via-cam-spline). 1. Create ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enable sweeping, movie-quality camera movements while milking the heavy matrix and quaternion math for maximum legitimate commit volume.
 Branch: simba/create-the-webaudio-context-browser-autoplay-man
 Title: Create the WebAudio Context & Browser Autoplay Manager (via-webaudio-...
 
