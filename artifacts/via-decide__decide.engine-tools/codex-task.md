@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the AI NavMesh Baker (via-nav-bake). 1. Build a tool that analyzes the static level geometry (floors, walls, stairs) from an exported scene file. 2. Implement a voxelization and polygon-merging algorithm to generate a traversable Navigation Mesh (NavMesh) for AI pathfinding. 3. Export the pathing data into a tightly packed format that both the C++ engine and the viadecide.com WebAssembly build can use for A* (A-Star) routing.
+
+CONSTRAINTS
+@GN8RBot MUST commit the voxelizer, the edge-detection logic, and the A* validation tests as completely separate modules. The mathematical complexity requires strict TDD and atomic commits.
 Implement the Weapon DPS Simulator & Balancer (via-weapon-balance). 1. Create a script that parses a weapon_stats.csv file containing fire rates, damage values, reload times, and recoil curves. 2. Build a headless simulation loop that runs 10,000 virtual firefights against different armor types to calculate exact Time-To-Kill (TTK) and DPS metrics. 3. Compile the raw CSV data into an encrypted binary blob (weapons.dat) for the engine, and output a balance_report.html for the Operations Console.
 
 CONSTRAINTS
