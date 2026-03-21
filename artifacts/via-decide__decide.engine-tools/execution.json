@@ -3,6 +3,7 @@
   "mode": "codex_then_claude",
   "branch": "simba/add-a-new-standalone-tool-tetris-game-id-tetris-",
   "mode": "codex_then_antigravity",
+  "branch": "simba/automate-the-nightly-simulation-cicd-bot-via-nig",
   "branch": "simba/implement-the-flame-graph-profiler-exporter-via-",
   "branch": "simba/develop-the-ai-behavior-tree-compiler-via-bt-com",
   "branch": "simba/build-the-headless-bot-swarm-orchestrator-via-sw",
