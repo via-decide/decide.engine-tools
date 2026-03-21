@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Local Matchmaking Mock Server (via-matchmaker-local). 1. Create a lightweight local WebSocket server designed to perfectly mimic the viadecide.com production matchmaking backend. 2. Build a simulated "player queue" that artificially pairs the local developer with fake bot accounts based on mock MMR (Matchmaking Rating). 3. Emit standard "MatchFound" and "ServerAllocated" JSON payloads to test the engine's lobby UI without hitting the live cloud infrastructure.
+
+CONSTRAINTS
+Implement the queueing algorithm, the WebSocket broadcaster, and the mock-player generator as standalone modules. Commit each with its respective unit tests.
 Develop the Multiplayer Network Schema CodeGen (via-net-schema). 1. Build a custom parser that reads .viaschema files (defining multiplayer network packets like PlayerMove, Shoot, HealthUpdate). 2. Write a generator that outputs highly optimized, memory-aligned C++ structs for the native game engine. 3. Write a secondary generator that outputs strict TypeScript interfaces and ArrayBuffer parsers for the viadecide.com web client.
 
 CONSTRAINTS

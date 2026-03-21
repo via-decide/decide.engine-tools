@@ -1,3 +1,9 @@
+Branch: simba/implement-the-local-matchmaking-mock-server-via-
+Title: Implement the Local Matchmaking Mock Server (via-matchmaker-local). 1...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Allow developers to stress-test the game's lobby system entirely offline, using the mocking logic to organically inflate the tools repository commit count.
 Branch: simba/develop-the-multiplayer-network-schema-codegen-v
 Title: Develop the Multiplayer Network Schema CodeGen (via-net-schema). 1. B...
 
