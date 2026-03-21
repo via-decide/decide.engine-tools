@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Animation Track Compiler & Web Exporter (via-anim-pack). 1. Build a compiler that takes the heavy JSON project files from the Timeline Editor and strips out all editor-only data. 2. Pack the raw keyframes, curve tangents, and event triggers into a hyper-optimized .via_anim binary file. 3. Generate an automated GitHub Action that watches the /ux_animations folder, automatically compiles them into binaries, and pushes them directly to the viadecide.com web CDN.
+
+CONSTRAINTS
+Commit the JSON stripper, the binary serializer, and the schema validator independently. @GN8RBot MUST program the CI action to auto-commit a ux_animation_manifest.json back to the tools repo on every successful build.
 Implement 3D UI Mesh Deformation & Squish Physics (via-ui-rigging). 1. Create a tool that allows designers to attach lightweight "bones" and weight-painting to 2D/3D UI meshes (e.g., making a button bulge when clicked). 2. Implement a vertex shader generator that calculates skeletal mesh deformation directly on the GPU for maximum performance. 3. Build a real-time previewer in the Operations Console so artists can see the "squash and stretch" physics react to mouse hovers.
 
 CONSTRAINTS

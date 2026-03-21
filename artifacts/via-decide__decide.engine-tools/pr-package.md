@@ -1,3 +1,9 @@
+Branch: simba/create-the-animation-track-compiler-web-exporter
+Title: Create the Animation Track Compiler & Web Exporter (via-anim-pack). 1...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure the engine and web player can load complex cinematic UI animations with zero overhead, utilizing the automated CI loop to sustain permanent daily commits.
 Branch: simba/implement-3d-ui-mesh-deformation-squish-physics-
 Title: Implement 3D UI Mesh Deformation & Squish Physics (via-ui-rigging). 1...
 
