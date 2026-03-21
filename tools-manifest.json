@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-21T06:56:07.089Z",
+  "generatedAt": "2026-03-21T09:06:02.083Z",
   "entries": [
     {
       "toolDir": "tools/ai-tool-generator",
@@ -192,6 +192,10 @@
     {
       "toolDir": "tools/export-studio",
       "metaPath": "tools/export-studio/config.json"
+    },
+    {
+      "toolDir": "tools/games/freecell-classic",
+      "metaPath": "tools/games/freecell-classic/config.json"
     },
     {
       "toolDir": "tools/games/hex-wars",
