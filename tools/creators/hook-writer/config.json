@@ -1,0 +1,8 @@
+{
+  "id": "hook-writer",
+  "name": "Hook Writer",
+  "description": "Generate viral opening lines for any platform. Get 5 A/B variants across hook styles — curiosity, controversy, story, data, and how-to.",
+  "category": "creators",
+  "entry": "tools/creators/hook-writer/index.html",
+  "tags": ["ai", "hooks", "viral", "copywriting", "social-media"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "caption-generator",
+  "name": "Caption Generator",
+  "description": "Upload an image and get AI-generated captions with platform-specific hashtags for Instagram, Twitter, LinkedIn, and TikTok.",
+  "category": "creators",
+  "entry": "tools/creators/caption-generator/index.html",
+  "tags": ["ai", "captions", "image", "social-media", "hashtags"]
+}

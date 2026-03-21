@@ -1,0 +1,8 @@
+{
+  "id": "prompt-alchemy",
+  "name": "Prompt Alchemy",
+  "description": "Multi-platform prompt optimizer. Input one prompt, get platform-specific versions with tone, length, and hashtags tuned for Twitter, Instagram, LinkedIn, TikTok, YouTube, and Reddit.",
+  "category": "creators",
+  "entry": "tools/creators/prompt-alchemy/index.html",
+  "tags": ["ai", "prompts", "social-media", "content", "optimization"]
+}
