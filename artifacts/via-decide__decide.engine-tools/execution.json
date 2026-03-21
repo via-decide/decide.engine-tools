@@ -1,7 +1,12 @@
 {
   "repo": "via-decide/decide.engine-tools",
+  "mode": "codex_then_claude",
+  "branch": "simba/add-a-new-standalone-tool-tetris-game-id-tetris-",
   "mode": "codex_then_antigravity",
   "branch": "simba/create-the-public-telemetry-aggregator-bot-1-bui",
+  "branch": "simba/implement-the-wasm-web-player-packager-via-wasm-",
+  "branch": "simba/develop-the-engine-to-web-documentation-generato",
+  "branch": "simba/build-the-web-asset-optimizer-cli-via-web-export",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
