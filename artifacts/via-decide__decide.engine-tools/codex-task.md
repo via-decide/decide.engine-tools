@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Animation State Machine (ASM) Compiler (via-anim-compile). 1. Create a CLI parser that reads .via_asm JSON files (which define animation states, blend trees, and transition rules). 2. Implement an optimizer that converts the JSON graph into a highly compact, memory-contiguous binary format for the native C++ engine. 3. Generate a .d.ts TypeScript definitions file so the viadecide.com web player can trigger specific animation states securely.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for each mathematical transition type (Linear, Ease-In, Bezier Blend) before implementing the logic. Commit every single blend function and its test as a completely separate push.
 Automate the Nightly Simulation CI/CD Bot (via-nightly-sim). 1. Write a GitHub Action workflow that automatically spins up the Headless Bot Swarm (via-swarm-test) every night at midnight. 2. Command the bot swarm to run a standard 15-minute cognitive/simulation test against the latest server build. 3. CRITICAL: Automate the workflow to push a generated nightly_sim_results.md file back to the repository with the server's tick-rate, memory usage, and peak bot count.
 
 CONSTRAINTS
