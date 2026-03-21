@@ -1,3 +1,9 @@
+Branch: simba/build-the-real-time-collaboration-core-crdt-engi
+Title: Build the Real-Time Collaboration Core (CRDT Engine) (via-live-sync)....
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enable Google Docs-style real-time collaboration for game development, utilizing the intense concurrency testing to farm hundreds of highly technical commits.
 Branch: simba/create-the-dynamic-plugin-host-sandbox-via-plugi
 Title: Create the Dynamic Plugin Host & Sandbox (via-plugin-host). 1. Build ...
 

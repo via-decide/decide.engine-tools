@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Real-Time Collaboration Core (CRDT Engine) (via-live-sync). 1. Create a Conflict-free Replicated Data Type (CRDT) manager that allows multiple developers to edit the exact same .viascene or Material Graph at the same time without locking the file. 2. Implement a WebSocket broadcaster that streams granular delta-updates (e.g., "User A moved Object X by 5 units on the Z-axis") to all connected Operations Consoles. 3. Build a presence system that tracks active users and displays their virtual "cursors" or selections inside the 3D viewport.
+
+CONSTRAINTS
+Strict TDD. CRDT math is notoriously complex. @GN8RBot MUST write unit tests simulating network latency, dropped packets, and simultaneous conflicting edits before implementing the merge resolution logic. Commit every conflict-resolution algorithm as an isolated push.
 Create the Dynamic Plugin Host & Sandbox (via-plugin-host). 1. Build a core backend registry that dynamically discovers, loads, and initializes all the other engine tools (Audio, ECS, Cinematics) as modular plugins. 2. Implement a sandboxing architecture that catches and isolates fatal errors. If the Shader Graph tool crashes due to a bad regex, it should *not* crash the ECS tool or the main Operations Console. 3. Write a lifecycle manager that controls the boot sequence (Init, Load Dependencies, Update Loop, Shutdown) for every loaded module.
 
 CONSTRAINTS
