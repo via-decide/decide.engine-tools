@@ -1,3 +1,9 @@
+Branch: simba/develop-the-high-frequency-telemetry-batcher-via
+Title: Develop the High-Frequency Telemetry Batcher (via-telemetry-pipe). 1....
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Protect the viadecide.com database from being DDOS'd by its own game clients, utilizing the data-compression math to drive granular commits.
 Branch: simba/build-the-wasmc-crash-dump-symbolicator-via-cras
 Title: Build the WASM/C++ Crash Dump Symbolicator (via-crash-decode). 1. Cre...
 

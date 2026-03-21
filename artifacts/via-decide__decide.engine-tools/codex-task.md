@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the High-Frequency Telemetry Batcher (via-telemetry-pipe). 1. Build a local data pipeline tool that formats in-game events (Player Death, Item Purchased, Level Loaded) into tightly packed binary packets or compressed JSON. 2. Implement a batching algorithm that queues these events and sends them to the viadecide.com backend in chunks every 5 seconds, rather than spamming the server on every single bullet fired. 3. Create an automated data-sanitizer that strips all Personally Identifiable Information (PII) before the payload leaves the client.
+
+CONSTRAINTS
+Isolate the queue logic, the compression algorithm, and the PII stripper. Commit the PII regex filters and the queue timer logic as standalone PRs.
 Build the WASM/C++ Crash Dump Symbolicator (via-crash-decode). 1. Create a CLI tool that intercepts raw, minified stack traces or memory dumps sent from the viadecide.com live player. 2. Implement a parser that cross-references these raw memory addresses against the engine's .pdb (Windows) or .wasm.map (Web) debug symbols. 3. Translate the hexadecimal garbage back into human-readable C++ file names and exact line numbers so developers can fix the crash instantly.
 
 CONSTRAINTS
