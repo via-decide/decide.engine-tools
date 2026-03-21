@@ -1,3 +1,9 @@
+Branch: simba/build-the-web-audio-compressor-soundbank-generat
+Title: Build the Web Audio Compressor & Soundbank Generator (via-audio-crush...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Guarantee instant, high-fidelity audio playback on the viadecide.com web player, leveraging the compression pipeline to rack up high-value commits.
 Branch: simba/implement-the-asset-webhook-cache-invalidator-da
 Title: Implement the Asset Webhook & Cache Invalidator Daemon (via-asset-web...
 

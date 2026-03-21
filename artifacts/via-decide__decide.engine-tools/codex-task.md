@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Web Audio Compressor & Soundbank Generator (via-audio-crusher). 1. Create a CLI tool that scans the engine's raw /audio_src directory (WAV/FLAC files). 2. Implement an automated compression pipeline that transcodes these heavy files into web-optimized Ogg Vorbis and WebM formats for viadecide.com. 3. Generate a soundbank_manifest.json that maps audio events (e.g., "player_jump") to the compressed file paths, complete with pre-calculated volume normalization data.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for the file scanner, the transcoder execution, and the JSON serializer. Commit each of these three modules as separate, atomic pushes.
 Implement the Asset Webhook & Cache Invalidator Daemon (via-asset-webhook). 1. Create a background service that watches the final compiled web_assets/ output directory. 2. Upon detecting new optimized web assets (textures, sounds, scripts), generate an MD5 checksum for the new files. 3. Send an authenticated HTTP POST webhook to the viadecide.com backend to immediately invalidate the CDN cache for those specific assets.
 
 CONSTRAINTS
