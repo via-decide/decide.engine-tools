@@ -1,0 +1,13 @@
+{
+  "id": "ai-game-strategy-advisor",
+  "name": "AI Game Strategy Advisor",
+  "description": "AI-powered strategic advisor that analyzes player state and recommends optimal growth paths using game scoring formulas.",
+  "category": "engine",
+  "layer": "advisory",
+  "audience": ["players", "founders", "operators"],
+  "inputs": ["player_state", "growth_mode", "goal"],
+  "outputs": ["strategy_report", "action_plan", "risk_analysis"],
+  "relatedTools": ["ai-coach-console", "growth-path-recommender", "daily-quest-generator", "fair-ranking-engine"],
+  "entry": "tools/engine/ai-game-strategy-advisor/index.html",
+  "tags": ["orchard-engine", "ai", "strategy", "game-logic", "standalone"]
+}

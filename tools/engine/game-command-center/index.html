@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Command Center</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+  <script src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+    .stat-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; text-align: center; position: relative; overflow: hidden; }
+    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .stat-card.roots::before { background: linear-gradient(90deg, #8B4513, #A0522D); }
+    .stat-card.trunk::before { background: linear-gradient(90deg, #654321, #8B6914); }
+    .stat-card.fruits::before { background: linear-gradient(90deg, #22c55e, #16a34a); }
+    .stat-card.seeds::before { background: linear-gradient(90deg, #FFCA28, #f59e0b); }
+    .stat-card.water::before { background: linear-gradient(90deg, #29B6F6, #0288D1); }
+    .stat-card.rank::before { background: linear-gradient(90deg, #ff671f, #f97316); }
+    .stat-icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .stat-value { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-delta { font-size: 0.72rem; margin-top: 4px; }
+    .stat-delta.up { color: var(--accent-2); }
+    .stat-delta.down { color: #ef4444; }
+    .quest-panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 12px; }
+    .quest-item { display: flex; align-items: center; gap: 10px; padding: 10px; margin: 6px 0; background: var(--bg-alt); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+    .quest-item:hover { border-color: var(--accent-2); }
+    .quest-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+    .quest-item.done .quest-check { background: var(--accent-2); border-color: var(--accent-2); }
+    .quest-text { font-size: 0.85rem; flex: 1; }
+    .quest-item.done .quest-text { text-decoration: line-through; color: var(--muted); }
+    .weather-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg-alt); border-radius: 10px; margin-top: 12px; font-size: 0.85rem; }
+    .weather-icon { font-size: 1.5rem; }
+    .farm-viz { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 12px; min-height: 180px; position: relative; }
+    .tree-row { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
+    .tree { text-align: center; }
+    .tree-visual { font-size: 2.2rem; line-height: 1; animation: sway 3s ease-in-out infinite; }
+    .tree-label { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+    @keyframes sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+    .progress-ring { width: 60px; height: 60px; margin: 0 auto; }
+    .progress-ring circle { fill: none; stroke-width: 4; }
+    .progress-ring .bg { stroke: #1e293b; }
+    .progress-ring .fg { stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+    .layer-nav { display: flex; gap: 6px; margin-top: 12px; }
+    .layer-nav a { flex: 1; padding: 10px; text-align: center; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; }
+    .layer-nav a:hover { border-color: var(--accent); background: rgba(255,103,31,0.08); }
+    .log-feed { max-height: 200px; overflow-y: auto; margin-top: 10px; }
+    .log-entry { padding: 6px 10px; font-size: 0.75rem; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .log-entry .log-time { color: var(--accent); margin-right: 6px; }
+    .section-title { font-size: 1rem; font-weight: 700; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Game Command Center</h1>
+      <p>Your unified Orchard Engine dashboard — farm, quests, scores & layers.</p>
+    </header>
+
+    <div id="weatherBar" class="weather-bar"></div>
+
+    <div class="dash-grid" id="statsGrid"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+      <div class="farm-viz" id="farmViz">
+        <div class="section-title">Your Farm</div>
+        <div id="treeRow" class="tree-row"></div>
+      </div>
+      <div class="quest-panel" id="questPanel">
+        <div class="section-title">Daily Quests</div>
+        <div id="questList"></div>
+      </div>
+    </div>
+
+    <div class="quest-panel" style="margin-top:12px">
+      <div class="section-title">Quick Launch — Game Tools</div>
+      <div class="layer-nav" id="layerNav"></div>
+    </div>
+
+    <div class="quest-panel" style="margin-top:12px">
+      <div class="section-title">Activity Feed</div>
+      <div class="log-feed" id="logFeed"></div>
+    </div>
+
+    <div style="margin-top:12px;text-align:center">
+      <button id="resetBtn" style="width:auto;padding:8px 20px;background:var(--bg-alt);border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:0.78rem;cursor:pointer">Reset Farm State</button>
+    </div>
+  </main>
+  <script src="../../../shared/tool-storage.js"></script>
+  <script src="../../../shared/engine-utils.js"></script>
+  <script src="../../../shared/engine-models.js"></script>
+  <script>
+(function () {
+  const FARM_KEY = 'engine.command-center.farm';
+  const LOG_KEY = 'engine.command-center.log';
+  const QUEST_KEY = 'engine.command-center.quests';
+
+  const weatherCycle = ['Sunny ☀️', 'Cloudy ☁️', 'Rain 🌧️', 'Windy 🌬️'];
+  const weatherIcons = ['☀️', '☁️', '🌧️', '🌬️'];
+
+  function getDay() {
+    return Math.floor(Date.now() / 86400000);
+  }
+
+  function getWeather() {
+    return getDay() % 4;
+  }
+
+  function loadFarm() {
+    const saved = ToolStorage.read(FARM_KEY);
+    if (saved) return saved;
+    return {
+      roots: 12, trunk: 6, fruits: 3, seeds: 5, water: 65,
+      consistency: 62, quality: 55, depth: 45, peer: 35,
+      spamDays: 0, daysActive: 10, weeklyScores: [38, 42],
+      trees: ['🌱', '🌿', '🪴'], credits: 60, nutrients: 80,
+      stress: 15, pests: 0, lastDay: getDay()
+    };
+  }
+
+  function saveFarm(farm) {
+    ToolStorage.write(FARM_KEY, farm);
+  }
+
+  function addLog(msg) {
+    const logs = ToolStorage.read(LOG_KEY) || [];
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    logs.unshift({ time, msg });
+    if (logs.length > 50) logs.length = 50;
+    ToolStorage.write(LOG_KEY, logs);
+  }
+
+  function calcRank(s) {
+    const imp = s.weeklyScores && s.weeklyScores.length >= 2 ? s.weeklyScores[s.weeklyScores.length - 1] - s.weeklyScores[0] : 0;
+    return Math.round(s.roots * 0.20 + s.trunk * 0.20 + s.fruits * 1.5 + (s.quality || 50) * 0.25 + (s.consistency || 50) * 0.15 + Math.max(0, imp) * 0.08 - (s.spamDays || 0) * 4);
+  }
+
+  function advanceDay(farm) {
+    if (farm.lastDay >= getDay()) return farm;
+    const daysDiff = getDay() - farm.lastDay;
+    farm.daysActive += daysDiff;
+    farm.water = Math.max(0, farm.water - daysDiff * 3);
+    farm.lastDay = getDay();
+    addLog('New day dawned — water decreased by ' + (daysDiff * 3));
+    saveFarm(farm);
+    return farm;
+  }
+
+  function renderStats(farm) {
+    const rank = calcRank(farm);
+    const stats = [
+      { icon: '🌳', label: 'Roots', value: farm.roots, cls: 'roots', delta: '+1.2/day' },
+      { icon: '🪵', label: 'Trunk', value: farm.trunk, cls: 'trunk', delta: '+0.8/day' },
+      { icon: '🍎', label: 'Fruits', value: farm.fruits, cls: 'fruits', delta: farm.fruits > 0 ? '+' + Math.min(2, farm.fruits) + '/week' : '—' },
+      { icon: '🌰', label: 'Seeds', value: farm.seeds || 0, cls: 'seeds', delta: '—' },
+      { icon: '💧', label: 'Water', value: farm.water + '%', cls: 'water', delta: farm.water > 50 ? 'Healthy' : 'Low' },
+      { icon: '🏆', label: 'Rank', value: rank, cls: 'rank', delta: 'Fair Score' }
+    ];
+    const grid = document.getElementById('statsGrid');
+    grid.innerHTML = stats.map(s =>
+      `<div class="stat-card ${s.cls}"><div class="stat-icon">${s.icon}</div><div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div><div class="stat-delta ${typeof s.delta === 'string' && s.delta.startsWith('+') ? 'up' : ''}">${s.delta}</div></div>`
+    ).join('');
+  }
+
+  function renderWeather() {
+    const w = getWeather();
+    document.getElementById('weatherBar').innerHTML =
+      `<span class="weather-icon">${weatherIcons[w]}</span><span>Today's Weather: <strong>${weatherCycle[w]}</strong></span><span style="margin-left:auto;color:var(--muted);font-size:0.78rem">Day ${getDay() % 365} | Season ${Math.floor((getDay() % 365) / 90) + 1}</span>`;
+  }
+
+  function renderFarm(farm) {
+    const treeEmojis = ['🌱', '🌿', '🪴', '🌳', '🌲'];
+    const treeRow = document.getElementById('treeRow');
+    const slots = 3 + Math.floor((farm.roots || 12) / 15);
+    const trees = [];
+    for (let i = 0; i < Math.min(slots, 7); i++) {
+      const stage = Math.min(4, Math.floor((farm.roots || 12) / 10 + i * 0.3));
+      trees.push({ emoji: treeEmojis[stage], label: `Slot ${i + 1}` });
+    }
+    treeRow.innerHTML = trees.map(t =>
+      `<div class="tree"><div class="tree-visual">${t.emoji}</div><div class="tree-label">${t.label}</div></div>`
+    ).join('');
+  }
+
+  function renderQuests(farm) {
+    const saved = ToolStorage.read(QUEST_KEY);
+    const today = getDay();
+    let quests;
+    if (saved && saved.day === today) {
+      quests = saved.quests;
+    } else {
+      const nutrientTier = farm.nutrients > 70 ? 'high' : farm.nutrients > 40 ? 'mid' : 'low';
+      quests = [
+        { text: 'Complete 3 focused study blocks to strengthen roots', done: false },
+        { text: nutrientTier === 'low' ? 'Spend 2 actions on nutrient recovery' : 'Ship 1 quality output (fruit)', done: false },
+        { text: 'Water your orchard (maintain consistency)', done: false },
+        { text: farm.peer < 40 ? 'Validate 1 peer\'s work in your circle' : 'Share 1 seed of knowledge', done: false }
+      ];
+      ToolStorage.write(QUEST_KEY, { day: today, quests });
+    }
+    const list = document.getElementById('questList');
+    list.innerHTML = quests.map((q, i) =>
+      `<div class="quest-item ${q.done ? 'done' : ''}" data-idx="${i}"><div class="quest-check">${q.done ? '✓' : ''}</div><div class="quest-text">${q.text}</div></div>`
+    ).join('');
+
+    list.querySelectorAll('.quest-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const idx = parseInt(el.dataset.idx);
+        quests[idx].done = !quests[idx].done;
+        ToolStorage.write(QUEST_KEY, { day: today, quests });
+        if (quests[idx].done) {
+          farm.roots += 1.2;
+          farm.water = Math.min(100, farm.water + 5);
+          farm.consistency = Math.min(100, farm.consistency + 2);
+          saveFarm(farm);
+          addLog('Quest completed: ' + quests[idx].text.substring(0, 40));
+          renderAll(farm);
+        } else {
+          renderQuests(farm);
+        }
+      });
+    });
+  }
+
+  function renderLayerNav() {
+    const tools = [
+      { name: 'Strategy Advisor', path: '../ai-game-strategy-advisor/index.html', icon: '🧠' },
+      { name: 'Daily Quests', path: '../daily-quest-generator/index.html', icon: '📋' },
+      { name: 'Farm Generator', path: '../starter-farm-generator/index.html', icon: '🌱' },
+      { name: 'Fruit Yield', path: '../fruit-yield-engine/index.html', icon: '🍎' },
+      { name: 'Rankings', path: '../fair-ranking-engine/index.html', icon: '🏆' },
+      { name: 'Trust Score', path: '../trust-score-engine/index.html', icon: '🤝' },
+      { name: 'Leaderboard', path: '../leaderboard-analytics/index.html', icon: '📊' },
+      { name: 'Market', path: '../market-dynamics/index.html', icon: '📈' }
+    ];
+    document.getElementById('layerNav').innerHTML = tools.map(t =>
+      `<a href="${t.path}">${t.icon} ${t.name}</a>`
+    ).join('');
+  }
+
+  function renderLogs() {
+    const logs = ToolStorage.read(LOG_KEY) || [];
+    if (logs.length === 0) {
+      addLog('Command Center initialized');
+      addLog('Farm state loaded');
+    }
+    const feed = document.getElementById('logFeed');
+    const entries = ToolStorage.read(LOG_KEY) || [];
+    feed.innerHTML = entries.slice(0, 20).map(l =>
+      `<div class="log-entry"><span class="log-time">${l.time}</span>${l.msg}</div>`
+    ).join('');
+  }
+
+  function renderAll(farm) {
+    renderWeather();
+    renderStats(farm);
+    renderFarm(farm);
+    renderQuests(farm);
+    renderLayerNav();
+    renderLogs();
+  }
+
+  // Init
+  let farm = loadFarm();
+  farm = advanceDay(farm);
+  renderAll(farm);
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (confirm('Reset farm state to defaults?')) {
+      ToolStorage.write(FARM_KEY, null);
+      ToolStorage.write(LOG_KEY, null);
+      ToolStorage.write(QUEST_KEY, null);
+      location.reload();
+    }
+  });
+})();
+  </script>
+</body>
+</html>

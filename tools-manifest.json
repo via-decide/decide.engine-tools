@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-16T23:09:38.334Z",
+  "generatedAt": "2026-03-21T06:41:15.096Z",
   "entries": [
     {
       "toolDir": "tools/ai-tool-generator",
@@ -22,12 +22,20 @@
       "metaPath": "tools/context-packager/config.json"
     },
     {
+      "toolDir": "tools/decision-matrix",
+      "metaPath": "tools/decision-matrix/config.json"
+    },
+    {
       "toolDir": "tools/eco-engine-test",
       "metaPath": "tools/eco-engine-test/config.json"
     },
     {
       "toolDir": "tools/engine/ai-coach-console",
       "metaPath": "tools/engine/ai-coach-console/config.json"
+    },
+    {
+      "toolDir": "tools/engine/ai-game-strategy-advisor",
+      "metaPath": "tools/engine/ai-game-strategy-advisor/config.json"
     },
     {
       "toolDir": "tools/engine/balance-dashboard",
@@ -58,6 +66,10 @@
       "metaPath": "tools/engine/fruit-yield-engine/config.json"
     },
     {
+      "toolDir": "tools/engine/game-command-center",
+      "metaPath": "tools/engine/game-command-center/config.json"
+    },
+    {
       "toolDir": "tools/engine/grid-evolution",
       "metaPath": "tools/engine/grid-evolution/config.json"
     },
@@ -76,6 +88,10 @@
     {
       "toolDir": "tools/engine/layer1-swipe-crucible",
       "metaPath": "tools/engine/layer1-swipe-crucible/config.json"
+    },
+    {
+      "toolDir": "tools/engine/leaderboard-analytics",
+      "metaPath": "tools/engine/leaderboard-analytics/config.json"
     },
     {
       "toolDir": "tools/engine/market-dynamics",
@@ -174,6 +190,10 @@
       "metaPath": "tools/games/hex-wars/config.json"
     },
     {
+      "toolDir": "tools/games/skillhex-mission-control",
+      "metaPath": "tools/games/skillhex-mission-control/config.json"
+    },
+    {
       "toolDir": "tools/games/snake-game",
       "metaPath": "tools/games/snake-game/config.json"
     },
@@ -218,6 +238,10 @@
       "metaPath": "tools/revenue-forecaster/config.json"
     },
     {
+      "toolDir": "tools/scenario-planner",
+      "metaPath": "tools/scenario-planner/config.json"
+    },
+    {
       "toolDir": "tools/script-generator",
       "metaPath": "tools/script-generator/config.json"
     },
@@ -244,18 +268,6 @@
     {
       "toolDir": "tools/workflow-template-gallery",
       "metaPath": "tools/workflow-template-gallery/config.json"
-    },
-    {
-      "toolDir": "tools/decision-matrix",
-      "metaPath": "tools/decision-matrix/config.json"
-    },
-    {
-      "toolDir": "tools/scenario-planner",
-      "metaPath": "tools/scenario-planner/config.json"
-    },
-    {
-      "toolDir": "tools/games/skillhex-mission-control",
-      "metaPath": "tools/games/skillhex-mission-control/config.json"
     }
   ]
 }
