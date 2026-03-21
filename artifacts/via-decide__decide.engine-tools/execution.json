@@ -3,6 +3,7 @@
   "mode": "codex_then_claude",
   "branch": "simba/add-a-new-standalone-tool-tetris-game-id-tetris-",
   "mode": "codex_then_antigravity",
+  "branch": "simba/develop-the-node-to-shader-transpiler-via-shader",
   "branch": "simba/build-the-material-node-graph-ui-core-via-shader",
   "branch": "simba/create-the-animation-track-compiler-web-exporter",
   "branch": "simba/implement-3d-ui-mesh-deformation-squish-physics-",

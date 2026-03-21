@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Node-to-Shader Transpiler (via-shader-compile). 1. Build a compiler that parses the JSON output of the Material Node Graph and constructs an Abstract Syntax Tree (AST). 2. Implement code generators that traverse the AST and output clean, optimized GLSL (for OpenGL) and WGSL (for WebGPU/viadecide.com). 3. Write a dead-code eliminator that detects unhooked nodes or mathematically useless branches (e.g., multiplying by 1) and strips them from the final shader code.
+
+CONSTRAINTS
+Strict TDD is mandatory. @GN8RBot MUST implement the code generation for every single node type (Dot Product, Cross Product, Sine, Clamp) individually. Write a test -> COMMIT -> Implement Node Translation -> COMMIT.
 Build the Material Node Graph UI Core (via-shader-graph). 1. Create a pan-and-zoom Canvas/SVG workspace in the Operations Console for the Material Editor. 2. Implement a modular Node system where designers can spawn Math nodes (Add, Multiply), Texture Samplers, and PBR output nodes (Albedo, Metallic, Roughness). 3. Build a spline-based connection system that allows users to drag wires between node input/output pins, with strict type-checking (e.g., blocking a Vector3 from connecting directly to a Float without a conversion node).
 
 CONSTRAINTS

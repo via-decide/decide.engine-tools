@@ -1,3 +1,9 @@
+Branch: simba/develop-the-node-to-shader-transpiler-via-shader
+Title: Develop the Node-to-Shader Transpiler (via-shader-compile). 1. Build ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Automate the translation of visual logic into blazing-fast GPU instructions, farming an enormous amount of high-value compiler logic commits.
 Branch: simba/build-the-material-node-graph-ui-core-via-shader
 Title: Build the Material Node Graph UI Core (via-shader-graph). 1. Create a...
 
