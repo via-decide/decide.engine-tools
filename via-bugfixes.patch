@@ -1,0 +1,233 @@
+diff --git a/auth.html b/auth.html
+index 6e64e91..242253c 100644
+--- a/auth.html
++++ b/auth.html
+@@ -25,7 +25,9 @@ window.VIA_FIREBASE_CONFIG = {
+ <script src="./shared/social-core.js"></script>
+ <script src="./js/via-transition.js"></script>
+ <style>
+-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
++*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
++*:focus{outline:none}
++*:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
+ :root{--saffron:#FF6B00;--saffron2:#FF9500;--deep:#0B0B1A;--deep2:#13132A;--deep3:#1C1C38;--gold:#F5C518;--white:#fff;--muted:#8B8BAD;--border:rgba(255,255,255,.08)}
+ html,body{height:100%;background:var(--deep);color:var(--white);font-family:'DM Sans',sans-serif}
+ body{overflow:hidden}
+@@ -133,8 +135,11 @@ input.error,select.error{border-color:#ff6b6b}
+   });
+ 
+   // ── FIREBASE CONFIGURATION ──
+-  const _fbAuth = window.viaFirebase && window.viaFirebase.auth ? window.viaFirebase.auth : null;
+-  const _fbDb   = window.viaFirebase && window.viaFirebase.db   ? window.viaFirebase.db   : null;
++  // Read lazily via getters so Firebase is available even if init order shifts
++  function getAuth() { return window.viaFirebase && window.viaFirebase.auth ? window.viaFirebase.auth : null; }
++  function getDb()   { return window.viaFirebase && window.viaFirebase.db   ? window.viaFirebase.db   : null; }
++  const _fbAuth = getAuth();
++  const _fbDb   = getDb();
+   const FIREBASE_CONFIGURED = !!(_fbAuth);
+ 
+   const state = { authMode:'signin', loginType:'email', phoneStep: 1 };
+@@ -179,9 +184,10 @@ input.error,select.error{border-color:#ff6b6b}
+   }
+ 
+   async function restoreSession() {
+-    if (!_fbAuth) return null;
++    const auth = getAuth();
++    if (!auth) return null;
+     return new Promise((resolve) => {
+-      const unsub = _fbAuth.onAuthStateChanged((user) => {
++      const unsub = auth.onAuthStateChanged((user) => {
+         unsub();
+         resolve(user || null);
+       });
+@@ -191,9 +197,10 @@ input.error,select.error{border-color:#ff6b6b}
+   async function buildCurrentUser(firebaseUser) {
+     if (!firebaseUser || !firebaseUser.uid) return null;
+     let profile = null;
+-    if (_fbDb) {
++    var db = getDb();
++    if (db) {
+       try {
+-        const doc = await _fbDb.collection('users').doc(firebaseUser.uid).get();
++        const doc = await db.collection('users').doc(firebaseUser.uid).get();
+         if (doc.exists) profile = doc.data();
+       } catch(err) {
+         console.warn('Firestore profile fetch failed:', err.message);
+@@ -268,9 +275,10 @@ input.error,select.error{border-color:#ff6b6b}
+   }
+ 
+   async function signIn(email, password) {
+-    if (!_fbAuth) throw new Error('Firebase Auth is not configured.');
++    const auth = getAuth();
++    if (!auth) throw new Error('Firebase Auth is not configured.');
+     try {
+-      const cred = await _fbAuth.signInWithEmailAndPassword(email, password);
++      const cred = await auth.signInWithEmailAndPassword(email, password);
+       currentUser = await buildCurrentUser(cred.user);
+       authReady = true;
+       renderApp();
+@@ -313,7 +321,7 @@ input.error,select.error{border-color:#ff6b6b}
+     }
+ 
+     if(state.loginType==='email' && password.length<8){ setErr('signin-pass-err','Min 8 characters.'); setInputError('signin-password',true); return; }
+-    if(!_fbAuth){ setErr('signin-main-err','Firebase not configured.'); return; }
++    if(!getAuth()){ setErr('signin-main-err','Firebase not configured.'); return; }
+     
+     try { 
+       // For phone demo, we still use pseudo-email + fixed password or something
+@@ -364,10 +372,10 @@ input.error,select.error{border-color:#ff6b6b}
+     let email = state.loginType==='phone' ? phoneToPseudoEmail(parsePhone(rawId)) : rawId;
+     let finalPass = state.loginType==='phone' ? 'via_demo_pass' : password;
+ 
+-    if(!_fbAuth){ setErr('signup-main-err','Firebase not configured.'); return; }
++    if(!getAuth()){ setErr('signup-main-err','Firebase not configured.'); return; }
+     
+     try {
+-      const cred = await _fbAuth.createUserWithEmailAndPassword(email, finalPass);
++      const cred = await getAuth().createUserWithEmailAndPassword(email, finalPass);
+       const uid = cred.user.uid;
+       const profile = prepareProfile({
+         id: uid,
+@@ -378,8 +386,9 @@ input.error,select.error{border-color:#ff6b6b}
+         avatar_emoji: '🌟',
+         xp: 0, level: 1, followers: 0, following: 0, posts: 0
+       });
+-      if (_fbDb) {
+-        await _fbDb.collection('users').doc(uid).set(profile, { merge: true });
++      var db = getDb();
++      if (db) {
++        await db.collection('users').doc(uid).set(profile, { merge: true });
+       }
+       saveProfileCache(profile);
+       if (window.VIATransition && typeof window.VIATransition.navigate === 'function') {
+@@ -396,9 +405,9 @@ input.error,select.error{border-color:#ff6b6b}
+     const email=document.getElementById('reset-email').value.trim();
+     setErr('reset-err','');
+     if(!/^\S+@\S+\.\S+$/.test(email)){ setErr('reset-err','Enter a valid email for reset link.'); return; }
+-    if(!_fbAuth){ setErr('reset-err','Firebase not configured.'); return; }
++    if(!getAuth()){ setErr('reset-err','Firebase not configured.'); return; }
+     try {
+-      await _fbAuth.sendPasswordResetEmail(email);
++      await getAuth().sendPasswordResetEmail(email);
+       setErr('reset-err','Reset email sent. Check your inbox.');
+     } catch(err) {
+       setErr('reset-err', err.message || 'Reset failed.');
+@@ -414,12 +423,14 @@ input.error,select.error{border-color:#ff6b6b}
+   document.getElementById('forgot-link').addEventListener('click',(e)=>{ e.preventDefault(); document.getElementById('reset-wrap').classList.toggle('hidden'); });
+   document.getElementById('reset-email').addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); resetPassword(); }});
+   document.getElementById('google-btn').addEventListener('click', async ()=>{
+-    if(!_fbAuth){ setErr('signin-main-err','Firebase not configured.'); return; }
++    const auth = getAuth();
++    const db = getDb();
++    if(!auth){ setErr('signin-main-err','Firebase not configured. Please refresh and try again.'); return; }
+     try {
+       const provider = new firebase.auth.GoogleAuthProvider();
+       provider.addScope('email');
+       provider.addScope('profile');
+-      const cred = await _fbAuth.signInWithPopup(provider);
++      const cred = await auth.signInWithPopup(provider);
+       const user = cred.user;
+       const profile = prepareProfile({
+         id: user.uid,
+@@ -430,8 +441,8 @@ input.error,select.error{border-color:#ff6b6b}
+         avatar_emoji: '🌟',
+         xp: 0, level: 1, followers: 0, following: 0, posts: 0
+       });
+-      if (_fbDb) {
+-        await _fbDb.collection('users').doc(user.uid).set(profile, { merge: true });
++      if (db) {
++        await db.collection('users').doc(user.uid).set(profile, { merge: true });
+       }
+       saveProfileCache(profile);
+       if (window.VIATransition && typeof window.VIATransition.navigate === 'function') {
+@@ -445,8 +456,8 @@ input.error,select.error{border-color:#ff6b6b}
+   });
+   document.getElementById('telegram-btn').addEventListener('click', ()=> window.open('https://t.me/GN8RBot?start=via_auth','_blank'));
+ 
+-  if (_fbAuth) {
+-    _fbAuth.onAuthStateChanged(async (user) => {
++  if (getAuth()) {
++    getAuth().onAuthStateChanged(async (user) => {
+       console.log('Firebase auth state:', user ? user.uid : 'signed out');
+       if (user) {
+         currentUser = await buildCurrentUser(user);
+diff --git a/css/via-pages.css b/css/via-pages.css
+index ba08960..f175d1a 100644
+--- a/css/via-pages.css
++++ b/css/via-pages.css
+@@ -15,7 +15,9 @@
+   --radius: 24px;
+ }
+ 
+-* { box-sizing: border-box; }
++*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
++*:focus { outline: none; }
++*:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ html, body { margin: 0; min-height: 100%; }
+ body {
+   font-family: 'DM Sans', system-ui, sans-serif;
+diff --git a/profile.html b/profile.html
+index a0bc731..a3f626b 100644
+--- a/profile.html
++++ b/profile.html
+@@ -129,16 +129,38 @@
+             return;
+           }
+ 
+-          activity.innerHTML = posts.slice(0, 6).map(function (post) {
++          activity.innerHTML = posts.slice(0, 6).map(function (post, idx) {
+             var author = post.author && post.author.display_name ? post.author.display_name : (post.author && post.author.username ? post.author.username : 'VIA');
++            var fullBody = (post.body || '');
++            var isLong = fullBody.length > 140;
++            var preview = isLong ? fullBody.slice(0, 140) + '...' : fullBody;
++            var expandId = 'post-expand-' + idx;
++
++            // Build the full article section for creator drafts
++            var drafts = window.VIAFeed.getCreatorDrafts ? window.VIAFeed.getCreatorDrafts() : [];
++            var matchedDraft = drafts.filter(function (d) { return d.id === post.id; })[0];
++            var fullContent = '';
++            if (matchedDraft) {
++              var parts = [matchedDraft.hook, matchedDraft.context, matchedDraft.insight, matchedDraft.cta].filter(Boolean);
++              fullContent = parts.join('\n\n');
++            } else {
++              fullContent = fullBody;
++            }
++            var needsExpand = fullContent.length > 140;
++
+             return '' +
+-              '<div class="via-list-item">' +
++              '<div class="via-list-item" style="flex-direction:column;align-items:stretch">' +
+                 '<div class="via-list-item-main">' +
+                   '<strong>' + (post.title || 'Feed post') + '</strong>' +
+-                  '<p>' + (post.body || '').slice(0, 140) + '</p>' +
++                  '<p id="' + expandId + '-preview">' + preview + '</p>' +
++                  (needsExpand ? '<div id="' + expandId + '-full" style="display:none;white-space:pre-line;line-height:1.7;color:var(--text);margin-top:8px">' + fullContent.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>' : '') +
+                   '<div class="via-inline-meta"><span>' + author + '</span><span>' + (post.tag || 'Post') + '</span></div>' +
+                 '</div>' +
+-                '<a class="via-link-button" href="./index.html">View feed</a>' +
++                '<div style="display:flex;gap:8px;margin-top:8px">' +
++                  (needsExpand ? '<button class="via-link-button" style="cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px 14px;color:var(--accent);font-weight:700;font-size:.82rem" onclick="var p=document.getElementById(\'' + expandId + '-preview\');var f=document.getElementById(\'' + expandId + '-full\');var open=f.style.display!==\'none\';f.style.display=open?\'none\':\'block\';p.style.display=open?\'block\':\'none\';this.textContent=open?\'Read full article\':\'Collapse\'">' +
++                    'Read full article</button>' : '') +
++                  '<a class="via-link-button" href="./index.html" style="border-radius:12px;padding:8px 14px;font-size:.82rem">View feed</a>' +
++                '</div>' +
+               '</div>';
+           }).join('');
+         }
+diff --git a/shared/firebase-config.js b/shared/firebase-config.js
+index ba72569..73d66d1 100644
+--- a/shared/firebase-config.js
++++ b/shared/firebase-config.js
+@@ -23,9 +23,8 @@
+     }
+   }
+ 
+-  if (document.readyState === 'loading') {
+-    document.addEventListener('DOMContentLoaded', initFirebase);
+-  } else {
+-    initFirebase();
+-  }
++  // Initialize immediately — Firebase SDK does not need the DOM.
++  // Deferring to DOMContentLoaded caused a race condition where
++  // auth.html's inline script read window.viaFirebase before it was set.
++  initFirebase();
+ })(window);

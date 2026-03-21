@@ -1,0 +1,13 @@
+{
+  "id": "casio-drone-controller",
+  "name": "Casio GBD-200 Drone Controller",
+  "description": "Drone autopilot interface adapted for Casio GBD-200 wearable watch — MIP LCD HUD, button mapping, accelerometer tilt control, 8-second BLE pairing, and 6-DOF physics simulation.",
+  "category": "engine",
+  "layer": "operations",
+  "audience": ["operators", "founders", "coders"],
+  "inputs": ["drone_setpoints", "ble_connection", "accelerometer_data", "button_inputs"],
+  "outputs": ["drone_telemetry", "watch_hud", "mission_log"],
+  "relatedTools": ["network-latency-simulator", "gesture-feedback-ui", "game-command-center"],
+  "entry": "tools/engine/casio-drone-controller/index.html",
+  "tags": ["orchard-engine", "drone", "casio", "wearable", "ble", "accelerometer", "standalone"]
+}
