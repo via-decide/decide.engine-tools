@@ -1,3 +1,9 @@
+Branch: simba/implement-the-convolution-reverb-baker-via-ir-ba
+Title: Implement the Convolution Reverb Baker (via-ir-baker). 1. Create an a...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give the engine's 3D environments hyper-realistic, physical sound reflections, turning the complex convolution math into a continuous stream of modular commits.
 Branch: simba/develop-the-procedural-sound-synthesizer-core-vi
 Title: Develop the Procedural Sound Synthesizer Core (via-synth-core). 1. Bu...
 

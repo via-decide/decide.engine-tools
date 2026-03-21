@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Convolution Reverb Baker (via-ir-baker). 1. Create an audio tool that ingests Impulse Response (IR) files (e.g., a recording of a balloon popping in a real cathedral or cave). 2. Build a mathematical convolution engine that processes "dry" game sounds through these IR files to simulate 100% accurate, real-world acoustics. 3. Bake the heavily processed audio offline, or output optimized IR data arrays that the Web Audio API's ConvolverNode can utilize on viadecide.com.
+
+CONSTRAINTS
+The convolution algorithm is mathematically intense. @GN8RBot MUST break the array-multiplication logic into isolated chunks, committing the performance benchmarks and unit tests as standalone PRs.
 Develop the Procedural Sound Synthesizer Core (via-synth-core). 1. Build a node-based generator in the Operations Console that creates sound effects mathematically (e.g., using oscillators and noise generators) instead of relying on heavy audio files. 2. Implement core DSP nodes: Sine, Square, Sawtooth, White Noise, and ADSR (Attack, Decay, Sustain, Release) volume envelopes. 3. Output these procedural patches as lightweight synth_patch.json files that the viadecide.com Web Audio API can parse and synthesize in real-time.
 
 CONSTRAINTS
