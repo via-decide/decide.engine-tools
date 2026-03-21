@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Adaptive Soundtrack Sequencer (via-music-sequencer). 1. Create a Timeline UI in the Operations Console designed for vertical music mixing (layering stems like drums, strings, and bass). 2. Implement an event-listening node system that crossfades or triggers specific music layers based on live game variables (e.g., danger_level > 50 fades in the battle drums). 3. Build a compiler that parses this adaptive timeline into a lightweight music_behavior.json format for the C++ and WASM audio engines.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for the crossfade math (linear, exponential, logarithmic) before implementing the audio buffer logic. Commit each fading algorithm and timeline parser as a separate, atomic push.
 Create the Shader Permutation & Warm-up Cache CI Bot (via-shader-cache). 1. Write a CLI tool that scans the game project for all compiled materials and generates every possible shader permutation (e.g., Material with shadows ON vs OFF, Fog ON vs OFF). 2. Implement an offline compiler script that pre-compiles these permutations into binary SPIR-V or WebGPU pipelines to eliminate runtime stuttering. 3. Configure a GitHub Action that runs this permutation compiler nightly and auto-commits the resulting shader_cache.bin back to the repository.
 
 CONSTRAINTS

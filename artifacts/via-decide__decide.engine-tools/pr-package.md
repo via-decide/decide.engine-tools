@@ -1,3 +1,9 @@
+Branch: simba/build-the-adaptive-soundtrack-sequencer-via-musi
+Title: Build the Adaptive Soundtrack Sequencer (via-music-sequencer). 1. Cre...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enable dynamic, movie-quality background music that reacts to the player, while farming complex audio-math commits.
 Branch: simba/create-the-shader-permutation-warm-up-cache-ci-b
 Title: Create the Shader Permutation & Warm-up Cache CI Bot (via-shader-cach...
 
