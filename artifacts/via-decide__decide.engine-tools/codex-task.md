@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Asset Webhook & Cache Invalidator Daemon (via-asset-webhook). 1. Create a background service that watches the final compiled web_assets/ output directory. 2. Upon detecting new optimized web assets (textures, sounds, scripts), generate an MD5 checksum for the new files. 3. Send an authenticated HTTP POST webhook to the viadecide.com backend to immediately invalidate the CDN cache for those specific assets.
+
+CONSTRAINTS
+Use a robust HTTP client library. Implement unit tests with mocked HTTP responses to simulate web server success/failure. Commit the file watcher, the hashing logic, and the HTTP client separately.
 Create the Playtest Analytics Dashboard Generator (via-playtest-report). 1. Build a local tool that ingests SQLite databases or raw log files generated during local engine playtesting (player pathing, death heatmaps, frame drops). 2. Implement a data aggregator that structures this data into lightweight analytics_payload.json files. 3. Generate a static HTML/JS report widget that can be directly embedded into a secure "Developer Portal" route on viadecide.com.
 
 CONSTRAINTS
