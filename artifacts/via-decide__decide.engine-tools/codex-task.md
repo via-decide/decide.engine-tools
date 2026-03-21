@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Master Mixing Bus & Automated Clipping CI Bot (via-audio-mastering). 1. Build a visual Node Graph mixer (similar to the Shader Graph) where designers can route audio channels through Limiters, Compressors, and Reverb buses. 2. Implement an offline mixdown script that simulates a heavy combat scenario, firing 500 sounds at once to test the Master Bus limits. 3. Configure a GitHub Action to run this audio stress-test nightly, automatically analyzing the output buffer for digital clipping (audio distortion going above 0dBFS).
+
+CONSTRAINTS
+The Master Bus routing logic must be mathematically rigorous. @GN8RBot MUST program the CI action to auto-commit an audio_clipping_report.md back to the repository detailing peak volume levels on every successful build.
 Implement the Dynamic Foley & Ambient Scatterer (via-foley-scatter). 1. Create a tool that parses .viafoley configurations to prevent repetitive "machine-gun" audio (e.g., 10 identical footstep sounds in a row). 2. Implement a round-robin sample picker with real-time, randomized pitch and volume shifting. 3. Build an "Ambient Emitter" system that allows designers to place virtual boxes in a level that randomly spawn ambient sounds (wind gusts, birds) within a specific 3D radius.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/create-the-master-mixing-bus-automated-clipping-
+Title: Create the Master Mixing Bus & Automated Clipping CI Bot (via-audio-m...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Guarantee a flawless, distortion-free audio mix while using the nightly CI/CD rendering bot to permanently sustain automated, high-value daily commits.
 Branch: simba/implement-the-dynamic-foley-ambient-scatterer-vi
 Title: Implement the Dynamic Foley & Ambient Scatterer (via-foley-scatter). ...
 
