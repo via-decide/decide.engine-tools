@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
+  "branch": "simba/create-the-visual-gesture-feedback-ui-components",
   "branch": "simba/build-the-omega-cloud-orchestrator-deployment-en",
   "branch": "simba/implement-the-parallel-build-system-task-runner-",
   "branch": "simba/create-the-visual-diff-git-integration-bridge-vi",
