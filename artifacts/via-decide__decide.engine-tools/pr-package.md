@@ -1,3 +1,9 @@
+Branch: simba/create-the-webaudio-context-browser-autoplay-man
+Title: Create the WebAudio Context & Browser Autoplay Manager (via-webaudio-...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure a bulletproof audio experience for web players, bridging the native C++ engine with strict browser policies while padding the commit graph with browser-compatibility tests.
 Branch: simba/implement-the-convolution-reverb-baker-via-ir-ba
 Title: Implement the Convolution Reverb Baker (via-ir-baker). 1. Create an a...
 

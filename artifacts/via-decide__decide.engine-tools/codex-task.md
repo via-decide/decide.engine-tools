@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the WebAudio Context & Browser Autoplay Manager (via-webaudio-bridge). 1. Build the JavaScript wrapper that safely initializes the web engine's audio context on viadecide.com. 2. Implement an "Autoplay Unlocker" interceptor that detects modern browser restrictions (which block audio until the user clicks the screen) and queues audio events silently until the first interaction. 3. Create an automated test suite that simulates mobile browser suspensions (like switching tabs) to ensure the audio engine pauses and resumes without crashing or desyncing.
+
+CONSTRAINTS
+Isolate the DOM event listeners, the audio queue array, and the suspension logic. Commit the automated tab-switching simulation script as a dedicated testing utility.
 Implement the Convolution Reverb Baker (via-ir-baker). 1. Create an audio tool that ingests Impulse Response (IR) files (e.g., a recording of a balloon popping in a real cathedral or cave). 2. Build a mathematical convolution engine that processes "dry" game sounds through these IR files to simulate 100% accurate, real-world acoustics. 3. Bake the heavily processed audio offline, or output optimized IR data arrays that the Web Audio API's ConvolverNode can utilize on viadecide.com.
 
 CONSTRAINTS
