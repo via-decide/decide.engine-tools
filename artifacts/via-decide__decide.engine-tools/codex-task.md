@@ -5,6 +5,10 @@ Develop the Engine-to-Web Documentation Generator (via-doc-gen). 1. Build a pars
 
 CONSTRAINTS
 Commit each language parser (C++, JS, etc.) independently. Implement automated tests to verify the JSON output matches the expected schema for the website.
+Build the Web Asset Optimizer CLI (via-web-export). 1. Create a command-line tool that targets the engine's raw assets and specifically optimizes them for viadecide.com's web player. 2. Implement an image converter that crushes textures into highly compressed WebP formats for fast browser loading. 3. Implement a 3D model converter that translates raw engine meshes into web-standard glTF/glb files.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST commit every single file parser, compression algorithm, and unit test as a separate, atomic push.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
