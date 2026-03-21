@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Daily "Game Health" Automator Bot (via-health-report). 1. Write a GitHub Action that pulls the aggregated telemetry and crash data from the viadecide.com production server via a secure API key every night at 3 AM. 2. Implement a script that analyzes the data to calculate the Daily Active Users (DAU), average session length, and the top 3 most frequent crash sources. 3. CRITICAL: Configure the bot to auto-generate a beautiful daily_health_report.md with ASCII charts, and commit it directly back to the main branch of the tools repository.
+
+CONSTRAINTS
+The Markdown generator must be modular. The bot MUST have a distinct signature and run flawlessly every 24 hours.
 Implement the Live-Ops A/B Testing Configurator (via-live-tune). 1. Create a UI module in the Operations Console that allows designers to tweak live game variables (e.g., "Double XP Weekend" or "Reduce Shotgun Damage by 5%") without pushing an actual code update. 2. Build a JSON generator that packages these temporary overrides into a live_tuning_manifest.json. 3. Write a deploy script that securely uploads this manifest directly to the viadecide.com CDN so active game clients can download the new rules instantly on their next match.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/create-the-daily-game-health-automator-bot-via-h
+Title: Create the Daily "Game Health" Automator Bot (via-health-report). 1. ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Establish a permanent, automated heartbeat for the repository that tracks the game's success while guaranteeing an unbroken, daily commit streak forever.
 Branch: simba/implement-the-live-ops-ab-testing-configurator-v
 Title: Implement the Live-Ops A/B Testing Configurator (via-live-tune). 1. C...
 
