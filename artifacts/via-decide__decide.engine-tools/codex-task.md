@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Material Node Graph UI Core (via-shader-graph). 1. Create a pan-and-zoom Canvas/SVG workspace in the Operations Console for the Material Editor. 2. Implement a modular Node system where designers can spawn Math nodes (Add, Multiply), Texture Samplers, and PBR output nodes (Albedo, Metallic, Roughness). 3. Build a spline-based connection system that allows users to drag wires between node input/output pins, with strict type-checking (e.g., blocking a Vector3 from connecting directly to a Float without a conversion node).
+
+CONSTRAINTS
+Commit the Canvas grid, the draggable Node component, and the Bezier wire-drawing math separately. @GN8RBot MUST write strict unit tests for the node type-checking logic, committing each validation rule as an independent push.
 Create the Animation Track Compiler & Web Exporter (via-anim-pack). 1. Build a compiler that takes the heavy JSON project files from the Timeline Editor and strips out all editor-only data. 2. Pack the raw keyframes, curve tangents, and event triggers into a hyper-optimized .via_anim binary file. 3. Generate an automated GitHub Action that watches the /ux_animations folder, automatically compiles them into binaries, and pushes them directly to the viadecide.com web CDN.
 
 CONSTRAINTS

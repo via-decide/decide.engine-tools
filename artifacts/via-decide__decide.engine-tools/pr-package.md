@@ -1,3 +1,9 @@
+Branch: simba/build-the-material-node-graph-ui-core-via-shader
+Title: Build the Material Node Graph UI Core (via-shader-graph). 1. Create a...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a AAA-grade visual interface for technical artists while breaking the complex UI state management down into a massive stream of granular commits.
 Branch: simba/create-the-animation-track-compiler-web-exporter
 Title: Create the Animation Track Compiler & Web Exporter (via-anim-pack). 1...
 
