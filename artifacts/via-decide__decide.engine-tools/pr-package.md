@@ -1,3 +1,9 @@
+Branch: simba/implement-the-wasm-web-player-packager-via-wasm-
+Title: Implement the WASM Web Player Packager (via-wasm-wrap). 1. Create a p...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Create the literal bridge that allows the engine to run on the website, structured to generate dozens of commits during the wrapper's construction.
 Branch: simba/develop-the-engine-to-web-documentation-generato
 Title: Develop the Engine-to-Web Documentation Generator (via-doc-gen). 1. B...
 
