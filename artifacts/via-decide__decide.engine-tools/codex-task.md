@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Dynamic Foley & Ambient Scatterer (via-foley-scatter). 1. Create a tool that parses .viafoley configurations to prevent repetitive "machine-gun" audio (e.g., 10 identical footstep sounds in a row). 2. Implement a round-robin sample picker with real-time, randomized pitch and volume shifting. 3. Build an "Ambient Emitter" system that allows designers to place virtual boxes in a level that randomly spawn ambient sounds (wind gusts, birds) within a specific 3D radius.
+
+CONSTRAINTS
+@GN8RBot MUST isolate the randomization algorithms, the JSON config parser, and the 3D radius math. Commit the pitch-shifting DSP logic as its own TDD cycle to safely inflate the commit graph.
 Develop the 3D Spatial Audio & Occlusion Baker (via-spatial-acoustics). 1. Build a CLI tool that analyzes the game's 3D level geometry and generates an "acoustic mesh." 2. Implement a DSP (Digital Signal Processing) module that simulates sound occlusion (e.g., applying a low-pass filter to muffle an explosion happening behind a thick concrete wall). 3. Write a Head-Related Transfer Function (HRTF) wrapper to ensure precise 3D audio positioning when the user is wearing headphones on viadecide.com.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/implement-the-dynamic-foley-ambient-scatterer-vi
+Title: Implement the Dynamic Foley & Ambient Scatterer (via-foley-scatter). ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure the game's background noise feels organic and alive, turning the randomization and DSP logic into a massive stream of modular commits.
 Branch: simba/develop-the-3d-spatial-audio-occlusion-baker-via
 Title: Develop the 3D Spatial Audio & Occlusion Baker (via-spatial-acoustics...
 
