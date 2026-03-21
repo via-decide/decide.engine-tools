@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Inter-Tool Message Bus (via-core-bus). 1. Create a high-performance Publish/Subscribe (PubSub) event broker in the backend that acts as the central nervous system for all engine tools. 2. Implement strongly-typed payload validators so if the Audio Tool broadcasts a "PlaySound" event, the Viewport Tool knows exactly how to deserialize and react to it. 3. Build a WebSocket/WebWorker bridge that allows tools running in different browser threads (on viadecide.com) to communicate seamlessly with zero-copy memory sharing where possible.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for the message dispatcher, the memory-sharing buffers, and the wildcard topic routers. Commit each routing algorithm and payload validator as a totally independent, atomic push.
 Create the Daily "Game Health" Automator Bot (via-health-report). 1. Write a GitHub Action that pulls the aggregated telemetry and crash data from the viadecide.com production server via a secure API key every night at 3 AM. 2. Implement a script that analyzes the data to calculate the Daily Active Users (DAU), average session length, and the top 3 most frequent crash sources. 3. CRITICAL: Configure the bot to auto-generate a beautiful daily_health_report.md with ASCII charts, and commit it directly back to the main branch of the tools repository.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/build-the-inter-tool-message-bus-via-core-bus-1-
+Title: Build the Inter-Tool Message Bus (via-core-bus). 1. Create a high-per...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Unify the entire engine toolchain into a single cohesive app, farming deep networking and architecture commits in the process.
 Branch: simba/create-the-daily-game-health-automator-bot-via-h
 Title: Create the Daily "Game Health" Automator Bot (via-health-report). 1. ...
 
