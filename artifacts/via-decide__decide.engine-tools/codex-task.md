@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the UI Layout Compiler & Binary Packer (via-ui-compile). 1. Build a transpiler that reads responsive .viaui (XML or JSON) layout files, which define HUD elements like health bars, minimaps, and inventory grids. 2. Implement an optimizer that resolves anchoring, flexbox-style constraints, and relative scaling into absolute screen coordinates. 3. Compile this layout data into a minimal .ui_bin format that the engine can load with zero parsing overhead.
+
+CONSTRAINTS
+Commit the XML/JSON parser, the flexbox math solver, and the binary packer independently. @GN8RBot MUST commit the translation logic for each individual UI element type (Text, Image, Button, Scrollbox) separately.
 Build the Multi-Channel Signed Distance Field (MSDF) Font Generator (via-font-pack). 1. Create a CLI tool that ingests standard .ttf and .otf font files. 2. Implement an MSDF generation algorithm to output highly optimized texture atlases that allow text to scale infinitely without pixelation in the C++ engine. 3. Generate a font_metrics.json file detailing character glyph bounding boxes, kerning pairs, and baseline offsets for the viadecide.com web renderer.
 
 CONSTRAINTS

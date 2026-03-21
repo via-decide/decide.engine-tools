@@ -1,3 +1,9 @@
+Branch: simba/develop-the-ui-layout-compiler-binary-packer-via
+Title: Develop the UI Layout Compiler & Binary Packer (via-ui-compile). 1. B...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enable designers to build responsive game HUDs quickly while forcing the bot into an extreme micro-commit loop based on the sheer number of UI nodes it has to process.
 Branch: simba/build-the-multi-channel-signed-distance-field-ms
 Title: Build the Multi-Channel Signed Distance Field (MSDF) Font Generator (...
 
