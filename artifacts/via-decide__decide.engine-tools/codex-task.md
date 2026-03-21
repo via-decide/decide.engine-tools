@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Shader Permutation & Warm-up Cache CI Bot (via-shader-cache). 1. Write a CLI tool that scans the game project for all compiled materials and generates every possible shader permutation (e.g., Material with shadows ON vs OFF, Fog ON vs OFF). 2. Implement an offline compiler script that pre-compiles these permutations into binary SPIR-V or WebGPU pipelines to eliminate runtime stuttering. 3. Configure a GitHub Action that runs this permutation compiler nightly and auto-commits the resulting shader_cache.bin back to the repository.
+
+CONSTRAINTS
+The permutations generator must be mathematically exhaustive. @GN8RBot MUST program the CI action to auto-commit an updated shader_variants_report.md indicating compilation times and variant counts.
 Implement the Live Material Preview Sphere (via-mat-preview). 1. Create a dedicated WebGL viewport within the Material Editor that renders a 3D preview sphere or custom mesh. 2. Build a hot-reloading bridge that takes the transpiled shader from via-shader-compile, injects it into the preview viewport, and updates instantly as the designer drags node wires. 3. Add a dynamic lighting rig (directional light + HDRI environment map) to the preview scene so artists can test physical reflections and roughness accurately.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/create-the-shader-permutation-warm-up-cache-ci-b
+Title: Create the Shader Permutation & Warm-up Cache CI Bot (via-shader-cach...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Solve the notorious "shader compilation stutter" problem before it starts, while permanently automating high-value daily commits via the caching bot.
 Branch: simba/implement-the-live-material-preview-sphere-via-m
 Title: Implement the Live Material Preview Sphere (via-mat-preview). 1. Crea...
 
