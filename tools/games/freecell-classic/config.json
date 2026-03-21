@@ -1,0 +1,12 @@
+{
+  "id": "freecell-classic",
+  "name": "FreeCell Classic",
+  "description": "Classic FreeCell with strict tableau, foundation, and supermove rules.",
+  "category": "games",
+  "audience": ["players", "puzzle-lovers"],
+  "inputs": ["card_moves"],
+  "outputs": ["completed_foundations", "move_count", "elapsed_time"],
+  "relatedTools": ["snake-game", "hex-wars"],
+  "entry": "tools/games/freecell-classic/index.html",
+  "tags": ["game", "cards", "freecell", "solitaire", "standalone"]
+}
