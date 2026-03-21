@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement 3D UI Mesh Deformation & Squish Physics (via-ui-rigging). 1. Create a tool that allows designers to attach lightweight "bones" and weight-painting to 2D/3D UI meshes (e.g., making a button bulge when clicked). 2. Implement a vertex shader generator that calculates skeletal mesh deformation directly on the GPU for maximum performance. 3. Build a real-time previewer in the Operations Console so artists can see the "squash and stretch" physics react to mouse hovers.
+
+CONSTRAINTS
+@GN8RBot MUST isolate the bone hierarchy parser, the vertex weight calculator, and the shader code generator. Commit the matrix multiplication logic for bone transforms with heavy unit testing.
 Develop the Timeline Track & Keyframe Editor UI (via-timeline-ui). 1. Build a sophisticated HTML5/Canvas Timeline Editor within the Operations Console, featuring draggable keyframes and scrubbable playheads. 2. Implement a visual "Graph Editor" view where designers can manually tweak the tangent handles of Bezier curves for easing in/out. 3. Create an event-dispatch system that synchronizes the web-based timeline playhead with the local engine's rendering context in real-time.
 
 CONSTRAINTS

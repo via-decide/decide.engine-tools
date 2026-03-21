@@ -1,3 +1,9 @@
+Branch: simba/implement-3d-ui-mesh-deformation-squish-physics-
+Title: Implement 3D UI Mesh Deformation & Squish Physics (via-ui-rigging). 1...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Bring organic, Pixar-style life to rigid game menus while using the complex vertex-math pipelines to drive massive commit volume.
 Branch: simba/develop-the-timeline-track-keyframe-editor-ui-vi
 Title: Develop the Timeline Track & Keyframe Editor UI (via-timeline-ui). 1....
 
