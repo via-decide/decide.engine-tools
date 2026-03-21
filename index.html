@@ -196,6 +196,7 @@
     .c-business {background:rgba(244,114,182,.1);color:var(--rose); border: 1px solid rgba(244,114,182,.2);}
     .c-education {background:rgba(167,139,250,.1);color:var(--violet); border: 1px solid rgba(167,139,250,.2);}
     .c-system {background:rgba(148,163,184,.1);color:var(--system); border: 1px solid rgba(148,163,184,.2);}
+    .c-games {background:rgba(34,197,94,.1);color:#86efac; border: 1px solid rgba(34,197,94,.2);}
     
     .card-icon {font-size:1.5rem;line-height:1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));}
     .card h3 {font-size:1.1rem;font-weight:700;color:var(--text); font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
@@ -825,7 +826,10 @@ const TOOLS_DB = [
     { name: "Wave 1 Simulator", cat: "system", desc: "Run 30/60/90-day simulations of the Layer 1 loop.", icon: "🌊", engine: true },
     { name: "Balance Dashboard", cat: "system", desc: "Analyse sim output and render a balance verdict.", icon: "⚖️", engine: true },
 
-    { name: "Prompt Alchemy", cat: "creators", desc: "Transform rough ideas into structured, powerful prompts.", icon: "⚗️", engine: false },
+    { name: "Prompt Alchemy", cat: "creators", desc: "One prompt → platform-perfect versions for Twitter, Instagram, LinkedIn, TikTok, and more. Tone & hashtags auto-optimized.", icon: "⚗️", engine: false },
+    { name: "Caption Generator", cat: "creators", desc: "Upload an image → AI reads it → captions with platform-specific hashtags for every channel.", icon: "📸", engine: false },
+    { name: "Script Writer", cat: "creators", desc: "Turn a topic into a full YouTube script with hook, sections, B-roll notes, and CTA.", icon: "🎬", engine: false },
+    { name: "Hook Writer", cat: "creators", desc: "Generate 5 viral opening lines with A/B variants across curiosity, controversy, story, data, and how-to styles.", icon: "🪝", engine: false },
     { name: "Sales Dashboard", cat: "business", desc: "Track sales pipeline and revenue metrics.", icon: "📊", engine: false },
     { name: "Founder Toolkit", cat: "business", desc: "Essential frameworks and templates for founders.", icon: "🚀", engine: false },
     { name: "Decision Brief", cat: "business", desc: "Structure complex decisions into clear briefs.", icon: "📋", engine: false },
@@ -840,7 +844,7 @@ const TOOLS_DB = [
     { name: "Data Orchard", cat: "games", desc: "Cultivate rare genetic plant specimens, trade credits, and dominate the leaderboard.", icon: "🌿", engine: false }
 ]
 
-const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc', games:'c-education' };
+const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc', games:'c-games' };
 const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other', games:'Games' };
 const DEFAULT_ICONS = { creators: '🎨', coders: '🛠️', researchers: '🔬', business: '💼', education: '📘', system: '⚙️', misc: '🧩', games: '🎮' };
 
@@ -887,7 +891,10 @@ const ROUTE_ALIASES = {
     'synthetic players': 'tools/engine/synthetic-player-generator/index.html',
     'wave 1 simulator': 'tools/engine/wave1-simulation-runner/index.html',
     'balance dashboard': 'tools/engine/balance-dashboard/index.html',
-    'prompt alchemy': 'prompt-alchemy/index.html',
+    'prompt alchemy': 'tools/creators/prompt-alchemy/index.html',
+    'caption generator': 'tools/creators/caption-generator/index.html',
+    'script writer': 'tools/creators/script-writer/index.html',
+    'hook writer': 'tools/creators/hook-writer/index.html',
     'sales dashboard': 'sales-dashboard/index.html',
     'founder toolkit': 'founder/index.html',
     'decision brief': 'decision-brief-guide/index.html',

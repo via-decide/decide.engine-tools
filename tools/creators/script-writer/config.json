@@ -1,0 +1,8 @@
+{
+  "id": "script-writer",
+  "name": "Script Writer",
+  "description": "Generate complete YouTube video scripts from a topic and keywords. Includes hook, intro, main sections, B-roll notes, and a call-to-action.",
+  "category": "creators",
+  "entry": "tools/creators/script-writer/index.html",
+  "tags": ["ai", "youtube", "script", "video", "content"]
+}

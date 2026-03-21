@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Prompt Alchemy · Creator Toolkit</title>
+  <script defer src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    :root {
+      --bg: #06060f;
+      --bg2: #0e0e1a;
+      --bg3: #14142a;
+      --border: #1e1e3a;
+      --accent: #8b5cf6;
+      --accent2: #a78bfa;
+      --accent3: #c4b5fd;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(900px 600px at 10% -10%, rgba(139,92,246,0.12), transparent 55%),
+        radial-gradient(700px 500px at 90% 110%, rgba(167,139,250,0.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      padding: calc(16px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom));
+    }
+
+    .app { max-width: 860px; margin: 0 auto; }
+
+    .header { margin-bottom: 24px; }
+    .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #8b5cf6, #a78bfa); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; background: linear-gradient(135deg, #c4b5fd, #e2e8f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: var(--muted); font-size: 0.9rem; }
+
+    .key-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding: 10px 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; font-size: 0.82rem; }
+    .key-bar .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--danger); flex-shrink: 0; }
+    .key-bar .dot.active { background: var(--success); }
+    .key-bar .label { color: var(--muted); flex: 1; }
+    .key-bar button { font-size: 0.78rem; padding: 4px 10px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; color: var(--text); cursor: pointer; }
+    .key-bar button:hover { border-color: var(--accent); }
+
+    .card { background: rgba(14,14,26,0.9); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+    .card h2 { font-size: 0.85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+
+    label { display: block; font-size: 0.83rem; color: var(--muted); margin-bottom: 6px; }
+    textarea, input[type="text"] {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: inherit; font-size: 0.9rem; padding: 10px 12px; resize: vertical; outline: none;
+      transition: border-color .2s;
+    }
+    textarea:focus, input[type="text"]:focus { border-color: var(--accent); }
+    textarea { min-height: 100px; }
+
+    .platforms { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .plat-chip {
+      display: flex; align-items: center; gap: 6px; padding: 6px 12px;
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 999px;
+      font-size: 0.82rem; cursor: pointer; transition: all .2s; user-select: none;
+    }
+    .plat-chip.selected { background: rgba(139,92,246,0.15); border-color: var(--accent); color: var(--accent3); }
+    .plat-chip input { display: none; }
+
+    .options-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .select-pill {
+      padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: inherit; font-size: 0.83rem; outline: none; cursor: pointer;
+    }
+    .select-pill:focus { border-color: var(--accent); }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      flex: 1; min-width: 140px; padding: 12px 20px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #fff;
+      font-size: 0.92rem; font-weight: 600; cursor: pointer; transition: opacity .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-primary:hover { opacity: .88; }
+    .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-secondary {
+      padding: 12px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--muted); font-size: 0.85rem; cursor: pointer; transition: all .2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--text); }
+
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .result-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+      position: relative; transition: border-color .2s;
+    }
+    .result-card:hover { border-color: var(--accent); }
+    .result-card .plat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .plat-badge { font-size: 1.1rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--bg3); border-radius: 8px; }
+    .plat-name { font-weight: 600; font-size: 0.88rem; }
+    .plat-tone { font-size: 0.73rem; color: var(--accent3); background: rgba(139,92,246,.12); padding: 2px 7px; border-radius: 999px; margin-left: auto; }
+    .result-text { font-size: 0.85rem; line-height: 1.6; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+    .hashtags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .hashtag { font-size: 0.75rem; color: var(--accent3); background: rgba(139,92,246,.1); padding: 2px 8px; border-radius: 999px; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 10px; padding: 4px 10px; font-size: 0.73rem;
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--muted); cursor: pointer; transition: all .15s;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--text); }
+    .copy-btn.copied { color: var(--success); border-color: var(--success); }
+
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.25); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.88rem; }
+    .empty .big { font-size: 2.5rem; margin-bottom: 10px; }
+
+    /* API key modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+    .modal-overlay.hidden { display: none; }
+    .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; max-width: 420px; width: 100%; }
+    .modal h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .modal p { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .modal input { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: monospace; font-size: 0.85rem; padding: 10px 12px; outline: none; margin-bottom: 12px; }
+    .modal input:focus { border-color: var(--accent); }
+    .modal-btns { display: flex; gap: 8px; }
+    .modal-btns .btn-primary { padding: 10px 20px; }
+    .modal-cancel { flex: 0; padding: 10px 16px; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); cursor: pointer; font-size: 0.85rem; }
+    .modal-cancel:hover { border-color: var(--accent); color: var(--text); }
+
+    .char-count { font-size: 0.73rem; color: var(--muted); text-align: right; margin-top: 4px; }
+    .over { color: var(--danger); }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="header-top">
+      <div class="icon">⚗️</div>
+      <h1>Prompt Alchemy</h1>
+    </div>
+    <p class="subtitle">One prompt → platform-perfect versions for every channel</p>
+  </div>
+
+  <div class="key-bar">
+    <div class="dot" id="keyDot"></div>
+    <span class="label" id="keyLabel">No API key set</span>
+    <button onclick="openKeyModal()">Set Key</button>
+  </div>
+
+  <div class="card">
+    <h2>Your Original Prompt</h2>
+    <label for="prompt">Paste your idea, caption, or announcement</label>
+    <textarea id="prompt" placeholder="e.g. Launching my new productivity course for founders who want to do more in less time..."></textarea>
+    <div class="char-count" id="charCount">0 characters</div>
+  </div>
+
+  <div class="card">
+    <h2>Target Platforms</h2>
+    <div class="platforms" id="platforms">
+      <label class="plat-chip selected"><input type="checkbox" value="twitter" checked>𝕏 Twitter / X</label>
+      <label class="plat-chip selected"><input type="checkbox" value="instagram" checked>📸 Instagram</label>
+      <label class="plat-chip selected"><input type="checkbox" value="linkedin" checked>💼 LinkedIn</label>
+      <label class="plat-chip selected"><input type="checkbox" value="tiktok" checked>🎵 TikTok</label>
+      <label class="plat-chip"><input type="checkbox" value="youtube">▶️ YouTube Community</label>
+      <label class="plat-chip"><input type="checkbox" value="reddit">👾 Reddit</label>
+      <label class="plat-chip"><input type="checkbox" value="email">📧 Email Newsletter</label>
+    </div>
+
+    <div class="options-row" style="margin-top:14px;">
+      <select class="select-pill" id="tone">
+        <option value="auto">Tone: Auto-detect</option>
+        <option value="professional">Professional</option>
+        <option value="casual">Casual & Friendly</option>
+        <option value="excited">Excited / Hype</option>
+        <option value="educational">Educational</option>
+        <option value="inspirational">Inspirational</option>
+        <option value="humorous">Humorous</option>
+      </select>
+      <select class="select-pill" id="goal">
+        <option value="engagement">Goal: Engagement</option>
+        <option value="awareness">Awareness</option>
+        <option value="conversion">Conversion / Sales</option>
+        <option value="community">Community Building</option>
+        <option value="traffic">Drive Traffic</option>
+      </select>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="generateBtn" onclick="generate()">
+        <span class="btn-label">✨ Transform Prompt</span>
+      </button>
+      <button class="btn-secondary" onclick="clearAll()">Clear</button>
+    </div>
+  </div>
+
+  <div id="resultsSection">
+    <div class="empty">
+      <div class="big">⚗️</div>
+      <div>Your platform-optimized prompts will appear here</div>
+    </div>
+  </div>
+</div>
+
+<!-- API Key Modal -->
+<div class="modal-overlay hidden" id="keyModal">
+  <div class="modal">
+    <h3>🔑 Anthropic API Key</h3>
+    <p>Your key is used only to call the Anthropic API directly from your browser. It's stored in sessionStorage and cleared when you close the tab.</p>
+    <input type="password" id="keyInput" placeholder="sk-ant-api03-..." autocomplete="off" />
+    <div class="modal-btns">
+      <button class="btn-primary" onclick="saveKey()">Save Key</button>
+      <button class="modal-cancel" onclick="closeKeyModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PLATFORMS = {
+  twitter:   { label: 'X / Twitter',       icon: '𝕏', tone: 'punchy & direct', maxChars: 280 },
+  instagram: { label: 'Instagram',          icon: '📸', tone: 'visual & lifestyle', maxChars: 2200 },
+  linkedin:  { label: 'LinkedIn',           icon: '💼', tone: 'professional & value-driven', maxChars: 3000 },
+  tiktok:    { label: 'TikTok',             icon: '🎵', tone: 'fun & trend-aware', maxChars: 2200 },
+  youtube:   { label: 'YouTube Community', icon: '▶️', tone: 'engaging & conversational', maxChars: 5000 },
+  reddit:    { label: 'Reddit',             icon: '👾', tone: 'authentic & discussion-focused', maxChars: 10000 },
+  email:     { label: 'Email Newsletter',   icon: '📧', tone: 'personal & high-value', maxChars: 99999 },
+};
+
+// API key management
+function openKeyModal() { document.getElementById('keyModal').classList.remove('hidden'); document.getElementById('keyInput').focus(); }
+function closeKeyModal() { document.getElementById('keyModal').classList.add('hidden'); }
+function saveKey() {
+  const v = document.getElementById('keyInput').value.trim();
+  if (!v.startsWith('sk-')) { alert('Key must start with sk-'); return; }
+  sessionStorage.setItem('ct_api_key', v);
+  updateKeyBar();
+  closeKeyModal();
+}
+function updateKeyBar() {
+  const k = sessionStorage.getItem('ct_api_key');
+  document.getElementById('keyDot').className = 'dot' + (k ? ' active' : '');
+  document.getElementById('keyLabel').textContent = k ? 'API key set (session only)' : 'No API key set — click to add';
+}
+
+// Char count
+document.getElementById('prompt').addEventListener('input', function() {
+  document.getElementById('charCount').textContent = this.value.length + ' characters';
+});
+
+// Platform chip toggle
+document.querySelectorAll('.plat-chip input').forEach(cb => {
+  cb.parentElement.addEventListener('click', () => {
+    cb.checked = !cb.checked;
+    cb.parentElement.classList.toggle('selected', cb.checked);
+  });
+});
+
+function getSelectedPlatforms() {
+  return [...document.querySelectorAll('.plat-chip input:checked')].map(cb => cb.value);
+}
+
+async function callClaude(systemPrompt, userMessage, maxTokens = 2000) {
+  const key = sessionStorage.getItem('ct_api_key');
+  if (!key) { openKeyModal(); throw new Error('no key'); }
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+      'anthropic-dangerous-allow-browser': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: maxTokens,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userMessage }]
+    })
+  });
+  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `API error ${res.status}`); }
+  return (await res.json()).content[0].text;
+}
+
+async function generate() {
+  const prompt = document.getElementById('prompt').value.trim();
+  if (!prompt) { document.getElementById('prompt').focus(); return; }
+  const platforms = getSelectedPlatforms();
+  if (!platforms.length) { alert('Select at least one platform'); return; }
+
+  const tone = document.getElementById('tone').value;
+  const goal = document.getElementById('goal').value;
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div><span>Transforming...</span>';
+
+  try {
+    const system = `You are an expert social media strategist. Transform the given prompt into platform-optimized versions.
+For EACH platform, return a JSON object in this exact format:
+{
+  "platform": "platform_id",
+  "post": "the optimized post text",
+  "hashtags": ["tag1", "tag2", "tag3"],
+  "tone": "detected/applied tone",
+  "tip": "one short platform-specific tip"
+}
+Return an array of these objects. No markdown, just raw JSON array.
+Rules per platform:
+- twitter: max 280 chars, punchy opener, 1-3 hashtags
+- instagram: storytelling, 5-10 hashtags, emojis OK
+- linkedin: professional insight angle, 3-5 hashtags, value-first hook
+- tiktok: hook in first line, trending slang OK, 5-8 hashtags
+- youtube: conversational, longer, encourage discussion, 3-5 hashtags
+- reddit: no hashtags (use []), authentic, discussion opener, community-aware
+- email: subject line as first line in brackets [SUBJECT], personal tone, CTA at end, no hashtags`;
+
+    const user = `Prompt: "${prompt}"
+Platforms: ${platforms.join(', ')}
+Tone override: ${tone}
+Goal: ${goal}`;
+
+    const raw = await callClaude(system, user);
+    const parsed = JSON.parse(raw.trim().replace(/^```json?\n?/, '').replace(/```$/, ''));
+    renderResults(parsed);
+  } catch(e) {
+    if (e.message !== 'no key') alert('Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="btn-label">✨ Transform Prompt</span>';
+  }
+}
+
+function renderResults(results) {
+  const section = document.getElementById('resultsSection');
+  if (!results.length) { section.innerHTML = '<div class="empty"><div class="big">😕</div><div>No results returned</div></div>'; return; }
+
+  const grid = results.map(r => {
+    const p = PLATFORMS[r.platform] || { icon: '🌐', label: r.platform };
+    const tags = (r.hashtags || []).map(t => `<span class="hashtag">#${t.replace(/^#/, '')}</span>`).join('');
+    const id = 'res_' + r.platform;
+    return `<div class="result-card">
+      <button class="copy-btn" id="copy_${r.platform}" onclick="copyCard('${r.platform}', this)">Copy</button>
+      <div class="plat-header">
+        <div class="plat-badge">${p.icon}</div>
+        <span class="plat-name">${r.label || p.label}</span>
+        <span class="plat-tone">${r.tone || ''}</span>
+      </div>
+      <div class="result-text" id="${id}">${escHtml(r.post)}</div>
+      ${tags ? `<div class="hashtags">${tags}</div>` : ''}
+      ${r.tip ? `<div style="margin-top:10px;font-size:0.74rem;color:var(--muted);font-style:italic">💡 ${escHtml(r.tip)}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  section.innerHTML = `<div class="card"><h2>Optimized Versions</h2><div class="results-grid">${grid}</div></div>`;
+}
+
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function copyCard(platform, btn) {
+  const el = document.getElementById('res_' + platform);
+  const tags = [...el.parentElement.querySelectorAll('.hashtag')].map(t => t.textContent).join(' ');
+  const text = el.textContent + (tags ? '\n\n' + tags : '');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function clearAll() {
+  document.getElementById('prompt').value = '';
+  document.getElementById('charCount').textContent = '0 characters';
+  document.getElementById('resultsSection').innerHTML = '<div class="empty"><div class="big">⚗️</div><div>Your platform-optimized prompts will appear here</div></div>';
+}
+
+updateKeyBar();
+</script>
+</body>
+</html>

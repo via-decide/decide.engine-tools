@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Caption Generator · Creator Toolkit</title>
+  <script defer src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    :root {
+      --bg: #06060f; --bg2: #0e0e1a; --bg3: #14142a; --border: #1e1e3a;
+      --accent: #ec4899; --accent2: #f472b6; --accent3: #fbcfe8;
+      --text: #e2e8f0; --muted: #94a3b8; --success: #22c55e; --danger: #ef4444;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(900px 600px at 10% -10%, rgba(236,72,153,0.1), transparent 55%),
+        radial-gradient(700px 500px at 90% 110%, rgba(244,114,182,0.07), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      padding: calc(16px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom));
+    }
+    .app { max-width: 860px; margin: 0 auto; }
+    .header { margin-bottom: 24px; }
+    .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #ec4899, #f472b6); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700; background: linear-gradient(135deg, #fbcfe8, #e2e8f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: var(--muted); font-size: 0.9rem; }
+    .key-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding: 10px 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; font-size: 0.82rem; }
+    .key-bar .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--danger); flex-shrink: 0; }
+    .key-bar .dot.active { background: var(--success); }
+    .key-bar .label { color: var(--muted); flex: 1; }
+    .key-bar button { font-size: 0.78rem; padding: 4px 10px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; color: var(--text); cursor: pointer; }
+    .key-bar button:hover { border-color: var(--accent); }
+    .card { background: rgba(14,14,26,0.9); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+    .card h2 { font-size: 0.85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+
+    /* Drop zone */
+    .drop-zone {
+      border: 2px dashed var(--border); border-radius: 12px; padding: 40px 20px;
+      text-align: center; cursor: pointer; transition: all .2s; position: relative;
+    }
+    .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: rgba(236,72,153,.05); }
+    .drop-zone .dz-icon { font-size: 2.5rem; margin-bottom: 10px; }
+    .drop-zone .dz-label { color: var(--muted); font-size: 0.88rem; }
+    .drop-zone .dz-sub { font-size: 0.76rem; color: var(--muted); margin-top: 4px; opacity: .7; }
+    .drop-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+    .preview-wrap { position: relative; margin-top: 14px; display: none; }
+    .preview-wrap img { width: 100%; max-height: 320px; object-fit: contain; border-radius: 10px; background: var(--bg3); }
+    .preview-remove { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; background: rgba(0,0,0,.7); border: 1px solid var(--border); border-radius: 50%; color: var(--muted); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .preview-remove:hover { color: var(--danger); border-color: var(--danger); }
+
+    label.small { display: block; font-size: 0.83rem; color: var(--muted); margin-bottom: 6px; }
+    textarea, input[type="text"] {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: inherit; font-size: 0.9rem; padding: 10px 12px; resize: vertical; outline: none; transition: border-color .2s;
+    }
+    textarea:focus, input[type="text"]:focus { border-color: var(--accent); }
+
+    .platforms { display: flex; flex-wrap: wrap; gap: 8px; }
+    .plat-chip { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 999px; font-size: 0.82rem; cursor: pointer; transition: all .2s; user-select: none; }
+    .plat-chip.selected { background: rgba(236,72,153,.15); border-color: var(--accent); color: var(--accent3); }
+    .plat-chip input { display: none; }
+
+    .options-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .select-pill { padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 0.83rem; outline: none; cursor: pointer; }
+    .select-pill:focus { border-color: var(--accent); }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .btn-primary { flex: 1; min-width: 140px; padding: 12px 20px; border: none; border-radius: 10px; background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; font-size: 0.92rem; font-weight: 600; cursor: pointer; transition: opacity .2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-primary:hover { opacity: .88; }
+    .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-secondary { padding: 12px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; color: var(--muted); font-size: 0.85rem; cursor: pointer; transition: all .2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--text); }
+
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .result-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; position: relative; transition: border-color .2s; }
+    .result-card:hover { border-color: var(--accent); }
+    .plat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .plat-badge { font-size: 1.1rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--bg3); border-radius: 8px; }
+    .plat-name { font-weight: 600; font-size: 0.88rem; }
+    .char-pill { font-size: 0.73rem; color: var(--accent3); background: rgba(236,72,153,.12); padding: 2px 7px; border-radius: 999px; margin-left: auto; }
+    .result-text { font-size: 0.85rem; line-height: 1.6; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+    .hashtags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .hashtag { font-size: 0.75rem; color: var(--accent3); background: rgba(236,72,153,.1); padding: 2px 8px; border-radius: 999px; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; padding: 4px 10px; font-size: 0.73rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); cursor: pointer; transition: all .15s; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--text); }
+    .copy-btn.copied { color: var(--success); border-color: var(--success); }
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.25); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.88rem; }
+    .empty .big { font-size: 2.5rem; margin-bottom: 10px; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+    .modal-overlay.hidden { display: none; }
+    .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; max-width: 420px; width: 100%; }
+    .modal h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .modal p { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .modal input { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: monospace; font-size: 0.85rem; padding: 10px 12px; outline: none; margin-bottom: 12px; }
+    .modal input:focus { border-color: var(--accent); }
+    .modal-btns { display: flex; gap: 8px; }
+    .modal-btns .btn-primary { padding: 10px 20px; }
+    .modal-cancel { flex: 0; padding: 10px 16px; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); cursor: pointer; font-size: 0.85rem; }
+    .modal-cancel:hover { border-color: var(--accent); color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="header-top">
+      <div class="icon">📸</div>
+      <h1>Caption Generator</h1>
+    </div>
+    <p class="subtitle">Upload an image → AI reads it → platform-perfect captions with hashtags</p>
+  </div>
+
+  <div class="key-bar">
+    <div class="dot" id="keyDot"></div>
+    <span class="label" id="keyLabel">No API key set</span>
+    <button onclick="openKeyModal()">Set Key</button>
+  </div>
+
+  <div class="card">
+    <h2>Upload Image</h2>
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*" />
+      <div class="dz-icon">🖼️</div>
+      <div class="dz-label">Drop image here or click to browse</div>
+      <div class="dz-sub">JPG, PNG, WebP, GIF · Max 5MB</div>
+    </div>
+    <div class="preview-wrap" id="previewWrap">
+      <img id="preview" src="" alt="Preview" />
+      <button class="preview-remove" onclick="removeImage()" title="Remove">×</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Context (optional)</h2>
+    <label class="small" for="context">Add context to improve captions (brand, campaign, mood)</label>
+    <input type="text" id="context" placeholder="e.g. New product launch, autumn vibes, startup life..." />
+  </div>
+
+  <div class="card">
+    <h2>Target Platforms</h2>
+    <div class="platforms" id="platforms">
+      <label class="plat-chip selected"><input type="checkbox" value="instagram" checked>📸 Instagram</label>
+      <label class="plat-chip selected"><input type="checkbox" value="twitter" checked>𝕏 Twitter / X</label>
+      <label class="plat-chip selected"><input type="checkbox" value="linkedin" checked>💼 LinkedIn</label>
+      <label class="plat-chip selected"><input type="checkbox" value="tiktok" checked>🎵 TikTok</label>
+      <label class="plat-chip"><input type="checkbox" value="facebook">👥 Facebook</label>
+      <label class="plat-chip"><input type="checkbox" value="pinterest">📌 Pinterest</label>
+    </div>
+    <div class="options-row" style="margin-top:14px;">
+      <select class="select-pill" id="vibe">
+        <option value="auto">Vibe: Auto-detect</option>
+        <option value="inspirational">Inspirational</option>
+        <option value="funny">Funny & Playful</option>
+        <option value="aesthetic">Aesthetic / Artsy</option>
+        <option value="professional">Professional</option>
+        <option value="minimalist">Minimalist</option>
+        <option value="storytelling">Storytelling</option>
+      </select>
+      <select class="select-pill" id="hashtagDensity">
+        <option value="medium">Hashtags: Medium (10-15)</option>
+        <option value="low">Few (3-5)</option>
+        <option value="high">Many (20-30)</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" id="generateBtn" onclick="generate()">
+        <span class="btn-label">✨ Generate Captions</span>
+      </button>
+      <button class="btn-secondary" onclick="clearAll()">Clear</button>
+    </div>
+  </div>
+
+  <div id="resultsSection">
+    <div class="empty">
+      <div class="big">📸</div>
+      <div>Upload an image to generate platform-specific captions</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="keyModal">
+  <div class="modal">
+    <h3>🔑 Anthropic API Key</h3>
+    <p>Needed for Claude's vision model to read your image and generate captions. Stored in sessionStorage only.</p>
+    <input type="password" id="keyInput" placeholder="sk-ant-api03-..." autocomplete="off" />
+    <div class="modal-btns">
+      <button class="btn-primary" onclick="saveKey()">Save Key</button>
+      <button class="modal-cancel" onclick="closeKeyModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PLATFORMS = {
+  instagram: { label: 'Instagram', icon: '📸' },
+  twitter:   { label: 'X / Twitter', icon: '𝕏' },
+  linkedin:  { label: 'LinkedIn', icon: '💼' },
+  tiktok:    { label: 'TikTok', icon: '🎵' },
+  facebook:  { label: 'Facebook', icon: '👥' },
+  pinterest: { label: 'Pinterest', icon: '📌' },
+};
+
+let imageBase64 = null;
+let imageMime = 'image/jpeg';
+
+// Key modal
+function openKeyModal() { document.getElementById('keyModal').classList.remove('hidden'); document.getElementById('keyInput').focus(); }
+function closeKeyModal() { document.getElementById('keyModal').classList.add('hidden'); }
+function saveKey() {
+  const v = document.getElementById('keyInput').value.trim();
+  if (!v.startsWith('sk-')) { alert('Key must start with sk-'); return; }
+  sessionStorage.setItem('ct_api_key', v);
+  updateKeyBar();
+  closeKeyModal();
+}
+function updateKeyBar() {
+  const k = sessionStorage.getItem('ct_api_key');
+  document.getElementById('keyDot').className = 'dot' + (k ? ' active' : '');
+  document.getElementById('keyLabel').textContent = k ? 'API key set (session only)' : 'No API key set — click to add';
+}
+
+// File upload
+function handleFile(file) {
+  if (!file || !file.type.startsWith('image/')) return;
+  if (file.size > 5 * 1024 * 1024) { alert('Image must be under 5MB'); return; }
+  imageMime = file.type;
+  const reader = new FileReader();
+  reader.onload = e => {
+    imageBase64 = e.target.result.split(',')[1];
+    document.getElementById('preview').src = e.target.result;
+    document.getElementById('previewWrap').style.display = 'block';
+    document.getElementById('dropZone').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+document.getElementById('fileInput').addEventListener('change', e => handleFile(e.target.files[0]));
+const dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
+
+function removeImage() {
+  imageBase64 = null;
+  document.getElementById('preview').src = '';
+  document.getElementById('previewWrap').style.display = 'none';
+  document.getElementById('dropZone').style.display = 'block';
+  document.getElementById('fileInput').value = '';
+}
+
+document.querySelectorAll('.plat-chip input').forEach(cb => {
+  cb.parentElement.addEventListener('click', () => { cb.checked = !cb.checked; cb.parentElement.classList.toggle('selected', cb.checked); });
+});
+
+function getSelectedPlatforms() {
+  return [...document.querySelectorAll('.plat-chip input:checked')].map(cb => cb.value);
+}
+
+async function callClaudeVision(systemPrompt, userText, imgBase64, mime, maxTokens = 2000) {
+  const key = sessionStorage.getItem('ct_api_key');
+  if (!key) { openKeyModal(); throw new Error('no key'); }
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-allow-browser': 'true' },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: maxTokens,
+      system: systemPrompt,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: mime, data: imgBase64 } },
+          { type: 'text', text: userText }
+        ]
+      }]
+    })
+  });
+  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `API ${res.status}`); }
+  return (await res.json()).content[0].text;
+}
+
+async function generate() {
+  if (!imageBase64) { alert('Please upload an image first'); return; }
+  const platforms = getSelectedPlatforms();
+  if (!platforms.length) { alert('Select at least one platform'); return; }
+
+  const context = document.getElementById('context').value.trim();
+  const vibe = document.getElementById('vibe').value;
+  const hashDensity = document.getElementById('hashtagDensity').value;
+  const hashCount = { low: '3-5', medium: '10-15', high: '20-30' }[hashDensity];
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div><span>Analyzing image...</span>';
+
+  try {
+    const system = `You are an expert social media copywriter who specializes in writing captions from images.
+Analyze the image carefully and write platform-optimized captions.
+Return a JSON array, one object per platform:
+{
+  "platform": "platform_id",
+  "caption": "the caption text",
+  "hashtags": ["tag1", "tag2"],
+  "charCount": 123,
+  "tip": "brief platform tip"
+}
+Rules:
+- instagram: story-driven, emotional, emojis welcome, ${hashCount} hashtags
+- twitter: concise, punchy, max 240 chars, 1-3 hashtags, wit welcome
+- linkedin: professional insight from the image, 3-5 hashtags, value angle
+- tiktok: hook-first, trending energy, relatable, 5-8 hashtags
+- facebook: conversational, community-focused, 2-4 hashtags
+- pinterest: descriptive, keyword-rich, 5-10 hashtags, SEO-friendly
+No markdown, only raw JSON array.`;
+
+    const userText = `Platforms: ${platforms.join(', ')}
+Vibe: ${vibe}
+Hashtag count: ${hashCount}
+${context ? 'Context: ' + context : ''}
+Generate captions for the uploaded image.`;
+
+    const raw = await callClaudeVision(system, userText, imageBase64, imageMime);
+    const parsed = JSON.parse(raw.trim().replace(/^```json?\n?/, '').replace(/```$/, ''));
+    renderResults(parsed);
+  } catch(e) {
+    if (e.message !== 'no key') alert('Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="btn-label">✨ Generate Captions</span>';
+  }
+}
+
+function renderResults(results) {
+  const section = document.getElementById('resultsSection');
+  const grid = results.map(r => {
+    const p = PLATFORMS[r.platform] || { icon: '🌐', label: r.platform };
+    const tags = (r.hashtags || []).map(t => `<span class="hashtag">#${t.replace(/^#/, '')}</span>`).join('');
+    return `<div class="result-card">
+      <button class="copy-btn" onclick="copyCard(this, '${r.platform}')">Copy</button>
+      <div class="plat-header">
+        <div class="plat-badge">${p.icon}</div>
+        <span class="plat-name">${p.label}</span>
+        ${r.charCount ? `<span class="char-pill">${r.charCount} chars</span>` : ''}
+      </div>
+      <div class="result-text" id="cap_${r.platform}">${escHtml(r.caption)}</div>
+      ${tags ? `<div class="hashtags">${tags}</div>` : ''}
+      ${r.tip ? `<div style="margin-top:10px;font-size:0.74rem;color:var(--muted);font-style:italic">💡 ${escHtml(r.tip)}</div>` : ''}
+    </div>`;
+  }).join('');
+  section.innerHTML = `<div class="card"><h2>Generated Captions</h2><div class="results-grid">${grid}</div></div>`;
+}
+
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function copyCard(btn, platform) {
+  const el = document.getElementById('cap_' + platform);
+  const tags = [...el.parentElement.querySelectorAll('.hashtag')].map(t => t.textContent).join(' ');
+  navigator.clipboard.writeText(el.textContent + (tags ? '\n\n' + tags : '')).then(() => {
+    btn.textContent = '✓ Copied'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+function clearAll() {
+  removeImage();
+  document.getElementById('context').value = '';
+  document.getElementById('resultsSection').innerHTML = '<div class="empty"><div class="big">📸</div><div>Upload an image to generate platform-specific captions</div></div>';
+}
+updateKeyBar();
+</script>
+</body>
+</html>
