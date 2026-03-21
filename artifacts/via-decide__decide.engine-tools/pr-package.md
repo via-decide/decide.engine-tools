@@ -1,3 +1,9 @@
+Branch: simba/implement-the-live-ops-ab-testing-configurator-v
+Title: Implement the Live-Ops A/B Testing Configurator (via-live-tune). 1. C...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give designers the power to rebalance the game and run live events on the fly, breaking the deployment pipeline into dozens of micro-commits.
 Branch: simba/develop-the-high-frequency-telemetry-batcher-via
 Title: Develop the High-Frequency Telemetry Batcher (via-telemetry-pipe). 1....
 

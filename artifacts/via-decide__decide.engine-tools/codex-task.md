@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Live-Ops A/B Testing Configurator (via-live-tune). 1. Create a UI module in the Operations Console that allows designers to tweak live game variables (e.g., "Double XP Weekend" or "Reduce Shotgun Damage by 5%") without pushing an actual code update. 2. Build a JSON generator that packages these temporary overrides into a live_tuning_manifest.json. 3. Write a deploy script that securely uploads this manifest directly to the viadecide.com CDN so active game clients can download the new rules instantly on their next match.
+
+CONSTRAINTS
+Commit the JSON schema validator, the UI sliders, and the CDN deployment script independently. @GN8RBot MUST commit the authentication logic for the CDN upload with strict, mocked unit tests.
 Develop the High-Frequency Telemetry Batcher (via-telemetry-pipe). 1. Build a local data pipeline tool that formats in-game events (Player Death, Item Purchased, Level Loaded) into tightly packed binary packets or compressed JSON. 2. Implement a batching algorithm that queues these events and sends them to the viadecide.com backend in chunks every 5 seconds, rather than spamming the server on every single bullet fired. 3. Create an automated data-sanitizer that strips all Personally Identifiable Information (PII) before the payload leaves the client.
 
 CONSTRAINTS
