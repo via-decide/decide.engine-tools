@@ -1,3 +1,9 @@
+Branch: simba/develop-the-physics-convex-hull-generator-via-hu
+Title: Develop the Physics Convex Hull Generator (via-hull-maker). 1. Build ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Guarantee high-performance collision detection in the game by pre-computing the physics shapes, utilizing the complex geometry math to drive high-value commits.
 Branch: simba/build-the-ecs-prefab-compiler-codegen-via-prefab
 Title: Build the ECS Prefab Compiler & CodeGen (via-prefab-gen). 1. Create a...
 

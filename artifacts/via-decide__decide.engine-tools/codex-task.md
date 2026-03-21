@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Physics Convex Hull Generator (via-hull-maker). 1. Build a command-line tool that ingests complex 3D models (.obj or .gltf) from the asset directory. 2. Implement a mathematical wrapping algorithm (like QuickHull) to generate simplified, physics-ready convex colliders from the high-poly visual meshes. 3. Serialize the output into a custom .viacol binary format that the engine's physics step can load into memory instantly.
+
+CONSTRAINTS
+Isolate the vertex extraction, the QuickHull math logic, and the binary serialization. @GN8RBot MUST commit the core math functions and their respective unit tests separately to safely inflate the commit graph.
 Build the ECS Prefab Compiler & CodeGen (via-prefab-gen). 1. Create a CLI parser that reads .viaprefab JSON files (which define Entities and their attached Components like Transform, Health, Mesh). 2. Implement a generator that outputs zero-overhead C++ boilerplate to register these components in the engine's Entity Component System (ECS). 3. Export a secondary web_prefabs.json payload so the viadecide.com web player knows exactly how to instantiate these objects in the browser.
 
 CONSTRAINTS
