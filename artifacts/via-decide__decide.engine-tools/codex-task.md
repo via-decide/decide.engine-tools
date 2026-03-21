@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Cinematic Spline & Curve Math Core (via-curve-math). 1. Create a standalone C++ math library (and WASM equivalent) dedicated entirely to animation interpolation. 2. Implement evaluation functions for Cubic Bezier, Catmull-Rom, and B-Spline curves to handle smooth transitions for UX translation, rotation, and scale. 3. Build a Quaternion spherical linear interpolation (Slerp) function for buttery-smooth 3D menu rotations.
+
+CONSTRAINTS
+Strict TDD is mandatory. @GN8RBot MUST write unit tests for every mathematical curve evaluator, checking expected floating-point outputs at t=0.0, t=0.5, and t=1.0. Commit every single math function and its test as an independent, atomic push.
 Create the Web-Based UI Layout Pre-viewer (via-hud-preview). 1. Build a local HTML5/Canvas tool within the Operations Console to load the compiled .ui_bin and texture atlases. 2. Implement a lightweight renderer that accurately draws the UI exactly as the native C++ engine would. 3. Add a responsive device-simulator dropdown (e.g., "iPhone 15", "1080p Desktop", "4K TV") to instantly test how the UI flexes and scales across different aspect ratios.
 
 CONSTRAINTS

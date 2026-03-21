@@ -1,3 +1,9 @@
+Branch: simba/build-the-cinematic-spline-curve-math-core-via-c
+Title: Build the Cinematic Spline & Curve Math Core (via-curve-math). 1. Cre...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Establish the Pixar-grade mathematical foundation for fluid UI animation, farming high-value, complex math commits.
 Branch: simba/create-the-web-based-ui-layout-pre-viewer-via-hu
 Title: Create the Web-Based UI Layout Pre-viewer (via-hud-preview). 1. Build...
 
