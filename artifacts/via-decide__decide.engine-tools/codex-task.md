@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the 3D Spatial Audio & Occlusion Baker (via-spatial-acoustics). 1. Build a CLI tool that analyzes the game's 3D level geometry and generates an "acoustic mesh." 2. Implement a DSP (Digital Signal Processing) module that simulates sound occlusion (e.g., applying a low-pass filter to muffle an explosion happening behind a thick concrete wall). 3. Write a Head-Related Transfer Function (HRTF) wrapper to ensure precise 3D audio positioning when the user is wearing headphones on viadecide.com.
+
+CONSTRAINTS
+Commit the raycast-occlusion math, the DSP low-pass filter algorithm, and the geometry analyzer independently. The math required for audio propagation is heavy-break it down into dozens of micro-commits with exhaustive unit tests.
 Build the Adaptive Soundtrack Sequencer (via-music-sequencer). 1. Create a Timeline UI in the Operations Console designed for vertical music mixing (layering stems like drums, strings, and bass). 2. Implement an event-listening node system that crossfades or triggers specific music layers based on live game variables (e.g., danger_level > 50 fades in the battle drums). 3. Build a compiler that parses this adaptive timeline into a lightweight music_behavior.json format for the C++ and WASM audio engines.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/develop-the-3d-spatial-audio-occlusion-baker-via
+Title: Develop the 3D Spatial Audio & Occlusion Baker (via-spatial-acoustics...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Achieve Pixar/AAA-level spatial sound, utilizing the complex acoustics math to flood the repository with high-value technical commits.
 Branch: simba/build-the-adaptive-soundtrack-sequencer-via-musi
 Title: Build the Adaptive Soundtrack Sequencer (via-music-sequencer). 1. Cre...
 
