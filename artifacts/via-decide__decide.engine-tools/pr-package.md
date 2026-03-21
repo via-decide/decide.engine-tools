@@ -1,3 +1,9 @@
+Branch: simba/implement-the-weapon-dps-simulator-balancer-via-
+Title: Implement the Weapon DPS Simulator & Balancer (via-weapon-balance). 1...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give game designers a data-driven way to balance combat, while using the continuous simulation reports to permanently sustain the daily automated commit velocity.
 Branch: simba/develop-the-physics-convex-hull-generator-via-hu
 Title: Develop the Physics Convex Hull Generator (via-hull-maker). 1. Build ...
 

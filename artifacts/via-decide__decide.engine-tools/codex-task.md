@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Weapon DPS Simulator & Balancer (via-weapon-balance). 1. Create a script that parses a weapon_stats.csv file containing fire rates, damage values, reload times, and recoil curves. 2. Build a headless simulation loop that runs 10,000 virtual firefights against different armor types to calculate exact Time-To-Kill (TTK) and DPS metrics. 3. Compile the raw CSV data into an encrypted binary blob (weapons.dat) for the engine, and output a balance_report.html for the Operations Console.
+
+CONSTRAINTS
+Commit the CSV parser, the TTK simulation math, and the binary packer independently. Setup a GitHub Action to auto-commit the balance_report.html back to the repo whenever the CSV is updated.
 Develop the Physics Convex Hull Generator (via-hull-maker). 1. Build a command-line tool that ingests complex 3D models (.obj or .gltf) from the asset directory. 2. Implement a mathematical wrapping algorithm (like QuickHull) to generate simplified, physics-ready convex colliders from the high-poly visual meshes. 3. Serialize the output into a custom .viacol binary format that the engine's physics step can load into memory instantly.
 
 CONSTRAINTS
