@@ -65,8 +65,11 @@
     'synthetic-player-generator': 'tools/engine/synthetic-player-generator/index.html',
     'wave1-simulation-runner': 'tools/engine/wave1-simulation-runner/index.html',
     'balance-dashboard': 'tools/engine/balance-dashboard/index.html',
-    'simulation-runner': 'tools/engine/simulation-runner/index.html'
-    'task-splitter': 'tools/task-splitter/index.html'
+    'simulation-runner': 'tools/engine/simulation-runner/index.html',
+    'task-splitter': 'tools/task-splitter/index.html',
+    'ai-game-strategy-advisor': 'tools/engine/ai-game-strategy-advisor/index.html',
+    'game-command-center': 'tools/engine/game-command-center/index.html',
+    'leaderboard-analytics': 'tools/engine/leaderboard-analytics/index.html'
   };
 
   const navLinks = [...document.querySelectorAll('.nl[data-s]')];
