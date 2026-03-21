@@ -1,3 +1,9 @@
+Branch: simba/build-the-multi-channel-signed-distance-field-ms
+Title: Build the Multi-Channel Signed Distance Field (MSDF) Font Generator (...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Guarantee ultra-crisp text rendering across desktop and web, farming complex mathematical and parser commits in the process.
 Branch: simba/create-the-ai-navmesh-baker-via-nav-bake-1-build
 Title: Create the AI NavMesh Baker (via-nav-bake). 1. Build a tool that anal...
 

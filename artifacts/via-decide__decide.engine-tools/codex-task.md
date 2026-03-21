@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Multi-Channel Signed Distance Field (MSDF) Font Generator (via-font-pack). 1. Create a CLI tool that ingests standard .ttf and .otf font files. 2. Implement an MSDF generation algorithm to output highly optimized texture atlases that allow text to scale infinitely without pixelation in the C++ engine. 3. Generate a font_metrics.json file detailing character glyph bounding boxes, kerning pairs, and baseline offsets for the viadecide.com web renderer.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for the TTF parser, the MSDF math generation, and the JSON serializer. Commit the glyph extraction logic and kerning table parsing as completely separate, atomic pushes.
 Create the AI NavMesh Baker (via-nav-bake). 1. Build a tool that analyzes the static level geometry (floors, walls, stairs) from an exported scene file. 2. Implement a voxelization and polygon-merging algorithm to generate a traversable Navigation Mesh (NavMesh) for AI pathfinding. 3. Export the pathing data into a tightly packed format that both the C++ engine and the viadecide.com WebAssembly build can use for A* (A-Star) routing.
 
 CONSTRAINTS
