@@ -1,3 +1,9 @@
+Branch: simba/create-the-game-economy-loot-schema-validator-vi
+Title: Create the Game Economy & Loot Schema Validator (via-economy-check). ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Protect the game's economy with rigorous automated math testing, while using the continuous simulation reports to permanently sustain the daily automated commit velocity.
 Branch: simba/implement-the-particle-vfx-shader-minifier-via-v
 Title: Implement the Particle VFX & Shader Minifier (via-vfx-crusher). 1. Cr...
 

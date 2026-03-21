@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Game Economy & Loot Schema Validator (via-economy-check). 1. Build a local tool that ingests massive JSON databases defining the game's items, drop rates, and virtual economy. 2. Implement a Monte Carlo simulation script that runs 1,000,000 virtual "loot drops" locally to verify that drop probabilities match the intended design. 3. Configure a GitHub Action to auto-run this simulation every time a designer updates the economy JSON, blocking the PR if the simulation detects inflation or broken drop rates.
+
+CONSTRAINTS
+The Monte Carlo simulation must output a loot_distribution_report.md. @GN8RBot MUST program the CI action to auto-commit this report back to the repository on every successful economy tweak.
 Implement the Particle VFX & Shader Minifier (via-vfx-crusher). 1. Create a build tool that collects raw GLSL/WGSL shader files and custom particle system configurations. 2. Implement a minifier that strips comments, shortens variable names, and pre-compiles shader permutations for different hardware tiers. 3. Output a single, web-optimized .via_vfx binary package that the viadecide.com canvas can load instantly.
 
 CONSTRAINTS
