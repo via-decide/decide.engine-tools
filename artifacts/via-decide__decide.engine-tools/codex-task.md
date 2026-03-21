@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Live Material Preview Sphere (via-mat-preview). 1. Create a dedicated WebGL viewport within the Material Editor that renders a 3D preview sphere or custom mesh. 2. Build a hot-reloading bridge that takes the transpiled shader from via-shader-compile, injects it into the preview viewport, and updates instantly as the designer drags node wires. 3. Add a dynamic lighting rig (directional light + HDRI environment map) to the preview scene so artists can test physical reflections and roughness accurately.
+
+CONSTRAINTS
+Isolate the WebGL context setup, the hot-reload watcher, and the lighting math. Commit the HDRI texture loader and the spherical harmonic lighting algorithms as completely standalone PRs.
 Develop the Node-to-Shader Transpiler (via-shader-compile). 1. Build a compiler that parses the JSON output of the Material Node Graph and constructs an Abstract Syntax Tree (AST). 2. Implement code generators that traverse the AST and output clean, optimized GLSL (for OpenGL) and WGSL (for WebGPU/viadecide.com). 3. Write a dead-code eliminator that detects unhooked nodes or mathematically useless branches (e.g., multiplying by 1) and strips them from the final shader code.
 
 CONSTRAINTS
