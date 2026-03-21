@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Timeline Track & Keyframe Editor UI (via-timeline-ui). 1. Build a sophisticated HTML5/Canvas Timeline Editor within the Operations Console, featuring draggable keyframes and scrubbable playheads. 2. Implement a visual "Graph Editor" view where designers can manually tweak the tangent handles of Bezier curves for easing in/out. 3. Create an event-dispatch system that synchronizes the web-based timeline playhead with the local engine's rendering context in real-time.
+
+CONSTRAINTS
+Commit the Canvas drawing logic, the keyframe drag-and-drop handler, and the tangent math as separate modules. The Graph Editor UI components must be built and committed piece-by-piece to safely inflate the commit graph.
 Build the Cinematic Spline & Curve Math Core (via-curve-math). 1. Create a standalone C++ math library (and WASM equivalent) dedicated entirely to animation interpolation. 2. Implement evaluation functions for Cubic Bezier, Catmull-Rom, and B-Spline curves to handle smooth transitions for UX translation, rotation, and scale. 3. Build a Quaternion spherical linear interpolation (Slerp) function for buttery-smooth 3D menu rotations.
 
 CONSTRAINTS

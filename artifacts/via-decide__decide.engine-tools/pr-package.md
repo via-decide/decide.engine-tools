@@ -1,3 +1,9 @@
+Branch: simba/develop-the-timeline-track-keyframe-editor-ui-vi
+Title: Develop the Timeline Track & Keyframe Editor UI (via-timeline-ui). 1....
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give designers a professional, Presto-style timeline interface to animate game UX, breaking down the complex UI state management into dozens of micro-commits.
 Branch: simba/build-the-cinematic-spline-curve-math-core-via-c
 Title: Build the Cinematic Spline & Curve Math Core (via-curve-math). 1. Cre...
 
