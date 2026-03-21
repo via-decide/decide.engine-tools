@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Cinematic Post-Processing Keyframer (via-lens-fx). 1. Create a tool that allows designers to keyframe lens effects over time (e.g., racking focus/Depth of Field, adjusting film grain, or tweaking color grading during a dramatic moment). 2. Build a transpiler that converts these timeline keyframes into dynamic uniforms that get fed directly into the WebGL/WGSL shaders. 3. Ensure these effects can be smoothly interpolated (e.g., smoothly blurring the background over 2 seconds).
+
+CONSTRAINTS
+Isolate the keyframe interpolation math, the shader uniform binder, and the UI sliders. Commit the interpolation logic for each specific effect (DoF, Bloom, Color Correction) as a standalone commit.
 Develop the Cutscene Sequencer & Master Timeline (via-director-timeline). 1. Build a multi-track UI in the Operations Console (similar to Adobe Premiere) where designers can lay down Camera Cuts, Animation Triggers, and Audio Cues. 2. Implement a precise delta-time playback engine that guarantees all tracks stay perfectly synced, even if the game drops frames. 3. Create an exporter that compiles this visual timeline into a lightweight cutscene_data.json file for the engine to parse at runtime.
 
 CONSTRAINTS
