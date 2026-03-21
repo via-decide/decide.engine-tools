@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Web-Optimized Level Exporter (via-level-export). 1. Create a CLI tool that parses the engine's proprietary 3D scene files (e.g., .via_scene). 2. Implement a spatial partitioner (like an Octree generator) that chunks the level data so the viadecide.com web player can stream large maps asynchronously. 3. Output the parsed level into a highly compressed JSON or custom binary format specifically tailored for WebAssembly/WebGL consumption.
+
+CONSTRAINTS
+Strict TDD required. @GN8RBot MUST write unit tests for every node type (Lights, Meshes, Spawners) before implementing the parsing logic. Commit each node parser as a standalone, atomic push.
 Create the Cloud Save & Web Leaderboard Mocker (via-backend-mock). 1. Build a local CLI tool that generates synthetic player data, mock cloud save files, and realistic leaderboard scores. 2. Implement a local HTTP server that mimics the exact REST API responses of viadecide.com's production backend. 3. Allow engine developers to test web-integrated features (like uploading high scores to the site) entirely locally without hitting production databases.
 
 CONSTRAINTS
