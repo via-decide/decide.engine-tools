@@ -8,6 +8,18 @@ preserve all existing tool folders and shared modules; additive changes only —
 
 MEMORY CONTEXT
 No persistent memory for this chat.
+Implement the WASM Web Player Packager (via-wasm-wrap). 1. Create a packaging tool that takes the engine's compiled WebAssembly (.wasm) output and wraps it in a standardized HTML/JS component. 2. Build the JavaScript interop layer that allows viadecide.com to send commands to the engine (e.g., resizing, fullscreen, passing user inputs). 3. Output a clean <via-engine-player> web component bundle that can be dropped seamlessly into the viadecide.com repository.
+
+CONSTRAINTS
+Isolate the JS interop layer, the CSS canvas styling, and the packaging logic. @GN8RBot MUST commit each of these as separate feature branches and merges.
+Develop the Engine-to-Web Documentation Generator (via-doc-gen). 1. Build a parser that scans the main engine's source code for specially formatted comments and API definitions. 2. Write an exporter that converts these parsed comments into structured JSON and static Markdown files. 3. Format the output so it can be directly ingested and rendered by viadecide.com's frontend for a live "API Reference" page.
+
+CONSTRAINTS
+Commit each language parser (C++, JS, etc.) independently. Implement automated tests to verify the JSON output matches the expected schema for the website.
+Build the Web Asset Optimizer CLI (via-web-export). 1. Create a command-line tool that targets the engine's raw assets and specifically optimizes them for viadecide.com's web player. 2. Implement an image converter that crushes textures into highly compressed WebP formats for fast browser loading. 3. Implement a 3D model converter that translates raw engine meshes into web-standard glTF/glb files.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST commit every single file parser, compression algorithm, and unit test as a separate, atomic push.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
@@ -22,40 +34,10 @@ REPO AUDIT CONTEXT
 - Description: 
 - Primary language: HTML
 - README snippet:
-# Decide Engine Tools + Orchard Engine Foundation
-
-This repository is a preservation-first browser-native tool mesh by **ViaDecide**.
-
-It hosts standalone decision and productivity tools that run directly in the browser with no build step, plus the **Orchard Engine** — a merit-based farming-career game system.
-
-## Preservation-first policy
-
-- Existing standalone tools are preserved.
-- New systems are additive.
-- No unrelated folder is deleted or replaced.
-- Tools remain standalone HTML/CSS/JS.
-
-## Tool categories
-
-Tools are organized into 9 categories. The index page at `index.html` renders them grouped automatically from registry metadata.
-
-| Category | Tools |
-|---|---|
-| **Creators** | PromptAlchemy, Script Generator |
-| **Coders** | Code Generator, Code Reviewer, Agent Builder, App Generator |
-| **Researchers** | Multi Source Research, Student Research |
-| **Business** | Sales Dashbo
+# Decide Engine Tools + Orchard Engine Foundation This repository is a preservation-first browser-native tool mesh by **ViaDecide**. It hosts standalone decision and productivity tools that run directly in the browser with no build step, plus the **Orchard Engine** — a merit-based farming-career g
 
 - AGENTS snippet:
-Rules for coding agents in this repository:
-
-1. Never delete tool folders.
-2. Never remove working code from tools.
-3. Never replace a tool with a placeholder.
-4. Prefer additive changes.
-5. Tools must remain standalone HTML apps.
-6. Routing must never break existing tools.
-7. If reorganizing tools, move them safely and update references.
+Rules for coding agents in this repository: 1. Never delete tool folders. 2. Never remove working code from tools. 3. Never replace a tool with a placeholder. 4. Prefer additive changes. 5. Tools must remain standalone HTML apps. 6. Routing must never break existing tools. 7. If reorganizing tools,
 ENGINE-TOOLS ARCHITECTURE (mandatory compliance)
 Tool directory: tools/<tool>/
 Required files: config.json, index.html, tool.js
@@ -65,6 +47,13 @@ Registration: append "tools/<tool>" to importableToolDirs[] in shared/tool-regis
 Router: add tool ID → entry path to static map in router.js
 Do NOT modify any existing tool folder or shared utility file.
 Do NOT use external frameworks, CDN packages, or bundlers.
+
+SOP: PRE-MODIFICATION PROTOCOL (MANDATORY)
+1. Adherence to Instructions: No deviations without explicit user approval.
+2. Mandatory Clarification: Immediately ask if instructions are ambiguous or incomplete.
+3. Proposal First: Always propose optimizations or fixes before implementing them.
+4. Scope Discipline: Do not add unrequested features or modify unrelated code.
+5. Vulnerability Check: Immediately flag and explain security risks.
 
 OUTPUT REQUIREMENTS
 - Include: implementation summary, checks run, risks, rollback notes.

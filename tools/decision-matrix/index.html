@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decision Matrix — ViaDecide</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f0f; --bg-2: #161616; --bg-3: #1e1e1e; --bg-4: #252525;
+      --border: rgba(255,255,255,0.07); --border-h: rgba(255,255,255,0.14);
+      --green: #52B756; --green-dim: rgba(82,183,86,0.1); --green-border: rgba(82,183,86,0.25);
+      --blue: #29B6F6; --amber: #FFB300; --red: #EF5350;
+      --text: #f0f0f0; --text-2: #999; --text-3: #555;
+      --r: 8px; --r-sm: 5px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; padding: 20px; min-height: 100vh; }
+    input, textarea, select { font-family: inherit; color: var(--text); background: var(--bg-3); border: 1px solid var(--border); border-radius: var(--r-sm); outline: none; }
+    input:focus, textarea:focus { border-color: var(--green); }
+    button { cursor: pointer; font-family: inherit; border: none; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-2); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+    /* HEADER */
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .header-left h1 { font-size: 1.3rem; font-weight: 700; }
+    .header-left p { font-size: 0.8rem; color: var(--text-2); margin-top: 3px; }
+    .header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; border-radius: var(--r); font-size: 0.8rem; font-weight: 500;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--green); color: #000; }
+    .btn-ghost { background: var(--bg-3); border: 1px solid var(--border); color: var(--text-2); }
+    .btn-ghost:hover { border-color: var(--border-h); color: var(--text); }
+    .btn-danger { background: rgba(239,83,80,0.1); border: 1px solid rgba(239,83,80,0.2); color: var(--red); }
+
+    /* LAYOUT */
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+    .panel { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; }
+    .panel-title { font-size: 0.82rem; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+
+    /* INPUTS SECTION */
+    .decision-row { display: flex; gap: 8px; margin-bottom: 8px; }
+    .decision-label { font-size: 0.78rem; color: var(--text-2); margin-bottom: 6px; }
+    .decision-input {
+      width: 100%; padding: 8px 10px; border-radius: var(--r-sm);
+      font-size: 0.85rem;
+    }
+    .decision-input::placeholder { color: var(--text-3); }
+
+    /* OPTION / CRITERION LISTS */
+    .list-item {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: var(--r-sm); padding: 7px 10px;
+      margin-bottom: 6px;
+      animation: slideIn 0.15s ease;
+    }
+    @keyframes slideIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    .list-item input[type="text"] { flex: 1; border: none; background: none; font-size: 0.85rem; padding: 0; color: var(--text); }
+    .list-item input[type="number"] { width: 52px; text-align: center; padding: 3px 6px; font-size: 0.8rem; }
+    .weight-label { font-size: 0.72rem; color: var(--text-3); white-space: nowrap; }
+    .remove-btn { background: none; color: var(--text-3); font-size: 1rem; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: color 0.15s, background 0.15s; }
+    .remove-btn:hover { color: var(--red); background: rgba(239,83,80,0.1); }
+    .add-btn { width: 100%; background: none; border: 1px dashed var(--border-h); border-radius: var(--r-sm); padding: 8px; color: var(--text-3); font-size: 0.8rem; transition: all 0.15s; margin-top: 6px; }
+    .add-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+
+    /* MATRIX TABLE */
+    .matrix-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th, td { padding: 8px 10px; border: 1px solid var(--border); text-align: left; white-space: nowrap; }
+    thead th { background: var(--bg-3); color: var(--text-2); font-weight: 600; }
+    thead th.crit-header { text-align: center; max-width: 100px; white-space: normal; word-break: break-word; }
+    thead th .weight-badge { display: block; font-size: 0.68rem; color: var(--text-3); font-weight: 400; }
+    td.option-name { font-weight: 500; color: var(--text); position: sticky; left: 0; background: var(--bg-2); z-index: 1; }
+    td.score-cell { text-align: center; }
+    td.score-cell input {
+      width: 46px; text-align: center;
+      padding: 4px 6px; font-size: 0.82rem;
+      border: 1px solid var(--border);
+      background: var(--bg-4);
+      border-radius: var(--r-sm);
+      transition: border-color 0.15s;
+    }
+    td.score-cell input:focus { border-color: var(--green); }
+    td.weighted-total { font-weight: 700; text-align: center; }
+    tr.winner td { background: var(--green-dim) !important; }
+    tr.winner td.option-name { border-left: 3px solid var(--green); }
+
+    /* RESULTS */
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px; }
+    .result-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: var(--r); padding: 12px 14px; }
+    .result-card.winner { border-color: var(--green); background: var(--green-dim); }
+    .result-rank { font-size: 0.7rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-name { font-size: 0.95rem; font-weight: 600; margin: 4px 0; }
+    .result-score { font-size: 1.3rem; font-weight: 700; color: var(--green); }
+    .result-score.winner { color: var(--green); }
+    .score-bar-track { height: 4px; background: var(--bg-4); border-radius: 2px; margin-top: 8px; overflow: hidden; }
+    .score-bar-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.4s ease; }
+    .winner-label { font-size: 0.72rem; color: var(--green); font-weight: 600; margin-top: 4px; }
+
+    /* REASONING */
+    .reasoning-box {
+      background: var(--bg-3); border: 1px solid var(--green-border);
+      border-radius: var(--r); padding: 14px 16px; margin-top: 14px;
+    }
+    .reasoning-title { font-size: 0.75rem; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .reasoning-text { font-size: 0.83rem; color: var(--text-2); line-height: 1.6; }
+    .reasoning-text strong { color: var(--text); }
+
+    /* SENSITIVITY */
+    .sensitivity-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .sensitivity-row:last-child { border-bottom: none; }
+    .sens-crit { flex: 1; font-size: 0.82rem; }
+    .sens-bar-track { width: 80px; height: 6px; background: var(--bg-4); border-radius: 3px; overflow: hidden; }
+    .sens-bar-fill { height: 100%; border-radius: 3px; }
+    .sens-pct { font-size: 0.75rem; color: var(--text-2); width: 36px; text-align: right; }
+
+    /* INSTRUCTIONS */
+    .instructions { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; margin-bottom: 16px; }
+    .instructions ol { padding-left: 18px; }
+    .instructions li { font-size: 0.82rem; color: var(--text-2); margin-bottom: 4px; }
+    .instructions li strong { color: var(--text); }
+
+    .tab-bar { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 0; }
+    .tab { padding: 7px 16px; font-size: 0.82rem; color: var(--text-2); border-bottom: 2px solid transparent; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+    .tab.active { color: var(--green); border-bottom-color: var(--green); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .empty-hint { text-align: center; padding: 32px; color: var(--text-3); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>⚖️ Decision Matrix</h1>
+    <p>Score options across weighted criteria — let the numbers guide the decision</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost" onclick="loadExample()">Load Example</button>
+    <button class="btn btn-ghost" onclick="exportJSON()">Export JSON</button>
+    <button class="btn btn-primary" onclick="scrollToResults()">See Results ↓</button>
+  </div>
+</div>
+
+<!-- INSTRUCTIONS -->
+<div class="instructions" id="instructions">
+  <strong style="font-size:0.82rem">How to use:</strong>
+  <ol style="margin-top:6px">
+    <li><strong>Add your options</strong> — what are you choosing between?</li>
+    <li><strong>Add criteria</strong> — what matters in this decision? Set a weight (1–10) for each.</li>
+    <li><strong>Score each option</strong> against each criterion (1–10) in the matrix.</li>
+    <li>The matrix calculates weighted totals and reveals the best choice.</li>
+  </ol>
+</div>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="switchTab('setup',this)">Setup</button>
+  <button class="tab" onclick="switchTab('matrix',this)">Matrix</button>
+  <button class="tab" onclick="switchTab('results',this)">Results</button>
+</div>
+
+<!-- ═══ TAB: SETUP ════════════════════════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-setup">
+  <div class="layout">
+
+    <!-- OPTIONS -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Options to compare</span>
+        <span style="font-size:0.75rem;font-weight:400;color:var(--text-3)" id="opts-count">0</span>
+      </div>
+      <div class="decision-label">What are you deciding between?</div>
+      <div id="options-list"></div>
+      <button class="add-btn" onclick="addOption()">+ Add Option</button>
+    </div>
+
+    <!-- CRITERIA -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Criteria & Weights</span>
+        <span style="font-size:0.75rem;font-weight:400;color:var(--text-3)" id="crit-count">0</span>
+      </div>
+      <div class="decision-label">What factors matter? Higher weight = more important (1–10)</div>
+      <div id="criteria-list"></div>
+      <button class="add-btn" onclick="addCriterion()">+ Add Criterion</button>
+    </div>
+
+  </div>
+  <div style="margin-top:16px;text-align:center">
+    <button class="btn btn-primary" onclick="switchTab('matrix', document.querySelector('.tab-bar .tab:nth-child(2)'))">
+      Build Matrix →
+    </button>
+  </div>
+</div>
+
+<!-- ═══ TAB: MATRIX ═══════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-matrix">
+  <div class="panel">
+    <div class="panel-title">Scoring Matrix <span style="font-size:0.72rem;font-weight:400;color:var(--text-3)">Score each option per criterion (1–10)</span></div>
+    <div class="matrix-scroll" id="matrix-container">
+      <div class="empty-hint">Add options and criteria in Setup first.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: RESULTS ══════════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-results">
+  <div id="results-container">
+    <div class="empty-hint">Complete the matrix to see results.</div>
+  </div>
+</div>
+
+<script>
+// ─── DATA MODEL ───────────────────────────────────────────────────────────────
+let options   = [];   // [{id, name}]
+let criteria  = [];   // [{id, name, weight}]
+let scores    = {};   // scores[optId][critId] = number (1-10)
+let uid = 0;
+const newId = () => ++uid;
+
+// ─── SETUP: OPTIONS ───────────────────────────────────────────────────────────
+function addOption(name='') {
+  const id = newId();
+  options.push({ id, name });
+  renderOptions();
+  renderMatrix();
+  renderResults();
+  // focus last input
+  setTimeout(() => {
+    const inputs = document.querySelectorAll('#options-list .list-item input[type="text"]');
+    if (inputs.length) inputs[inputs.length-1].focus();
+  }, 40);
+}
+
+function removeOption(id) {
+  options = options.filter(o => o.id !== id);
+  delete scores[id];
+  renderOptions();
+  renderMatrix();
+  renderResults();
+}
+
+function renderOptions() {
+  document.getElementById('opts-count').textContent = options.length;
+  document.getElementById('options-list').innerHTML = options.map(o => `
+    <div class="list-item" data-id="${o.id}">
+      <span style="color:var(--text-3);font-size:0.85rem">📌</span>
+      <input type="text" value="${esc(o.name)}" placeholder="Option name…"
+        oninput="options.find(x=>x.id===${o.id}).name=this.value; renderMatrix(); renderResults();" />
+      <button class="remove-btn" onclick="removeOption(${o.id})">✕</button>
+    </div>`).join('');
+}
+
+// ─── SETUP: CRITERIA ─────────────────────────────────────────────────────────
+function addCriterion(name='', weight=5) {
+  const id = newId();
+  criteria.push({ id, name, weight });
+  renderCriteria();
+  renderMatrix();
+  renderResults();
+  setTimeout(() => {
+    const inputs = document.querySelectorAll('#criteria-list .list-item input[type="text"]');
+    if (inputs.length) inputs[inputs.length-1].focus();
+  }, 40);
+}
+
+function removeCriterion(id) {
+  criteria = criteria.filter(c => c.id !== id);
+  Object.keys(scores).forEach(oid => delete scores[oid][id]);
+  renderCriteria();
+  renderMatrix();
+  renderResults();
+}
+
+function renderCriteria() {
+  document.getElementById('crit-count').textContent = criteria.length;
+  document.getElementById('criteria-list').innerHTML = criteria.map(c => `
+    <div class="list-item" data-id="${c.id}">
+      <span style="color:var(--text-3);font-size:0.85rem">🎯</span>
+      <input type="text" value="${esc(c.name)}" placeholder="Criterion name…"
+        oninput="criteria.find(x=>x.id===${c.id}).name=this.value; renderMatrix(); renderResults();" />
+      <span class="weight-label">Weight</span>
+      <input type="number" min="1" max="10" value="${c.weight}"
+        oninput="criteria.find(x=>x.id===${c.id}).weight=Math.min(10,Math.max(1,+this.value||1)); renderMatrix(); renderResults();" />
+      <button class="remove-btn" onclick="removeCriterion(${c.id})">✕</button>
+    </div>`).join('');
+}
+
+// ─── MATRIX ───────────────────────────────────────────────────────────────────
+function getScore(oid, cid) {
+  if (!scores[oid]) scores[oid] = {};
+  return scores[oid][cid] ?? '';
+}
+
+function setScore(oid, cid, val) {
+  if (!scores[oid]) scores[oid] = {};
+  const n = parseFloat(val);
+  scores[oid][cid] = (isNaN(n) ? null : Math.min(10, Math.max(0, n)));
+  renderResults();
+}
+
+function weightedTotal(oid) {
+  let sum = 0, totalW = 0;
+  criteria.forEach(c => {
+    const s = scores[oid]?.[c.id];
+    if (s != null && s !== '') {
+      sum += s * c.weight;
+      totalW += c.weight;
+    }
+  });
+  if (totalW === 0) return null;
+  return sum / totalW;
+}
+
+function renderMatrix() {
+  const el = document.getElementById('matrix-container');
+  if (options.length === 0 || criteria.length === 0) {
+    el.innerHTML = `<div class="empty-hint">Add options and criteria in Setup to build the matrix.</div>`;
+    return;
+  }
+
+  const totals = options.map(o => ({ o, t: weightedTotal(o.id) }));
+  const maxT = Math.max(...totals.map(x => x.t ?? 0));
+
+  let html = `<table>
+    <thead><tr>
+      <th style="min-width:120px">Option</th>
+      ${criteria.map(c => `<th class="crit-header">${esc(c.name||'—')}<span class="weight-badge">×${c.weight}</span></th>`).join('')}
+      <th style="min-width:80px;text-align:center">Total</th>
+    </tr></thead>
+    <tbody>`;
+
+  options.forEach(o => {
+    const tot = weightedTotal(o.id);
+    const isWinner = tot !== null && tot === maxT && maxT > 0;
+    html += `<tr class="${isWinner ? 'winner' : ''}">
+      <td class="option-name">${isWinner ? '🏆 ' : ''}${esc(o.name||'—')}</td>
+      ${criteria.map(c => `<td class="score-cell">
+        <input type="number" min="0" max="10" step="0.5" value="${getScore(o.id, c.id)}"
+          placeholder="—"
+          oninput="setScore(${o.id},${c.id},this.value)" />
+      </td>`).join('')}
+      <td class="weighted-total" style="color:${isWinner ? 'var(--green)' : 'var(--text)'}">
+        ${tot !== null ? tot.toFixed(2) : '—'}
+      </td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  el.innerHTML = html;
+}
+
+// ─── RESULTS ──────────────────────────────────────────────────────────────────
+function renderResults() {
+  const el = document.getElementById('results-container');
+  if (options.length === 0 || criteria.length === 0) {
+    el.innerHTML = `<div class="empty-hint">Complete Setup and score the Matrix to see results.</div>`;
+    return;
+  }
+
+  const ranked = options
+    .map(o => ({ o, t: weightedTotal(o.id) }))
+    .sort((a, b) => (b.t ?? -1) - (a.t ?? -1));
+
+  const maxT = ranked[0].t ?? 0;
+  const totalPossible = criteria.reduce((s, c) => s + c.weight * 10, 0) / criteria.reduce((s, c) => s + c.weight, 0);
+
+  let html = `<div class="results-grid">`;
+  ranked.forEach((r, i) => {
+    const pct = maxT > 0 ? ((r.t ?? 0) / totalPossible * 100) : 0;
+    const isWinner = i === 0 && r.t !== null;
+    html += `<div class="result-card${isWinner ? ' winner' : ''}">
+      <div class="result-rank">${['🥇 1st','🥈 2nd','🥉 3rd'][i] ?? `#${i+1}`}</div>
+      <div class="result-name">${esc(r.o.name || '—')}</div>
+      <div class="result-score${isWinner ? ' winner' : ''}">${r.t !== null ? r.t.toFixed(2) : '—'}</div>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:${pct.toFixed(1)}%"></div></div>
+      ${isWinner ? '<div class="winner-label">Recommended</div>' : ''}
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Reasoning
+  if (ranked[0].t !== null && ranked.length >= 2) {
+    const winner = ranked[0];
+    const runner = ranked[1];
+    const margin = (winner.t - (runner.t ?? 0)).toFixed(2);
+    const topCrit = criteria
+      .map(c => ({ c, s: scores[winner.o.id]?.[c.id] ?? 0, weighted: (scores[winner.o.id]?.[c.id] ?? 0) * c.weight }))
+      .sort((a, b) => b.weighted - a.weighted)[0];
+    html += `<div class="reasoning-box">
+      <div class="reasoning-title">💡 Decision Reasoning</div>
+      <div class="reasoning-text">
+        <strong>${esc(winner.o.name)}</strong> scores highest at <strong>${winner.t.toFixed(2)}/10</strong>,
+        leading <strong>${esc(runner.o.name)}</strong> by <strong>${margin} points</strong>.
+        ${topCrit ? `Its strongest differentiator is <strong>${esc(topCrit.c.name)}</strong>
+        (score ${topCrit.c.weight > 7 ? `${scores[winner.o.id]?.[topCrit.c.id]}/10 — a high-weight criterion` : `${scores[winner.o.id]?.[topCrit.c.id]}/10`}).` : ''}
+        ${+margin < 0.5 ? ' <strong>Note:</strong> The margin is close — consider qualitative factors before committing.' : ''}
+      </div>
+    </div>`;
+  }
+
+  // Sensitivity: which criteria have most weight
+  if (criteria.length > 0) {
+    const totalW = criteria.reduce((s, c) => s + c.weight, 0);
+    const sorted = [...criteria].sort((a, b) => b.weight - a.weight);
+    html += `<div class="panel" style="margin-top:14px">
+      <div class="panel-title">Criteria Weight Distribution</div>
+      ${sorted.map(c => {
+        const pct = (c.weight / totalW * 100).toFixed(0);
+        const hue = c.weight > 7 ? '#EF5350' : c.weight > 4 ? '#FFB300' : '#52B756';
+        return `<div class="sensitivity-row">
+          <span class="sens-crit">${esc(c.name || '—')}</span>
+          <div class="sens-bar-track"><div class="sens-bar-fill" style="width:${pct}%;background:${hue}"></div></div>
+          <span class="sens-pct">${pct}%</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(`tab-${name}`).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'results') renderResults();
+  if (name === 'matrix') renderMatrix();
+}
+
+// ─── EXAMPLE ──────────────────────────────────────────────────────────────────
+function loadExample() {
+  options = []; criteria = []; scores = {};
+  ['Build in-house', 'Buy SaaS tool', 'Hire contractor'].forEach(n => addOption(n));
+  [['Cost', 8], ['Time to ship', 7], ['Scalability', 6], ['Team fit', 5], ['Risk', 9]].forEach(([n, w]) => {
+    const id = newId();
+    criteria.push({ id, name: n, weight: w });
+  });
+
+  const scoreMap = {
+    'Build in-house':    [4, 3, 9, 8, 4],
+    'Buy SaaS tool':     [7, 9, 6, 7, 8],
+    'Hire contractor':   [6, 7, 5, 5, 6],
+  };
+  options.forEach(o => {
+    scores[o.id] = {};
+    criteria.forEach((c, i) => {
+      scores[o.id][c.id] = scoreMap[o.name]?.[i] ?? 5;
+    });
+  });
+
+  renderOptions();
+  renderCriteria();
+  renderMatrix();
+  renderResults();
+  switchTab('matrix', document.querySelector('.tab-bar .tab:nth-child(2)'));
+}
+
+// ─── EXPORT ───────────────────────────────────────────────────────────────────
+function exportJSON() {
+  const data = {
+    options: options.map(o => ({ ...o, scores: criteria.map(c => ({ criterion: c.name, score: scores[o.id]?.[c.id], weighted: (scores[o.id]?.[c.id] ?? 0) * c.weight })) })),
+    criteria,
+    results: options.map(o => ({ option: o.name, total: weightedTotal(o.id) })).sort((a,b) => (b.total??0)-(a.total??0))
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'decision-matrix.json';
+  a.click();
+}
+
+function scrollToResults() {
+  switchTab('results', document.querySelector('.tab-bar .tab:nth-child(3)'));
+}
+
+// ─── UTILS ────────────────────────────────────────────────────────────────────
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+addOption(); addOption(); addOption();
+addCriterion('', 5); addCriterion('', 5); addCriterion('', 5);
+</script>
+</body>
+</html>

@@ -244,6 +244,18 @@
     {
       "toolDir": "tools/workflow-template-gallery",
       "metaPath": "tools/workflow-template-gallery/config.json"
+    },
+    {
+      "toolDir": "tools/decision-matrix",
+      "metaPath": "tools/decision-matrix/config.json"
+    },
+    {
+      "toolDir": "tools/scenario-planner",
+      "metaPath": "tools/scenario-planner/config.json"
+    },
+    {
+      "toolDir": "tools/games/skillhex-mission-control",
+      "metaPath": "tools/games/skillhex-mission-control/config.json"
     }
   ]
 }

@@ -534,6 +534,7 @@
         <button class="tab" data-c="business">Business</button>
         <button class="tab" data-c="education">Students</button>
         <button class="tab" data-c="system">Simulations</button>
+        <button class="tab" data-c="games">🎮 Games</button>
       </div>
       
       <!-- Controls -->
@@ -828,14 +829,20 @@ const TOOLS_DB = [
     { name: "Sales Dashboard", cat: "business", desc: "Track sales pipeline and revenue metrics.", icon: "📊", engine: false },
     { name: "Founder Toolkit", cat: "business", desc: "Essential frameworks and templates for founders.", icon: "🚀", engine: false },
     { name: "Decision Brief", cat: "business", desc: "Structure complex decisions into clear briefs.", icon: "📋", engine: false },
-    { name: "Wings of Fire Quiz", cat: "education", desc: "Immersive quiz game set in the Wings of Fire world.", icon: "🐉", engine: false },
+    { name: "Wings of Fire Quiz", cat: "games", desc: "Multiplayer quiz game based on Dr. APJ Abdul Kalam's Wings of Fire.", icon: "🐉", engine: false },
     { name: "Agent Builder", cat: "coders", desc: "Design and configure AI agents and their workflows.", icon: "🤖", engine: false },
-    { name: "App Generator", cat: "coders", desc: "Scaffold complete app templates from a description.", icon: "⚡", engine: false }
+    { name: "App Generator", cat: "coders", desc: "Scaffold complete app templates from a description.", icon: "⚡", engine: false },
+    { name: "Decision Matrix", cat: "business", desc: "Weighted scoring across criteria — ranked results with reasoning.", icon: "⚖️", engine: false },
+    { name: "Scenario Planner", cat: "business", desc: "Map outcomes across futures with probability-weighted analysis.", icon: "🔭", engine: false },
+    { name: "HexWars", cat: "games", desc: "Conquer the hex battlefield with your knowledge. Timed quiz meets territory strategy.", icon: "⬡", engine: false },
+    { name: "Decision Snake", cat: "games", desc: "Navigate the path of choices. Classic snake reborn with decision logic.", icon: "🐍", engine: false },
+    { name: "SkillHex Mission Control", cat: "games", desc: "Mission-based skill progression hub. Complete challenges to unlock new territory.", icon: "🎯", engine: false },
+    { name: "Data Orchard", cat: "games", desc: "Cultivate rare genetic plant specimens, trade credits, and dominate the leaderboard.", icon: "🌿", engine: false }
 ]
 
-const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc' };
-const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other' };
-const DEFAULT_ICONS = { creators: '🎨', coders: '🛠️', researchers: '🔬', business: '💼', education: '📘', system: '⚙️', misc: '🧩' };
+const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc', games:'c-education' };
+const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other', games:'Games' };
+const DEFAULT_ICONS = { creators: '🎨', coders: '🛠️', researchers: '🔬', business: '💼', education: '📘', system: '⚙️', misc: '🧩', games: '🎮' };
 
 // Fixed Routing Dictionary mapping explicitly to Repo Paths
 const ROUTE_ALIASES = {
@@ -887,6 +894,19 @@ const ROUTE_ALIASES = {
     'wings of fire quiz': 'wings-of-fire-quiz/index.html',
     'agent builder': 'agent/index.html',
     'app generator': 'app-generator/index.html',
+    'decision matrix': 'tools/decision-matrix/index.html',
+    'scenario planner': 'tools/scenario-planner/index.html',
+    'hexwars': 'tools/games/hex-wars/index.html',
+    'hex wars': 'tools/games/hex-wars/index.html',
+    'decision snake': 'tools/games/snake-game/index.html',
+    'snake': 'tools/games/snake-game/index.html',
+    'skillhex mission control': 'tools/games/skillhex-mission-control/index.html',
+    'skillhex': 'tools/games/skillhex-mission-control/index.html',
+    'mission control': 'tools/games/skillhex-mission-control/index.html',
+    'wings of fire quiz': 'tools/games/wings-of-fire-quiz/index.html',
+    'wings of fire': 'tools/games/wings-of-fire-quiz/index.html',
+    'data orchard': 'https://via-decide.github.io/Game-/',
+    'orchard game': 'https://via-decide.github.io/Game-/',
     'github repo': 'https://github.com/via-decide/decide.engine-tools'
 }
 
