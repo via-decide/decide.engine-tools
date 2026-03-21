@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Universal Asset Dependency Graph (via-dep-tracker). 1. Build an in-memory Directed Acyclic Graph (DAG) that maps exactly how every asset in the project relies on others (e.g., PlayerPrefab -> ArmorMesh -> MetalMaterial -> RustTexture). 2. Write an algorithm that instantly flags broken dependencies if a user deletes or renames a core asset that other files are currently using. 3. Create a CI/CD validator that walks this entire graph on every push to ensure no "orphan" or missing assets make it into the final viadecide.com web build.
+
+CONSTRAINTS
+@GN8RBot MUST isolate the DAG node insertion logic, the traversal algorithms, and the cycle-detection math. Commit the mathematical proof for detecting infinite loops (A depends on B, B depends on A) as an independent PR.
 Develop the Global Undo/Redo State Manager (via-state-manager). 1. Implement a centralized Command Pattern architecture that records every state mutation across all tools (e.g., moving a UI node, deleting an audio track, tweaking a shader). 2. Build an efficient delta-compression stack that stores the "before" and "after" states of these actions without eating up gigabytes of RAM. 3. Create a unified history panel in the Operations Console that allows designers to scrub back and forth through time across the entire project simultaneously.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/implement-the-universal-asset-dependency-graph-v
+Title: Implement the Universal Asset Dependency Graph (via-dep-tracker). 1. ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Prevent catastrophic missing-asset crashes in production, utilizing the heavy computer-science graph algorithms to drive high-value, legitimate commits.
 Branch: simba/develop-the-global-undoredo-state-manager-via-st
 Title: Develop the Global Undo/Redo State Manager (via-state-manager). 1. Im...
 
