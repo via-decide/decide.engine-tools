@@ -1,3 +1,9 @@
+Branch: simba/build-the-cross-platform-input-action-mapper-via
+Title: Build the Cross-Platform Input Action Mapper (via-input-mapper). 1. C...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure players have exactly the same control scheme whether playing native or on the web, farming complex code-generation commits in the process.
 Branch: simba/create-the-game-economy-loot-schema-validator-vi
 Title: Create the Game Economy & Loot Schema Validator (via-economy-check). ...
 

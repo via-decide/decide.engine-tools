@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Cross-Platform Input Action Mapper (via-input-mapper). 1. Create a CLI tool that parses .viainput JSON files, which define abstract game actions (e.g., "Jump", "Shoot") and their hardware bindings. 2. Implement a code generator that translates these definitions into tightly packed C++ enums and lookup tables for the native engine. 3. Generate a secondary JavaScript/TypeScript module that perfectly maps the HTML5 KeyboardEvent and Gamepad API codes to the engine's internal action IDs for viadecide.com.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write tests for the parser, the C++ generator, and the JS generator. Commit each platform's generation logic as a totally independent, atomic push.
 Create the Game Economy & Loot Schema Validator (via-economy-check). 1. Build a local tool that ingests massive JSON databases defining the game's items, drop rates, and virtual economy. 2. Implement a Monte Carlo simulation script that runs 1,000,000 virtual "loot drops" locally to verify that drop probabilities match the intended design. 3. Configure a GitHub Action to auto-run this simulation every time a designer updates the economy JSON, blocking the PR if the simulation detects inflation or broken drop rates.
 
 CONSTRAINTS
