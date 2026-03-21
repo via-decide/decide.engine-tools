@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Web-Latency & Jitter Simulator for Interactive Playback. 1. Build a network-throttling proxy within the Operations Console that can inject artificial lag (latency), packet loss, and bandwidth caps into the engine. 2. Implement a 'HLS Buffer Monitor' that visualizes how much video is pre-fetched and predicts if a 'Seamless Branch' will fail based on current network speed. 3. Build an automated 'Crash Stressor' that intentionally disconnects the cohort socket during a vote to test the engine's graceful recovery and fallback logic.
+
+CONSTRAINTS
+Commit the packet-loss algorithm, the buffer-visualization math, and the recovery-state machine separately. @GN8RBot MUST test the 'Graceful Fallback' logic under 90% packet loss.
 Create the Visual Gesture-Feedback UI Components. 1. Build a 'Gesture Toast' notification system for the viadecide.com web engine that mirrors the user's physical input (e.g., showing a spinning icon when the user spins the Kada). 2. Implement a 'Consensus Meter' that visually fills up as members of a Cohort perform the 'AGREE' gesture during an interactive video. 3. Build an 'Emergency SOS' overlay that triggers a dramatic visual change in the UI when a 'STRESS_ALARM' is detected.
 
 CONSTRAINTS
