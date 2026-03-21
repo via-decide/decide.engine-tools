@@ -1,3 +1,9 @@
+Branch: simba/build-the-wasmc-crash-dump-symbolicator-via-cras
+Title: Build the WASM/C++ Crash Dump Symbolicator (via-crash-decode). 1. Cre...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Turn catastrophic web player crashes into easily readable bug reports, farming highly technical compiler-level commits in the process.
 Branch: simba/create-the-headless-cutscene-validator-ci-bot-vi
 Title: Create the Headless Cutscene Validator CI Bot (via-cutscene-check). 1...
 

@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the WASM/C++ Crash Dump Symbolicator (via-crash-decode). 1. Create a CLI tool that intercepts raw, minified stack traces or memory dumps sent from the viadecide.com live player. 2. Implement a parser that cross-references these raw memory addresses against the engine's .pdb (Windows) or .wasm.map (Web) debug symbols. 3. Translate the hexadecimal garbage back into human-readable C++ file names and exact line numbers so developers can fix the crash instantly.
+
+CONSTRAINTS
+Strict TDD is mandatory. @GN8RBot MUST write unit tests for the hex-to-int converters, the debug map parser, and the line-resolution logic. Commit each parsing stage as a completely independent push to safely inflate commit volume.
 Create the Headless Cutscene Validator CI Bot (via-cutscene-check). 1. Write a CLI script that parses all compiled cutscene_data.json files in the project. 2. Implement an automated validator that checks for broken references (e.g., the timeline triggers an animation or audio file that no longer exists in the asset directory). 3. Configure a GitHub Action to run this validator on every push, failing the build if a cutscene is broken.
 
 CONSTRAINTS
