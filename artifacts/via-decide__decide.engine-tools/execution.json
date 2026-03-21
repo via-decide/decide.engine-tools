@@ -1,11 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/implement-a-high-throughput-non-blocking-metrics",
-  "branch": "simba/implement-a-stateful-tenant-aware-load-balancer-",
-  "branch": "simba/implement-a-grpc-compliant-securityinterceptor-t",
-  "branch": "simba/implement-a-high-performance-asynchronous-routin",
-  "branch": "simba/implement-the-mt-multi-tenant-message-transport-",
+  "branch": "simba/build-the-cinematic-spline-curve-math-core-via-c",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
