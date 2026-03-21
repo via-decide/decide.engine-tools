@@ -138,6 +138,32 @@
       relatedTools: ['fair-ranking-engine', 'balance-dashboard', 'trust-score-engine'],
       featured: true,
       isEngineTool: true
+    },
+    {
+      id: 'network-latency-simulator',
+      name: 'Network Latency Simulator',
+      description: 'Simulate network conditions — latency, jitter, packet loss & bandwidth caps.',
+      category: 'simulations',
+      tags: ['orchard-engine', 'network', 'simulation', 'operations'],
+      entry: 'tools/engine/network-latency-simulator/index.html',
+      audience: ['operators', 'founders', 'coders'],
+      inputs: ['latency_ms', 'jitter_ms', 'packet_loss_pct', 'bandwidth_kbps'],
+      outputs: ['simulation_report', 'buffer_metrics'],
+      relatedTools: ['meta-health-dashboard', 'market-dynamics'],
+      isEngineTool: true
+    },
+    {
+      id: 'gesture-feedback-ui',
+      name: 'Gesture Feedback UI',
+      description: 'Visual gesture toasts, consensus meter & SOS emergency overlay.',
+      category: 'simulations',
+      tags: ['orchard-engine', 'ui', 'gesture', 'feedback'],
+      entry: 'tools/engine/gesture-feedback-ui/index.html',
+      audience: ['players', 'operators', 'coders'],
+      inputs: ['gesture_type', 'intensity'],
+      outputs: ['toast_event', 'consensus_state'],
+      relatedTools: ['game-command-center', 'ai-coach-console'],
+      isEngineTool: true
     }
   ];
 

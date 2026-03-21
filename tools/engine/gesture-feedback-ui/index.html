@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gesture Feedback UI</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+  <script src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    .gesture-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 14px; }
+    .gesture-btn { padding: 20px 10px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); cursor: pointer; text-align: center; transition: all 0.2s; user-select: none; }
+    .gesture-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .gesture-btn:active { transform: scale(0.95); }
+    .gesture-btn .g-icon { font-size: 2rem; margin-bottom: 6px; }
+    .gesture-btn .g-name { font-size: 0.82rem; font-weight: 600; }
+    .gesture-btn .g-desc { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+    .toast-container { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 8px; max-width: 320px; }
+    .toast { padding: 12px 16px; border-radius: 12px; background: rgba(17,24,39,0.95); border: 1px solid var(--line); backdrop-filter: blur(12px); display: flex; align-items: center; gap: 10px; animation: toastIn 0.3s ease-out; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .toast.closing { animation: toastOut 0.3s ease-in forwards; }
+    .toast-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .toast-body { flex: 1; }
+    .toast-title { font-size: 0.82rem; font-weight: 700; }
+    .toast-msg { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .toast-progress { height: 3px; background: var(--line); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .toast-progress-fill { height: 100%; border-radius: 2px; animation: progressShrink 3s linear forwards; }
+    @keyframes toastIn { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes toastOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(80px); } }
+    @keyframes progressShrink { from { width: 100%; } to { width: 0%; } }
+
+    .consensus-section { margin-top: 16px; }
+    .consensus-ring-wrap { display: flex; justify-content: center; margin: 16px 0; }
+    .consensus-ring { width: 180px; height: 180px; position: relative; }
+    .consensus-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .consensus-ring .ring-bg { fill: none; stroke: #1e293b; stroke-width: 8; }
+    .consensus-ring .ring-fg { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease, stroke 0.3s; }
+    .consensus-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+    .consensus-pct { font-size: 2rem; font-weight: 800; }
+    .consensus-label { font-size: 0.72rem; color: var(--muted); }
+    .voter-row { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
+    .voter { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; transition: all 0.3s; }
+    .voter.agreed { background: rgba(34,197,94,0.2); border: 2px solid var(--accent-2); color: var(--accent-2); }
+    .voter.pending { background: rgba(148,163,184,0.1); border: 2px solid var(--line); color: var(--muted); }
+    .voter.disagreed { background: rgba(239,68,68,0.1); border: 2px solid #ef4444; color: #ef4444; }
+
+    .sos-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(239,68,68,0.15); backdrop-filter: blur(4px); justify-content: center; align-items: center; }
+    .sos-overlay.active { display: flex; animation: sosPulse 1s ease-in-out infinite; }
+    .sos-card { background: rgba(17,24,39,0.98); border: 2px solid #ef4444; border-radius: 20px; padding: 30px 40px; text-align: center; max-width: 400px; box-shadow: 0 0 60px rgba(239,68,68,0.3); }
+    .sos-icon { font-size: 4rem; margin-bottom: 10px; animation: sosShake 0.5s ease-in-out infinite; }
+    .sos-title { font-size: 1.4rem; font-weight: 800; color: #ef4444; }
+    .sos-msg { color: var(--muted); margin: 10px 0 16px; font-size: 0.85rem; }
+    @keyframes sosPulse { 0%, 100% { background: rgba(239,68,68,0.1); } 50% { background: rgba(239,68,68,0.2); } }
+    @keyframes sosShake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
+
+    .section-title { font-size: 1rem; font-weight: 700; margin: 20px 0 8px; }
+    .pulse-ring { animation: pulseRing 2s ease-out infinite; }
+    @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+    .history-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 10px; }
+    .history-table th { text-align: left; padding: 6px 8px; color: var(--muted); font-size: 0.7rem; border-bottom: 1px solid var(--line); }
+    .history-table td { padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Gesture Feedback UI</h1>
+      <p>Visual toast notifications, consensus meter, and SOS emergency overlay components.</p>
+    </header>
+
+    <div class="section-title">Gesture Actions</div>
+    <div class="gesture-grid" id="gestureGrid"></div>
+
+    <div class="sim-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+      <article class="card consensus-section">
+        <div class="section-title" style="margin-top:0">Consensus Meter</div>
+        <p style="font-size:0.78rem;color:var(--muted);margin:0 0 6px">Simulates group agreement tracking.</p>
+        <div class="consensus-ring-wrap">
+          <div class="consensus-ring">
+            <svg viewBox="0 0 200 200">
+              <circle class="ring-bg" cx="100" cy="100" r="80" />
+              <circle class="ring-fg" id="ringFg" cx="100" cy="100" r="80" stroke="var(--accent-2)" stroke-dasharray="502.65" stroke-dashoffset="502.65" />
+            </svg>
+            <div class="consensus-center">
+              <div class="consensus-pct" id="conPct">0%</div>
+              <div class="consensus-label">Agreement</div>
+            </div>
+          </div>
+        </div>
+        <div class="voter-row" id="voterRow"></div>
+        <div class="toolbar">
+          <button id="addAgree" class="primary" style="font-size:0.78rem">+ Agree</button>
+          <button id="addDisagree" style="font-size:0.78rem">+ Disagree</button>
+          <button id="resetConsensus" style="font-size:0.78rem">Reset</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-title" style="margin-top:0">Gesture History</div>
+        <table class="history-table">
+          <thead><tr><th>Time</th><th>Gesture</th><th>Response</th></tr></thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </article>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="sos-overlay" id="sosOverlay">
+    <div class="sos-card">
+      <div class="sos-icon">🚨</div>
+      <div class="sos-title">STRESS ALARM DETECTED</div>
+      <div class="sos-msg">Player stress level exceeded critical threshold.<br>Immediate action recommended.</div>
+      <button id="dismissSos" class="primary" style="padding:10px 30px">Acknowledge & Dismiss</button>
+    </div>
+  </div>
+
+  <script src="../../../shared/tool-storage.js"></script>
+  <script>
+(function () {
+  const STORE_KEY = 'engine.gesture-feedback-ui.history';
+  const toastContainer = document.getElementById('toastContainer');
+  const historyBody = document.getElementById('historyBody');
+
+  const gestures = [
+    { id: 'tap', icon: '👆', name: 'Tap', desc: 'Quick confirmation', color: 'var(--accent-2)', toastMsg: 'Action confirmed' },
+    { id: 'swipe-right', icon: '👉', name: 'Swipe Right', desc: 'Approve / Accept', color: 'var(--accent-2)', toastMsg: 'Approved successfully' },
+    { id: 'swipe-left', icon: '👈', name: 'Swipe Left', desc: 'Reject / Skip', color: '#ef4444', toastMsg: 'Item rejected' },
+    { id: 'long-press', icon: '✊', name: 'Long Press', desc: 'Deep inspect', color: 'var(--warn)', toastMsg: 'Inspecting details...' },
+    { id: 'pinch', icon: '🤏', name: 'Pinch', desc: 'Focus / Zoom', color: '#3b82f6', toastMsg: 'Focus mode activated' },
+    { id: 'spread', icon: '🖐️', name: 'Spread', desc: 'Expand view', color: '#a855f7', toastMsg: 'Expanded view enabled' },
+    { id: 'double-tap', icon: '👆👆', name: 'Double Tap', desc: 'Boost / Favorite', color: 'var(--accent)', toastMsg: 'Boosted! +10 credits' },
+    { id: 'shake', icon: '📳', name: 'Shake', desc: 'Undo last action', color: 'var(--muted)', toastMsg: 'Last action undone' },
+    { id: 'sos', icon: '🚨', name: 'SOS', desc: 'Emergency alert', color: '#ef4444', toastMsg: 'Emergency SOS triggered' }
+  ];
+
+  // Render gesture buttons
+  const grid = document.getElementById('gestureGrid');
+  gestures.forEach(g => {
+    const btn = document.createElement('div');
+    btn.className = 'gesture-btn';
+    btn.innerHTML = `<div class="g-icon">${g.icon}</div><div class="g-name">${g.name}</div><div class="g-desc">${g.desc}</div>`;
+    btn.addEventListener('click', () => triggerGesture(g));
+    grid.appendChild(btn);
+  });
+
+  function showToast(gesture) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <div class="toast-icon">${gesture.icon}</div>
+      <div class="toast-body">
+        <div class="toast-title">${gesture.name}</div>
+        <div class="toast-msg">${gesture.toastMsg}</div>
+        <div class="toast-progress"><div class="toast-progress-fill" style="background:${gesture.color}"></div></div>
+      </div>`;
+    toastContainer.appendChild(toast);
+    setTimeout(() => { toast.classList.add('closing'); setTimeout(() => toast.remove(), 300); }, 3000);
+  }
+
+  function addHistory(gesture) {
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const row = document.createElement('tr');
+    row.innerHTML = `<td style="color:var(--muted)">${time}</td><td>${gesture.icon} ${gesture.name}</td><td style="font-size:0.72rem;color:var(--muted)">${gesture.toastMsg}</td>`;
+    historyBody.prepend(row);
+    if (historyBody.children.length > 20) historyBody.removeChild(historyBody.lastChild);
+
+    const history = ToolStorage.read(STORE_KEY) || [];
+    history.unshift({ gesture: gesture.id, time, msg: gesture.toastMsg });
+    if (history.length > 50) history.length = 50;
+    ToolStorage.write(STORE_KEY, history);
+  }
+
+  function triggerGesture(gesture) {
+    showToast(gesture);
+    addHistory(gesture);
+    if (gesture.id === 'sos') {
+      document.getElementById('sosOverlay').classList.add('active');
+    }
+  }
+
+  document.getElementById('dismissSos').addEventListener('click', () => {
+    document.getElementById('sosOverlay').classList.remove('active');
+    showToast({ icon: '✅', name: 'SOS Acknowledged', toastMsg: 'Emergency dismissed — status normal', color: 'var(--accent-2)' });
+  });
+
+  // Consensus Meter
+  const TOTAL_VOTERS = 12;
+  let voters = Array(TOTAL_VOTERS).fill('pending');
+  const ringFg = document.getElementById('ringFg');
+  const circumference = 2 * Math.PI * 80;
+
+  function renderVoters() {
+    const row = document.getElementById('voterRow');
+    row.innerHTML = voters.map((v, i) =>
+      `<div class="voter ${v} ${v === 'agreed' ? 'pulse-ring' : ''}">${i + 1}</div>`
+    ).join('');
+
+    const agreed = voters.filter(v => v === 'agreed').length;
+    const total = voters.filter(v => v !== 'pending').length;
+    const pct = total > 0 ? Math.round(agreed / TOTAL_VOTERS * 100) : 0;
+    document.getElementById('conPct').textContent = pct + '%';
+
+    const offset = circumference - (pct / 100) * circumference;
+    ringFg.style.strokeDashoffset = offset;
+    ringFg.style.stroke = pct >= 75 ? 'var(--accent-2)' : pct >= 50 ? 'var(--warn)' : '#ef4444';
+  }
+
+  document.getElementById('addAgree').addEventListener('click', () => {
+    const idx = voters.indexOf('pending');
+    if (idx !== -1) { voters[idx] = 'agreed'; renderVoters(); }
+  });
+  document.getElementById('addDisagree').addEventListener('click', () => {
+    const idx = voters.indexOf('pending');
+    if (idx !== -1) { voters[idx] = 'disagreed'; renderVoters(); }
+  });
+  document.getElementById('resetConsensus').addEventListener('click', () => {
+    voters = Array(TOTAL_VOTERS).fill('pending');
+    renderVoters();
+  });
+
+  renderVoters();
+})();
+  </script>
+</body>
+</html>
