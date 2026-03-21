@@ -1,3 +1,9 @@
+Branch: simba/develop-the-cutscene-sequencer-master-timeline-v
+Title: Develop the Cutscene Sequencer & Master Timeline (via-director-timeli...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give designers a AAA-grade cutscene director tool, breaking the complex UI state management down into dozens of micro-commits.
 Branch: simba/build-the-cinematic-camera-spline-editor-via-cam
 Title: Build the Cinematic Camera Spline Editor (via-cam-spline). 1. Create ...
 

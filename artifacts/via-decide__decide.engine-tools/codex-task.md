@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Cutscene Sequencer & Master Timeline (via-director-timeline). 1. Build a multi-track UI in the Operations Console (similar to Adobe Premiere) where designers can lay down Camera Cuts, Animation Triggers, and Audio Cues. 2. Implement a precise delta-time playback engine that guarantees all tracks stay perfectly synced, even if the game drops frames. 3. Create an exporter that compiles this visual timeline into a lightweight cutscene_data.json file for the engine to parse at runtime.
+
+CONSTRAINTS
+Commit the UI track management, the delta-time synchronization logic, and the JSON compiler separately. @GN8RBot MUST commit the event-trigger logic for each individual track type (Audio vs. Camera vs. Animation) as its own PR.
 Build the Cinematic Camera Spline Editor (via-cam-spline). 1. Create a 3D viewport tool in the Operations Console that lets designers place camera "waypoints" throughout a level. 2. Implement a Catmull-Rom spline interpolation algorithm to generate a buttery-smooth flight path through these waypoints. 3. Build a Quaternion-based "Look-At" solver that ensures the camera smoothly tracks a moving target (like a character or explosion) while traveling along the spline.
 
 CONSTRAINTS
