@@ -1,33 +1,9 @@
-Branch: simba/implement-a-high-throughput-non-blocking-metrics
-Title: Implement a high-throughput, non-blocking MetricsCollector to monitor...
+Branch: simba/create-the-dynamic-plugin-host-sandbox-via-plugi
+Title: Create the Dynamic Plugin Host & Sandbox (via-plugin-host). 1. Build ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Achieve total observability. By collecting granular data at the protocol level, you can generate per-tenant billing reports, identify performance bottlenecks in specific tools, and detect DDoS attacks or rogue agents in real-time.
-Branch: simba/implement-a-stateful-tenant-aware-load-balancer-
-Title: Implement a stateful, tenant-aware Load Balancer called MtLoadBalance...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Enable infinite horizontal scaling. By implementing a tenant-aware load balancer, the engine can grow from a single server to a global cluster, distributing the compute-heavy AI tool executions evenly across your infrastructure.
-Branch: simba/implement-a-grpc-compliant-securityinterceptor-t
-Title: Implement a gRPC-compliant SecurityInterceptor to validate tenant ide...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Enforce a Zero-Trust architecture. By validating the identity at the protocol gate, you mathematically guarantee that an AI agent or user from "Tenant A" can never accidentally or maliciously execute tools or view data belonging to "Tenant B."
-Branch: simba/implement-a-high-performance-asynchronous-routin
-Title: Implement a high-performance, asynchronous routing engine called MtRo...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Turn the protocol into an active network. By implementing a central router, the engine can efficiently juggle thousands of independent tool executions from different users without cross-contaminating data or blocking the main event loop.
-Branch: simba/implement-the-mt-multi-tenant-message-transport-
-Title: Implement the MT (Multi-Tenant) Message Transport protocol using Prot...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Establish a high-speed, multi-tenant communication layer. By using a multiplexed bidirectional stream, the engine can manage thousands of concurrent tool executions across different tenants over a single persistent TCP connection.
+- Goal: Establish a truly scalable, crash-resistant AAA architecture while permanently automating high-value architecture commits through lifecycle testing.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
