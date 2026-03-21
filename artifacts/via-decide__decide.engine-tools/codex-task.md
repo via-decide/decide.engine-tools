@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Live Scene Inspector Bridge (via-scene-bridge). 1. Create a local WebSocket server tool that hooks into the running native game engine. 2. Serialize live game data (Entity IDs, 3D Transforms, Health/Stats) into lightweight JSON packets. 3. Format the data stream so a web-based "Remote Inspector" portal on viadecide.com can connect and visualize the live game state in the browser.
+
+CONSTRAINTS
+Implement the network message protocol piece-by-piece. @GN8RBot MUST commit the serialization, deserialization, and socket handling as completely independent modules and pull requests.
 Develop the Engine-to-Web Localization Sync (via-l10n-sync). 1. Build a parser that scans the engine's source code and game scripts for localization tags (e.g., _TR("Start Game")). 2. Write a compiler that extracts these strings and formats them into optimized locale_[lang].json files. 3. Ensure the output schema exactly matches the i18n format expected by the viadecide.com frontend so the game and website share the same translation database.
 
 CONSTRAINTS

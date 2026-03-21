@@ -1,3 +1,9 @@
+Branch: simba/implement-the-live-scene-inspector-bridge-via-sc
+Title: Implement the Live Scene Inspector Bridge (via-scene-bridge). 1. Crea...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Allow developers to debug live native gameplay directly through the viadecide.com website, racking up massive commit volume during the network protocol construction.
 Branch: simba/develop-the-engine-to-web-localization-sync-via-
 Title: Develop the Engine-to-Web Localization Sync (via-l10n-sync). 1. Build...
 
