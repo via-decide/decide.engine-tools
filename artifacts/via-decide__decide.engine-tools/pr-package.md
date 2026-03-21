@@ -1,3 +1,9 @@
+Branch: simba/add-a-new-standalone-tool-tetris-game-id-tetris-
+Title: Add a new standalone tool "Tetris Game" (id: tetris-game) at tools/ga...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Produce working tetris-game tool with config.json, index.html, tool.js — registered in tool-registry.js and router.js, categorized under "games".
 Branch: simba/implement-the-wasm-web-player-packager-via-wasm-
 Title: Implement the WASM Web Player Packager (via-wasm-wrap). 1. Create a p...
 
