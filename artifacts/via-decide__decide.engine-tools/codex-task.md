@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the ECS Prefab Compiler & CodeGen (via-prefab-gen). 1. Create a CLI parser that reads .viaprefab JSON files (which define Entities and their attached Components like Transform, Health, Mesh). 2. Implement a generator that outputs zero-overhead C++ boilerplate to register these components in the engine's Entity Component System (ECS). 3. Export a secondary web_prefabs.json payload so the viadecide.com web player knows exactly how to instantiate these objects in the browser.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST write unit tests for the JSON schema validator and the C++ string generator. Commit each component's parsing logic (e.g., parsing a Transform vs. parsing a Collider) as an isolated, atomic push.
 Create the Automated CI/CD Memory Leak Detector (via-leak-check). 1. Write a GitHub Action that spins up the engine in headless mode and runs a heavy, simulated 10-minute gameplay loop. 2. Implement a script that monitors the process's heap size over time; if the memory footprint grows continuously without releasing (a leak), the script must fail the build. 3. Configure the bot to auto-generate a memory_health_report.md detailing the peak memory usage, allocation counts, and potential leak pointers.
 
 CONSTRAINTS

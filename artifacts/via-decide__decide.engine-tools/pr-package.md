@@ -1,3 +1,9 @@
+Branch: simba/build-the-ecs-prefab-compiler-codegen-via-prefab
+Title: Build the ECS Prefab Compiler & CodeGen (via-prefab-gen). 1. Create a...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Automate the most tedious part of engine programming (ECS boilerplate) while farming dozens of granular commits through the code-generation logic.
 Branch: simba/create-the-automated-cicd-memory-leak-detector-v
 Title: Create the Automated CI/CD Memory Leak Detector (via-leak-check). 1. ...
 
