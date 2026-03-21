@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leaderboard & Analytics</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+  <script src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    .lb-tabs { display: flex; gap: 4px; margin: 14px 0 12px; }
+    .lb-tabs button { flex: 1; padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-alt); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+    .lb-tabs button.active { background: linear-gradient(135deg, var(--accent), #f97316); color: #111; border-color: transparent; font-weight: 700; }
+    .lb-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .lb-table th { text-align: left; padding: 8px 10px; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--line); }
+    .lb-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    .lb-table tr:hover { background: rgba(255,255,255,0.02); }
+    .lb-table .rank-col { width: 40px; text-align: center; font-weight: 700; }
+    .lb-table .rank-1 { color: #FFD700; }
+    .lb-table .rank-2 { color: #C0C0C0; }
+    .lb-table .rank-3 { color: #CD7F32; }
+    .archetype-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
+    .arch-consistent { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .arch-fast-learner { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .arch-spammer { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .arch-slow-learner { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .arch-lazy { background: rgba(148,163,184,0.15); color: #94a3b8; }
+    .arch-high-potential { background: rgba(168,85,247,0.15); color: #a855f7; }
+    .chart-container { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 12px; }
+    .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding: 0 10px; }
+    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bar-fill { width: 100%; border-radius: 6px 6px 0 0; transition: height 0.5s ease; min-height: 2px; }
+    .bar-label { font-size: 0.65rem; color: var(--muted); text-align: center; transform: rotate(-30deg); white-space: nowrap; }
+    .bar-value { font-size: 0.7rem; font-weight: 600; }
+    .metric-row { display: flex; gap: 8px; margin-top: 12px; }
+    .metric-card { flex: 1; padding: 12px; background: var(--bg-alt); border-radius: 10px; text-align: center; }
+    .metric-card .m-val { font-size: 1.4rem; font-weight: 800; }
+    .metric-card .m-label { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .fairness-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; }
+    .verdict-balanced { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .verdict-minor { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .verdict-rebalance { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .controls-row { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .controls-row select, .controls-row input { width: auto; flex: 1; min-width: 120px; }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Leaderboard & Analytics</h1>
+      <p>Player rankings, archetype charts, and fairness metrics for the Orchard Engine.</p>
+    </header>
+
+    <div class="controls-row">
+      <select id="playerCount">
+        <option value="20">20 Players</option>
+        <option value="50" selected>50 Players</option>
+        <option value="100">100 Players</option>
+        <option value="200">200 Players</option>
+      </select>
+      <select id="simDays">
+        <option value="30" selected>30 Days</option>
+        <option value="60">60 Days</option>
+        <option value="90">90 Days</option>
+      </select>
+      <button id="generate" class="primary" style="width:auto;padding:8px 20px">Generate Leaderboard</button>
+      <button id="exportBtn" style="width:auto;padding:8px 16px">Export CSV</button>
+    </div>
+
+    <div class="lb-tabs">
+      <button class="active" data-tab="leaderboard">Leaderboard</button>
+      <button data-tab="archetypes">Archetypes</button>
+      <button data-tab="fairness">Fairness</button>
+    </div>
+
+    <div id="tab-leaderboard" class="tab-content">
+      <div style="overflow-x:auto"><table class="lb-table" id="lbTable"></table></div>
+    </div>
+    <div id="tab-archetypes" class="tab-content" style="display:none">
+      <div id="archCharts"></div>
+    </div>
+    <div id="tab-fairness" class="tab-content" style="display:none">
+      <div id="fairnessPanel"></div>
+    </div>
+  </main>
+  <script src="../../../shared/tool-storage.js"></script>
+  <script src="../../../shared/engine-utils.js"></script>
+  <script src="../../../shared/engine-models.js"></script>
+  <script>
+(function () {
+  const STORE_KEY = 'engine.leaderboard-analytics.data';
+
+  // Tab switching
+  document.querySelectorAll('.lb-tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lb-tabs button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).style.display = 'block';
+    });
+  });
+
+  const ARCHETYPES = [
+    { id: 'consistent-player', consistency: 90, quality: 65, completion: 85, spam: 5, improvement: 40, integrity: 90 },
+    { id: 'fast-learner', consistency: 70, quality: 70, completion: 80, spam: 15, improvement: 85, integrity: 75 },
+    { id: 'spammer', consistency: 85, quality: 15, completion: 95, spam: 90, improvement: 5, integrity: 20 },
+    { id: 'slow-learner', consistency: 55, quality: 40, completion: 50, spam: 10, improvement: 30, integrity: 80 },
+    { id: 'lazy-player', consistency: 20, quality: 50, completion: 25, spam: 5, improvement: 10, integrity: 70 },
+    { id: 'high-potential-irregular', consistency: 35, quality: 85, completion: 40, spam: 5, improvement: 60, integrity: 85 }
+  ];
+
+  function jitter(val, pct) {
+    return Math.max(0, Math.min(100, val + (Math.random() - 0.5) * 2 * val * (pct / 100)));
+  }
+
+  function generatePlayer(idx) {
+    const arch = ARCHETYPES[Math.floor(Math.random() * ARCHETYPES.length)];
+    const j = 12;
+    const name = arch.id.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('') + '_' + idx;
+    return {
+      name,
+      archetype: arch.id,
+      consistency: jitter(arch.consistency, j),
+      quality: jitter(arch.quality, j),
+      completion: jitter(arch.completion, j),
+      spamRisk: jitter(arch.spam, j),
+      improvement: jitter(arch.improvement, j),
+      integrity: jitter(arch.integrity, j)
+    };
+  }
+
+  function simulatePlayer(player, days) {
+    let roots = 5, trunk = 3, fruits = 0, spamDays = 0;
+    const weeklyScores = [];
+    let weekCompletions = 0, weekQuality = 0, weekFruits = 0, weekSpam = 0;
+
+    for (let d = 1; d <= days; d++) {
+      const completed = Math.random() * 100 < player.completion;
+      const isSpam = Math.random() * 100 < player.spamRisk;
+      const quality = isSpam ? 5 + Math.random() * 15 : player.quality * 0.7 + Math.random() * 30;
+
+      if (completed) {
+        const spamMult = isSpam ? 0.2 : 1;
+        roots += (player.consistency / 100) * 1.2 * spamMult;
+        trunk += (quality / 100) * 0.8 * (isSpam ? 0.1 : 1);
+        if (quality > 30 && !isSpam && Math.random() < 0.3) { fruits++; weekFruits++; }
+        weekCompletions++;
+        weekQuality += quality;
+      }
+      if (isSpam) { spamDays++; weekSpam++; }
+
+      if (d % 7 === 0) {
+        const cs = (weekCompletions / 7) * 35;
+        const qs = weekCompletions > 0 ? (weekQuality / weekCompletions / 100) * 35 : 0;
+        const fs = Math.min(weekFruits * 10, 30);
+        weeklyScores.push(Math.max(0, Math.round(cs + qs + fs - weekSpam * 8)));
+        weekCompletions = 0; weekQuality = 0; weekFruits = 0; weekSpam = 0;
+      }
+    }
+
+    const avgQuality = player.quality;
+    const consistencyRate = player.completion / 100;
+    const rankScore = Math.round(
+      roots * 0.20 + trunk * 0.20 + fruits * 1.5 +
+      avgQuality * 0.25 + consistencyRate * 15 +
+      Math.max(0, player.improvement) * 0.08 - spamDays * 4
+    );
+    const trustScore = Math.round(player.integrity * 0.4 + player.consistency * 0.35 + player.quality * 0.25);
+    const hireScore = Math.round(player.consistency * 0.25 + player.quality * 0.3 + avgQuality * 0.25 + player.integrity * 0.2);
+    const promoted = roots >= 18 && trunk >= 10 && fruits >= 6 &&
+      (weeklyScores.length > 0 ? weeklyScores.reduce((a, b) => a + b, 0) / weeklyScores.length >= 40 : false) &&
+      spamDays <= 3 && consistencyRate >= 0.5;
+
+    return {
+      ...player,
+      roots: +roots.toFixed(1), trunk: +trunk.toFixed(1), fruits, spamDays,
+      rankScore, trustScore, hireScore, promoted,
+      weeklyScores, avgWeekly: weeklyScores.length ? +(weeklyScores.reduce((a, b) => a + b, 0) / weeklyScores.length).toFixed(1) : 0
+    };
+  }
+
+  function renderLeaderboard(players) {
+    const sorted = [...players].sort((a, b) => b.rankScore - a.rankScore);
+    let html = '<thead><tr><th class="rank-col">#</th><th>Player</th><th>Archetype</th><th>Rank</th><th>Trust</th><th>Roots</th><th>Trunk</th><th>Fruits</th><th>Spam</th><th>Promo</th></tr></thead><tbody>';
+    sorted.forEach((p, i) => {
+      const archClass = 'arch-' + (p.archetype === 'consistent-player' ? 'consistent' : p.archetype === 'fast-learner' ? 'fast-learner' : p.archetype === 'spammer' ? 'spammer' : p.archetype === 'slow-learner' ? 'slow-learner' : p.archetype === 'lazy-player' ? 'lazy' : 'high-potential');
+      html += `<tr>
+        <td class="rank-col rank-${i + 1}">${i + 1}</td>
+        <td style="font-weight:600">${p.name}</td>
+        <td><span class="archetype-badge ${archClass}">${p.archetype}</span></td>
+        <td style="font-weight:700;color:var(--accent)">${p.rankScore}</td>
+        <td>${p.trustScore}</td>
+        <td>${p.roots}</td><td>${p.trunk}</td><td>${p.fruits}</td>
+        <td style="color:${p.spamDays > 3 ? '#ef4444' : 'var(--muted)'}">${p.spamDays}</td>
+        <td>${p.promoted ? '<span style="color:var(--accent-2);font-weight:700">YES</span>' : '<span style="color:var(--muted)">No</span>'}</td>
+      </tr>`;
+    });
+    html += '</tbody>';
+    document.getElementById('lbTable').innerHTML = html;
+  }
+
+  function renderArchetypeCharts(players) {
+    const byArch = {};
+    players.forEach(p => {
+      if (!byArch[p.archetype]) byArch[p.archetype] = [];
+      byArch[p.archetype].push(p);
+    });
+
+    let html = '<div class="metric-row" style="flex-wrap:wrap">';
+    Object.entries(byArch).forEach(([arch, group]) => {
+      const avgRank = Math.round(group.reduce((s, p) => s + p.rankScore, 0) / group.length);
+      const avgTrust = Math.round(group.reduce((s, p) => s + p.trustScore, 0) / group.length);
+      const promoRate = Math.round(group.filter(p => p.promoted).length / group.length * 100);
+      const archClass = 'arch-' + (arch === 'consistent-player' ? 'consistent' : arch === 'fast-learner' ? 'fast-learner' : arch === 'spammer' ? 'spammer' : arch === 'slow-learner' ? 'slow-learner' : arch === 'lazy-player' ? 'lazy' : 'high-potential');
+      html += `<div class="metric-card" style="min-width:140px"><span class="archetype-badge ${archClass}">${arch}</span><div style="margin-top:8px"><div class="m-val">${avgRank}</div><div class="m-label">Avg Rank</div></div><div style="margin-top:6px;font-size:0.78rem">Trust: ${avgTrust} | Promo: ${promoRate}%</div><div style="font-size:0.72rem;color:var(--muted)">n=${group.length}</div></div>`;
+    });
+    html += '</div>';
+
+    // Bar chart — avg rank by archetype
+    const maxRank = Math.max(...Object.values(byArch).map(g => g.reduce((s, p) => s + p.rankScore, 0) / g.length));
+    const colors = { 'consistent-player': '#22c55e', 'fast-learner': '#3b82f6', 'spammer': '#ef4444', 'slow-learner': '#f59e0b', 'lazy-player': '#94a3b8', 'high-potential-irregular': '#a855f7' };
+    html += '<div class="chart-container"><div style="font-weight:700;margin-bottom:10px;font-size:0.85rem">Average Rank Score by Archetype</div><div class="bar-chart">';
+    Object.entries(byArch).forEach(([arch, group]) => {
+      const avg = Math.round(group.reduce((s, p) => s + p.rankScore, 0) / group.length);
+      const hPct = Math.round(avg / maxRank * 140);
+      html += `<div class="bar-col"><div class="bar-value" style="color:${colors[arch] || '#94a3b8'}">${avg}</div><div class="bar-fill" style="height:${hPct}px;background:${colors[arch] || '#94a3b8'}"></div><div class="bar-label">${arch.replace(/-/g, ' ')}</div></div>`;
+    });
+    html += '</div></div>';
+
+    document.getElementById('archCharts').innerHTML = html;
+  }
+
+  function renderFairness(players) {
+    const byArch = {};
+    players.forEach(p => {
+      if (!byArch[p.archetype]) byArch[p.archetype] = [];
+      byArch[p.archetype].push(p);
+    });
+
+    const sorted = [...players].sort((a, b) => b.rankScore - a.rankScore);
+    const top25 = sorted.slice(0, Math.ceil(sorted.length * 0.25));
+    const top25Archs = {};
+    top25.forEach(p => { top25Archs[p.archetype] = (top25Archs[p.archetype] || 0) + 1; });
+
+    const consAvg = byArch['consistent-player'] ? byArch['consistent-player'].reduce((s, p) => s + p.rankScore, 0) / byArch['consistent-player'].length : 1;
+    const spamAvg = byArch['spammer'] ? byArch['spammer'].reduce((s, p) => s + p.rankScore, 0) / byArch['spammer'].length : 0;
+    const sar = consAvg > 0 ? +(spamAvg / consAvg).toFixed(2) : 0;
+
+    const allScores = players.map(p => p.rankScore);
+    const mean = Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length);
+    const sortedScores = [...allScores].sort((a, b) => a - b);
+    const median = sortedScores[Math.floor(sortedScores.length / 2)];
+    const stddev = Math.round(Math.sqrt(allScores.reduce((s, v) => s + (v - mean) ** 2, 0) / allScores.length));
+
+    const domination = Object.entries(top25Archs).some(([, count]) => count / top25.length > 0.5);
+    const verdict = sar < 0.70 && !domination ? 'BALANCED' : sar >= 0.85 || domination ? 'REBALANCE NEEDED' : 'MINOR ISSUES';
+    const verdictClass = verdict === 'BALANCED' ? 'verdict-balanced' : verdict === 'MINOR ISSUES' ? 'verdict-minor' : 'verdict-rebalance';
+
+    let html = '<div style="text-align:center;margin:16px 0"><div class="fairness-badge ' + verdictClass + '">' + verdict + '</div></div>';
+    html += '<div class="metric-row">';
+    html += `<div class="metric-card"><div class="m-val" style="color:${sar < 0.7 ? 'var(--accent-2)' : sar < 0.85 ? 'var(--warn)' : '#ef4444'}">${sar}</div><div class="m-label">Spam Advantage Ratio<br>(target &lt; 0.70)</div></div>`;
+    html += `<div class="metric-card"><div class="m-val">${mean}</div><div class="m-label">Mean Rank</div></div>`;
+    html += `<div class="metric-card"><div class="m-val">${median}</div><div class="m-label">Median Rank</div></div>`;
+    html += `<div class="metric-card"><div class="m-val">${stddev}</div><div class="m-label">Std Dev</div></div>`;
+    html += '</div>';
+
+    html += '<div class="chart-container"><div style="font-weight:700;margin-bottom:10px;font-size:0.85rem">Top 25% Composition</div>';
+    html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+    const colors = { 'consistent-player': '#22c55e', 'fast-learner': '#3b82f6', 'spammer': '#ef4444', 'slow-learner': '#f59e0b', 'lazy-player': '#94a3b8', 'high-potential-irregular': '#a855f7' };
+    Object.entries(top25Archs).forEach(([arch, count]) => {
+      const pct = Math.round(count / top25.length * 100);
+      html += `<div style="padding:8px 12px;border-radius:8px;background:${colors[arch] || '#333'}22;border:1px solid ${colors[arch] || '#333'}44;font-size:0.78rem"><strong style="color:${colors[arch]}">${pct}%</strong> ${arch.replace(/-/g, ' ')}</div>`;
+    });
+    html += '</div></div>';
+
+    // Promotion rates
+    html += '<div class="chart-container"><div style="font-weight:700;margin-bottom:10px;font-size:0.85rem">Promotion Rate by Archetype</div>';
+    Object.entries(byArch).forEach(([arch, group]) => {
+      const rate = Math.round(group.filter(p => p.promoted).length / group.length * 100);
+      html += `<div style="display:flex;align-items:center;gap:8px;margin:6px 0"><span style="width:150px;font-size:0.78rem;color:var(--muted)">${arch}</span><div style="flex:1;height:10px;background:#1e293b;border-radius:6px;overflow:hidden"><div style="height:100%;width:${rate}%;background:${colors[arch]};border-radius:6px"></div></div><span style="width:40px;text-align:right;font-size:0.78rem;font-weight:600">${rate}%</span></div>`;
+    });
+    html += '</div>';
+
+    document.getElementById('fairnessPanel').innerHTML = html;
+  }
+
+  let currentPlayers = [];
+
+  function runGeneration() {
+    const count = parseInt(document.getElementById('playerCount').value);
+    const days = parseInt(document.getElementById('simDays').value);
+    const players = [];
+    for (let i = 0; i < count; i++) {
+      const p = generatePlayer(i + 1);
+      players.push(simulatePlayer(p, days));
+    }
+    currentPlayers = players;
+    renderLeaderboard(players);
+    renderArchetypeCharts(players);
+    renderFairness(players);
+    ToolStorage.write(STORE_KEY, { players: players.length, days, generatedAt: new Date().toISOString() });
+  }
+
+  document.getElementById('generate').addEventListener('click', runGeneration);
+
+  document.getElementById('exportBtn').addEventListener('click', function () {
+    if (!currentPlayers.length) return;
+    const headers = 'Name,Archetype,RankScore,TrustScore,HireScore,Roots,Trunk,Fruits,SpamDays,Promoted,AvgWeekly\n';
+    const rows = currentPlayers.sort((a, b) => b.rankScore - a.rankScore).map(p =>
+      `${p.name},${p.archetype},${p.rankScore},${p.trustScore},${p.hireScore},${p.roots},${p.trunk},${p.fruits},${p.spamDays},${p.promoted},${p.avgWeekly}`
+    ).join('\n');
+    const blob = new Blob([headers + rows], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'leaderboard-analytics.csv'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Auto-generate on load
+  runGeneration();
+})();
+  </script>
+</body>
+</html>
