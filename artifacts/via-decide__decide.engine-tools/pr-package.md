@@ -1,3 +1,9 @@
+Branch: simba/implement-the-flame-graph-profiler-exporter-via-
+Title: Implement the Flame Graph Profiler & Exporter (via-flame-gen). 1. Cre...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give developers visual, deep-dive performance metrics on the web, utilizing the complex data transformation logic to farm dozens of testing commits.
 Branch: simba/develop-the-ai-behavior-tree-compiler-via-bt-com
 Title: Develop the AI Behavior Tree Compiler (via-bt-compile). 1. Build a pa...
 
