@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Procedural Sound Synthesizer Core (via-synth-core). 1. Build a node-based generator in the Operations Console that creates sound effects mathematically (e.g., using oscillators and noise generators) instead of relying on heavy audio files. 2. Implement core DSP nodes: Sine, Square, Sawtooth, White Noise, and ADSR (Attack, Decay, Sustain, Release) volume envelopes. 3. Output these procedural patches as lightweight synth_patch.json files that the viadecide.com Web Audio API can parse and synthesize in real-time.
+
+CONSTRAINTS
+Commit the math for each individual oscillator type and envelope stage independently. @GN8RBot MUST write a test -> COMMIT -> implement Sine wave -> COMMIT -> implement ADSR -> COMMIT.
 Build the Auto-Lip-Sync & Phoneme Extractor (via-lipsync-gen). 1. Create a CLI tool that ingests raw dialogue voiceover files. 2. Implement an amplitude and frequency analyzer using Fast Fourier Transforms (FFT) to approximate spoken phonemes (e.g., detecting the harsh frequencies of a "T" vs. the open wave of an "O"). 3. Export a timeline .viseme JSON file that maps exact timestamps to facial blendshapes (A, E, I, O, U, closed) so the 3D characters animate their mouths automatically.
 
 CONSTRAINTS

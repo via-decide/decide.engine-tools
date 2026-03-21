@@ -1,3 +1,9 @@
+Branch: simba/develop-the-procedural-sound-synthesizer-core-vi
+Title: Develop the Procedural Sound Synthesizer Core (via-synth-core). 1. Bu...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Drastically reduce the game's download size on the web by generating UI clicks, wind, and sci-fi hums procedurally, utilizing the DSP node math to drive massive commit volume.
 Branch: simba/build-the-auto-lip-sync-phoneme-extractor-via-li
 Title: Build the Auto-Lip-Sync & Phoneme Extractor (via-lipsync-gen). 1. Cre...
 
