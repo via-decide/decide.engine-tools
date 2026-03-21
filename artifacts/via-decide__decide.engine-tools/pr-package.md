@@ -1,3 +1,9 @@
+Branch: simba/build-the-auto-lip-sync-phoneme-extractor-via-li
+Title: Build the Auto-Lip-Sync & Phoneme Extractor (via-lipsync-gen). 1. Cre...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Automate tedious facial animation for cinematic dialogue while farming highly complex, algorithmic commits through the audio-parsing logic.
 Branch: simba/create-the-master-mixing-bus-automated-clipping-
 Title: Create the Master Mixing Bus & Automated Clipping CI Bot (via-audio-m...
 

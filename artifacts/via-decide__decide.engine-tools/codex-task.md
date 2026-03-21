@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the Auto-Lip-Sync & Phoneme Extractor (via-lipsync-gen). 1. Create a CLI tool that ingests raw dialogue voiceover files. 2. Implement an amplitude and frequency analyzer using Fast Fourier Transforms (FFT) to approximate spoken phonemes (e.g., detecting the harsh frequencies of a "T" vs. the open wave of an "O"). 3. Export a timeline .viseme JSON file that maps exact timestamps to facial blendshapes (A, E, I, O, U, closed) so the 3D characters animate their mouths automatically.
+
+CONSTRAINTS
+Strict TDD. @GN8RBot MUST isolate the FFT math, the frequency-band detection logic, and the JSON serialization. Commit each mathematical DSP function and its unit test as a separate, atomic push to maximize commit density.
 Create the Master Mixing Bus & Automated Clipping CI Bot (via-audio-mastering). 1. Build a visual Node Graph mixer (similar to the Shader Graph) where designers can route audio channels through Limiters, Compressors, and Reverb buses. 2. Implement an offline mixdown script that simulates a heavy combat scenario, firing 500 sounds at once to test the Master Bus limits. 3. Configure a GitHub Action to run this audio stress-test nightly, automatically analyzing the output buffer for digital clipping (audio distortion going above 0dBFS).
 
 CONSTRAINTS
