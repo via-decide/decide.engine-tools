@@ -1,3 +1,9 @@
+Branch: simba/create-the-headless-cutscene-validator-ci-bot-vi
+Title: Create the Headless Cutscene Validator CI Bot (via-cutscene-check). 1...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure the game's story moments never break during production, while permanently sustaining daily automated commits via the reporting bot.
 Branch: simba/implement-the-cinematic-post-processing-keyframe
 Title: Implement the Cinematic Post-Processing Keyframer (via-lens-fx). 1. C...
 

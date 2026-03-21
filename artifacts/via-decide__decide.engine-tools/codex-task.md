@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Headless Cutscene Validator CI Bot (via-cutscene-check). 1. Write a CLI script that parses all compiled cutscene_data.json files in the project. 2. Implement an automated validator that checks for broken references (e.g., the timeline triggers an animation or audio file that no longer exists in the asset directory). 3. Configure a GitHub Action to run this validator on every push, failing the build if a cutscene is broken.
+
+CONSTRAINTS
+The bot MUST auto-commit a cinematic_integrity_report.md detailing the total length of all cutscenes and asset dependencies back to the repository after every run.
 Implement the Cinematic Post-Processing Keyframer (via-lens-fx). 1. Create a tool that allows designers to keyframe lens effects over time (e.g., racking focus/Depth of Field, adjusting film grain, or tweaking color grading during a dramatic moment). 2. Build a transpiler that converts these timeline keyframes into dynamic uniforms that get fed directly into the WebGL/WGSL shaders. 3. Ensure these effects can be smoothly interpolated (e.g., smoothly blurring the background over 2 seconds).
 
 CONSTRAINTS
