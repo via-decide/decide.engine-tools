@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the High-Speed Asset Search & Indexer (via-asset-index). 1. Build a local background daemon that scans the entire project directory and builds an inverted index of every asset, script, and prefab. 2. Implement a fuzzy-search algorithm (like Levenshtein distance) so developers can instantly find assets in the Operations Console even with typos (e.g., searching "bllt" finds "bullet_mesh.obj"). 3. Create an SQLite wrapper that caches this index locally, ensuring the search returns results in under 5 milliseconds even with 50,000+ files.
+
+CONSTRAINTS
+Commit the directory watcher, the fuzzy-search math, and the SQLite query builder independently. @GN8RBot MUST write strict unit tests for the inverted index generation, committing the sorting and tokenization logic separately.
 Implement the Parallel Build System & Task Runner (via-build-orchestrator). 1. Create a multi-threaded build orchestrator that reads the Asset Dependency Graph (from via-dep-tracker) and figures out the optimal order to compile assets. 2. Implement a thread-pool manager that distributes heavy compilation tasks (like crushing audio or baking lighting) across all available CPU cores simultaneously. 3. Build a smart-caching layer that hashes input files and skips recompiling assets that haven't changed since the last build, cutting compile times from minutes to seconds.
 
 CONSTRAINTS

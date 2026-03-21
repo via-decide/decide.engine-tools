@@ -1,3 +1,9 @@
+Branch: simba/develop-the-high-speed-asset-search-indexer-via-
+Title: Develop the High-Speed Asset Search & Indexer (via-asset-index). 1. B...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide an instant, Unreal Engine-style Content Browser experience, breaking the database and search logic down into a massive stream of modular commits.
 Branch: simba/implement-the-parallel-build-system-task-runner-
 Title: Implement the Parallel Build System & Task Runner (via-build-orchestr...
 
