@@ -1,3 +1,9 @@
+Branch: simba/build-the-web-asset-cdn-packager-via-cdn-deploy-
+Title: Build the Web Asset CDN Packager (via-cdn-deploy). 1. Create a CLI to...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Enable lightning-fast game loading on viadecide.com via streaming, while farming granular unit-test commits for the file-hashing logic.
 Branch: simba/create-the-public-telemetry-aggregator-bot-1-bui
 Title: Create the Public Telemetry Aggregator Bot. 1. Build a script that pr...
 
