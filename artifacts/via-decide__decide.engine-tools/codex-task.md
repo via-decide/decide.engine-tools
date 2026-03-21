@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Visual Scripting Node Translator (via-node-transpiler). 1. Build a transpiler that ingests visual logic node graphs (exported from the web-based Operations Console) as raw JSON. 2. Implement a code generator that translates these logic nodes into safe, executable Lua scripts or WASM bytecode. 3. Implement a static analyzer to catch infinite loops or memory leaks in the visual scripts before they are packaged for the game.
+
+CONSTRAINTS
+Commit the parser, the code generator, and the static analyzer independently. For the code generator, @GN8RBot MUST commit the translation logic for each individual node type (Math Node, Logic Node, Event Node) separately.
 Build the Animation State Machine (ASM) Compiler (via-anim-compile). 1. Create a CLI parser that reads .via_asm JSON files (which define animation states, blend trees, and transition rules). 2. Implement an optimizer that converts the JSON graph into a highly compact, memory-contiguous binary format for the native C++ engine. 3. Generate a .d.ts TypeScript definitions file so the viadecide.com web player can trigger specific animation states securely.
 
 CONSTRAINTS
