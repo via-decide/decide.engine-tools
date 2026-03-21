@@ -1,3 +1,9 @@
+Branch: simba/develop-the-multiplayer-network-schema-codegen-v
+Title: Develop the Multiplayer Network Schema CodeGen (via-net-schema). 1. B...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure the C++ game engine and the web website share 100% synchronized netcode, while flooding the commit graph with complex compiler-theory commits.
 Branch: simba/build-the-web-audio-compressor-soundbank-generat
 Title: Build the Web Audio Compressor & Soundbank Generator (via-audio-crush...
 

@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Multiplayer Network Schema CodeGen (via-net-schema). 1. Build a custom parser that reads .viaschema files (defining multiplayer network packets like PlayerMove, Shoot, HealthUpdate). 2. Write a generator that outputs highly optimized, memory-aligned C++ structs for the native game engine. 3. Write a secondary generator that outputs strict TypeScript interfaces and ArrayBuffer parsers for the viadecide.com web client.
+
+CONSTRAINTS
+@GN8RBot MUST commit the lexer, the AST builder, the C++ generator, and the TS generator as completely isolated features. Test every single data type (int, float, string) parsing separately and commit.
 Build the Web Audio Compressor & Soundbank Generator (via-audio-crusher). 1. Create a CLI tool that scans the engine's raw /audio_src directory (WAV/FLAC files). 2. Implement an automated compression pipeline that transcodes these heavy files into web-optimized Ogg Vorbis and WebM formats for viadecide.com. 3. Generate a soundbank_manifest.json that maps audio events (e.g., "player_jump") to the compressed file paths, complete with pre-calculated volume normalization data.
 
 CONSTRAINTS
