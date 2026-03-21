@@ -1,3 +1,9 @@
+Branch: simba/develop-the-gamepad-calibration-web-bridge-via-g
+Title: Develop the Gamepad Calibration & Web Bridge (via-gamepad-bridge). 1....
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Perfect the tactile feel of the game's controls while using the mathematical curve implementations to drive granular commit volume.
 Branch: simba/build-the-cross-platform-input-action-mapper-via
 Title: Build the Cross-Platform Input Action Mapper (via-input-mapper). 1. C...
 

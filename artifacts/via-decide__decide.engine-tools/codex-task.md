@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Gamepad Calibration & Web Bridge (via-gamepad-bridge). 1. Build a local HTML/JS utility within the Operations Console to visualize connected controllers and their raw axis/button inputs. 2. Implement a deadzone and sensitivity curve calculator that generates optimized math functions for the engine's input layer. 3. Export a gamepad_profiles.json mapping database so the engine knows how to handle different controllers (Xbox, PlayStation, generic USB) automatically.
+
+CONSTRAINTS
+Commit the HTML visualizer, the deadzone math logic, and the JSON exporter separately. For the math logic, commit each curve function (linear, exponential, smoothed) as a separate TDD loop.
 Build the Cross-Platform Input Action Mapper (via-input-mapper). 1. Create a CLI tool that parses .viainput JSON files, which define abstract game actions (e.g., "Jump", "Shoot") and their hardware bindings. 2. Implement a code generator that translates these definitions into tightly packed C++ enums and lookup tables for the native engine. 3. Generate a secondary JavaScript/TypeScript module that perfectly maps the HTML5 KeyboardEvent and Gamepad API codes to the engine's internal action IDs for viadecide.com.
 
 CONSTRAINTS
