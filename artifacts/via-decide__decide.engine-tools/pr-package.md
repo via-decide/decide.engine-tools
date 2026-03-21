@@ -1,3 +1,9 @@
+Branch: simba/create-the-web-based-ui-layout-pre-viewer-via-hu
+Title: Create the Web-Based UI Layout Pre-viewer (via-hud-preview). 1. Build...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Give your UI designers instant visual feedback in the browser without launching the full heavy C++ engine, driving granular UI logic commits.
 Branch: simba/implement-the-automated-ui-texture-atlas-generat
 Title: Implement the Automated UI Texture Atlas Generator (via-sprite-packer...
 

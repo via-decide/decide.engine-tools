@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Web-Based UI Layout Pre-viewer (via-hud-preview). 1. Build a local HTML5/Canvas tool within the Operations Console to load the compiled .ui_bin and texture atlases. 2. Implement a lightweight renderer that accurately draws the UI exactly as the native C++ engine would. 3. Add a responsive device-simulator dropdown (e.g., "iPhone 15", "1080p Desktop", "4K TV") to instantly test how the UI flexes and scales across different aspect ratios.
+
+CONSTRAINTS
+Commit the binary file reader, the Canvas drawing logic, and the responsive scaling simulator independently. Setup a GitHub Action to auto-deploy this previewer to a staging branch on viadecide.com.
 Implement the Automated UI Texture Atlas Generator (via-sprite-packer). 1. Create a build script that scans a /ui_raw directory full of individual buttons, icons, and borders. 2. Implement a 2D bin-packing algorithm (like MaxRects) to automatically arrange these scattered images into a single, tightly packed 2048x2048 sprite atlas to minimize GPU draw calls. 3. Output a mapping dictionary that the engine and viadecide.com can use to look up the exact UV coordinates of every individual icon.
 
 CONSTRAINTS
