@@ -1,3 +1,9 @@
+Branch: simba/develop-the-engine-to-web-localization-sync-via-
+Title: Develop the Engine-to-Web Localization Sync (via-l10n-sync). 1. Build...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Keep the native game and the web platform perfectly synced in multiple languages, utilizing bot-driven dictionary updates to drive daily commit volume.
 Branch: simba/build-the-web-asset-cdn-packager-via-cdn-deploy-
 Title: Build the Web Asset CDN Packager (via-cdn-deploy). 1. Create a CLI to...
 

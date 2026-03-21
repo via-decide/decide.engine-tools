@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Engine-to-Web Localization Sync (via-l10n-sync). 1. Build a parser that scans the engine's source code and game scripts for localization tags (e.g., _TR("Start Game")). 2. Write a compiler that extracts these strings and formats them into optimized locale_[lang].json files. 3. Ensure the output schema exactly matches the i18n format expected by the viadecide.com frontend so the game and website share the same translation database.
+
+CONSTRAINTS
+Commit the regex parser, the JSON serializer, and the test suite in separate pushes. Automate a GitHub Action that auto-commits the locale_*.json files back to the repo whenever source strings are updated.
 Build the Web Asset CDN Packager (via-cdn-deploy). 1. Create a CLI tool that takes large compiled game assets (audio, heavy textures) and chunks them into small, streamable binary files for the web. 2. Implement a hashing algorithm (e.g., SHA-256) to generate a web_manifest.json file that viadecide.com uses to load and cache game assets incrementally. 3. Build an auto-uploader script that securely pushes these chunks to a web server or CDN bucket.
 
 CONSTRAINTS
