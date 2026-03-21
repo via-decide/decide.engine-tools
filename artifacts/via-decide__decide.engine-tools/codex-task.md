@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the AI Behavior Tree Compiler (via-bt-compile). 1. Build a parser that reads custom .viabt JSON files (which define the logic for your AI agents and simulator bots). 2. Write a code generator that translates these JSON behavior trees into highly optimized, compiled C++ decision nodes for the native engine. 3. Create an exporter that also compiles the tree into a WebAssembly-friendly format so the AI can run directly in the browser on viadecide.com.
+
+CONSTRAINTS
+Implement each Behavior Tree node type (Sequence, Selector, Decorator, Leaf) in absolute isolation. Write a test -> COMMIT -> Implement Node -> COMMIT.
 Build the Headless Bot Swarm Orchestrator (via-swarm-test). 1. Create a CLI controller that can spawn and manage hundreds of headless (no-rendering) game engine client instances locally. 2. Implement a multiplexer that routes simulated inputs (movement, shooting, chatting) to all headless clients simultaneously to hammer the local server. 3. Aggregate the latency and packet-loss data from the swarm into a stress_test_report.json for the Operations Console.
 
 CONSTRAINTS

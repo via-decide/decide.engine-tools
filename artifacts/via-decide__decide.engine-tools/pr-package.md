@@ -1,3 +1,9 @@
+Branch: simba/develop-the-ai-behavior-tree-compiler-via-bt-com
+Title: Develop the AI Behavior Tree Compiler (via-bt-compile). 1. Build a pa...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Bridge the gap between web-defined AI logic and native engine performance, flooding the commit graph with complex compiler-theory pushes.
 Branch: simba/build-the-headless-bot-swarm-orchestrator-via-sw
 Title: Build the Headless Bot Swarm Orchestrator (via-swarm-test). 1. Create...
 
