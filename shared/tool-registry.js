@@ -96,6 +96,51 @@
   ];
 
 
+  const GAME_ENHANCEMENT_TOOLS = [
+    {
+      id: 'ai-game-strategy-advisor',
+      name: 'AI Game Strategy Advisor',
+      description: 'AI-powered strategic advisor — analyzes player state & recommends optimal growth.',
+      category: 'simulations',
+      tags: ['orchard-engine', 'ai', 'strategy', 'game-logic'],
+      entry: 'tools/engine/ai-game-strategy-advisor/index.html',
+      audience: ['players', 'founders', 'operators'],
+      inputs: ['player_state', 'growth_mode', 'goal'],
+      outputs: ['strategy_report', 'action_plan'],
+      relatedTools: ['ai-coach-console', 'growth-path-recommender', 'daily-quest-generator'],
+      featured: true,
+      isEngineTool: true
+    },
+    {
+      id: 'game-command-center',
+      name: 'Game Command Center',
+      description: 'Unified dashboard — live stats, farm health, quests & all game layers.',
+      category: 'simulations',
+      tags: ['orchard-engine', 'dashboard', 'game-hub'],
+      entry: 'tools/engine/game-command-center/index.html',
+      audience: ['players', 'founders', 'operators'],
+      inputs: ['player_id'],
+      outputs: ['dashboard_view'],
+      relatedTools: ['meta-health-dashboard', 'starter-farm-generator', 'daily-quest-generator'],
+      featured: true,
+      isEngineTool: true
+    },
+    {
+      id: 'leaderboard-analytics',
+      name: 'Leaderboard & Analytics',
+      description: 'Interactive leaderboard with rankings, archetype charts & fairness analytics.',
+      category: 'simulations',
+      tags: ['orchard-engine', 'leaderboard', 'analytics', 'visualization'],
+      entry: 'tools/engine/leaderboard-analytics/index.html',
+      audience: ['players', 'recruiters', 'operators'],
+      inputs: ['player_data', 'time_range'],
+      outputs: ['leaderboard_view', 'fairness_report'],
+      relatedTools: ['fair-ranking-engine', 'balance-dashboard', 'trust-score-engine'],
+      featured: true,
+      isEngineTool: true
+    }
+  ];
+
   const importableToolDirs = [
     'tools/promptalchemy', 'tools/script-generator', 'tools/spec-builder',
     'tools/code-generator', 'tools/code-reviewer', 'tools/tool-router',
@@ -190,7 +235,7 @@
 
   async function loadAll() {
     const [entries, manifest] = await Promise.all([
-      Promise.resolve(BUILTIN_TOOLS.map((tool) => normalizeTool(tool, tool.id))),
+      Promise.resolve([...BUILTIN_TOOLS, ...GAME_ENHANCEMENT_TOOLS].map((tool) => normalizeTool(tool, tool.id))),
       loadManifest()
     ]);
 
