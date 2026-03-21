@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Automated UI Texture Atlas Generator (via-sprite-packer). 1. Create a build script that scans a /ui_raw directory full of individual buttons, icons, and borders. 2. Implement a 2D bin-packing algorithm (like MaxRects) to automatically arrange these scattered images into a single, tightly packed 2048x2048 sprite atlas to minimize GPU draw calls. 3. Output a mapping dictionary that the engine and viadecide.com can use to look up the exact UV coordinates of every individual icon.
+
+CONSTRAINTS
+Isolate the image loading, the bin-packing math logic, and the UV exporter. @GN8RBot MUST commit the core bin-packing functions and their respective spatial tests separately to safely inflate the commit graph.
 Develop the UI Layout Compiler & Binary Packer (via-ui-compile). 1. Build a transpiler that reads responsive .viaui (XML or JSON) layout files, which define HUD elements like health bars, minimaps, and inventory grids. 2. Implement an optimizer that resolves anchoring, flexbox-style constraints, and relative scaling into absolute screen coordinates. 3. Compile this layout data into a minimal .ui_bin format that the engine can load with zero parsing overhead.
 
 CONSTRAINTS
