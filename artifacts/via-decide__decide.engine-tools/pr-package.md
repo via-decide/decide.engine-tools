@@ -1,3 +1,9 @@
+Branch: simba/create-the-visual-diff-git-integration-bridge-vi
+Title: Create the Visual Diff & Git Integration Bridge (via-git-visualizer)....
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Make version control intuitive for artists and designers, while padding the commit graph with deep data-parsing and tree-comparison logic.
 Branch: simba/build-the-real-time-collaboration-core-crdt-engi
 Title: Build the Real-Time Collaboration Core (CRDT Engine) (via-live-sync)....
 

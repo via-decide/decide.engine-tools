@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Visual Diff & Git Integration Bridge (via-git-visualizer). 1. Build a CLI wrapper that interfaces directly with local Git commands to track changes in the engine's proprietary binary and JSON formats. 2. Implement a "Visual Diff" generator that parses two versions of a .viascene file and outputs a web-ready UI component highlighting exactly what changed (e.g., "Tree_04 was moved left by 10 units" instead of a wall of raw JSON text). 3. Automate a script that generates human-readable commit messages based on these diffs for the engine developers.
+
+CONSTRAINTS
+Commit the Git command wrapper, the diff parser, and the UI generator separately. @GN8RBot MUST test the diff parser against massive files, committing the chunking and comparison algorithms one by one.
 Build the Real-Time Collaboration Core (CRDT Engine) (via-live-sync). 1. Create a Conflict-free Replicated Data Type (CRDT) manager that allows multiple developers to edit the exact same .viascene or Material Graph at the same time without locking the file. 2. Implement a WebSocket broadcaster that streams granular delta-updates (e.g., "User A moved Object X by 5 units on the Z-axis") to all connected Operations Consoles. 3. Build a presence system that tracks active users and displays their virtual "cursors" or selections inside the 3D viewport.
 
 CONSTRAINTS
