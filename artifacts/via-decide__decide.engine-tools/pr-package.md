@@ -1,3 +1,9 @@
+Branch: simba/develop-the-automated-webassembly-publisher-cicd
+Title: Develop the Automated WebAssembly Publisher CI/CD Bot (via-wasm-publi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Automate the delivery of engine updates to the main website, utilizing the CI/CD bot to continuously inject automated versioning and logging commits into the graph.
 Branch: simba/build-the-web-optimized-level-exporter-via-level
 Title: Build the Web-Optimized Level Exporter (via-level-export). 1. Create ...
 

@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Develop the Automated WebAssembly Publisher CI/CD Bot (via-wasm-publish). 1. Write a shell/Python script that triggers the Emscripten build chain to compile the core C++ engine into a .wasm binary. 2. Implement an automated versioning system that bumps the semantic version number and generates a CHANGELOG.md based on recent commit messages. 3. Build a deployment script that automatically creates a Pull Request (PR) pushing the new .wasm payload directly to the viadecide.com repository.
+
+CONSTRAINTS
+The bot must auto-commit the version bump and the updated changelog back to the tools repository on every successful build. Ensure the build pipeline caches intermediate object files to keep CI runtimes under 3 minutes.
 Build the Web-Optimized Level Exporter (via-level-export). 1. Create a CLI tool that parses the engine's proprietary 3D scene files (e.g., .via_scene). 2. Implement a spatial partitioner (like an Octree generator) that chunks the level data so the viadecide.com web player can stream large maps asynchronously. 3. Output the parsed level into a highly compressed JSON or custom binary format specifically tailored for WebAssembly/WebGL consumption.
 
 CONSTRAINTS
