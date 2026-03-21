@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-21T06:41:15.096Z",
+  "generatedAt": "2026-03-21T06:56:07.089Z",
   "entries": [
     {
       "toolDir": "tools/ai-tool-generator",
@@ -70,6 +70,10 @@
       "metaPath": "tools/engine/game-command-center/config.json"
     },
     {
+      "toolDir": "tools/engine/gesture-feedback-ui",
+      "metaPath": "tools/engine/gesture-feedback-ui/config.json"
+    },
+    {
       "toolDir": "tools/engine/grid-evolution",
       "metaPath": "tools/engine/grid-evolution/config.json"
     },
@@ -104,6 +108,10 @@
     {
       "toolDir": "tools/engine/meta-health-dashboard",
       "metaPath": "tools/engine/meta-health-dashboard/config.json"
+    },
+    {
+      "toolDir": "tools/engine/network-latency-simulator",
+      "metaPath": "tools/engine/network-latency-simulator/config.json"
     },
     {
       "toolDir": "tools/engine/orchard-discovery-search",

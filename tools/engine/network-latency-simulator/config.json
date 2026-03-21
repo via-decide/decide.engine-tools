@@ -1,0 +1,13 @@
+{
+  "id": "network-latency-simulator",
+  "name": "Network Latency Simulator",
+  "description": "Simulate network conditions — inject latency, jitter, packet loss, and bandwidth caps to test game resilience.",
+  "category": "engine",
+  "layer": "operations",
+  "audience": ["operators", "founders", "coders"],
+  "inputs": ["latency_ms", "jitter_ms", "packet_loss_pct", "bandwidth_kbps"],
+  "outputs": ["simulation_report", "buffer_metrics", "recovery_log"],
+  "relatedTools": ["meta-health-dashboard", "market-dynamics"],
+  "entry": "tools/engine/network-latency-simulator/index.html",
+  "tags": ["orchard-engine", "network", "simulation", "operations", "standalone"]
+}
