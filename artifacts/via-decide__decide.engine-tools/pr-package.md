@@ -1,3 +1,9 @@
+Branch: simba/create-the-dynamic-plugin-host-sandbox-via-plugi
+Title: Create the Dynamic Plugin Host & Sandbox (via-plugin-host). 1. Build ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Establish a truly scalable, crash-resistant AAA architecture while permanently automating high-value architecture commits through lifecycle testing.
 Branch: simba/implement-the-universal-asset-dependency-graph-v
 Title: Implement the Universal Asset Dependency Graph (via-dep-tracker). 1. ...
 

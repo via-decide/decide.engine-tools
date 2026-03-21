@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the Dynamic Plugin Host & Sandbox (via-plugin-host). 1. Build a core backend registry that dynamically discovers, loads, and initializes all the other engine tools (Audio, ECS, Cinematics) as modular plugins. 2. Implement a sandboxing architecture that catches and isolates fatal errors. If the Shader Graph tool crashes due to a bad regex, it should *not* crash the ECS tool or the main Operations Console. 3. Write a lifecycle manager that controls the boot sequence (Init, Load Dependencies, Update Loop, Shutdown) for every loaded module.
+
+CONSTRAINTS
+Commit the manifest parser, the error-boundary isolator, and the lifecycle manager separately. @GN8RBot MUST program unit tests that intentionally throw fatal errors in dummy plugins to verify the host survives.
 Implement the Universal Asset Dependency Graph (via-dep-tracker). 1. Build an in-memory Directed Acyclic Graph (DAG) that maps exactly how every asset in the project relies on others (e.g., PlayerPrefab -> ArmorMesh -> MetalMaterial -> RustTexture). 2. Write an algorithm that instantly flags broken dependencies if a user deletes or renames a core asset that other files are currently using. 3. Create a CI/CD validator that walks this entire graph on every push to ensure no "orphan" or missing assets make it into the final viadecide.com web build.
 
 CONSTRAINTS
