@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Parallel Build System & Task Runner (via-build-orchestrator). 1. Create a multi-threaded build orchestrator that reads the Asset Dependency Graph (from via-dep-tracker) and figures out the optimal order to compile assets. 2. Implement a thread-pool manager that distributes heavy compilation tasks (like crushing audio or baking lighting) across all available CPU cores simultaneously. 3. Build a smart-caching layer that hashes input files and skips recompiling assets that haven't changed since the last build, cutting compile times from minutes to seconds.
+
+CONSTRAINTS
+@GN8RBot MUST isolate the thread-pool logic, the mutex locks, and the hashing algorithms. Commit the thread-safety unit tests (simulating race conditions and deadlocks) as completely standalone PRs.
 Create the Visual Diff & Git Integration Bridge (via-git-visualizer). 1. Build a CLI wrapper that interfaces directly with local Git commands to track changes in the engine's proprietary binary and JSON formats. 2. Implement a "Visual Diff" generator that parses two versions of a .viascene file and outputs a web-ready UI component highlighting exactly what changed (e.g., "Tree_04 was moved left by 10 units" instead of a wall of raw JSON text). 3. Automate a script that generates human-readable commit messages based on these diffs for the engine developers.
 
 CONSTRAINTS
