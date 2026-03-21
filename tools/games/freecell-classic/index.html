@@ -93,9 +93,10 @@
       box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
     }
 
-    .info-bar {
+    .toolbar {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
       gap: 10px 18px;
       margin-bottom: 14px;
       padding: 10px 12px;
@@ -104,11 +105,22 @@
       align-items: center;
     }
 
+    .toolbar-stats,
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
     .info-item {
       display: flex;
       gap: 8px;
       align-items: baseline;
-      min-width: 160px;
+      min-width: 120px;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
     .info-item strong {
@@ -316,9 +328,13 @@
     }
 
     @media (max-width: 640px) {
-      .info-bar {
+      .toolbar {
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+
+      .toolbar-actions {
+        width: 100%;
       }
 
       .slot-row,
@@ -344,16 +360,21 @@
         <h1>FreeCell Classic</h1>
         <p>Standard 52-card FreeCell with strict original move rules.</p>
       </div>
-      <div class="controls">
-        <button id="new-game" type="button">New Game</button>
-      </div>
     </header>
 
-    <section class="info-bar" aria-label="Game status">
-      <div class="info-item"><strong>Moves</strong><span id="move-count">0</span></div>
-      <div class="info-item"><strong>Time</strong><span id="elapsed-time">00:00</span></div>
-      <div class="info-item"><strong>Selected</strong><span id="selection-status">None</span></div>
-      <div class="info-item"><strong>Message</strong><span id="message">Deal a fresh game and begin.</span></div>
+    <section class="toolbar" aria-label="Game status and actions">
+      <div class="toolbar-stats">
+        <div class="info-item"><strong>Time</strong><span id="elapsed-time">00:00</span></div>
+        <div class="info-item"><strong>Moves</strong><span id="move-count">0</span></div>
+        <div class="info-item"><strong>Score</strong><span id="score">0</span></div>
+        <div class="info-item"><strong>Selected</strong><span id="selection-status">None</span></div>
+      </div>
+      <div class="toolbar-actions">
+        <button id="new-game" type="button">New Game</button>
+        <button id="undo-move" type="button">Undo</button>
+        <button id="show-hint" type="button">Hint</button>
+        <div class="info-item"><strong>Message</strong><span id="message">Deal a fresh game and begin.</span></div>
+      </div>
     </section>
 
     <section class="board" aria-label="FreeCell board">
@@ -394,9 +415,12 @@
       const tableauRow = document.getElementById('tableau-row');
       const moveCountEl = document.getElementById('move-count');
       const elapsedTimeEl = document.getElementById('elapsed-time');
+      const scoreEl = document.getElementById('score');
       const selectionStatusEl = document.getElementById('selection-status');
       const messageEl = document.getElementById('message');
       const newGameButton = document.getElementById('new-game');
+      const undoMoveButton = document.getElementById('undo-move');
+      const showHintButton = document.getElementById('show-hint');
 
       const state = {
         freeCells: [null, null, null, null],
@@ -411,7 +435,8 @@
         moves: 0,
         startedAt: 0,
         timerId: null,
-        dragPayload: null
+        dragPayload: null,
+        history: []
       };
 
       function createDeck() {
@@ -456,6 +481,7 @@
         state.tableau = [[], [], [], [], [], [], [], []];
         state.selection = null;
         state.dragPayload = null;
+        state.history = [];
         state.moves = 0;
         state.startedAt = Date.now();
 
@@ -490,13 +516,49 @@
         messageEl.textContent = text;
       }
 
+      function cloneCards(cards) {
+        return cards.map((card) => ({ ...card }));
+      }
+
+      function snapshotState() {
+        return {
+          freeCells: state.freeCells.map((card) => (card ? { ...card } : null)),
+          foundations: FOUNDATION_SLOTS.reduce((result, suit) => {
+            result[suit] = cloneCards(state.foundations[suit]);
+            return result;
+          }, {}),
+          tableau: state.tableau.map((column) => cloneCards(column)),
+          moves: state.moves,
+          startedAt: state.startedAt
+        };
+      }
+
+      function restoreSnapshot(snapshot) {
+        state.freeCells = snapshot.freeCells.map((card) => (card ? { ...card } : null));
+        state.foundations = FOUNDATION_SLOTS.reduce((result, suit) => {
+          result[suit] = cloneCards(snapshot.foundations[suit] || []);
+          return result;
+        }, {});
+        state.tableau = snapshot.tableau.map((column) => cloneCards(column));
+        state.moves = snapshot.moves;
+        state.startedAt = snapshot.startedAt;
+        state.selection = null;
+        state.dragPayload = null;
+      }
+
+      function updateScore() {
+        const completedCards = FOUNDATION_SLOTS.reduce((count, suit) => count + state.foundations[suit].length, 0);
+        scoreEl.textContent = String(completedCards * 10);
+      }
+
       function persistState() {
         const payload = {
           freeCells: state.freeCells,
           foundations: state.foundations,
           tableau: state.tableau,
           moves: state.moves,
-          startedAt: state.startedAt
+          startedAt: state.startedAt,
+          history: state.history
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
       }
@@ -519,6 +581,7 @@
           state.tableau = saved.tableau;
           state.moves = Number(saved.moves || 0);
           state.startedAt = Number(saved.startedAt || Date.now());
+          state.history = Array.isArray(saved.history) ? saved.history : [];
           state.selection = null;
           state.dragPayload = null;
           ensureTimer();
@@ -626,6 +689,26 @@
       function clearSelection() {
         state.selection = null;
         selectionStatusEl.textContent = 'None';
+        render();
+      }
+
+      function storeUndoState() {
+        state.history.push(snapshotState());
+        if (state.history.length > 100) {
+          state.history.shift();
+        }
+      }
+
+      function undoMove() {
+        const previous = state.history.pop();
+        if (!previous) {
+          setMessage('No move to undo.');
+          return;
+        }
+
+        restoreSnapshot(previous);
+        persistState();
+        setMessage('Last move undone.');
         render();
       }
 
@@ -740,6 +823,7 @@
           return false;
         }
 
+        storeUndoState();
         const movedCards = removeCardsFromSource(state.selection);
         placeCardsAtDestination(movedCards, destination);
         state.moves += 1;
@@ -832,6 +916,53 @@
         if (canPlaceOnFoundation(card, card.suit)) {
           attemptMove({ type: 'foundation', suit: card.suit });
         }
+      }
+
+      function findHintMove() {
+        for (let index = 0; index < state.freeCells.length; index += 1) {
+          const card = state.freeCells[index];
+          if (card && canPlaceOnFoundation(card, card.suit)) {
+            return `Try moving ${describeCard(card)} from Free Cell ${index + 1} to its Foundation.`;
+          }
+        }
+
+        for (let columnIndex = 0; columnIndex < state.tableau.length; columnIndex += 1) {
+          const column = state.tableau[columnIndex];
+          const topCard = getTopCard(column);
+          if (topCard && canPlaceOnFoundation(topCard, topCard.suit)) {
+            return `Try moving ${describeCard(topCard)} from Tableau ${columnIndex + 1} to its Foundation.`;
+          }
+        }
+
+        for (let columnIndex = 0; columnIndex < state.tableau.length; columnIndex += 1) {
+          const column = state.tableau[columnIndex];
+          if (!column.length) continue;
+
+          for (let cardIndex = 0; cardIndex < column.length; cardIndex += 1) {
+            const selection = getSelectionFromSource({ type: 'tableau', index: columnIndex, cardIndex });
+            if (!selection) continue;
+
+            for (let targetIndex = 0; targetIndex < state.tableau.length; targetIndex += 1) {
+              if (targetIndex === columnIndex) continue;
+              const validation = validateMove(selection, { type: 'tableau', index: targetIndex });
+              if (validation.ok) {
+                return `Try moving ${describeCard(selection.cards[0])} onto Tableau ${targetIndex + 1}.`;
+              }
+            }
+          }
+        }
+
+        const emptyFreeCellIndex = state.freeCells.findIndex((cell) => cell === null);
+        if (emptyFreeCellIndex !== -1) {
+          for (let columnIndex = 0; columnIndex < state.tableau.length; columnIndex += 1) {
+            const topCard = getTopCard(state.tableau[columnIndex]);
+            if (topCard) {
+              return `Try parking ${describeCard(topCard)} in Free Cell ${emptyFreeCellIndex + 1}.`;
+            }
+          }
+        }
+
+        return 'No obvious hint available. Try freeing an Ace or opening a column.';
       }
 
       function buildFreeCell(slotIndex) {
@@ -960,6 +1091,7 @@
 
       function render() {
         moveCountEl.textContent = String(state.moves);
+        updateScore();
         selectionStatusEl.textContent = state.selection
           ? state.selection.cards.map(describeCard).join(', ')
           : 'None';
@@ -983,6 +1115,14 @@
 
       newGameButton.addEventListener('click', () => {
         dealNewGame();
+      });
+
+      undoMoveButton.addEventListener('click', () => {
+        undoMove();
+      });
+
+      showHintButton.addEventListener('click', () => {
+        setMessage(findHintMove());
       });
 
       document.addEventListener('keydown', (event) => {
