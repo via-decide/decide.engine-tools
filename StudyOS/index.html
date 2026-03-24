@@ -940,6 +940,7 @@ const ComboBridge = {
 const Dictionary = {
     "UPSC": ["Prelims", "Mains", "Optional", "Interview"],
     "Programming": ["Frontend", "Backend", "Fullstack", "DevOps"],
+    "Competitive Exams": ["B.Sc. Chemistry", "B.Sc. Physics", "B.Sc. Mathematics", "General Aptitude"],
     "Design": ["UI/UX", "Graphic", "Product", "Web"],
     "AI": ["Machine Learning", "Data Science", "NLP", "Vision"],
     "Productivity": ["Time Management", "Note Taking", "Workflows", "Habits"],
@@ -1050,6 +1051,33 @@ TABLE III: TERRITORY OF INDIA
             ];
             missions = [{ id: Date.now(), text: ComboBridge.t(`Setup ${subject} environment`), type: "Study", done: false }];
             vault.doc1 = { category: ComboBridge.t("Documentation"), title: ComboBridge.t(`${subject} Practices`), size: "8 KB", content: ComboBridge.t("Use clear naming, modular components, testing.") };
+        } else if (category === "Competitive Exams") {
+            syllabus = [
+                { id: "ce1", title: ComboBridge.t(`${subject} Exam Blueprint`), total: 4, items: [{ id: "ce1-1", text: ComboBridge.t("Syllabus weightage mapping") }, { id: "ce1-2", text: ComboBridge.t("Previous-year trend scan") }, { id: "ce1-3", text: ComboBridge.t("High-yield topic shortlist") }, { id: "ce1-4", text: ComboBridge.t("Revision cycle planner") }] },
+                { id: "ce2", title: ComboBridge.t(`${subject} Practice Track`), total: 4, items: [{ id: "ce2-1", text: ComboBridge.t("GATE mixed practice set") }, { id: "ce2-2", text: ComboBridge.t("JAM concept drill") }, { id: "ce2-3", text: ComboBridge.t("TIFR aptitude section") }, { id: "ce2-4", text: ComboBridge.t("Error-log remediation") }] }
+            ];
+            missions = [
+                { id: Date.now(), text: ComboBridge.t("Read latest exam roadmap"), type: "Study", done: false },
+                { id: Date.now()+1, text: ComboBridge.t("Attempt one previous-year mock"), type: "Practice", done: false }
+            ];
+            vault.doc1 = {
+                category: ComboBridge.t("Exam Strategy"),
+                title: ComboBridge.t(`${subject} 12-Week Plan`),
+                size: "22 KB",
+                content: ComboBridge.t("Map syllabus into 3 phases: concept build, PYQ drills, and timed mocks. Reserve one weekly slot for error correction and formula recall.")
+            };
+            vault.doc2 = {
+                category: ComboBridge.t("Official Links"),
+                title: ComboBridge.t("GATE / JAM / TIFR Resources"),
+                size: "6 KB",
+                content: "GATE: https://gate2026.iitr.ac.in\nJAM: https://jam2026.iisc.ac.in\nTIFR GS: https://www.tifr.res.in"
+            };
+            vault.doc3 = {
+                category: ComboBridge.t("PYQ Tracker"),
+                title: ComboBridge.t("Attempt Log Template"),
+                size: "4 KB",
+                content: ComboBridge.t("Fields: year, exam, score, weak area, retry date, confidence level.")
+            };
         } else if (category === "General Knowledge") {
             syllabus = [
                 { id: "gk1", title: ComboBridge.t(`Daily ${subject}`), total: 4, items: [{ id: "g1", text: ComboBridge.t("Top 5 Headlines") }, { id: "g2", text: ComboBridge.t("Editorial Analysis") }, { id: "g3", text: ComboBridge.t("Financial Updates") }, { id: "g4", text: ComboBridge.t("Global Events") }] },
@@ -1788,6 +1816,10 @@ const PYQDatabases = {
         { year: "2024", q: "Which data structure operates on a Last-In, First-Out (LIFO) principle?", opts: ["Queue", "Stack", "Linked List", "Tree"], ans: 1, exp: "A Stack follows the LIFO principle, where the last element added is the first to be removed." },
         { year: "2023", q: "What is the primary purpose of a 'Promise' in JavaScript?", opts: ["To style UI components", "To handle asynchronous operations", "To query the DOM", "To create a loop"], ans: 1, exp: "Promises represent the eventual completion (or failure) of an asynchronous operation." }
     ],
+    "Competitive Exams": [
+        { year: "2025", q: "In a revision strategy for national competitive exams, what should be prioritized during the final 2 weeks?", opts: ["Learning brand-new chapters", "Only watching lectures", "PYQ revision + weak-topic formulas", "Skipping mocks to avoid stress"], ans: 2, exp: "Final weeks should prioritize recall efficiency using PYQs, concise notes, and weak-area formula revision." },
+        { year: "2024", q: "Which approach best improves performance in mixed-difficulty exam papers?", opts: ["Solve toughest questions first always", "Use two-pass strategy: secure easy/medium first", "Guess all numerical answers quickly", "Ignore time limits in practice"], ans: 1, exp: "A two-pass strategy improves accuracy and time utilization by locking secure marks before difficult questions." }
+    ],
     "General Knowledge": [
         { year: "2024", q: "Which organization is responsible for calculating the global Multidimensional Poverty Index (MPI)?", opts: ["World Bank", "UNDP and OPHI", "World Economic Forum", "IMF"], ans: 1, exp: "The MPI is jointly published by the UNDP and the Oxford Poverty and Human Development Initiative (OPHI)." },
         { year: "2023", q: "What is the primary objective of the 'Artemis Accords'?", opts: ["Regulating AI development", "Peaceful exploration of the Moon and space", "Global trade tariffs", "Ocean cleanup"], ans: 1, exp: "The Artemis Accords establish a framework for peaceful and cooperative space exploration, led by NASA." }
@@ -2025,6 +2057,11 @@ const KineticDatabases = {
         { "Question_ID": "P_001", "Question_Text": "What does CSS stand for?", "Correct_Answer": "Cascading Style Sheets", "Distractor_1": "Computer Style Sheets", "Distractor_2": "Creative Style Sheets", "Explanation_Short": "CSS defines how HTML elements are displayed on screen." },
         { "Question_ID": "P_002", "Question_Text": "Which HTTP method is used to replace a resource completely?", "Correct_Answer": "PUT", "Distractor_1": "POST", "Distractor_2": "PATCH", "Explanation_Short": "PUT replaces the entire resource, while PATCH applies partial modifications." },
         { "Question_ID": "P_003", "Question_Text": "In React, what hook is used to manage side effects?", "Correct_Answer": "useEffect", "Distractor_1": "useState", "Distractor_2": "useContext", "Explanation_Short": "useEffect lets you perform side effects in function components." }
+    ],
+    "Competitive Exams": [
+        { "Question_ID": "CE_001", "Question_Text": "What is the most effective first step before starting a 3-month competitive exam prep sprint?", "Correct_Answer": "Create a topic-priority map from syllabus + PYQ trend", "Distractor_1": "Start random full-length mocks immediately", "Distractor_2": "Only memorize formulas for 2 weeks", "Explanation_Short": "A priority map aligns effort with marks weightage and reduces unplanned study." },
+        { "Question_ID": "CE_002", "Question_Text": "For improving accuracy in objective exams, which method is best?", "Correct_Answer": "Maintain an error log and revisit it weekly", "Distractor_1": "Attempt every question without review", "Distractor_2": "Read only theory, avoid timed sets", "Explanation_Short": "Error logs convert mistakes into structured revision targets and improve retention." },
+        { "Question_ID": "CE_003", "Question_Text": "When solving a timed mixed exam section, what should you do after the first pass?", "Correct_Answer": "Return to marked questions with remaining time", "Distractor_1": "Submit immediately", "Distractor_2": "Restart from question 1", "Explanation_Short": "Second-pass solving maximizes score by using leftover time on medium/hard flagged items." }
     ],
     "Default": [
         { "Question_ID": "D_001", "Question_Text": "Is consistency the key to mastering this module?", "Correct_Answer": "Yes, absolutely", "Distractor_1": "No, it's about luck", "Distractor_2": "Only occasionally", "Explanation_Short": "Spaced repetition and consistency are scientifically proven methods of learning." }
