@@ -1037,6 +1037,7 @@ const App = {
     resolveToolEntry(name) {
         const raw = String(name || '').trim();
         const normalized = raw.toLowerCase();
+        if (!normalized) return null;
         const slug = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
         const routerMap = window.Router?.toolPathStaticMap || {};
 
