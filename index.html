@@ -1196,6 +1196,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const deepLinkTool = new URLSearchParams(window.location.search).get('tool');
     if (deepLinkTool) {
         App.openTool(deepLinkTool);
+        return;
     }
 
     document.querySelectorAll('.nl').forEach(link => {
@@ -1229,3 +1230,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 </script>
 </body>
 </html>
+
