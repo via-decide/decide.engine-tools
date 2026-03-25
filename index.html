@@ -755,6 +755,7 @@
 <!-- =========================================
      JAVASCRIPT ENGINE
      ========================================= -->
+<script src="./shared/tool-registry.js"></script>
 <script src="./router.js"></script>
 <script>
 // --- SIDEBAR MENU ENGINE ---
@@ -940,9 +941,13 @@ const ToolCatalog = {
 const App = {
     state: { tab: 'all', sortAlpha: true, includeEngine: false },
     tools: [...TOOLS_DB],
+    registryTools: [],
 
     async init() {
         await ToolCatalog.load();
+        if (window.ToolRegistry && typeof window.ToolRegistry.loadAll === 'function') {
+            this.registryTools = await window.ToolRegistry.loadAll();
+        }
         this.tools = ToolCatalog.list();
         this.updateCounterTargets();
         this.renderGrid();
@@ -1029,10 +1034,41 @@ const App = {
         this.renderGrid();
     },
 
+    resolveToolEntry(name) {
+        const raw = String(name || '').trim();
+        const normalized = raw.toLowerCase();
+        if (!normalized) return null;
+        const slug = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const routerMap = window.Router?.toolPathStaticMap || {};
+
+        if (slug && routerMap[slug]) return routerMap[slug];
+        if (routerMap[normalized]) return routerMap[normalized];
+
+        const byRegistryName = this.registryTools.find((tool) => String(tool.name || '').toLowerCase() === normalized);
+        if (byRegistryName?.entry) return byRegistryName.entry;
+        if (slug) {
+            const byRegistryId = this.registryTools.find((tool) => String(tool.id || '').toLowerCase() === slug);
+            if (byRegistryId?.entry) return byRegistryId.entry;
+        }
+
+        const partialRegistry = this.registryTools.find((tool) => {
+            const toolId = String(tool.id || '').toLowerCase();
+            const toolName = String(tool.name || '').toLowerCase();
+            return toolId.includes(normalized) || toolName.includes(normalized) || normalized.includes(toolId);
+        });
+        if (partialRegistry?.entry) return partialRegistry.entry;
+
+        const catalogEntry = ToolCatalog.resolveEntry(raw);
+        if (catalogEntry) return catalogEntry;
+
+        const partialAlias = Object.keys(ROUTE_ALIASES).find((key) => key.includes(normalized) || normalized.includes(key));
+        return partialAlias ? ROUTE_ALIASES[partialAlias] : null;
+    },
+
     openTool(name) {
         const toast = document.getElementById('toast');
         const toastIcon = document.getElementById('toast-icon');
-        const resolvedEntry = ToolCatalog.resolveEntry(name);
+        const resolvedEntry = this.resolveToolEntry(name);
         const isExternal = Boolean(resolvedEntry && /^https?:\/\//i.test(resolvedEntry));
         const entryPath = resolvedEntry
           ? (isExternal ? resolvedEntry : `./${resolvedEntry.replace(/^\.\//, '')}`)
@@ -1157,6 +1193,11 @@ const SearchUI = {
 document.addEventListener('DOMContentLoaded', async () => {
     await App.init();
 
+    const deepLinkTool = new URLSearchParams(window.location.search).get('tool');
+    if (deepLinkTool) {
+        App.openTool(deepLinkTool);
+    }
+
     document.querySelectorAll('.nl').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1188,5 +1229,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 </script>
 </body>
 </html>
-
-
