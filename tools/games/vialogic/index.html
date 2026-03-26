@@ -426,6 +426,11 @@
             <span id="btn-cost">100</span>
           </div>
         </button>
+
+        <button class="upgrade-btn" id="launch-btn" style="background: var(--rose); margin-top: 12px; display: none;">
+          <i class="ph ph-play-circle"></i>
+          <span>LAUNCH CINEMATIC</span>
+        </button>
       </div>
     </div>
   </div>
@@ -443,6 +448,7 @@
         contribution: "Thales asked why the world works, not just that it does — the first documented deductive proofs in geometry. He proved that a circle is bisected by its diameter.",
         buff1Name: "Deductive Proof", buff1Val: 1.0,
         buff2Name: "Water Theory", buff2Val: 0.5,
+        path: "people/thales/",
         unlockedBy: []
       },
       aryabhata: {
@@ -451,6 +457,7 @@
         contribution: "Aryabhata formalised the concept of zero and positional notation in 499 CE, 1,100 years before Europe adopted it. He also calculated π to 4 decimal places.",
         buff1Name: "Zero Positional", buff1Val: 1.0,
         buff2Name: "Solar Orbit", buff2Val: 0.5,
+        path: "people/aryabhata/",
         unlockedBy: []
       },
       pythagoras: {
@@ -459,6 +466,7 @@
         contribution: "Pythagoras formalised the theorem bearing his name and founded a mathematical brotherhood that treated numbers as the fabric of reality.",
         buff1Name: "Harmonic Ratios", buff1Val: 2.0,
         buff2Name: "Right Angles", buff2Val: 1.5,
+        path: "people/pythagoras/",
         unlockedBy: ["thales"]
       },
       euclid: {
@@ -467,6 +475,7 @@
         contribution: "Euclid's Elements — 13 books written around 300 BCE — defined rigorous mathematical proof and remained the geometry textbook for 2,000 years.",
         buff1Name: "Axiomatic Proof", buff1Val: 2.5,
         buff2Name: "Prime Numbers", buff2Val: 1.0,
+        path: "people/euclid/",
         unlockedBy: ["thales"]
       },
       brahmagupta: {
@@ -475,6 +484,7 @@
         contribution: "Brahmagupta defined arithmetic rules for zero and negative numbers in 628 CE — five centuries before European mathematicians acknowledged their existence.",
         buff1Name: "Negative Numbers", buff1Val: 2.0,
         buff2Name: "Cyclic Quadrilateral", buff2Val: 1.5,
+        path: "people/brahmagupta/",
         unlockedBy: ["aryabhata"]
       },
       archimedes: {
@@ -483,6 +493,7 @@
         contribution: "Archimedes computed areas under curves using exhaustion — a precursor to integral calculus — and invented the screw pump still used in irrigation today.",
         buff1Name: "Exhaustion Method", buff1Val: 3.0,
         buff2Name: "Lever Principle", buff2Val: 2.0,
+        path: "people/archimedes/",
         unlockedBy: ["pythagoras", "euclid"]
       },
       "al-khwarizmi": {
@@ -491,6 +502,7 @@
         contribution: "Al-Khwarizmi's 9th-century treatise gave us the word algebra (al-jabr) and algorithm (his Latinised name). He systematised solving linear and quadratic equations.",
         buff1Name: "Linear Equations", buff1Val: 3.5,
         buff2Name: "Hindu-Arabic Numerals", buff2Val: 2.5,
+        path: "people/al-khwarizmi/",
         unlockedBy: ["brahmagupta"]
       },
       mahaviracharya: {
@@ -499,6 +511,7 @@
         contribution: "Mahavira's 9th-century Gaṇitasārasaṅgraha was the first text dedicated entirely to mathematics — covering fractions, permutations, and geometric series.",
         buff1Name: "Fraction Arithmetic", buff1Val: 3.0,
         buff2Name: "Permutations", buff2Val: 2.0,
+        path: "people/mahaviracharya/",
         unlockedBy: ["brahmagupta", "aryabhata"]
       },
       plato: {
@@ -507,6 +520,7 @@
         contribution: "Plato argued that mathematical objects — triangles, numbers — exist independently of the physical world, establishing mathematical Platonism still debated today.",
         buff1Name: "Abstract Forms", buff1Val: 2.5,
         buff2Name: "Platonic Solids", buff2Val: 2.0,
+        path: "people/plato/",
         unlockedBy: ["pythagoras"]
       },
       hypatia: {
@@ -515,6 +529,7 @@
         contribution: "Hypatia of Alexandria edited and preserved Ptolemy's Almagest and Diophantus's Arithmetica. Without her work, much of ancient mathematics would be lost.",
         buff1Name: "Conic Sections", buff1Val: 3.5,
         buff2Name: "Astrolabe Design", buff2Val: 2.5,
+        path: "people/hypatia/",
         unlockedBy: ["euclid", "plato"]
       },
       ptolemy: {
@@ -523,6 +538,7 @@
         contribution: "Ptolemy's Almagest compiled centuries of Greek astronomy into a single trigonometric framework — including the chord table that preceded the sine function.",
         buff1Name: "Chord Tables", buff1Val: 3.0,
         buff2Name: "Star Catalogue", buff2Val: 2.5,
+        path: "people/ptolemy/",
         unlockedBy: ["euclid"]
       },
       "omar-khayyam": {
@@ -531,6 +547,7 @@
         contribution: "Omar Khayyam solved every class of cubic equation geometrically in 1070 CE and wrote a reform of the Euclidean parallel postulate — 700 years before Lobachevsky.",
         buff1Name: "Cubic Equations", buff1Val: 4.0,
         buff2Name: "Calendar Reform", buff2Val: 3.0,
+        path: "people/omar-khayyam/",
         unlockedBy: ["al-khwarizmi"]
       },
       bhaskara: {
@@ -539,6 +556,7 @@
         contribution: "Bhaskaracharya's Lilavati (1150 CE) solved differential equations conceptually and described a rotating wheel whose velocity approached instantaneous change — early calculus.",
         buff1Name: "Instantaneous Motion", buff1Val: 5.0,
         buff2Name: "Planetary Ephemeris", buff2Val: 4.0,
+        path: "people/bhashkaracharya/",
         unlockedBy: ["mahaviracharya", "brahmagupta"]
       },
       "golden-ratio": {
@@ -547,6 +565,7 @@
         contribution: "The golden ratio φ = 1.618... appears in Euclid's Elements, in Pythagorean pentagrams, in Bhaskara's geometry, and in every living spiral in nature.",
         buff1Name: "Aesthetic Proportion", buff1Val: 6.0,
         buff2Name: "Fibonacci Resonance", buff2Val: 5.0,
+        path: "people/golden-ratio/",
         unlockedBy: ["bhaskara", "euclid"]
       }
     };
@@ -941,6 +960,16 @@
       document.getElementById('upgrade-btn').onclick = () => upgrade(id);
       document.getElementById('upgrade-btn').disabled = false;
       
+      const launchBtn = document.getElementById('launch-btn');
+      if (entity.level > 0) {
+        launchBtn.style.display = 'flex';
+        launchBtn.onclick = () => {
+          location.href = data.path;
+        };
+      } else {
+        launchBtn.style.display = 'none';
+      }
+
       document.getElementById('modal-overlay').style.display = 'block';
       setTimeout(() => document.getElementById('modal-overlay').classList.add('active'), 10);
       isModalOpen = true;
@@ -1014,6 +1043,11 @@
     // Handle wallet updates from outside (iframe mode)
     window.addEventListener('message', (e) => {
       if (e.data.type === 'sparks_sync') {
+        updateHUD();
+      }
+      if (e.data.type === 'sparks_award') {
+        Sparks.add(e.data.amount || 250);
+        showToast(`✨ Received ${e.data.amount} Sparks!`, 'success');
         updateHUD();
       }
     });
