@@ -78,7 +78,11 @@
     'game-command-center': 'tools/engine/game-command-center/index.html',
     'leaderboard-analytics': 'tools/engine/leaderboard-analytics/index.html',
     'network-latency-simulator': 'tools/engine/network-latency-simulator/index.html',
-    'gesture-feedback-ui': 'tools/engine/gesture-feedback-ui/index.html'
+    'gesture-feedback-ui': 'tools/engine/gesture-feedback-ui/index.html',
+    vialogic: 'tools/games/vialogic/index.html',
+    mathmap: 'tools/games/vialogic/index.html',
+    cartography: 'tools/games/vialogic/index.html',
+    minds: 'tools/games/vialogic/index.html'
   };
 
   const navLinks = [...document.querySelectorAll('.nl[data-s]')];

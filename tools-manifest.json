@@ -280,6 +280,24 @@
     {
       "toolDir": "tools/workflow-template-gallery",
       "metaPath": "tools/workflow-template-gallery/config.json"
+    },
+    {
+      "id": "vialogic",
+      "name": "ViaLogic",
+      "title": "Cartography of Minds",
+      "path": "tools/games/vialogic/index.html",
+      "tags": [
+        "math",
+        "history",
+        "exploration",
+        "game",
+        "india"
+      ],
+      "tier": "game",
+      "icon": "🗺️",
+      "sparks": true,
+      "toolDir": "tools/games/vialogic",
+      "metaPath": "tools/games/vialogic/config.json"
     }
   ]
 }
