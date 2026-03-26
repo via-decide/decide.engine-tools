@@ -1,0 +1,13 @@
+{
+  "id": "kutch-map",
+  "name": "Kutch Digital Map",
+  "title": "Local Discovery Engine",
+  "description": "Discover 130 local businesses across 8 towns in Kutch. Salons, IT, CAs, Events, PG/Hostel and more.",
+  "entry": "tools/business/kutch-map/index.html",
+  "path": "tools/business/kutch-map/index.html",
+  "tags": ["business", "directory", "local", "kutch", "india"],
+  "tier": "business",
+  "icon": "🗺️",
+  "sparks": true,
+  "category": "business"
+}

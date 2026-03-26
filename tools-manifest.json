@@ -299,6 +299,25 @@
       "sparks": true,
       "toolDir": "tools/games/vialogic",
       "metaPath": "tools/games/vialogic/config.json"
+    },
+    {
+      "id": "kutch-map",
+      "name": "Kutch Digital Map",
+      "title": "Local Discovery Engine",
+      "path": "tools/business/kutch-map/index.html",
+      "tags": [
+        "business",
+        "directory",
+        "local",
+        "kutch",
+        "india"
+      ],
+      "tier": "business",
+      "icon": "🗺️",
+      "pullable": true,
+      "sparks": true,
+      "toolDir": "tools/business/kutch-map",
+      "metaPath": "tools/business/kutch-map/config.json"
     }
   ]
 }
