@@ -8,6 +8,25 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   
+  <!-- Firebase 9 Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  
+  <script>
+    // DO NOT MODIFY THIS BLOCK - IT IS PULLED FROM INDEX.HTML AS SOURCE OF TRUTH
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4ues4tuPmT_BVqTr_gzUQ5m0TPbLB5H4",
+      authDomain: "gen-lang-client-0530513864.firebaseapp.com",
+      projectId: "gen-lang-client-0530513864",
+      storageBucket: "gen-lang-client-0530513864.firebasestorage.app",
+      messagingSenderId: "783755173296",
+      appId: "1:783755173296:web:242974c84f464f979e8a75"
+    };
+    if (typeof firebase !== 'undefined') {
+      firebase.initializeApp(firebaseConfig);
+    }
+  </script>
+  
   <style>
     /* =========================================
        VIADECIDE DESIGN SYSTEM
@@ -415,6 +434,19 @@
     }
     #toast.show { transform: translateY(0); opacity: 1; }
     #toast.coming-soon { background: var(--amber); box-shadow: 0 8px 24px rgba(245,158,11,0.3); }
+
+    /* AUTH UI */
+    .user-badge { display: flex; align-items: center; gap: 8px; margin-left: 12px; }
+    .user-avatar { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--leaf); }
+    .auth-wall { 
+      position: fixed; inset: 0; z-index: 9999; 
+      background: var(--bg); display: none; 
+      flex-direction: column; align-items: center; justify-content: center; 
+      text-align: center; padding: 20px;
+    }
+    .auth-wall h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 12px; }
+    .auth-wall p { color: var(--muted); margin-bottom: 32px; max-width: 400px; }
+    body.auth-locked { overflow: hidden; }
   </style>
 </head>
 <body>
@@ -465,6 +497,7 @@
       <a class="nl" href="#games" data-s="games">Games</a>
       <a class="nl" href="#orchard-engine" data-s="orchard-engine">Orchard</a>
       <a class="nl" href="./ui/studyos.html" data-s="studyos">Study OS</a>
+      <div id="vd-auth-badge" class="user-badge"></div>
     </div>
   </div>
 </nav>
@@ -752,10 +785,21 @@
     <span id="toast-msg">Initializing module...</span>
 </div>
 
+<!-- LOGIN WALL -->
+<div id="vd-login-wall" class="auth-wall">
+    <div class="w" style="display:flex; flex-direction:column; align-items:center;">
+        <div class="eyebrow">ViaDecide Engine</div>
+        <h2>Secure Terminal</h2>
+        <p>This workspace is encrypted. Please authenticate with your Google account to access your tools and wallet data.</p>
+        <button class="btn-green" onclick="_VD_AUTH.login()">Login with Google</button>
+    </div>
+</div>
+
 <!-- =========================================
      JAVASCRIPT ENGINE
      ========================================= -->
 <script src="./shared/tool-registry.js"></script>
+<script src="./shared/vd-auth.js"></script>
 <script src="./router.js"></script>
 <script>
 // --- SIDEBAR MENU ENGINE ---
