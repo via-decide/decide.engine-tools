@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>ViaDecide · Interactive Home & Engine</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    /* =========================================
+       VIADECIDE DESIGN SYSTEM
+       ========================================= */
+    :root{
+      --bg:#0f0d0c; --bg2:#1a1614; --bg3:#231e1b; --bg4:#2d2623;
+      --border:#3a2e28; --border2:#4f3e36;
+      --text:#f0e4d0; --muted:#8a7568; --subtle:#5a4e47;
+      --leaf:#52B756; --leafdk:#357a39;
+      --water:#29B6F6; --waterdk:#0277BD;
+      --gold:#FFCA28; --golddk:#c79800;
+      --amber:#f59e0b;
+      --rose:#f472b6;
+      --violet:#a78bfa;
+      --system:#94a3b8;
+      --r:12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color:transparent}
+    *:focus{outline:none}
+    *:focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background:var(--bg);color:var(--text);
+      font-family:'DM Sans',system-ui,sans-serif;
+      line-height:1.6;min-height:100vh;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+    
+    a, button {text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent;}
+
+    button, label, [role="button"], [onclick], .card, .tab, .toggle-btn,
+    .search-trigger, .search-item, .nl, .orb-trigger, .hamburger-btn, .sidebar-nav-btn {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    
+    button::selection, label::selection, [onclick]::selection,
+    .card::selection, .tab::selection, .toggle-btn::selection,
+    .search-item::selection, .nl::selection {
+      background: transparent;
+    }
+
+    .w {width:min(1100px,92vw);margin:0 auto}
+
+    /* ── NAV ── */
+    .nav {
+      position:sticky;top:0;z-index:100;
+      background:rgba(15,13,12,0.85);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom:1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .nav-i {display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:12px;flex-wrap:wrap}
+    .brand {font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900; letter-spacing: 0.5px;}
+    .brand em {color:var(--leaf);font-style:normal}
+    
+    .nav-links {display:flex;gap:4px;flex-wrap:wrap; align-items: center;}
+    .nl {color:var(--muted);font-size:.85rem;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid transparent;transition:all .2s ease; cursor: pointer;}
+    .nl:hover, .nl.on {color:var(--text); background: var(--bg2); border-color:var(--border2)}
+
+    /* Desktop Search Trigger */
+    .search-trigger {
+        background: var(--bg3); border: 1px solid var(--border); color: var(--muted);
+        border-radius: 999px; padding: 6px 12px; font-size: 0.8rem; cursor: pointer;
+        display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    }
+    .search-trigger:hover { border-color: var(--leaf); color: var(--text); background: var(--bg4); transform: scale(0.98); }
+    .kbd { background: var(--bg); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;}
+
+    /* ── SIDEBAR MENU ── */
+    .hamburger-btn {
+        width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+        background: var(--bg2); color: var(--text); cursor: pointer; display: inline-flex;
+        align-items: center; justify-content: center; transition: all 0.2s ease; font-size: 1.2rem;
+    }
+    .hamburger-btn:hover { border-color: var(--leaf); background: var(--bg3); }
+    .sidebar-overlay {
+        position: fixed; inset: 0; background: rgba(15,13,12,0.7); backdrop-filter: blur(4px);
+        z-index: 180; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+    .sidebar-panel {
+        position: fixed; top: 0; left: 0; width: min(90vw, 340px); height: 100dvh;
+        z-index: 190; background: linear-gradient(180deg, var(--bg2), var(--bg));
+        border-right: 1px solid var(--border); box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+        transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex; flex-direction: column;
+    }
+    .sidebar-panel.open { transform: translateX(0); }
+    .sidebar-nav-btn {
+        width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        padding: 16px; border-radius: 12px; border: 1px solid var(--border);
+        background: var(--bg3); color: var(--text); font-weight: 700; cursor: pointer; transition: all 0.2s ease; margin-bottom: 8px;
+    }
+    .sidebar-nav-btn:hover, .sidebar-nav-btn.active { border-color: var(--leaf); background: rgba(82,183,86,0.08); color: var(--leaf); }
+
+    /* ── ORB BUTTON ── */
+    .orb-trigger {
+        position: fixed; bottom: 24px; right: 24px; z-index: 90;
+        width: 60px; height: 60px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--leaf), var(--water));
+        border: none; cursor: pointer; display: flex; justify-content: center; align-items: center;
+        color: #000; font-size: 26px; box-shadow: 0 10px 25px rgba(82,183,86, 0.4);
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .orb-trigger:hover { transform: scale(1.1); box-shadow: 0 12px 30px rgba(82,183,86, 0.5); }
+    .orb-trigger:active { transform: scale(0.9); }
+
+    @media (min-width: 769px) { .mobile-only { display: none !important; } }
+    @media (max-width: 768px) { .desktop-only { display: none !important; } .nav-links.desktop-only { display: none !important; } }
+
+    /* ── HERO ── */
+    .hero {padding:80px 0 60px; position: relative;}
+    .hero::before {
+        content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+        width: 600px; height: 600px; background: radial-gradient(circle, rgba(82,183,86,0.08) 0%, transparent 70%);
+        z-index: -1; pointer-events: none;
+    }
+    .eyebrow {font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--leaf);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .eyebrow::before {content:'';display:inline-block;width:24px;height:2px;background:var(--leaf);border-radius:2px}
+    h1 {font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:900;line-height:1.05;margin-bottom:20px; letter-spacing: -0.5px;}
+    h1 em {color:var(--leaf);font-style:normal}
+    .sub {color:var(--muted);font-size:1.1rem;max-width:540px;margin-bottom:40px; line-height: 1.7;}
+    
+    .hero-stats {display:flex;gap:32px;flex-wrap:wrap}
+    .hstat {display:flex;flex-direction:column}
+    .hstat-n {font-size:2.2rem;font-weight:900;color:var(--text);line-height:1; font-family: 'Playfair Display', serif;}
+    .hstat-l {font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:6px; font-weight: 600;}
+
+    .div {height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent); margin: 20px 0;}
+
+    /* ── SECTION ── */
+    section{padding:44px 0;scroll-margin-top:68px}
+    .sh{margin-bottom:32px}
+    .sh h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;margin-bottom:8px; letter-spacing: -0.2px;}
+    .sh p{color:var(--muted);font-size:1rem; max-width: 600px;}
+
+    /* ── TABS & CONTROLS ── */
+    .tabs {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+    .tab {background:var(--bg2);border:1px solid var(--border);color:var(--muted);font-size:.85rem;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;transition:all .2s ease;font-family:'DM Sans',sans-serif}
+    .tab:hover {border-color:var(--border2);color:var(--text); background: var(--bg3);}
+    .tab:active {transform: scale(0.96);}
+    .tab.on {background:var(--leaf);border-color:var(--leaf);color:#0a1a0a; box-shadow: 0 0 16px rgba(82,183,86,0.3);}
+    
+    .tools-controls {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin: 16px 0 24px; padding: 12px 16px; background: var(--bg2); border-radius: var(--r); border: 1px solid var(--border);}
+    .tools-meta {font-size:.85rem;color:var(--text); font-weight: 600;}
+    .tools-toggles {display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    
+    .toggle-btn {background:var(--bg);border:1px solid var(--border);color:var(--muted);font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .toggle-btn.active {background: var(--bg4); border-color:var(--leaf);color:var(--leaf)}
+    .toggle-btn:active {transform: scale(0.96);}
+    
+    .toggle-check {display:inline-flex;align-items:center;gap:8px;color:var(--text);font-size:.8rem; font-weight: 500; cursor: pointer;}
+    .toggle-check input {accent-color:var(--leaf); width: 16px; height: 16px; cursor: pointer;}
+
+    /* ── TOOL GRID ── */
+    .grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+    .card {
+      background:var(--bg2);border:1px solid var(--border);
+      border-radius:var(--r);padding:24px;
+      display:flex;flex-direction:column;gap:12px;
+      transition:all .25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor:pointer; position: relative; overflow: hidden;
+    }
+    .card.is-engine { border-left: 3px solid var(--system); }
+    .card::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: radial-gradient(circle at top right, rgba(255,255,255,0.03), transparent);
+        opacity: 0; transition: opacity 0.3s;
+    }
+    .card:hover {transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.5);border-color:var(--border2); background: var(--bg3);}
+    .card:active {transform: scale(0.98);}
+    .card:hover::before { opacity: 1; }
+    
+    .card-top {display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .chip {font-size:.7rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:6px;white-space:nowrap}
+    .c-creators {background:rgba(245,158,11,.1);color:var(--amber); border: 1px solid rgba(245,158,11,.2);}
+    .c-coders {background:rgba(41,182,246,.1);color:var(--water); border: 1px solid rgba(41,182,246,.2);}
+    .c-researchers {background:rgba(82,183,86,.1);color:var(--leaf); border: 1px solid rgba(82,183,86,.2);}
+    .c-operators {background:rgba(167,139,250,.1);color:var(--violet); border: 1px solid rgba(167,139,250,.2);}
+    .c-business {background:rgba(244,114,182,.1);color:var(--rose); border: 1px solid rgba(244,114,182,.2);}
+    .c-education {background:rgba(167,139,250,.1);color:var(--violet); border: 1px solid rgba(167,139,250,.2);}
+    .c-system {background:rgba(148,163,184,.1);color:var(--system); border: 1px solid rgba(148,163,184,.2);}
+    .c-games {background:rgba(34,197,94,.1);color:#86efac; border: 1px solid rgba(34,197,94,.2);}
+    
+    .card-icon {font-size:1.5rem;line-height:1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));}
+    .card h3 {font-size:1.1rem;font-weight:700;color:var(--text); font-family: 'Playfair Display', serif; letter-spacing: 0.5px;}
+    .card p {font-size:.88rem;color:var(--muted);flex:1;line-height:1.5; font-weight: 500;}
+    .card-link {
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:.85rem;font-weight:700;color:var(--leaf);margin-top:8px;
+      transition:gap .2s; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .card-link::after {content:'→'}
+    .card:hover .card-link {gap:10px}
+    .card.is-coming-soon {opacity:.86; border-style:dashed; border-color:rgba(245,158,11,.35); cursor:default; transform:none;}
+    .card.is-coming-soon:hover {transform:none; border-color:rgba(245,158,11,.5); box-shadow:none;}
+    .card .chip.soon-chip {background:rgba(245,158,11,.15); color:#f59e0b; border-color:rgba(245,158,11,.4);}
+    .card.is-coming-soon .card-link {color:#f59e0b;}
+    .card.is-coming-soon .card-link::after {content:'';}
+
+    .grid-anim-enter { animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+    @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.95) translateY(10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ── MARS GAME HERO ── */
+    .mars-hero {
+      background:linear-gradient(135deg,rgba(220,38,38,.1) 0%,rgba(26,22,20,.97) 55%);
+      border:1px solid rgba(220,38,38,.3);
+      border-radius:var(--r);padding:40px;
+      display:flex;align-items:center;justify-content:space-between;gap:32px;
+      box-shadow:0 20px 48px rgba(220,38,38,.05);
+      overflow:hidden;position:relative;
+    }
+    .mars-left {flex:1;min-width:0; z-index: 2;}
+    .mars-badge {display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:rgba(220,38,38,.15);color:#f87171;border-radius:6px;padding:4px 10px;margin-bottom:16px; border: 1px solid rgba(220,38,38,.3);}
+    .mars-title {font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;margin-bottom:12px; line-height: 1.1;}
+    .mars-desc {color:var(--text); opacity: 0.8; font-size:1rem;max-width:520px;margin-bottom:24px;line-height:1.6;}
+    
+    /* ── ORCHARD GAME HERO ── */
+    .orchard-hero {
+      background:linear-gradient(135deg,rgba(82,183,86,.1) 0%,rgba(26,22,20,.97) 55%);
+      border:1px solid rgba(82,183,86,.3);
+      border-radius:var(--r);padding:40px;
+      display:flex;align-items:center;justify-content:space-between;gap:32px;
+      box-shadow:0 20px 48px rgba(82,183,86,.05);
+      overflow:hidden;position:relative;
+    }
+    .orchard-badge {display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:rgba(52,211,153,.15);color:#34d399;border-radius:6px;padding:4px 10px;margin-bottom:16px; border: 1px solid rgba(52,211,153,.3);}
+
+    .btn-sim {
+        display:inline-flex;align-items:center;justify-content:center;gap:8px;
+        font-weight:700;font-size:1rem;border:none;cursor:pointer;
+        border-radius:8px;padding:14px 28px;
+        transition:all 0.15s; position: relative; top: 0; color:#fff;
+    }
+    .btn-mars { background:linear-gradient(135deg,#dc2626,#991b1b); box-shadow:0 4px 0 #7f1d1d, 0 8px 16px rgba(220,38,38,0.3); }
+    .btn-mars:hover {filter:brightness(1.15); transform: translateY(-2px); box-shadow:0 6px 0 #7f1d1d, 0 12px 20px rgba(220,38,38,0.4);}
+    .btn-mars:active {top:4px;box-shadow:0 0 0 #7f1d1d, 0 4px 8px rgba(220,38,38,0.3); transform: translateY(0);}
+    
+    .btn-orchard { background:linear-gradient(135deg,#10b981,#047857); box-shadow:0 4px 0 #064e3b, 0 8px 16px rgba(16,185,129,0.3); }
+    .btn-orchard:hover {filter:brightness(1.15); transform: translateY(-2px); box-shadow:0 6px 0 #064e3b, 0 12px 20px rgba(16,185,129,0.4);}
+    .btn-orchard:active {top:4px;box-shadow:0 0 0 #064e3b, 0 4px 8px rgba(16,185,129,0.3); transform: translateY(0);}
+    
+    .sim-visual {width:200px;height:200px;flex-shrink:0;display:flex;align-items:center;justify-content:center; z-index: 1;}
+    .mars-planet {
+      width:180px;height:180px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #f87171, #dc2626 40%, #991b1b 70%, #450a0a);
+      box-shadow:0 0 60px rgba(220,38,38,.4),inset -30px -20px 40px rgba(0,0,0,.6);
+      animation:spinRotate 25s linear infinite;
+    }
+    .orchard-planet {
+      width:180px;height:180px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #4ade80, #10b981 40%, #047857 70%, #022c22);
+      box-shadow:0 0 60px rgba(16,185,129,.4),inset -30px -20px 40px rgba(0,0,0,.6);
+      animation:spinRotate 25s linear infinite reverse;
+    }
+    @keyframes spinRotate{
+      0%{ transform: rotate(0deg);}
+      100%{ transform: rotate(360deg);}
+    }
+
+    @media(max-width:768px){
+      .mars-hero, .orchard-hero {flex-direction: column; text-align: center; padding: 32px 20px;}
+      .mars-desc{margin: 0 auto 24px;}
+      .sim-visual{display:none;}
+      .mars-left { display: flex; flex-direction: column; align-items: center; }
+      .orchard-layer-grid { grid-template-columns: 1fr; }
+      .layer-wave-actions { grid-template-columns: 1fr; }
+    }
+
+    .btn-orchard-outline {
+      background: transparent;
+      border: 1px solid var(--leaf);
+      box-shadow: none;
+      color: var(--text);
+    }
+    .btn-orchard-outline:hover { background: rgba(82,183,86,.08); filter: none; transform: translateY(-2px); }
+    .btn-orchard-outline:active { top: 0; transform: translateY(0); }
+    .small-orchard-note { margin-top: 12px; color: var(--muted); font-size: 0.9rem; }
+    .small-orchard-note a { color: var(--leaf); font-weight: 700; }
+
+    .layer-note { color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
+    .orchard-layer-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 14px; }
+    .layer-card { border: 1px solid var(--border); border-radius: var(--r); padding: 16px; background: var(--bg2); }
+    .layer-farm { border-color: var(--leaf); background: rgba(82,183,86,.05); }
+    .layer-commons { border-color: var(--amber); background: rgba(245,158,11,.05); }
+    .layer-market { border-color: var(--water); background: rgba(41,182,246,.05); }
+    .layer-sub { color: var(--muted); margin-bottom: 8px; }
+    .layer-status { display: inline-block; font-size: 0.78rem; font-weight: 700; margin-bottom: 10px; }
+    .layer-links { display: grid; gap: 8px; margin-top: 10px; }
+    .layer-links button,
+    .layer-links span {
+      display: inline-flex; justify-content: space-between; align-items: center;
+      width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg3); color: var(--text); font-size: 0.84rem;
+    }
+    .layer-links button { cursor: pointer; }
+    .layer-links.locked span { opacity: 0.5; cursor: default; }
+    .layer-wave { margin-top: 12px; border: 1px solid var(--border); border-radius: var(--r); padding: 16px; background: var(--bg2); }
+    .layer-wave-actions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin-top: 12px; }
+    .layer-wave-actions button { width: 100%; }
+
+    /* ── MISSION CTA ── */
+    .mission-wrap {
+      display:flex;align-items:center;justify-content:space-between;
+      gap:40px;flex-wrap:wrap;
+      background:linear-gradient(to right, var(--bg2), var(--bg3));
+      border:1px solid var(--border);
+      border-left:4px solid var(--leaf);
+      border-radius:var(--r);padding:40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .mission-text {flex:1;min-width:280px}
+    .mission-title {font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900; line-height: 1.1; margin-bottom: 16px;}
+    .mission-copy {color:var(--muted);font-size:1rem;margin-bottom:24px;line-height:1.6; max-width: 500px;}
+    .btn-green {
+        display:inline-flex;align-items:center;justify-content:center;gap:8px;
+        font-weight:700;font-size:1rem;border:none;cursor:pointer;
+        border-radius:8px;padding:14px 24px;
+        background:var(--leaf);color:#0a1a0a;
+        box-shadow:0 4px 0 var(--leafdk);
+        transition:all 0.15s; position: relative; top: 0;
+    }
+    .btn-green:hover {filter:brightness(1.1); transform: translateY(-2px); box-shadow:0 6px 0 var(--leafdk);}
+    .btn-green:active {top:4px;box-shadow:0 0 0 var(--leafdk); transform: translateY(0);}
+    .btn-ghost {
+        display:inline-flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:1rem;cursor:pointer;
+        border-radius:8px;padding:14px 24px;
+        background:transparent;color:var(--text);border:1px solid var(--border);
+        transition:all 0.2s;
+    }
+    .btn-ghost:hover {border-color:var(--leaf); background:rgba(82,183,86,0.05);}
+    .btn-ghost:active {transform: scale(0.96);}
+    .btn-row {display:flex;gap:12px;flex-wrap:wrap;}
+    
+    .mission-stats {display:grid;grid-template-columns:repeat(2,1fr);gap:16px;flex-shrink:0}
+    .mstat {display:flex;flex-direction:column;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);}
+    .mstat-n {font-size:2.5rem;font-weight:900;color:var(--leaf);line-height:1; font-family: 'Playfair Display', serif;}
+    .mstat-l {font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:8px; font-weight: 700;}
+
+    /* ── FOOTER ── */
+    footer {border-top:1px solid var(--border);padding:32px 0 48px;color:var(--subtle);font-size:.85rem; font-weight: 500; margin-bottom: 40px;}
+    .footer-meta {display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;}
+    footer a {color:var(--muted); transition: color 0.2s;}
+    footer a:hover {color:var(--text)}
+    .footer-links {display: flex; gap: 24px;}
+
+    /* =========================================
+       UNIVERSAL ORB SEARCH MODAL
+       ========================================= */
+    #search-modal {
+        position: fixed; inset: 0; z-index: 1000;
+        background: rgba(15,13,12,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        display: flex; align-items: flex-start; justify-content: center;
+        padding-top: 10vh; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    #search-modal.active { opacity: 1; pointer-events: auto; }
+    
+    .search-box {
+        width: 100%; max-width: 640px; background: var(--bg2);
+        border: 1px solid var(--border2); border-radius: 16px;
+        box-shadow: 0 24px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+        transform: scale(0.95) translateY(-20px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex; flex-direction: column; overflow: hidden;
+    }
+    #search-modal.active .search-box { transform: scale(1) translateY(0); }
+    
+    .search-header { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); background: var(--bg3); }
+    .search-header span { font-size: 1.5rem; color: var(--leaf); margin-right: 12px; }
+    .search-input { flex: 1; background: transparent; border: none; font-size: 1.2rem; color: var(--text); font-weight: 500; font-family: 'DM Sans', sans-serif; outline: none; }
+    .search-input::placeholder { color: var(--subtle); }
+    .close-search { background: var(--bg); border: 1px solid var(--border); color: var(--muted); border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;}
+    .close-search:hover { color: var(--text); border-color: var(--border2); background: var(--bg4); }
+    
+    .search-results { max-height: 50vh; overflow-y: auto; padding: 12px; }
+    .search-results::-webkit-scrollbar { width: 6px; }
+    .search-results::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+    .search-item {
+        display: flex; align-items: center; gap: 16px; padding: 12px 16px;
+        border-radius: 8px; cursor: pointer; transition: all 0.2s;
+        border: 1px solid transparent;
+    }
+    .search-item:hover { background: var(--bg3); border-color: var(--border); transform: translateX(4px); }
+    .si-icon { font-size: 1.5rem; }
+    .si-text { flex: 1; }
+    .si-title { font-weight: 700; color: var(--text); font-size: 1rem; }
+    .si-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+    
+    /* TOAST NOTIFICATION */
+    #toast {
+        position: fixed; bottom: 32px; right: 32px; z-index: 2000;
+        background: var(--leaf); color: #0a1a0a; font-weight: 700; font-size: 0.9rem;
+        padding: 12px 24px; border-radius: 8px; box-shadow: 0 8px 24px rgba(82,183,86,0.3);
+        transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex; align-items: center; gap: 12px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.coming-soon { background: var(--amber); box-shadow: 0 8px 24px rgba(245,158,11,0.3); }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR OVERLAY & PANEL -->
+<div id="sidebar-overlay" class="sidebar-overlay" onclick="Sidebar.close()"></div>
+<aside id="sidebar-panel" class="sidebar-panel" aria-hidden="true">
+    <div style="padding: 24px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start;">
+        <div>
+            <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--leaf); margin-bottom: 4px;">Menu</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--text);">ViaDecide</div>
+        </div>
+        <button class="close-search" onclick="Sidebar.close()">Close</button>
+    </div>
+    <div style="padding: 20px; overflow-y: auto; flex: 1;">
+        <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 12px;">Navigate</div>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;">
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('home')"><span>🏠 Home</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('research')"><span>🔬 Research</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('all')"><span>🧰 All Tools</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('games')"><span>🎮 Games & Sims</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="Sidebar.go('orchard-engine')"><span>🌳 Orchard Engine</span><span>›</span></button>
+        </div>
+        <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--muted); margin-bottom: 12px;">Quick Actions</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="sidebar-nav-btn" onclick="Sidebar.action('search')"><span>✨ Open Orb Search</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="window.location.href='./ui/studyos.html'"><span>📘 Study OS</span><span>›</span></button>
+            <button class="sidebar-nav-btn" onclick="window.open('https://github.com/via-decide/decide.engine-tools', '_blank')"><span>⭐ GitHub Repo</span><span>›</span></button>
+        </div>
+    </div>
+</aside>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="w nav-i">
+    <div style="display: flex; align-items: center; gap: 16px;">
+        <button id="hamburger-btn" class="hamburger-btn mobile-only" onclick="Sidebar.open()" aria-label="Open menu">&#9776;</button>
+        <a class="brand" href="#home">Via<em>Decide</em></a>
+        <button class="search-trigger desktop-only" onclick="SearchUI.open()">
+            <span>🔍 Search OS...</span>
+            <span class="kbd">Ctrl K</span>
+        </button>
+    </div>
+    <div class="nav-links desktop-only">
+      <a class="nl on" href="#home" data-s="home">Home</a>
+      <a class="nl" href="#research" data-s="research">Research</a>
+      <a class="nl" href="#all" data-s="all">All Tools</a>
+      <a class="nl" href="#games" data-s="games">Games</a>
+      <a class="nl" href="#orchard-engine" data-s="orchard-engine">Orchard</a>
+      <a class="nl" href="./ui/studyos.html" data-s="studyos">Study OS</a>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="w">
+      <div class="eyebrow">Free · No Login · Open Source</div>
+      <h1>Tools that help you<br>think, build, <em>decide.</em></h1>
+      <p class="sub">Practical browser tools for creators, students, researchers, and business builders. Instantly searchable, entirely local. Open any tool and start in seconds.</p>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n counter" data-target="44">0</div><div class="hstat-l">Live Tools</div></div>
+        <div class="hstat"><div class="hstat-n counter" data-target="0">0</div><div class="hstat-l">Logins Required</div></div>
+        <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">Forever</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- RESEARCHERS / STUDENTS (Featured Hardcoded Section) -->
+  <section id="research">
+    <div class="w">
+      <div class="sh">
+        <h2>🔬 For Researchers &amp; Students</h2>
+        <p>Structure your learning, synthesise sources, prep for interviews, and evaluate your outputs.</p>
+      </div>
+      <div class="grid">
+        <div class="card" onclick="App.openTool('Student Research')">
+          <div class="card-top"><span class="chip c-education">Students</span><span class="card-icon">📚</span></div>
+          <h3>Student Research</h3>
+          <p>Structure your research process — define your question, organise sources, and build your summary.</p>
+          <span class="card-link">Launch Tool</span>
+        </div>
+        <div class="card" onclick="App.openTool('Multi-Source Synthesizer')">
+          <div class="card-top"><span class="chip c-researchers">Research</span><span class="card-icon">🧩</span></div>
+          <h3>Multi-Source Synthesizer</h3>
+          <p>Combine findings from multiple papers into one coherent, structured research output.</p>
+          <span class="card-link">Launch Tool</span>
+        </div>
+        <div class="card" onclick="App.openTool('Interview Prep Framework')">
+          <div class="card-top"><span class="chip c-education">Career</span><span class="card-icon">🎯</span></div>
+          <h3>Interview Prep Framework</h3>
+          <p>Build structured answers for any interview question — behavioural, technical, or case-based.</p>
+          <span class="card-link">Launch Tool</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- ALL TOOLS (Dynamic JS Engine) -->
+  <section id="all">
+    <div class="w">
+      <div class="sh">
+        <h2>🧰 The Tool Engine</h2>
+        <p>Explore the complete collection of micro-apps. Filter, sort, and launch instantly.</p>
+      </div>
+      
+      <!-- Interactive Tabs -->
+      <div class="tabs" id="tab-row">
+        <button class="tab on" data-c="all">All Tools</button>
+        <button class="tab" data-c="creators">Creators</button>
+        <button class="tab" data-c="coders">Builders</button>
+        <button class="tab" data-c="researchers">Research</button>
+        <button class="tab" data-c="business">Business</button>
+        <button class="tab" data-c="education">Students</button>
+        <button class="tab" data-c="system">Simulations</button>
+        <button class="tab" data-c="games">🎮 Games</button>
+      </div>
+      
+      <!-- Controls -->
+      <div class="tools-controls">
+        <div class="tools-meta" id="tool-count">Loading tools...</div>
+        <div class="tools-toggles">
+          <button class="toggle-btn active" id="sort-toggle" onclick="App.toggleSort()">Sort: A → Z</button>
+          <label class="toggle-check">
+            <input id="engine-toggle" type="checkbox" onchange="App.toggleEngineFilters()">
+            Include Engine/Sim Tools
+          </label>
+        </div>
+      </div>
+      
+      <!-- Dynamic Grid -->
+      <div class="grid" id="all-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- GAMES & SIMULATIONS (New Featured Section) -->
+  <section id="games">
+    <div class="w">
+        <div class="sh">
+            <h2>🎮 Engine Simulations</h2>
+            <p>Interactive system dynamics and management games running directly in your browser.</p>
+        </div>
+        
+        <!-- MARS GAME HERO -->
+        <div class="mars-hero" style="margin-bottom: 24px;">
+            <div class="mars-left">
+                <div class="mars-badge">Survival Engine</div>
+                <h2 class="mars-title">Mars Colony Simulator</h2>
+                <p class="mars-desc">Manage resources, build habitats, and ensure the survival of humanity's first off-world colony. A complex system dynamics game built entirely in the browser.</p>
+                <button class="btn-sim btn-mars" onclick="App.openTool('Mars Colony')">▶ Initialize Mission</button>
+            </div>
+            <div class="sim-visual">
+                <div class="mars-planet"></div>
+            </div>
+        </div>
+
+        <!-- ORCHARD GAME HERO -->
+        <div class="orchard-hero" style="margin-bottom: 24px;">
+            <div class="mars-left">
+                <div class="orchard-badge">Ecological Engine</div>
+                <h2 class="mars-title">Orchard Ecosystem</h2>
+                <p class="mars-desc">Balance soil nutrients, manage water tables, and cultivate a thriving, sustainable farm ecosystem. A relaxing but deeply strategic simulation.</p>
+                <div class="btn-row">
+                  <button class="btn-sim btn-orchard" onclick="App.openTool('Orchard Sim')">▶ Enter Orchard Simulation</button>
+                  <button class="btn-sim btn-orchard-outline" onclick="App.openTool('Player Signup')">🌱 Start Your Farm →</button>
+                </div>
+                <p class="small-orchard-note">New player? Start with <a href="#" onclick="App.openTool('Player Signup'); return false;">Player Signup</a> → <a href="#" onclick="App.openTool('Orchard Profile'); return false;">Orchard Profile</a> → <a href="#" onclick="App.openTool('Starter Farm'); return false;">Starter Farm</a></p>
+            </div>
+            <div class="sim-visual">
+                <div class="orchard-planet"></div>
+            </div>
+        </div>
+
+        <!-- ADDITIONAL GAMES GRID -->
+        <div class="grid">
+            <div class="card is-engine" onclick="App.openTool('Grid Evolution')">
+                <div class="card-top"><span class="chip c-system">Simulation</span><span class="card-icon">🧬</span></div>
+                <h3>Grid Evolution</h3>
+                <p>Cellular automata simulator. Define rules and watch artificial life evolve over generations.</p>
+                <span class="card-link">Launch Sim</span>
+            </div>
+            <div class="card is-engine" onclick="App.openTool('Market Dynamics')">
+                <div class="card-top"><span class="chip c-business">Business</span><span class="card-icon">📉</span></div>
+                <h3>Market Dynamics</h3>
+                <p>Control supply, demand, and pricing in a volatile simulated global economy.</p>
+                <span class="card-link">Launch Sim</span>
+            </div>
+            <div class="card is-engine" onclick="App.openTool('Traffic Router')">
+                <div class="card-top"><span class="chip c-system">Logistics</span><span class="card-icon">🚦</span></div>
+                <h3>Traffic Router</h3>
+                <p>Design city road networks to prevent gridlock. Optimization puzzle game.</p>
+                <span class="card-link">Launch Sim</span>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <section id="orchard-engine">
+    <div class="w">
+      <div class="sh">
+        <div class="eyebrow">🌳 Orchard Engine · Merit-Based Career Game</div>
+        <h2>Three layers. One ecosystem.</h2>
+        <p>Build your farm. Join the commons. Enter the market.</p>
+        <p class="layer-note">Layer 2 and Layer 3 unlock after Layer 1 is validated.</p>
+      </div>
+
+      <div class="orchard-layer-grid">
+        <article class="layer-card layer-farm">
+          <h3>Layer 1 · Farm</h3>
+          <p class="layer-sub">Grow, earn, rank.</p>
+          <span class="layer-status">● Active — Validate First</span>
+          <p>Plant seeds, run daily quests, build root strength. Fair ranking is validated before Layer 2 opens.</p>
+          <div class="layer-links">
+            <button onclick="App.openTool('Player Signup')">🌱 Player Signup →</button>
+            <button onclick="App.openTool('Orchard Profile')">🧑‍🌾 Orchard Profile →</button>
+            <button onclick="App.openTool('Starter Farm')">🏡 Starter Farm →</button>
+            <button onclick="App.openTool('Root Calculator')">🌿 Root Calculator →</button>
+            <button onclick="App.openTool('Trunk Growth')">🌲 Trunk Growth →</button>
+            <button onclick="App.openTool('Fruit Yield')">🍎 Fruit Yield →</button>
+            <button onclick="App.openTool('Daily Quests')">📋 Daily Quests →</button>
+            <button onclick="App.openTool('Weekly Harvest')">🌾 Weekly Harvest →</button>
+            <button onclick="App.openTool('Fair Ranking')">🏆 Fair Ranking →</button>
+          </div>
+        </article>
+
+        <article class="layer-card layer-commons">
+          <h3>Layer 2 · Commons</h3>
+          <p class="layer-sub">Share, validate, trust.</p>
+          <span class="layer-status">🔒 Unlocks after Layer 1 validation</span>
+          <p>Seed exchange, peer circles, trust scoring. Collaboration tools that depend on a proven fair Layer 1.</p>
+          <div class="layer-links locked">
+            <span>🫘 Seed Exchange →</span>
+            <span>🤝 Fruit Sharing →</span>
+            <span>⭕ Circle Builder →</span>
+            <span>✅ Peer Validation →</span>
+            <span>⭐ Trust Score →</span>
+          </div>
+        </article>
+
+        <article class="layer-card layer-market">
+          <h3>Layer 3 · Market</h3>
+          <p class="layer-sub">Recruit, discover, hire.</p>
+          <span class="layer-status">🔒 Unlocks after Layer 2 validation</span>
+          <p>Recruiter dashboard, discovery search, hire readiness. The market layer amplifies trust built in Layer 2.</p>
+          <div class="layer-links locked">
+            <span>💼 Recruiter Dashboard →</span>
+            <span>🔍 Discovery Search →</span>
+            <span>🎯 Hire Readiness →</span>
+            <span>🤖 AI Coach →</span>
+            <span>📈 Growth Path →</span>
+          </div>
+        </article>
+      </div>
+
+      <article class="layer-wave">
+        <h3>Wave 1 — Validate Before Expanding</h3>
+        <p>Run synthetic players through the Layer 1 loop. Confirm fair ranking before Layer 2 goes live.</p>
+        <div class="layer-wave-actions">
+          <button onclick="App.openTool('Synthetic Players')">🧪 Synthetic Players</button>
+          <button onclick="App.openTool('Wave 1 Simulator')">🌊 Wave 1 Simulator</button>
+          <button onclick="App.openTool('Balance Dashboard')">⚖️ Balance Dashboard</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="div"></div>
+
+  <!-- MISSION CTA -->
+  <section id="mission">
+    <div class="w">
+      <div class="mission-wrap">
+        <div class="mission-text">
+          <div class="eyebrow">Open Source · Free Forever</div>
+          <h2 class="mission-title">
+            Think better.<br>Build faster.<br><em style="color:var(--leaf);font-style:normal">Decide with clarity.</em>
+          </h2>
+          <p class="mission-copy">Join the open-source movement. No hidden fees, no data harvesting. Just pure, functional tools designed to amplify human intellect.</p>
+          <div class="btn-row">
+            <button class="btn-green" onclick="window.open('https://github.com/via-decide/decide.engine-tools', '_blank')">⭐ Star on GitHub</button>
+            <button class="btn-ghost" onclick="document.getElementById('all').scrollIntoView({behavior:'smooth'})">Browse Directory</button>
+          </div>
+        </div>
+        <div class="mission-stats">
+          <div class="mstat"><div class="mstat-n counter" data-target="44">0</div><div class="mstat-l">Live Tools</div></div>
+          <div class="mstat"><div class="mstat-n">∞</div><div class="mstat-l">Free Use</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="w footer-meta">
+    <span>© 2026 ViaDecide · Free browser tools for practical thinkers</span>
+    <div class="footer-links">
+      <a href="https://github.com/via-decide/decide.engine-tools" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="tool-graph.html">Knowledge Graph</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING ORB BUTTON (Global Trigger) -->
+<button id="orb-trigger" class="orb-trigger" onclick="SearchUI.open()" aria-label="Open Search">✨</button>
+
+<!-- UNIVERSAL SEARCH MODAL -->
+<div id="search-modal">
+    <div class="search-box">
+        <div class="search-header">
+            <span>✨</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search for tools, games, or categories..." autocomplete="off">
+            <button class="close-search" onclick="SearchUI.close()">ESC</button>
+        </div>
+        <div class="search-results" id="search-results">
+            <div class="empty" style="padding: 24px; text-align: center;">Type to search all 44+ tools...</div>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">
+    <span id="toast-icon">🚀</span>
+    <span id="toast-msg">Initializing module...</span>
+</div>
+
+<!-- =========================================
+     JAVASCRIPT ENGINE
+     ========================================= -->
+<script src="./shared/tool-registry.js"></script>
+<script src="./router.js"></script>
+<script>
+// --- SIDEBAR MENU ENGINE ---
+const Sidebar = {
+    open() {
+        document.getElementById("sidebar-overlay").classList.add("open");
+        document.getElementById("sidebar-panel").classList.add("open");
+        document.body.style.overflow = "hidden";
+    },
+    close() {
+        document.getElementById("sidebar-overlay").classList.remove("open");
+        document.getElementById("sidebar-panel").classList.remove("open");
+        document.body.style.overflow = "auto";
+    },
+    go(sectionId) {
+        this.close();
+        const targetSec = document.getElementById(sectionId);
+        if(targetSec) {
+            history.replaceState(null, '', `#${sectionId}`);
+            targetSec.scrollIntoView({ behavior: 'smooth' });
+        }
+    },
+    action(type) {
+        this.close();
+        if (type === "search") SearchUI.open();
+    }
+};
+
+// --- 1. BASE TOOL DATABASE (UI-preserving seed) ---
+const TOOLS_DB = [
+    { name: "Student Research", cat: "education", desc: "Define your question and organise sources.", icon: "📚", engine: false },
+    { name: "Multi-Source Synthesizer", cat: "researchers", desc: "Combine findings from multiple papers into one output.", icon: "🧩", engine: false },
+    { name: "Interview Prep Framework", cat: "education", desc: "Build STAR methodology answers for interviews.", icon: "🎯", engine: false },
+    { name: "Context Packager", cat: "system", desc: "Bundle project context for LLM handoffs.", icon: "📦", engine: true },
+    { name: "Workflow Gallery", cat: "system", desc: "Browse reusable SOPs and workflow templates.", icon: "🗂️", engine: true },
+    { name: "Color Palette Generator", cat: "creators", desc: "Extract and generate accessible UI palettes.", icon: "🎨", engine: false },
+    { name: "Typography Scale Calculator", cat: "creators", desc: "Generate fluid CSS typographic scales.", icon: "Aa", engine: false },
+    { name: "JSON Formatter", cat: "coders", desc: "Validate, format, and minify JSON payloads.", icon: "{ }", engine: false },
+    { name: "RegEx Tester", cat: "coders", desc: "Test regular expressions safely in the browser.", icon: "🔍", engine: false },
+    { name: "Revenue Forecaster", cat: "business", desc: "Model SaaS MRR growth and churn.", icon: "📈", engine: false },
+    { name: "Meeting Cost Calculator", cat: "business", desc: "Calculate the literal cost of meetings.", icon: "⏱️", engine: false },
+    { name: "Pomodoro Timer", cat: "misc", desc: "Classic focus timer with ambient noise.", icon: "🍅", engine: false },
+    { name: "Mars Colony", cat: "system", desc: "System dynamics survival simulation engine.", icon: "🚀", engine: true },
+    { name: "Orchard Sim", cat: "system", desc: "Ecological farming and resource simulator.", icon: "🌳", engine: true },
+    { name: "Grid Evolution", cat: "system", desc: "Cellular automata artificial life simulator.", icon: "🧬", engine: true },
+    { name: "Market Dynamics", cat: "business", desc: "Global economy supply and demand simulator.", icon: "📉", engine: true },
+    { name: "Traffic Router", cat: "system", desc: "City road network optimization puzzle.", icon: "🚦", engine: true },
+
+    { name: "Player Signup", cat: "system", desc: "Create your orchard player profile and begin Layer 1.", icon: "🌱", engine: true },
+    { name: "Orchard Profile", cat: "system", desc: "Build and manage your orchard identity and stats.", icon: "🧑‍🌾", engine: true },
+    { name: "Starter Farm", cat: "system", desc: "Generate your initial farm layout and seed inventory.", icon: "🏡", engine: true },
+    { name: "Root Calculator", cat: "system", desc: "Calculate root strength from soil and growth inputs.", icon: "🌿", engine: true },
+    { name: "Trunk Growth", cat: "system", desc: "Model trunk growth over time using engine variables.", icon: "🌲", engine: true },
+    { name: "Fruit Yield", cat: "system", desc: "Compute expected fruit yield for a harvest cycle.", icon: "🍎", engine: true },
+    { name: "Daily Quests", cat: "system", desc: "Generate and track daily objectives in the orchard.", icon: "📋", engine: true },
+    { name: "Weekly Harvest", cat: "system", desc: "Run the weekly harvest engine and update scores.", icon: "🌾", engine: true },
+    { name: "Fair Ranking", cat: "system", desc: "Compute fair leaderboard positions across players.", icon: "🏆", engine: true },
+    { name: "Seed Exchange", cat: "system", desc: "Trade and share seeds within the commons layer.", icon: "🫘", engine: true },
+    { name: "Fruit Sharing", cat: "system", desc: "Commons-layer fruit distribution and gifting.", icon: "🤝", engine: true },
+    { name: "Circle Builder", cat: "system", desc: "Form and manage peer circles for collaboration.", icon: "⭕", engine: true },
+    { name: "Peer Validation", cat: "system", desc: "Validate contributions through peer review.", icon: "✅", engine: true },
+    { name: "Trust Score", cat: "system", desc: "Calculate and display player trust ratings.", icon: "⭐", engine: true },
+    { name: "Recruiter Dashboard", cat: "system", desc: "Discover and evaluate players for opportunities.", icon: "💼", engine: true },
+    { name: "Discovery Search", cat: "system", desc: "Search the orchard for players, skills, and farms.", icon: "🔍", engine: true },
+    { name: "Hire Readiness", cat: "system", desc: "Score a player's readiness for real-world roles.", icon: "🎯", engine: true },
+    { name: "AI Coach", cat: "system", desc: "Get AI-guided growth recommendations for your farm.", icon: "🤖", engine: true },
+    { name: "Growth Path", cat: "system", desc: "Visualise your recommended progression through layers.", icon: "📈", engine: true },
+    { name: "Synthetic Players", cat: "system", desc: "Generate test players for Layer 1 wave simulation.", icon: "🧪", engine: true },
+    { name: "Wave 1 Simulator", cat: "system", desc: "Run 30/60/90-day simulations of the Layer 1 loop.", icon: "🌊", engine: true },
+    { name: "Balance Dashboard", cat: "system", desc: "Analyse sim output and render a balance verdict.", icon: "⚖️", engine: true },
+
+    { name: "Prompt Alchemy", cat: "creators", desc: "One prompt → platform-perfect versions for Twitter, Instagram, LinkedIn, TikTok, and more. Tone & hashtags auto-optimized.", icon: "⚗️", engine: false },
+    { name: "Caption Generator", cat: "creators", desc: "Upload an image → AI reads it → captions with platform-specific hashtags for every channel.", icon: "📸", engine: false },
+    { name: "Script Writer", cat: "creators", desc: "Turn a topic into a full YouTube script with hook, sections, B-roll notes, and CTA.", icon: "🎬", engine: false },
+    { name: "Hook Writer", cat: "creators", desc: "Generate 5 viral opening lines with A/B variants across curiosity, controversy, story, data, and how-to styles.", icon: "🪝", engine: false },
+    { name: "Sales Dashboard", cat: "business", desc: "Track sales pipeline and revenue metrics.", icon: "📊", engine: false },
+    { name: "Founder Toolkit", cat: "business", desc: "Essential frameworks and templates for founders.", icon: "🚀", engine: false },
+    { name: "Decision Brief", cat: "business", desc: "Structure complex decisions into clear briefs.", icon: "📋", engine: false },
+    { name: "Wings of Fire Quiz", cat: "games", desc: "Multiplayer quiz game based on Dr. APJ Abdul Kalam's Wings of Fire.", icon: "🐉", engine: false },
+    { name: "Agent Builder", cat: "coders", desc: "Design and configure AI agents and their workflows.", icon: "🤖", engine: false },
+    { name: "App Generator", cat: "coders", desc: "Scaffold complete app templates from a description.", icon: "⚡", engine: false },
+    { name: "Decision Matrix", cat: "business", desc: "Weighted scoring across criteria — ranked results with reasoning.", icon: "⚖️", engine: false },
+    { name: "Scenario Planner", cat: "business", desc: "Map outcomes across futures with probability-weighted analysis.", icon: "🔭", engine: false },
+    { name: "HexWars", cat: "games", desc: "Conquer the hex battlefield with your knowledge. Timed quiz meets territory strategy.", icon: "⬡", engine: false },
+    { name: "Decision Snake", cat: "games", desc: "Navigate the path of choices. Classic snake reborn with decision logic.", icon: "🐍", engine: false },
+    { name: "SkillHex Mission Control", cat: "games", desc: "Mission-based skill progression hub. Complete challenges to unlock new territory.", icon: "🎯", engine: false },
+    { name: "Data Orchard", cat: "games", desc: "Cultivate rare genetic plant specimens, trade credits, and dominate the leaderboard.", icon: "🌿", engine: false }
+]
+
+const CAT_MAP = { creators:'c-creators', coders:'c-coders', researchers:'c-researchers', business:'c-business', education:'c-education', system:'c-system', misc:'c-misc', games:'c-games' };
+const LABEL_MAP = { creators:'Creators', coders:'Builders', researchers:'Research', business:'Business', education:'Students', system:'Simulations', misc:'Other', games:'Games' };
+const DEFAULT_ICONS = { creators: '🎨', coders: '🛠️', researchers: '🔬', business: '💼', education: '📘', system: '⚙️', misc: '🧩', games: '🎮' };
+
+// Fixed Routing Dictionary mapping explicitly to Repo Paths
+const ROUTE_ALIASES = {
+    'student research': 'student-research/index.html',
+    'multi-source research': 'multi-source-research-explained/index.html',
+    'multi-source synthesizer': 'multi-source-research-explained/index.html',
+    'interview prep': 'interview-prep/index.html',
+    'interview prep framework': 'interview-prep/index.html',
+    'workflow gallery': 'tools/workflow-template-gallery/index.html',
+    'context packager': 'tools/context-packager/index.html',
+    'color palette generator': 'tools/color-palette/index.html',
+    'typography scale calculator': 'tools/engine/typography-scale-calculator/index.html',
+    'json formatter': 'tools/json-formatter/index.html',
+    'regex tester': 'tools/regex-tester/index.html',
+    'revenue forecaster': 'tools/revenue-forecaster/index.html',
+    'meeting cost calculator': 'tools/engine/meeting-cost-calculator/index.html',
+    'pomodoro timer': 'tools/pomodoro/index.html',
+    'mars colony': 'mars.html',
+    'orchard sim': 'tools/eco-engine-test/index.html',
+    'grid evolution': 'tools/engine/grid-evolution/index.html',
+    'market dynamics': 'tools/engine/market-dynamics/index.html',
+    'traffic router': 'tools/engine/traffic-router/index.html',
+    'player signup': 'tools/engine/player-signup/index.html',
+    'orchard profile': 'tools/engine/orchard-profile-builder/index.html',
+    'starter farm': 'tools/engine/starter-farm-generator/index.html',
+    'root calculator': 'tools/engine/root-strength-calculator/index.html',
+    'trunk growth': 'tools/engine/trunk-growth-calculator/index.html',
+    'fruit yield': 'tools/engine/fruit-yield-engine/index.html',
+    'daily quests': 'tools/engine/daily-quest-generator/index.html',
+    'weekly harvest': 'tools/engine/weekly-harvest-engine/index.html',
+    'fair ranking': 'tools/engine/fair-ranking-engine/index.html',
+    'seed exchange': 'tools/engine/seed-exchange/index.html',
+    'fruit sharing': 'tools/engine/fruit-sharing/index.html',
+    'circle builder': 'tools/engine/circle-builder/index.html',
+    'peer validation': 'tools/engine/peer-validation-engine/index.html',
+    'trust score': 'tools/engine/trust-score-engine/index.html',
+    'recruiter dashboard': 'tools/engine/recruiter-dashboard/index.html',
+    'discovery search': 'tools/engine/orchard-discovery-search/index.html',
+    'hire readiness': 'tools/engine/hire-readiness-scorer/index.html',
+    'ai coach': 'tools/engine/ai-coach-console/index.html',
+    'growth path': 'tools/engine/growth-path-recommender/index.html',
+    'synthetic players': 'tools/engine/synthetic-player-generator/index.html',
+    'wave 1 simulator': 'tools/engine/wave1-simulation-runner/index.html',
+    'balance dashboard': 'tools/engine/balance-dashboard/index.html',
+    'prompt alchemy': 'tools/creators/prompt-alchemy/index.html',
+    'caption generator': 'tools/creators/caption-generator/index.html',
+    'script writer': 'tools/creators/script-writer/index.html',
+    'hook writer': 'tools/creators/hook-writer/index.html',
+    'sales dashboard': 'sales-dashboard/index.html',
+    'founder toolkit': 'founder/index.html',
+    'decision brief': 'decision-brief-guide/index.html',
+    'wings of fire quiz': 'wings-of-fire-quiz/index.html',
+    'agent builder': 'agent/index.html',
+    'app generator': 'app-generator/index.html',
+    'decision matrix': 'tools/decision-matrix/index.html',
+    'scenario planner': 'tools/scenario-planner/index.html',
+    'hexwars': 'tools/games/hex-wars/index.html',
+    'hex wars': 'tools/games/hex-wars/index.html',
+    'decision snake': 'tools/games/snake-game/index.html',
+    'snake': 'tools/games/snake-game/index.html',
+    'skillhex mission control': 'tools/games/skillhex-mission-control/index.html',
+    'skillhex': 'tools/games/skillhex-mission-control/index.html',
+    'mission control': 'tools/games/skillhex-mission-control/index.html',
+    'wings of fire quiz': 'tools/games/wings-of-fire-quiz/index.html',
+    'wings of fire': 'tools/games/wings-of-fire-quiz/index.html',
+    'data orchard': 'https://via-decide.github.io/Game-/',
+    'orchard game': 'https://via-decide.github.io/Game-/',
+    'github repo': 'https://github.com/via-decide/decide.engine-tools'
+}
+
+const ToolCatalog = {
+    byName: new Map(),
+
+    async load() {
+      const seed = [...TOOLS_DB];
+      seed.forEach((tool) => this.byName.set(tool.name.toLowerCase(), { ...tool }));
+    },
+
+    list() { return Array.from(this.byName.values()); },
+    findByName(name) { return this.byName.get(String(name || '').toLowerCase()) || null; },
+
+    resolveEntry(name) {
+      const key = String(name || '').toLowerCase();
+      const byName = this.findByName(name);
+      if (byName?.entry) return byName.entry;
+      return ROUTE_ALIASES[key] || null;
+    }
+};
+
+// --- 2. CORE APP ENGINE ---
+const App = {
+    state: { tab: 'all', sortAlpha: true, includeEngine: false },
+    tools: [...TOOLS_DB],
+    registryTools: [],
+
+    async init() {
+        await ToolCatalog.load();
+        if (window.ToolRegistry && typeof window.ToolRegistry.loadAll === 'function') {
+            this.registryTools = await window.ToolRegistry.loadAll();
+        }
+        this.tools = ToolCatalog.list();
+        this.updateCounterTargets();
+        this.renderGrid();
+        this.initTabs();
+        this.animateNumbers();
+    },
+
+    updateCounterTargets() {
+        const total = this.tools.length;
+        document.querySelectorAll('.counter[data-target]').forEach((node) => {
+          node.setAttribute('data-target', String(total));
+          node.innerText = '0';
+        });
+    },
+
+    renderGrid() {
+        const grid = document.getElementById('all-grid');
+        const count = document.getElementById('tool-count');
+
+        let filtered = this.tools.filter(t => {
+            const matchTab = this.state.tab === 'all' || t.cat === this.state.tab;
+            const matchEngine = this.state.includeEngine || !t.engine;
+            return matchTab && matchEngine;
+        });
+
+        if(this.state.sortAlpha) filtered.sort((a,b) => a.name.localeCompare(b.name));
+
+        if(filtered.length === 0) {
+            grid.innerHTML = `<div class="empty" style="grid-column: 1/-1; text-align:center; padding: 40px; font-weight:500;">No tools found matching criteria. Toggle "Include Engine Tools" to see simulations.</div>`;
+            count.innerText = `0 tools visible`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map((t, index) => {
+            const chipClass = CAT_MAP[t.cat] || 'c-misc';
+            const label = LABEL_MAP[t.cat] || t.cat;
+            const delay = (index * 0.04) > 0.5 ? 0 : index * 0.04;
+            const engineBorder = t.engine ? 'is-engine' : '';
+            const hasRoute = Boolean(ToolCatalog.resolveEntry(t.name));
+            const isComingSoon = !hasRoute || t.comingSoon === true;
+            const cardClass = `${engineBorder} ${isComingSoon ? 'is-coming-soon' : ''}`.trim();
+            const cardAction = isComingSoon ? '' : `onclick="App.openTool(${JSON.stringify(t.name)})"`;
+            const chipMarkup = isComingSoon
+              ? `<span class="chip soon-chip">Coming Soon</span>`
+              : `<span class="chip ${chipClass}">${label}</span>`;
+
+            return `
+            <div class="card grid-anim-enter ${cardClass}" style="animation-delay: ${delay}s" ${cardAction}>
+                <div class="card-top">
+                    ${chipMarkup}
+                    <span class="card-icon">${t.icon}</span>
+                </div>
+                <h3>${t.name}</h3>
+                <p>${t.desc}</p>
+                <span class="card-link">${isComingSoon ? 'In Development' : 'Launch'}</span>
+            </div>`;
+        }).join('');
+
+        count.innerText = `Showing ${filtered.length} tools`;
+    },
+
+    initTabs() {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                tabs.forEach(t => t.classList.remove('on'));
+                e.target.classList.add('on');
+                this.state.tab = e.target.getAttribute('data-c');
+                this.renderGrid();
+            });
+        });
+    },
+
+    toggleSort() {
+        this.state.sortAlpha = !this.state.sortAlpha;
+        const btn = document.getElementById('sort-toggle');
+        btn.classList.toggle('active');
+        btn.innerText = this.state.sortAlpha ? "Sort: A → Z" : "Sort: Category";
+        this.renderGrid();
+    },
+
+    toggleEngineFilters() {
+        this.state.includeEngine = document.getElementById('engine-toggle').checked;
+        this.renderGrid();
+    },
+
+    resolveToolEntry(name) {
+        const raw = String(name || '').trim();
+        const normalized = raw.toLowerCase();
+        if (!normalized) return null;
+        const slug = normalized.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const routerMap = window.Router?.toolPathStaticMap || {};
+
+        if (slug && routerMap[slug]) return routerMap[slug];
+        if (routerMap[normalized]) return routerMap[normalized];
+
+        const byRegistryName = this.registryTools.find((tool) => String(tool.name || '').toLowerCase() === normalized);
+        if (byRegistryName?.entry) return byRegistryName.entry;
+        if (slug) {
+            const byRegistryId = this.registryTools.find((tool) => String(tool.id || '').toLowerCase() === slug);
+            if (byRegistryId?.entry) return byRegistryId.entry;
+        }
+
+        const partialRegistry = this.registryTools.find((tool) => {
+            const toolId = String(tool.id || '').toLowerCase();
+            const toolName = String(tool.name || '').toLowerCase();
+            return toolId.includes(normalized) || toolName.includes(normalized) || normalized.includes(toolId);
+        });
+        if (partialRegistry?.entry) return partialRegistry.entry;
+
+        const catalogEntry = ToolCatalog.resolveEntry(raw);
+        if (catalogEntry) return catalogEntry;
+
+        const partialAlias = Object.keys(ROUTE_ALIASES).find((key) => key.includes(normalized) || normalized.includes(key));
+        return partialAlias ? ROUTE_ALIASES[partialAlias] : null;
+    },
+
+    openTool(name) {
+        const toast = document.getElementById('toast');
+        const toastIcon = document.getElementById('toast-icon');
+        const resolvedEntry = this.resolveToolEntry(name);
+        const isExternal = Boolean(resolvedEntry && /^https?:\/\//i.test(resolvedEntry));
+        const entryPath = resolvedEntry
+          ? (isExternal ? resolvedEntry : `./${resolvedEntry.replace(/^\.\//, '')}`)
+          : null;
+
+        if (entryPath) {
+            toastIcon.textContent = '🚀';
+            toast.classList.remove('coming-soon');
+            document.getElementById('toast-msg').innerText = `Booting ${name} module...`;
+        } else {
+            toastIcon.textContent = '🔜';
+            toast.classList.add('coming-soon');
+            document.getElementById('toast-msg').innerText = `${name} · Coming Soon`;
+        }
+
+        toast.classList.add('show');
+
+        if (entryPath) {
+          setTimeout(() => {
+            if (isExternal) {
+              window.open(entryPath, '_blank', 'noopener');
+              toast.classList.remove('show');
+            } else {
+              window.location.href = entryPath;
+            }
+          }, 350);
+        } else {
+          setTimeout(() => {
+            toast.classList.remove('show');
+            toast.classList.remove('coming-soon');
+          }, 2500);
+        }
+    },
+
+    animateNumbers() {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 150;
+
+        const observer = new IntersectionObserver((entries, observerRef) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const updateCount = () => {
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observerRef.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => observer.observe(counter));
+    }
+};
+
+// --- 3. UNIVERSAL SEARCH (ORB) ---
+const SearchUI = {
+    isOpen: false,
+
+    open() {
+        this.isOpen = true;
+        const modal = document.getElementById('search-modal');
+        modal.classList.add('active');
+        setTimeout(() => document.getElementById('search-input').focus(), 100);
+        document.body.style.overflow = 'hidden';
+    },
+
+    close() {
+        this.isOpen = false;
+        document.getElementById('search-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+        document.getElementById('search-input').value = '';
+    },
+
+    handleInput(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const resultsBox = document.getElementById('search-results');
+
+        if(!query) {
+            resultsBox.innerHTML = '<div class="empty" style="padding: 24px; text-align: center;">Type to search tools and simulations...</div>';
+            return;
+        }
+
+        const matches = ToolCatalog.list().filter(t =>
+            t.name.toLowerCase().includes(query) ||
+            t.desc.toLowerCase().includes(query) ||
+            t.cat.toLowerCase().includes(query)
+        );
+
+        if(matches.length === 0) {
+            resultsBox.innerHTML = `<div class="empty" style="padding: 24px; text-align: center;">No tools found matching "${query}".</div>`;
+            return;
+        }
+
+        resultsBox.innerHTML = matches.map(t => `
+            <div class="search-item" onclick="SearchUI.execute(${JSON.stringify(t.name)})">
+                <div class="si-icon">${t.icon}</div>
+                <div class="si-text">
+                    <div class="si-title">${t.name}</div>
+                    <div class="si-desc">${t.desc}</div>
+                </div>
+                <span class="chip ${CAT_MAP[t.cat]||'c-misc'}">${LABEL_MAP[t.cat]||t.cat}</span>
+            </div>
+        `).join('');
+    },
+
+    execute(toolName) {
+        this.close();
+        App.openTool(toolName);
+    }
+};
+
+// --- 4. EVENT BINDINGS ---
+document.addEventListener('DOMContentLoaded', async () => {
+    await App.init();
+
+    const deepLinkTool = new URLSearchParams(window.location.search).get('tool');
+    if (deepLinkTool) {
+        App.openTool(deepLinkTool);
+        return;
+    }
+
+    document.querySelectorAll('.nl').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSec = document.getElementById(targetId);
+            if(targetSec) {
+                history.replaceState(null, '', `#${targetId}`);
+                targetSec.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    document.getElementById('search-input').addEventListener('input', (e) => SearchUI.handleInput(e));
+    document.getElementById('search-modal').addEventListener('click', (e) => {
+        if(e.target.id === 'search-modal') SearchUI.close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            SearchUI.isOpen ? SearchUI.close() : SearchUI.open();
+        }
+        if (e.key === 'Escape') {
+            if (SearchUI.isOpen) SearchUI.close();
+            Sidebar.close();
+        }
+    });
+});
+</script>
+</body>
+</html>
+

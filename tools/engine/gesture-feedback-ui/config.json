@@ -1,0 +1,13 @@
+{
+  "id": "gesture-feedback-ui",
+  "name": "Gesture Feedback UI",
+  "description": "Visual gesture toast notifications, consensus meter, and SOS emergency overlay for player interactions.",
+  "category": "engine",
+  "layer": "ui-components",
+  "audience": ["players", "operators", "coders"],
+  "inputs": ["gesture_type", "intensity", "consensus_target"],
+  "outputs": ["toast_event", "consensus_state", "sos_alert"],
+  "relatedTools": ["game-command-center", "ai-coach-console"],
+  "entry": "tools/engine/gesture-feedback-ui/index.html",
+  "tags": ["orchard-engine", "ui", "gesture", "feedback", "standalone"]
+}

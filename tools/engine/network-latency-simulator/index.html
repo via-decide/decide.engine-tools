@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Latency Simulator</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+  <script src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    @media(max-width:640px) { .sim-grid { grid-template-columns: 1fr; } }
+    .slider-row { margin: 10px 0; }
+    .slider-row label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .slider-row label span { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
+    input[type="range"] { width: 100%; height: 6px; border-radius: 4px; background: #1e293b; border: none; padding: 0; -webkit-appearance: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+    .viz-canvas { width: 100%; height: 200px; background: #0a0e18; border-radius: 10px; border: 1px solid var(--line); }
+    .packet-grid { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; margin: 12px 0; }
+    .packet { width: 100%; aspect-ratio: 1; border-radius: 3px; transition: all 0.3s; }
+    .packet.ok { background: var(--accent-2); }
+    .packet.lost { background: #ef4444; }
+    .packet.delayed { background: var(--warn); }
+    .packet.pending { background: #1e293b; }
+    .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+    .m-card { padding: 10px; background: var(--bg-alt); border-radius: 10px; text-align: center; }
+    .m-card .m-val { font-size: 1.3rem; font-weight: 800; }
+    .m-card .m-label { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .log-panel { max-height: 200px; overflow-y: auto; margin-top: 10px; font-family: ui-monospace, monospace; font-size: 0.75rem; }
+    .log-line { padding: 3px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .log-line.error { color: #ef4444; }
+    .log-line.warn { color: var(--warn); }
+    .log-line.ok { color: var(--accent-2); }
+    .status-bar { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 10px; margin-top: 12px; font-size: 0.82rem; font-weight: 600; }
+    .status-bar.healthy { background: rgba(34,197,94,0.1); color: var(--accent-2); border: 1px solid rgba(34,197,94,0.2); }
+    .status-bar.degraded { background: rgba(245,158,11,0.1); color: var(--warn); border: 1px solid rgba(245,158,11,0.2); }
+    .status-bar.critical { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+    .buffer-bar { height: 24px; background: #1e293b; border-radius: 6px; overflow: hidden; margin: 8px 0; position: relative; }
+    .buffer-fill { height: 100%; border-radius: 6px; transition: width 0.3s; }
+    .buffer-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 0.72rem; font-weight: 700; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+    .preset-row { display: flex; gap: 6px; margin: 10px 0; flex-wrap: wrap; }
+    .preset-btn { padding: 6px 12px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--line); color: var(--text); font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
+    .preset-btn:hover { border-color: var(--accent); }
+    .preset-btn.active { background: rgba(255,103,31,0.12); border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Network Latency Simulator</h1>
+      <p>Test game resilience under adverse network conditions — latency, jitter, packet loss & bandwidth caps.</p>
+    </header>
+
+    <div class="preset-row">
+      <button class="preset-btn active" data-preset="ideal">Ideal</button>
+      <button class="preset-btn" data-preset="3g">3G Mobile</button>
+      <button class="preset-btn" data-preset="congested">Congested WiFi</button>
+      <button class="preset-btn" data-preset="satellite">Satellite</button>
+      <button class="preset-btn" data-preset="chaos">Chaos Mode</button>
+    </div>
+
+    <div class="sim-grid">
+      <article class="card">
+        <h3 style="margin:0 0 8px;font-size:0.95rem">Network Controls</h3>
+        <div class="slider-row">
+          <label>Latency (ms) <span id="latencyVal">50</span></label>
+          <input type="range" id="latency" min="0" max="2000" value="50" />
+        </div>
+        <div class="slider-row">
+          <label>Jitter (ms) <span id="jitterVal">10</span></label>
+          <input type="range" id="jitter" min="0" max="500" value="10" />
+        </div>
+        <div class="slider-row">
+          <label>Packet Loss (%) <span id="lossVal">0</span></label>
+          <input type="range" id="loss" min="0" max="100" value="0" />
+        </div>
+        <div class="slider-row">
+          <label>Bandwidth (kbps) <span id="bwVal">10000</span></label>
+          <input type="range" id="bw" min="10" max="50000" value="10000" />
+        </div>
+        <div class="toolbar">
+          <button id="runSim" class="primary">Run Simulation</button>
+          <button id="stopSim">Stop</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 style="margin:0 0 8px;font-size:0.95rem">Packet Flow</h3>
+        <div class="packet-grid" id="packetGrid"></div>
+        <div id="statusBar" class="status-bar healthy">Network: Healthy</div>
+        <h3 style="margin:14px 0 6px;font-size:0.85rem">Buffer Health</h3>
+        <div class="buffer-bar"><div class="buffer-fill" id="bufferFill" style="width:100%;background:var(--accent-2)"></div><div class="buffer-label" id="bufferLabel">100%</div></div>
+      </article>
+    </div>
+
+    <div class="metrics-row" id="metricsRow">
+      <div class="m-card"><div class="m-val" id="mLatency">0ms</div><div class="m-label">Avg Latency</div></div>
+      <div class="m-card"><div class="m-val" id="mLoss">0%</div><div class="m-label">Packet Loss</div></div>
+      <div class="m-card"><div class="m-val" id="mThroughput">0kb/s</div><div class="m-label">Throughput</div></div>
+      <div class="m-card"><div class="m-val" id="mRecoveries">0</div><div class="m-label">Recoveries</div></div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h3 style="margin:0 0 8px;font-size:0.85rem">Event Log</h3>
+      <div class="log-panel" id="logPanel"></div>
+    </div>
+  </main>
+  <script src="../../../shared/tool-storage.js"></script>
+  <script>
+(function () {
+  const STORE_KEY = 'engine.network-latency-simulator.state';
+  const sliders = { latency: document.getElementById('latency'), jitter: document.getElementById('jitter'), loss: document.getElementById('loss'), bw: document.getElementById('bw') };
+  const vals = { latency: document.getElementById('latencyVal'), jitter: document.getElementById('jitterVal'), loss: document.getElementById('lossVal'), bw: document.getElementById('bwVal') };
+  const packetGrid = document.getElementById('packetGrid');
+  const logPanel = document.getElementById('logPanel');
+  const bufferFill = document.getElementById('bufferFill');
+  const bufferLabel = document.getElementById('bufferLabel');
+  const statusBar = document.getElementById('statusBar');
+
+  const PACKET_COUNT = 60;
+  let packets = [];
+  let simInterval = null;
+  let simStep = 0;
+  let stats = { sent: 0, lost: 0, delayed: 0, ok: 0, totalLatency: 0, recoveries: 0, bufferHealth: 100 };
+
+  const presets = {
+    ideal: { latency: 20, jitter: 5, loss: 0, bw: 50000 },
+    '3g': { latency: 300, jitter: 100, loss: 5, bw: 384 },
+    congested: { latency: 150, jitter: 80, loss: 8, bw: 2000 },
+    satellite: { latency: 600, jitter: 200, loss: 3, bw: 1000 },
+    chaos: { latency: 800, jitter: 400, loss: 40, bw: 100 }
+  };
+
+  // Init packet grid
+  for (let i = 0; i < PACKET_COUNT; i++) {
+    const div = document.createElement('div');
+    div.className = 'packet pending';
+    packetGrid.appendChild(div);
+    packets.push({ el: div, state: 'pending' });
+  }
+
+  // Slider sync
+  Object.keys(sliders).forEach(key => {
+    sliders[key].addEventListener('input', () => {
+      vals[key].textContent = sliders[key].value;
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    });
+  });
+
+  // Presets
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const p = presets[btn.dataset.preset];
+      Object.keys(p).forEach(k => { sliders[k].value = p[k]; vals[k].textContent = p[k]; });
+    });
+  });
+
+  function addLog(msg, type) {
+    const line = document.createElement('div');
+    line.className = 'log-line ' + (type || '');
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    line.textContent = `[${time}] ${msg}`;
+    logPanel.prepend(line);
+    if (logPanel.children.length > 100) logPanel.removeChild(logPanel.lastChild);
+  }
+
+  function simulatePacket(idx) {
+    const lat = parseInt(sliders.latency.value);
+    const jit = parseInt(sliders.jitter.value);
+    const lossPct = parseInt(sliders.loss.value);
+    const bw = parseInt(sliders.bw.value);
+
+    stats.sent++;
+    const actualLatency = Math.max(0, lat + (Math.random() - 0.5) * 2 * jit);
+    const isLost = Math.random() * 100 < lossPct;
+    const packetSize = 1.2; // KB per packet
+    const transmitTime = (packetSize / (bw / 1000)) * 1000; // ms
+    const totalDelay = actualLatency + transmitTime;
+
+    const pkt = packets[idx % PACKET_COUNT];
+
+    if (isLost) {
+      pkt.state = 'lost';
+      pkt.el.className = 'packet lost';
+      stats.lost++;
+      stats.bufferHealth = Math.max(0, stats.bufferHealth - 3);
+      if (stats.bufferHealth < 20) addLog(`CRITICAL: Buffer depleted (${stats.bufferHealth.toFixed(0)}%) — packet #${stats.sent} lost`, 'error');
+    } else if (totalDelay > 500) {
+      pkt.state = 'delayed';
+      pkt.el.className = 'packet delayed';
+      stats.delayed++;
+      stats.totalLatency += totalDelay;
+      stats.bufferHealth = Math.max(0, stats.bufferHealth - 1);
+      if (totalDelay > 1000) addLog(`HIGH LATENCY: ${totalDelay.toFixed(0)}ms on packet #${stats.sent}`, 'warn');
+    } else {
+      pkt.state = 'ok';
+      pkt.el.className = 'packet ok';
+      stats.ok++;
+      stats.totalLatency += totalDelay;
+      stats.bufferHealth = Math.min(100, stats.bufferHealth + 0.5);
+    }
+
+    // Recovery detection
+    if (stats.bufferHealth < 30 && pkt.state === 'ok') {
+      const prevLost = packets[(idx - 1 + PACKET_COUNT) % PACKET_COUNT].state;
+      if (prevLost === 'lost' || prevLost === 'delayed') {
+        stats.recoveries++;
+        addLog(`RECOVERY: Connection restored after disruption (#${stats.recoveries})`, 'ok');
+      }
+    }
+  }
+
+  function updateMetrics() {
+    const avgLat = stats.ok + stats.delayed > 0 ? Math.round(stats.totalLatency / (stats.ok + stats.delayed)) : 0;
+    const lossPct = stats.sent > 0 ? ((stats.lost / stats.sent) * 100).toFixed(1) : '0';
+    const bw = parseInt(sliders.bw.value);
+    const effectiveThroughput = Math.round(bw * (1 - stats.lost / Math.max(1, stats.sent)));
+
+    document.getElementById('mLatency').textContent = avgLat + 'ms';
+    document.getElementById('mLatency').style.color = avgLat > 500 ? '#ef4444' : avgLat > 200 ? 'var(--warn)' : 'var(--accent-2)';
+    document.getElementById('mLoss').textContent = lossPct + '%';
+    document.getElementById('mLoss').style.color = parseFloat(lossPct) > 10 ? '#ef4444' : parseFloat(lossPct) > 3 ? 'var(--warn)' : 'var(--accent-2)';
+    document.getElementById('mThroughput').textContent = effectiveThroughput > 1000 ? (effectiveThroughput / 1000).toFixed(1) + 'mb/s' : effectiveThroughput + 'kb/s';
+    document.getElementById('mRecoveries').textContent = stats.recoveries;
+
+    // Buffer bar
+    const bh = stats.bufferHealth;
+    bufferFill.style.width = bh + '%';
+    bufferFill.style.background = bh > 60 ? 'var(--accent-2)' : bh > 30 ? 'var(--warn)' : '#ef4444';
+    bufferLabel.textContent = Math.round(bh) + '%';
+
+    // Status bar
+    if (bh > 60 && parseFloat(lossPct) < 5) {
+      statusBar.className = 'status-bar healthy';
+      statusBar.textContent = 'Network: Healthy';
+    } else if (bh > 20 && parseFloat(lossPct) < 20) {
+      statusBar.className = 'status-bar degraded';
+      statusBar.textContent = 'Network: Degraded';
+    } else {
+      statusBar.className = 'status-bar critical';
+      statusBar.textContent = 'Network: Critical';
+    }
+  }
+
+  function startSim() {
+    stopSim();
+    stats = { sent: 0, lost: 0, delayed: 0, ok: 0, totalLatency: 0, recoveries: 0, bufferHealth: 100 };
+    simStep = 0;
+    packets.forEach(p => { p.state = 'pending'; p.el.className = 'packet pending'; });
+    logPanel.innerHTML = '';
+    addLog('Simulation started — ' + document.querySelector('.preset-btn.active')?.textContent || 'Custom' + ' profile', 'ok');
+
+    simInterval = setInterval(() => {
+      simulatePacket(simStep);
+      updateMetrics();
+      simStep++;
+      if (simStep >= 200) {
+        stopSim();
+        addLog(`Simulation complete: ${stats.sent} sent, ${stats.ok} ok, ${stats.lost} lost, ${stats.delayed} delayed, ${stats.recoveries} recoveries`, 'ok');
+        ToolStorage.write(STORE_KEY, {
+          profile: document.querySelector('.preset-btn.active')?.dataset.preset || 'custom',
+          stats, completedAt: new Date().toISOString()
+        });
+      }
+    }, 80);
+  }
+
+  function stopSim() {
+    if (simInterval) { clearInterval(simInterval); simInterval = null; addLog('Simulation stopped', 'warn'); }
+  }
+
+  document.getElementById('runSim').addEventListener('click', startSim);
+  document.getElementById('stopSim').addEventListener('click', stopSim);
+})();
+  </script>
+</body>
+</html>

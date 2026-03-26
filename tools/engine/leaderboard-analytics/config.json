@@ -1,0 +1,13 @@
+{
+  "id": "leaderboard-analytics",
+  "name": "Leaderboard & Analytics",
+  "description": "Interactive leaderboard with player rankings, archetype performance charts, and fairness analytics powered by the fair ranking engine.",
+  "category": "engine",
+  "layer": "market",
+  "audience": ["players", "recruiters", "operators"],
+  "inputs": ["player_data", "time_range"],
+  "outputs": ["leaderboard_view", "analytics_charts", "fairness_report"],
+  "relatedTools": ["fair-ranking-engine", "balance-dashboard", "trust-score-engine", "hire-readiness-scorer"],
+  "entry": "tools/engine/leaderboard-analytics/index.html",
+  "tags": ["orchard-engine", "leaderboard", "analytics", "visualization", "standalone"]
+}

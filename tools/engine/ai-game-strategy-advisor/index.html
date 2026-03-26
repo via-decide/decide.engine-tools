@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Game Strategy Advisor</title>
+  <link rel="stylesheet" href="../../../shared/shared.css" />
+  <script src="../../../shared/vd-nav-fix.js"></script>
+  <style>
+    .strategy-tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+    .strategy-tabs button { flex: 1; padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-alt); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+    .strategy-tabs button.active { background: linear-gradient(135deg, var(--accent), #f97316); color: #111; border-color: transparent; font-weight: 700; }
+    .meter-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+    .meter-label { width: 90px; font-size: 0.78rem; color: var(--muted); }
+    .meter-bar { flex: 1; height: 10px; background: #1e293b; border-radius: 6px; overflow: hidden; }
+    .meter-fill { height: 100%; border-radius: 6px; transition: width 0.5s ease; }
+    .meter-val { width: 40px; text-align: right; font-size: 0.78rem; font-weight: 600; }
+    .insight-card { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 10px; padding: 10px 12px; margin: 8px 0; }
+    .insight-card.warn { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); }
+    .insight-card.danger { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); }
+    .insight-card h4 { margin: 0 0 4px; font-size: 0.85rem; }
+    .insight-card p { margin: 0; font-size: 0.78rem; color: var(--muted); }
+    .action-list { list-style: none; padding: 0; margin: 8px 0; }
+    .action-list li { padding: 8px 10px; margin: 4px 0; background: var(--bg-alt); border-radius: 8px; font-size: 0.82rem; border-left: 3px solid var(--accent-2); }
+    .action-list li.priority-high { border-left-color: var(--accent); }
+    .action-list li.priority-critical { border-left-color: #ef4444; }
+    .score-big { font-size: 2.2rem; font-weight: 800; text-align: center; margin: 10px 0; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .risk-item { padding: 10px; border-radius: 8px; background: var(--bg-alt); border: 1px solid var(--line); }
+    .risk-item .risk-name { font-size: 0.78rem; color: var(--muted); }
+    .risk-item .risk-level { font-size: 0.9rem; font-weight: 700; margin-top: 4px; }
+    .risk-low { color: var(--accent-2); }
+    .risk-med { color: var(--warn); }
+    .risk-high { color: #ef4444; }
+    .timeline { position: relative; padding-left: 20px; margin: 8px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+    .timeline-item { position: relative; margin: 10px 0; }
+    .timeline-item::before { content: ''; position: absolute; left: -18px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-2); border: 2px solid var(--bg); }
+    .timeline-item.future::before { background: var(--line); }
+    .timeline-item h5 { margin: 0; font-size: 0.82rem; }
+    .timeline-item p { margin: 2px 0 0; font-size: 0.75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>AI Game Strategy Advisor</h1>
+      <p>Analyze your orchard state and get AI-powered growth strategies.</p>
+    </header>
+    <section class="grid">
+      <article class="card">
+        <label for="playerState">Player State (JSON or use defaults)</label>
+        <textarea id="playerState" placeholder='{"roots": 25, "trunk": 15, "fruits": 8, "seeds": 12, "water": 70, "consistency": 75, "quality": 60, "depth": 55, "peer": 40, "spamDays": 1, "daysActive": 22}'></textarea>
+        <label for="goal">Strategic Goal</label>
+        <select id="goal">
+          <option value="promotion">Get Promoted (30-day)</option>
+          <option value="ranking">Climb Rankings</option>
+          <option value="trust">Build Trust Score</option>
+          <option value="hire-ready">Hire Readiness</option>
+          <option value="balanced">Balanced Growth</option>
+        </select>
+        <label for="growthMode">Growth Mode</label>
+        <select id="growthMode">
+          <option value="steady">Steady</option>
+          <option value="accelerated">Accelerated</option>
+          <option value="resilient">Resilient</option>
+        </select>
+        <div class="toolbar">
+          <button id="analyze" class="primary">Analyze & Advise</button>
+          <button id="simulate">Simulate 7 Days</button>
+          <button id="copy">Copy Report</button>
+        </div>
+      </article>
+      <article class="card">
+        <div class="strategy-tabs">
+          <button class="active" data-tab="overview">Overview</button>
+          <button data-tab="actions">Actions</button>
+          <button data-tab="risks">Risks</button>
+          <button data-tab="timeline">Timeline</button>
+        </div>
+        <div id="tab-overview" class="tab-content"></div>
+        <div id="tab-actions" class="tab-content" style="display:none"></div>
+        <div id="tab-risks" class="tab-content" style="display:none"></div>
+        <div id="tab-timeline" class="tab-content" style="display:none"></div>
+      </article>
+    </section>
+  </main>
+  <script src="../../../shared/tool-storage.js"></script>
+  <script src="../../../shared/engine-utils.js"></script>
+  <script src="../../../shared/engine-models.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>

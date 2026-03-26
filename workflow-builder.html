@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Plan Editor • decide.engine</title>
+  <style>
+    :root { --bg:#060916; --panel:#11162a; --muted:#9ba7c7; --text:#f5f8ff; --primary:#6ea8fe; --border:#202a47; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: radial-gradient(circle at 20% 0%, #1d2a55 0%, var(--bg) 45%); color: var(--text); }
+    .page { width: min(1220px, 96vw); margin: 0 auto; padding: 18px 0 24px; }
+    .top { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn { border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 10px; padding: 8px 12px; cursor: pointer; text-decoration: none; }
+    .btn.primary { background: linear-gradient(120deg, var(--primary), #9fc5ff); color: #051022; border: 0; font-weight: 700; }
+    .panel { margin-top: 12px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+    .controls { display: grid; gap: 8px; margin-bottom: 12px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    input, select, textarea { width: 100%; background: #0d142a; color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px; }
+    .steps-list { display: grid; gap: 10px; }
+    .step-card { border: 1px solid var(--border); border-radius: 10px; padding: 10px; background: rgba(255,255,255,0.02); display: grid; gap: 8px; }
+    .step-card header { display: flex; justify-content: space-between; align-items: center; }
+    .step-actions { display: flex; gap: 6px; }
+    .step-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+    .muted { color: var(--muted); }
+    pre { margin-top: 10px; background: #0d142a; border: 1px solid var(--border); border-radius: 8px; padding: 8px; max-height: 240px; overflow: auto; color: #c7ddff; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <h1>Agent Plan Editor</h1>
+      <a class="btn" href="index.html">Back to Hub</a>
+    </header>
+
+    <section class="panel controls">
+      <label>Agent ID<input id="workflow-id" type="text" placeholder="agent-content-pipeline"></label>
+      <label>Agent Name<input id="workflow-name" type="text" placeholder="Content Pipeline Agent"></label>
+      <div class="row">
+        <button id="add-step" class="btn" type="button">Add Step</button>
+        <button id="save-workflow" class="btn primary" type="button">Save Agent JSON</button>
+        <button id="run-workflow" class="btn primary" type="button">Run Sequentially</button>
+        <button id="clear-canvas" class="btn" type="button">Clear Steps</button>
+        <button id="export-workflow" class="btn" type="button">Export JSON</button>
+        <label class="btn">Import JSON<input id="import-workflow" type="file" accept="application/json" style="display:none"></label>
+      </div>
+      <div class="row">
+        <select id="saved-workflows" aria-label="Saved agents"></select>
+        <button id="load-workflow" class="btn" type="button">Load Agent</button>
+      </div>
+      <label>Task Prompt<input id="agent-task-prompt" type="text" placeholder="Generate brief, review code, export output"></label>
+      <div class="row">
+        <button id="build-agent-workflow" class="btn" type="button">Auto Build Plan</button>
+        <button id="run-agent-workflow" class="btn" type="button">Run Auto Plan</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Workflow Steps</h2>
+      <div id="steps-list" class="steps-list"></div>
+      <div id="autosave-status" class="muted" style="margin-top:8px;">Autosave ready</div>
+      <pre id="workflow-steps-preview"></pre>
+    </section>
+  </main>
+
+  <script src="shared/tool-registry.js"></script>
+  <script src="shared/workflow-engine.js"></script>
+  <script src="shared/workflow-storage.js"></script>
+  <script src="shared/agent-storage.js"></script>
+  <script src="shared/agent-runtime.js"></script>
+  <script src="shared/agent-layer.js"></script>
+  <script src="shared/workflow-ui.js"></script>
+  <script>window.WorkflowUI.init();</script>
+</body>
+</html>
