@@ -1,0 +1,770 @@
+<!doctype html>
+<!-- CODEX: DO NOT MODIFY loreData entries below id:bhaskara onwards -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ViaLogic · Cartography of Minds</title>
+  <script src="./p5.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js';"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <script src="../../../shared/vd-nav-fix.js"></script>
+  <script src="../../../shared/vd-wallet.js"></script>
+  <style>
+    :root {
+      --bg: #0a0f19;
+      --panel: #121a2a;
+      --ink: #ecf2ff;
+      --muted: #8d9bb6;
+      --amber: #ff8f00;
+      --locked: #5f697d;
+      --line: #2d3648;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top, #17253b 0%, #0a0f19 55%, #090d15 100%);
+      overflow: hidden;
+    }
+    #p5-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    #app { position: relative; z-index: 2; height: 100%; }
+    .hud {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(13, 19, 30, 0.9);
+      border: 1px solid #293247;
+      border-radius: 16px;
+      padding: 8px;
+    }
+    .pill {
+      border-radius: 999px;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f1728;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .pill strong { color: #ffd08c; }
+    .spark-btn { cursor: pointer; min-width: 148px; }
+    .filters {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      gap: 6px;
+      background: rgba(13, 19, 30, 0.9);
+      border: 1px solid #293247;
+      border-radius: 16px;
+      padding: 8px;
+      flex-wrap: wrap;
+      max-width: min(90vw, 420px);
+    }
+    .filter-btn {
+      min-height: 48px;
+      min-width: 48px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      background: #0f1728;
+      color: #c8d4eb;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    .filter-btn.on { border-color: var(--amber); color: #ffd59b; }
+    .badge {
+      position: fixed;
+      left: 12px;
+      bottom: 12px;
+      background: rgba(13, 19, 30, 0.92);
+      border: 1px solid #293247;
+      border-radius: 14px;
+      padding: 10px 14px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+    }
+    #minimap-wrap {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      width: 120px;
+      background: rgba(13, 19, 30, 0.92);
+      border: 1px solid #293247;
+      border-radius: 12px;
+      padding: 6px;
+    }
+    #minimap { width: 120px; height: 80px; cursor: pointer; }
+    #viewport { position: absolute; inset: 0; overflow: hidden; cursor: grab; touch-action: none; }
+    #viewport.dragging { cursor: grabbing; }
+    #world {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform-origin: 0 0;
+    }
+    #paths {
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .path {
+      fill: none;
+      stroke: var(--locked);
+      stroke-dasharray: 6 7;
+      stroke-width: 2.6;
+      opacity: 0.7;
+      transition: stroke 350ms ease, stroke-dasharray 350ms ease;
+    }
+    .path.unlocked {
+      stroke: var(--amber);
+      stroke-dasharray: 0;
+      opacity: 0.95;
+      stroke-dasharray: 1000;
+      animation: growStroke 900ms ease forwards;
+    }
+    @keyframes growStroke {
+      from { stroke-dashoffset: 1000; }
+      to { stroke-dashoffset: 0; }
+    }
+    .node {
+      position: absolute;
+      width: 88px;
+      min-height: 88px;
+      margin: -44px 0 0 -44px;
+      border-radius: 18px;
+      border: 1px solid #2f3a4d;
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+      color: #f1f5ff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      cursor: pointer;
+      padding: 8px;
+      transition: transform 200ms ease, opacity 200ms ease, box-shadow 250ms ease;
+      backdrop-filter: blur(5px);
+    }
+    .node:hover { transform: translateY(-2px); }
+    .node .icon { font-size: 26px; line-height: 1; }
+    .node .name { font-size: 11px; margin-top: 4px; }
+    .node .lvl {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid #3f4f67;
+      background: #0d1523;
+      font-size: 11px;
+      display: grid;
+      place-items: center;
+    }
+    .node.locked {
+      filter: grayscale(1);
+      cursor: not-allowed;
+      box-shadow: none !important;
+    }
+    .node.dimmed { opacity: 0.3; }
+    .node.unlocked {
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 20px rgba(255, 143, 0, 0.18);
+    }
+    #modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 9, 15, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 10;
+    }
+    #modal.open { display: flex; }
+    .modal-card {
+      width: min(540px, 100%);
+      background: #0d1523;
+      border: 1px solid #2d3b54;
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .modal-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    .modal-title h2 { margin: 0 0 4px; }
+    .sub { color: #8fa2c3; margin: 0; display: inline-flex; align-items: center; gap: 8px; }
+    .era-pill { border: 1px solid #334155; border-radius: 999px; padding: 2px 8px; font-size: 12px; color: #bcd0f1; }
+    .contrib { color: #93a3bf; font-style: italic; margin: 14px 0; line-height: 1.5; }
+    .stats {
+      border: 1px solid #2a3a52;
+      border-radius: 14px;
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+      color: #d8e4ff;
+    }
+    .row { display: flex; justify-content: space-between; gap: 10px; }
+    .actions { margin-top: 12px; display: flex; gap: 8px; }
+    .btn {
+      flex: 1;
+      min-height: 48px;
+      border-radius: 12px;
+      border: 1px solid #364961;
+      background: #111d30;
+      color: #ecf4ff;
+      cursor: pointer;
+      padding: 8px 12px;
+    }
+    .btn.primary { background: linear-gradient(180deg, #ffb13b, #ff8f00); color: #1f1403; border-color: #ffac31; font-weight: 700; }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div id="p5-bg" aria-hidden="true"></div>
+  <div id="app">
+    <div class="hud">
+      <div class="pill"><strong id="spark-total">0</strong>&nbsp;💡 Sparks</div>
+      <button class="pill spark-btn" id="spark-btn">Gather +250</button>
+    </div>
+
+    <div class="filters" id="filter-bar" aria-label="Era filter bar"></div>
+
+    <div id="viewport">
+      <div id="world">
+        <svg id="paths"></svg>
+        <div id="nodes"></div>
+      </div>
+    </div>
+
+    <div class="badge" id="unlock-count">0 / 14 Unlocked</div>
+
+    <div id="minimap-wrap">
+      <canvas id="minimap" width="120" height="80" aria-label="ViaLogic minimap"></canvas>
+    </div>
+  </div>
+
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="modal-title">
+          <h2 id="m-name">Node</h2>
+          <p class="sub"><span id="m-title"></span><span class="era-pill" id="m-era"></span></p>
+        </div>
+        <button class="btn" id="m-close" style="min-width: 48px;">✕</button>
+      </div>
+      <p class="contrib" id="m-contribution"></p>
+      <div class="stats" id="m-stats"></div>
+      <div class="actions">
+        <button class="btn" id="m-center">Center on Map</button>
+        <button class="btn primary" id="m-upgrade">Upgrade</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'vialogic_state';
+
+      const loreData = [
+        {
+          id: 'thales', name: 'Thales', title: 'First Geometer', icon: '📐', color: '#36c2ff', tier: 0, x: -140, y: 0,
+          level: 1, power: 500, cost: 100,
+          buff1Name: 'Proof Clarity', buff1Val: 5, buff2Name: 'Axiom Bloom', buff2Val: 4,
+          unlockedBy: [], era: 'Ancient Greece',
+          contribution: 'Thales introduced deductive reasoning into geometry and linked mathematics to logical proof. His theorems became early roots for formal geometric thought.'
+        },
+        {
+          id: 'aryabhata', name: 'Aryabhata', title: 'Astral Mathematician', icon: '🌌', color: '#7b7dff', tier: 0, x: 140, y: 0,
+          level: 1, power: 500, cost: 100,
+          buff1Name: 'Trigonometric Seed', buff1Val: 6, buff2Name: 'Orbital Insight', buff2Val: 5,
+          unlockedBy: [], era: 'Indian Classical',
+          contribution: 'Aryabhata advanced trigonometric tables and astronomical calculations with striking precision. His work shaped computational mathematics across South and West Asia.'
+        },
+        {
+          id: 'pythagoras', name: 'Pythagoras', title: 'Harmony of Number', icon: '🎵', color: '#4cc3ff', tier: 1, x: -360, y: -60,
+          level: 1, power: 1500, cost: 300,
+          buff1Name: 'Ratio Resonance', buff1Val: 8, buff2Name: 'Triangle Force', buff2Val: 7,
+          unlockedBy: ['thales'], era: 'Ancient Greece',
+          contribution: 'Pythagorean ideas tied arithmetic, geometry, and music through ratio and form. The theorem bearing his name became foundational in spatial reasoning.'
+        },
+        {
+          id: 'euclid', name: 'Euclid', title: 'Architect of Elements', icon: '📘', color: '#6ad8ff', tier: 1, x: -10, y: -320,
+          level: 1, power: 1500, cost: 300,
+          buff1Name: 'Postulate Order', buff1Val: 9, buff2Name: 'Logical Spine', buff2Val: 8,
+          unlockedBy: ['thales', 'aryabhata'], era: 'Ancient Greece',
+          contribution: 'Euclid organized geometry into axioms, definitions, and proofs in the Elements. This structure shaped mathematical teaching for centuries.'
+        },
+        {
+          id: 'brahmagupta', name: 'Brahmagupta', title: 'Master of Zero', icon: '0️⃣', color: '#9a80ff', tier: 1, x: 350, y: -70,
+          level: 1, power: 1500, cost: 300,
+          buff1Name: 'Zero Law', buff1Val: 8, buff2Name: 'Negative Balance', buff2Val: 7,
+          unlockedBy: ['aryabhata'], era: 'Indian Classical',
+          contribution: 'Brahmagupta formalized rules for zero and negative numbers with algorithmic clarity. His arithmetic framework accelerated algebraic development.'
+        },
+        {
+          id: 'archimedes', name: 'Archimedes', title: 'Mechanics Sage', icon: '⚙️', color: '#6dd6d6', tier: 2, x: -520, y: -220,
+          level: 1, power: 2500, cost: 500,
+          buff1Name: 'Leverage Law', buff1Val: 11, buff2Name: 'Volume Vision', buff2Val: 10,
+          unlockedBy: ['pythagoras', 'euclid'], era: 'Hellenistic',
+          contribution: 'Archimedes united geometry with mechanics to derive results on areas, volumes, and centers of mass. His method of exhaustion anticipated integral thinking.'
+        },
+        {
+          id: 'al-khwarizmi', name: 'Al-Khwarizmi', title: 'Father of Algebra', icon: '🧮', color: '#f8ae48', tier: 2, x: 350, y: -350,
+          level: 1, power: 2500, cost: 500,
+          buff1Name: 'Equation Craft', buff1Val: 12, buff2Name: 'Algorithm Core', buff2Val: 11,
+          unlockedBy: ['brahmagupta', 'euclid'], era: 'Islamic Golden Age',
+          contribution: 'Al-Khwarizmi systematized algebra as a practical method for solving equations. His name gave rise to the term algorithm in modern computation.'
+        },
+        {
+          id: 'mahaviracharya', name: 'Mahaviracharya', title: 'Combinatorics Scholar', icon: '🪷', color: '#b186ff', tier: 2, x: 560, y: -80,
+          level: 1, power: 2500, cost: 500,
+          buff1Name: 'Permutation Bloom', buff1Val: 10, buff2Name: 'Series Nectar', buff2Val: 9,
+          unlockedBy: ['brahmagupta'], era: 'Medieval India',
+          contribution: 'Mahaviracharya expanded arithmetic and combinatorial techniques with rich worked examples. His treatments of series and permutations influenced later Indian texts.'
+        },
+        {
+          id: 'plato', name: 'Plato', title: 'Philosopher of Forms', icon: '🏛️', color: '#8fc2ff', tier: 3, x: -700, y: -150,
+          level: 1, power: 3500, cost: 700,
+          buff1Name: 'Form Insight', buff1Val: 13, buff2Name: 'Dialectic Lens', buff2Val: 12,
+          unlockedBy: ['archimedes'], era: 'Ancient Greece',
+          contribution: 'Plato elevated geometry as preparation for philosophical reasoning and abstract thought. His academy sustained mathematical culture in classical Greece.'
+        },
+        {
+          id: 'hypatia', name: 'Hypatia', title: 'Alexandrian Mentor', icon: '🌠', color: '#84e2ff', tier: 3, x: -360, y: -520,
+          level: 1, power: 3500, cost: 700,
+          buff1Name: 'Commentary Flame', buff1Val: 14, buff2Name: 'Teaching Aura', buff2Val: 12,
+          unlockedBy: ['euclid', 'archimedes'], era: 'Hellenistic',
+          contribution: 'Hypatia preserved and taught major works in geometry and astronomy in Alexandria. Her scholarship became a symbol of scientific continuity and intellectual courage.'
+        },
+        {
+          id: 'ptolemy', name: 'Ptolemy', title: 'Geometric Astronomer', icon: '🛰️', color: '#72d5f9', tier: 3, x: -20, y: -620,
+          level: 1, power: 3500, cost: 700,
+          buff1Name: 'Chord Matrix', buff1Val: 13, buff2Name: 'Cosmos Grid', buff2Val: 13,
+          unlockedBy: ['euclid', 'al-khwarizmi'], era: 'Hellenistic',
+          contribution: 'Ptolemy refined astronomical models using geometric methods and tabular computation. His synthesis in the Almagest guided scientific astronomy for centuries.'
+        },
+        {
+          id: 'omar-khayyam', name: 'Omar Khayyam', title: 'Cubic Geometer', icon: '📜', color: '#f2b86e', tier: 3, x: 520, y: -500,
+          level: 1, power: 3500, cost: 700,
+          buff1Name: 'Cubic Arc', buff1Val: 15, buff2Name: 'Calendar Precision', buff2Val: 13,
+          unlockedBy: ['al-khwarizmi', 'mahaviracharya'], era: 'Islamic Golden Age',
+          contribution: 'Omar Khayyam classified cubic equations and solved classes geometrically with conics. He also contributed to highly accurate calendar reform.'
+        },
+        {
+          id: 'bhaskara', name: 'Bhaskara', title: 'Crown of Lilavati', icon: '👑', color: '#d7a6ff', tier: 4, x: 300, y: -700,
+          level: 1, power: 4500, cost: 900,
+          buff1Name: 'Calculus Seed', buff1Val: 17, buff2Name: 'Planetary Pulse', buff2Val: 16,
+          unlockedBy: ['mahaviracharya', 'omar-khayyam'], era: 'Medieval India',
+          contribution: 'Bhaskara II developed sophisticated algebraic and astronomical techniques with near-calculus intuitions. His works integrated pedagogy, computation, and celestial modeling.'
+        },
+        {
+          id: 'golden-ratio', name: 'Golden Ratio (φ)', title: 'Crown of Proportion', icon: '🌿', color: '#ffd05f', tier: 4, x: -230, y: -760,
+          level: 1, power: 4500, cost: 900,
+          buff1Name: 'Aesthetic Harmony', buff1Val: 18, buff2Name: 'Recursive Growth', buff2Val: 17,
+          unlockedBy: ['plato', 'ptolemy', 'hypatia'], era: 'Ancient Greece',
+          contribution: 'The golden ratio symbolizes recurring proportional structure across geometry, art, and natural growth. In ViaLogic it stands as the crown where abstract pattern meets living design.'
+        }
+      ];
+
+
+      function applyDeterministicLayout() {
+        const radiusByTier = { 0: 140, 1: 320, 2: 500, 3: 670, 4: 820 };
+        const angleById = {
+          thales: Math.PI,
+          aryabhata: 0,
+          pythagoras: Math.PI * 1.18,
+          euclid: Math.PI * 1.5,
+          brahmagupta: Math.PI * 1.82,
+          archimedes: Math.PI * 1.28,
+          'al-khwarizmi': Math.PI * 1.72,
+          mahaviracharya: Math.PI * 1.9,
+          plato: Math.PI * 1.34,
+          hypatia: Math.PI * 1.48,
+          ptolemy: Math.PI * 1.58,
+          'omar-khayyam': Math.PI * 1.72,
+          bhaskara: Math.PI * 1.84,
+          'golden-ratio': Math.PI * 1.43
+        };
+
+        loreData.forEach((entity) => {
+          const radius = radiusByTier[entity.tier] || 300;
+          const angle = angleById[entity.id] || Math.PI * 1.5;
+          entity.x = Math.round(Math.cos(angle) * radius);
+          entity.y = Math.round(Math.sin(angle) * radius);
+        });
+      }
+
+      applyDeterministicLayout();
+
+      const byId = Object.fromEntries(loreData.map((entity) => [entity.id, entity]));
+      const edges = loreData.flatMap((entity) => entity.unlockedBy.map((parent) => ({ parent, child: entity.id })));
+
+      const state = {
+        totalSparks: 2200,
+        entities: {},
+        filter: 'All',
+        panX: 0,
+        panY: 0,
+        scale: 1,
+        selectedId: null
+      };
+
+      const world = document.getElementById('world');
+      const nodesEl = document.getElementById('nodes');
+      const pathsEl = document.getElementById('paths');
+      const viewport = document.getElementById('viewport');
+      const sparkTotalEl = document.getElementById('spark-total');
+      const unlockCountEl = document.getElementById('unlock-count');
+      const minimap = document.getElementById('minimap');
+      const miniCtx = minimap.getContext('2d');
+
+      function safeLoadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          const parsed = raw ? JSON.parse(raw) : null;
+          if (!parsed || typeof parsed !== 'object') return;
+          if (typeof parsed.totalSparks === 'number') state.totalSparks = parsed.totalSparks;
+          if (parsed.entities && typeof parsed.entities === 'object') {
+            Object.keys(parsed.entities).forEach((id) => {
+              state.entities[id] = parsed.entities[id];
+            });
+          }
+        } catch (_error) {
+          // Storage can fail in private mode.
+        }
+      }
+
+      function safeSaveState() {
+        const payload = { totalSparks: state.totalSparks, entities: {} };
+        loreData.forEach((entity) => {
+          const saved = mergedEntity(entity.id);
+          payload.entities[entity.id] = {
+            level: saved.level,
+            power: saved.power,
+            cost: saved.cost,
+            buff1Val: saved.buff1Val,
+            buff2Val: saved.buff2Val
+          };
+        });
+
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        } catch (_error) {
+          // ignore write failure
+        }
+      }
+
+      function mergedEntity(id) {
+        const base = byId[id];
+        return { ...base, ...(state.entities[id] || {}) };
+      }
+
+      function isUnlocked(entity) {
+        if (!entity.unlockedBy.length) return true;
+        return entity.unlockedBy.every((parentId) => mergedEntity(parentId).level >= 2);
+      }
+
+      function unlockCount() {
+        return loreData.filter((entity) => isUnlocked(mergedEntity(entity.id))).length;
+      }
+
+      function applyTransform() {
+        world.style.transform = `translate(${state.panX}px, ${state.panY}px) scale(${state.scale})`;
+      }
+
+      function drawPaths() {
+        pathsEl.innerHTML = '';
+        edges.forEach((edge) => {
+          const parent = mergedEntity(edge.parent);
+          const child = mergedEntity(edge.child);
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const c1x = parent.x + (child.x - parent.x) * 0.35;
+          const c1y = parent.y + (child.y - parent.y) * 0.1;
+          const c2x = child.x - (child.x - parent.x) * 0.2;
+          const c2y = child.y - (child.y - parent.y) * 0.15;
+          line.setAttribute('d', `M ${parent.x} ${parent.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${child.x} ${child.y}`);
+          line.classList.add('path');
+          line.dataset.key = `${edge.parent}->${edge.child}`;
+          if (isUnlocked(child)) {
+            line.classList.add('unlocked');
+          }
+          pathsEl.appendChild(line);
+        });
+      }
+
+      function eraMatch(entity) {
+        if (state.filter === 'All') return true;
+        if (state.filter === 'Ancient Greece') return entity.era === 'Ancient Greece';
+        if (state.filter === 'Indian Cluster') return entity.era === 'Indian Classical' || entity.era === 'Medieval India';
+        return entity.era === state.filter;
+      }
+
+      function renderNodes() {
+        nodesEl.innerHTML = '';
+
+        loreData.forEach((base) => {
+          const entity = mergedEntity(base.id);
+          const unlocked = isUnlocked(entity);
+          const glow = Math.min(0.9, 0.2 + entity.level * 0.08 + entity.tier * 0.05);
+          const node = document.createElement('button');
+          node.type = 'button';
+          node.className = `node ${unlocked ? 'unlocked' : 'locked'} ${eraMatch(entity) ? '' : 'dimmed'}`.trim();
+          node.style.left = `${entity.x}px`;
+          node.style.top = `${entity.y}px`;
+          node.style.borderColor = unlocked ? entity.color : '#465067';
+          node.style.boxShadow = unlocked ? `0 0 20px rgba(255,143,0,${glow}), 0 0 18px ${entity.color}44` : 'none';
+          node.innerHTML = `<span class="icon">${entity.icon}</span><span class="name">${entity.name}</span><span class="lvl">Lv ${entity.level}</span>`;
+          node.disabled = !unlocked;
+          node.addEventListener('click', () => openModal(entity.id));
+          nodesEl.appendChild(node);
+        });
+
+        sparkTotalEl.textContent = Math.floor(state.totalSparks).toLocaleString();
+        unlockCountEl.textContent = `${unlockCount()} / 14 Unlocked`;
+      }
+
+      function centerOnEntity(id) {
+        const entity = mergedEntity(id);
+        state.panX = -entity.x * state.scale;
+        state.panY = -entity.y * state.scale;
+        applyTransform();
+      }
+
+      function upgrade(id) {
+        const entity = mergedEntity(id);
+        if (!isUnlocked(entity)) return false;
+        if (state.totalSparks < entity.cost) return false;
+
+        state.totalSparks -= entity.cost;
+        const next = {
+          level: entity.level + 1,
+          power: entity.power + Math.round(180 + entity.tier * 140 + entity.level * 60),
+          cost: Math.round(entity.cost * 1.42),
+          buff1Val: entity.buff1Val + Math.max(1, Math.round(entity.tier / 2)),
+          buff2Val: entity.buff2Val + Math.max(1, Math.round(entity.tier / 3 + 1))
+        };
+        state.entities[id] = next;
+
+        safeSaveState();
+        render();
+        openModal(id);
+        return true;
+      }
+
+      function openModal(id) {
+        state.selectedId = id;
+        const entity = mergedEntity(id);
+        const unlocked = isUnlocked(entity);
+        document.getElementById('m-name').textContent = `${entity.icon} ${entity.name}`;
+        document.getElementById('m-title').textContent = entity.title;
+        document.getElementById('m-era').textContent = entity.era;
+        document.getElementById('m-contribution').textContent = entity.contribution;
+        document.getElementById('m-stats').innerHTML = [
+          `<div class="row"><span>Tier</span><strong>${entity.tier}</strong></div>`,
+          `<div class="row"><span>Power Rating</span><strong>${entity.power.toLocaleString()}</strong></div>`,
+          `<div class="row"><span>${entity.buff1Name}</span><strong>+${entity.buff1Val}</strong></div>`,
+          `<div class="row"><span>${entity.buff2Name}</span><strong>+${entity.buff2Val}</strong></div>`,
+          `<div class="row"><span>Upgrade Cost</span><strong>${entity.cost.toLocaleString()} 💡</strong></div>`
+        ].join('');
+        const up = document.getElementById('m-upgrade');
+        up.disabled = !unlocked || state.totalSparks < entity.cost;
+        up.textContent = unlocked ? `Upgrade (${entity.cost.toLocaleString()} 💡)` : 'Locked by roots/trunk';
+        document.getElementById('modal').classList.add('open');
+      }
+
+      function closeModal() {
+        document.getElementById('modal').classList.remove('open');
+      }
+
+      function renderFilterBar() {
+        const bar = document.getElementById('filter-bar');
+        const groups = [
+          { key: 'All', label: 'All', match: () => true },
+          { key: 'Ancient Greece', label: 'Greece', match: (e) => e.era === 'Ancient Greece' },
+          { key: 'Indian Cluster', label: 'India', match: (e) => e.era === 'Indian Classical' || e.era === 'Medieval India' },
+          { key: 'Islamic Golden Age', label: 'Islam', match: (e) => e.era === 'Islamic Golden Age' },
+          { key: 'Hellenistic', label: 'Hellenistic', match: (e) => e.era === 'Hellenistic' }
+        ];
+
+        bar.innerHTML = groups.map((f) => `<button type="button" class="filter-btn ${state.filter === f.key ? 'on' : ''}" data-key="${f.key}">${f.label}</button>`).join('');
+        bar.querySelectorAll('.filter-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            state.filter = btn.dataset.key;
+            render();
+          });
+        });
+      }
+
+      function drawMinimap() {
+        const pad = 8;
+        miniCtx.clearRect(0, 0, minimap.width, minimap.height);
+        miniCtx.fillStyle = '#09101b';
+        miniCtx.fillRect(0, 0, minimap.width, minimap.height);
+        miniCtx.strokeStyle = '#243147';
+        miniCtx.strokeRect(0.5, 0.5, minimap.width - 1, minimap.height - 1);
+
+        const xs = loreData.map((e) => e.x);
+        const ys = loreData.map((e) => e.y);
+        const minX = Math.min(...xs), maxX = Math.max(...xs);
+        const minY = Math.min(...ys), maxY = Math.max(...ys);
+        const spanX = Math.max(1, maxX - minX), spanY = Math.max(1, maxY - minY);
+
+        loreData.forEach((node) => {
+          const unlocked = isUnlocked(mergedEntity(node.id));
+          const x = pad + ((node.x - minX) / spanX) * (minimap.width - pad * 2);
+          const y = pad + ((node.y - minY) / spanY) * (minimap.height - pad * 2);
+          miniCtx.fillStyle = unlocked ? '#ff8f00' : '#677288';
+          miniCtx.beginPath();
+          miniCtx.arc(x, y, 2.6, 0, Math.PI * 2);
+          miniCtx.fill();
+        });
+      }
+
+      function render() {
+        drawPaths();
+        renderNodes();
+        renderFilterBar();
+        drawMinimap();
+      }
+
+      function initPanZoom() {
+        state.panX = 0;
+        state.panY = 140;
+        state.scale = Math.min(1.05, Math.max(0.72, window.innerWidth / 1300));
+        applyTransform();
+
+        let dragging = false;
+        let sx = 0;
+        let sy = 0;
+
+        viewport.addEventListener('pointerdown', (event) => {
+          dragging = true;
+          sx = event.clientX;
+          sy = event.clientY;
+          viewport.classList.add('dragging');
+          viewport.setPointerCapture(event.pointerId);
+        });
+
+        viewport.addEventListener('pointermove', (event) => {
+          if (!dragging) return;
+          const dx = event.clientX - sx;
+          const dy = event.clientY - sy;
+          sx = event.clientX;
+          sy = event.clientY;
+          state.panX += dx;
+          state.panY += dy;
+          applyTransform();
+        });
+
+        viewport.addEventListener('pointerup', () => {
+          dragging = false;
+          viewport.classList.remove('dragging');
+        });
+
+        viewport.addEventListener('wheel', (event) => {
+          event.preventDefault();
+          const direction = event.deltaY > 0 ? -1 : 1;
+          const next = state.scale + direction * 0.08;
+          state.scale = Math.max(0.4, Math.min(2, next));
+          applyTransform();
+        }, { passive: false });
+      }
+
+      function initMinimapJump() {
+        minimap.addEventListener('click', (event) => {
+          const rect = minimap.getBoundingClientRect();
+          const tx = (event.clientX - rect.left) / rect.width;
+          const ty = (event.clientY - rect.top) / rect.height;
+          let closest = loreData[0];
+          let best = Infinity;
+          const xs = loreData.map((e) => e.x);
+          const ys = loreData.map((e) => e.y);
+          const minX = Math.min(...xs), maxX = Math.max(...xs);
+          const minY = Math.min(...ys), maxY = Math.max(...ys);
+
+          loreData.forEach((node) => {
+            const nx = (node.x - minX) / Math.max(1, maxX - minX);
+            const ny = (node.y - minY) / Math.max(1, maxY - minY);
+            const dist = (nx - tx) ** 2 + (ny - ty) ** 2;
+            if (dist < best) {
+              best = dist;
+              closest = node;
+            }
+          });
+          centerOnEntity(closest.id);
+          openModal(closest.id);
+        });
+      }
+
+      function initEvents() {
+        document.getElementById('spark-btn').addEventListener('click', () => {
+          state.totalSparks += 250;
+          safeSaveState();
+          render();
+        });
+        document.getElementById('m-close').addEventListener('click', closeModal);
+        document.getElementById('m-upgrade').addEventListener('click', () => {
+          if (state.selectedId) upgrade(state.selectedId);
+        });
+        document.getElementById('m-center').addEventListener('click', () => {
+          if (state.selectedId) centerOnEntity(state.selectedId);
+          closeModal();
+        });
+        document.getElementById('modal').addEventListener('click', (event) => {
+          if (event.target.id === 'modal') closeModal();
+        });
+      }
+
+      function initDecorativeP5() {
+        if (typeof window.p5 === 'undefined') return;
+        const points = [];
+        const sketch = (p) => {
+          p.setup = function () {
+            const c = p.createCanvas(window.innerWidth, window.innerHeight);
+            c.parent('p5-bg');
+            for (let i = 0; i < 45; i += 1) {
+              points.push({ x: p.random(p.width), y: p.random(p.height), r: p.random(1.5, 3.4), s: p.random(0.08, 0.32) });
+            }
+          };
+          p.draw = function () {
+            p.clear();
+            p.noStroke();
+            points.forEach((dot, index) => {
+              const pulse = 0.35 + Math.sin(p.frameCount * 0.01 + index) * 0.25;
+              p.fill(255, 152, 37, 90 * pulse);
+              p.circle(dot.x, dot.y, dot.r * 2);
+              dot.y -= dot.s;
+              if (dot.y < -4) {
+                dot.y = p.height + 4;
+                dot.x = p.random(p.width);
+              }
+            });
+          };
+          p.windowResized = function () { p.resizeCanvas(window.innerWidth, window.innerHeight); };
+        };
+        new window.p5(sketch);
+      }
+
+      safeLoadState();
+      initPanZoom();
+      initMinimapJump();
+      initEvents();
+      initDecorativeP5();
+      render();
+    })();
+  </script>
+</body>
+</html>
