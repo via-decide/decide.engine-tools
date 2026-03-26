@@ -295,6 +295,7 @@
       ],
       "tier": "game",
       "icon": "🗺️",
+      "pullable": true,
       "sparks": true,
       "toolDir": "tools/games/vialogic",
       "metaPath": "tools/games/vialogic/config.json"

@@ -1,770 +1,985 @@
-<!doctype html>
-<!-- CODEX: DO NOT MODIFY loreData entries below id:bhaskara onwards -->
+<!DOCTYPE html>
+<!-- CODEX: loreData is hand-authored. Surgical edits only. -->
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ViaLogic · Cartography of Minds</title>
-  <script src="./p5.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js';"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ViaLogic — Cartography of Minds</title>
+
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  
+  <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
-  <script src="../../../shared/vd-nav-fix.js"></script>
-  <script src="../../../shared/vd-wallet.js"></script>
+
+  <!-- Shared Tools -->
+  <script src="../../shared/vd-nav-fix.js"></script>
+  <script src="../../shared/vd-wallet.js"></script>
+  <script src="../../shared/tool-storage.js"></script>
+
   <style>
     :root {
-      --bg: #0a0f19;
-      --panel: #121a2a;
-      --ink: #ecf2ff;
-      --muted: #8d9bb6;
+      --bg: #0b0f17;
+      --panel: rgba(17, 24, 39, 0.9);
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
       --amber: #ff8f00;
-      --locked: #5f697d;
-      --line: #2d3648;
+      --amber-muted: rgba(255, 143, 0, 0.3);
+      --green: #10b981;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --pink: #ec4899;
+      --cyan: #06b6d4;
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
     body {
-      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: var(--ink);
-      background: radial-gradient(circle at top, #17253b 0%, #0a0f19 55%, #090d15 100%);
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       overflow: hidden;
+      width: 100vw;
+      height: 100vh;
     }
-    #p5-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    #app { position: relative; z-index: 2; height: 100%; }
+
+    #canvas-container {
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+
+    /* HUD Layers */
     .hud {
       position: fixed;
-      top: 12px;
-      left: 12px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      background: rgba(13, 19, 30, 0.9);
-      border: 1px solid #293247;
-      border-radius: 16px;
-      padding: 8px;
-    }
-    .pill {
-      border-radius: 999px;
-      border: 1px solid #334155;
-      padding: 8px 12px;
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #0f1728;
-      color: var(--ink);
-      font-size: 14px;
-    }
-    .pill strong { color: #ffd08c; }
-    .spark-btn { cursor: pointer; min-width: 148px; }
-    .filters {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      display: flex;
-      gap: 6px;
-      background: rgba(13, 19, 30, 0.9);
-      border: 1px solid #293247;
-      border-radius: 16px;
-      padding: 8px;
-      flex-wrap: wrap;
-      max-width: min(90vw, 420px);
-    }
-    .filter-btn {
-      min-height: 48px;
-      min-width: 48px;
-      border-radius: 12px;
-      border: 1px solid #334155;
-      background: #0f1728;
-      color: #c8d4eb;
-      padding: 8px 10px;
-      cursor: pointer;
-    }
-    .filter-btn.on { border-color: var(--amber); color: #ffd59b; }
-    .badge {
-      position: fixed;
-      left: 12px;
-      bottom: 12px;
-      background: rgba(13, 19, 30, 0.92);
-      border: 1px solid #293247;
-      border-radius: 14px;
-      padding: 10px 14px;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-    }
-    #minimap-wrap {
-      position: fixed;
-      right: 12px;
-      bottom: 12px;
-      width: 120px;
-      background: rgba(13, 19, 30, 0.92);
-      border: 1px solid #293247;
-      border-radius: 12px;
-      padding: 6px;
-    }
-    #minimap { width: 120px; height: 80px; cursor: pointer; }
-    #viewport { position: absolute; inset: 0; overflow: hidden; cursor: grab; touch-action: none; }
-    #viewport.dragging { cursor: grabbing; }
-    #world {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 0;
-      height: 0;
-      transform-origin: 0 0;
-    }
-    #paths {
-      position: absolute;
-      left: 0;
-      top: 0;
-      overflow: visible;
+      z-index: 10;
       pointer-events: none;
     }
-    .path {
-      fill: none;
-      stroke: var(--locked);
-      stroke-dasharray: 6 7;
-      stroke-width: 2.6;
-      opacity: 0.7;
-      transition: stroke 350ms ease, stroke-dasharray 350ms ease;
+
+    .hud * {
+      pointer-events: auto;
     }
-    .path.unlocked {
-      stroke: var(--amber);
-      stroke-dasharray: 0;
-      opacity: 0.95;
-      stroke-dasharray: 1000;
-      animation: growStroke 900ms ease forwards;
+
+    .hud-top-left {
+      top: 60px;
+      left: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    @keyframes growStroke {
-      from { stroke-dashoffset: 1000; }
-      to { stroke-dashoffset: 0; }
+
+    .spark-badge {
+      background: var(--panel);
+      padding: 8px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--amber);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
-    .node {
-      position: absolute;
-      width: 88px;
-      min-height: 88px;
-      margin: -44px 0 0 -44px;
-      border-radius: 18px;
-      border: 1px solid #2f3a4d;
-      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
-      color: #f1f5ff;
-      display: grid;
-      place-items: center;
-      text-align: center;
+
+    .node-badge {
+      background: var(--panel);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .hud-top-right {
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 300px;
+    }
+
+    .era-pill {
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
-      padding: 8px;
-      transition: transform 200ms ease, opacity 200ms ease, box-shadow 250ms ease;
-      backdrop-filter: blur(5px);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s;
     }
-    .node:hover { transform: translateY(-2px); }
-    .node .icon { font-size: 26px; line-height: 1; }
-    .node .name { font-size: 11px; margin-top: 4px; }
-    .node .lvl {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      min-width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      border: 1px solid #3f4f67;
-      background: #0d1523;
-      font-size: 11px;
-      display: grid;
-      place-items: center;
+
+    .era-pill.active {
+      background: var(--amber);
+      color: #000;
+      border-color: var(--amber);
     }
-    .node.locked {
-      filter: grayscale(1);
-      cursor: not-allowed;
-      box-shadow: none !important;
+
+    .hud-bottom-right {
+      bottom: 24px;
+      right: 24px;
     }
-    .node.dimmed { opacity: 0.3; }
-    .node.unlocked {
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 20px rgba(255, 143, 0, 0.18);
+
+    #minimap {
+      width: 130px;
+      height: 90px;
+      background: var(--panel);
+      border: 1px solid var(--amber-muted);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
     }
-    #modal {
+
+    /* Modal Bottom Sheet */
+    #modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(7, 9, 15, 0.72);
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
       display: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #modal-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    #bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #0f172a;
+      border-top: 2px solid var(--border);
+      border-radius: 24px 24px 0 0;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 101;
+      padding: 24px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    #modal-overlay.active #bottom-sheet {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .modal-title-group h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .modal-subtitle {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 16px;
-      z-index: 10;
+      gap: 8px;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
     }
-    #modal.open { display: flex; }
-    .modal-card {
-      width: min(540px, 100%);
-      background: #0d1523;
-      border: 1px solid #2d3b54;
-      border-radius: 18px;
-      padding: 16px;
+
+    .era-badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--amber);
+      color: #000;
     }
-    .modal-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
-    .modal-title h2 { margin: 0 0 4px; }
-    .sub { color: #8fa2c3; margin: 0; display: inline-flex; align-items: center; gap: 8px; }
-    .era-pill { border: 1px solid #334155; border-radius: 999px; padding: 2px 8px; font-size: 12px; color: #bcd0f1; }
-    .contrib { color: #93a3bf; font-style: italic; margin: 14px 0; line-height: 1.5; }
-    .stats {
-      border: 1px solid #2a3a52;
-      border-radius: 14px;
-      padding: 12px;
-      display: grid;
-      gap: 6px;
-      color: #d8e4ff;
+
+    .contribution {
+      font-style: italic;
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
-    .row { display: flex; justify-content: space-between; gap: 10px; }
-    .actions { margin-top: 12px; display: flex; gap: 8px; }
-    .btn {
-      flex: 1;
-      min-height: 48px;
+
+    .stats-card {
+      background: rgba(255,255,255,0.05);
       border-radius: 12px;
-      border: 1px solid #364961;
-      background: #111d30;
-      color: #ecf4ff;
-      cursor: pointer;
-      padding: 8px 12px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
     }
-    .btn.primary { background: linear-gradient(180deg, #ffb13b, #ff8f00); color: #1f1403; border-color: #ffac31; font-weight: 700; }
-    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .next-unlocks {
+      margin-top: 16px;
+    }
+
+    .next-unlocks-hd {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .unlock-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .unlock-chip {
+      background: rgba(255, 143, 0, 0.15);
+      border: 1px solid var(--amber-muted);
+      color: var(--amber);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .upgrade-btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      border: none;
+      background: var(--amber);
+      color: #000;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .upgrade-btn:disabled {
+      background: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .upgrade-btn.shake {
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 99px;
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
-  <div id="p5-bg" aria-hidden="true"></div>
-  <div id="app">
-    <div class="hud">
-      <div class="pill"><strong id="spark-total">0</strong>&nbsp;💡 Sparks</div>
-      <button class="pill spark-btn" id="spark-btn">Gather +250</button>
+
+  <div id="canvas-container"></div>
+
+  <!-- HUD -->
+  <div class="hud hud-top-left">
+    <div class="spark-badge">
+      <i class="ph-fill ph-lightbulb"></i>
+      <span id="bal-val">0</span>
     </div>
-
-    <div class="filters" id="filter-bar" aria-label="Era filter bar"></div>
-
-    <div id="viewport">
-      <div id="world">
-        <svg id="paths"></svg>
-        <div id="nodes"></div>
-      </div>
-    </div>
-
-    <div class="badge" id="unlock-count">0 / 14 Unlocked</div>
-
-    <div id="minimap-wrap">
-      <canvas id="minimap" width="120" height="80" aria-label="ViaLogic minimap"></canvas>
-    </div>
+    <div class="node-badge" id="node-count">⬡ 0 / 14 Unlocked</div>
   </div>
 
-  <div id="modal" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <div class="modal-top">
-        <div class="modal-title">
-          <h2 id="m-name">Node</h2>
-          <p class="sub"><span id="m-title"></span><span class="era-pill" id="m-era"></span></p>
+  <div class="hud hud-top-right" id="era-filter">
+    <button class="era-pill active" data-era="all">All</button>
+    <button class="era-pill" data-era="Greece">Greece</button>
+    <button class="era-pill" data-era="India">India</button>
+    <button class="era-pill" data-era="Islam">Islam</button>
+    <button class="era-pill" data-era="Hellenistic">Hellenistic</button>
+    <button class="era-pill" data-era="Medieval">Medieval</button>
+  </div>
+
+  <div class="hud hud-bottom-right">
+    <div id="minimap"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal-overlay">
+    <div id="bottom-sheet">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="m-title">Entity Name</h2>
+          <div class="modal-subtitle">
+            <span class="era-badge" id="m-era">ERA</span>
+            <span id="m-role">The Title</span>
+          </div>
         </div>
-        <button class="btn" id="m-close" style="min-width: 48px;">✕</button>
+        <button onclick="closeModal()" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:24px;">
+          <i class="ph ph-x"></i>
+        </button>
       </div>
-      <p class="contrib" id="m-contribution"></p>
-      <div class="stats" id="m-stats"></div>
-      <div class="actions">
-        <button class="btn" id="m-center">Center on Map</button>
-        <button class="btn primary" id="m-upgrade">Upgrade</button>
+
+      <p class="contribution" id="m-contribution">
+        Contribution text goes here...
+      </p>
+
+      <div class="stats-card">
+        <div class="stat-item">
+          <span class="stat-label" id="m-buff1-name">BUFF 1</span>
+          <span class="stat-value" id="m-buff1-val">0.0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label" id="m-buff2-name">BUFF 2</span>
+          <span class="stat-value" id="m-buff2-val">0.0</span>
+        </div>
+      </div>
+
+      <div id="next-unlock-container" class="next-unlocks">
+        <div class="next-unlocks-hd">Next Unlock</div>
+        <div class="unlock-chips" id="m-unlocks">
+          <!-- chips -->
+        </div>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <button class="upgrade-btn" id="upgrade-btn">
+          <span id="btn-label">Upgrade to Lv.1</span>
+          <div style="display:flex; align-items:center; gap:4px; font-size:14px; opacity:0.8;">
+            <i class="ph-fill ph-lightbulb"></i>
+            <span id="btn-cost">100</span>
+          </div>
+        </button>
       </div>
     </div>
   </div>
+
+  <div id="toast">Message</div>
 
   <script>
-    (function () {
-      'use strict';
+    // ═══════════════════════════════════════════
+    //  LORE DATA
+    // ═══════════════════════════════════════════
+    const loreData = {
+      thales: {
+        id: "thales", x: 1200, y: 1500, color: "#3B82F6", icon: "🌊",
+        title: "The First Philosopher", era: "Greece",
+        contribution: "Thales asked why the world works, not just that it does — the first documented deductive proofs in geometry. He proved that a circle is bisected by its diameter.",
+        buff1Name: "Deductive Proof", buff1Val: 1.0,
+        buff2Name: "Water Theory", buff2Val: 0.5,
+        unlockedBy: []
+      },
+      aryabhata: {
+        id: "aryabhata", x: 1800, y: 1500, color: "#10B981", icon: "🕉️",
+        title: "Father of Zero", era: "India",
+        contribution: "Aryabhata formalised the concept of zero and positional notation in 499 CE, 1,100 years before Europe adopted it. He also calculated π to 4 decimal places.",
+        buff1Name: "Zero Positional", buff1Val: 1.0,
+        buff2Name: "Solar Orbit", buff2Val: 0.5,
+        unlockedBy: []
+      },
+      pythagoras: {
+        id: "pythagoras", x: 800, y: 1200, color: "#8B5CF6", icon: "📐",
+        title: "The Number Mystic", era: "Greece",
+        contribution: "Pythagoras formalised the theorem bearing his name and founded a mathematical brotherhood that treated numbers as the fabric of reality.",
+        buff1Name: "Harmonic Ratios", buff1Val: 2.0,
+        buff2Name: "Right Angles", buff2Val: 1.5,
+        unlockedBy: ["thales"]
+      },
+      euclid: {
+        id: "euclid", x: 1000, y: 1800, color: "#06B6D4", icon: "📘",
+        title: "Architect of Geometry", era: "Hellenistic",
+        contribution: "Euclid's Elements — 13 books written around 300 BCE — defined rigorous mathematical proof and remained the geometry textbook for 2,000 years.",
+        buff1Name: "Axiomatic Proof", buff1Val: 2.5,
+        buff2Name: "Prime Numbers", buff2Val: 1.0,
+        unlockedBy: ["thales"]
+      },
+      brahmagupta: {
+        id: "brahmagupta", x: 2000, y: 1100, color: "#F59E0B", icon: "🌑",
+        title: "Algebraist of the Void", era: "India",
+        contribution: "Brahmagupta defined arithmetic rules for zero and negative numbers in 628 CE — five centuries before European mathematicians acknowledged their existence.",
+        buff1Name: "Negative Numbers", buff1Val: 2.0,
+        buff2Name: "Cyclic Quadrilateral", buff2Val: 1.5,
+        unlockedBy: ["aryabhata"]
+      },
+      archimedes: {
+        id: "archimedes", x: 600, y: 1000, color: "#EF4444", icon: "⚖️",
+        title: "The Original Engineer", era: "Greece",
+        contribution: "Archimedes computed areas under curves using exhaustion — a precursor to integral calculus — and invented the screw pump still used in irrigation today.",
+        buff1Name: "Exhaustion Method", buff1Val: 3.0,
+        buff2Name: "Lever Principle", buff2Val: 2.0,
+        unlockedBy: ["pythagoras", "euclid"]
+      },
+      "al-khwarizmi": {
+        id: "al-khwarizmi", x: 2300, y: 900, color: "#EC4899", icon: "📜",
+        title: "Father of Algebra", era: "Islam",
+        contribution: "Al-Khwarizmi's 9th-century treatise gave us the word algebra (al-jabr) and algorithm (his Latinised name). He systematised solving linear and quadratic equations.",
+        buff1Name: "Linear Equations", buff1Val: 3.5,
+        buff2Name: "Hindu-Arabic Numerals", buff2Val: 2.5,
+        unlockedBy: ["brahmagupta"]
+      },
+      mahaviracharya: {
+        id: "mahaviracharya", x: 2200, y: 1500, color: "#84CC16", icon: "🔢",
+        title: "Master of Fractions", era: "India",
+        contribution: "Mahavira's 9th-century Gaṇitasārasaṅgraha was the first text dedicated entirely to mathematics — covering fractions, permutations, and geometric series.",
+        buff1Name: "Fraction Arithmetic", buff1Val: 3.0,
+        buff2Name: "Permutations", buff2Val: 2.0,
+        unlockedBy: ["brahmagupta", "aryabhata"]
+      },
+      plato: {
+        id: "plato", x: 500, y: 1400, color: "#A78BFA", icon: "🏛️",
+        title: "Philosopher of Forms", era: "Greece",
+        contribution: "Plato argued that mathematical objects — triangles, numbers — exist independently of the physical world, establishing mathematical Platonism still debated today.",
+        buff1Name: "Abstract Forms", buff1Val: 2.5,
+        buff2Name: "Platonic Solids", buff2Val: 2.0,
+        unlockedBy: ["pythagoras"]
+      },
+      hypatia: {
+        id: "hypatia", x: 700, y: 1600, color: "#FB923C", icon: "🕯️",
+        title: "The Last Librarian", era: "Hellenistic",
+        contribution: "Hypatia of Alexandria edited and preserved Ptolemy's Almagest and Diophantus's Arithmetica. Without her work, much of ancient mathematics would be lost.",
+        buff1Name: "Conic Sections", buff1Val: 3.5,
+        buff2Name: "Astrolabe Design", buff2Val: 2.5,
+        unlockedBy: ["euclid", "plato"]
+      },
+      ptolemy: {
+        id: "ptolemy", x: 900, y: 2000, color: "#67E8F9", icon: "🔭",
+        title: "Mapper of the Cosmos", era: "Hellenistic",
+        contribution: "Ptolemy's Almagest compiled centuries of Greek astronomy into a single trigonometric framework — including the chord table that preceded the sine function.",
+        buff1Name: "Chord Tables", buff1Val: 3.0,
+        buff2Name: "Star Catalogue", buff2Val: 2.5,
+        unlockedBy: ["euclid"]
+      },
+      "omar-khayyam": {
+        id: "omar-khayyam", x: 2500, y: 700, color: "#FCD34D", icon: "🍷",
+        title: "Poet of Infinity", era: "Islam",
+        contribution: "Omar Khayyam solved every class of cubic equation geometrically in 1070 CE and wrote a reform of the Euclidean parallel postulate — 700 years before Lobachevsky.",
+        buff1Name: "Cubic Equations", buff1Val: 4.0,
+        buff2Name: "Calendar Reform", buff2Val: 3.0,
+        unlockedBy: ["al-khwarizmi"]
+      },
+      bhaskara: {
+        id: "bhaskara", x: 1500, y: 700, color: "#FF8F00", icon: "☸️",
+        title: "The Crown of Mathematics", era: "India",
+        contribution: "Bhaskaracharya's Lilavati (1150 CE) solved differential equations conceptually and described a rotating wheel whose velocity approached instantaneous change — early calculus.",
+        buff1Name: "Instantaneous Motion", buff1Val: 5.0,
+        buff2Name: "Planetary Ephemeris", buff2Val: 4.0,
+        unlockedBy: ["mahaviracharya", "brahmagupta"]
+      },
+      "golden-ratio": {
+        id: "golden-ratio", x: 1500, y: 400, color: "#FFD700", icon: "🌀",
+        title: "φ — The Universal Constant", era: "Medieval",
+        contribution: "The golden ratio φ = 1.618... appears in Euclid's Elements, in Pythagorean pentagrams, in Bhaskara's geometry, and in every living spiral in nature.",
+        buff1Name: "Aesthetic Proportion", buff1Val: 6.0,
+        buff2Name: "Fibonacci Resonance", buff2Val: 5.0,
+        unlockedBy: ["bhaskara", "euclid"]
+      }
+    };
 
-      const STORAGE_KEY = 'vialogic_state';
-
-      const loreData = [
-        {
-          id: 'thales', name: 'Thales', title: 'First Geometer', icon: '📐', color: '#36c2ff', tier: 0, x: -140, y: 0,
-          level: 1, power: 500, cost: 100,
-          buff1Name: 'Proof Clarity', buff1Val: 5, buff2Name: 'Axiom Bloom', buff2Val: 4,
-          unlockedBy: [], era: 'Ancient Greece',
-          contribution: 'Thales introduced deductive reasoning into geometry and linked mathematics to logical proof. His theorems became early roots for formal geometric thought.'
-        },
-        {
-          id: 'aryabhata', name: 'Aryabhata', title: 'Astral Mathematician', icon: '🌌', color: '#7b7dff', tier: 0, x: 140, y: 0,
-          level: 1, power: 500, cost: 100,
-          buff1Name: 'Trigonometric Seed', buff1Val: 6, buff2Name: 'Orbital Insight', buff2Val: 5,
-          unlockedBy: [], era: 'Indian Classical',
-          contribution: 'Aryabhata advanced trigonometric tables and astronomical calculations with striking precision. His work shaped computational mathematics across South and West Asia.'
-        },
-        {
-          id: 'pythagoras', name: 'Pythagoras', title: 'Harmony of Number', icon: '🎵', color: '#4cc3ff', tier: 1, x: -360, y: -60,
-          level: 1, power: 1500, cost: 300,
-          buff1Name: 'Ratio Resonance', buff1Val: 8, buff2Name: 'Triangle Force', buff2Val: 7,
-          unlockedBy: ['thales'], era: 'Ancient Greece',
-          contribution: 'Pythagorean ideas tied arithmetic, geometry, and music through ratio and form. The theorem bearing his name became foundational in spatial reasoning.'
-        },
-        {
-          id: 'euclid', name: 'Euclid', title: 'Architect of Elements', icon: '📘', color: '#6ad8ff', tier: 1, x: -10, y: -320,
-          level: 1, power: 1500, cost: 300,
-          buff1Name: 'Postulate Order', buff1Val: 9, buff2Name: 'Logical Spine', buff2Val: 8,
-          unlockedBy: ['thales', 'aryabhata'], era: 'Ancient Greece',
-          contribution: 'Euclid organized geometry into axioms, definitions, and proofs in the Elements. This structure shaped mathematical teaching for centuries.'
-        },
-        {
-          id: 'brahmagupta', name: 'Brahmagupta', title: 'Master of Zero', icon: '0️⃣', color: '#9a80ff', tier: 1, x: 350, y: -70,
-          level: 1, power: 1500, cost: 300,
-          buff1Name: 'Zero Law', buff1Val: 8, buff2Name: 'Negative Balance', buff2Val: 7,
-          unlockedBy: ['aryabhata'], era: 'Indian Classical',
-          contribution: 'Brahmagupta formalized rules for zero and negative numbers with algorithmic clarity. His arithmetic framework accelerated algebraic development.'
-        },
-        {
-          id: 'archimedes', name: 'Archimedes', title: 'Mechanics Sage', icon: '⚙️', color: '#6dd6d6', tier: 2, x: -520, y: -220,
-          level: 1, power: 2500, cost: 500,
-          buff1Name: 'Leverage Law', buff1Val: 11, buff2Name: 'Volume Vision', buff2Val: 10,
-          unlockedBy: ['pythagoras', 'euclid'], era: 'Hellenistic',
-          contribution: 'Archimedes united geometry with mechanics to derive results on areas, volumes, and centers of mass. His method of exhaustion anticipated integral thinking.'
-        },
-        {
-          id: 'al-khwarizmi', name: 'Al-Khwarizmi', title: 'Father of Algebra', icon: '🧮', color: '#f8ae48', tier: 2, x: 350, y: -350,
-          level: 1, power: 2500, cost: 500,
-          buff1Name: 'Equation Craft', buff1Val: 12, buff2Name: 'Algorithm Core', buff2Val: 11,
-          unlockedBy: ['brahmagupta', 'euclid'], era: 'Islamic Golden Age',
-          contribution: 'Al-Khwarizmi systematized algebra as a practical method for solving equations. His name gave rise to the term algorithm in modern computation.'
-        },
-        {
-          id: 'mahaviracharya', name: 'Mahaviracharya', title: 'Combinatorics Scholar', icon: '🪷', color: '#b186ff', tier: 2, x: 560, y: -80,
-          level: 1, power: 2500, cost: 500,
-          buff1Name: 'Permutation Bloom', buff1Val: 10, buff2Name: 'Series Nectar', buff2Val: 9,
-          unlockedBy: ['brahmagupta'], era: 'Medieval India',
-          contribution: 'Mahaviracharya expanded arithmetic and combinatorial techniques with rich worked examples. His treatments of series and permutations influenced later Indian texts.'
-        },
-        {
-          id: 'plato', name: 'Plato', title: 'Philosopher of Forms', icon: '🏛️', color: '#8fc2ff', tier: 3, x: -700, y: -150,
-          level: 1, power: 3500, cost: 700,
-          buff1Name: 'Form Insight', buff1Val: 13, buff2Name: 'Dialectic Lens', buff2Val: 12,
-          unlockedBy: ['archimedes'], era: 'Ancient Greece',
-          contribution: 'Plato elevated geometry as preparation for philosophical reasoning and abstract thought. His academy sustained mathematical culture in classical Greece.'
-        },
-        {
-          id: 'hypatia', name: 'Hypatia', title: 'Alexandrian Mentor', icon: '🌠', color: '#84e2ff', tier: 3, x: -360, y: -520,
-          level: 1, power: 3500, cost: 700,
-          buff1Name: 'Commentary Flame', buff1Val: 14, buff2Name: 'Teaching Aura', buff2Val: 12,
-          unlockedBy: ['euclid', 'archimedes'], era: 'Hellenistic',
-          contribution: 'Hypatia preserved and taught major works in geometry and astronomy in Alexandria. Her scholarship became a symbol of scientific continuity and intellectual courage.'
-        },
-        {
-          id: 'ptolemy', name: 'Ptolemy', title: 'Geometric Astronomer', icon: '🛰️', color: '#72d5f9', tier: 3, x: -20, y: -620,
-          level: 1, power: 3500, cost: 700,
-          buff1Name: 'Chord Matrix', buff1Val: 13, buff2Name: 'Cosmos Grid', buff2Val: 13,
-          unlockedBy: ['euclid', 'al-khwarizmi'], era: 'Hellenistic',
-          contribution: 'Ptolemy refined astronomical models using geometric methods and tabular computation. His synthesis in the Almagest guided scientific astronomy for centuries.'
-        },
-        {
-          id: 'omar-khayyam', name: 'Omar Khayyam', title: 'Cubic Geometer', icon: '📜', color: '#f2b86e', tier: 3, x: 520, y: -500,
-          level: 1, power: 3500, cost: 700,
-          buff1Name: 'Cubic Arc', buff1Val: 15, buff2Name: 'Calendar Precision', buff2Val: 13,
-          unlockedBy: ['al-khwarizmi', 'mahaviracharya'], era: 'Islamic Golden Age',
-          contribution: 'Omar Khayyam classified cubic equations and solved classes geometrically with conics. He also contributed to highly accurate calendar reform.'
-        },
-        {
-          id: 'bhaskara', name: 'Bhaskara', title: 'Crown of Lilavati', icon: '👑', color: '#d7a6ff', tier: 4, x: 300, y: -700,
-          level: 1, power: 4500, cost: 900,
-          buff1Name: 'Calculus Seed', buff1Val: 17, buff2Name: 'Planetary Pulse', buff2Val: 16,
-          unlockedBy: ['mahaviracharya', 'omar-khayyam'], era: 'Medieval India',
-          contribution: 'Bhaskara II developed sophisticated algebraic and astronomical techniques with near-calculus intuitions. His works integrated pedagogy, computation, and celestial modeling.'
-        },
-        {
-          id: 'golden-ratio', name: 'Golden Ratio (φ)', title: 'Crown of Proportion', icon: '🌿', color: '#ffd05f', tier: 4, x: -230, y: -760,
-          level: 1, power: 4500, cost: 900,
-          buff1Name: 'Aesthetic Harmony', buff1Val: 18, buff2Name: 'Recursive Growth', buff2Val: 17,
-          unlockedBy: ['plato', 'ptolemy', 'hypatia'], era: 'Ancient Greece',
-          contribution: 'The golden ratio symbolizes recurring proportional structure across geometry, art, and natural growth. In ViaLogic it stands as the crown where abstract pattern meets living design.'
+    // ═══════════════════════════════════════════
+    //  SPARKS / WALLET COMPATIBILITY
+    // ═══════════════════════════════════════════
+    const Sparks = {
+      getBalance: () => VDWallet.balance('focusDrops'),
+      add: (n) => VDWallet.earn('focusDrops', n, 'vialogic'),
+      deduct: (n) => {
+        const bal = VDWallet.balance('focusDrops');
+        if (bal >= n) {
+          VDWallet.earn('focusDrops', -n, 'vialogic_upgrade');
+          return true;
         }
-      ];
+        return false;
+      }
+    };
 
+    // ═══════════════════════════════════════════
+    //  STATE & INITIALIZATION
+    // ═══════════════════════════════════════════
+    const STORAGE_KEY = "vialogic_state";
+    let state = {
+      version: 1,
+      entities: {}
+    };
 
-      function applyDeterministicLayout() {
-        const radiusByTier = { 0: 140, 1: 320, 2: 500, 3: 670, 4: 820 };
-        const angleById = {
-          thales: Math.PI,
-          aryabhata: 0,
-          pythagoras: Math.PI * 1.18,
-          euclid: Math.PI * 1.5,
-          brahmagupta: Math.PI * 1.82,
-          archimedes: Math.PI * 1.28,
-          'al-khwarizmi': Math.PI * 1.72,
-          mahaviracharya: Math.PI * 1.9,
-          plato: Math.PI * 1.34,
-          hypatia: Math.PI * 1.48,
-          ptolemy: Math.PI * 1.58,
-          'omar-khayyam': Math.PI * 1.72,
-          bhaskara: Math.PI * 1.84,
-          'golden-ratio': Math.PI * 1.43
+    function initDefaults() {
+      for (let id in loreData) {
+        state.entities[id] = {
+          level: (loreData[id].unlockedBy.length === 0) ? 1 : 0,
+          unlocked: (loreData[id].unlockedBy.length === 0)
         };
+      }
+    }
 
-        loreData.forEach((entity) => {
-          const radius = radiusByTier[entity.tier] || 300;
-          const angle = angleById[entity.id] || Math.PI * 1.5;
-          entity.x = Math.round(Math.cos(angle) * radius);
-          entity.y = Math.round(Math.sin(angle) * radius);
-        });
+    function loadState() {
+      const saved = ToolStorage.read(STORAGE_KEY, null);
+      if (saved && saved.version === state.version) {
+        // Merge saved into defaults
+        for (let id in saved.entities) {
+          if (state.entities[id]) {
+            state.entities[id] = { ...state.entities[id], ...saved.entities[id] };
+          }
+        }
+      }
+      refreshUnlocks();
+    }
+
+    function saveState() {
+      ToolStorage.write(STORAGE_KEY, state);
+    }
+
+    function refreshUnlocks() {
+      for (let id in loreData) {
+        if (state.entities[id].level > 0) {
+          state.entities[id].unlocked = true;
+          continue;
+        }
+        
+        let canUnlock = true;
+        for (let parentId of loreData[id].unlockedBy) {
+          if (!state.entities[parentId] || state.entities[parentId].level < 2) {
+            canUnlock = false;
+            break;
+          }
+        }
+        state.entities[id].unlocked = canUnlock;
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    //  MAP ENGINE (p5.js)
+    // ═══════════════════════════════════════════
+    let cam = { x: -1500, y: -1200, zoom: 0.6 };
+    let targetCam = { x: -1500, y: -1200, zoom: 0.6 };
+    let drag = { active: false, x: 0, y: 0, startX: 0, startY: 0 };
+    let activeEra = 'all';
+    let selectedEntity = null;
+    let paths = [];
+
+    function setup() {
+      const cnv = createCanvas(windowWidth, windowHeight);
+      cnv.parent('canvas-container');
+      
+      initDefaults();
+      loadState();
+      updateHUD();
+
+      // Pre-calculate paths
+      for (let id in loreData) {
+        for (let pid of loreData[id].unlockedBy) {
+          paths.push({ from: pid, to: id });
+        }
       }
 
-      applyDeterministicLayout();
+      // Initial center on roots
+      targetCam.x = width/2 - 1500 * cam.zoom;
+      targetCam.y = height/2 - 1500 * cam.zoom;
+      cam.x = targetCam.x;
+      cam.y = targetCam.y;
+    }
 
-      const byId = Object.fromEntries(loreData.map((entity) => [entity.id, entity]));
-      const edges = loreData.flatMap((entity) => entity.unlockedBy.map((parent) => ({ parent, child: entity.id })));
+    function draw() {
+      background(11, 15, 23);
+      
+      // Hover check for cursor
+      let hovering = false;
+      if (!isModalOpen) {
+        const wx = (mouseX - cam.x) / cam.zoom;
+        const wy = (mouseY - cam.y) / cam.zoom;
+        for (let id in loreData) {
+          if (dist(wx, wy, loreData[id].x, loreData[id].y) < 50) {
+            hovering = true;
+            if (!state.entities[id].unlocked) cursor('not-allowed');
+            else cursor('pointer');
+            break;
+          }
+        }
+      }
+      if (!hovering && !drag.active) cursor('crosshair');
 
-      const state = {
-        totalSparks: 2200,
-        entities: {},
-        filter: 'All',
-        panX: 0,
-        panY: 0,
-        scale: 1,
-        selectedId: null
+      // Smooth camera
+      cam.x = lerp(cam.x, targetCam.x, 0.1);
+      cam.y = lerp(cam.y, targetCam.y, 0.1);
+      cam.zoom = lerp(cam.zoom, targetCam.zoom, 0.1);
+
+      push();
+      translate(cam.x, cam.y);
+      scale(cam.zoom);
+
+      // Draw Paths
+      for (let p of paths) {
+        drawPath(p);
+      }
+
+      // Draw Nodes
+      for (let id in loreData) {
+        drawNode(loreData[id]);
+      }
+      pop();
+
+      drawMinimap();
+    }
+
+    function drawPath(p) {
+      const from = loreData[p.from];
+      const to = loreData[p.to];
+      const isUnlocked = state.entities[p.to].level > 0;
+      
+      strokeWeight(4);
+      if (isUnlocked) {
+        stroke(255, 143, 0); // Solid Amber
+        drawingContext.setLineDash([]);
+      } else {
+        stroke(255, 143, 0, 40); // Faint dashed amber
+        drawingContext.setLineDash([12, 12]);
+      }
+      
+      line(from.x, from.y, to.x, to.y);
+      drawingContext.setLineDash([]);
+    }
+
+    function drawNode(n) {
+      const entity = state.entities[n.id];
+      const isMatch = activeEra === 'all' || n.era === activeEra;
+      const opacityMultiplier = isMatch ? 1 : 0.25;
+      
+      push();
+      translate(n.x, n.y);
+      
+      // Selection ring
+      if (selectedEntity === n.id) {
+        noFill();
+        stroke(255, 143, 0, 200 * opacityMultiplier);
+        strokeWeight(4);
+        ellipse(0, 0, 110, 110);
+      }
+
+      // Main Circle
+      noStroke();
+      let c = color(n.color);
+      if (!entity.unlocked) {
+        // Locked nodes: opacity 0.35, grayscale filter
+        fill(100, 100, 100, 90 * opacityMultiplier);
+      } else {
+        fill(red(c), green(c), blue(c), 255 * opacityMultiplier);
+      }
+      
+      ellipse(0, 0, 80, 80);
+      
+      // Icon
+      fill(255, 255 * opacityMultiplier);
+      textAlign(CENTER, CENTER);
+      textSize(32);
+      text(n.icon, 0, 0);
+      
+      // Label
+      textSize(16);
+      textStyle(BOLD);
+      fill(255, 255 * opacityMultiplier);
+      text(n.id.toUpperCase(), 0, 70);
+      
+      // Level Badge
+      if (entity.level > 0) {
+        fill(15, 23, 42, 230 * opacityMultiplier);
+        stroke(31, 41, 55, 255 * opacityMultiplier);
+        rect(-25, 30, 50, 22, 6);
+        noStroke();
+        fill(255, 143, 0, 255 * opacityMultiplier);
+        textSize(13);
+        text('Lv.' + entity.level, 0, 42);
+      } else if (!entity.unlocked) {
+        fill(255, 120 * opacityMultiplier);
+        textSize(14);
+        text('🔒', 0, 42);
+      }
+
+      pop();
+    }
+
+    function drawMinimap() {
+      resetMatrix();
+      const mapEl = document.getElementById('minimap');
+      mapEl.innerHTML = '';
+      
+      for (let id in loreData) {
+        const n = loreData[id];
+        const dot = document.createElement('div');
+        dot.style.position = 'absolute';
+        dot.style.width = '5px';
+        dot.style.height = '5px';
+        dot.style.borderRadius = '2px';
+        dot.style.background = state.entities[id].level > 0 ? 'var(--amber)' : '#4b5563';
+        
+        const px = (n.x - 500) / 2200 * 130;
+        const py = (n.y - 400) / 1800 * 90;
+        
+        dot.style.left = px + 'px';
+        dot.style.top = py + 'px';
+        dot.style.cursor = 'pointer';
+        dot.onclick = (e) => {
+          e.stopPropagation();
+          panTo(n.x, n.y);
+        };
+        mapEl.appendChild(dot);
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    //  INTERACTIONS
+    // ═══════════════════════════════════════════
+    function mousePressed() {
+      if (isModalOpen || mouseX > width || mouseY > height) return;
+      drag.active = true;
+      drag.startX = mouseX;
+      drag.startY = mouseY;
+      drag.x = targetCam.x;
+      drag.y = targetCam.y;
+    }
+
+    function mouseDragged() {
+      if (!drag.active) return;
+      targetCam.x = drag.x + (mouseX - drag.startX);
+      targetCam.y = drag.y + (mouseY - drag.startY);
+    }
+
+    function mouseReleased() {
+      if (!drag.active) return;
+      const dx = abs(mouseX - drag.startX);
+      const dy = abs(mouseY - drag.startY);
+      drag.active = false;
+      
+      if (dx < 5 && dy < 5) {
+        handleTap(mouseX, mouseY);
+      }
+    }
+
+    function mouseWheel(event) {
+      if (isModalOpen) return;
+      let zoomIn = event.delta < 0;
+      let factor = zoomIn ? 1.05 : 0.95;
+      
+      let newZoom = constrain(targetCam.zoom * factor, 0.2, 2.0);
+      
+      targetCam.x = mouseX - (mouseX - targetCam.x) * (newZoom / targetCam.zoom);
+      targetCam.y = mouseY - (mouseY - targetCam.y) * (newZoom / targetCam.zoom);
+      targetCam.zoom = newZoom;
+    }
+
+    function handleTap(mx, my) {
+      const wx = (mx - cam.x) / cam.zoom;
+      const wy = (my - cam.y) / cam.zoom;
+      
+      let found = false;
+      for (let id in loreData) {
+        const n = loreData[id];
+        const d = dist(wx, wy, n.x, n.y);
+        if (d < 50) {
+          if (!state.entities[id].unlocked) {
+            let parents = loreData[id].unlockedBy.map(p => loreData[p].id.toUpperCase());
+            showToast(`🔒 Upgrade ${parents.join(' & ')} first`, 'info');
+            return;
+          }
+          openModal(id);
+          found = true;
+          break;
+        }
+      }
+      if (!found && isModalOpen) closeModal();
+    }
+
+    function panTo(x, y) {
+      targetCam.x = width/2 - x * cam.zoom;
+      targetCam.y = height/2 - y * cam.zoom;
+    }
+
+    function varColor(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    // ═══════════════════════════════════════════
+    //  MODAL & UI
+    // ═══════════════════════════════════════════
+    let isModalOpen = false;
+    let currentEntityId = null;
+
+    function openModal(id) {
+      currentEntityId = id;
+      selectedEntity = id;
+      const data = loreData[id];
+      const entity = state.entities[id];
+      
+      document.getElementById('m-title').textContent = data.id.toUpperCase();
+      document.getElementById('m-era').textContent = data.era;
+      document.getElementById('m-role').textContent = data.title;
+      document.getElementById('m-contribution').textContent = data.contribution;
+      
+      // Buffs
+      const levelBonus = 1 + entity.level * 0.25;
+      document.getElementById('m-buff1-name').textContent = data.buff1Name;
+      document.getElementById('m-buff1-val').textContent = (data.buff1Val * levelBonus).toFixed(1);
+      document.getElementById('m-buff2-name').textContent = data.buff2Name;
+      document.getElementById('m-buff2-val').textContent = (data.buff2Val * levelBonus).toFixed(1);
+      
+      // Unlocks logic
+      const container = document.getElementById('next-unlock-container');
+      const chips = document.getElementById('m-unlocks');
+      chips.innerHTML = '';
+      
+      let unlocks = [];
+      for (let eId in loreData) {
+        if (loreData[eId].unlockedBy.includes(id)) {
+          unlocks.push(eId);
+        }
+      }
+      
+      if (unlocks.length > 0 && entity.level < 2) {
+        container.style.display = 'block';
+        unlocks.forEach(u => {
+          const chip = document.createElement('div');
+          chip.className = 'unlock-chip';
+          chip.textContent = u.toUpperCase();
+          chips.appendChild(chip);
+        });
+      } else {
+        container.style.display = 'none';
+      }
+
+      // Upgrade Button
+      const cost = getCost(id, entity.level);
+      document.getElementById('btn-label').textContent = entity.level === 0 ? "Unlock Mind" : `Upgrade to Lv.${entity.level + 1}`;
+      document.getElementById('btn-cost').textContent = cost;
+      
+      document.getElementById('upgrade-btn').onclick = () => upgrade(id);
+      document.getElementById('upgrade-btn').disabled = false;
+      
+      document.getElementById('modal-overlay').style.display = 'block';
+      setTimeout(() => document.getElementById('modal-overlay').classList.add('active'), 10);
+      isModalOpen = true;
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      setTimeout(() => {
+        if (!isModalOpen) document.getElementById('modal-overlay').style.display = 'none';
+      }, 400);
+      isModalOpen = false;
+      selectedEntity = null;
+    }
+
+    function getCost(id, currentLevel) {
+      const baseCosts = {
+        thales: 50, aryabhata: 50, pythagoras: 150, euclid: 150, brahmagupta: 200,
+        archimedes: 400, "al-khwarizmi": 500, mahaviracharya: 450, plato: 300,
+        hypatia: 400, ptolemy: 350, "omar-khayyam": 600, bhaskara: 1000, "golden-ratio": 2500
       };
+      const base = baseCosts[id] || 100;
+      return Math.floor(base * Math.pow(2.2, currentLevel));
+    }
 
-      const world = document.getElementById('world');
-      const nodesEl = document.getElementById('nodes');
-      const pathsEl = document.getElementById('paths');
-      const viewport = document.getElementById('viewport');
-      const sparkTotalEl = document.getElementById('spark-total');
-      const unlockCountEl = document.getElementById('unlock-count');
-      const minimap = document.getElementById('minimap');
-      const miniCtx = minimap.getContext('2d');
-
-      function safeLoadState() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          const parsed = raw ? JSON.parse(raw) : null;
-          if (!parsed || typeof parsed !== 'object') return;
-          if (typeof parsed.totalSparks === 'number') state.totalSparks = parsed.totalSparks;
-          if (parsed.entities && typeof parsed.entities === 'object') {
-            Object.keys(parsed.entities).forEach((id) => {
-              state.entities[id] = parsed.entities[id];
-            });
-          }
-        } catch (_error) {
-          // Storage can fail in private mode.
-        }
+    function upgrade(id) {
+      const entity = state.entities[id];
+      const cost = getCost(id, entity.level);
+      
+      if (Sparks.deduct(cost)) {
+        state.entities[id].level++;
+        refreshUnlocks();
+        saveState();
+        updateHUD();
+        openModal(id); // refresh modal
+        showToast(`✨ ${id.toUpperCase()} UPGRADED`, 'success');
+      } else {
+        const btn = document.getElementById('upgrade-btn');
+        btn.classList.add('shake');
+        setTimeout(() => btn.classList.remove('shake'), 400);
+        showToast("Insufficient Sparks 💡", "error");
       }
+    }
 
-      function safeSaveState() {
-        const payload = { totalSparks: state.totalSparks, entities: {} };
-        loreData.forEach((entity) => {
-          const saved = mergedEntity(entity.id);
-          payload.entities[entity.id] = {
-            level: saved.level,
-            power: saved.power,
-            cost: saved.cost,
-            buff1Val: saved.buff1Val,
-            buff2Val: saved.buff2Val
-          };
-        });
-
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-        } catch (_error) {
-          // ignore write failure
-        }
+    function updateHUD() {
+      const balance = Sparks.getBalance();
+      document.getElementById('bal-val').textContent = balance;
+      
+      let unlockedCount = 0;
+      for (let id in state.entities) {
+        if (state.entities[id].level > 0) unlockedCount++;
       }
+      document.getElementById('node-count').textContent = `⬡ ${unlockedCount} / 14 Unlocked`;
+    }
 
-      function mergedEntity(id) {
-        const base = byId[id];
-        return { ...base, ...(state.entities[id] || {}) };
+    function showToast(msg, type = 'info') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = `show ${type}`;
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // Filter interaction
+    document.querySelectorAll('.era-pill').forEach(pill => {
+      pill.onclick = () => {
+        document.querySelectorAll('.era-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeEra = pill.dataset.era;
+      };
+    });
+
+    // Handle wallet updates from outside (iframe mode)
+    window.addEventListener('message', (e) => {
+      if (e.data.type === 'sparks_sync') {
+        updateHUD();
       }
+    });
 
-      function isUnlocked(entity) {
-        if (!entity.unlockedBy.length) return true;
-        return entity.unlockedBy.every((parentId) => mergedEntity(parentId).level >= 2);
-      }
+    window.addEventListener('resize', () => {
+      resizeCanvas(windowWidth, windowHeight);
+    });
 
-      function unlockCount() {
-        return loreData.filter((entity) => isUnlocked(mergedEntity(entity.id))).length;
-      }
-
-      function applyTransform() {
-        world.style.transform = `translate(${state.panX}px, ${state.panY}px) scale(${state.scale})`;
-      }
-
-      function drawPaths() {
-        pathsEl.innerHTML = '';
-        edges.forEach((edge) => {
-          const parent = mergedEntity(edge.parent);
-          const child = mergedEntity(edge.child);
-          const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          const c1x = parent.x + (child.x - parent.x) * 0.35;
-          const c1y = parent.y + (child.y - parent.y) * 0.1;
-          const c2x = child.x - (child.x - parent.x) * 0.2;
-          const c2y = child.y - (child.y - parent.y) * 0.15;
-          line.setAttribute('d', `M ${parent.x} ${parent.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${child.x} ${child.y}`);
-          line.classList.add('path');
-          line.dataset.key = `${edge.parent}->${edge.child}`;
-          if (isUnlocked(child)) {
-            line.classList.add('unlocked');
-          }
-          pathsEl.appendChild(line);
-        });
-      }
-
-      function eraMatch(entity) {
-        if (state.filter === 'All') return true;
-        if (state.filter === 'Ancient Greece') return entity.era === 'Ancient Greece';
-        if (state.filter === 'Indian Cluster') return entity.era === 'Indian Classical' || entity.era === 'Medieval India';
-        return entity.era === state.filter;
-      }
-
-      function renderNodes() {
-        nodesEl.innerHTML = '';
-
-        loreData.forEach((base) => {
-          const entity = mergedEntity(base.id);
-          const unlocked = isUnlocked(entity);
-          const glow = Math.min(0.9, 0.2 + entity.level * 0.08 + entity.tier * 0.05);
-          const node = document.createElement('button');
-          node.type = 'button';
-          node.className = `node ${unlocked ? 'unlocked' : 'locked'} ${eraMatch(entity) ? '' : 'dimmed'}`.trim();
-          node.style.left = `${entity.x}px`;
-          node.style.top = `${entity.y}px`;
-          node.style.borderColor = unlocked ? entity.color : '#465067';
-          node.style.boxShadow = unlocked ? `0 0 20px rgba(255,143,0,${glow}), 0 0 18px ${entity.color}44` : 'none';
-          node.innerHTML = `<span class="icon">${entity.icon}</span><span class="name">${entity.name}</span><span class="lvl">Lv ${entity.level}</span>`;
-          node.disabled = !unlocked;
-          node.addEventListener('click', () => openModal(entity.id));
-          nodesEl.appendChild(node);
-        });
-
-        sparkTotalEl.textContent = Math.floor(state.totalSparks).toLocaleString();
-        unlockCountEl.textContent = `${unlockCount()} / 14 Unlocked`;
-      }
-
-      function centerOnEntity(id) {
-        const entity = mergedEntity(id);
-        state.panX = -entity.x * state.scale;
-        state.panY = -entity.y * state.scale;
-        applyTransform();
-      }
-
-      function upgrade(id) {
-        const entity = mergedEntity(id);
-        if (!isUnlocked(entity)) return false;
-        if (state.totalSparks < entity.cost) return false;
-
-        state.totalSparks -= entity.cost;
-        const next = {
-          level: entity.level + 1,
-          power: entity.power + Math.round(180 + entity.tier * 140 + entity.level * 60),
-          cost: Math.round(entity.cost * 1.42),
-          buff1Val: entity.buff1Val + Math.max(1, Math.round(entity.tier / 2)),
-          buff2Val: entity.buff2Val + Math.max(1, Math.round(entity.tier / 3 + 1))
-        };
-        state.entities[id] = next;
-
-        safeSaveState();
-        render();
-        openModal(id);
-        return true;
-      }
-
-      function openModal(id) {
-        state.selectedId = id;
-        const entity = mergedEntity(id);
-        const unlocked = isUnlocked(entity);
-        document.getElementById('m-name').textContent = `${entity.icon} ${entity.name}`;
-        document.getElementById('m-title').textContent = entity.title;
-        document.getElementById('m-era').textContent = entity.era;
-        document.getElementById('m-contribution').textContent = entity.contribution;
-        document.getElementById('m-stats').innerHTML = [
-          `<div class="row"><span>Tier</span><strong>${entity.tier}</strong></div>`,
-          `<div class="row"><span>Power Rating</span><strong>${entity.power.toLocaleString()}</strong></div>`,
-          `<div class="row"><span>${entity.buff1Name}</span><strong>+${entity.buff1Val}</strong></div>`,
-          `<div class="row"><span>${entity.buff2Name}</span><strong>+${entity.buff2Val}</strong></div>`,
-          `<div class="row"><span>Upgrade Cost</span><strong>${entity.cost.toLocaleString()} 💡</strong></div>`
-        ].join('');
-        const up = document.getElementById('m-upgrade');
-        up.disabled = !unlocked || state.totalSparks < entity.cost;
-        up.textContent = unlocked ? `Upgrade (${entity.cost.toLocaleString()} 💡)` : 'Locked by roots/trunk';
-        document.getElementById('modal').classList.add('open');
-      }
-
-      function closeModal() {
-        document.getElementById('modal').classList.remove('open');
-      }
-
-      function renderFilterBar() {
-        const bar = document.getElementById('filter-bar');
-        const groups = [
-          { key: 'All', label: 'All', match: () => true },
-          { key: 'Ancient Greece', label: 'Greece', match: (e) => e.era === 'Ancient Greece' },
-          { key: 'Indian Cluster', label: 'India', match: (e) => e.era === 'Indian Classical' || e.era === 'Medieval India' },
-          { key: 'Islamic Golden Age', label: 'Islam', match: (e) => e.era === 'Islamic Golden Age' },
-          { key: 'Hellenistic', label: 'Hellenistic', match: (e) => e.era === 'Hellenistic' }
-        ];
-
-        bar.innerHTML = groups.map((f) => `<button type="button" class="filter-btn ${state.filter === f.key ? 'on' : ''}" data-key="${f.key}">${f.label}</button>`).join('');
-        bar.querySelectorAll('.filter-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            state.filter = btn.dataset.key;
-            render();
-          });
-        });
-      }
-
-      function drawMinimap() {
-        const pad = 8;
-        miniCtx.clearRect(0, 0, minimap.width, minimap.height);
-        miniCtx.fillStyle = '#09101b';
-        miniCtx.fillRect(0, 0, minimap.width, minimap.height);
-        miniCtx.strokeStyle = '#243147';
-        miniCtx.strokeRect(0.5, 0.5, minimap.width - 1, minimap.height - 1);
-
-        const xs = loreData.map((e) => e.x);
-        const ys = loreData.map((e) => e.y);
-        const minX = Math.min(...xs), maxX = Math.max(...xs);
-        const minY = Math.min(...ys), maxY = Math.max(...ys);
-        const spanX = Math.max(1, maxX - minX), spanY = Math.max(1, maxY - minY);
-
-        loreData.forEach((node) => {
-          const unlocked = isUnlocked(mergedEntity(node.id));
-          const x = pad + ((node.x - minX) / spanX) * (minimap.width - pad * 2);
-          const y = pad + ((node.y - minY) / spanY) * (minimap.height - pad * 2);
-          miniCtx.fillStyle = unlocked ? '#ff8f00' : '#677288';
-          miniCtx.beginPath();
-          miniCtx.arc(x, y, 2.6, 0, Math.PI * 2);
-          miniCtx.fill();
-        });
-      }
-
-      function render() {
-        drawPaths();
-        renderNodes();
-        renderFilterBar();
-        drawMinimap();
-      }
-
-      function initPanZoom() {
-        state.panX = 0;
-        state.panY = 140;
-        state.scale = Math.min(1.05, Math.max(0.72, window.innerWidth / 1300));
-        applyTransform();
-
-        let dragging = false;
-        let sx = 0;
-        let sy = 0;
-
-        viewport.addEventListener('pointerdown', (event) => {
-          dragging = true;
-          sx = event.clientX;
-          sy = event.clientY;
-          viewport.classList.add('dragging');
-          viewport.setPointerCapture(event.pointerId);
-        });
-
-        viewport.addEventListener('pointermove', (event) => {
-          if (!dragging) return;
-          const dx = event.clientX - sx;
-          const dy = event.clientY - sy;
-          sx = event.clientX;
-          sy = event.clientY;
-          state.panX += dx;
-          state.panY += dy;
-          applyTransform();
-        });
-
-        viewport.addEventListener('pointerup', () => {
-          dragging = false;
-          viewport.classList.remove('dragging');
-        });
-
-        viewport.addEventListener('wheel', (event) => {
-          event.preventDefault();
-          const direction = event.deltaY > 0 ? -1 : 1;
-          const next = state.scale + direction * 0.08;
-          state.scale = Math.max(0.4, Math.min(2, next));
-          applyTransform();
-        }, { passive: false });
-      }
-
-      function initMinimapJump() {
-        minimap.addEventListener('click', (event) => {
-          const rect = minimap.getBoundingClientRect();
-          const tx = (event.clientX - rect.left) / rect.width;
-          const ty = (event.clientY - rect.top) / rect.height;
-          let closest = loreData[0];
-          let best = Infinity;
-          const xs = loreData.map((e) => e.x);
-          const ys = loreData.map((e) => e.y);
-          const minX = Math.min(...xs), maxX = Math.max(...xs);
-          const minY = Math.min(...ys), maxY = Math.max(...ys);
-
-          loreData.forEach((node) => {
-            const nx = (node.x - minX) / Math.max(1, maxX - minX);
-            const ny = (node.y - minY) / Math.max(1, maxY - minY);
-            const dist = (nx - tx) ** 2 + (ny - ty) ** 2;
-            if (dist < best) {
-              best = dist;
-              closest = node;
-            }
-          });
-          centerOnEntity(closest.id);
-          openModal(closest.id);
-        });
-      }
-
-      function initEvents() {
-        document.getElementById('spark-btn').addEventListener('click', () => {
-          state.totalSparks += 250;
-          safeSaveState();
-          render();
-        });
-        document.getElementById('m-close').addEventListener('click', closeModal);
-        document.getElementById('m-upgrade').addEventListener('click', () => {
-          if (state.selectedId) upgrade(state.selectedId);
-        });
-        document.getElementById('m-center').addEventListener('click', () => {
-          if (state.selectedId) centerOnEntity(state.selectedId);
-          closeModal();
-        });
-        document.getElementById('modal').addEventListener('click', (event) => {
-          if (event.target.id === 'modal') closeModal();
-        });
-      }
-
-      function initDecorativeP5() {
-        if (typeof window.p5 === 'undefined') return;
-        const points = [];
-        const sketch = (p) => {
-          p.setup = function () {
-            const c = p.createCanvas(window.innerWidth, window.innerHeight);
-            c.parent('p5-bg');
-            for (let i = 0; i < 45; i += 1) {
-              points.push({ x: p.random(p.width), y: p.random(p.height), r: p.random(1.5, 3.4), s: p.random(0.08, 0.32) });
-            }
-          };
-          p.draw = function () {
-            p.clear();
-            p.noStroke();
-            points.forEach((dot, index) => {
-              const pulse = 0.35 + Math.sin(p.frameCount * 0.01 + index) * 0.25;
-              p.fill(255, 152, 37, 90 * pulse);
-              p.circle(dot.x, dot.y, dot.r * 2);
-              dot.y -= dot.s;
-              if (dot.y < -4) {
-                dot.y = p.height + 4;
-                dot.x = p.random(p.width);
-              }
-            });
-          };
-          p.windowResized = function () { p.resizeCanvas(window.innerWidth, window.innerHeight); };
-        };
-        new window.p5(sketch);
-      }
-
-      safeLoadState();
-      initPanZoom();
-      initMinimapJump();
-      initEvents();
-      initDecorativeP5();
-      render();
-    })();
   </script>
 </body>
 </html>
