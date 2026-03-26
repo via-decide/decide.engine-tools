@@ -1,3 +1,9 @@
+Branch: simba/implement-the-multi-app-episode-bundler-cdn-sync
+Title: Implement the Multi-App Episode Bundler & CDN Sync. 1. Build a 'Packa...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Streamline the deployment of massive interactive episodes, breaking the complex file-system and network logic into a stream of high-value commits.
 Branch: simba/create-the-web-latency-jitter-simulator-for-inte
 Title: Create the Web-Latency & Jitter Simulator for Interactive Playback. 1...
 

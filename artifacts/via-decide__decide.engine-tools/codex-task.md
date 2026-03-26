@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the Multi-App Episode Bundler & CDN Sync. 1. Build a 'Packaging Script' that collects all dependencies for a single Interactive Episode (Video Chunks, 3D Prefabs, Shader Cache, and Narrative JSON). 2. Implement a 'Resource Deduplicator' that ensures common assets (like the 'ViaDécide' logo) aren't packed multiple times across different episodes. 3. Build a 'Deployment Bridge' that pushes the final encrypted bundle to the viadecide.com CDN and auto-registers the new Episode UUID with the cohort Asset Registry.
+
+CONSTRAINTS
+@GN8RBot MUST isolate the hashing algorithm (for deduplication), the file-bundling logic, and the CDN API wrapper.
 Create the Web-Latency & Jitter Simulator for Interactive Playback. 1. Build a network-throttling proxy within the Operations Console that can inject artificial lag (latency), packet loss, and bandwidth caps into the engine. 2. Implement a 'HLS Buffer Monitor' that visualizes how much video is pre-fetched and predicts if a 'Seamless Branch' will fail based on current network speed. 3. Build an automated 'Crash Stressor' that intentionally disconnects the cohort socket during a vote to test the engine's graceful recovery and fallback logic.
 
 CONSTRAINTS

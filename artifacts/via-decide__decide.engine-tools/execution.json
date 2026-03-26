@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
+  "branch": "simba/implement-the-multi-app-episode-bundler-cdn-sync",
   "branch": "simba/create-the-web-latency-jitter-simulator-for-inte",
   "branch": "simba/create-the-visual-gesture-feedback-ui-components",
   "branch": "simba/build-the-omega-cloud-orchestrator-deployment-en",
