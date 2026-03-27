@@ -2,6 +2,9 @@
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
   "branch": "simba/add-biasprism-as-a-single-file-tool-at-toolsengi",
+  "branch": "simba/add-sourcecartography-as-a-single-file-tool-at-t",
+  "branch": "simba/add-truthseer-as-a-single-file-tool-at-toolsengi",
+  "branch": "simba/add-vialogic-as-a-single-file-tool-at-toolsgames",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
