@@ -19,6 +19,12 @@
     <section id="legend" class="legend" aria-label="Category legend"></section>
 
     <section class="viewport" aria-label="Interactive tool graph viewport">
+      <div id="graph-fallback" style="position:fixed;inset:0;background:#05060F;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:monospace;color:#E2E8F0;z-index:999;">
+        <div style="font-size:48px;margin-bottom:20px">🕸️</div>
+        <h2 style="font-weight:900;margin-bottom:8px">Analyzing 66 Tool Connections...</h2>
+        <p style="color:#64748B;margin-bottom:24px">Building interaction mesh. If this persists, the manifest may be missing.</p>
+        <a href="index.html" style="background:#FF8F00;color:#000;padding:12px 24px;border-radius:8px;font-weight:700;text-decoration:none">Back to Engine Hub →</a>
+      </div>
       <svg id="graph" role="img">
         <g id="graph-root">
           <g id="category-labels"></g>

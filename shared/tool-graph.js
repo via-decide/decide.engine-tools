@@ -1,4 +1,4 @@
-(function () {
+(async function () {
   'use strict';
 
   const TYPE_COLORS = { tool: '#60a5fa', agent: '#f59e0b', workflow: '#34d399' };
@@ -137,5 +137,6 @@
     );
   }
 
-  init();
-})();
+    await init();
+    document.getElementById('graph-fallback')?.remove();
+  })();

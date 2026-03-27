@@ -447,7 +447,17 @@
     </style>
 </head>
 
-<body>
+<body style="background:#0f0d0c">
+
+<div id="studyos-shell" style="font-family:monospace; background:#05060F; color:#E2E8F0; min-height:100vh; padding:40px 20px; max-width:800px; margin:0 auto; position:fixed; inset:0; z-index:9999; overflow-y:auto;">
+    <div style="color:#52B756;font-size:12px;letter-spacing:4px; text-transform:uppercase;margin-bottom:20px">⚡ DECIDE ENGINE · STUDY OS</div>
+    <h1 style="font-size:2rem;font-weight:900;margin-bottom:12px">Initializing Workspace...</h1>
+    <p style="color:#64748B;margin-bottom:32px">Mounting modular learning OS. If this persists, the registry may be offline. <a href="../index.html" style="color:#52B756">Return to Hub</a>.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:#0F172A;border:1px solid rgba(255,255,255,0.08); border-radius:12px;padding:16px"><div style="color:#52B756;font-size:11px;margin-bottom:6px">FILES</div><div style="color:#94A3B8;font-size:13px">Loading local vault...</div></div>
+        <div style="background:#0F172A;border:1px solid rgba(255,255,255,0.08); border-radius:12px;padding:16px"><div style="color:#52B756;font-size:11px;margin-bottom:6px">TERMINAL</div><div style="color:#94A3B8;font-size:13px">Waiting for auth handshake...</div></div>
+    </div>
+</div>
 
 <!-- ══════════════════════════════════════════════
      VIEW: ONBOARDING
@@ -1334,6 +1344,7 @@ const Bootloader = {
         setTimeout(() => {
             const target = document.getElementById(id);
             target.classList.add("active");
+            document.getElementById('studyos-shell')?.remove();
             if (id === "view-app") {
                 document.getElementById("app-subtitle").innerText = `${AppStore.config.category} — ${AppStore.config.subject}`;
                 document.getElementById("orb-trigger").style.display = "flex";

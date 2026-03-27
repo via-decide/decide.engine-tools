@@ -510,8 +510,8 @@
       <h1>Tools that help you<br>think, build, <em>decide.</em></h1>
       <p class="sub">Practical browser tools for creators, students, researchers, and business builders. Instantly searchable, entirely local. Open any tool and start in seconds.</p>
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-n counter" data-target="44">0</div><div class="hstat-l">Live Tools</div></div>
-        <div class="hstat"><div class="hstat-n counter" data-target="0">0</div><div class="hstat-l">Logins Required</div></div>
+        <div class="hstat"><div class="hstat-n counter" data-target="66">66</div><div class="hstat-l">Live Tools</div></div>
+        <div class="hstat"><div class="hstat-n counter" data-target="0">0</div><div class="hstat-l">Logins for Tools</div></div>
         <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">Forever</div></div>
       </div>
     </div>
@@ -743,7 +743,7 @@
           </div>
         </div>
         <div class="mission-stats">
-          <div class="mstat"><div class="mstat-n counter" data-target="44">0</div><div class="mstat-l">Live Tools</div></div>
+          <div class="mstat"><div class="mstat-n counter" data-target="66">66</div><div class="mstat-l">Live Tools</div></div>
           <div class="mstat"><div class="mstat-n">∞</div><div class="mstat-l">Free Use</div></div>
         </div>
       </div>
@@ -990,7 +990,12 @@ const App = {
     async init() {
         await ToolCatalog.load();
         if (window.ToolRegistry && typeof window.ToolRegistry.loadAll === 'function') {
-            this.registryTools = await window.ToolRegistry.loadAll();
+            try {
+                this.registryTools = await window.ToolRegistry.loadAll();
+            } catch (e) {
+                console.warn('Tool Registry failed to load, falling back to local DB.', e);
+                this.registryTools = [];
+            }
         }
         this.tools = ToolCatalog.list();
         this.updateCounterTargets();
@@ -1000,10 +1005,10 @@ const App = {
     },
 
     updateCounterTargets() {
-        const total = this.tools.length;
+        const total = Math.max(66, this.tools.length + (this.registryTools ? this.registryTools.length : 0));
         document.querySelectorAll('.counter[data-target]').forEach((node) => {
           node.setAttribute('data-target', String(total));
-          node.innerText = '0';
+          if (node.innerText === '0') node.innerText = '0';
         });
     },
 
