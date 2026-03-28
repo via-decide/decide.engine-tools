@@ -112,8 +112,8 @@
 
   <div class="key-bar">
     <div class="dot" id="keyDot"></div>
-    <span class="label" id="keyLabel">No API key set</span>
-    <button onclick="openKeyModal()">Set Key</button>
+    <span class="label" id="keyLabel">Claude API ready</span>
+    
   </div>
 
   <div class="card">
@@ -180,33 +180,11 @@
   </div>
 </div>
 
-<div class="modal-overlay hidden" id="keyModal">
-  <div class="modal">
-    <h3>🔑 Anthropic API Key</h3>
-    <p>Used to generate your script via Claude. Stored in sessionStorage only — cleared when you close the tab.</p>
-    <input type="password" id="keyInput" placeholder="sk-ant-api03-..." autocomplete="off" />
-    <div class="modal-btns">
-      <button class="btn-primary" onclick="saveKey()">Save Key</button>
-      <button class="modal-cancel" onclick="closeKeyModal()">Cancel</button>
-    </div>
-  </div>
 </div>
 
 <script>
 let tags = [];
-function openKeyModal() { document.getElementById('keyModal').classList.remove('hidden'); document.getElementById('keyInput').focus(); }
-function closeKeyModal() { document.getElementById('keyModal').classList.add('hidden'); }
-function saveKey() {
-  const v = document.getElementById('keyInput').value.trim();
-  if (!v.startsWith('sk-')) { alert('Key must start with sk-'); return; }
-  sessionStorage.setItem('ct_api_key', v);
-  updateKeyBar(); closeKeyModal();
-}
-function updateKeyBar() {
-  const k = sessionStorage.getItem('ct_api_key');
-  document.getElementById('keyDot').className = 'dot' + (k ? ' active' : '');
-  document.getElementById('keyLabel').textContent = k ? 'API key set (session only)' : 'No API key set — click to add';
-}
+
 
 // Tags
 const tagInput = document.getElementById('tagInput');
@@ -238,11 +216,9 @@ function renderTags() {
 }
 
 async function callClaude(systemPrompt, userMessage, maxTokens = 3000) {
-  const key = sessionStorage.getItem('ct_api_key');
-  if (!key) { openKeyModal(); throw new Error('no key'); }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetch('/api/claude', {
     method: 'POST',
-    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-allow-browser': 'true' },
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
       max_tokens: maxTokens,

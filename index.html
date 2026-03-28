@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <!-- PWA / TWA -->
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <meta name="theme-color" content="#52B756"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="ViaDecide"/>
+  <link rel="apple-touch-icon" href="/ui/icons/icon-192.png"/>
   <title>ViaDecide · Interactive Home & Engine</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -1271,6 +1279,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(r => console.log('[SW] registered:', r.scope))
+        .catch(e => console.warn('[SW] failed:', e));
+    });
+  }
 </script>
 </body>
 </html>

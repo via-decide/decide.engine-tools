@@ -145,8 +145,8 @@
 
   <div class="key-bar">
     <div class="dot" id="keyDot"></div>
-    <span class="label" id="keyLabel">No API key set</span>
-    <button onclick="openKeyModal()">Set Key</button>
+    <span class="label" id="keyLabel">Claude API ready</span>
+    
   </div>
 
   <div class="card">
@@ -204,16 +204,6 @@
 </div>
 
 <!-- API Key Modal -->
-<div class="modal-overlay hidden" id="keyModal">
-  <div class="modal">
-    <h3>🔑 Anthropic API Key</h3>
-    <p>Your key is used only to call the Anthropic API directly from your browser. It's stored in sessionStorage and cleared when you close the tab.</p>
-    <input type="password" id="keyInput" placeholder="sk-ant-api03-..." autocomplete="off" />
-    <div class="modal-btns">
-      <button class="btn-primary" onclick="saveKey()">Save Key</button>
-      <button class="modal-cancel" onclick="closeKeyModal()">Cancel</button>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -228,20 +218,7 @@ const PLATFORMS = {
 };
 
 // API key management
-function openKeyModal() { document.getElementById('keyModal').classList.remove('hidden'); document.getElementById('keyInput').focus(); }
-function closeKeyModal() { document.getElementById('keyModal').classList.add('hidden'); }
-function saveKey() {
-  const v = document.getElementById('keyInput').value.trim();
-  if (!v.startsWith('sk-')) { alert('Key must start with sk-'); return; }
-  sessionStorage.setItem('ct_api_key', v);
-  updateKeyBar();
-  closeKeyModal();
-}
-function updateKeyBar() {
-  const k = sessionStorage.getItem('ct_api_key');
-  document.getElementById('keyDot').className = 'dot' + (k ? ' active' : '');
-  document.getElementById('keyLabel').textContent = k ? 'API key set (session only)' : 'No API key set — click to add';
-}
+
 
 // Char count
 document.getElementById('prompt').addEventListener('input', function() {
@@ -261,16 +238,9 @@ function getSelectedPlatforms() {
 }
 
 async function callClaude(systemPrompt, userMessage, maxTokens = 2000) {
-  const key = sessionStorage.getItem('ct_api_key');
-  if (!key) { openKeyModal(); throw new Error('no key'); }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetch('/api/claude', {
     method: 'POST',
-    headers: {
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-      'anthropic-dangerous-allow-browser': 'true'
-    },
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: maxTokens,

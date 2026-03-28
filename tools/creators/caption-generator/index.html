@@ -117,9 +117,8 @@
   </div>
 
   <div class="key-bar">
-    <div class="dot" id="keyDot"></div>
-    <span class="label" id="keyLabel">No API key set</span>
-    <button onclick="openKeyModal()">Set Key</button>
+    <div class="dot active" id="keyDot"></div>
+    <span class="label" id="keyLabel">Claude API ready</span>
   </div>
 
   <div class="card">
@@ -184,18 +183,6 @@
   </div>
 </div>
 
-<div class="modal-overlay hidden" id="keyModal">
-  <div class="modal">
-    <h3>🔑 Anthropic API Key</h3>
-    <p>Needed for Claude's vision model to read your image and generate captions. Stored in sessionStorage only.</p>
-    <input type="password" id="keyInput" placeholder="sk-ant-api03-..." autocomplete="off" />
-    <div class="modal-btns">
-      <button class="btn-primary" onclick="saveKey()">Save Key</button>
-      <button class="modal-cancel" onclick="closeKeyModal()">Cancel</button>
-    </div>
-  </div>
-</div>
-
 <script>
 const PLATFORMS = {
   instagram: { label: 'Instagram', icon: '📸' },
@@ -208,21 +195,6 @@ const PLATFORMS = {
 
 let imageBase64 = null;
 let imageMime = 'image/jpeg';
-
-// Key modal
-function openKeyModal() { document.getElementById('keyModal').classList.remove('hidden'); document.getElementById('keyInput').focus(); }
-function closeKeyModal() { document.getElementById('keyModal').classList.add('hidden'); }
-function saveKey() {
-  const v = document.getElementById('keyInput').value.trim();
-  if (!v.startsWith('sk-')) { alert('Key must start with sk-'); return; }
-  sessionStorage.setItem('ct_api_key', v);
-  updateKeyBar();
-  closeKeyModal();
-}
-function updateKeyBar() {
-  const k = sessionStorage.getItem('ct_api_key');
-  document.getElementById('keyDot').className = 'dot' + (k ? ' active' : '');
-  document.getElementById('keyLabel').textContent = k ? 'API key set (session only)' : 'No API key set — click to add';
 }
 
 // File upload
@@ -262,11 +234,9 @@ function getSelectedPlatforms() {
 }
 
 async function callClaudeVision(systemPrompt, userText, imgBase64, mime, maxTokens = 2000) {
-  const key = sessionStorage.getItem('ct_api_key');
-  if (!key) { openKeyModal(); throw new Error('no key'); }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetch('/api/claude', {
     method: 'POST',
-    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-allow-browser': 'true' },
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: maxTokens,
