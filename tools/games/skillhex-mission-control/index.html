@@ -413,12 +413,13 @@ header {
 .interview-meta { font-family:var(--fmono); font-size:.5rem; color:var(--txt-dim); display:flex; justify-content:space-between; margin-top:.35rem; }
 .cat-chip { font-size:.47rem; border:1px solid var(--border); padding:.2rem .4rem; border-radius:20px; cursor:pointer; color:var(--txt-dim); }
 .cat-chip.on { border-color:var(--cyan); color:var(--cyan); }
+.hex-poly.expanded { transform:scale(1.4); transform-origin:center; filter:drop-shadow(0 0 16px rgba(0,229,255,.9)); stroke-width:2.5; z-index:10; }
 .interview-modal {
-  position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:350;
-  background:rgba(3,9,18,.75); backdrop-filter: blur(2px);
+  max-height:0; overflow:hidden;
+  transition:max-height 0.3s ease;
 }
-.interview-modal.open { display:flex; }
-.interview-modal-card { width:min(980px, 94vw); max-height:92vh; overflow:auto; background:var(--bg); border:1px solid var(--cyan); box-shadow:var(--cyan-glow); border-radius:8px; padding:.8rem; }
+.interview-modal.open { max-height:calc(100vh - 160px); overflow:auto; }
+.interview-modal-card { width:100%; background:var(--bg); border:1px solid var(--cyan); box-shadow:var(--cyan-glow); border-radius:8px; padding:.8rem; margin-top:.5rem; }
 
 /* ═══════════════════════════════════════════════════════ SVG PIPELINE */
 .pipeline-header {
@@ -1654,6 +1655,9 @@ function handleChoice(choice) {
     const warmBoost = missionWarmup?.mult || 1;
     const pts = Math.round((500 + (30 - kadaTimer) * 20 + MISSIONS[missionIdx].diff * 100) * warmBoost);
     const srDelta = Math.round((pts - 600) / 25);
+    // Optimistic XP: snapshot pre-update state for rollback
+    const _prevXp = STATE.xp;
+    const _prevSr = STATE.sr;
     STATE.sr = Math.max(300, STATE.sr + srDelta);
     STATE.xp += 40 + Math.max(0, Math.round((pts-600)/20));
     STATE.lastScore = pts;
@@ -1671,10 +1675,14 @@ function handleChoice(choice) {
   }
 
   advancePassLevel();
-  updateStats();
+  updateStats(); // Optimistic DOM update — XP already in STATE
   save();
-  fbWritePlayer();
   buildSceneGrids(); // refresh the mission log view
+  // Async write — revert on failure
+  fbWritePlayer().catch(() => {
+    if (typeof _prevXp !== 'undefined') { STATE.xp = _prevXp; STATE.sr = _prevSr; updateStats(); }
+    showToast('Sync failed — XP reverted', 'err');
+  });
 
   setTimeout(() => {
     missionIdx = (missionIdx + 1) % MISSIONS.length;
@@ -2547,7 +2555,17 @@ function openInterviewModal(sceneId) {
   const body = document.getElementById('interview-modal-body');
   if (title) title.textContent = `${sceneId} · ${meta.label}`;
   if (modal && body) {
+    // Collapse any previously expanded hex
+    document.querySelectorAll('.hex-poly.expanded').forEach(el => el.classList.remove('expanded'));
+    // Expand the hex node for this scene (match by skill key prefix in sceneId)
+    const skillKey = Object.keys(STATE.hexSkills || {}).find(k => sceneId.toLowerCase().includes(k.toLowerCase()));
+    if (skillKey) {
+      const hexEl = document.getElementById('hx-' + skillKey);
+      if (hexEl) hexEl.classList.add('expanded');
+    }
     modal.classList.add('open');
+    // Scroll the modal into view smoothly
+    requestAnimationFrame(() => modal.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
     mountInterview('interview-modal-body', meta.cats, { deepDive: !!meta.deepDive, compact:false });
     refreshWheelSectorLabels();
     updateKadaHUD(sceneId, meta.label);
@@ -2557,6 +2575,7 @@ function openInterviewModal(sceneId) {
 function closeInterviewModal() {
   const modal = document.getElementById('interview-modal');
   if (modal) modal.classList.remove('open');
+  document.querySelectorAll('.hex-poly.expanded').forEach(el => el.classList.remove('expanded'));
   refreshWheelSectorLabels();
 }
 

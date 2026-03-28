@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Script Writer · Creator Toolkit</title>
   <script defer src="../../../shared/vd-nav-fix.js"></script>
+  <script src="../../../shared/ai_dispatcher.js"></script>
   <style>
     :root {
       --bg: #06060f; --bg2: #0e0e1a; --bg3: #14142a; --border: #1e1e3a;
@@ -240,18 +241,14 @@ function renderTags() {
 async function callClaude(systemPrompt, userMessage, maxTokens = 3000) {
   const key = sessionStorage.getItem('ct_api_key');
   if (!key) { openKeyModal(); throw new Error('no key'); }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-allow-browser': 'true' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: maxTokens,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userMessage }]
-    })
-  });
-  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `API ${res.status}`); }
-  return (await res.json()).content[0].text;
+  window.VD_CONFIG = { claudeApiKey: key };
+  const result = await window.VDDispatcher.query({
+    task: 'code_output',
+    system: systemPrompt,
+    prompt: userMessage,
+    max_tokens: maxTokens
+  }, 'claude');
+  return result.text;
 }
 
 async function generate() {
@@ -382,7 +379,129 @@ function clearAll() {
   document.getElementById('cta').value = '';
   tags = []; renderTags();
   document.getElementById('resultsSection').innerHTML = '<div class="empty"><div class="big">🎬</div><div>Your full video script will appear here</div></div>';
+  VD_IDB.clear();
 }
+
+/* ── IndexedDB autosave wrapper ─────────────────────────────────────── */
+const VD_IDB = (function() {
+  const DB_NAME = 'vd-script-writer';
+  const STORE   = 'drafts';
+  const KEY     = 'current';
+  const MAX_AGE = 24 * 60 * 60 * 1000; // 24 hours
+  let _db = null;
+
+  function open() {
+    if (_db) return Promise.resolve(_db);
+    return new Promise(function(resolve, reject) {
+      const req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = function(e) {
+        e.target.result.createObjectStore(STORE);
+      };
+      req.onsuccess = function(e) { _db = e.target.result; resolve(_db); };
+      req.onerror   = function(e) { reject(e.target.error); };
+    });
+  }
+
+  function save(data) {
+    return open().then(function(db) {
+      return new Promise(function(resolve, reject) {
+        const tx = db.transaction(STORE, 'readwrite');
+        tx.objectStore(STORE).put(data, KEY);
+        tx.oncomplete = resolve;
+        tx.onerror    = function(e) { reject(e.target.error); };
+      });
+    }).catch(function(e) { console.warn('[VD_IDB] save failed:', e); });
+  }
+
+  function load() {
+    return open().then(function(db) {
+      return new Promise(function(resolve, reject) {
+        const req = db.transaction(STORE, 'readonly').objectStore(STORE).get(KEY);
+        req.onsuccess = function(e) { resolve(e.target.result || null); };
+        req.onerror   = function(e) { reject(e.target.error); };
+      });
+    }).catch(function(e) { console.warn('[VD_IDB] load failed:', e); return null; });
+  }
+
+  function clear() {
+    return open().then(function(db) {
+      return new Promise(function(resolve, reject) {
+        const tx = db.transaction(STORE, 'readwrite');
+        tx.objectStore(STORE).delete(KEY);
+        tx.oncomplete = resolve;
+        tx.onerror    = function(e) { reject(e.target.error); };
+      });
+    }).catch(function(e) { console.warn('[VD_IDB] clear failed:', e); });
+  }
+
+  return { open: open, save: save, load: load, clear: clear };
+})();
+
+/* Capture current form state */
+function _getFormState() {
+  return {
+    topic:    document.getElementById('topic')?.value || '',
+    audience: document.getElementById('audience')?.value || '',
+    channel:  document.getElementById('channel')?.value || '',
+    cta:      document.getElementById('cta')?.value || '',
+    duration: document.getElementById('duration')?.value || '5',
+    style:    document.getElementById('style')?.value || 'educational',
+    tags:     tags.slice(),
+    ts:       Date.now()
+  };
+}
+
+function _applyFormState(state) {
+  if (!state) return;
+  ['topic','audience','channel','cta','duration','style'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el && state[id] !== undefined) el.value = state[id];
+  });
+  if (Array.isArray(state.tags)) { tags = state.tags; renderTags(); }
+}
+
+/* Debounce helper */
+let _saveDebounce = null;
+function _scheduleAutosave() {
+  clearTimeout(_saveDebounce);
+  _saveDebounce = setTimeout(function() {
+    VD_IDB.save(_getFormState());
+  }, 2000);
+}
+
+/* Attach input listeners for autosave */
+['topic','audience','channel','cta'].forEach(function(id) {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', _scheduleAutosave);
+});
+['duration','style'].forEach(function(id) {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', _scheduleAutosave);
+});
+
+/* 30s periodic autosave */
+setInterval(function() { VD_IDB.save(_getFormState()); }, 30000);
+
+/* Restore toast */
+function _showRestoreToast(state) {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#14142a;border:1px solid #f59e0b;color:#e2e8f0;padding:12px 18px;border-radius:10px;font-size:.85rem;z-index:9999;display:flex;gap:12px;align-items:center;box-shadow:0 4px 24px rgba(0,0,0,.5)';
+  toast.innerHTML = 'Draft restored from ' + new Date(state.ts).toLocaleTimeString() +
+    ' &nbsp;<button style="padding:4px 10px;background:#f59e0b;color:#000;border:none;border-radius:6px;cursor:pointer;font-size:.8rem" id="toast-restore-yes">Restore</button>' +
+    '<button style="padding:4px 10px;background:#1e1e3a;color:#94a3b8;border:1px solid #1e1e3a;border-radius:6px;cursor:pointer;font-size:.8rem" id="toast-restore-no">Dismiss</button>';
+  document.body.appendChild(toast);
+  document.getElementById('toast-restore-yes').onclick = function() { _applyFormState(state); toast.remove(); };
+  document.getElementById('toast-restore-no').onclick  = function() { VD_IDB.clear(); toast.remove(); };
+  setTimeout(function() { if (toast.parentNode) toast.remove(); }, 8000);
+}
+
+/* On init: check for saved draft < 24h */
+VD_IDB.load().then(function(state) {
+  if (!state) return;
+  const age = Date.now() - (state.ts || 0);
+  if (age < 24 * 60 * 60 * 1000 && state.topic) _showRestoreToast(state);
+});
+
 updateKeyBar();
 </script>
 </body>

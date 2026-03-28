@@ -649,6 +649,42 @@
     let selectedEntity = null;
     let paths = [];
 
+    // RAF debounce flag for drag/wheel events
+    let _rafPending = false;
+
+    // Viewport culling: returns true if world-space point (wx, wy) is visible
+    function isInViewport(wx, wy, margin) {
+      margin = margin !== undefined ? margin : 120;
+      const sx = wx * cam.zoom + cam.x;
+      const sy = wy * cam.zoom + cam.y;
+      return sx > -margin && sx < width + margin && sy > -margin && sy < height + margin;
+    }
+
+    // Inline Web Worker for camera lerp physics (offloads lerp tick from main thread)
+    let _camWorker = null;
+    try {
+      const workerCode = [
+        'self.onmessage = function(e) {',
+        '  const d = e.data;',
+        '  const t = 0.1;',
+        '  self.postMessage({',
+        '    x:    d.cx + (d.tx - d.cx) * t,',
+        '    y:    d.cy + (d.ty - d.cy) * t,',
+        '    zoom: d.cz + (d.tz - d.cz) * t',
+        '  });',
+        '};'
+      ].join('\n');
+      const blob = new Blob([workerCode], { type: 'application/javascript' });
+      _camWorker = new Worker(URL.createObjectURL(blob));
+      _camWorker.onmessage = function(e) {
+        cam.x    = e.data.x;
+        cam.y    = e.data.y;
+        cam.zoom = e.data.zoom;
+      };
+    } catch(e) {
+      _camWorker = null; // fallback to inline lerp in draw()
+    }
+
     function setup() {
       // --- AUTH GUARD ---
       if (global._VD_AUTH) {
@@ -705,22 +741,30 @@
       }
       if (!hovering && !drag.active) cursor('crosshair');
 
-      // Smooth camera
-      cam.x = lerp(cam.x, targetCam.x, 0.1);
-      cam.y = lerp(cam.y, targetCam.y, 0.1);
-      cam.zoom = lerp(cam.zoom, targetCam.zoom, 0.1);
+      // Smooth camera — use Web Worker when available, inline lerp as fallback
+      if (_camWorker) {
+        _camWorker.postMessage({ cx: cam.x, cy: cam.y, cz: cam.zoom, tx: targetCam.x, ty: targetCam.y, tz: targetCam.zoom });
+      } else {
+        cam.x = lerp(cam.x, targetCam.x, 0.1);
+        cam.y = lerp(cam.y, targetCam.y, 0.1);
+        cam.zoom = lerp(cam.zoom, targetCam.zoom, 0.1);
+      }
 
       push();
       translate(cam.x, cam.y);
       scale(cam.zoom);
 
-      // Draw Paths
+      // Draw Paths — skip if both endpoints are off-screen
       for (let p of paths) {
+        const from = loreData[p.from];
+        const to = loreData[p.to];
+        if (from && to && !isInViewport(from.x, from.y) && !isInViewport(to.x, to.y)) continue;
         drawPath(p);
       }
 
-      // Draw Nodes
+      // Draw Nodes — skip if off-screen
       for (let id in loreData) {
+        if (!isInViewport(loreData[id].x, loreData[id].y)) continue;
         drawNode(loreData[id]);
       }
       pop();
@@ -846,8 +890,13 @@
 
     function mouseDragged() {
       if (!drag.active) return;
-      targetCam.x = drag.x + (mouseX - drag.startX);
-      targetCam.y = drag.y + (mouseY - drag.startY);
+      if (_rafPending) return;
+      _rafPending = true;
+      requestAnimationFrame(function() {
+        targetCam.x = drag.x + (mouseX - drag.startX);
+        targetCam.y = drag.y + (mouseY - drag.startY);
+        _rafPending = false;
+      });
     }
 
     function mouseReleased() {
@@ -865,12 +914,19 @@
       if (isModalOpen) return;
       let zoomIn = event.delta < 0;
       let factor = zoomIn ? 1.05 : 0.95;
-      
       let newZoom = constrain(targetCam.zoom * factor, 0.2, 2.0);
-      
-      targetCam.x = mouseX - (mouseX - targetCam.x) * (newZoom / targetCam.zoom);
-      targetCam.y = mouseY - (mouseY - targetCam.y) * (newZoom / targetCam.zoom);
-      targetCam.zoom = newZoom;
+      // Capture values before async RAF
+      let mx = mouseX, my = mouseY;
+      let prevZoom = targetCam.zoom;
+      let prevX = targetCam.x, prevY = targetCam.y;
+      if (_rafPending) return;
+      _rafPending = true;
+      requestAnimationFrame(function() {
+        targetCam.x = mx - (mx - prevX) * (newZoom / prevZoom);
+        targetCam.y = my - (my - prevY) * (newZoom / prevZoom);
+        targetCam.zoom = newZoom;
+        _rafPending = false;
+      });
     }
 
     function handleTap(mx, my) {

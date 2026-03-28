@@ -1,12 +1,12 @@
 {
-  "name": "ViaDecide Studio",
+  "name": "ViaDecide Engine",
   "short_name": "ViaDecide",
   "description": "37 decision-making, productivity, and game tools in one studio.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0f0d0c",
-  "theme_color": "#52B756",
+  "background_color": "#030508",
+  "theme_color": "#ff671f",
   "scope": "/",
   "lang": "en",
   "icons": [

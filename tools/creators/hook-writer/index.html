@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Hook Writer · Creator Toolkit</title>
   <script defer src="../../../shared/vd-nav-fix.js"></script>
+  <script src="../../../shared/ai_dispatcher.js"></script>
   <style>
     :root {
       --bg: #06060f; --bg2: #0e0e1a; --bg3: #14142a; --border: #1e1e3a;
@@ -255,18 +256,14 @@ let lastParams = null;
 async function callClaude(systemPrompt, userMessage, maxTokens = 2000) {
   const key = sessionStorage.getItem('ct_api_key');
   if (!key) { openKeyModal(); throw new Error('no key'); }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-allow-browser': 'true' },
-    body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: maxTokens,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userMessage }]
-    })
-  });
-  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `API ${res.status}`); }
-  return (await res.json()).content[0].text;
+  window.VD_CONFIG = { claudeApiKey: key };
+  const result = await window.VDDispatcher.query({
+    task: 'structured_spec',
+    system: systemPrompt,
+    prompt: userMessage,
+    max_tokens: maxTokens
+  }, 'claude');
+  return result.text;
 }
 
 async function generate() {

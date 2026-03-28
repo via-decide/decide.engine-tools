@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Prompt Alchemy · Creator Toolkit</title>
   <script defer src="../../../shared/vd-nav-fix.js"></script>
+  <script src="../../../shared/ai_dispatcher.js"></script>
+  <script src="./evaluation_engine.js"></script>
   <style>
     :root {
       --bg: #06060f;
@@ -195,6 +197,8 @@
     </div>
   </div>
 
+  <div id="eval-pipeline-container"></div>
+
   <div id="resultsSection">
     <div class="empty">
       <div class="big">⚗️</div>
@@ -263,23 +267,14 @@ function getSelectedPlatforms() {
 async function callClaude(systemPrompt, userMessage, maxTokens = 2000) {
   const key = sessionStorage.getItem('ct_api_key');
   if (!key) { openKeyModal(); throw new Error('no key'); }
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-      'anthropic-dangerous-allow-browser': 'true'
-    },
-    body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: maxTokens,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userMessage }]
-    })
-  });
-  if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `API error ${res.status}`); }
-  return (await res.json()).content[0].text;
+  window.VD_CONFIG = { claudeApiKey: key };
+  const result = await window.VDDispatcher.query({
+    task: 'structured_spec',
+    system: systemPrompt,
+    prompt: userMessage,
+    max_tokens: maxTokens
+  }, 'claude');
+  return result.text;
 }
 
 async function generate() {
@@ -319,7 +314,17 @@ Platforms: ${platforms.join(', ')}
 Tone override: ${tone}
 Goal: ${goal}`;
 
-    const raw = await callClaude(system, user);
+    const schema = {
+      required: ['platform', 'post', 'hashtags'],
+      types: { platform: 'string', post: 'string', hashtags: 'array' }
+    };
+    const evalResult = await window.VDEvalEngine.runPipeline(
+      user,
+      schema,
+      (p) => callClaude(system, p),
+      'eval-pipeline-container'
+    );
+    const raw = evalResult.output;
     const parsed = JSON.parse(raw.trim().replace(/^```json?\n?/, '').replace(/```$/, ''));
     renderResults(parsed);
   } catch(e) {
