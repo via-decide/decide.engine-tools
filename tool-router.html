@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Router - Find the Right Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #030508 0%, #0a0d12 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff671f 0%, #00e676 50%, #00d1ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a8b8;
+            margin-bottom: 30px;
+        }
+
+        .router-section {
+            background: rgba(10, 13, 18, 0.8);
+            border: 2px solid #1a1f2a;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .question {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e8eaef;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .question::before {
+            content: "🎯";
+            font-size: 1.8rem;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .option-btn {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.1) 0%, rgba(0, 209, 255, 0.1) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 10px;
+            color: #e8eaef;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .option-btn:hover {
+            border-color: #00e676;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.2) 0%, rgba(0, 209, 255, 0.2) 100%);
+            transform: translateY(-2px);
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(255, 103, 31, 0.1) 0%, rgba(0, 230, 118, 0.1) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            border-color: #ff671f;
+            background: linear-gradient(135deg, rgba(255, 103, 31, 0.15) 0%, rgba(0, 230, 118, 0.15) 100%);
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff671f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-description {
+            color: #a0a8b8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .tool-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .benefit {
+            font-size: 0.85rem;
+            color: #00e676;
+            padding: 8px 12px;
+            background: rgba(0, 230, 118, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid #00e676;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #ff671f, #00e676);
+            color: #030508;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, rgba(0, 209, 255, 0.3) 0%, rgba(0, 230, 118, 0.3) 100%);
+            color: #00d1ff;
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #fbbf24;
+            color: #030508;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00e676;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #a0a8b8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🧭 Tool Router</h1>
+            <p class="subtitle">Find the perfect tool for your problem in seconds</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">40+</div>
+                <div class="stat-label">Tools Available</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">90%</div>
+                <div class="stat-label">Token Savings</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">1,600+</div>
+                <div class="stat-label">Possible Workflows</div>
+            </div>
+        </div>
+
+        <div class="router-section">
+            <div class="question">What do you want to do?</div>
+            <div class="options" id="mainOptions">
+                <button class="option-btn" onclick="selectProblem('code')">💻 Write Code</button>
+                <button class="option-btn" onclick="selectProblem('content')">✍️ Create Content</button>
+                <button class="option-btn" onclick="selectProblem('research')">🔬 Research & Learn</button>
+                <button class="option-btn" onclick="selectProblem('business')">💼 Business & Planning</button>
+                <button class="option-btn" onclick="selectProblem('analysis')">📊 Analysis & Validation</button>
+                <button class="option-btn" onclick="selectProblem('workflow')">⚙️ Build Workflows</button>
+            </div>
+        </div>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        const toolRegistry = {
+            code: [
+                {
+                    id: 'code-generator',
+                    name: 'Code Generator',
+                    description: 'Generate boilerplate code, project scaffolding, and implementations from specifications',
+                    savings: '70-80%',
+                    speed: '3-4 weeks → 2 days',
+                    use: 'Need to create code quickly',
+                    link: '/code-generator.html'
+                },
+                {
+                    id: 'app-generator',
+                    name: 'App Generator',
+                    description: 'Generate complete applications from detailed specifications',
+                    savings: '80-90%',
+                    speed: '4 weeks → 1-2 days',
+                    use: 'Building full applications',
+                    link: '/app-generator.html'
+                },
+                {
+                    id: 'code-reviewer',
+                    name: 'Code Reviewer',
+                    description: 'Validate code quality, security, and pattern compliance',
+                    savings: '60-70%',
+                    speed: 'Faster reviews',
+                    use: 'Need code validation',
+                    link: '/code-reviewer.html'
+                },
+                {
+                    id: 'spec-builder',
+                    name: 'Spec Builder',
+                    description: 'Create detailed technical specifications before coding',
+                    savings: '50-60%',
+                    speed: 'Better planning',
+                    use: 'Need clear specifications',
+                    link: '/spec-builder.html'
+                }
+            ],
+            content: [
+                {
+                    id: 'prompt-alchemy',
+                    name: 'Prompt Alchemy',
+                    description: 'Optimize and refine prompts for maximum effectiveness',
+                    savings: '40-50%',
+                    speed: 'Better outputs',
+                    use: 'Improve prompt quality',
+                    link: '/prompt-alchemy.html'
+                },
+                {
+                    id: 'script-generator',
+                    name: 'Script Generator',
+                    description: 'Generate scripts, automations, and procedural content',
+                    savings: '65-75%',
+                    speed: '1-2 days',
+                    use: 'Create scripts or automation',
+                    link: '/script-generator.html'
+                },
+                {
+                    id: 'idea-remixer',
+                    name: 'Idea Remixer',
+                    description: 'Remix and combine ideas into new creative outputs',
+                    savings: '45-55%',
+                    speed: 'Fast ideation',
+                    use: 'Brainstorming new ideas',
+                    link: '/idea-remixer.html'
+                },
+                {
+                    id: 'export-studio',
+                    name: 'Export Studio',
+                    description: 'Export work in multiple formats for distribution',
+                    savings: '40-50%',
+                    speed: 'Instant exports',
+                    use: 'Export & distribute content',
+                    link: '/export-studio.html'
+                }
+            ],
+            research: [
+                {
+                    id: 'multi-source-research',
+                    name: 'Multi-Source Research',
+                    description: 'Synthesize information from multiple sources into cohesive analysis',
+                    savings: '55-65%',
+                    speed: '1-2 days',
+                    use: 'Deep research needed',
+                    link: '/multi-source-research.html'
+                },
+                {
+                    id: 'student-research',
+                    name: 'Student Research',
+                    description: 'Structured research for learning and academic purposes',
+                    savings: '50-60%',
+                    speed: 'Faster learning',
+                    use: 'Academic research',
+                    link: '/student-research.html'
+                },
+                {
+                    id: 'interview-prep',
+                    name: 'Interview Prep',
+                    description: 'Comprehensive interview preparation and coaching',
+                    savings: '60-70%',
+                    speed: '1 week → 2 days',
+                    use: 'Interview preparation',
+                    link: '/interview-prep.html'
+                }
+            ],
+            business: [
+                {
+                    id: 'decision-brief',
+                    name: 'Decision Brief',
+                    description: 'Create structured decision frameworks and business briefs',
+                    savings: '45-55%',
+                    speed: '1 day',
+                    use: 'Make strategic decisions',
+                    link: '/decision-brief.html'
+                },
+                {
+                    id: 'sales-dashboard',
+                    name: 'Sales Dashboard',
+                    description: 'Track and optimize sales metrics and pipelines',
+                    savings: '50-60%',
+                    speed: 'Real-time tracking',
+                    use: 'Sales management',
+                    link: '/sales-dashboard.html'
+                },
+                {
+                    id: 'revenue-forecaster',
+                    name: 'Revenue Forecaster',
+                    description: 'Project revenue and financial outcomes',
+                    savings: '50-60%',
+                    speed: 'Quick forecasts',
+                    use: 'Financial projections',
+                    link: '/revenue-forecaster.html'
+                }
+            ],
+            analysis: [
+                {
+                    id: 'output-evaluator',
+                    name: 'Output Evaluator',
+                    description: 'Evaluate and validate tool outputs against quality standards',
+                    savings: '40-50%',
+                    speed: 'Fast validation',
+                    use: 'Validate quality',
+                    link: '/output-evaluator.html'
+                },
+                {
+                    id: 'prompt-compare',
+                    name: 'Prompt Compare',
+                    description: 'Compare and analyze different prompts and their outputs',
+                    savings: '35-45%',
+                    speed: 'Side-by-side analysis',
+                    use: 'Compare approaches',
+                    link: '/prompt-compare.html'
+                },
+                {
+                    id: 'tool-search-discovery',
+                    name: 'Tool Search Discovery',
+                    description: 'Find and discover the right tool for any problem',
+                    savings: '30-40%',
+                    speed: 'Quick discovery',
+                    use: 'Find the right tool',
+                    link: '/tool-search-discovery.html'
+                }
+            ],
+            workflow: [
+                {
+                    id: 'workflow-builder',
+                    name: 'Workflow Builder',
+                    description: 'Create and optimize automated workflows',
+                    savings: '65-75%',
+                    speed: '1-2 days',
+                    use: 'Build automation',
+                    link: '/workflow-builder.html'
+                },
+                {
+                    id: 'agent-builder',
+                    name: 'Agent Builder',
+                    description: 'Build autonomous agents and workflows',
+                    savings: '75-85%',
+                    speed: '2-3 days',
+                    use: 'Create AI agents',
+                    link: '/agent-builder.html'
+                },
+                {
+                    id: 'task-splitter',
+                    name: 'Task Splitter',
+                    description: 'Break complex tasks into smaller, manageable subtasks',
+                    savings: '55-65%',
+                    speed: 'Better planning',
+                    use: 'Decompose problems',
+                    link: '/task-splitter.html'
+                }
+            ]
+        };
+
+        function selectProblem(category) {
+            const tools = toolRegistry[category];
+            const resultsDiv = document.getElementById('results');
+
+            let html = `
+                <div class="router-section">
+                    <div class="question">✨ Perfect Tools for You</div>
+                    <div style="margin-bottom: 30px;">
+            `;
+
+            tools.forEach(tool => {
+                html += `
+                    <div class="result-card">
+                        <div class="tool-name">
+                            ${tool.name}
+                            <span class="savings-badge">Save ${tool.savings}</span>
+                        </div>
+                        <div class="tool-description">${tool.description}</div>
+                        <div class="tool-benefits">
+                            <div class="benefit">⚡ ${tool.speed}</div>
+                            <div class="benefit">🎯 ${tool.use}</div>
+                        </div>
+                        <a href="${tool.link}" class="action-btn">Open Tool</a>
+                    </div>
+                `;
+            });
+
+            html += `
+                        <button class="action-btn reset-btn" onclick="resetRouter()">← Try Another Problem</button>
+                    </div>
+                </div>
+            `;
+
+            resultsDiv.innerHTML = html;
+            resultsDiv.classList.add('active');
+            document.getElementById('mainOptions').parentElement.style.display = 'none';
+        }
+
+        function resetRouter() {
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('mainOptions').parentElement.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
