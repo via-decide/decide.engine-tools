@@ -28,5 +28,15 @@
     { "name": "Games",       "url": "/?section=games",       "description": "Open games" },
     { "name": "Tools",       "url": "/?section=creators",    "description": "Open creator tools" },
     { "name": "Engine",      "url": "/?section=simulations", "description": "Open simulations" }
+    {
+      "name": "Games",
+      "url": "/?section=games",
+      "description": "Open games section"
+    },
+    {
+      "name": "Tools",
+      "url": "/?section=tools",
+      "description": "Open productivity tools"
+    }
   ]
 }
