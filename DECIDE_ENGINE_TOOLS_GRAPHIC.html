@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decide Engine Tools - Open Source Tool Mesh</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #030508 0%, #0a0d12 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            background: linear-gradient(135deg, #0a0d12 0%, #0f1219 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff671f 0%, #00e676 50%, #00d1ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #a0a8b8;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 40px;
+        }
+
+        /* Main Content Grid */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* Left: Features */
+        .features {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.08) 0%, rgba(0, 209, 255, 0.08) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 15px;
+        }
+
+        .features h2 {
+            font-size: 1.8rem;
+            color: #e8eaef;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .features h2::before {
+            content: "⚡";
+            font-size: 2rem;
+        }
+
+        .feature-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border-left: 3px solid #00e676;
+        }
+
+        .feature-title {
+            color: #00e676;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            color: #a0a8b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Right: Tool Categories */
+        .tools {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 103, 31, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 15px;
+        }
+
+        .tools h2 {
+            font-size: 1.8rem;
+            color: #e8eaef;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tools h2::before {
+            content: "🛠️";
+            font-size: 2rem;
+        }
+
+        .tool-category {
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border-left: 3px solid #ff671f;
+        }
+
+        .category-name {
+            color: #ff671f;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .category-tools {
+            color: #a0a8b8;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Statistics Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 15px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid #1a1f2a;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00e676;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #a0a8b8;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 15px;
+            margin-bottom: 60px;
+        }
+
+        .architecture h2 {
+            font-size: 1.6rem;
+            color: #e8eaef;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .architecture h2::before {
+            content: "🏗️";
+            font-size: 2rem;
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .arch-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid #1a1f2a;
+        }
+
+        .arch-title {
+            color: #22c55e;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .arch-desc {
+            color: #a0a8b8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Highlight Section */
+        .highlight {
+            padding: 40px;
+            background: linear-gradient(135deg, #ff671f 0%, #00e676 100%);
+            border-radius: 15px;
+            color: #030508;
+            margin-bottom: 40px;
+        }
+
+        .highlight h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .highlight p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(0, 230, 118, 0.15) 0%, rgba(0, 209, 255, 0.15) 100%);
+            border: 2px solid #1a1f2a;
+            border-radius: 15px;
+        }
+
+        .cta-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e8eaef;
+            margin-bottom: 15px;
+        }
+
+        .cta-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: #00e676;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .cta-subtext {
+            color: #a0a8b8;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .star-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff671f, #00e676);
+            color: #030508;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .star-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #1a1f2a;
+        }
+
+        .footer-link {
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .arch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .cta-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 230, 118, 0.8);
+            }
+        }
+
+        .glow {
+            animation: glow 3s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">⚙️</div>
+            <h1 class="title">Decide Engine Tools</h1>
+            <p class="tagline">Browser-Native Decision & Productivity Tool Mesh</p>
+            <p class="subtitle">40+ Standalone Tools • No Build Step • Open Source</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Features -->
+            <div class="features">
+                <h2>Why Choose This?</h2>
+
+                <div class="feature-item">
+                    <div class="feature-title">🚀 Zero Setup Required</div>
+                    <div class="feature-desc">Run directly in your browser. No npm install, no build step, no configuration.</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-title">📦 Preservation-First</div>
+                    <div class="feature-desc">Tools are standalone HTML/CSS/JS. Never breaks existing functionality.</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-title">🔗 Tool Mesh Architecture</div>
+                    <div class="feature-desc">Tools communicate seamlessly. Share state, trigger actions, integrate workflows.</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-title">🎮 Orchard Engine Included</div>
+                    <div class="feature-desc">Merit-based farming game system integrated with productivity tools.</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-title">👥 Community Driven</div>
+                    <div class="feature-desc">Open source. Additive development. Your contributions shape the future.</div>
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="tools">
+                <h2>Tool Categories</h2>
+
+                <div class="tool-category">
+                    <div class="category-name">👨‍💻 Coders</div>
+                    <div class="category-tools">Code Generator • Code Reviewer • Agent Builder • App Generator</div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-name">🎨 Creators</div>
+                    <div class="category-tools">Prompt Alchemy • Script Generator • Design System Tools</div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-name">🔬 Researchers</div>
+                    <div class="category-tools">Multi-Source Research • Student Research • Data Analysis</div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-name">📚 Learners</div>
+                    <div class="category-tools">Interview Prep • Study OS • Knowledge Graph</div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-name">💼 Professionals</div>
+                    <div class="category-tools">Decision Brief • Sales Dashboard • Workflow Builder</div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-name">🎮 Gaming</div>
+                    <div class="category-tools">Orchard Engine • Wings of Fire Quiz</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-icon">🛠️</div>
+                <div class="stat-number">40+</div>
+                <div class="stat-label">Standalone Tools</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-number">0</div>
+                <div class="stat-label">Build Steps</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon">📦</div>
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Extensible</div>
+            </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="architecture">
+            <h2>How It Works</h2>
+            <div class="arch-grid">
+                <div class="arch-item">
+                    <div class="arch-title">🌐 Browser-Native</div>
+                    <div class="arch-desc">All tools run directly in the browser using vanilla HTML/CSS/JS. No server required.</div>
+                </div>
+
+                <div class="arch-item">
+                    <div class="arch-title">🔗 Tool Mesh</div>
+                    <div class="arch-desc">Tools communicate through a shared state layer. Pass data between tools seamlessly.</div>
+                </div>
+
+                <div class="arch-item">
+                    <div class="arch-title">📂 Standalone</div>
+                    <div class="arch-desc">Each tool is self-contained. No dependencies between tools. Use individually or together.</div>
+                </div>
+
+                <div class="arch-item">
+                    <div class="arch-title">🚀 Deploy Anywhere</div>
+                    <div class="arch-desc">Vercel, Netlify, GitHub Pages, or self-hosted. One HTML file works everywhere.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Highlight -->
+        <div class="highlight">
+            <h2>🎯 The Decide Engine Difference</h2>
+            <p>Built for developers who value simplicity over complexity.</p>
+            <p>No build tools. No package management. No configuration hell.</p>
+            <p>Just pure, browser-native decision and productivity tools.</p>
+            <p style="font-size: 1.3rem; margin-top: 20px; font-weight: 700;">Start using tools in 30 seconds.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">
+            <div class="cta-text">Ready to Decide?</div>
+            <div class="cta-link">github.com/via-decide/decide.engine-tools</div>
+            <div class="cta-subtext">⭐ Star the repository • 🔄 Fork it • 💬 Contribute</div>
+            <a href="https://github.com/via-decide/decide.engine-tools" target="_blank" class="star-btn">
+                ⭐ Star on GitHub
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Built with ❤️ by ViaDecide • <a href="https://github.com/via-decide/decide.engine-tools" class="footer-link">Open Source</a> • <a href="https://github.com/via-decide/decide.engine-tools/blob/main/ARCHITECTURE.md" class="footer-link">Architecture Docs</a></p>
+        </div>
+    </div>
+</body>
+</html>
