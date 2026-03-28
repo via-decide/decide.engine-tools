@@ -1,3 +1,6 @@
+⭐ If this saved you $X in API costs, star this repo
+Help other devs discover metadata-driven development
+
 # VIA Platform: 58-Tool Ecosystem with 80% Token Savings
 
 > **Before you fork another monorepo: This one saved me $33,756 in API costs and 2.25M tokens. Here's how.**
