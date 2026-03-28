@@ -1,0 +1,18 @@
+{
+  "name": "decide-engine-tools",
+  "version": "1.0.0",
+  "description": "ViaDecide Studio — 37 decision-making, productivity and game tools",
+  "private": true,
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "test:unit": "node tests/unit/run.js",
+    "test:smoke": "node tests/smoke/run.js",
+    "version:bump": "node tests/scripts/bump-version.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.44.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
