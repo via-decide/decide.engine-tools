@@ -5,6 +5,7 @@
       "namespace": "android_app",
       "package_name": "com.viadecide.studio",
       "sha256_cert_fingerprints": [
+        "PLACEHOLDER_REPLACE_AFTER_BUBBLEWRAP_INIT"
         "PLACEHOLDER_SHA256_REPLACE_AFTER_BUBBLEWRAP_KEYGEN"
       ]
     }
