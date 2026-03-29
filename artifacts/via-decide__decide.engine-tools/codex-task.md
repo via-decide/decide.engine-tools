@@ -1,34 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Implement a lightweight, headless DOM testing sandbox for autonomous agents using JSDOM. 1. Initialize a test environment in scripts/testing/ (using a lightweight runner like node --test or a minimal custom script). 2. Install jsdom as a dev dependency to simulate the browser environment inside Node.js. 3. Create scripts/testing/sandbox.js. This script must: - Accept a tool path (e.g., tools/games/vialogic/index.html). - Load the HTML into a virtual JSDOM instance. - Inject shared/shared.css and global variables (window.Telegram, window.ProgressionEngine). - Execute the tool's tool.js script. 4. Write a helper function simulateClick(selector) and assertDOMText(selector, expectedText) that the AI can use to write lightning-fast test assertions.
+Implement the SwarmGraphBinder to map Agent States to SVG Data Streams. 1. Create shared/swarm-graph-binder.js. 2. Implement a function updateSwarmGraph(activeAgentsArray). This array contains objects like [{ id: 'researcher', status: 'computing', linkedTo: 'summarizer' }]. 3. The function must query the DOM for all SVG nodes matching .swarm-node[data-agent-id="..."] and SVG paths matching .swarm-link[data-link-source="..."]. 4. Logic mapping:
 
 CONSTRAINTS
-Do not use heavy frameworks like Cypress or Playwright. JSDOM keeps token usage and execution time minimal.
-Build the via-diagnostic CLI tool to automatically verify the integrity of the 58-tool ecosystem. 1. Create scripts/testing/run-diagnostics.js. 2. The script must iterate through every directory listed in shared/tool-registry.js. 3. For each tool, it must run three automated checks:
-
-CONSTRAINTS
-Pure Node.js. The output must be concise (token-efficient) so it can be fed directly back into antigravity's context window.
-Create the event-schema-registry.json as the ultimate reference contract for agent communication. 1. Create a file shared/event-schema.json. 2. Document every valid global custom event in the VIA ecosystem. Example:
-
-CONSTRAINTS
-Keep the JSON schema flat and highly readable. The validator must be completely disabled in production for performance.
-Build the MockSynthesizer to provide deterministic reference data for AI testing. 1. Create a new directory scripts/testing/mocks/. 2. Create a script generate-mocks.js. This script must define the absolute "Gold Standard" JSON schemas for the core engine states:
-
-CONSTRAINTS
-Pure Node.js for the generator, Vanilla JS for the injector. The mock data must perfectly mirror the production database schema.
-Enforce a Unified Diff output protocol for the Genesis Compiler / AI workflows. 1. Update the system prompt configuration for all internal Agent building tools (like the genesis-compiler built previously). 2. Add the strict directive: "NEVER output the full file contents. You must ONLY output a JSON-formatted unified diff patch containing the exact line numbers to add, remove, or modify." 3. Write a utility function shared/patch-applier.js that can read this diff JSON and safely apply it to a raw string of code. 4. Integrate this into the agent execution loop so that tools update themselves surgically.
-
-CONSTRAINTS
-The patcher must handle line-number shifts safely (e.g., if inserting 3 lines, subsequent patch line numbers must adjust).
-Build the meta-compressor to extract only function signatures from the architecture. 1. Create a script scripts/generate-meta-map.js. 2. This script must read every .js file in the shared/ directory (e.g., reward-wallet.js, agent-runtime.js). 3. Write a simple Regex or AST parser that strips out ALL internal logic, loops, and implementation details. 4. It must extract ONLY: - Class names / Object names. - Function signatures and their parameters (e.g., RewardWallet.spend(amount, currency)). - Global CustomEvents dispatched (e.g., @fires wallet:sync_error). 5. The script must output a single, hyper-dense file: .via-metadata.d.ts or .via-map.json to the root directory.
-
-CONSTRAINTS
-The output file must be as token-dense as possible. Strip all whitespace, comments, and internal variables.
-Build the via-scaffold CLI utility to eliminate boilerplate token generation. 1. Create a new directory scripts/scaffold/ in the root. 2. Create a base template folder scripts/scaffold/template/ containing a perfect, empty standard for a tool: index.html (with all shared CSS/JS linked), tool.js (with a basic init wrapper), and config.json (with empty metadata arrays). 3. Write a Node.js script generate-tool.js that accepts a tool name via command line (e.g., node scripts/scaffold/generate-tool.js "quantum-calculator"). 4. The script must: - Copy the template to tools/engine/[tool-name]. - Automatically inject the tool name into index.html and config.json. - Auto-append the new tool to the importableToolDirs array in shared/tool-registry.js.
-
-CONSTRAINTS
-Must be pure Node.js (fs, path modules). No external dependencies.
+Pure Vanilla JS DOM manipulation. Use requestAnimationFrame if updating multiple nodes simultaneously to avoid layout thrashing.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
