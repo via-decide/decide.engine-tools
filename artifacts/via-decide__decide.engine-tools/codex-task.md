@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create the event-schema-registry.json as the ultimate reference contract for agent communication. 1. Create a file shared/event-schema.json. 2. Document every valid global custom event in the VIA ecosystem. Example:
+
+CONSTRAINTS
+Keep the JSON schema flat and highly readable. The validator must be completely disabled in production for performance.
 Build the MockSynthesizer to provide deterministic reference data for AI testing. 1. Create a new directory scripts/testing/mocks/. 2. Create a script generate-mocks.js. This script must define the absolute "Gold Standard" JSON schemas for the core engine states:
 
 CONSTRAINTS

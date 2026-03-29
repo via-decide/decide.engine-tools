@@ -1,3 +1,9 @@
+Branch: simba/create-the-event-schema-registryjson-as-the-ulti
+Title: Create the event-schema-registry.json as the ultimate reference contr...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a strict "compiler-like" error interface. If the AI hallucinates a payload structure, the validator instantly catches it and tells the AI exactly which field was wrong.
 Branch: simba/build-the-mocksynthesizer-to-provide-determinist
 Title: Build the MockSynthesizer to provide deterministic reference data for...
 
