@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the via-diagnostic CLI tool to automatically verify the integrity of the 58-tool ecosystem. 1. Create scripts/testing/run-diagnostics.js. 2. The script must iterate through every directory listed in shared/tool-registry.js. 3. For each tool, it must run three automated checks:
+
+CONSTRAINTS
+Pure Node.js. The output must be concise (token-efficient) so it can be fed directly back into antigravity's context window.
 Create the event-schema-registry.json as the ultimate reference contract for agent communication. 1. Create a file shared/event-schema.json. 2. Document every valid global custom event in the VIA ecosystem. Example:
 
 CONSTRAINTS

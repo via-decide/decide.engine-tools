@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
+  "branch": "simba/build-the-via-diagnostic-cli-tool-to-automatical",
   "branch": "simba/create-the-event-schema-registryjson-as-the-ulti",
   "branch": "simba/build-the-mocksynthesizer-to-provide-determinist",
   "branch": "simba/enforce-a-unified-diff-output-protocol-for-the-g",

@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Build the via-diagnostic CLI tool to automatically verify the integrity of the 58-tool ecosystem. 1. Create scripts/testing/run-diagnostics.js. 2. The script must iterate through every directory listed in shared/tool-registry.js. 3. For each tool, it must run three automated checks:
 Create the event-schema-registry.json as the ultimate reference contract for agent communication. 1. Create a file shared/event-schema.json. 2. Document every valid global custom event in the VIA ecosystem. Example:
 Build the MockSynthesizer to provide deterministic reference data for AI testing. 1. Create a new directory scripts/testing/mocks/. 2. Create a script generate-mocks.js. This script must define the absolute "Gold Standard" JSON schemas for the core engine states:
 Enforce a Unified Diff output protocol for the Genesis Compiler / AI workflows. 1. Update the system prompt configuration for all internal Agent building tools (like the genesis-compiler built previously). 2. Add the strict directive: "NEVER output the full file contents. You must ONLY output a JSON-formatted unified diff patch containing the exact line numbers to add, remove, or modify." 3. Write a utility function shared/patch-applier.js that can read this diff JSON and safely apply it to a raw string of code. 4. Integrate this into the agent execution loop so that tools update themselves surgically.
