@@ -14,5 +14,6 @@
     "seed_score_report",
     "engine_state_snapshot",
     "event_log"
-  ]
+  ],
+  "tags": []
 }

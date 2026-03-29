@@ -5,6 +5,18 @@
   "category": "engine",
   "isEngineTool": false,
   "entry": "tools/engine/layer1-swipe-crucible/index.html",
-  "relatedTools": ["growth-milestone-engine", "season-engine", "reward-wallet"],
-  "tags": ["orchard-engine", "game", "layer1", "swipe", "daily", "standalone"]
+  "relatedTools": [
+    "growth-milestone-engine",
+    "season-engine",
+    "reward-wallet"
+  ],
+  "tags": [
+    "orchard-engine",
+    "game",
+    "layer1",
+    "swipe",
+    "daily",
+    "standalone"
+  ],
+  "inputs": []
 }
