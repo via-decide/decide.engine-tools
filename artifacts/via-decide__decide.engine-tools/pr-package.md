@@ -1,3 +1,9 @@
+Branch: simba/implement-a-lightweight-headless-dom-testing-san
+Title: Implement a lightweight, headless DOM testing sandbox for autonomous ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Allow antigravity to write a tool, write a test file, run the test in the terminal, read the error logs, and fix its own bugs before completing the task.
 Branch: simba/build-the-via-diagnostic-cli-tool-to-automatical
 Title: Build the via-diagnostic CLI tool to automatically verify the integri...
 

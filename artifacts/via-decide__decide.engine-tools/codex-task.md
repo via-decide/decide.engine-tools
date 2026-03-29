@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement a lightweight, headless DOM testing sandbox for autonomous agents using JSDOM. 1. Initialize a test environment in scripts/testing/ (using a lightweight runner like node --test or a minimal custom script). 2. Install jsdom as a dev dependency to simulate the browser environment inside Node.js. 3. Create scripts/testing/sandbox.js. This script must: - Accept a tool path (e.g., tools/games/vialogic/index.html). - Load the HTML into a virtual JSDOM instance. - Inject shared/shared.css and global variables (window.Telegram, window.ProgressionEngine). - Execute the tool's tool.js script. 4. Write a helper function simulateClick(selector) and assertDOMText(selector, expectedText) that the AI can use to write lightning-fast test assertions.
+
+CONSTRAINTS
+Do not use heavy frameworks like Cypress or Playwright. JSDOM keeps token usage and execution time minimal.
 Build the via-diagnostic CLI tool to automatically verify the integrity of the 58-tool ecosystem. 1. Create scripts/testing/run-diagnostics.js. 2. The script must iterate through every directory listed in shared/tool-registry.js. 3. For each tool, it must run three automated checks:
 
 CONSTRAINTS
