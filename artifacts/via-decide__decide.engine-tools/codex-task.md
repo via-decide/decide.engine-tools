@@ -5,6 +5,18 @@ Build a global GlassModalController for dynamic context injection. 1. Create sha
 
 CONSTRAINTS
 There should only ever be ONE glass modal in the DOM at a time to save memory. Re-use the same DOM node and just swap the innerHTML and event listeners.
+Implement the SwarmGraphBinder to map Agent States to SVG Data Streams. 1. Create shared/swarm-graph-binder.js. 2. Implement a function updateSwarmGraph(activeAgentsArray). This array contains objects like [{ id: 'researcher', status: 'computing', linkedTo: 'summarizer' }]. 3. The function must query the DOM for all SVG nodes matching .swarm-node[data-agent-id="..."] and SVG paths matching .swarm-link[data-link-source="..."]. 4. Logic mapping:
+
+CONSTRAINTS
+Pure Vanilla JS DOM manipulation. Use requestAnimationFrame if updating multiple nodes simultaneously to avoid layout thrashing.
+Wire the Supabase Realtime payload to the CSS Cyber-Health Bar. 1. Open shared/circle-manager.js (or your multiplayer handler). 2. Locate the Supabase WebSocket listener that receives UPDATE events for the pest_sieges table. 3. When a payload arrives (e.g., { current_hp: 4500, max_hp: 5000 }), calculate the percentage: const hpPercent = (current_hp / max_hp) * 100. 4. Select the DOM element with the .siege-health-fill class. 5. Dynamically update its CSS variable: element.style.setProperty('--hp-percent', \${hpPercent}%\). 6. Select the parent .siege-health-track container and temporarily add the .taking-damage class. Remove it after 200ms using setTimeout.
+
+CONSTRAINTS
+Do not re-render the entire DOM element. Only touch the CSS custom property --hp-percent and toggle the utility class to ensure 60fps hardware-accelerated animations.
+Build the TerminalLogger to map LLM JSON outputs into the CRT CSS UI. 1. Create shared/terminal-logger.js. 2. Implement a TerminalLogger class with a streamToUI(elementId, jsonPayload) method. 3. The method must target a container with the .hud-terminal class (built in the CSS phase). 4. Instead of dumping raw text, it must parse the jsonPayload. For each key-value pair (e.g., {"step": "Analyzing", "status": "Success"}), it should dynamically generate HTML lines. 5. If status === "Success", append the .status-ok class (triggering the green glow). If status === "Error", append the .btn-glitch class to the text to make it visually unstable. 6. Add a simulated "typing" delay (e.g., 20ms per character) to the output so it feels like a retro console receiving live data, appending the .cursor-blink class to the last active line.
+
+CONSTRAINTS
+Pure Vanilla JS. Do not use external typing libraries. Ensure the container auto-scrolls to the bottom as new lines are added using element.scrollTop = element.scrollHeight.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
