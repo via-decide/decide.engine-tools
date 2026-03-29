@@ -5,6 +5,10 @@ Wire the Supabase Realtime payload to the CSS Cyber-Health Bar. 1. Open shared/c
 
 CONSTRAINTS
 Do not re-render the entire DOM element. Only touch the CSS custom property --hp-percent and toggle the utility class to ensure 60fps hardware-accelerated animations.
+Build the TerminalLogger to map LLM JSON outputs into the CRT CSS UI. 1. Create shared/terminal-logger.js. 2. Implement a TerminalLogger class with a streamToUI(elementId, jsonPayload) method. 3. The method must target a container with the .hud-terminal class (built in the CSS phase). 4. Instead of dumping raw text, it must parse the jsonPayload. For each key-value pair (e.g., {"step": "Analyzing", "status": "Success"}), it should dynamically generate HTML lines. 5. If status === "Success", append the .status-ok class (triggering the green glow). If status === "Error", append the .btn-glitch class to the text to make it visually unstable. 6. Add a simulated "typing" delay (e.g., 20ms per character) to the output so it feels like a retro console receiving live data, appending the .cursor-blink class to the last active line.
+
+CONSTRAINTS
+Pure Vanilla JS. Do not use external typing libraries. Ensure the container auto-scrolls to the bottom as new lines are added using element.scrollTop = element.scrollHeight.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
