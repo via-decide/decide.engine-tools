@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build the MockSynthesizer to provide deterministic reference data for AI testing. 1. Create a new directory scripts/testing/mocks/. 2. Create a script generate-mocks.js. This script must define the absolute "Gold Standard" JSON schemas for the core engine states:
+
+CONSTRAINTS
+Pure Node.js for the generator, Vanilla JS for the injector. The mock data must perfectly mirror the production database schema.
 Enforce a Unified Diff output protocol for the Genesis Compiler / AI workflows. 1. Update the system prompt configuration for all internal Agent building tools (like the genesis-compiler built previously). 2. Add the strict directive: "NEVER output the full file contents. You must ONLY output a JSON-formatted unified diff patch containing the exact line numbers to add, remove, or modify." 3. Write a utility function shared/patch-applier.js that can read this diff JSON and safely apply it to a raw string of code. 4. Integrate this into the agent execution loop so that tools update themselves surgically.
 
 CONSTRAINTS

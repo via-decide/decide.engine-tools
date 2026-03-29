@@ -1,3 +1,9 @@
+Branch: simba/build-the-mocksynthesizer-to-provide-determinist
+Title: Build the MockSynthesizer to provide deterministic reference data for...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a static, 0-token-cost reference file so antigravity can inject perfect mock data into any new tool it builds, ensuring UI tests don't fail due to missing variables.
 Branch: simba/enforce-a-unified-diff-output-protocol-for-the-g
 Title: Enforce a Unified Diff output protocol for the Genesis Compiler / AI ...
 
