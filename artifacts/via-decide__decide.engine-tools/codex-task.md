@@ -5,6 +5,10 @@ Build the meta-compressor to extract only function signatures from the architect
 
 CONSTRAINTS
 The output file must be as token-dense as possible. Strip all whitespace, comments, and internal variables.
+Build the via-scaffold CLI utility to eliminate boilerplate token generation. 1. Create a new directory scripts/scaffold/ in the root. 2. Create a base template folder scripts/scaffold/template/ containing a perfect, empty standard for a tool: index.html (with all shared CSS/JS linked), tool.js (with a basic init wrapper), and config.json (with empty metadata arrays). 3. Write a Node.js script generate-tool.js that accepts a tool name via command line (e.g., node scripts/scaffold/generate-tool.js "quantum-calculator"). 4. The script must: - Copy the template to tools/engine/[tool-name]. - Automatically inject the tool name into index.html and config.json. - Auto-append the new tool to the importableToolDirs array in shared/tool-registry.js.
+
+CONSTRAINTS
+Must be pure Node.js (fs, path modules). No external dependencies.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
