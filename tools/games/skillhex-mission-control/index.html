@@ -821,13 +821,6 @@ footer {
     <div style="margin-top:.9rem">
       <div class="panel-hd" style="margin-bottom:.5rem">Reward Log</div>
       <div class="reward-list" id="reward-log"></div>
-    </div>
-  </div>
-
-  <!-- PROGRESSION + SHARE -->
-  <div class="panel">
-    <div class="panel-hd">Mission Stats</div>
-    <div class="stat-grid" style="margin-bottom:.9rem">
       <div class="stat-card"><div class="sc-val" id="st-sr">1000</div><div class="sc-lbl">Skill Rating</div></div>
       <div class="stat-card"><div class="sc-val" id="st-score">0</div><div class="sc-lbl">Last Score</div></div>
       <div class="stat-card"><div class="sc-val" id="st-tokens">0</div><div class="sc-lbl">Tokens</div></div>
@@ -884,20 +877,16 @@ footer {
 <!-- ═══════════════════════════════════════════════════════════════════
      SCRIPTS
 ═══════════════════════════════════════════════════════════════════ -->
+<script src="../../../../shared/config_env.js"></script>
 <script>
 "use strict";
 
 /* ═══ FIREBASE CONFIG ═══════════════════════════════════════════════
-   Replace with your own Firebase project config.
-   Get it from: console.firebase.google.com → Project Settings → Your Apps
+   NOTE: Ensure Supabase Row Level Security (RLS) is enabled for the 'anon' key.
  ═════════════════════════════════════════════════════════════════════ */
-const FB_CONFIG = {
-  apiKey: "AIzaSyB4ues4tuPmT_BVqTr_gzUQ5m0TPbLB5H4",
-  authDomain: "gen-lang-client-0530513864.firebaseapp.com",
-  projectId: "gen-lang-client-0530513864",
-  storageBucket: "gen-lang-client-0530513864.firebasestorage.app",
-  messagingSenderId: "783755173296",
-  appId: "1:783755173296:web:242974c84f464f979e8a75"
+const FB_CONFIG = window.VIA_CONFIG?.FIREBASE || {
+  apiKey: "SETUP_REQUIRED",
+  authDomain: "SETUP_REQUIRED"
 };
 
 let db = null;

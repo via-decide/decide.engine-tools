@@ -11,18 +11,19 @@
     <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';</script>
 
     <!-- Firebase compat SDKs -->
+    <script src="../shared/config_env.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyB4ues4tuPmT_BVqTr_gzUQ5m0TPbLB5H4",
-            authDomain: "gen-lang-client-0530513864.firebaseapp.com",
-            projectId: "gen-lang-client-0530513864",
-            storageBucket: "gen-lang-client-0530513864.firebasestorage.app",
-            messagingSenderId: "783755173296",
-            appId: "1:783755173296:web:242974c84f464f979e8a75"
+        // VIA CONFIGURATION (Externalized)
+        // NOTE: Ensure Supabase Row Level Security (RLS) is enabled for the 'anon' key.
+        const firebaseConfig = window.VIA_CONFIG?.FIREBASE || {
+            apiKey: "SETUP_REQUIRED",
+            authDomain: "SETUP_REQUIRED"
         };
-        if (typeof firebase !== 'undefined') firebase.initializeApp(firebaseConfig);
+        if (firebaseConfig.apiKey !== "SETUP_REQUIRED" && typeof firebase !== 'undefined') {
+            firebase.initializeApp(firebaseConfig);
+        }
     </script>
 
     <!-- Shared Auth/Wallet -->

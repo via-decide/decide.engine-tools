@@ -124,7 +124,7 @@
 </head>
 <body>
   <main class="app">
-    <section class="panel">
+    <section class="panel anim-1" style="--i: 1;">
       <h1>Layer 1 — Swipe Crucible</h1>
       <div id="meta" class="meta">Day 1 · Streak 🔥 0 · ⭐ 0 XP</div>
       <div class="root-wrap">
@@ -133,23 +133,23 @@
       </div>
     </section>
 
-    <section id="gamePanel" class="panel">
+    <section id="gamePanel" class="panel anim-2" style="--i: 2;">
       <div class="stack" id="stack">
         <div class="ghost g3"></div>
         <div class="ghost g2"></div>
-        <div id="cardHost"></div>
+        <div id="cardHost" class="anim-3" style="--i: 4;"></div>
         <div class="progress" id="cardProgress">Card 1 of 5</div>
       </div>
       <div class="hint">← skip &nbsp;&nbsp;&nbsp; complete →</div>
     </section>
 
-    <section id="alreadyPanel" class="panel hide">
+    <section id="alreadyPanel" class="panel hide anim-4" style="--i: 1;">
       <h2 style="margin:0 0 8px;">Already played today</h2>
       <div id="countdown" class="meta"></div>
-      <a class="btn" href="../growth-milestone-engine/index.html">See My Farm</a>
+      <a class="btn live" href="../growth-milestone-engine/index.html">See My Farm</a>
     </section>
 
-    <section id="completePanel" class="panel complete hide">
+    <section id="completePanel" class="panel complete hide anim-5" style="--i: 1;">
       <h2>Session Complete</h2>
       <div class="stats">
         <div id="result-xp">XP Earned: +0</div>
@@ -157,7 +157,7 @@
         <div id="accLine">Accuracy: 0%</div>
         <div id="result-streak">Streak: 0 days 🔥</div>
       </div>
-      <a class="btn" href="../growth-milestone-engine/index.html">See My Farm</a>
+      <a class="btn live" href="../growth-milestone-engine/index.html">See My Farm</a>
     </section>
   </main>
 
