@@ -1,3 +1,9 @@
+Branch: simba/build-the-meta-compressor-to-extract-only-functi
+Title: Build the meta-compressor to extract only function signatures from th...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Instead of passing 10,000 tokens of shared files to Claude to give it context, I will pass this 500-token .via-metadata map. Claude will instantly know exactly how to call every backend function without reading how it works.
 Branch: simba/build-the-via-scaffold-cli-utility-to-eliminate-
 Title: Build the via-scaffold CLI utility to eliminate boilerplate token gen...
 
