@@ -1,3 +1,9 @@
+Branch: simba/enforce-a-unified-diff-output-protocol-for-the-g
+Title: Enforce a Unified Diff output protocol for the Genesis Compiler / AI ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Reduce output token costs by 95% on iterative updates. If a file is 500 lines, modifying a button should only cost 20 output tokens, not 520 tokens.
 Branch: simba/build-the-meta-compressor-to-extract-only-functi
 Title: Build the meta-compressor to extract only function signatures from th...
 

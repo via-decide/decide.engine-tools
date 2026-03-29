@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Enforce a Unified Diff output protocol for the Genesis Compiler / AI workflows. 1. Update the system prompt configuration for all internal Agent building tools (like the genesis-compiler built previously). 2. Add the strict directive: "NEVER output the full file contents. You must ONLY output a JSON-formatted unified diff patch containing the exact line numbers to add, remove, or modify." 3. Write a utility function shared/patch-applier.js that can read this diff JSON and safely apply it to a raw string of code. 4. Integrate this into the agent execution loop so that tools update themselves surgically.
+
+CONSTRAINTS
+The patcher must handle line-number shifts safely (e.g., if inserting 3 lines, subsequent patch line numbers must adjust).
 Build the meta-compressor to extract only function signatures from the architecture. 1. Create a script scripts/generate-meta-map.js. 2. This script must read every .js file in the shared/ directory (e.g., reward-wallet.js, agent-runtime.js). 3. Write a simple Regex or AST parser that strips out ALL internal logic, loops, and implementation details. 4. It must extract ONLY: - Class names / Object names. - Function signatures and their parameters (e.g., RewardWallet.spend(amount, currency)). - Global CustomEvents dispatched (e.g., @fires wallet:sync_error). 5. The script must output a single, hyper-dense file: .via-metadata.d.ts or .via-map.json to the root directory.
 
 CONSTRAINTS
