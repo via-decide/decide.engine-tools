@@ -2,11 +2,27 @@
   "id": "script-generator",
   "name": "Script Generator",
   "description": "Convert structured prompts into scripts",
-  "inputs": ["structured_prompt", "format", "length"],
-  "outputs": ["script"],
-  "relatedTools": ["promptalchemy", "spec-builder", "export-studio"],
+  "inputs": [
+    "structured_prompt",
+    "format",
+    "length"
+  ],
+  "outputs": [
+    "script"
+  ],
+  "relatedTools": [
+    "promptalchemy",
+    "spec-builder",
+    "export-studio"
+  ],
   "category": "creators",
-  "audience": ["creators", "founders"],
+  "audience": [
+    "creators",
+    "founders"
+  ],
   "entry": "tools/script-generator/index.html",
-  "tags": ["mesh-ready", "content"]
+  "tags": [
+    "mesh-ready",
+    "content"
+  ]
 }

@@ -4,9 +4,20 @@
   "description": "Builds Codex-ready technical specifications from context packets.",
   "category": "coders",
   "audience": "developers",
-  "inputs": ["context_or_description", "feature_name", "acceptance_criteria", "edge_cases"],
-  "outputs": ["technical_spec"],
-  "tags": ["spec", "requirements", "pipeline"],
+  "inputs": [
+    "context_or_description",
+    "feature_name",
+    "acceptance_criteria",
+    "edge_cases"
+  ],
+  "outputs": [
+    "technical_spec"
+  ],
+  "tags": [
+    "spec",
+    "requirements",
+    "pipeline"
+  ],
   "pipeline": {
     "position": 2,
     "next": "code-generator",

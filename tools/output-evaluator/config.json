@@ -4,9 +4,20 @@
   "description": "Scores final code delivery quality against context, spec, and review signals.",
   "category": "coders",
   "audience": "developers",
-  "inputs": ["context_packet", "spec", "review_feedback", "final_code"],
-  "outputs": ["delivery_report"],
-  "tags": ["evaluation", "scoring", "delivery"],
+  "inputs": [
+    "context_packet",
+    "spec",
+    "review_feedback",
+    "final_code"
+  ],
+  "outputs": [
+    "delivery_report"
+  ],
+  "tags": [
+    "evaluation",
+    "scoring",
+    "delivery"
+  ],
   "pipeline": {
     "position": 0,
     "next": null,

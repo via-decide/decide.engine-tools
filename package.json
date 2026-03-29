@@ -10,6 +10,7 @@
     "version:bump": "node tests/scripts/bump-version.js"
   },
   "devDependencies": {
+    "jsdom": "^29.0.1",
     "playwright": "^1.44.0"
   },
   "engines": {

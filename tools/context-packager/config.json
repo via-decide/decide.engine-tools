@@ -4,9 +4,21 @@
   "description": "Packages project context into a ranked brief for downstream coding agents.",
   "category": "coders",
   "audience": "developers",
-  "inputs": ["project", "stack", "existing", "task", "constraints"],
-  "outputs": ["context_packet"],
-  "tags": ["context", "handoff", "pipeline"],
+  "inputs": [
+    "project",
+    "stack",
+    "existing",
+    "task",
+    "constraints"
+  ],
+  "outputs": [
+    "context_packet"
+  ],
+  "tags": [
+    "context",
+    "handoff",
+    "pipeline"
+  ],
   "pipeline": {
     "position": 1,
     "next": "spec-builder",

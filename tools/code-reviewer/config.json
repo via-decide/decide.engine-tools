@@ -4,9 +4,19 @@
   "description": "Reviews generated code against spec requirements and emits repair instructions.",
   "category": "coders",
   "audience": "developers",
-  "inputs": ["spec", "generated_code", "review_mode"],
-  "outputs": ["review_feedback"],
-  "tags": ["review", "quality", "repair"],
+  "inputs": [
+    "spec",
+    "generated_code",
+    "review_mode"
+  ],
+  "outputs": [
+    "review_feedback"
+  ],
+  "tags": [
+    "review",
+    "quality",
+    "repair"
+  ],
   "pipeline": {
     "position": 4,
     "next": "output-evaluator",

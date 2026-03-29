@@ -2,12 +2,27 @@
   "id": "tool-router",
   "name": "Tool Router",
   "description": "Suggest next tool in workflow",
-  "inputs": ["artifact_type", "goal"],
-  "outputs": ["next_tool_suggestion"],
-  "relatedTools": ["promptalchemy", "spec-builder", "code-generator", "code-reviewer"],
-  "category": "operators",
+  "inputs": [
+    "artifact_type",
+    "goal"
+  ],
+  "outputs": [
+    "next_tool_suggestion"
+  ],
+  "relatedTools": [
+    "promptalchemy",
+    "spec-builder",
+    "code-generator",
+    "code-reviewer"
+  ],
   "category": "system",
-  "audience": ["operators", "founders"],
+  "audience": [
+    "operators",
+    "founders"
+  ],
   "entry": "tools/tool-router/index.html",
-  "tags": ["mesh-ready", "pipeline-prep"]
+  "tags": [
+    "mesh-ready",
+    "pipeline-prep"
+  ]
 }
