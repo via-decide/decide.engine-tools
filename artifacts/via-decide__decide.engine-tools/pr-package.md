@@ -1,3 +1,9 @@
+Branch: simba/wire-the-supabase-realtime-payload-to-the-css-cy
+Title: Wire the Supabase Realtime payload to the CSS Cyber-Health Bar. 1. Op...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Bridge the cloud database directly to the CSS animation engine. When a clan member deals damage, the local UI instantly recalculates the math, shrinks the bar, and triggers the physical impact shake.
 Branch: simba/build-the-terminallogger-to-map-llm-json-outputs
 Title: Build the TerminalLogger to map LLM JSON outputs into the CRT CSS UI....
 

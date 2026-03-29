@@ -1,6 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
+  "branch": "simba/wire-the-supabase-realtime-payload-to-the-css-cy",
   "branch": "simba/build-the-terminallogger-to-map-llm-json-outputs",
   "files_to_create": [
     "codex-task.md",
