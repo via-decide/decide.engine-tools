@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Implement the SwarmGraphBinder to map Agent States to SVG Data Streams. 1. Create shared/swarm-graph-binder.js. 2. Implement a function updateSwarmGraph(activeAgentsArray). This array contains objects like [{ id: 'researcher', status: 'computing', linkedTo: 'summarizer' }]. 3. The function must query the DOM for all SVG nodes matching .swarm-node[data-agent-id="..."] and SVG paths matching .swarm-link[data-link-source="..."]. 4. Logic mapping:
+
+CONSTRAINTS
+Pure Vanilla JS DOM manipulation. Use requestAnimationFrame if updating multiple nodes simultaneously to avoid layout thrashing.
 Wire the Supabase Realtime payload to the CSS Cyber-Health Bar. 1. Open shared/circle-manager.js (or your multiplayer handler). 2. Locate the Supabase WebSocket listener that receives UPDATE events for the pest_sieges table. 3. When a payload arrives (e.g., { current_hp: 4500, max_hp: 5000 }), calculate the percentage: const hpPercent = (current_hp / max_hp) * 100. 4. Select the DOM element with the .siege-health-fill class. 5. Dynamically update its CSS variable: element.style.setProperty('--hp-percent', \${hpPercent}%\). 6. Select the parent .siege-health-track container and temporarily add the .taking-damage class. Remove it after 200ms using setTimeout.
 
 CONSTRAINTS

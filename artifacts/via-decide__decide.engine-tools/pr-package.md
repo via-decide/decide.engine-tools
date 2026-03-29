@@ -1,3 +1,9 @@
+Branch: simba/implement-the-swarmgraphbinder-to-map-agent-stat
+Title: Implement the SwarmGraphBinder to map Agent States to SVG Data Stream...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Create a living map. As your background QStash workers spin up and pass data to each other, the 3D SVG connections physically light up to show the flow of information in real-time.
 Branch: simba/wire-the-supabase-realtime-payload-to-the-css-cy
 Title: Wire the Supabase Realtime payload to the CSS Cyber-Health Bar. 1. Op...
 
