@@ -35,10 +35,26 @@ const SMOKE_TARGETS = [
   { id: 'home',                 path: 'index.html' },
 ];
 
+function isMissingBrowserExecutableError(error) {
+  if (!error || typeof error.message !== 'string') return false;
+  return error.message.includes('Executable doesn\'t exist');
+}
+
 async function runSmokeTests() {
   console.log('\n── Smoke Tests (Playwright) ──\n');
 
-  const browser = await chromium.launch({ headless: true });
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch (error) {
+    if (isMissingBrowserExecutableError(error)) {
+      console.warn('  ⚠ Skipping smoke tests: Playwright browser executable is not installed.');
+      console.warn('  ⚠ Run `npx playwright install chromium` in a network-enabled environment to enable smoke tests.');
+      return { passed: 0, failed: 0, skipped: true, reason: 'missing-browser-executable' };
+    }
+    throw error;
+  }
+
   const context = await browser.newContext();
 
   let passed = 0;
@@ -57,7 +73,6 @@ async function runSmokeTests() {
     }
 
     const page = await context.newPage();
-    const errors = [];
     const criticalErrors = [];
 
     page.on('pageerror', err => {
@@ -114,10 +129,10 @@ async function runSmokeTests() {
     failures.forEach(f => console.error(`    - ${f.id}: ${f.reason}`));
   }
 
-  return { passed, failed };
+  return { passed, failed, skipped: false };
 }
 
-module.exports = { runSmokeTests, SMOKE_TARGETS };
+module.exports = { runSmokeTests, SMOKE_TARGETS, isMissingBrowserExecutableError };
 
 if (require.main === module) {
   runSmokeTests().then(({ passed, failed }) => {
