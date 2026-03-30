@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Fixed
+- Added missing `shared/config_env.js`, fixed broken script paths in Agent/SkillHex/Kutch Map pages, and restored a loadable `js/viadecide-agent.js` entrypoint for the Agent demo.
 - Improved smoke test resilience by skipping only when Playwright browser executables are unavailable, while keeping real smoke regressions as hard failures.
 - Added regression unit coverage for smoke bootstrap error classification.
 - Repaired malformed root service worker logic and restored valid install/activate/fetch handlers with GitHub Pages-safe relative shell asset paths.
