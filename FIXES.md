@@ -91,3 +91,27 @@ python3 -m http.server 8080
 ```text
 Both pages now resolve shared config script correctly.
 ```
+
+
+---
+
+# Tool: Eco Engine Test (`tools/eco-engine-test/index.html`)
+
+## What Was Wrong
+- Duplicate constant declaration:
+  - `const SUPABASE_ANON_KEY = ...` was declared twice in the same scope.
+- Duplicate setup error screen assignment ran back-to-back.
+
+## What I Fixed
+- Removed duplicate `const SUPABASE_ANON_KEY` declaration.
+- Removed duplicate `document.body.innerHTML = ...` setup-required block.
+
+## How To Test
+```bash
+rg -n "const SUPABASE_ANON_KEY =" tools/eco-engine-test/index.html
+```
+
+## Result
+```text
+One declaration remains; no duplicate const syntax/runtime risk.
+```
