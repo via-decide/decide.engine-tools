@@ -5,6 +5,10 @@ Create branch feature/logichub-gemini-integration. Update tools/engine/logichub/
 
 CONSTRAINTS
 Handle Gemini API errors gracefully (e.g., "API Key Leaked" or "Quota Exceeded") by showing them in the scrolling logger and marking the block status as "ERROR".
+Create branch feature/logichub-core-ui. Create a new directory tools/engine/logichub/. Inside, create index.html, tool.js, and config.json. Migrate the layout, SVG paths, and CSS of the latest LogicHub node-editor prototype into these files. Ensure the dragging logic, snap-to-port radius (50px), and mobile-responsive palettes are fully functional. Replace the prototype CSS variables (e.g., --bg) with the global OS variables (e.g., --color-soil-dark) so it matches the rest of the game engine's aesthetic. Commit with message "feat: add LogicHub node editor UI to engine tools". Push branch and open PR to main titled "Feat: LogicHub Core UI Migration"
+
+CONSTRAINTS
+Pure Vanilla JS. Do not use external libraries for the node dragging or SVG line drawing. The config.json must register the tool correctly in the OS.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
