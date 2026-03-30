@@ -12,6 +12,7 @@ const suites = [
   { name: 'EngineUtils',  file: './engine-utils.test.js' },
   { name: 'ToolBridge',   file: './tool-bridge.test.js' },
   { name: 'Router',       file: './router.test.js' },
+  { name: 'SmokeTools',   file: './smoke-tools.test.js' },
 ];
 
 let totalPassed = 0;
