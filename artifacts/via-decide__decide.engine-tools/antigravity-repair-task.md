@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Create branch feature/logichub-gemini-integration. Update tools/engine/logichub/tool.js. Implement the generateCodeForBlock() function to call generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent. Ensure it passes the dependsOn block code as context in the prompt. Implement the getContextIdeas() function for Orphaned blocks using Gemini. Refactor saveMap() and loadMap() to use the OS's centralized localStorage key (e.g., orchard_logichub_maps) instead of temporary sessionStorage. Add a dynamic, scrolling terminal logger (#lh-logger) that keeps the last 20 events visible. Commit with message "feat: integrate Gemini API and persistent state for LogicHub". Push branch and open PR to main titled "Feat: Gemini API & State Sync"
 Create branch feature/logichub-core-ui. Create a new directory tools/engine/logichub/. Inside, create index.html, tool.js, and config.json. Migrate the layout, SVG paths, and CSS of the latest LogicHub node-editor prototype into these files. Ensure the dragging logic, snap-to-port radius (50px), and mobile-responsive palettes are fully functional. Replace the prototype CSS variables (e.g., --bg) with the global OS variables (e.g., --color-soil-dark) so it matches the rest of the game engine's aesthetic. Commit with message "feat: add LogicHub node editor UI to engine tools". Push branch and open PR to main titled "Feat: LogicHub Core UI Migration"
 
 RULES

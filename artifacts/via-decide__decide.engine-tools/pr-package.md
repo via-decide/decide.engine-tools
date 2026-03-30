@@ -1,3 +1,9 @@
+Branch: simba/create-branch-featurelogichub-gemini-integration
+Title: Create branch feature/logichub-gemini-integration. Update tools/engin...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Make the architectural map actually "think" and generate usable code based on the node structure.
 Branch: simba/create-branch-featurelogichub-core-ui-create-a-n
 Title: Create branch feature/logichub-core-ui. Create a new directory tools/...
 
