@@ -36,3 +36,7 @@ This batch performs Phase 1 baseline analysis and establishes a reliable test wo
 - Keep smoke tests strict when browser runtime exists.
 - Skip smoke tests gracefully (with warnings) only when Playwright reports missing browser executable.
 - Preserve hard failure behavior for actual smoke regressions.
+
+
+## Additional Finding (Option A follow-up)
+- Service worker (`sw.js`) was syntactically invalid due to duplicated malformed blocks and required repair before broader tool-level runtime validation.

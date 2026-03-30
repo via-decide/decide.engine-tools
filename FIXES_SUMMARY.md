@@ -1,6 +1,8 @@
 # Fixes Summary (Batch 1)
 
 ## Fixed Components
+- `sw.js`
+- `FIX_sw.md`
 - `tests/smoke/tools.smoke.js`
 - `tests/smoke/run.js`
 - `tests/unit/run.js`
@@ -8,6 +10,7 @@
 
 ## Issue Categories Addressed
 - Test infrastructure resilience
+- Service worker stability and offline shell reliability
 - Environment-aware error handling
 - Regression test coverage
 - Documentation completeness

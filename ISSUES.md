@@ -21,3 +21,21 @@ Running `npm test` failed before executing smoke assertions due to:
 - Return a structured `skipped` result when that specific environment limitation occurs.
 - Keep non-environment errors as hard failures.
 - Add regression unit test for error classification helper.
+
+
+## Issue 2 — Root service worker (`sw.js`) syntax is invalid
+
+### Symptoms
+- `node --check sw.js` fails with parse errors.
+- Service worker cannot install/activate when syntax parsing fails.
+
+### Impact
+- Offline shell caching and cache cleanup logic do not run.
+- Runtime resilience regresses for subscriber-facing shell experience.
+
+### Root Cause
+A malformed merge introduced duplicated partial blocks and unmatched braces.
+
+### Resolution Strategy
+- Replace `sw.js` with one coherent, syntactically valid implementation.
+- Use relative cache asset URLs to support GitHub Pages subpath hosting.
