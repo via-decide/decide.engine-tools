@@ -1,3 +1,9 @@
+Branch: simba/create-branch-featurelogichub-dual-export-update
+Title: Create branch feature/logichub-dual-export. Update tools/engine/logic...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide users with tangible, highly useful artifacts resulting from their architectural planning.
 Branch: simba/create-branch-featurelogichub-gemini-integration
 Title: Create branch feature/logichub-gemini-integration. Update tools/engin...
 

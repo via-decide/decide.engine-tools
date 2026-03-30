@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Create branch feature/logichub-dual-export. Update tools/engine/logichub/tool.js and index.html. Add two buttons to the action bar: "[EXPORT .MD (PROMPTS & CODE)]" and "[EXPORT PDF]". Implement exportArchitectureMarkdown(map). It must generate a .md file containing the ASCII tree diagram, and for each block, print the EXACT prompt used to generate it, followed by the generated code. Implement exportArchitecturePDF(map) using jspdf. For BOTH exports, implement the Native Web Share API (navigator.share) for mobile devices, gracefully falling back to a standard blob download (a.download) on desktop browsers. Ensure both buttons remain disabled ([LOCKED]) until all blocks are VERIFIED and the architecture is confirmed. Commit with message "feat: add PDF and Markdown dual-export to LogicHub". Push branch and open PR to main titled "Feat: Dual-Export Engine (PDF & MD)"
+
+CONSTRAINTS
+Pure Vanilla JS. The Markdown file must enclose Prompts in > blockquotes or `text``` blocks, and code in ```javascript``` blocks so tools like GitHub/VSCode render native 'Copy' buttons for the user.
 Create branch feature/logichub-gemini-integration. Update tools/engine/logichub/tool.js. Implement the generateCodeForBlock() function to call generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent. Ensure it passes the dependsOn block code as context in the prompt. Implement the getContextIdeas() function for Orphaned blocks using Gemini. Refactor saveMap() and loadMap() to use the OS's centralized localStorage key (e.g., orchard_logichub_maps) instead of temporary sessionStorage. Add a dynamic, scrolling terminal logger (#lh-logger) that keeps the last 20 events visible. Commit with message "feat: integrate Gemini API and persistent state for LogicHub". Push branch and open PR to main titled "Feat: Gemini API & State Sync"
 
 CONSTRAINTS
