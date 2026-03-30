@@ -5,6 +5,15 @@ Format: [Semantic Versioning](https://semver.org)
 
 ---
 
+## [Unreleased]
+
+### Fixed
+- Improved smoke test resilience by skipping only when Playwright browser executables are unavailable, while keeping real smoke regressions as hard failures.
+- Added regression unit coverage for smoke bootstrap error classification.
+- Repaired malformed root service worker logic and restored valid install/activate/fetch handlers with GitHub Pages-safe relative shell asset paths.
+
+---
+
 ## [1.0.0] — 2026-03-28
 
 ### Foundation
