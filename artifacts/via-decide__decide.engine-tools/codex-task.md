@@ -5,6 +5,10 @@ Initiate Daxini Revival Protocol on a data/utility tool (e.g., SOP Builder or Re
 
 CONSTRAINTS
 Pure Vanilla JS. Do not use external PDF libraries unless absolutely necessary (prefer simple text/MD export).
+Initiate Daxini Revival Protocol on a swipe-based learning/assessment tool (e.g., Alchemist). 1. Consolidate into a SINGLE index.html file. 2. GESTURE ENGINE FIX: Repair the touchstart/touchmove/touchend logic for the swipe cards. Ensure cards visually rotate and fade out as they are dragged left or right. 3. DECK LOGIC: Ensure the array of questions/cards loops correctly or shows a "Deck Completed" glass modal with a final score/analysis when empty. 4. UI UPGRADE: Apply Daxini styling. Dark void background (#030508). The swipe cards must be glass-morphic (rgba(10, 12, 18, 0.8)) with a subtle Cyan border (rgba(0, 229, 255, 0.3)).
+
+CONSTRAINTS
+Pure Vanilla JS. No Hammer.js or external gesture libraries. Math must be handled via native TouchEvents.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.

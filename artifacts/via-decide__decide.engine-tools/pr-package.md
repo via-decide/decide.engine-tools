@@ -4,6 +4,12 @@ Title: Initiate Daxini Revival Protocol on a data/utility tool (e.g., SOP Bu...
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
 - Goal: Ensure the business tool generates a tangible, copyable result without breaking inside an iframe.
+Branch: simba/initiate-daxini-revival-protocol-on-a-swipe-base
+Title: Initiate Daxini Revival Protocol on a swipe-based learning/assessment...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Create a butter-smooth, tactile swipe experience that feels native on mobile devices.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
