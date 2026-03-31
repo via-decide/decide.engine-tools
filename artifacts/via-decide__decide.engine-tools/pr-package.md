@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-tracetrimmer-th
+Title: Build a new micro-frontend named 'TraceTrimmer' (The Error Log Optimi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local utility to instantly strip useless noise from massive stack traces before pasting them into LLMs, ensuring the AI focuses only on the actual bug while slashing token costs.
 Branch: simba/build-a-new-micro-frontend-named-payloadpruner-t
 Title: Build a new micro-frontend named 'PayloadPruner' (The JSON Token Opti...
 

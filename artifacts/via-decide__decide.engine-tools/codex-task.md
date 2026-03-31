@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'TraceTrimmer' (The Error Log Optimizer). Create a new folder /TraceTrimmer and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Split UI: Left pane <textarea> for pasting raw, bloated terminal/browser error logs. Right pane <textarea> for the pruned output. 2. The Trimming Engine (Regex based): - Strip timestamps (e.g., [2026-03-31 10:45:00], YYYY-MM-DDTHH:mm:ss.sssZ). - Strip memory addresses (e.g., 0x0000000...). - Optional Toggle [x]: "Hide Library Traces" (Removes lines containing node_modules, chrome-extension://, anonymous function).
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Heavy use of efficient Regex .replace() and string manipulation. Must run instantly in the browser without freezing on large text blocks.
 Build a new micro-frontend named 'PayloadPruner' (The JSON Token Optimizer). Create a new folder /PayloadPruner and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Split UI: Left pane <textarea> for pasting raw, bloated JSON. Right pane <textarea> for the pruned output. 2. The Pruning Engine: Write a recursive JavaScript function that parses the input JSON and applies these rules: - IF it encounters an Array: Keep ONLY the first item (index 0) and discard the rest. Add a dummy string "_NOTE": "Array truncated for LLM context" as the second item if it was truncated. - IF it encounters a String longer than 40 characters: Truncate it and append .... 3. Feature Toggle: Add a checkbox [ ] "Generate TypeScript Interfaces Instead". If checked, instead of pruned JSON, use basic JS logic to map the JSON keys to a TS Interface (e.g., id: string;). 4. Real-Time Stats: Display a token/character comparison at the top: Original: 45KB ➔ Pruned: 2KB (95% Saved). 5. Add a [ COPY PRUNED PAYLOAD ] button. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 CONSTRAINTS
