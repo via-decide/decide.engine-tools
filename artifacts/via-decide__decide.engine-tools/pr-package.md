@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-domscrubber-the
+Title: Build a new micro-frontend named 'DOMScrubber' (The HTML & SVG Token ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local utility to instantly strip heavy SVGs, inline styles, and classes from raw web code, giving LLMs a pure semantic skeleton of a UI while saving massive token costs.
 Branch: simba/build-a-new-micro-frontend-named-datamasker-the-
 Title: Build a new micro-frontend named 'DataMasker' (The PII & Secrets Scru...
 
