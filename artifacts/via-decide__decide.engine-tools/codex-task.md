@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'ToolForge' (The AI Agent Function Builder). Create a new folder /ToolForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Main Form: Inputs for Function Name and Function Description. 2. Parameters List: A dynamic section where users can click [+ Add Parameter]. - Each parameter needs: Name (e.g., location), Type (String, Integer, Boolean, Object, Array), Description, and a checkbox [x] Required. 3. The Compiler: A button that takes the visual inputs and generates the exact JSON Schema required for LLM Function Calling (OpenAI/Gemini/Anthropic standard). 4. The output must be perfectly formatted JSON, wrapped in <tool_schema> tags or standard JSON block, displayed in a <textarea>. 5. Add a [ COPY SCHEMA ] button. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS DOM manipulation for adding/removing parameter rows. Output must be valid, strict JSON Schema Draft-07 format (which LLMs use for tool calling).
 Build a new micro-frontend named 'TraceTrimmer' (The Error Log Optimizer). Create a new folder /TraceTrimmer and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Split UI: Left pane <textarea> for pasting raw, bloated terminal/browser error logs. Right pane <textarea> for the pruned output. 2. The Trimming Engine (Regex based): - Strip timestamps (e.g., [2026-03-31 10:45:00], YYYY-MM-DDTHH:mm:ss.sssZ). - Strip memory addresses (e.g., 0x0000000...). - Optional Toggle [x]: "Hide Library Traces" (Removes lines containing node_modules, chrome-extension://, anonymous function).
 
 CONSTRAINTS
