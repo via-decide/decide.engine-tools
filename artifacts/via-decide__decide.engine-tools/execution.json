@@ -1,10 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/initiate-daxini-revival-protocol-on-the-mars-sim",
-  "branch": "simba/initiate-daxini-revival-protocol-on-the-skillhex",
-  "branch": "simba/initiate-daxini-revival-protocol-on-the-vialogic",
-  "branch": "simba/initiate-daxini-revival-protocol-on-the-sop-buil",
+  "branch": "simba/build-a-new-micro-frontend-named-macroforge-the-",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
