@@ -5,6 +5,10 @@ Initiate Daxini Revival Protocol on the 'ViaLogic' and 'ViaMath' game modules. (
 
 CONSTRAINTS
 Pure Vanilla JS. No Canvas/Phaser unless already present. No NPM.
+Initiate Daxini Revival Protocol on the 'SOP Builder' tool. 1. Consolidate all logic into a single index.html file. 2. STATE MANAGEMENT: Wire inputs to localStorage (autosave on keystroke) so data survives iframe unloads. 3. UI UPGRADE: Apply Daxini styling. Background: #030508. Fonts: JetBrains Mono & Syne. Glass-morphic input fields with Cyan (#00e5ff) focus states. 4. EXPORT ENGINE: Build a robust Markdown (.md) generator based on the form inputs. Create a glowing, fixed-bottom action bar with a [COPY TO CLIPBOARD] and [DOWNLOAD .TXT] button. 5. IFRAME SAFETY: Ensure height: 100vh, overflow-y: auto, and disable any external window redirects.
+
+CONSTRAINTS
+Pure Vanilla JS. No external CSS/JS libraries. The export must rely purely on native Blob and Clipboard APIs.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
