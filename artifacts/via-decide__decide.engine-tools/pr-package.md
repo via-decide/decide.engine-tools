@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-payloadpruner-t
+Title: Build a new micro-frontend named 'PayloadPruner' (The JSON Token Opti...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, instant utility to strip redundant data from massive API responses, allowing developers to pass exact data schemas to LLMs while slashing token usage by up to 99%.
 Branch: simba/build-a-new-micro-frontend-named-contextweaver-t
 Title: Build a new micro-frontend named 'ContextWeaver' (The Multi-File Prom...
 
