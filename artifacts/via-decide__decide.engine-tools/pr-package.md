@@ -1,3 +1,9 @@
+Branch: simba/initiate-daxini-revival-protocol-on-the-vialogic
+Title: Initiate Daxini Revival Protocol on the 'ViaLogic' and 'ViaMath' game...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Ensure these puzzle games are fully playable inside a mobile web iframe without scrolling glitches.
 Branch: simba/initiate-daxini-revival-protocol-on-the-sop-buil
 Title: Initiate Daxini Revival Protocol on the 'SOP Builder' tool. 1. Consol...
 
