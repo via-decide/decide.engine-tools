@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-datamasker-the-
+Title: Build a new micro-frontend named 'DataMasker' (The PII & Secrets Scru...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local security and optimization utility to instantly sanitize logs, code, and JSON of sensitive PII and heavy cryptographic tokens before pasting them into LLMs.
 Branch: simba/build-a-new-micro-frontend-named-toolforge-the-a
 Title: Build a new micro-frontend named 'ToolForge' (The AI Agent Function B...
 
