@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Initiate Daxini Revival Protocol on the 'Mars Sim' module. 1. Consolidate into a single index.html file. 2. TICK ENGINE: Ensure the JavaScript setInterval loop correctly calculates resource generation (oxygen, power, etc.) every second. 3. UI UPGRADE: Build a "Command Center" dashboard aesthetic. Dark void (#030508) background, JetBrains Mono font for all numbers/stats. Use progress bars (<progress> or CSS width) colored Cyan and Saffron. 4. EVENT LOG: Create a scrolling text area at the bottom logging simulation events ("Day 1: Solar flare detected"). 5. STATE: Save simulation state to localStorage every 10 ticks.
+
+CONSTRAINTS
+Pure Vanilla JS. No React. Keep DOM updates highly optimized so the iframe doesn't lag.
 Initiate Daxini Revival Protocol on the 'SkillHex' module. 1. Consolidate into a single index.html file. 2. RENDER ENGINE: Rebuild the hexagonal or grid-based skill layout using CSS Grid or SVG. Ensure nodes are clickable/tappable. 3. UI UPGRADE: Apply Daxini styling. Background: #030508. Unlocked skills glow Cyan (#00e5ff), locked skills are muted glass (rgba(255,255,255,0.05)), maxed skills glow Saffron (#ff671f). 4. STATE: Save the skill tree progression to localStorage. 5. IFRAME SAFETY: Ensure the grid scales dynamically using relative units (vw/vh) so it fits perfectly inside the Daxini Space window viewport without horizontal scrolling.
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/initiate-daxini-revival-protocol-on-the-mars-sim
+Title: Initiate Daxini Revival Protocol on the 'Mars Sim' module. 1. Consoli...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Create a self-contained, continuous simulation dashboard compatible with the Daxini OS.
 Branch: simba/initiate-daxini-revival-protocol-on-the-skillhex
 Title: Initiate Daxini Revival Protocol on the 'SkillHex' module. 1. Consoli...
 
