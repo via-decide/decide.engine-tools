@@ -1,21 +1,9 @@
-Branch: simba/create-branch-featurelogichub-dual-export-update
-Title: Create branch feature/logichub-dual-export. Update tools/engine/logic...
+Branch: simba/initiate-the-daxini-revival-protocol-on-the-brok
+Title: Initiate the "Daxini Revival Protocol" on the broken tools within thi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide users with tangible, highly useful artifacts resulting from their architectural planning.
-Branch: simba/create-branch-featurelogichub-gemini-integration
-Title: Create branch feature/logichub-gemini-integration. Update tools/engin...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Make the architectural map actually "think" and generate usable code based on the node structure.
-Branch: simba/create-branch-featurelogichub-core-ui-create-a-n
-Title: Create branch feature/logichub-core-ui. Create a new directory tools/...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: A seamless visual editor embedded directly into the OS where users can map out app architectures.
+- Goal: Transform a broken, fragmented tool into a production-ready, iframe-compatible artifact for the Daxini Space OS.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
