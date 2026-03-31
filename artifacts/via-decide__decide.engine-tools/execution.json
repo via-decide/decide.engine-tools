@@ -1,9 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/create-branch-featurelogichub-dual-export-update",
-  "branch": "simba/create-branch-featurelogichub-gemini-integration",
-  "branch": "simba/create-branch-featurelogichub-core-ui-create-a-n",
+  "branch": "simba/initiate-daxini-revival-protocol-on-a-swipe-base",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
