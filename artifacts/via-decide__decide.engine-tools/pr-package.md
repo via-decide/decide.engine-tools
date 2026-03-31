@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-contextweaver-t
+Title: Build a new micro-frontend named 'ContextWeaver' (The Multi-File Prom...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local developer utility to instantly convert multi-file codebases into structured, LLM-ready system prompts without manual copy-pasting, drastically speeding up the AI debugging workflow.
 Branch: simba/build-a-new-micro-frontend-named-jsoncore-the-st
 Title: Build a new micro-frontend named 'JSONCore' (The Strict-Schema Prompt...
 

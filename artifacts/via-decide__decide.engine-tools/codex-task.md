@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'ContextWeaver' (The Multi-File Prompt Assembler). Create a new folder /ContextWeaver and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Drag & Drop Zone: Use the HTML5 File API and webkitGetAsEntry to allow users to drag and drop multiple files OR an entire folder into the browser. 2. The File Tree (Left Pane): Parse the dropped files and render a visual file tree (e.g., 📁 src -> 📄 app.js). - Add a checkbox next to every file. All files are checked by default. 3. The Compiler (Right Pane): A live-updating <textarea> that concatenates the contents of ALL checked files. 4. Formatting: Wrap each file's content in LLM-optimized XML tags: <file path="src/app.js"> [FILE CONTENT HERE] </file> 5. Add a massive [ COPY MASTER PROMPT ] button that copies the entire payload to the clipboard. 6. Add a "Token Estimate" counter that roughly estimates the token count (Words * 1.3) so the user knows if they are blowing their context window. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Use native Browser File APIs to read directories. All processing must happen 100% locally in the browser for speed and privacy.
 Build a new micro-frontend named 'JSONCore' (The Strict-Schema Prompt Builder). Create a new folder /JSONCore and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Schema Builder UI: A dynamic list where users can click [+ Add Key] to define JSON properties.
 
 CONSTRAINTS
