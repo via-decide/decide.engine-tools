@@ -2,6 +2,10 @@
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
   "branch": "simba/build-a-new-micro-frontend-named-payloadpruner-t",
+  "branch": "simba/build-a-new-micro-frontend-named-contextweaver-t",
+  "branch": "simba/build-a-new-micro-frontend-named-jsoncore-the-st",
+  "branch": "simba/build-a-new-micro-frontend-named-macroforge-the-",
+  "branch": "simba/build-a-new-micro-frontend-named-tokensqueeze-th",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
