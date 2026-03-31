@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-macroforge-the-
+Title: Build a new micro-frontend named 'MacroForge' (The VBA / Excel Prompt...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Create a visual layout tool that translates spreadsheet coordinates and logic into dense, error-free system prompts for LLMs, drastically reducing API costs and debugging time for Excel automation.
 Branch: simba/build-a-new-micro-frontend-named-tokensqueeze-th
 Title: Build a new micro-frontend named 'TokenSqueeze' (The Context Compress...
 

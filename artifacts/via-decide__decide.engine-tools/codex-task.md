@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'MacroForge' (The VBA / Excel Prompt Compiler). Create a new folder /MacroForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. UI Grid: Render a lightweight, interactive spreadsheet grid (Columns A-G, Rows 1-10) using CSS Grid. 2. Range Selector: Allow the user to click and drag to highlight an "Input Range" (colors it Cyan) and an "Output Range" (colors it Saffron). 3. Action Panel: A dropdown menu of common Excel operations: [Filter, Sort, Loop & Math, VLOOKUP/Index-Match, Data Cleaning]. 4. The Compiler: A button that generates a hyper-dense, machine-readable prompt string based on the selections.
+
+CONSTRAINTS
+Zero NPM dependencies. No heavy spreadsheet libraries (no Handsontable or DataTables). Build the basic grid using raw Vanilla JS DOM manipulation and CSS Grid.
 Build a new micro-frontend named 'TokenSqueeze' (The Context Compressor). Create a new folder /TokenSqueeze and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Input: A drag-and-drop zone for files (JS, HTML, CSS, PY, TXT) AND a standard <textarea> for direct pasting. 2. The Squeeze Engine: Write regex/string manipulation to locally: - Strip single-line comments (//, #). - Strip multi-line comments (/* */, ``, """ """). - Remove all blank lines and unnecessary indentation. 3. Output Formatting: Wrap the minified code in LLM-optimized XML tags: <file name="[filename]">[minified_code]</file>. If pasted text without a filename, use <snippet>. 4. Display the output in a read-only <textarea> with a prominent [ COPY TO CLIPBOARD ] button. 5. Calculate and display the "Space Saved" (e.g., "Original: 50KB | Squeezed: 32KB | Saved: 36%"). UI/UX AESTHETIC: - Conform to the Daxini OS standard.
 
 CONSTRAINTS
