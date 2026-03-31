@@ -1,27 +1,9 @@
-Branch: simba/initiate-daxini-revival-protocol-on-a-gamesimula
-Title: Initiate Daxini Revival Protocol on a game/simulation tool (e.g., Via...
+Branch: simba/initiate-daxini-revival-protocol-on-the-mars-sim
+Title: Initiate Daxini Revival Protocol on the 'Mars Sim' module. 1. Consoli...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Transform a broken game prototype into a fluid, iframe-locked mini-game for Daxini Space.
-Branch: simba/initiate-the-daxini-revival-protocol-on-the-brok
-Title: Initiate the "Daxini Revival Protocol" on the broken tools within thi...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Transform a broken, fragmented tool into a production-ready, iframe-compatible artifact for the Daxini Space OS.
-Branch: simba/initiate-daxini-revival-protocol-on-a-datautilit
-Title: Initiate Daxini Revival Protocol on a data/utility tool (e.g., SOP Bu...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Ensure the business tool generates a tangible, copyable result without breaking inside an iframe.
-Branch: simba/initiate-daxini-revival-protocol-on-a-swipe-base
-Title: Initiate Daxini Revival Protocol on a swipe-based learning/assessment...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create a butter-smooth, tactile swipe experience that feels native on mobile devices.
+- Goal: Create a self-contained, continuous simulation dashboard compatible with the Daxini OS.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
