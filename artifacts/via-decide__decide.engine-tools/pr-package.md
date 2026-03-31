@@ -1,3 +1,9 @@
+Branch: simba/initiate-daxini-revival-protocol-on-a-gamesimula
+Title: Initiate Daxini Revival Protocol on a game/simulation tool (e.g., Via...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Transform a broken game prototype into a fluid, iframe-locked mini-game for Daxini Space.
 Branch: simba/initiate-the-daxini-revival-protocol-on-the-brok
 Title: Initiate the "Daxini Revival Protocol" on the broken tools within thi...
 

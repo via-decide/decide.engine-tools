@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Initiate Daxini Revival Protocol on a game/simulation tool (e.g., ViaLogic, ViaMath, or Mars Sim). 1. Consolidate into a SINGLE index.html file. 2. IFRAME & TOUCH OPTIMIZATION: Games break inside iframes if the user accidentally scrolls. Add touch-action: none; to the CSS body and e.preventDefault() to touch event listeners to lock the viewport. 3. UI UPGRADE: Apply the Daxini Aesthetic. Background: #030508. Fonts: JetBrains Mono (tech/scores) & Syne (titles). Accents: Matrix Green (#00e5ff) for success, Saffron (#ff671f) for warnings/errors. 4. GAME LOGIC REPAIR: Ensure the core game loop, score tracking, and win/loss states are fully functional. Add a "Game Over" glass-morphic modal with a "Restart" button.
+
+CONSTRAINTS
+Pure Vanilla JS. No Canvas libraries (Phaser/Threejs) unless already present. No NPM.
 Initiate the "Daxini Revival Protocol" on the broken tools within this repository. Target the first broken or incomplete tool (e.g., SOP Builder, HexWars, or any pending tool). Refactor the tool to match the exact architectural standard of the 'PromptAlchemy' repository: 1. Consolidate into a SINGLE index.html file containing HTML, CSS, and Vanilla JS. 2. Fix all broken UI components. Apply the "Daxini Aesthetic":
 
 CONSTRAINTS
