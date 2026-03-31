@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Initiate Daxini Revival Protocol on the 'SkillHex' module. 1. Consolidate into a single index.html file. 2. RENDER ENGINE: Rebuild the hexagonal or grid-based skill layout using CSS Grid or SVG. Ensure nodes are clickable/tappable. 3. UI UPGRADE: Apply Daxini styling. Background: #030508. Unlocked skills glow Cyan (#00e5ff), locked skills are muted glass (rgba(255,255,255,0.05)), maxed skills glow Saffron (#ff671f). 4. STATE: Save the skill tree progression to localStorage. 5. IFRAME SAFETY: Ensure the grid scales dynamically using relative units (vw/vh) so it fits perfectly inside the Daxini Space window viewport without horizontal scrolling.
+
+CONSTRAINTS
+Pure Vanilla JS and CSS. No React, no D3.js (unless strictly necessary, prefer native SVG/CSS).
 Initiate Daxini Revival Protocol on the 'ViaLogic' and 'ViaMath' game modules. (Execute on one, then adapt for the other). 1. Consolidate into a single index.html file. 2. VIEWPORT LOCK: Add touch-action: none; to the CSS body and e.preventDefault() on all game container touch events to prevent the iframe from scrolling during gameplay. 3. GAME LOOP REPAIR: Ensure the core logic (timer, score tracking, win/loss states) is intact. 4. UI UPGRADE: Apply Daxini aesthetic. Dark void (#030508) background. Use glass-morphic tiles for the puzzle pieces. Saffron (#ff671f) for errors/timer warnings, Cyan (#00e5ff) for success. 5. MODALS: Build a pure CSS/JS glass-morphic "Game Over / Score" modal with a Restart button.
 
 CONSTRAINTS

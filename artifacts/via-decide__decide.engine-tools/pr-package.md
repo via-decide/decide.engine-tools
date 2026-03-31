@@ -1,3 +1,9 @@
+Branch: simba/initiate-daxini-revival-protocol-on-the-skillhex
+Title: Initiate Daxini Revival Protocol on the 'SkillHex' module. 1. Consoli...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Create a visually striking, interactive skill tree that fits responsively in an iframe.
 Branch: simba/initiate-daxini-revival-protocol-on-the-vialogic
 Title: Initiate Daxini Revival Protocol on the 'ViaLogic' and 'ViaMath' game...
 
