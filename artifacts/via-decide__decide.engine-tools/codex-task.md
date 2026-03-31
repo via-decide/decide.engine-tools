@@ -1,22 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Initiate Daxini Revival Protocol on the 'Mars Sim' module. 1. Consolidate into a single index.html file. 2. TICK ENGINE: Ensure the JavaScript setInterval loop correctly calculates resource generation (oxygen, power, etc.) every second. 3. UI UPGRADE: Build a "Command Center" dashboard aesthetic. Dark void (#030508) background, JetBrains Mono font for all numbers/stats. Use progress bars (<progress> or CSS width) colored Cyan and Saffron. 4. EVENT LOG: Create a scrolling text area at the bottom logging simulation events ("Day 1: Solar flare detected"). 5. STATE: Save simulation state to localStorage every 10 ticks.
+Build a new micro-frontend named 'DOMScrubber' (The HTML & SVG Token Slayer). Create a new folder /DOMScrubber and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Split UI: Left pane <textarea> for pasting raw, bloated HTML/DOM code. Right pane <textarea> for the stripped semantic output. 2. The Scrubbing Engine (DOMParser based): - Use new DOMParser().parseFromString() to load the input locally. - Find and fully remove all <svg>, <script>, <style>, <noscript>, <iframe>, and <link> elements. - Traverse all remaining nodes and STRIP all attributes EXCEPT: id, name, type, href, src, value, placeholder. (Crucially, it must remove class, style, and data-* attributes). - Collapse empty <div> or <span> elements if they contain no text or children. 3. Formatting: Output the cleaned, indented HTML wrapped in LLM-optimized <ui_structure> tags. 4. Real-Time Stats: Display token/character reduction: Raw DOM: 150KB ➔ Scrubbed Skeleton: 4KB (97% Saved). 5. Add a massive [ COPY SKELETON ] button. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 CONSTRAINTS
-Pure Vanilla JS. No React. Keep DOM updates highly optimized so the iframe doesn't lag.
-Initiate Daxini Revival Protocol on the 'SkillHex' module. 1. Consolidate into a single index.html file. 2. RENDER ENGINE: Rebuild the hexagonal or grid-based skill layout using CSS Grid or SVG. Ensure nodes are clickable/tappable. 3. UI UPGRADE: Apply Daxini styling. Background: #030508. Unlocked skills glow Cyan (#00e5ff), locked skills are muted glass (rgba(255,255,255,0.05)), maxed skills glow Saffron (#ff671f). 4. STATE: Save the skill tree progression to localStorage. 5. IFRAME SAFETY: Ensure the grid scales dynamically using relative units (vw/vh) so it fits perfectly inside the Daxini Space window viewport without horizontal scrolling.
-
-CONSTRAINTS
-Pure Vanilla JS and CSS. No React, no D3.js (unless strictly necessary, prefer native SVG/CSS).
-Initiate Daxini Revival Protocol on the 'ViaLogic' and 'ViaMath' game modules. (Execute on one, then adapt for the other). 1. Consolidate into a single index.html file. 2. VIEWPORT LOCK: Add touch-action: none; to the CSS body and e.preventDefault() on all game container touch events to prevent the iframe from scrolling during gameplay. 3. GAME LOOP REPAIR: Ensure the core logic (timer, score tracking, win/loss states) is intact. 4. UI UPGRADE: Apply Daxini aesthetic. Dark void (#030508) background. Use glass-morphic tiles for the puzzle pieces. Saffron (#ff671f) for errors/timer warnings, Cyan (#00e5ff) for success. 5. MODALS: Build a pure CSS/JS glass-morphic "Game Over / Score" modal with a Restart button.
-
-CONSTRAINTS
-Pure Vanilla JS. No Canvas/Phaser unless already present. No NPM.
-Initiate Daxini Revival Protocol on the 'SOP Builder' tool. 1. Consolidate all logic into a single index.html file. 2. STATE MANAGEMENT: Wire inputs to localStorage (autosave on keystroke) so data survives iframe unloads. 3. UI UPGRADE: Apply Daxini styling. Background: #030508. Fonts: JetBrains Mono & Syne. Glass-morphic input fields with Cyan (#00e5ff) focus states. 4. EXPORT ENGINE: Build a robust Markdown (.md) generator based on the form inputs. Create a glowing, fixed-bottom action bar with a [COPY TO CLIPBOARD] and [DOWNLOAD .TXT] button. 5. IFRAME SAFETY: Ensure height: 100vh, overflow-y: auto, and disable any external window redirects.
-
-CONSTRAINTS
-Pure Vanilla JS. No external CSS/JS libraries. The export must rely purely on native Blob and Clipboard APIs.
+Zero NPM dependencies. Pure Vanilla JS. Use the native browser DOMParser API instead of Regex to safely traverse and manipulate the HTML tree without breaking nested tags.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
