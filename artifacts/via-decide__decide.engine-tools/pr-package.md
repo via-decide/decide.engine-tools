@@ -1,27 +1,9 @@
-Branch: simba/initiate-daxini-revival-protocol-on-the-mars-sim
-Title: Initiate Daxini Revival Protocol on the 'Mars Sim' module. 1. Consoli...
+Branch: simba/build-a-new-micro-frontend-named-jsoncore-the-st
+Title: Build a new micro-frontend named 'JSONCore' (The Strict-Schema Prompt...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create a self-contained, continuous simulation dashboard compatible with the Daxini OS.
-Branch: simba/initiate-daxini-revival-protocol-on-the-skillhex
-Title: Initiate Daxini Revival Protocol on the 'SkillHex' module. 1. Consoli...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create a visually striking, interactive skill tree that fits responsively in an iframe.
-Branch: simba/initiate-daxini-revival-protocol-on-the-vialogic
-Title: Initiate Daxini Revival Protocol on the 'ViaLogic' and 'ViaMath' game...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Ensure these puzzle games are fully playable inside a mobile web iframe without scrolling glitches.
-Branch: simba/initiate-daxini-revival-protocol-on-the-sop-buil
-Title: Initiate Daxini Revival Protocol on the 'SOP Builder' tool. 1. Consol...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Transform the SOP Builder into a reliable, state-persistent business tool ready for Daxini OS embedding.
+- Goal: Provide a visual tool to generate iron-clad system prompts that force LLMs to return perfectly structured, application-ready JSON without markdown wrappers or hallucinations.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
