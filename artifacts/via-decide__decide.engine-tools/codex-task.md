@@ -1,22 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build a new micro-frontend named 'SynapseSearch' (The Local RAG Query Engine). Create a new folder /SynapseSearch and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Memory Load:
+Build a new micro-frontend named 'DaxiniSweep' (The Autonomous PR Janitor). Create a new folder /DaxiniSweep and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The PR Discovery Engine: - Use Octokit to fetch all 'Open' Pull Requests for the 'via-decide/ViaLogic' repository. - Filter for PRs created by the 'GN8R' bot (identified by the branch prefix 'record/persona-'). 2. The Batch Merge Logic: - Implement a 'Sequential Merger' that processes PRs in batches of 20. - For each PR, call octokit.rest.pulls.merge with the 'squash' method to keep the git history clean. - After a successful merge, use octokit.rest.git.deleteRef to delete the feature branch. 3. The Rate-Limit Guardian: - Monitor the GitHub API 'Retry-After' headers. - If the API throttles the merge rate, the Janitor must 'Sleep' and resume automatically. 4. The Live Tally UI: - A massive, glowing counter showing: [ 🏛️ TOTAL PEOPLE IN VIA-LOGIC: 6,000 ] [ ✅ SUCCESSFULLY MERGED: 1,402 ] [ ⏳ PENDING QUEUE: 4,598 ] [ 🚀 MERGE VELOCITY: 15 PRs/min ] UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. The cosine similarity math must be highly optimized (use simple loops) so it can scan thousands of vectors in milliseconds without locking up the browser UI.
-Build a new micro-frontend named 'VectorForge' (The Semantic Embedding Engine). Create a new folder /VectorForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
-
-CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. Gracefully handle API 429 errors by pausing and retrying. The output must be a clean, parseable JSON file containing the original metadata plus the embedding arrays.
-Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotation Engine). Create a new folder /NeuroScriber and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
-
-CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. Must process the data in chunks or sequence to avoid crashing the browser's memory if the .jsonl file is massive. Handle Gemini API 429 (Too Many Requests) errors by automatically pausing the loop for 10 seconds and retrying.
-Build a new micro-frontend named 'ChronoMiner' (The Git-to-LLM Memory Extractor). Create a new folder /ChronoMiner and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
-
-CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. The GitHub PAT must NEVER be saved to localStorage or sent anywhere except directly to api.github.com via fetch headers. Must gracefully handle 403 Rate Limit errors by pausing the extraction and alerting the user.
+Zero NPM dependencies. Pure Vanilla JS. Use Promise.allSettled for batching to ensure one failed merge doesn't stop the entire 6,000-person queue.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
