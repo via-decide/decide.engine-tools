@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniSynapse'-the autonomous relational mapping and knowledge graph engine for ViaLogic. CORE ARCHITECTURE (The Intelligence Web): 1. The Semantic Linker: - Create a module synapse/mapper.js that scans all 24,000 'metadata.json' files.
+Build 'DaxiniProtocol'-the autonomous governance and data-standardization engine for the 24,000-unit network. CORE ARCHITECTURE (The Sovereign Laws): 1. The Namespace Guard: - Create a module protocol/sandbox-rules.js that enforces strict 'Atomic Isolation.'
 
 CONSTRAINTS
-Zero manual linking. Use 'Natural Language Processing' (NLP) patterns to find thematic similarities. Ensure the 'atlas-graph.bin' is compressed to under 1MB using binary encoding.
+Strictly follow 'Object.freeze()' patterns to ensure data immutability. Use the M2 chip's secure enclave patterns (conceptually) to explain the data isolation.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
