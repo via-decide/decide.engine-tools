@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniSweep v2.0'-the autonomous high-speed merging engine for the world record run. CORE LOGIC (GitHub API / Octokit): 1. The Queue Scanner: - Fetch all 'Open' Pull Requests in the 'ViaLogic' repository.
+Build 'DaxiniControl'-the real-time telemetry and mission control dashboard for the 24,000-PR run. CORE ARCHITECTURE (Single-Page Dashboard): 1. The API Pulse Monitor: - Connect to the GitHub API /rate_limit endpoint. - Display a 'Fuel Gauge' showing remaining 'Core' and 'Search' API credits.
 
 RULES
 1. Audit touched files first and identify regressions.
