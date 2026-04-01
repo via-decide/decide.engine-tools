@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniCerebro'-the high-performance neural search and statistical analytics engine for the 24,000-unit network. CORE ARCHITECTURE (The Intelligence Scanner): 1. The Multi-Threaded Indexer: - Create a module cerebro/indexer.js that uses the MacBook Air M2's efficiency cores to index all 24,000 'metadata.json' files into a 'Flat-Buffer' format. 2. The Semantic Search Engine: - Implement a 'Fuzzy Search' logic in 'js/search-core.js' for the frontend.
+Build 'DaxiniHarvester'-the autonomous data scraping and ingestion engine to fuel the 24,000-PR run. CORE ARCHITECTURE (The Ingestion Pipeline): 1. The Global Scraper: - Create a module harvester/crawler.js that targets public APIs (Wikipedia REST, Open Library, etc.).
 
 RULES
 1. Audit touched files first and identify regressions.
