@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-airswarm-the-mu
+Title: Build a new micro-frontend named 'AIRSwarm' (The Multi-Agent Routing ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, browser-based orchestration layer that allows users to deploy autonomous, multi-step agent workflows (similar to CrewAI), transforming isolated prompts into a collaborative digital workforce.
 Branch: simba/build-a-new-micro-frontend-named-airtrace-the-sw
 Title: Build a new micro-frontend named 'AIRTrace' (The Swarm Observability ...
 
