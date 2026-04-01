@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniSignal'-the autonomous social broadcasting and webhook engine for the 24,000-PR world record. CORE ARCHITECTURE (The Hype Pipeline): 1. The Milestone Trigger:
+Build 'DaxiniIdentity'-the autonomous persona and git-signature engine for the 24,000-PR run. CORE ARCHITECTURE (The Digital Doppelgänger): 1. The Persona Synthesizer: - Create a module identity/generator.js that generates unique 'Developer Profiles' for the Git Commits.
 
 CONSTRAINTS
-Zero manual posting. Use 'axios' or 'node-fetch' for API calls. Ensure sensitive API keys are stored in encrypted environment variables, never hardcoded.
+Zero manual input. Use the 'DaxiniCortex' data to ensure personas match the 'Sector' of the code they are pushing (e.g., a 'Math' persona pushes 'Logic.js' for Calculus).
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
