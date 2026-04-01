@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniJudge'-the autonomous quality assurance and validation engine for high-velocity Git contributions. CORE ARCHITECTURE (The Sovereign Gavel): 1. The Logic Validator: - Create a module judge/validator.js that performs a 'Pre-Flight Check' on every 'logic.js'.
+Build 'DaxiniOverlord'-the centralized monitoring and command-and-control dashboard for the 24,000-PR run. CORE ARCHITECTURE (The War Room): 1. The Tool Aggregator: - Create a module overlord/status-aggregator.js that collects real-time logs from Judge, Sentinel, Sweep, and Ghost. 2. The Mission Heartbeat: - Implement a 'Global Health Metric' (0-100%).
 
 CONSTRAINTS
-Zero manual intervention. Use the MacBook Air M2's multi-threading to parallelize the validation of 100+ PRs simultaneously. Ensure the validator script itself is lightweight (under 50KB).
+Zero external hosting. Must run as a local Node.js server with a clean HTML5 frontend. Use 'Socket.io' or simple 'Long Polling' for real-time updates from the background processes.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.

@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniJudge'-the autonomous quality assurance and validation engine for high-velocity Git contributions. CORE ARCHITECTURE (The Sovereign Gavel): 1. The Logic Validator: - Create a module judge/validator.js that performs a 'Pre-Flight Check' on every 'logic.js'.
+Build 'DaxiniOverlord'-the centralized monitoring and command-and-control dashboard for the 24,000-PR run. CORE ARCHITECTURE (The War Room): 1. The Tool Aggregator: - Create a module overlord/status-aggregator.js that collects real-time logs from Judge, Sentinel, Sweep, and Ghost. 2. The Mission Heartbeat: - Implement a 'Global Health Metric' (0-100%).
 
 RULES
 1. Audit touched files first and identify regressions.
