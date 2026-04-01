@@ -1,9 +1,9 @@
-Branch: simba/build-daxinikernel-the-central-operating-logic-t
-Title: Build 'DaxiniKernel'-the central operating logic that unifies all Dax...
+Branch: simba/build-daxinisnapshot-the-cryptographic-logging-a
+Title: Build 'DaxiniSnapshot'-the cryptographic logging and archiving engine...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Finalize the infrastructure of the world-record attempt by creating a central brain that ensures all 24,000 PRs are generated, validated, and merged as a single, unstoppable system.
+- Goal: Create a verifiable, high-integrity log of the 24,000-PR run, ensuring the project is ready for formal world-record submission and scientific audit.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
