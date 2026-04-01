@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-vectorforge-the
+Title: Build a new micro-frontend named 'VectorForge' (The Semantic Embeddin...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, browser-based utility to convert human-readable datasets into mathematical embeddings, creating the foundational Vector Database required for the user's Cognitive Twin RAG system.
 Branch: simba/build-a-new-micro-frontend-named-neuroscriber-th
 Title: Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotati...
 

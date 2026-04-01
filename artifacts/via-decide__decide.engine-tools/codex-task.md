@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'VectorForge' (The Semantic Embedding Engine). Create a new folder /VectorForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Gracefully handle API 429 errors by pausing and retrying. The output must be a clean, parseable JSON file containing the original metadata plus the embedding arrays.
 Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotation Engine). Create a new folder /NeuroScriber and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
 
 CONSTRAINTS
