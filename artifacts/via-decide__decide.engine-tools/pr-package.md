@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-dataforge-the-s
+Title: Build a new micro-frontend named 'DataForge' (The Synthetic Payload E...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local utility to instantly generate massive, highly realistic JSON/CSV test datasets for UI prototyping and database seeding, eliminating the manual labor of writing mock data.
 Branch: simba/build-a-new-micro-frontend-named-chunkforge-the-
 Title: Build a new micro-frontend named 'ChunkForge' (The Semantic Text Spli...
 
