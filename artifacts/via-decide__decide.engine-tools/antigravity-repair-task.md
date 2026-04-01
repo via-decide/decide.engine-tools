@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniSignal'-the autonomous social broadcasting and webhook engine for the 24,000-PR world record. CORE ARCHITECTURE (The Hype Pipeline): 1. The Milestone Trigger:
+Build 'DaxiniIdentity'-the autonomous persona and git-signature engine for the 24,000-PR run. CORE ARCHITECTURE (The Digital Doppelgänger): 1. The Persona Synthesizer: - Create a module identity/generator.js that generates unique 'Developer Profiles' for the Git Commits.
 
 RULES
 1. Audit touched files first and identify regressions.
