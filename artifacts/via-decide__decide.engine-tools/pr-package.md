@@ -1,9 +1,9 @@
-Branch: simba/build-daxiniassets-a-procedural-svg-generation-e
-Title: Build 'DaxiniAssets'-a procedural SVG generation engine for the 24,00...
+Branch: simba/build-daxinicli-a-dedicated-nodejs-based-termina
+Title: Build 'DaxiniCLI'-a dedicated Node.js-based terminal interface to man...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Ensure the 24,000-PR repository remains lightweight and fast (under 500MB total) while providing a unique, high-end visual identity for every entity.
+- Goal: Provide the user with low-level, high-speed control over the 24,000-PR record attempt, moving from 'Bot-management' to 'System-Orchestration'.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
