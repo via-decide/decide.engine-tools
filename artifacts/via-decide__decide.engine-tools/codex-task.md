@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniKernel'-the central operating logic that unifies all Daxini tools into a single, cohesive engine. CORE ARCHITECTURE (The System Spine): 1. The Global Registry: - Create core/kernel.js to manage the state and communication between Cortex, Swarm, Guardian, and Search. - Implement a 'Health-Check' pulse that pings every active worker node every 10 seconds. 2. The Unified Event Bus:
+Build 'DaxiniSnapshot'-the cryptographic logging and archiving engine for world-record verification. CORE ARCHITECTURE (The Ledger): 1. The State Capturer: - Create a module archive/snapshot.js that runs after every 'DaxiniSweep' batch (50-100 PRs).
 
 CONSTRAINTS
-Pure Vanilla JS (Node.js). Zero external dependencies. Use the 'EventEmitter' pattern for high-speed internal communication. Optimized for the M2 chip's multi-core orchestration.
+Pure Node.js. Use the 'crypto' module for hashing. Optimized for minimal disk I/O to protect the MacBook Air M2's SSD during 24,000 operations.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
