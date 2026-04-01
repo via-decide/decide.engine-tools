@@ -1,9 +1,9 @@
-Branch: simba/build-daxiniguardian-the-autonomous-auditing-and
-Title: Build 'DaxiniGuardian'-the autonomous auditing and self-healing engin...
+Branch: simba/build-daxinisearch-a-high-performance-local-inde
+Title: Build 'DaxiniSearch'-a high-performance local indexing and search eng...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Ensure the 24,000-PR world record consists of 100% functional, high-quality code and data, protecting the reputation of the ViaLogic network.
+- Goal: Provide instant access to any part of the 24,000-PR network, ensuring the world record is not just a 'collection' but a fully searchable intelligence database.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
