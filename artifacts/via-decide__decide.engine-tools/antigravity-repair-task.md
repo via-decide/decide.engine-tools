@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniProtocol'-the autonomous governance and data-standardization engine for the 24,000-unit network. CORE ARCHITECTURE (The Sovereign Laws): 1. The Namespace Guard: - Create a module protocol/sandbox-rules.js that enforces strict 'Atomic Isolation.'
+Build 'DaxiniJudge'-the autonomous quality assurance and validation engine for high-velocity Git contributions. CORE ARCHITECTURE (The Sovereign Gavel): 1. The Logic Validator: - Create a module judge/validator.js that performs a 'Pre-Flight Check' on every 'logic.js'.
 
 RULES
 1. Audit touched files first and identify regressions.
