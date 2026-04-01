@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniFactory'-the master orchestrator that connects Harvester, Forge, Judge, and Sweep into a single autonomous pipeline. CORE ARCHITECTURE (The Sovereign Conveyor): 1. The Flow Controller: - Create factory/main.js to manage the lifecycle of a 'Wave' (100 PRs). - Step 1: Trigger 'DaxiniHarvester' to pull 100 new entities. - Step 2: Pass data to 'DaxiniForge' to generate folder structures. - Step 3: Run 'DaxiniJudge' to validate code purity. - Step 4: Execute 'DaxiniSweep' to push and merge. 2. The Self-Healing Logic: - If 'DaxiniJudge' rejects more than 10% of a batch, the Factory must automatically re-run the 'Forge' with a different 'Logic Archetype' seed. 3. The Throttle Sync: - Coordinate with 'DaxiniSentinel' to adjust the 'Factory Speed' based on GitHub's real-time rate-limit responses. 4. The 24K Countdown: - Implement a persistent 'State Manager' that tracks exactly how many steps are left to hit 24,000 and estimates the "Time of Completion" based on current velocity.
+Build 'DaxiniAudit'-the autonomous verification and transparency engine for the 24,000-PR run. CORE ARCHITECTURE (The Proof Engine): 1. The Batch Certifier: - Create a module audit/certify.js that triggers every time the PR count hits a multiple of 1,000.
 
 CONSTRAINTS
-Use 'Node.js event emitters' for clean communication between modules. Ensure the MacBook Air M2 stays within safe thermal limits by pausing the factory for 30 seconds if CPU temp spikes.
+Use 'crypto' for SHA-256 hashing. Ensure the audit files are lightweight and don't clutter the main code history. Use 'Table' formatting in Markdown for the mission logs.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
