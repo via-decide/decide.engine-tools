@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniControl'-the real-time telemetry and mission control dashboard for the 24,000-PR run. CORE ARCHITECTURE (Single-Page Dashboard): 1. The API Pulse Monitor: - Connect to the GitHub API /rate_limit endpoint. - Display a 'Fuel Gauge' showing remaining 'Core' and 'Search' API credits.
+Build 'DaxiniOrchestrator'-the master execution loop that automates the 24,000-PR lifecycle. CORE LOGIC (The Infinite Loop): 1. The Sequence Controller:
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. Must be responsive for mobile (Gandhidham monitoring) and desktop. Use WebSockets or long-polling to ensure the data is 'Live' without refreshing.
+Zero NPM dependencies. Pure Vanilla JS. Use 'async/await' for the lifecycle to ensure perfect sequential execution without race conditions. Ensure the bot sends a 'Batch Complete' summary to Telegram after every 50 PRs.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
