@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'SynapseSearch' (The Local RAG Query Engine). Create a new folder /SynapseSearch and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Memory Load:
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The cosine similarity math must be highly optimized (use simple loops) so it can scan thousands of vectors in milliseconds without locking up the browser UI.
 Build a new micro-frontend named 'VectorForge' (The Semantic Embedding Engine). Create a new folder /VectorForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-synapsesearch-t
+Title: Build a new micro-frontend named 'SynapseSearch' (The Local RAG Query...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local semantic search engine that bridges the gap between the user's saved Vector Database and their active prompting workflow, allowing them to instantly recall and inject their own historical code patterns into new LLM queries.
 Branch: simba/build-a-new-micro-frontend-named-vectorforge-the
 Title: Build a new micro-frontend named 'VectorForge' (The Semantic Embeddin...
 
