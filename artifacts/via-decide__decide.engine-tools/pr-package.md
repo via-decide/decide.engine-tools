@@ -1,9 +1,9 @@
-Branch: simba/build-daxiniorchestrator-the-master-execution-lo
-Title: Build 'DaxiniOrchestrator'-the master execution loop that automates t...
+Branch: simba/build-daxinicluster-a-parallelized-execution-eng
+Title: Build 'DaxiniCluster'-a parallelized execution engine to distribute t...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Automate the end-to-end process of the world-record attempt, allowing for hands-free generation and merging of thousands of unique entities.
+- Goal: Quadruple the production speed of the world-record attempt while minimizing the risk of GitHub account flagging through distributed execution.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
