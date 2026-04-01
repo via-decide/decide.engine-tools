@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'AIRBlueprint' (The Meta-Agency Synthesizer). Create a new folder /AIRBlueprint and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Synthesis Engine:
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The JSON parsing must be highly resilient to ensure the LLM's output perfectly matches the schema required by the other AIR tools. The org-chart rendering should use simple CSS Grid/Flexbox or basic SVG lines, avoiding heavy libraries.
 Build a new micro-frontend named 'AIRMount' (The Local File System Bridge). Create a new folder /AIRMount and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Secure Mounting Engine: - A massive [ MOUNT LOCAL DIRECTORY ] button. - When clicked, trigger window.showDirectoryPicker() to prompt the user to select a local folder on their machine. - Request persistent read/write permissions for that directory handle. 2. The File Tree Explorer: - Recursively read the mounted directory. - Render a visual, collapsible File Tree UI on the left side of the screen (e.g., 📁 src, 📄 index.html, 📄 data.csv). - Clicking a file opens its contents in a <textarea> on the right side for manual review/editing. 3. The Agent API Bridge: - Wrap the File System Access API into 3 pure JS functions: agentReadFile(path), agentWriteFile(path, content), and agentListDirectory(path). - Expose these functions to the window object so they can be injected into the AIRSwarm execution environment. 4. Telemetry UI & Safeguards: - Display an "Active Mount" status indicator (e.g., Mounted: /Users/admin/projects/LogicHub). - Show a live event log: [10:45:02] Agent 'Viaco Coder' modified /src/styles.css. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 CONSTRAINTS
