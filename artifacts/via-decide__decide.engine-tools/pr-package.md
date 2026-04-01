@@ -1,9 +1,9 @@
-Branch: simba/build-daxinisearch-a-high-performance-local-inde
-Title: Build 'DaxiniSearch'-a high-performance local indexing and search eng...
+Branch: simba/build-daxiniassets-a-procedural-svg-generation-e
+Title: Build 'DaxiniAssets'-a procedural SVG generation engine for the 24,00...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide instant access to any part of the 24,000-PR network, ensuring the world record is not just a 'collection' but a fully searchable intelligence database.
+- Goal: Ensure the 24,000-PR repository remains lightweight and fast (under 500MB total) while providing a unique, high-end visual identity for every entity.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

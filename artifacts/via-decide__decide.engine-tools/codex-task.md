@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniSearch'-a high-performance local indexing and search engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Inverted Index): 1. The Index Builder: - Create a module indexer/build.js that scans all sub-directories in '/people/'. - Extract 'name', 'id', 'tags', and 'role' from every 'metadata.json'. - Generate a minified atlas-index.bin (Binary format) to keep the payload under 500KB even for 24,000 entries. 2. The Fuzzy-Match Logic: - Implement a 'Levenshtein Distance' algorithm for fuzzy searching. - Ensure the search can handle typos (e.g., 'Newton' instead of 'Isac Newton'). 3. The Portal Integration: - Add a 'Quantum Search Bar' to the root 'index.html'.
+Build 'DaxiniAssets'-a procedural SVG generation engine for the 24,000-unit population. CORE ARCHITECTURE (The Digital Canvas): 1. The Abstract Portrait Generator: - Create a module assets/portrait.js that generates a unique Geometric SVG for each ID.
 
 CONSTRAINTS
-Zero external libraries (No Lunr.js or FlexSearch). Use pure Vanilla JS for maximum speed and zero dependencies. Ensure the index is generated server-side (via GitHub Actions) so the user doesn't have to download raw JSONs.
+Strictly no JPG, PNG, or GIF. Everything must be 100% SVG code. Use the MacBook Air M2 GPU for batch rendering SVGs if previewing locally.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
