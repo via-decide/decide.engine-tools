@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniCerebro'-the high-performance neural search and statistical analytics engine for the 24,000-unit network. CORE ARCHITECTURE (The Intelligence Scanner): 1. The Multi-Threaded Indexer: - Create a module cerebro/indexer.js that uses the MacBook Air M2's efficiency cores to index all 24,000 'metadata.json' files into a 'Flat-Buffer' format. 2. The Semantic Search Engine: - Implement a 'Fuzzy Search' logic in 'js/search-core.js' for the frontend.
+Build 'DaxiniHarvester'-the autonomous data scraping and ingestion engine to fuel the 24,000-PR run. CORE ARCHITECTURE (The Ingestion Pipeline): 1. The Global Scraper: - Create a module harvester/crawler.js that targets public APIs (Wikipedia REST, Open Library, etc.).
 
 CONSTRAINTS
-Zero database dependency (No SQL/No MongoDB). Everything must be static and client-side for maximum speed. Use 'FlexSearch' or a custom 'In-Memory Map' for the search index.
+Respect robots.txt and API rate limits. Use the MacBook Air M2's Neural Engine to run local LLM summarization (via Llama-edge or similar) to avoid cloud API costs.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
