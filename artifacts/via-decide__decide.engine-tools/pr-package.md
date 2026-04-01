@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-airmanager-the-
+Title: Build a new micro-frontend named 'AIRManager' (The AI Resource Manage...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a visual command center to orchestrate, budget, and constrain a multi-agent AI system, treating AI models as employees with strict roles and permissions rather than generic chatbots.
 Branch: simba/build-a-new-micro-frontend-named-aireval-the-age
 Title: Build a new micro-frontend named 'AIREval' (The Agent Performance Cru...
 
