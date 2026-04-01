@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniCluster'-a parallelized execution engine to distribute the 24,000-PR workload across multiple worker threads. CORE ARCHITECTURE (Sector Partitioning): 1. The Sector Manager: - Divide the 24,000-PR goal into 4 autonomous 'Sectors':
+Build 'DaxiniCortex'-the autonomous synthesis engine for large-scale data pack generation. CORE ARCHITECTURE (The Intelligence Pipeline): 1. The Taxonomy Generator: - Create a module cortex/taxonomy.js that maps 24,000 potential entities across 4 categories: - [Science]: Physics, Chemistry, Biology (6,000) - [Math]: Theorems, Constants, Mathematicians (6,000) - [Code]: Algorithms, Languages, Tech Pioneers (6,000) - [Logic]: Philosophers, Logic Gates, Systems Theory (6,000) 2. The Auto-Researcher:
 
 CONSTRAINTS
-Zero external dependencies. Use Node.js 'worker_threads' or 'child_process' for true parallel execution on the M2 chip. Ensure 'Atomic Isolation' is strictly enforced across sectors.
+Zero manual input. Use internal search and Wikipedia-API patterns for grounding. All data must be formatted to the Atomic Isolation standard (Folder-prefixing). Use the M2 Neural Engine for faster bio synthesis.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
