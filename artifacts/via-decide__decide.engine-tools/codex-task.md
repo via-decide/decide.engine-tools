@@ -5,6 +5,10 @@ Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotation Engine).
 
 CONSTRAINTS
 Zero NPM dependencies. Pure Vanilla JS. Must process the data in chunks or sequence to avoid crashing the browser's memory if the .jsonl file is massive. Handle Gemini API 429 (Too Many Requests) errors by automatically pausing the loop for 10 seconds and retrying.
+Build a new micro-frontend named 'ChronoMiner' (The Git-to-LLM Memory Extractor). Create a new folder /ChronoMiner and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The GitHub PAT must NEVER be saved to localStorage or sent anywhere except directly to api.github.com via fetch headers. Must gracefully handle 403 Rate Limit errors by pausing the extraction and alerting the user.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
