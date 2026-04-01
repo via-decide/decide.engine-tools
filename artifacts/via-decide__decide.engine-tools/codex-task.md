@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'AIRTrace' (The Swarm Observability Deck). Create a new folder /AIRTrace and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Ingestion Engine: - A massive dropzone to load swarm_log.json (exported from AIRSwarm). 2. The Waterfall Dashboard (Timeline): - Parse the JSON array of agent interactions. - Render a chronological waterfall chart. Each block represents an Agent's API call. - Width of the block represents execution time (latency). - Color-code the blocks: Matrix Cyan #00e5ff (Success) and Saffron #ff671f (Failed/Error). 3. The Inspector Panel: - When a user clicks a block on the timeline, slide out a detailed inspector panel on the right. - Show 4 tabs: [ Payload In ], [ Payload Out ], [ Metrics ], [ RAG Context ].
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. DOM rendering for the waterfall chart must use flexbox or CSS Grid creatively to represent time visually, without relying on heavy charting libraries like Chart.js or D3.
 Build a new micro-frontend named 'AIRBlueprint' (The Meta-Agency Synthesizer). Create a new folder /AIRBlueprint and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Synthesis Engine:
 
 CONSTRAINTS

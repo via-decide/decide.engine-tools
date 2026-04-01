@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-airtrace-the-sw
+Title: Build a new micro-frontend named 'AIRTrace' (The Swarm Observability ...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, browser-based observability platform that unpacks the "black box" of multi-agent workflows, allowing the user to precisely audit token spend, identify prompt hallucinations, and optimize swarm latency.
 Branch: simba/build-a-new-micro-frontend-named-airblueprint-th
 Title: Build a new micro-frontend named 'AIRBlueprint' (The Meta-Agency Synt...
 
