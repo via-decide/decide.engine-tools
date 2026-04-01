@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniOverlord'-the centralized monitoring and command-and-control dashboard for the 24,000-PR run. CORE ARCHITECTURE (The War Room): 1. The Tool Aggregator: - Create a module overlord/status-aggregator.js that collects real-time logs from Judge, Sentinel, Sweep, and Ghost. 2. The Mission Heartbeat: - Implement a 'Global Health Metric' (0-100%).
+Build 'DaxiniCerebro'-the high-performance neural search and statistical analytics engine for the 24,000-unit network. CORE ARCHITECTURE (The Intelligence Scanner): 1. The Multi-Threaded Indexer: - Create a module cerebro/indexer.js that uses the MacBook Air M2's efficiency cores to index all 24,000 'metadata.json' files into a 'Flat-Buffer' format. 2. The Semantic Search Engine: - Implement a 'Fuzzy Search' logic in 'js/search-core.js' for the frontend.
 
 CONSTRAINTS
-Zero external hosting. Must run as a local Node.js server with a clean HTML5 frontend. Use 'Socket.io' or simple 'Long Polling' for real-time updates from the background processes.
+Zero database dependency (No SQL/No MongoDB). Everything must be static and client-side for maximum speed. Use 'FlexSearch' or a custom 'In-Memory Map' for the search index.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
