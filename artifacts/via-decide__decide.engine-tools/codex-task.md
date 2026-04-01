@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniProtocol'-the autonomous governance and data-standardization engine for the 24,000-unit network. CORE ARCHITECTURE (The Sovereign Laws): 1. The Namespace Guard: - Create a module protocol/sandbox-rules.js that enforces strict 'Atomic Isolation.'
+Build 'DaxiniJudge'-the autonomous quality assurance and validation engine for high-velocity Git contributions. CORE ARCHITECTURE (The Sovereign Gavel): 1. The Logic Validator: - Create a module judge/validator.js that performs a 'Pre-Flight Check' on every 'logic.js'.
 
 CONSTRAINTS
-Strictly follow 'Object.freeze()' patterns to ensure data immutability. Use the M2 chip's secure enclave patterns (conceptually) to explain the data isolation.
+Zero manual intervention. Use the MacBook Air M2's multi-threading to parallelize the validation of 100+ PRs simultaneously. Ensure the validator script itself is lightweight (under 50KB).
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
