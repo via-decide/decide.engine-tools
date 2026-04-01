@@ -5,6 +5,14 @@ Build a new micro-frontend named 'DaxiniReflect' (The Recursive Learning Engine)
 
 CONSTRAINTS
 Zero NPM dependencies. Pure Vanilla JS. The pattern recognition prompt must be highly token-efficient to avoid redundant costs. The "Patch" must be formatted as a modular XML block that is easy to append to existing prompts.
+Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR Auditor). Create a new folder /ValidatorCore and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The PR Ingestor: - Input field for a GitHub PR URL. - Use Octokit to fetch the "Diff" of that PR. 2. The Multi-Modal Audit (The Test): - Send the PR Diff AND the user's original Telegram prompt (Text/Audio/Image) to Gemini 1.5 Pro.
+
+CONSTRAINTS
+Zero NPM dependencies. Must handle fetching binary image data from previous Telegram messages if the PR was triggered by a photo.
+Build a new micro-frontend named 'DaxiniOrrery' (The 3D Neural Population Map). Create a new folder /DaxiniOrrery and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Population Loader: - Use Octokit to fetch the list of folders from via-decide/ViaLogic/people. - Fetch the identity.json for each persona (or a sampled batch to maintain speed). 2. The 3D Engine (Pure Canvas 2D - No Libraries): - Project 3D coordinates $(x, y, z)$ onto a 2D screen using basic perspective math: $x_{proj} = \frac{x \cdot fov}{z + fov} + center_{x}$ $y_{proj} = \frac{y \cdot fov}{z + fov} + center_{y}$ - Render 6,000 individual 'stars'. 3. Gravitational Clustering: - Assign each persona a color based on their 'Role' metadata. - Apply a 'Target Attraction' force so stars of the same role pull toward a central coordinate, creating 'Intelligence Nebulas'. 4. Interactive HUD: - As the user moves the mouse, rotate the starfield. - Clicking a star reveals a floating Daxini-style card with that person's bio and the "Tokens Saved" audit line. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Must use requestAnimationFrame for smooth 60FPS rendering of 6,000 points. The perspective projection math must be handled manually to keep the file lightweight and sovereign.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
