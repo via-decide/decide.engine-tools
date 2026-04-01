@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniCLI'-a dedicated Node.js-based terminal interface to manage the 24,000-PR swarm. CORE ARCHITECTURE (The Command Hub): 1. The CLI Skeleton: - Create a binary entry point bin/daxini.js. - Implement 'Commander' logic for the following operations: - daxini swarm start [sector]: Launch the parallel worker nodes.
+Build 'DaxiniKernel'-the central operating logic that unifies all Daxini tools into a single, cohesive engine. CORE ARCHITECTURE (The System Spine): 1. The Global Registry: - Create core/kernel.js to manage the state and communication between Cortex, Swarm, Guardian, and Search. - Implement a 'Health-Check' pulse that pings every active worker node every 10 seconds. 2. The Unified Event Bus:
 
 RULES
 1. Audit touched files first and identify regressions.
