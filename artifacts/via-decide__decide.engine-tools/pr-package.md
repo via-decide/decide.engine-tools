@@ -1,9 +1,9 @@
-Branch: simba/build-daxinicontrol-the-real-time-telemetry-and-
-Title: Build 'DaxiniControl'-the real-time telemetry and mission control das...
+Branch: simba/build-daxiniorchestrator-the-master-execution-lo
+Title: Build 'DaxiniOrchestrator'-the master execution loop that automates t...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide full observability of the 24,000-PR run, ensuring the user can manage GitHub rate limits and verify merge progress in real-time.
+- Goal: Automate the end-to-end process of the world-record attempt, allowing for hands-free generation and merging of thousands of unique entities.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

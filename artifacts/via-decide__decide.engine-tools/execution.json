@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/build-daxinicontrol-the-real-time-telemetry-and-",
+  "branch": "simba/build-daxiniorchestrator-the-master-execution-lo",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",

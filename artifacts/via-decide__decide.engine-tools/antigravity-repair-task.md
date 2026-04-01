@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniControl'-the real-time telemetry and mission control dashboard for the 24,000-PR run. CORE ARCHITECTURE (Single-Page Dashboard): 1. The API Pulse Monitor: - Connect to the GitHub API /rate_limit endpoint. - Display a 'Fuel Gauge' showing remaining 'Core' and 'Search' API credits.
+Build 'DaxiniOrchestrator'-the master execution loop that automates the 24,000-PR lifecycle. CORE LOGIC (The Infinite Loop): 1. The Sequence Controller:
 
 RULES
 1. Audit touched files first and identify regressions.
