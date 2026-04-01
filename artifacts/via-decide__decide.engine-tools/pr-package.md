@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-chunkforge-the-
+Title: Build a new micro-frontend named 'ChunkForge' (The Semantic Text Spli...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, browser-based text processing utility that prepares massive unstructured documents for Vector Database ingestion by slicing them into overlapping, semantically intact chunks.
 Branch: simba/build-a-new-micro-frontend-named-viberender-the-
 Title: Build a new micro-frontend named 'VibeRender' (The Instant LLM UI San...
 

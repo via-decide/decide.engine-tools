@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'ChunkForge' (The Semantic Text Splitter). Create a new folder /ChunkForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Input Panel: - A massive <textarea> for pasting raw documentation, SOPs, or massive codebases. - Slider 1: Chunk Size (Characters) (Range: 250 to 2000, Default 1000). - Slider 2: Overlap (Characters) (Range: 0 to 500, Default 150). - A massive [ FORGE SEMANTIC CHUNKS ] button. 2. The Splitting Engine: - Write a vanilla JS function that splits the text intelligently. - It should prioritize splitting at double newlines (\n\n), then single newlines (\n), then periods (. ), to avoid cutting in the middle of a sentence or code block. - It must respect the Overlap setting (the end of Chunk 1 becomes the beginning of Chunk 2 to preserve contextual flow). 3. Live Telemetry UI: - On the right side, display the results in a scrollable, glass-morphic list.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The chunking algorithm must be robust enough to handle edge cases like extremely long sentences without crashing, falling back to a hard character slice only if absolutely necessary.
 Build a new micro-frontend named 'VibeRender' (The Instant LLM UI Sandbox). Create a new folder /VibeRender and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Split UI Layout:
 
 CONSTRAINTS
