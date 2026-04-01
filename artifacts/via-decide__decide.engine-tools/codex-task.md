@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build the 'DaxiniVisualForge'-the master UI generation engine for the ViaLogic ecosystem.
+Build 'DaxiniSweep v2.0'-the autonomous high-speed merging engine for the world record run. CORE LOGIC (GitHub API / Octokit): 1. The Queue Scanner: - Fetch all 'Open' Pull Requests in the 'ViaLogic' repository.
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS for the template engine. The forge must be 'Data-Agnostic'-it should render whatever data it receives as long as it follows the ViaLogic schema.
+Zero NPM dependencies. Pure Vanilla JS using the fetch API. Ensure the script is optimized for the MacBook Air M2's efficiency cores to avoid thermal throttling during massive 6,000-PR loops.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
