@@ -1,9 +1,9 @@
-Branch: simba/build-daxinisweep-v20-the-autonomous-high-speed-
-Title: Build 'DaxiniSweep v2.0'-the autonomous high-speed merging engine for...
+Branch: simba/build-daxinicontrol-the-real-time-telemetry-and-
+Title: Build 'DaxiniControl'-the real-time telemetry and mission control das...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Remove the manual effort of merging, allowing the 24,000-PR record attempt to proceed autonomously from generation to final merge.
+- Goal: Provide full observability of the 24,000-PR run, ensuring the user can manage GitHub rate limits and verify merge progress in real-time.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
