@@ -5,6 +5,7 @@ Validate and repair only the files touched by the previous implementation.
 
 TASK
 Build a new micro-frontend named 'DaxiniHive' (The Collective Intelligence Interface). Create a new folder /DaxiniHive and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Hive Assembly Engine:
+Build a new micro-frontend named 'DaxiniImmune' (The Self-Healing Sentinel). Create a new folder /DaxiniImmune' and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Random Patrol Engine: - Use a 'Random Walk' algorithm to select 50 random folders from ViaLogic/people, /logic, /assets, and /ops every hour. 2. The Diagnostic Layer: - For the selected entities, run a 'Dry Run' of the JS logic. - Use Gemini 1.5 Flash to 'Spot Check' the README content against the manifest.json.
 
 RULES
 1. Audit touched files first and identify regressions.
