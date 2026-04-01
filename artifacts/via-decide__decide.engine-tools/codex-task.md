@@ -1,15 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build a new micro-frontend named 'DaxiniSearch' (The Semantic Vector Navigator). Create a new folder /DaxiniSearch and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Index Ingestor: - Load the master index.json (or crawl the /people, /logic, /assets, and /ops directories) of ViaLogic. - Create a local, lightweight searchable manifest of all 24,000 entity descriptions. 2. The Semantic Query Engine:
-Build a new micro-frontend named 'DaxiniReflect' (The Recursive Learning Engine). Create a new folder /DaxiniReflect and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Audit Ingestor: - Dropzones for audit_report.csv (from AIREval) and swarm_log.json (from AIRSwarm). 2. The Pattern Recognition Engine: - Send the failed test cases and error logs to Gemini.
+Build a new micro-frontend named 'DaxiniImmune' (The Self-Healing Sentinel). Create a new folder /DaxiniImmune' and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Random Patrol Engine: - Use a 'Random Walk' algorithm to select 50 random folders from ViaLogic/people, /logic, /assets, and /ops every hour. 2. The Diagnostic Layer: - For the selected entities, run a 'Dry Run' of the JS logic. - Use Gemini 1.5 Flash to 'Spot Check' the README content against the manifest.json.
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. The pattern recognition prompt must be highly token-efficient to avoid redundant costs. The "Patch" must be formatted as a modular XML block that is easy to append to existing prompts.
-Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR Auditor). Create a new folder /ValidatorCore and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The PR Ingestor: - Input field for a GitHub PR URL. - Use Octokit to fetch the "Diff" of that PR. 2. The Multi-Modal Audit (The Test): - Send the PR Diff AND the user's original Telegram prompt (Text/Audio/Image) to Gemini 1.5 Pro.
-
-CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. Must handle the 24,000-item array in-memory efficiently using TypedArrays or optimized loops to ensure the 'Search' button doesn't freeze the browser.
+Zero NPM dependencies. Pure Vanilla JS. The random sampler must ensure it covers the entire 24,000-unit range over a 48-hour period. Ensure the healing trigger is rate-limited to avoid commit-spam.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
