@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-neuroscriber-th
+Title: Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotati...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, automated pipeline to transform raw, unlabeled Git histories into a high-quality, reasoning-enriched "Golden Dataset" suitable for fine-tuning a Cognitive Twin LLM.
 Branch: simba/build-a-new-micro-frontend-named-chronominer-the
 Title: Build a new micro-frontend named 'ChronoMiner' (The Git-to-LLM Memory...
 

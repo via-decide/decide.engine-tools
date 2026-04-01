@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotation Engine). Create a new folder /NeuroScriber and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
 Build a new micro-frontend named 'ChronoMiner' (The Git-to-LLM Memory Extractor). Create a new folder /ChronoMiner and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
 
 RULES
