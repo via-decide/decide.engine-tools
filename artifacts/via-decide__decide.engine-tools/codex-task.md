@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniSweep v2.0'-the autonomous high-speed merging engine for the world record run. CORE LOGIC (GitHub API / Octokit): 1. The Queue Scanner: - Fetch all 'Open' Pull Requests in the 'ViaLogic' repository.
+Build 'DaxiniControl'-the real-time telemetry and mission control dashboard for the 24,000-PR run. CORE ARCHITECTURE (Single-Page Dashboard): 1. The API Pulse Monitor: - Connect to the GitHub API /rate_limit endpoint. - Display a 'Fuel Gauge' showing remaining 'Core' and 'Search' API credits.
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS using the fetch API. Ensure the script is optimized for the MacBook Air M2's efficiency cores to avoid thermal throttling during massive 6,000-PR loops.
+Zero NPM dependencies. Pure Vanilla JS. Must be responsive for mobile (Gandhidham monitoring) and desktop. Use WebSockets or long-polling to ensure the data is 'Live' without refreshing.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
