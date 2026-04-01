@@ -2,6 +2,11 @@ You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
 Build a new micro-frontend named 'DaxiniSearch' (The Semantic Vector Navigator). Create a new folder /DaxiniSearch and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Index Ingestor: - Load the master index.json (or crawl the /people, /logic, /assets, and /ops directories) of ViaLogic. - Create a local, lightweight searchable manifest of all 24,000 entity descriptions. 2. The Semantic Query Engine:
+Build a new micro-frontend named 'DaxiniReflect' (The Recursive Learning Engine). Create a new folder /DaxiniReflect and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Audit Ingestor: - Dropzones for audit_report.csv (from AIREval) and swarm_log.json (from AIRSwarm). 2. The Pattern Recognition Engine: - Send the failed test cases and error logs to Gemini.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The pattern recognition prompt must be highly token-efficient to avoid redundant costs. The "Patch" must be formatted as a modular XML block that is easy to append to existing prompts.
+Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR Auditor). Create a new folder /ValidatorCore and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The PR Ingestor: - Input field for a GitHub PR URL. - Use Octokit to fetch the "Diff" of that PR. 2. The Multi-Modal Audit (The Test): - Send the PR Diff AND the user's original Telegram prompt (Text/Audio/Image) to Gemini 1.5 Pro.
 
 CONSTRAINTS
 Zero NPM dependencies. Pure Vanilla JS. Must handle the 24,000-item array in-memory efficiently using TypedArrays or optimized loops to ensure the 'Search' button doesn't freeze the browser.

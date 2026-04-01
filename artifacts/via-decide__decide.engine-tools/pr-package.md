@@ -1,5 +1,13 @@
 Branch: simba/build-a-new-micro-frontend-named-daxinisearch-th
 Title: Build a new micro-frontend named 'DaxiniSearch' (The Semantic Vector ...
+Branch: simba/build-a-new-micro-frontend-named-daxinireflect-t
+Title: Build a new micro-frontend named 'DaxiniReflect' (The Recursive Learn...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a recursive feedback loop that analyzes historical agent failures to automatically generate and apply prompt improvements, creating a self-optimizing AI workforce.
+Branch: simba/build-a-new-micro-frontend-named-validatorcore-t
+Title: Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR A...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
