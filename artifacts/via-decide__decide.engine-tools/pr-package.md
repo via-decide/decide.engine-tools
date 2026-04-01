@@ -1,17 +1,9 @@
-Branch: simba/build-a-new-micro-frontend-named-daxinisearch-th
-Title: Build a new micro-frontend named 'DaxiniSearch' (The Semantic Vector ...
-Branch: simba/build-a-new-micro-frontend-named-daxinireflect-t
-Title: Build a new micro-frontend named 'DaxiniReflect' (The Recursive Learn...
+Branch: simba/build-a-new-micro-frontend-named-daxinihive-the-
+Title: Build a new micro-frontend named 'DaxiniHive' (The Collective Intelli...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide a recursive feedback loop that analyzes historical agent failures to automatically generate and apply prompt improvements, creating a self-optimizing AI workforce.
-Branch: simba/build-a-new-micro-frontend-named-validatorcore-t
-Title: Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR A...
-
-## Summary
-- Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide a high-performance, semantic search interface that allows the user to instantly navigate and utilize the massive dataset created during the record-breaking contribution mission.
+- Goal: Transition from 'Mass Generation' to 'Mass Utility' by providing a tool that assembles custom project teams from the 24,000-entity ViaLogic population to solve complex tasks.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
