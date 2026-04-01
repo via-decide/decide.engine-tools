@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-twinterminal-th
+Title: Build a new micro-frontend named 'TwinTerminal' (The Cognitive RAG Ch...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a fully functional, edge-hosted AI chat interface that uses local vector math to augment the LLM's knowledge with the user's proprietary Git history, creating a true Cognitive Twin experience.
 Branch: simba/build-a-new-micro-frontend-named-visionpruner-th
 Title: Build a new micro-frontend named 'VisionPruner' (The Vision API Token...
 
