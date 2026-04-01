@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-promptmatrix-th
+Title: Build a new micro-frontend named 'PromptMatrix' (The XML Metaprompt C...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, visual prompt-assembly workstation that generates strict, XML-structured system prompts, completely eliminating manual tagging errors and drastically reducing LLM hallucinations in production agents.
 Branch: simba/build-a-new-micro-frontend-named-airforge-the-ag
 Title: Build a new micro-frontend named 'AIRForge' (The Agent Function Regis...
 
