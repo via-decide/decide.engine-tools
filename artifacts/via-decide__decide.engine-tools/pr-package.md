@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-nexusgraph-the-
+Title: Build a new micro-frontend named 'NexusGraph' (The Temporal Memory Vi...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a stunning, local visualizer that maps a user's vectorized Git history into a constellation of ideas, allowing them to visually explore the semantic connections between their past projects.
 Branch: simba/build-a-new-micro-frontend-named-twinterminal-th
 Title: Build a new micro-frontend named 'TwinTerminal' (The Cognitive RAG Ch...
 
