@@ -1,9 +1,9 @@
-Branch: simba/build-daxiniharvester-the-autonomous-data-scrapi
-Title: Build 'DaxiniHarvester'-the autonomous data scraping and ingestion en...
+Branch: simba/build-daxinifactory-the-master-orchestrator-that
+Title: Build 'DaxiniFactory'-the master orchestrator that connects Harvester...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create an infinite stream of high-quality, unique data to hit the 24,000-PR world record before the April 1st deadline ends.
+- Goal: Create a 'Set-and-Forget' system that will carry the project from 6,821 to 24,000 PRs while you focus on the global reveal strategy.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
