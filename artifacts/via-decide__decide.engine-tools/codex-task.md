@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniGuardian'-the autonomous auditing and self-healing engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Digital Sieve): 1. The Schema Validator: - Automatically scan every new PR for 'metadata.json'. - Verify required fields: 'name', 'role', 'id', 'design_tokens'. 2. The Logic Tester (Sandbox): - Extract 'logic.js' from the PR and run it in a secure 'NodeVM' environment.
+Build 'DaxiniSearch'-a high-performance local indexing and search engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Inverted Index): 1. The Index Builder: - Create a module indexer/build.js that scans all sub-directories in '/people/'. - Extract 'name', 'id', 'tags', and 'role' from every 'metadata.json'. - Generate a minified atlas-index.bin (Binary format) to keep the payload under 500KB even for 24,000 entries. 2. The Fuzzy-Match Logic: - Implement a 'Levenshtein Distance' algorithm for fuzzy searching. - Ensure the search can handle typos (e.g., 'Newton' instead of 'Isac Newton'). 3. The Portal Integration: - Add a 'Quantum Search Bar' to the root 'index.html'.
 
 CONSTRAINTS
-Zero manual intervention. Use 'git commit --amend' patterns for self-healing. Ensure the testing environment is isolated from the M2 system files for security.
+Zero external libraries (No Lunr.js or FlexSearch). Use pure Vanilla JS for maximum speed and zero dependencies. Ensure the index is generated server-side (via GitHub Actions) so the user doesn't have to download raw JSONs.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
