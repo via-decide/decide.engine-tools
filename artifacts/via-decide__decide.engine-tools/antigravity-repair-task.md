@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniOverlord'-the centralized monitoring and command-and-control dashboard for the 24,000-PR run. CORE ARCHITECTURE (The War Room): 1. The Tool Aggregator: - Create a module overlord/status-aggregator.js that collects real-time logs from Judge, Sentinel, Sweep, and Ghost. 2. The Mission Heartbeat: - Implement a 'Global Health Metric' (0-100%).
+Build 'DaxiniCerebro'-the high-performance neural search and statistical analytics engine for the 24,000-unit network. CORE ARCHITECTURE (The Intelligence Scanner): 1. The Multi-Threaded Indexer: - Create a module cerebro/indexer.js that uses the MacBook Air M2's efficiency cores to index all 24,000 'metadata.json' files into a 'Flat-Buffer' format. 2. The Semantic Search Engine: - Implement a 'Fuzzy Search' logic in 'js/search-core.js' for the frontend.
 
 RULES
 1. Audit touched files first and identify regressions.
