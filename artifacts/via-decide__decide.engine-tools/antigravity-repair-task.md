@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniOracle'-the serverless, static API generation engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Headless API): 1. The JSON Smelter: - Create a module oracle/smelt.js that aggregates all 24,000 'metadata.json' files into categorized 'Shards'.
+Build 'DaxiniGhost'-the autonomous multi-platform mirroring engine to ensure zero downtime for the 24,000-PR run. CORE ARCHITECTURE (The Shadow Sync): 1. The Multi-Remote Orchestrator: - Create a module ghost/sync.js that manages multiple Git remotes (GitHub, GitLab, Self-hosted Gitea).
 
 RULES
 1. Audit touched files first and identify regressions.
