@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniHarvester'-the autonomous data scraping and ingestion engine to fuel the 24,000-PR run. CORE ARCHITECTURE (The Ingestion Pipeline): 1. The Global Scraper: - Create a module harvester/crawler.js that targets public APIs (Wikipedia REST, Open Library, etc.).
+Build 'DaxiniFactory'-the master orchestrator that connects Harvester, Forge, Judge, and Sweep into a single autonomous pipeline. CORE ARCHITECTURE (The Sovereign Conveyor): 1. The Flow Controller: - Create factory/main.js to manage the lifecycle of a 'Wave' (100 PRs). - Step 1: Trigger 'DaxiniHarvester' to pull 100 new entities. - Step 2: Pass data to 'DaxiniForge' to generate folder structures. - Step 3: Run 'DaxiniJudge' to validate code purity. - Step 4: Execute 'DaxiniSweep' to push and merge. 2. The Self-Healing Logic: - If 'DaxiniJudge' rejects more than 10% of a batch, the Factory must automatically re-run the 'Forge' with a different 'Logic Archetype' seed. 3. The Throttle Sync: - Coordinate with 'DaxiniSentinel' to adjust the 'Factory Speed' based on GitHub's real-time rate-limit responses. 4. The 24K Countdown: - Implement a persistent 'State Manager' that tracks exactly how many steps are left to hit 24,000 and estimates the "Time of Completion" based on current velocity.
 
 RULES
 1. Audit touched files first and identify regressions.
