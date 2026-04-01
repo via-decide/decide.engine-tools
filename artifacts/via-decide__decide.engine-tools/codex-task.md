@@ -5,6 +5,10 @@ Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR Auditor). Cr
 
 CONSTRAINTS
 Zero NPM dependencies. Must handle fetching binary image data from previous Telegram messages if the PR was triggered by a photo.
+Build a new micro-frontend named 'DaxiniOrrery' (The 3D Neural Population Map). Create a new folder /DaxiniOrrery and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Population Loader: - Use Octokit to fetch the list of folders from via-decide/ViaLogic/people. - Fetch the identity.json for each persona (or a sampled batch to maintain speed). 2. The 3D Engine (Pure Canvas 2D - No Libraries): - Project 3D coordinates $(x, y, z)$ onto a 2D screen using basic perspective math: $x_{proj} = \frac{x \cdot fov}{z + fov} + center_{x}$ $y_{proj} = \frac{y \cdot fov}{z + fov} + center_{y}$ - Render 6,000 individual 'stars'. 3. Gravitational Clustering: - Assign each persona a color based on their 'Role' metadata. - Apply a 'Target Attraction' force so stars of the same role pull toward a central coordinate, creating 'Intelligence Nebulas'. 4. Interactive HUD: - As the user moves the mouse, rotate the starfield. - Clicking a star reveals a floating Daxini-style card with that person's bio and the "Tokens Saved" audit line. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Must use requestAnimationFrame for smooth 60FPS rendering of 6,000 points. The perspective projection math must be handled manually to keep the file lightweight and sovereign.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
