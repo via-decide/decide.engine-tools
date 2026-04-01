@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniAudit'-the autonomous verification and transparency engine for the 24,000-PR run. CORE ARCHITECTURE (The Proof Engine): 1. The Batch Certifier: - Create a module audit/certify.js that triggers every time the PR count hits a multiple of 1,000.
+Build 'DaxiniControl'-the high-performance remote command-and-control (C2) terminal for the 24,000-PR run. CORE ARCHITECTURE (The Master Console): 1. The Command Dispatcher: - Create a module control/dispatcher.js that can send "Global Commands" to the DaxiniFactory.
 
 CONSTRAINTS
-Use 'crypto' for SHA-256 hashing. Ensure the audit files are lightweight and don't clutter the main code history. Use 'Table' formatting in Markdown for the mission logs.
+Zero latency. Use 'Socket.io' for the remote bridge. Ensure the terminal UI is 'Non-Blocking' so the MacBook Air M2 can continue pushing PRs at 100/min.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
