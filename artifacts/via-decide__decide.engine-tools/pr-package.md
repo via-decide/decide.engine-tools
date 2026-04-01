@@ -1,9 +1,9 @@
-Branch: simba/build-a-new-micro-frontend-named-daxinisweep-the
-Title: Build a new micro-frontend named 'DaxiniSweep' (The Autonomous PR Jan...
+Branch: simba/build-a-new-micro-frontend-named-daxiniorrery-th
+Title: Build a new micro-frontend named 'DaxiniOrrery' (The 3D Neural Popula...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide an automated "Closer" for the 6,000 PR mission, ensuring the user can finalize the world-record contribution count without manual intervention.
+- Goal: Provide a stunning, 3D visual 'Proof of Life' for the 6,000-persona record attempt, allowing the user to explore the diversity and density of their autonomous digital workforce.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
