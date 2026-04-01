@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-daxinipulse-the
+Title: Build a new micro-frontend named 'DaxiniPulse' (The Sovereign Heartbe...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a centralized, high-level monitoring dashboard that aggregates the health, performance, and costs of the entire Daxini AI ecosystem in one place.
 Branch: simba/build-a-new-micro-frontend-named-daxiniwall-the-
 Title: Build a new micro-frontend named 'DaxiniWall' (The Sovereign Proof-of...
 

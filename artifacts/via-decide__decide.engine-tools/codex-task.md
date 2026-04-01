@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'DaxiniPulse' (The Sovereign Heartbeat Monitor). Create a new folder /DaxiniPulse and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. API Health Checkers: - Use fetch to ping the Gemini API and GitHub API (using stored keys) to verify they are active and check remaining rate limits.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Use setInterval to refresh the data every 60 seconds. Ensure the UI is responsive so it can be monitored on a secondary monitor or a tablet in Gandhidham.
 Build a new micro-frontend named 'DaxiniWall' (The Sovereign Proof-of-Work Gallery). Create a new folder /DaxiniWall and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Global Record Counter: - Fetch the current 'Merge' count from the ViaLogic repository using Octokit. - Display a massive, glowing number: 'OFFICIAL RECORD STATUS: [N] / 24,000'. 2. The Uniqueness Validator: - Load the metadata for all 24,000 entities. - Perform a 'Fingerprint Check' (hashing the identity.json/manifesto.md files). - Display the Uniqueness Metric: "Uniqueness Probability: 99.9999% (Verified by DaxiniWall)". 3. The Infinite Scroll Gallery: - Implement a high-performance virtualized list to render 24,000 entity thumbnails without crashing the browser. - Each thumbnail should be a miniature version of the Daxini Glass-morphic card. 4. The Efficiency Banner: - A permanent footer displaying: "Total Sovereign Savings: 18.7M Tokens ($1,200 saved using decide.engine-tools)". UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 CONSTRAINTS
