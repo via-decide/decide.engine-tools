@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'VibeRender' (The Instant LLM UI Sandbox). Create a new folder /VibeRender and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Split UI Layout:
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The iframe must be sandboxed but allow scripts (sandbox="allow-scripts allow-same-origin"). The execution must be purely client-side with no server round-trips for maximum speed and privacy.
 Build a new micro-frontend named 'AIRManager' (The AI Resource Manager). Create a new folder /AIRManager and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Roster Dashboard: - A grid displaying currently active "Agent Profiles" as glass-morphic ID cards. - A massive [ + ONBOARD NEW AGENT ] button. 2. The Onboarding Modal: - Agent Name (e.g., "Viaco Scheduler"). - LLM Model (Dropdown: Gemini 3.1 Pro, Claude 3.5, Local Llama). - System Role (Textarea - meant to paste output from PromptMatrix). - Tool Permissions (Checkboxes/Input to define which functions from ToolForge this agent is allowed to call). - Token Budget (Slider: Max tokens allowed per session - acts as their compute "salary"). 3. The Roster State: - Save the deployed agents to an array of objects in localStorage so the roster persists across reloads. - Add [ EDIT ] and [ OFFBOARD ] (Delete) buttons to each agent's ID card. 4. The Payload Delivery: - A [ DOWNLOAD AIR_ROSTER.JSON ] button. This compiles the entire organization of agents into a single master JSON configuration file that a backend router can use to orchestrate the multi-agent system. UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 CONSTRAINTS

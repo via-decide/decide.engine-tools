@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-viberender-the-
+Title: Build a new micro-frontend named 'VibeRender' (The Instant LLM UI San...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, browser-based CodePen alternative specifically designed for rapid "Vibecoding", allowing users to instantly render, resize, and debug LLM-generated UIs without leaving their workflow or opening an IDE.
 Branch: simba/build-a-new-micro-frontend-named-airmanager-the-
 Title: Build a new micro-frontend named 'AIRManager' (The AI Resource Manage...
 
