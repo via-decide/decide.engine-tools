@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniCortex'-the autonomous synthesis engine for large-scale data pack generation. CORE ARCHITECTURE (The Intelligence Pipeline): 1. The Taxonomy Generator: - Create a module cortex/taxonomy.js that maps 24,000 potential entities across 4 categories: - [Science]: Physics, Chemistry, Biology (6,000) - [Math]: Theorems, Constants, Mathematicians (6,000) - [Code]: Algorithms, Languages, Tech Pioneers (6,000) - [Logic]: Philosophers, Logic Gates, Systems Theory (6,000) 2. The Auto-Researcher:
+Build 'DaxiniGuardian'-the autonomous auditing and self-healing engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Digital Sieve): 1. The Schema Validator: - Automatically scan every new PR for 'metadata.json'. - Verify required fields: 'name', 'role', 'id', 'design_tokens'. 2. The Logic Tester (Sandbox): - Extract 'logic.js' from the PR and run it in a secure 'NodeVM' environment.
 
 CONSTRAINTS
-Zero manual input. Use internal search and Wikipedia-API patterns for grounding. All data must be formatted to the Atomic Isolation standard (Folder-prefixing). Use the M2 Neural Engine for faster bio synthesis.
+Zero manual intervention. Use 'git commit --amend' patterns for self-healing. Ensure the testing environment is isolated from the M2 system files for security.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
