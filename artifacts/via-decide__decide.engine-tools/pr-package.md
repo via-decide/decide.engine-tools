@@ -1,5 +1,13 @@
 Branch: simba/build-a-new-micro-frontend-named-daxiniforge-the
 Title: Build a new micro-frontend named 'DaxiniForge' (The Sovereign App Fac...
+Branch: simba/build-a-new-micro-frontend-named-daxinihive-the-
+Title: Build a new micro-frontend named 'DaxiniHive' (The Collective Intelli...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Transition from 'Mass Generation' to 'Mass Utility' by providing a tool that assembles custom project teams from the 24,000-entity ViaLogic population to solve complex tasks.
+Branch: simba/build-a-new-micro-frontend-named-daxiniimmune-th
+Title: Build a new micro-frontend named 'DaxiniImmune' (The Self-Healing Sen...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
