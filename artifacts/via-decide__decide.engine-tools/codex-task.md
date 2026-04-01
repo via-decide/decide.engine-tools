@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build a new micro-frontend named 'DaxiniImmune' (The Self-Healing Sentinel). Create a new folder /DaxiniImmune' and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Random Patrol Engine: - Use a 'Random Walk' algorithm to select 50 random folders from ViaLogic/people, /logic, /assets, and /ops every hour. 2. The Diagnostic Layer: - For the selected entities, run a 'Dry Run' of the JS logic. - Use Gemini 1.5 Flash to 'Spot Check' the README content against the manifest.json.
+Build a new micro-frontend named 'DaxiniForge' (The Sovereign App Factory). Create a new folder /DaxiniForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Blueprint Selector: - Allow the user to drag-and-drop URLs or IDs from DaxiniSearch/DaxiniHive into a 'Forge Slot'.
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. The random sampler must ensure it covers the entire 24,000-unit range over a 48-hour period. Ensure the healing trigger is rate-limited to avoid commit-spam.
+Zero NPM dependencies for the core logic. If using a library for ZIP generation, use a CDN link. The dependency resolution must handle missing files gracefully by suggesting alternatives from the 24,000-unit pool.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
