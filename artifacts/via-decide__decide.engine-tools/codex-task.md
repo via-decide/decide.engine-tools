@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'DaxiniWall' (The Sovereign Proof-of-Work Gallery). Create a new folder /DaxiniWall and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Global Record Counter: - Fetch the current 'Merge' count from the ViaLogic repository using Octokit. - Display a massive, glowing number: 'OFFICIAL RECORD STATUS: [N] / 24,000'. 2. The Uniqueness Validator: - Load the metadata for all 24,000 entities. - Perform a 'Fingerprint Check' (hashing the identity.json/manifesto.md files). - Display the Uniqueness Metric: "Uniqueness Probability: 99.9999% (Verified by DaxiniWall)". 3. The Infinite Scroll Gallery: - Implement a high-performance virtualized list to render 24,000 entity thumbnails without crashing the browser. - Each thumbnail should be a miniature version of the Daxini Glass-morphic card. 4. The Efficiency Banner: - A permanent footer displaying: "Total Sovereign Savings: 18.7M Tokens ($1,200 saved using decide.engine-tools)". UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Use 'IntersectionObserver' for the infinite scroll. The hash-check logic must be optimized to run on the client-side without lagging the main UI thread.
 Build a new micro-frontend named 'DaxiniForge' (The Sovereign App Factory). Create a new folder /DaxiniForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Blueprint Selector: - Allow the user to drag-and-drop URLs or IDs from DaxiniSearch/DaxiniHive into a 'Forge Slot'.
 Build a new micro-frontend named 'DaxiniHive' (The Collective Intelligence Interface). Create a new folder /DaxiniHive and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Hive Assembly Engine:
 
