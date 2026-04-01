@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniSynapse'-the autonomous relational mapping and knowledge graph engine for ViaLogic. CORE ARCHITECTURE (The Intelligence Web): 1. The Semantic Linker: - Create a module synapse/mapper.js that scans all 24,000 'metadata.json' files.
+Build 'DaxiniProtocol'-the autonomous governance and data-standardization engine for the 24,000-unit network. CORE ARCHITECTURE (The Sovereign Laws): 1. The Namespace Guard: - Create a module protocol/sandbox-rules.js that enforces strict 'Atomic Isolation.'
 
 RULES
 1. Audit touched files first and identify regressions.
