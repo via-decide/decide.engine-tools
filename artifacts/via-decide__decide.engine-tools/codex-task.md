@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniOrchestrator'-the master execution loop that automates the 24,000-PR lifecycle. CORE LOGIC (The Infinite Loop): 1. The Sequence Controller:
+Build 'DaxiniCluster'-a parallelized execution engine to distribute the 24,000-PR workload across multiple worker threads. CORE ARCHITECTURE (Sector Partitioning): 1. The Sector Manager: - Divide the 24,000-PR goal into 4 autonomous 'Sectors':
 
 CONSTRAINTS
-Zero NPM dependencies. Pure Vanilla JS. Use 'async/await' for the lifecycle to ensure perfect sequential execution without race conditions. Ensure the bot sends a 'Batch Complete' summary to Telegram after every 50 PRs.
+Zero external dependencies. Use Node.js 'worker_threads' or 'child_process' for true parallel execution on the M2 chip. Ensure 'Atomic Isolation' is strictly enforced across sectors.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
