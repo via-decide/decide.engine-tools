@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-airforge-the-ag
+Title: Build a new micro-frontend named 'AIRForge' (The Agent Function Regis...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, visual builder that allows users to rapidly wrap raw Vanilla JS functions into LLM-compatible tool schemas, upgrading their agents from passive text-generators to active, executing programs.
 Branch: simba/build-a-new-micro-frontend-named-dataforge-the-s
 Title: Build a new micro-frontend named 'DataForge' (The Synthetic Payload E...
 

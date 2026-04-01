@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'AIRForge' (The Agent Function Registry). Create a new folder /AIRForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Function Builder Panel: - Function Name (e.g., "fetchLiveStockPrice"). - Description (textarea): Tell the LLM exactly when and why to use this tool.
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. The compiled JSON schema must strictly adhere to the OpenAPI 3.0 specification used by major LLM providers for function calling to ensure zero API rejection errors.
 Build a new micro-frontend named 'DataForge' (The Synthetic Payload Engine). Create a new folder /DataForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Configuration Panel:
 
 CONSTRAINTS
