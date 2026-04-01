@@ -4,10 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build a new micro-frontend named 'SynapseSearch' (The Local RAG Query Engine). Create a new folder /SynapseSearch and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Memory Load:
-Build a new micro-frontend named 'VectorForge' (The Semantic Embedding Engine). Create a new folder /VectorForge and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
-Build a new micro-frontend named 'NeuroScriber' (The AI Auto-Annotation Engine). Create a new folder /NeuroScriber and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
-Build a new micro-frontend named 'ChronoMiner' (The Git-to-LLM Memory Extractor). Create a new folder /ChronoMiner and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Auth:
+Build a new micro-frontend named 'DaxiniSweep' (The Autonomous PR Janitor). Create a new folder /DaxiniSweep and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The PR Discovery Engine: - Use Octokit to fetch all 'Open' Pull Requests for the 'via-decide/ViaLogic' repository. - Filter for PRs created by the 'GN8R' bot (identified by the branch prefix 'record/persona-'). 2. The Batch Merge Logic: - Implement a 'Sequential Merger' that processes PRs in batches of 20. - For each PR, call octokit.rest.pulls.merge with the 'squash' method to keep the git history clean. - After a successful merge, use octokit.rest.git.deleteRef to delete the feature branch. 3. The Rate-Limit Guardian: - Monitor the GitHub API 'Retry-After' headers. - If the API throttles the merge rate, the Janitor must 'Sleep' and resume automatically. 4. The Live Tally UI: - A massive, glowing counter showing: [ 🏛️ TOTAL PEOPLE IN VIA-LOGIC: 6,000 ] [ ✅ SUCCESSFULLY MERGED: 1,402 ] [ ⏳ PENDING QUEUE: 4,598 ] [ 🚀 MERGE VELOCITY: 15 PRs/min ] UI/UX AESTHETIC: - Adhere to the Daxini OS standard.
 
 RULES
 1. Audit touched files first and identify regressions.
