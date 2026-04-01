@@ -1,9 +1,9 @@
-Branch: simba/build-daxinicortex-the-autonomous-synthesis-engi
-Title: Build 'DaxiniCortex'-the autonomous synthesis engine for large-scale ...
+Branch: simba/build-daxiniguardian-the-autonomous-auditing-and
+Title: Build 'DaxiniGuardian'-the autonomous auditing and self-healing engin...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Eliminate the data bottleneck by providing an infinite stream of high-quality, structured personas for the 24,000-PR world record run.
+- Goal: Ensure the 24,000-PR world record consists of 100% functional, high-quality code and data, protecting the reputation of the ViaLogic network.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
