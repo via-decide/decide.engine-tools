@@ -2,6 +2,13 @@
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
   "branch": "simba/build-a-new-micro-frontend-named-airtrace-the-sw",
+  "branch": "simba/build-a-new-micro-frontend-named-airblueprint-th",
+  "branch": "simba/build-a-new-micro-frontend-named-airmount-the-lo",
+  "branch": "simba/build-a-new-micro-frontend-named-daxinipulse-the",
+  "branch": "simba/build-a-new-micro-frontend-named-daxiniwall-the-",
+  "branch": "simba/build-a-new-micro-frontend-named-daxiniforge-the",
+  "branch": "simba/build-a-new-micro-frontend-named-daxinihive-the-",
+  "branch": "simba/build-a-new-micro-frontend-named-daxiniimmune-th",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
