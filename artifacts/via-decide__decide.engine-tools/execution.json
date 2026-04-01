@@ -2,6 +2,8 @@
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
   "branch": "simba/build-a-new-micro-frontend-named-vectorforge-the",
+  "branch": "simba/build-a-new-micro-frontend-named-neuroscriber-th",
+  "branch": "simba/build-a-new-micro-frontend-named-chronominer-the",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
