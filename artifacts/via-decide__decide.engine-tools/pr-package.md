@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-validatorcore-t
+Title: Build a new micro-frontend named 'ValidatorCore' (The Autonomous PR A...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a final verification layer that uses high-reasoning AI to cross-reference the generated code against the original multimodal input, ensuring the 'Synapse' and 'Vision' pipelines are working perfectly.
 Branch: simba/build-a-new-micro-frontend-named-daxiniorrery-th
 Title: Build a new micro-frontend named 'DaxiniOrrery' (The 3D Neural Popula...
 
