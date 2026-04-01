@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniIdentity'-the autonomous persona and git-signature engine for the 24,000-PR run. CORE ARCHITECTURE (The Digital Doppelgänger): 1. The Persona Synthesizer: - Create a module identity/generator.js that generates unique 'Developer Profiles' for the Git Commits.
+Build 'DaxiniSynapse'-the autonomous relational mapping and knowledge graph engine for ViaLogic. CORE ARCHITECTURE (The Intelligence Web): 1. The Semantic Linker: - Create a module synapse/mapper.js that scans all 24,000 'metadata.json' files.
 
 RULES
 1. Audit touched files first and identify regressions.
