@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniIdentity'-the autonomous persona and git-signature engine for the 24,000-PR run. CORE ARCHITECTURE (The Digital Doppelgänger): 1. The Persona Synthesizer: - Create a module identity/generator.js that generates unique 'Developer Profiles' for the Git Commits.
+Build 'DaxiniSynapse'-the autonomous relational mapping and knowledge graph engine for ViaLogic. CORE ARCHITECTURE (The Intelligence Web): 1. The Semantic Linker: - Create a module synapse/mapper.js that scans all 24,000 'metadata.json' files.
 
 CONSTRAINTS
-Zero manual input. Use the 'DaxiniCortex' data to ensure personas match the 'Sector' of the code they are pushing (e.g., a 'Math' persona pushes 'Logic.js' for Calculus).
+Zero manual linking. Use 'Natural Language Processing' (NLP) patterns to find thematic similarities. Ensure the 'atlas-graph.bin' is compressed to under 1MB using binary encoding.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
