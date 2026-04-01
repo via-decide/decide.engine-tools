@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build the 'DaxiniVisualForge'-the master UI generation engine for the ViaLogic ecosystem.
+Build 'DaxiniSweep v2.0'-the autonomous high-speed merging engine for the world record run. CORE LOGIC (GitHub API / Octokit): 1. The Queue Scanner: - Fetch all 'Open' Pull Requests in the 'ViaLogic' repository.
 
 RULES
 1. Audit touched files first and identify regressions.
