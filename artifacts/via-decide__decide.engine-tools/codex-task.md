@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniOracle'-the serverless, static API generation engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Headless API): 1. The JSON Smelter: - Create a module oracle/smelt.js that aggregates all 24,000 'metadata.json' files into categorized 'Shards'.
+Build 'DaxiniGhost'-the autonomous multi-platform mirroring engine to ensure zero downtime for the 24,000-PR run. CORE ARCHITECTURE (The Shadow Sync): 1. The Multi-Remote Orchestrator: - Create a module ghost/sync.js that manages multiple Git remotes (GitHub, GitLab, Self-hosted Gitea).
 
 CONSTRAINTS
-Zero hosting costs. Must run entirely on GitHub Pages. Use 'pako' or similar compression for the JSON shards to minimize bandwidth.
+Use 'simple-git' or raw 'child_process' for high-speed git operations. Ensure the M2's upload bandwidth is optimized by using 'git push --atomic'.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
