@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniSentinel'-the autonomous stealth and anti-flagging engine for high-velocity Git contributions. CORE ARCHITECTURE (The Stealth Pulse): 1. The Velocity Jitter: - Implement a 'Randomized Burst' logic. Instead of pushing PRs every 5 seconds, the engine must mimic human patterns (e.g., 3 mins of intense activity followed by 1 min of "thinking" pause). 2. The User-Agent Rotator: - Automatically cycle between 50+ unique Browser and OS signatures for every API call to DaxiniControl. 3. The Shadow-Ban Detector: - Create a module sentinel/check.js that performs a 'Public Ghost Search'.
+Build 'DaxiniSignal'-the autonomous social broadcasting and webhook engine for the 24,000-PR world record. CORE ARCHITECTURE (The Hype Pipeline): 1. The Milestone Trigger:
 
 CONSTRAINTS
-Zero dependency. Use 'crypto' for true randomness in jitter calculations. Ensure the M2's system clock is synchronized to prevent timestamp anomalies.
+Zero manual posting. Use 'axios' or 'node-fetch' for API calls. Ensure sensitive API keys are stored in encrypted environment variables, never hardcoded.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
