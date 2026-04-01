@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniOrchestrator'-the master execution loop that automates the 24,000-PR lifecycle. CORE LOGIC (The Infinite Loop): 1. The Sequence Controller:
+Build 'DaxiniCluster'-a parallelized execution engine to distribute the 24,000-PR workload across multiple worker threads. CORE ARCHITECTURE (Sector Partitioning): 1. The Sector Manager: - Divide the 24,000-PR goal into 4 autonomous 'Sectors':
 
 RULES
 1. Audit touched files first and identify regressions.
