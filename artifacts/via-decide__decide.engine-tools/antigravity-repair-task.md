@@ -4,6 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
+Build a new micro-frontend named 'AIREval' (The Agent Performance Crucible). Create a new folder /AIREval and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Dropzones & Config:
 Build a new micro-frontend named 'AIRSwarm' (The Multi-Agent Routing Engine). Create a new folder /AIRSwarm and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Roster Load:
 Build a new micro-frontend named 'AIRTrace' (The Swarm Observability Deck). Create a new folder /AIRTrace and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Ingestion Engine: - A massive dropzone to load swarm_log.json (exported from AIRSwarm). 2. The Waterfall Dashboard (Timeline): - Parse the JSON array of agent interactions. - Render a chronological waterfall chart. Each block represents an Agent's API call. - Width of the block represents execution time (latency). - Color-code the blocks: Matrix Cyan #00e5ff (Success) and Saffron #ff671f (Failed/Error). 3. The Inspector Panel: - When a user clicks a block on the timeline, slide out a detailed inspector panel on the right. - Show 4 tabs: [ Payload In ], [ Payload Out ], [ Metrics ], [ RAG Context ].
 Build a new micro-frontend named 'AIRBlueprint' (The Meta-Agency Synthesizer). Create a new folder /AIRBlueprint and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Synthesis Engine:

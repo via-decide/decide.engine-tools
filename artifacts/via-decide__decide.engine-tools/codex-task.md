@@ -1,6 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
+Build a new micro-frontend named 'AIREval' (The Agent Performance Crucible). Create a new folder /AIREval and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. The Dropzones & Config:
+
+CONSTRAINTS
+Zero NPM dependencies. Pure Vanilla JS. Must handle API rate limits (429 errors) gracefully by pausing the loop and resuming, ensuring the simulation completes without crashing. The JSON validation check must be highly robust to catch LLM syntax hallucinations.
 Build a new micro-frontend named 'AIRSwarm' (The Multi-Agent Routing Engine). Create a new folder /AIRSwarm and a single index.html file inside it. CORE LOGIC (Pure Vanilla JS): 1. Setup & Roster Load:
 
 CONSTRAINTS

@@ -1,3 +1,9 @@
+Branch: simba/build-a-new-micro-frontend-named-aireval-the-age
+Title: Build a new micro-frontend named 'AIREval' (The Agent Performance Cru...
+
+## Summary
+- Repo orchestration task for via-decide/decide.engine-tools
+- Goal: Provide a local, automated testing arena to benchmark AI agents against synthetic datasets, ensuring they strictly follow instructions, maintain stable JSON outputs, and stay within compute budgets before being deployed to production routing.
 Branch: simba/build-a-new-micro-frontend-named-airswarm-the-mu
 Title: Build a new micro-frontend named 'AIRSwarm' (The Multi-Agent Routing ...
 
