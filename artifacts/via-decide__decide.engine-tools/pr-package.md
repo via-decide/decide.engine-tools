@@ -1,9 +1,9 @@
-Branch: simba/build-daxinicluster-a-parallelized-execution-eng
-Title: Build 'DaxiniCluster'-a parallelized execution engine to distribute t...
+Branch: simba/build-daxinicortex-the-autonomous-synthesis-engi
+Title: Build 'DaxiniCortex'-the autonomous synthesis engine for large-scale ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Quadruple the production speed of the world-record attempt while minimizing the risk of GitHub account flagging through distributed execution.
+- Goal: Eliminate the data bottleneck by providing an infinite stream of high-quality, structured personas for the 24,000-PR world record run.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
