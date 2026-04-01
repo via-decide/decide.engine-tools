@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniGuardian'-the autonomous auditing and self-healing engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Digital Sieve): 1. The Schema Validator: - Automatically scan every new PR for 'metadata.json'. - Verify required fields: 'name', 'role', 'id', 'design_tokens'. 2. The Logic Tester (Sandbox): - Extract 'logic.js' from the PR and run it in a secure 'NodeVM' environment.
+Build 'DaxiniSearch'-a high-performance local indexing and search engine for the ViaLogic ecosystem. CORE ARCHITECTURE (The Inverted Index): 1. The Index Builder: - Create a module indexer/build.js that scans all sub-directories in '/people/'. - Extract 'name', 'id', 'tags', and 'role' from every 'metadata.json'. - Generate a minified atlas-index.bin (Binary format) to keep the payload under 500KB even for 24,000 entries. 2. The Fuzzy-Match Logic: - Implement a 'Levenshtein Distance' algorithm for fuzzy searching. - Ensure the search can handle typos (e.g., 'Newton' instead of 'Isac Newton'). 3. The Portal Integration: - Add a 'Quantum Search Bar' to the root 'index.html'.
 
 RULES
 1. Audit touched files first and identify regressions.
