@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniAssets'-a procedural SVG generation engine for the 24,000-unit population. CORE ARCHITECTURE (The Digital Canvas): 1. The Abstract Portrait Generator: - Create a module assets/portrait.js that generates a unique Geometric SVG for each ID.
+Build 'DaxiniCLI'-a dedicated Node.js-based terminal interface to manage the 24,000-PR swarm. CORE ARCHITECTURE (The Command Hub): 1. The CLI Skeleton: - Create a binary entry point bin/daxini.js. - Implement 'Commander' logic for the following operations: - daxini swarm start [sector]: Launch the parallel worker nodes.
 
 CONSTRAINTS
-Strictly no JPG, PNG, or GIF. Everything must be 100% SVG code. Use the MacBook Air M2 GPU for batch rendering SVGs if previewing locally.
+Use pure Node.js (v18+). No massive NPM packages. Ensure the CLI is globally installable via 'npm link'. Must be compatible with the ZSH shell on macOS (MacBook Air M2).
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
