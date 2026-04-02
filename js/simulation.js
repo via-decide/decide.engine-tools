@@ -33,7 +33,8 @@
     lab: null,
     latestEvolution: null,
     latestArchitecture: null,
-    latestScenarioSuite: null
+    latestScenarioSuite: null,
+    latestInfrastructureEvolution: null
   };
 
   function getEngineUtils() {
@@ -392,6 +393,43 @@
       renderLabPanels(run.metrics);
     });
 
+    state.dom.runInfraEvolutionBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const generations = Math.max(8, Number(state.dom.generationSelector.value) || 40);
+      const infraEvolution = global.HighwayExperimentRunner.runInfrastructureEvolution(state.lab, {
+        generations,
+        population: 24
+      });
+      state.latestInfrastructureEvolution = infraEvolution.json;
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        type: infraEvolution.json.type,
+        success: infraEvolution.json.success,
+        improvements: infraEvolution.json.improvements,
+        recommendations: infraEvolution.json.recommendations
+      }, null, 2);
+      state.dom.infraTopDesigns.textContent = JSON.stringify({
+        baseline: infraEvolution.json.baseline.score.metrics,
+        best: infraEvolution.json.best.metrics,
+        recommendations: infraEvolution.json.recommendations
+      }, null, 2);
+      state.dom.infraPlayback.textContent = JSON.stringify({
+        bestGenome: infraEvolution.json.best.genome,
+        scenarioScore: infraEvolution.json.best.score,
+        scenarios: infraEvolution.json.best.scenarioResults
+      }, null, 2);
+      global.HighwayProtocolLabUi.drawInfrastructurePerformance(state.dom.infraEvolutionCanvas, infraEvolution.json.rows.map((row) => ({
+        bestFitness: row.bestFitness
+      })));
+      global.HighwayProtocolLabUi.renderGenomeTree(state.dom.infraGenomeTree, infraEvolution.json.evolutionTree);
+      downloadTextFile(`infrastructure-evolution-${Date.now()}.json`, JSON.stringify(infraEvolution.json, null, 2), 'application/json');
+      downloadTextFile(`infrastructure-evolution-${Date.now()}.csv`, infraEvolution.csv, 'text/csv');
+      const playback = state.lab.simulateGenome(global.HighwayProtocolGenome.createRandomGenome(), 20, {
+        rainIntensity: 20,
+        emergencyEvent: 'crash'
+      });
+      renderLabPanels(playback);
+    });
+
     state.dom.replaySimBtn.addEventListener('click', () => {
       if (!state.latestEvolution) return;
       const report = state.lab.simulateGenome(state.latestEvolution.best.genome, 24);
@@ -464,11 +502,16 @@
       architectureRuns: document.getElementById('architecture-runs'),
       batchRuns: document.getElementById('batch-runs'),
       runScenarioSuiteBtn: document.getElementById('run-scenario-suite-btn'),
+      runInfraEvolutionBtn: document.getElementById('run-infra-evolution-btn'),
       trafficIntelligencePanel: document.getElementById('traffic-intelligence-panel'),
       infrastructureHealthPanel: document.getElementById('infrastructure-health-panel'),
       floodRiskPanel: document.getElementById('flood-risk-panel'),
       emergencyMobilityPanel: document.getElementById('emergency-mobility-panel'),
-      scenarioLabPanel: document.getElementById('scenario-lab-panel')
+      scenarioLabPanel: document.getElementById('scenario-lab-panel'),
+      infraTopDesigns: document.getElementById('infra-top-designs'),
+      infraGenomeTree: document.getElementById('infra-genome-tree'),
+      infraPlayback: document.getElementById('infra-playback'),
+      infraEvolutionCanvas: document.getElementById('infra-evolution-canvas')
     };
 
     drawNodes(state.params.nodePositions);

@@ -127,11 +127,44 @@
     };
   }
 
+  function runInfrastructureEvolution(lab, options) {
+    const result = lab.evolveInfrastructureDesigns(options || {});
+    const rows = result.history.map((entry) => ({
+      generation: entry.generation,
+      bestFitness: Number(entry.bestFitness.toFixed(3)),
+      meanFitness: Number(entry.meanFitness.toFixed(3)),
+      trafficDelay: Number((entry.metrics.trafficDelay || 0).toFixed(3)),
+      emergencyResponseTime: Number((entry.metrics.emergencyResponseTime || 0).toFixed(3)),
+      sensorCoverage: Number((entry.metrics.sensorCoverage || 0).toFixed(3)),
+      communicationLatency: Number((entry.metrics.communicationLatency || 0).toFixed(3)),
+      floodRisk: Number((entry.metrics.floodRisk || 0).toFixed(3)),
+      maintenanceCost: Number((entry.metrics.maintenanceCost || 0).toFixed(3))
+    }));
+
+    return {
+      json: {
+        type: 'infrastructure-evolution-lab',
+        generatedAt: new Date().toISOString(),
+        storagePath: '/highway-v2i-lab/research/',
+        config: result.config,
+        baseline: result.baseline,
+        best: result.best,
+        improvements: result.improvements,
+        recommendations: result.recommendations,
+        success: result.success,
+        evolutionTree: result.tree,
+        rows
+      },
+      csv: toCsv(rows)
+    };
+  }
+
   global.HighwayExperimentRunner = {
     runProtocolExperiment,
     runInfrastructureComparison,
     runArchitectureSearchBatch,
     runScenarioSuite,
+    runInfrastructureEvolution,
     toCsv
   };
 })(window);

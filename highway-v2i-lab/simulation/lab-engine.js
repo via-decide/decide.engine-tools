@@ -321,7 +321,8 @@
 
     function evaluateInfrastructure(genome, simOptions) {
       network.updateInfrastructure(genome);
-      sensors.updateDensity(genome.sensorDensity);
+      if (sensors.updateInfrastructureConfig) sensors.updateInfrastructureConfig(genome);
+      else sensors.updateDensity(genome.sensorDensity);
       const metrics = simulateGenome(protocolGenomeApi.createRandomGenome(), 16, simOptions || {});
       const infrastructureScore = infraGenomeApi.scoreInfrastructure(metrics);
       research.addDataset('infrastructure-eval', { genome, metrics, infrastructureScore });
@@ -341,6 +342,191 @@
       }
       research.addLeaderboardEntry('infrastructure', best);
       return best;
+    }
+
+    function buildInfrastructureScenarios() {
+      return [
+        { name: 'heavy-traffic', behaviorMode: 'baseline', networkMode: 'dsrc', rainIntensity: 9 },
+        { name: 'heavy-rain', behaviorMode: 'dynamic-relay-nodes', networkMode: 'c-v2x', rainIntensity: 38, roadSlope: 1.6, drainPlacement: 3, waterFlowDirection: 'west' },
+        { name: 'sensor-failure', behaviorMode: 'baseline', networkMode: 'vehicle-mesh-relay', rainIntensity: 12 },
+        { name: 'emergency-vehicle', behaviorMode: 'cooperative-braking-signals', networkMode: '5g-v2x', emergencyEvent: 'breakdown', rainIntensity: 10 },
+        { name: 'accident', behaviorMode: 'cooperative-braking-signals', networkMode: 'edge-assisted-routing', emergencyEvent: 'crash', rainIntensity: 11 }
+      ];
+    }
+
+    function scoreInfrastructureAcrossScenarios(results) {
+      const totals = results.reduce((acc, row) => {
+        const metrics = row.metrics || {};
+        const emergency = metrics.emergencyMobility || {};
+        const drainage = metrics.drainage || {};
+        acc.trafficDelay += metrics.congestion || 0;
+        acc.emergencyResponseTime += emergency.avgEmergencyResponseTime || emergency.emergencyResponseTime || metrics.safetyResponseTime || 0;
+        acc.sensorCoverage += metrics.coverageReliability || 0;
+        acc.communicationLatency += metrics.latency || 0;
+        acc.floodRisk += drainage.floodHighTickRatio != null ? drainage.floodHighTickRatio * 100 : (drainage.floodRisk === 'high' ? 90 : (drainage.floodRisk === 'medium' ? 45 : 15));
+        acc.maintenanceCost += Math.max(0, 100 - ((metrics.infrastructureHealth && metrics.infrastructureHealth.healthScore) || 80));
+        return acc;
+      }, {
+        trafficDelay: 0,
+        emergencyResponseTime: 0,
+        sensorCoverage: 0,
+        communicationLatency: 0,
+        floodRisk: 0,
+        maintenanceCost: 0
+      });
+      const count = Math.max(1, results.length);
+      const metrics = {
+        trafficDelay: totals.trafficDelay / count,
+        emergencyResponseTime: totals.emergencyResponseTime / count,
+        sensorCoverage: totals.sensorCoverage / count,
+        communicationLatency: totals.communicationLatency / count,
+        floodRisk: totals.floodRisk / count,
+        maintenanceCost: totals.maintenanceCost / count
+      };
+      const score = (
+        (100 - metrics.trafficDelay) * 0.25 +
+        (100 - (metrics.emergencyResponseTime * 10)) * 0.22 +
+        metrics.sensorCoverage * 0.2 +
+        (100 - metrics.communicationLatency) * 0.17 +
+        (100 - metrics.floodRisk) * 0.1 +
+        (100 - metrics.maintenanceCost) * 0.06
+      );
+      return {
+        score,
+        metrics
+      };
+    }
+
+    function evolveInfrastructureDesigns(options) {
+      const opt = Object.assign({
+        population: 24,
+        generations: 40,
+        mutationRate: 0.22,
+        scenarios: buildInfrastructureScenarios()
+      }, options || {});
+      const populationSize = Math.max(8, Number(opt.population) || 24);
+      const generations = Math.max(2, Number(opt.generations) || 40);
+      const mutationRate = Math.max(0.02, Math.min(0.8, Number(opt.mutationRate) || 0.22));
+      let population = Array.from({ length: populationSize }, () => infraGenomeApi.createRandomInfrastructureGenome());
+      const baselineGenome = infraGenomeApi.createBaselineInfrastructureGenome
+        ? infraGenomeApi.createBaselineInfrastructureGenome()
+        : infraGenomeApi.createRandomInfrastructureGenome();
+      const baselineScenarioMetrics = opt.scenarios.map((scenario) => ({
+        name: scenario.name,
+        metrics: evaluateInfrastructure(baselineGenome, scenario)
+      }));
+      const baselineScore = scoreInfrastructureAcrossScenarios(baselineScenarioMetrics);
+      const history = [];
+      const tree = [];
+      let best = null;
+
+      for (let generation = 0; generation < generations; generation += 1) {
+        const scored = population.map((genome, idx) => {
+          const scenarioResults = opt.scenarios.map((scenario) => ({
+            name: scenario.name,
+            metrics: evaluateInfrastructure(genome, scenario)
+          }));
+          const aggregate = scoreInfrastructureAcrossScenarios(scenarioResults);
+          const row = {
+            id: `g${generation}-i${idx}`,
+            generation,
+            genome,
+            scenarioResults,
+            score: aggregate.score,
+            metrics: aggregate.metrics
+          };
+          if (!best || row.score > best.score) best = row;
+          return row;
+        }).sort((a, b) => b.score - a.score);
+
+        const meanFitness = scored.reduce((sum, item) => sum + item.score, 0) / scored.length;
+        history.push({ generation, bestFitness: scored[0].score, meanFitness, metrics: scored[0].metrics });
+        tree.push({
+          generation,
+          nodes: scored.slice(0, 6).map((item) => ({
+            id: item.id,
+            score: Number(item.score.toFixed(2)),
+            rsuSpacing: Number(item.genome.rsuSpacing.toFixed(1)),
+            laneWidth: Number(item.genome.laneWidth.toFixed(2)),
+            drainSlope: Number(item.genome.drainSlope.toFixed(2))
+          }))
+        });
+
+        const eliteCount = Math.max(2, Math.floor(populationSize * 0.25));
+        const elites = scored.slice(0, eliteCount).map((item) => item.genome);
+        const next = elites.slice();
+        while (next.length < populationSize) {
+          const parentA = elites[Math.floor(Math.random() * elites.length)];
+          const parentB = elites[Math.floor(Math.random() * elites.length)];
+          const crossover = infraGenomeApi.crossoverInfrastructureGenome
+            ? infraGenomeApi.crossoverInfrastructureGenome(parentA, parentB)
+            : infraGenomeApi.mutateInfrastructureGenome(parentA);
+          let child = crossover;
+          if (Math.random() < mutationRate) child = infraGenomeApi.mutateInfrastructureGenome(child);
+          next.push(child);
+        }
+        population = next;
+      }
+
+      const improvements = {
+        trafficDelayGainPct: ((baselineScore.metrics.trafficDelay - best.metrics.trafficDelay) / Math.max(1, baselineScore.metrics.trafficDelay)) * 100,
+        emergencyResponseGainPct: ((baselineScore.metrics.emergencyResponseTime - best.metrics.emergencyResponseTime) / Math.max(0.5, baselineScore.metrics.emergencyResponseTime)) * 100,
+        sensorCoverageGainPct: ((best.metrics.sensorCoverage - baselineScore.metrics.sensorCoverage) / Math.max(1, baselineScore.metrics.sensorCoverage)) * 100
+      };
+      const success = improvements.trafficDelayGainPct > 0 && improvements.emergencyResponseGainPct > 0 && improvements.sensorCoverageGainPct > 0;
+
+      const recommendations = {
+        optimizedRsuPlacement: {
+          spacingMeters: Number(best.genome.rsuSpacing.toFixed(2)),
+          communicationRange: Number(best.genome.communicationRange.toFixed(2)),
+          topology: best.genome.communicationTopology
+        },
+        sensorLayoutRecommendations: {
+          density: Number(best.genome.sensorDensity.toFixed(3)),
+          placement: Number(best.genome.sensorPlacement.toFixed(3)),
+          sensorAngle: Number(best.genome.sensorAngle.toFixed(2)),
+          cameraAngle: Number(best.genome.cameraAngle.toFixed(2))
+        },
+        trafficControlStrategies: {
+          emergencyLanePriority: Number(best.genome.emergencyLanePriority.toFixed(3)),
+          laneWidth: Number(best.genome.laneWidth.toFixed(2)),
+          drainSlope: Number(best.genome.drainSlope.toFixed(2))
+        }
+      };
+
+      research.addDataset('infrastructure-evolution', {
+        config: { population: populationSize, generations, mutationRate },
+        baseline: { genome: baselineGenome, score: baselineScore },
+        best,
+        history,
+        tree,
+        recommendations,
+        success
+      });
+      research.addLeaderboardEntry('infrastructure', {
+        mode: 'evolution',
+        fitness: best.score,
+        genome: best.genome,
+        metrics: best.metrics,
+        improvements,
+        success
+      });
+      research.addReport('Infrastructure Evolution Lab', success ? 'Evolution produced infrastructure gains over baseline.' : 'Evolution did not beat baseline on all key dimensions.', [
+        { metric: 'traffic-delay', baseline: baselineScore.metrics.trafficDelay, candidate: best.metrics.trafficDelay, gainPct: improvements.trafficDelayGainPct },
+        { metric: 'emergency-response', baseline: baselineScore.metrics.emergencyResponseTime, candidate: best.metrics.emergencyResponseTime, gainPct: improvements.emergencyResponseGainPct },
+        { metric: 'sensor-coverage', baseline: baselineScore.metrics.sensorCoverage, candidate: best.metrics.sensorCoverage, gainPct: improvements.sensorCoverageGainPct }
+      ]);
+
+      return {
+        config: { population: populationSize, generations, mutationRate, scenarios: opt.scenarios },
+        baseline: { genome: baselineGenome, score: baselineScore },
+        best,
+        history,
+        tree,
+        improvements,
+        recommendations,
+        success
+      };
     }
 
     function discoverArchitecture(options) {
@@ -439,6 +625,7 @@
       discoverInfrastructure,
       discoverArchitecture,
       runInventionMode,
+      evolveInfrastructureDesigns,
       telemetrySnapshot,
       simulateGenome,
       runScenarioExperiment
