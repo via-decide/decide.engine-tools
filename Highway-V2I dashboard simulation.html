@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Highway-V2I: Safety Pulse Dashboard</title>
+    <title>Highway-V2I: Smart Corridor Digital Twin Laboratory</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./shared/vd-nav-fix.js"></script>
     <script src="./shared/tool-registry.js"></script>
@@ -39,8 +39,8 @@
 
     <header class="max-w-6xl mx-auto mb-8 flex justify-between items-end">
         <div>
-            <h1 class="text-3xl font-black tracking-tighter text-white">HIGHWAY-V2I <span class="text-cyan-400">SAFETY PULSE</span></h1>
-            <p class="text-zinc-500 font-mono text-xs uppercase tracking-widest">Autonomous Infrastructure & Emergency IoT Mesh v1.0</p>
+            <h1 class="text-3xl font-black tracking-tighter text-white">HIGHWAY-V2I <span class="text-cyan-400">SMART CORRIDOR LAB</span></h1>
+            <p class="text-zinc-500 font-mono text-xs uppercase tracking-widest">Digital Twin Research Runtime • Traffic, Infrastructure, Drainage & Emergency Systems</p>
         </div>
         <div class="text-right">
             <span class="text-[10px] font-bold text-zinc-600 block">SYSTEM STATUS</span>
@@ -179,6 +179,7 @@
             <button id="discover-architecture-btn" class="bg-sky-900/30 border border-sky-700 text-sky-300 py-3 px-3 rounded-lg text-xs">Architecture Discovery Map</button>
             <button id="invention-mode-btn" class="bg-amber-900/30 border border-amber-700 text-amber-300 py-3 px-3 rounded-lg text-xs">Run Invention Mode</button>
             <button id="run-batch-btn" class="bg-fuchsia-900/30 border border-fuchsia-700 text-fuchsia-300 py-3 px-3 rounded-lg text-xs">Run Batch Experiments</button>
+            <button id="run-scenario-suite-btn" class="bg-indigo-900/30 border border-indigo-700 text-indigo-300 py-3 px-3 rounded-lg text-xs">Run Scenario Lab Suite</button>
         </div>
         <div class="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="panel-shell p-3">
@@ -191,6 +192,32 @@
             </div>
         </div>
         <pre id="experiment-output" class="mt-4 text-[11px] text-zinc-300 whitespace-pre-wrap bg-zinc-950 border border-zinc-800 rounded p-3">Experiment outputs (JSON/CSV preview) appear here.</pre>
+    </section>
+
+    <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">
+        <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-300 mb-4">Smart Corridor Operational Dashboards</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-cyan-300 mb-2">Traffic Intelligence</h4>
+                <div id="traffic-intelligence-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Awaiting simulation tick...</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-emerald-300 mb-2">Infrastructure Health</h4>
+                <div id="infrastructure-health-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Awaiting simulation tick...</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-blue-300 mb-2">Flood Risk Monitor</h4>
+                <div id="flood-risk-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Awaiting simulation tick...</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-red-300 mb-2">Emergency Mobility</h4>
+                <div id="emergency-mobility-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Awaiting simulation tick...</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-violet-300 mb-2">Scenario Lab</h4>
+                <div id="scenario-lab-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Run Scenario Lab Suite to record research metrics.</div>
+            </div>
+        </div>
     </section>
 
         <script src="./js/simulation.js"></script>

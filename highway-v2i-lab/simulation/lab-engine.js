@@ -23,6 +23,141 @@
     const protocolGenomeApi = global.HighwayProtocolGenome;
     const research = global.HighwayResearchOutput.createResearchStore();
 
+    function deriveTrafficIntelligence(vehicleState, networkState) {
+      const density = vehicleState.densityPerKm || 0;
+      const wave = vehicleState.trafficWaveIndex || 0;
+      const speedVar = vehicleState.speedVariance || 0;
+      const bottleneckLane = vehicleState.bottleneckLane || 0;
+      const laneUsage = vehicleState.laneCounts || [0, 0, 0];
+      const congestionScore = Math.max(0, Math.min(100, (density * 0.7) + (wave * 30) + networkState.congestion * 0.6 + (speedVar * 0.4)));
+      const predictedCongestion = congestionScore > 70 ? 'high' : (congestionScore > 45 ? 'medium' : 'low');
+      const travelTimeMinutes = (cfg.corridorLength / 1000) / Math.max(5, vehicleState.averageSpeed || 20) * 60;
+      const heatmap = laneUsage.map((count, idx) => ({ lane: idx + 1, density: count, heat: Math.min(100, Math.round((count / Math.max(1, vehicleState.vehicles.length)) * 300)) }));
+      const laneOptimization = laneUsage.map((count, idx) => ({
+        lane: idx + 1,
+        recommendation: count === Math.max.apply(null, laneUsage) ? 'offload' : 'accept',
+        utilization: Number((count / Math.max(1, vehicleState.vehicles.length)).toFixed(3))
+      }));
+
+      return {
+        density,
+        laneSwitchingRate: vehicleState.laneChanges / Math.max(1, vehicleState.vehicles.length),
+        speedVariation: speedVar,
+        trafficWaveIndex: wave,
+        bottleneckLane,
+        predictedCongestion,
+        travelTimeMinutes,
+        congestionAlerts: predictedCongestion === 'high' ? ['Corridor congestion risk elevated'] : [],
+        laneOptimization,
+        heatmap
+      };
+    }
+
+    function simulateDrainage(simOptions, vehicleState, sensorState) {
+      const rainfall = Number(simOptions && simOptions.rainIntensity) || 12;
+      const roadSlope = Number(simOptions && simOptions.roadSlope) || 2.4;
+      const drainPlacement = Number(simOptions && simOptions.drainPlacement) || 4;
+      const flowDirection = simOptions && simOptions.waterFlowDirection ? simOptions.waterFlowDirection : 'east';
+
+      const accumulation = Math.max(0, (rainfall * 1.8) - (roadSlope * 4.2) - (drainPlacement * 1.5) + (vehicleState.densityPerKm * 0.09));
+      const floodRisk = accumulation > 28 ? 'high' : (accumulation > 16 ? 'medium' : 'low');
+      const safeRoadSlope = Math.max(1.5, Number((rainfall / 6.8).toFixed(2)));
+      const drainPlacementOptimization = Math.max(2, Math.ceil(rainfall / 5));
+
+      return {
+        rainIntensity: rainfall,
+        roadSlope,
+        drainPlacement,
+        waterFlowDirection: flowDirection,
+        waterAccumulationMap: {
+          segmentA: Number((accumulation * 0.9).toFixed(2)),
+          segmentB: Number(accumulation.toFixed(2)),
+          segmentC: Number((accumulation * 1.1).toFixed(2))
+        },
+        floodRisk,
+        safeRoadSlope,
+        drainPlacementOptimization,
+        drainageAngle: sensorState.drainageSensor.angle,
+        selfCleaningSensorDesignScore: Number((sensorState.drainageSensor.selfCleaningFactor * 100).toFixed(2))
+      };
+    }
+
+    function simulateEmergencyMobility(simOptions, vehicleState, networkState, trafficIntelligence) {
+      const eventType = simOptions && simOptions.emergencyEvent ? simOptions.emergencyEvent : null;
+      const incidentDetected = Boolean(eventType) || vehicleState.anomalyCount > 0;
+      const prioritySignals = incidentDetected ? Math.max(2, Math.round(networkState.rsuCount * 0.35)) : 0;
+      const distanceClearedKm = incidentDetected ? Number((0.3 + (prioritySignals * 0.08)).toFixed(2)) : 0;
+      const responseMinutes = incidentDetected
+        ? Number((2 + (networkState.latency / 25) + (trafficIntelligence.predictedCongestion === 'high' ? 2.2 : 0.9)).toFixed(2))
+        : 0;
+      const disruptionIndex = incidentDetected
+        ? Number(Math.min(100, 28 + trafficIntelligence.density * 0.5 + networkState.congestion * 0.4).toFixed(2))
+        : 0;
+
+      if (incidentDetected) {
+        events.emit('emergency.corridor', {
+          eventType: eventType || 'vehicle-anomaly',
+          responseMinutes,
+          prioritySignals,
+          distanceClearedKm
+        });
+      }
+
+      return {
+        crashDetected: eventType === 'crash' || vehicleState.anomalyCount > 1,
+        breakdownDetected: eventType === 'breakdown',
+        roadBlockageDetected: eventType === 'road_blockage',
+        emergencyCorridorActive: incidentDetected,
+        dynamicLaneClearing: incidentDetected,
+        priorityTrafficSignals: prioritySignals,
+        vehicleAlertsIssued: incidentDetected ? vehicleState.vehicles.length : 0,
+        emergencyResponseTime: responseMinutes,
+        distanceCleared: distanceClearedKm,
+        trafficDisruptionIndex: disruptionIndex
+      };
+    }
+
+    function buildDigitalTwin(vehicleState, sensorState, networkState, trafficIntelligence, drainage, emergency) {
+      return {
+        timestamp: new Date().toISOString(),
+        entities: {
+          vehicles: vehicleState.vehicles.length,
+          sensors: sensorState.sensorHits,
+          trafficLights: Math.max(4, Math.round(networkState.rsuCount / 2)),
+          rsuNodes: networkState.rsuCount,
+          weather: {
+            rainIntensity: drainage.rainIntensity,
+            floodRisk: drainage.floodRisk
+          },
+          energySystems: {
+            energyConsumption: networkState.energyConsumption,
+            backupGridState: sensorState.health.networkDowntime < 0.1 ? 'stable' : 'degraded'
+          }
+        },
+        layers: {
+          traffic: {
+            averageSpeed: vehicleState.averageSpeed,
+            congestion: trafficIntelligence.predictedCongestion,
+            heatmap: trafficIntelligence.heatmap
+          },
+          sensorNetwork: {
+            confidence: sensorState.confidence,
+            healthScore: sensorState.health.score
+          },
+          communication: {
+            mode: networkState.mode,
+            latency: networkState.latency,
+            coverageReliability: networkState.coverageReliability
+          },
+          environment: {
+            floodRisk: drainage.floodRisk,
+            waterAccumulationMap: drainage.waterAccumulationMap,
+            emergencyCorridorActive: emergency.emergencyCorridorActive
+          }
+        }
+      };
+    }
+
     function simulateGenome(genome, ticks, simOptions) {
       const steps = Math.max(5, Number(ticks) || 24);
       const opts = Object.assign({
@@ -41,6 +176,20 @@
       let trafficEfficiencySum = 0;
       let safetyResponseSum = 0;
       let decisionsTriggered = 0;
+      let densitySum = 0;
+      let laneSwitchSum = 0;
+      let speedVarSum = 0;
+      let waveSum = 0;
+      let infraHealthSum = 0;
+      let repairPrioritySum = 0;
+      let emergencyResponseSum = 0;
+      let disruptionSum = 0;
+      let floodRiskHighTicks = 0;
+      let twin = null;
+      let lastTraffic = null;
+      let lastDrainage = null;
+      let lastEmergency = null;
+      let lastSensor = null;
 
       for (let i = 0; i < steps; i += 1) {
         const vehicleState = vehicles.tick(0.35, events);
@@ -53,6 +202,11 @@
           network: networkState
         }, events);
 
+        const trafficIntelligence = deriveTrafficIntelligence(vehicleState, networkState);
+        const drainage = simulateDrainage(opts, vehicleState, sensorState);
+        const emergency = simulateEmergencyMobility(opts, vehicleState, networkState, trafficIntelligence);
+        twin = buildDigitalTwin(vehicleState, sensorState, networkState, trafficIntelligence, drainage, emergency);
+
         if (graphOutputs.responseAction === 'dispatch-safety-alert') decisionsTriggered += 1;
 
         latencySum += networkState.latency;
@@ -61,6 +215,20 @@
         energySum += networkState.energyConsumption;
         trafficEfficiencySum += networkState.trafficEfficiency;
         safetyResponseSum += networkState.safetyResponseTime;
+        densitySum += trafficIntelligence.density;
+        laneSwitchSum += trafficIntelligence.laneSwitchingRate;
+        speedVarSum += trafficIntelligence.speedVariation;
+        waveSum += trafficIntelligence.trafficWaveIndex;
+        infraHealthSum += sensorState.health.score;
+        repairPrioritySum += sensorState.health.repairPriorityScore;
+        emergencyResponseSum += emergency.emergencyResponseTime;
+        disruptionSum += emergency.trafficDisruptionIndex;
+        if (drainage.floodRisk === 'high') floodRiskHighTicks += 1;
+
+        lastTraffic = trafficIntelligence;
+        lastDrainage = drainage;
+        lastEmergency = emergency;
+        lastSensor = sensorState;
       }
 
       return {
@@ -73,7 +241,26 @@
         safetyResponseTime: safetyResponseSum / steps,
         graphActivations: decisionsTriggered,
         networkMode: opts.networkMode,
-        behaviorMode: opts.behaviorMode
+        behaviorMode: opts.behaviorMode,
+        trafficIntelligence: Object.assign({}, lastTraffic, {
+          averageDensity: densitySum / steps,
+          averageLaneSwitchingRate: laneSwitchSum / steps,
+          averageSpeedVariation: speedVarSum / steps,
+          averageTrafficWaveIndex: waveSum / steps
+        }),
+        infrastructureHealth: {
+          healthScore: infraHealthSum / steps,
+          repairPriorityScore: repairPrioritySum / steps,
+          maintenancePredictionTimeline: lastSensor ? lastSensor.health.maintenancePredictionHrs : 0
+        },
+        drainage: Object.assign({}, lastDrainage, {
+          floodHighTickRatio: floodRiskHighTicks / steps
+        }),
+        emergencyMobility: Object.assign({}, lastEmergency, {
+          avgEmergencyResponseTime: emergencyResponseSum / steps,
+          avgTrafficDisruptionIndex: disruptionSum / steps
+        }),
+        digitalTwin: twin
       };
     }
 
@@ -217,6 +404,28 @@
       };
     }
 
+    function runScenarioExperiment(scenario) {
+      const cfgScenario = Object.assign({
+        name: 'custom-scenario',
+        rainIntensity: 12,
+        roadSlope: 2.4,
+        drainPlacement: 4,
+        waterFlowDirection: 'east',
+        emergencyEvent: null,
+        networkMode: cfg.defaultNetworkMode,
+        behaviorMode: cfg.behaviorMode
+      }, scenario || {});
+      const genome = protocolGenomeApi.createRandomGenome();
+      const metrics = simulateGenome(genome, 30, cfgScenario);
+      const record = {
+        scenario: cfgScenario,
+        metrics,
+        generatedAt: new Date().toISOString()
+      };
+      research.addDataset('scenario-experiment', record);
+      return record;
+    }
+
     function telemetrySnapshot() {
       return {
         events: events.snapshotTelemetry(250),
@@ -231,7 +440,8 @@
       discoverArchitecture,
       runInventionMode,
       telemetrySnapshot,
-      simulateGenome
+      simulateGenome,
+      runScenarioExperiment
     };
   }
 

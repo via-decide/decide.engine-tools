@@ -11,6 +11,7 @@ Format: [Semantic Versioning](https://semver.org)
 - Upgraded the Highway-V2I lab into an autonomous transport architecture discovery system with multi-network switching (DSRC/C-V2X/5G and experimental mesh modes), protocol + infrastructure genomes, swarm behavior modes, decision-graph-evaluated simulation metrics, invention mode, and large-scale architecture batch experiments integrated into the dashboard UI.
 - Refactored the Highway-V2I dashboard into a DECIDE runtime wrapper with `DECIDE.simulation.run()` and Monte Carlo `DECIDE.simulation.optimize()`, plus embedded tool loading for decision-matrix, scenario-planner, output-evaluator, and analytics visualization.
 - Added a research-grade Highway-V2I lab module (`highway-v2i-lab/`) with simulation engines, protocol/infrastructure genomes, protocol evolution loop (population 60, configurable generations default 200), experiment runner with JSON/CSV exports, research artifact store, and Protocol Lab UI panel integrated into the dashboard.
+- Expanded the Highway-V2I simulator into a smart corridor digital twin laboratory with traffic intelligence analytics, infrastructure health monitoring, drainage/flood risk simulation, emergency mobility corridor logic, real-time digital twin layers, and a scenario experiment suite that exports structured JSON/CSV research outputs targeted for `/highway-v2i-lab/research/`.
 
 ### Fixed
 - Fixed StudyOS bootloader blank-screen regression by adding an auth-readiness fallback timer so the app still initializes when Firebase auth never reaches ready state.

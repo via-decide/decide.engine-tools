@@ -36,11 +36,34 @@
       return leaderboards[kind][leaderboards[kind].length - 1];
     }
 
+    function buildOptimizationSuggestions() {
+      const latestInfra = datasets.filter((d) => d.name === 'infrastructure-eval').slice(-1)[0];
+      const latestScenario = datasets.filter((d) => d.name === 'scenario-experiment').slice(-1)[0];
+      const suggestions = [];
+
+      if (latestInfra && latestInfra.payload && latestInfra.payload.metrics) {
+        const m = latestInfra.payload.metrics;
+        if ((m.congestion || 0) > 55) suggestions.push('Increase RSU density around bottleneck segments to reduce congestion.');
+        if ((m.infrastructureHealth && m.infrastructureHealth.healthScore || 100) < 75) suggestions.push('Prioritize preventive maintenance for deteriorating road/sensor assets.');
+      }
+
+      if (latestScenario && latestScenario.payload && latestScenario.payload.metrics) {
+        const s = latestScenario.payload.metrics;
+        if (s.drainage && s.drainage.floodRisk === 'high') suggestions.push('Add drains and increase minimum slope in flood-prone road sections.');
+        if (s.emergencyMobility && (s.emergencyMobility.avgEmergencyResponseTime || s.emergencyMobility.emergencyResponseTime) > 4) suggestions.push('Configure dynamic lane-clearing and adaptive signal priority for emergency corridors.');
+      }
+
+      if (!suggestions.length) suggestions.push('Corridor metrics are nominal; continue scenario stress testing to uncover edge-case risks.');
+      return suggestions;
+    }
+
     function snapshot() {
+      const recommendations = buildOptimizationSuggestions();
       return {
         datasets: datasets.slice(-50),
         protocolLogs: protocolLogs.slice(-200),
         reports: reports.slice(-50),
+        recommendations,
         leaderboards: {
           protocol: leaderboards.protocol.slice(-20),
           infrastructure: leaderboards.infrastructure.slice(-20),

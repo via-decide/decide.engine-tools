@@ -15,7 +15,9 @@
       id,
       type,
       lane: index % 3,
+      prevLane: index % 3,
       speed: baseSpeed + ((Math.random() - 0.5) * 6),
+      prevSpeed: baseSpeed,
       position: (cfg.corridorLength / cfg.density) * index,
       heading: 0,
       communicationRange: type === 'truck' ? 250 : 220,
@@ -79,15 +81,37 @@
       return active;
     }
 
+    function computeTrafficWaves(speedList) {
+      if (!speedList.length) return 0;
+      let waves = 0;
+      for (let i = 1; i < speedList.length; i += 1) {
+        if (Math.abs(speedList[i] - speedList[i - 1]) > 6) waves += 1;
+      }
+      return Number((waves / Math.max(1, speedList.length - 1)).toFixed(3));
+    }
+
     function tick(deltaSeconds, events) {
       const dt = Math.max(0.05, Number(deltaSeconds) || 0.1);
       let anomalyCount = 0;
+      let laneChanges = 0;
+      let totalSpeed = 0;
+      const speeds = [];
       const activeIds = [];
       const vehicleTypes = { car: 0, motorcycle: 0, truck: 0 };
+      const laneCounts = [0, 0, 0];
 
       vehicles.forEach((vehicle) => {
         const randomDrift = (Math.random() - 0.5) * 1.2;
+        vehicle.prevSpeed = vehicle.speed;
         vehicle.speed = utils.clamp((vehicle.speed + randomDrift) * vehicle.adaptiveSpeedFactor, 14, 48);
+
+        vehicle.prevLane = vehicle.lane;
+        if (Math.random() < 0.035) {
+          const laneShift = Math.random() < 0.5 ? -1 : 1;
+          vehicle.lane = Math.max(0, Math.min(2, vehicle.lane + laneShift));
+        }
+        if (vehicle.lane !== vehicle.prevLane) laneChanges += 1;
+
         vehicle.position += vehicle.speed * dt;
         vehicle.heading = 0;
         if (vehicle.position > cfg.corridorLength) vehicle.position -= cfg.corridorLength;
@@ -98,6 +122,9 @@
         if (vehicle.messageBuffer.length > 12) vehicle.messageBuffer.shift();
 
         vehicleTypes[vehicle.type] += 1;
+        laneCounts[vehicle.lane] += 1;
+        totalSpeed += vehicle.speed;
+        speeds.push(vehicle.speed);
         if (vehicle.anomaly) {
           anomalyCount += 1;
           activeIds.push(vehicle.id);
@@ -111,12 +138,26 @@
         }
       });
 
+      const avgSpeed = totalSpeed / Math.max(1, vehicles.length);
+      const densityPerKm = (vehicles.length / (cfg.corridorLength / 1000));
+      const speedVariance = speeds.reduce((sum, speed) => sum + Math.pow(speed - avgSpeed, 2), 0) / Math.max(1, speeds.length);
+      const trafficWaveIndex = computeTrafficWaves(speeds);
+      const bottleneckLane = laneCounts.indexOf(Math.max.apply(null, laneCounts));
+
       return {
         vehicles,
         anomalyCount,
         activeAnomalies: activeIds,
         vehicleTypes,
-        behaviorMode: cfg.behaviorMode
+        behaviorMode: cfg.behaviorMode,
+        densityPerKm,
+        laneChanges,
+        speedVariance,
+        averageSpeed: avgSpeed,
+        trafficWaveIndex,
+        laneCounts,
+        bottleneckLane,
+        trafficFlowState: avgSpeed < 22 ? 'congested' : (avgSpeed < 30 ? 'dense' : 'free-flow')
       };
     }
 
