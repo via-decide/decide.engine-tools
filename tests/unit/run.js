@@ -13,6 +13,7 @@ const suites = [
   { name: 'ToolBridge',   file: './tool-bridge.test.js' },
   { name: 'Router',       file: './router.test.js' },
   { name: 'SmokeTools',   file: './smoke-tools.test.js' },
+  { name: 'StudyOSAuthFallback', file: './studyos-auth-fallback.test.js' },
 ];
 
 let totalPassed = 0;
