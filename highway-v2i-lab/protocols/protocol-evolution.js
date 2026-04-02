@@ -6,14 +6,16 @@
   };
 
   function createEvolutionEngine(config) {
-    const cfg = Object.assign({ population: 60, generations: 200 }, config || {});
+    const cfg = Object.assign({ population: 80, generations: 200 }, config || {});
     const genomeApi = global.HighwayProtocolGenome;
 
     function scoreCandidate(metrics) {
       const latencyScore = utils.clamp(100 - metrics.latency, 0, 100);
-      const congestionScore = utils.clamp(100 - metrics.congestion, 0, 100);
-      const reliabilityScore = utils.clamp(metrics.coverageReliability, 0, 100);
-      return (latencyScore * 0.4) + (congestionScore * 0.3) + (reliabilityScore * 0.3);
+      const reliabilityScore = utils.clamp(metrics.packetReliability || metrics.coverageReliability, 0, 100);
+      const energyScore = utils.clamp(100 - (metrics.energyConsumption || 100), 0, 100);
+      const trafficScore = utils.clamp(metrics.trafficEfficiency || 0, 0, 100);
+      const safetyScore = utils.clamp(100 - (metrics.safetyResponseTime || metrics.latency), 0, 100);
+      return (latencyScore * 0.25) + (reliabilityScore * 0.25) + (energyScore * 0.15) + (trafficScore * 0.15) + (safetyScore * 0.2);
     }
 
     function evolve(stepEvaluator, options) {
@@ -40,7 +42,9 @@
           meanFitness: scored.reduce((sum, item) => sum + item.fitness, 0) / scored.length,
           bestLatency: scored[0].metrics.latency,
           bestCongestion: scored[0].metrics.congestion,
-          bestReliability: scored[0].metrics.coverageReliability
+          bestReliability: scored[0].metrics.coverageReliability,
+          bestEnergy: scored[0].metrics.energyConsumption,
+          bestSafetyResponseTime: scored[0].metrics.safetyResponseTime
         });
 
         const eliteCount = Math.max(2, Math.floor(populationSize * 0.2));

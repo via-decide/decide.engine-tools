@@ -9,9 +9,12 @@
     return {
       broadcastInterval: 1 + Math.random() * 6,
       relayProbability: 0.15 + Math.random() * 0.8,
+      priorityWeight: 0.1 + Math.random() * 0.9,
+      clusterRadius: 40 + Math.random() * 220,
+      adaptiveDelay: Math.random() * 0.9,
+      collisionAvoidanceFactor: 0.1 + Math.random() * 0.85,
       priorityRouting: Math.random() > 0.5,
       messageTTL: 2 + Math.floor(Math.random() * 10),
-      adaptiveDelay: Math.random() * 0.9,
       dynamicRsuActivation: Math.random() > 0.5,
       clusterRelayBias: 2 + Math.floor(Math.random() * 6)
     };
@@ -23,9 +26,12 @@
 
     if (Math.random() < mutationRate) next.broadcastInterval = utils.clamp(next.broadcastInterval + (Math.random() - 0.5), 0.5, 8);
     if (Math.random() < mutationRate) next.relayProbability = utils.clamp(next.relayProbability + (Math.random() - 0.5) * 0.2, 0.05, 0.98);
+    if (Math.random() < mutationRate) next.priorityWeight = utils.clamp(next.priorityWeight + (Math.random() - 0.5) * 0.2, 0.05, 1);
+    if (Math.random() < mutationRate) next.clusterRadius = utils.clamp(next.clusterRadius + (Math.random() - 0.5) * 40, 20, 300);
+    if (Math.random() < mutationRate) next.adaptiveDelay = utils.clamp(next.adaptiveDelay + (Math.random() - 0.5) * 0.2, 0, 1);
+    if (Math.random() < mutationRate) next.collisionAvoidanceFactor = utils.clamp(next.collisionAvoidanceFactor + (Math.random() - 0.5) * 0.2, 0.05, 1);
     if (Math.random() < mutationRate) next.priorityRouting = !next.priorityRouting;
     if (Math.random() < mutationRate) next.messageTTL = Math.max(1, Math.min(18, next.messageTTL + Math.round((Math.random() - 0.5) * 4)));
-    if (Math.random() < mutationRate) next.adaptiveDelay = utils.clamp(next.adaptiveDelay + (Math.random() - 0.5) * 0.2, 0, 1);
     if (Math.random() < mutationRate) next.dynamicRsuActivation = !next.dynamicRsuActivation;
     if (Math.random() < mutationRate) next.clusterRelayBias = Math.max(2, Math.min(12, next.clusterRelayBias + Math.round((Math.random() - 0.5) * 3)));
 
@@ -38,9 +44,12 @@
     return {
       broadcastInterval: Math.random() > 0.5 ? left.broadcastInterval : right.broadcastInterval,
       relayProbability: Math.random() > 0.5 ? left.relayProbability : right.relayProbability,
+      priorityWeight: Math.random() > 0.5 ? left.priorityWeight : right.priorityWeight,
+      clusterRadius: Math.random() > 0.5 ? left.clusterRadius : right.clusterRadius,
+      adaptiveDelay: Math.random() > 0.5 ? left.adaptiveDelay : right.adaptiveDelay,
+      collisionAvoidanceFactor: Math.random() > 0.5 ? left.collisionAvoidanceFactor : right.collisionAvoidanceFactor,
       priorityRouting: Math.random() > 0.5 ? left.priorityRouting : right.priorityRouting,
       messageTTL: Math.random() > 0.5 ? left.messageTTL : right.messageTTL,
-      adaptiveDelay: Math.random() > 0.5 ? left.adaptiveDelay : right.adaptiveDelay,
       dynamicRsuActivation: Math.random() > 0.5 ? left.dynamicRsuActivation : right.dynamicRsuActivation,
       clusterRelayBias: Math.random() > 0.5 ? left.clusterRelayBias : right.clusterRelayBias
     };

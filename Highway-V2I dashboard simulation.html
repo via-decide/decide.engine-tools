@@ -138,11 +138,28 @@
     </section>
 
     <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex flex-wrap items-center justify-between mb-4 gap-3">
             <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-300">Protocol Lab</h3>
-            <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2">
                 <label for="generation-selector" class="text-xs text-zinc-500">Generations</label>
                 <input id="generation-selector" type="number" min="10" max="400" value="200" class="w-20 bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs">
+                <select id="network-selector" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs">
+                    <option value="dsrc">DSRC</option>
+                    <option value="c-v2x">C-V2X</option>
+                    <option value="5g-v2x">5G V2X</option>
+                    <option value="vehicle-mesh-relay">Vehicle Mesh Relay</option>
+                    <option value="cluster-broadcast">Cluster Broadcast</option>
+                    <option value="opportunistic-communication">Opportunistic</option>
+                    <option value="edge-assisted-routing">Edge Assisted</option>
+                </select>
+                <select id="behavior-selector" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-1 text-xs">
+                    <option value="baseline">Baseline</option>
+                    <option value="cluster-leader-election">Cluster Leader</option>
+                    <option value="dynamic-relay-nodes">Dynamic Relay</option>
+                    <option value="platoon-communication">Platoon</option>
+                    <option value="cooperative-braking-signals">Cooperative Braking</option>
+                    <option value="adaptive-speed-coordination">Adaptive Speed</option>
+                </select>
             </div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -159,6 +176,19 @@
             <button id="run-evolution-btn" class="bg-cyan-900/30 border border-cyan-700 text-cyan-300 py-3 px-3 rounded-lg text-xs">Run Protocol Evolution</button>
             <button id="compare-layout-btn" class="bg-violet-900/30 border border-violet-700 text-violet-300 py-3 px-3 rounded-lg text-xs">Compare Infrastructure Layouts</button>
             <button id="replay-sim-btn" class="bg-emerald-900/30 border border-emerald-700 text-emerald-300 py-3 px-3 rounded-lg text-xs">Replay Best Simulation</button>
+            <button id="discover-architecture-btn" class="bg-sky-900/30 border border-sky-700 text-sky-300 py-3 px-3 rounded-lg text-xs">Architecture Discovery Map</button>
+            <button id="invention-mode-btn" class="bg-amber-900/30 border border-amber-700 text-amber-300 py-3 px-3 rounded-lg text-xs">Run Invention Mode</button>
+            <button id="run-batch-btn" class="bg-fuchsia-900/30 border border-fuchsia-700 text-fuchsia-300 py-3 px-3 rounded-lg text-xs">Run Batch Experiments</button>
+        </div>
+        <div class="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="panel-shell p-3">
+                <label for="architecture-runs" class="text-xs text-zinc-500 block mb-1">Architecture candidates</label>
+                <input id="architecture-runs" type="number" min="20" max="2000" value="120" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs">
+            </div>
+            <div class="panel-shell p-3">
+                <label for="batch-runs" class="text-xs text-zinc-500 block mb-1">Experiment batch runs</label>
+                <input id="batch-runs" type="number" min="10" max="5000" value="250" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs">
+            </div>
         </div>
         <pre id="experiment-output" class="mt-4 text-[11px] text-zinc-300 whitespace-pre-wrap bg-zinc-950 border border-zinc-800 rounded p-3">Experiment outputs (JSON/CSV preview) appear here.</pre>
     </section>

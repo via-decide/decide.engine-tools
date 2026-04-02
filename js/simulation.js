@@ -31,7 +31,8 @@
     params: { ...DEFAULT_PARAMS },
     dom: {},
     lab: null,
-    latestEvolution: null
+    latestEvolution: null,
+    latestArchitecture: null
   };
 
   function getEngineUtils() {
@@ -250,7 +251,9 @@
 
     state.dom.runEvolutionBtn.addEventListener('click', () => {
       const generations = Number(state.dom.generationSelector.value) || 200;
-      const evolution = runtime.simulation.runEvolution({ generations });
+      const networkMode = state.dom.networkSelector ? state.dom.networkSelector.value : 'dsrc';
+      const behaviorMode = state.dom.behaviorSelector ? state.dom.behaviorSelector.value : 'baseline';
+      const evolution = runtime.simulation.runEvolution({ generations, networkMode, behaviorMode });
       if (!evolution) return;
 
       global.HighwayProtocolLabUi.renderLeaderboard(
@@ -274,6 +277,39 @@
       const layouts = [1, 2, 3, 4].map(() => global.HighwayInfrastructureGenome.createRandomInfrastructureGenome());
       const comparison = global.HighwayExperimentRunner.runInfrastructureComparison(state.lab, layouts);
       state.dom.experimentOutput.textContent = JSON.stringify(comparison.json, null, 2);
+    });
+
+
+    state.dom.discoverArchitectureBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const runs = Number(state.dom.architectureRuns.value) || 120;
+      const result = state.lab.discoverArchitecture({ candidates: runs });
+      state.latestArchitecture = result.best;
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        best: result.best,
+        top5: result.ranked.slice(0, 5)
+      }, null, 2);
+    });
+
+    state.dom.inventionModeBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const invention = state.lab.runInventionMode({});
+      state.dom.optimizationResult.textContent = JSON.stringify({
+        mode: 'invention',
+        success: invention.success,
+        deltas: invention.deltas,
+        candidate: invention.candidate
+      }, null, 2);
+    });
+
+    state.dom.runBatchBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const batch = global.HighwayExperimentRunner.runArchitectureSearchBatch(state.lab, { runs: Math.max(10, Number(state.dom.batchRuns.value) || 50) });
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        type: batch.json.type,
+        runs: batch.json.rows.length,
+        csvPreview: batch.csv.split('\n').slice(0, 6).join('\n')
+      }, null, 2);
     });
 
     state.dom.replaySimBtn.addEventListener('click', () => {
@@ -338,7 +374,14 @@
       protocolLeaderboard: document.getElementById('protocol-leaderboard'),
       evolutionCanvas: document.getElementById('evolution-canvas'),
       generationSelector: document.getElementById('generation-selector'),
-      experimentOutput: document.getElementById('experiment-output')
+      experimentOutput: document.getElementById('experiment-output'),
+      networkSelector: document.getElementById('network-selector'),
+      behaviorSelector: document.getElementById('behavior-selector'),
+      discoverArchitectureBtn: document.getElementById('discover-architecture-btn'),
+      inventionModeBtn: document.getElementById('invention-mode-btn'),
+      runBatchBtn: document.getElementById('run-batch-btn'),
+      architectureRuns: document.getElementById('architecture-runs'),
+      batchRuns: document.getElementById('batch-runs')
     };
 
     drawNodes(state.params.nodePositions);
