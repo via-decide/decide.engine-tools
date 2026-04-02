@@ -1306,18 +1306,32 @@ const OnboardingEngine = {
 // ──────────────────────────────────────────────────
 const Bootloader = {
     init() {
-        if (window._VD_AUTH) {
-            _VD_AUTH.onReady((user) => {
-                if (!user) {
-                    console.warn("StudyOS: Auth required. Redirecting to root...");
-                    window.location.href = '../index.html';
-                    return;
-                }
-                this.start();
-            });
-        } else {
+        let started = false;
+        const safeStart = () => {
+            if (started) return;
+            started = true;
             this.start();
+        };
+
+        if (!window._VD_AUTH || typeof _VD_AUTH.onReady !== "function") {
+            safeStart();
+            return;
         }
+
+        const authFallbackTimer = setTimeout(() => {
+            console.warn("StudyOS: Auth readiness timeout. Loading workspace in fallback mode.");
+            safeStart();
+        }, 1800);
+
+        _VD_AUTH.onReady((user) => {
+            clearTimeout(authFallbackTimer);
+            if (!user) {
+                console.warn("StudyOS: Auth required. Redirecting to root...");
+                window.location.href = '../index.html';
+                return;
+            }
+            safeStart();
+        });
     },
 
     start() {

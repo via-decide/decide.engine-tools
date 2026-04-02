@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Fixed
+- Fixed StudyOS bootloader blank-screen regression by adding an auth-readiness fallback timer so the app still initializes when Firebase auth never reaches ready state.
 - Fixed duplicate `SUPABASE_ANON_KEY` declarations and duplicate setup-render assignment in `tools/eco-engine-test/index.html` to prevent runtime script errors.
 - Added missing `shared/config_env.js`, fixed broken script paths in Agent/SkillHex/Kutch Map pages, and restored a loadable `js/viadecide-agent.js` entrypoint for the Agent demo.
 - Improved smoke test resilience by skipping only when Playwright browser executables are unavailable, while keeping real smoke regressions as hard failures.
