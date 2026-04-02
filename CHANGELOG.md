@@ -7,6 +7,9 @@ Format: [Semantic Versioning](https://semver.org)
 
 ## [Unreleased]
 
+### Added
+- Refactored the Highway-V2I dashboard into a DECIDE runtime wrapper with `DECIDE.simulation.run()` and Monte Carlo `DECIDE.simulation.optimize()`, plus embedded tool loading for decision-matrix, scenario-planner, output-evaluator, and analytics visualization.
+
 ### Fixed
 - Fixed StudyOS bootloader blank-screen regression by adding an auth-readiness fallback timer so the app still initializes when Firebase auth never reaches ready state.
 - Fixed duplicate `SUPABASE_ANON_KEY` declarations and duplicate setup-render assignment in `tools/eco-engine-test/index.html` to prevent runtime script errors.

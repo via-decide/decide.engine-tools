@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Highway-V2I: Safety Pulse Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./shared/vd-nav-fix.js"></script>
+    <script src="./shared/tool-registry.js"></script>
+    <script src="./shared/engine-utils.js"></script>
     <style>
         body { background-color: #050505; color: #e4e4e7; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .glass { background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(63, 63, 70, 0.5); }
@@ -15,6 +18,9 @@
         .status-pulse { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
         .emergency-active { background: #ef4444 !important; box-shadow: 0 0 40px #ef4444 !important; }
+        .panel-shell { background: rgba(9, 9, 11, 0.88); border: 1px solid rgba(63,63,70,0.7); border-radius: 14px; }
+        .tool-frame { width: 100%; min-height: 340px; border: 0; border-radius: 12px; background: #09090b; }
+        .runtime-pill { border: 1px solid rgba(6,182,212,0.5); background: rgba(6,182,212,0.12); color: #67e8f9; border-radius: 999px; padding: 4px 10px; font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -91,77 +97,35 @@
                 </div>
             </div>
         </aside>
-    </main>
+        </main>
 
-    <script>
-        let pos = 0;
-        let speed = 2; // Simulation step speed
-        let isEmergency = false;
-        const car = document.getElementById('car');
-        const highway = document.getElementById('highway');
-        const nodes = [150, 400, 650, 900]; // Node positions in px
+    <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">
+        <div class="flex flex-wrap gap-3 items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+                <span class="runtime-pill">DECIDE Runtime Active</span>
+                <span class="text-xs text-zinc-400">Tool-hosted in interface (no external navigation)</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button id="run-scenario-btn" class="bg-cyan-900/30 border border-cyan-700 text-cyan-300 py-2 px-3 rounded-lg text-xs">Run Scenario</button>
+                <button id="optimize-corridor-btn" class="bg-violet-900/30 border border-violet-700 text-violet-300 py-2 px-3 rounded-lg text-xs">Optimize Corridor</button>
+                <button id="evaluate-network-btn" class="bg-emerald-900/30 border border-emerald-700 text-emerald-300 py-2 px-3 rounded-lg text-xs">Evaluate Network</button>
+                <button id="open-analytics-btn" class="bg-zinc-800 border border-zinc-700 text-zinc-300 py-2 px-3 rounded-lg text-xs">Open Analytics Bay</button>
+            </div>
+        </div>
 
-        // Create RSU Nodes and Signal Rectangles
-        nodes.forEach((x, i) => {
-            const node = document.createElement('div');
-            node.className = 'rsu-node';
-            node.style.left = x + 'px';
-            highway.appendChild(node);
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Optimization Result</h4>
+                <pre id="optimization-result" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Run optimization to view Monte Carlo best layout.</pre>
+            </div>
+            <div class="panel-shell p-4 lg:col-span-2">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Embedded Tool Workspace</h4>
+                <iframe id="tool-frame" class="tool-frame" title="decide tools workspace"></iframe>
+            </div>
+        </div>
+    </section>
 
-            const signal = document.createElement('div');
-            signal.className = 'signal-aura';
-            signal.style.left = (x - 125) + 'px';
-            signal.style.width = '250px';
-            highway.appendChild(signal);
-        });
+        <script src="./js/simulation.js"></script>
 
-        function animate() {
-            if(!isEmergency) {
-                pos += speed;
-                if (pos > 1000) pos = -50;
-                car.style.left = pos + 'px';
-
-                // Calculate RSSI based on proximity to nearest node
-                let minAt = Math.min(...nodes.map(n => Math.abs(pos - n)));
-                let rssi = -40 - (minAt / 3);
-                document.getElementById('ui-rssi').innerText = Math.round(rssi) + " dBm";
-                document.getElementById('bar-rssi').style.width = Math.max(0, 100 + rssi) + "%";
-                
-                // Color RSSI bar based on strength
-                document.getElementById('bar-rssi').className = rssi < -75 ? 'h-full bg-red-500' : 'h-full bg-cyan-500';
-            }
-            requestAnimationFrame(animate);
-        }
-
-        function toggleEmergency() {
-            isEmergency = !isEmergency;
-            const status = document.getElementById('global-status');
-            const dots = document.querySelectorAll('.led-dot');
-            
-            if(isEmergency) {
-                car.classList.add('emergency-active');
-                status.innerText = "● EMERGENCY DETECTED";
-                status.className = "text-red-500 font-mono font-bold status-pulse";
-                
-                // Trigger Pipeline Animation
-                dots.forEach((dot, i) => {
-                    setTimeout(() => dot.style.backgroundColor = '#ef4444', i * 600);
-                });
-            } else {
-                car.classList.remove('emergency-active');
-                status.innerText = "● CONNECTED / NOMINAL";
-                status.className = "text-emerald-400 font-mono font-bold";
-                dots.forEach(dot => dot.style.backgroundColor = '#3f3f46');
-            }
-        }
-
-        function changeSpeed(val) {
-            speed = val / 40;
-            document.getElementById('ui-speed').innerText = val;
-            document.getElementById('ui-latency').innerText = Math.floor(Math.random() * 5) + (val/10);
-        }
-
-        animate();
-    </script>
 </body>
 </html>
