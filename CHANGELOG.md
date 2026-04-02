@@ -9,6 +9,7 @@ Format: [Semantic Versioning](https://semver.org)
 
 ### Added
 - Refactored the Highway-V2I dashboard into a DECIDE runtime wrapper with `DECIDE.simulation.run()` and Monte Carlo `DECIDE.simulation.optimize()`, plus embedded tool loading for decision-matrix, scenario-planner, output-evaluator, and analytics visualization.
+- Added a research-grade Highway-V2I lab module (`highway-v2i-lab/`) with simulation engines, protocol/infrastructure genomes, protocol evolution loop (population 60, configurable generations default 200), experiment runner with JSON/CSV exports, research artifact store, and Protocol Lab UI panel integrated into the dashboard.
 
 ### Fixed
 - Fixed StudyOS bootloader blank-screen regression by adding an auth-readiness fallback timer so the app still initializes when Firebase auth never reaches ready state.

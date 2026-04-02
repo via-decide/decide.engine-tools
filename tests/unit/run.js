@@ -15,6 +15,7 @@ const suites = [
   { name: 'SmokeTools',   file: './smoke-tools.test.js' },
   { name: 'StudyOSAuthFallback', file: './studyos-auth-fallback.test.js' },
   { name: 'HighwaySimulation', file: './highway-simulation.test.js' },
+  { name: 'HighwayV2ILab', file: './highway-v2i-lab.test.js' },
 ];
 
 let totalPassed = 0;

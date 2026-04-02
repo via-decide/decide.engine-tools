@@ -29,7 +29,9 @@
     speedStep: 2,
     isEmergency: false,
     params: { ...DEFAULT_PARAMS },
-    dom: {}
+    dom: {},
+    lab: null,
+    latestEvolution: null
   };
 
   function getEngineUtils() {
@@ -150,6 +152,19 @@
     };
   };
 
+  runtime.simulation.initializeLab = function initializeLab(options) {
+    if (!global.HighwayLabEngine || !global.HighwayLabEngine.createLabEngine) return null;
+    state.lab = global.HighwayLabEngine.createLabEngine(options || {});
+    return state.lab;
+  };
+
+  runtime.simulation.runEvolution = function runEvolution(options) {
+    if (!state.lab) runtime.simulation.initializeLab();
+    if (!state.lab) return null;
+    state.latestEvolution = state.lab.runEvolution(options || {});
+    return state.latestEvolution;
+  };
+
   function drawNodes(nodePositions) {
     const { highway } = state.dom;
     if (!highway) return;
@@ -232,6 +247,47 @@
     state.dom.openAnalyticsBtn.addEventListener('click', () => {
       runtime.tools.load('analytics-bay');
     });
+
+    state.dom.runEvolutionBtn.addEventListener('click', () => {
+      const generations = Number(state.dom.generationSelector.value) || 200;
+      const evolution = runtime.simulation.runEvolution({ generations });
+      if (!evolution) return;
+
+      global.HighwayProtocolLabUi.renderLeaderboard(
+        state.dom.protocolLeaderboard,
+        evolution.best,
+        evolution.baseline
+      );
+      global.HighwayProtocolLabUi.drawEvolutionChart(state.dom.evolutionCanvas, evolution.history);
+
+      const exportBundle = global.HighwayExperimentRunner.runProtocolExperiment(state.lab, { generations });
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        success: evolution.success,
+        improvements: evolution.improvements,
+        bestGenome: evolution.best.genome,
+        csvPreview: exportBundle.csv.split('\n').slice(0, 6).join('\n')
+      }, null, 2);
+    });
+
+    state.dom.compareLayoutBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const layouts = [1, 2, 3, 4].map(() => global.HighwayInfrastructureGenome.createRandomInfrastructureGenome());
+      const comparison = global.HighwayExperimentRunner.runInfrastructureComparison(state.lab, layouts);
+      state.dom.experimentOutput.textContent = JSON.stringify(comparison.json, null, 2);
+    });
+
+    state.dom.replaySimBtn.addEventListener('click', () => {
+      if (!state.latestEvolution) return;
+      const report = state.lab.simulateGenome(state.latestEvolution.best.genome, 24);
+      state.dom.optimizationResult.textContent = JSON.stringify({
+        replay: 'Best evolved protocol replay',
+        metrics: report
+      }, null, 2);
+      renderTelemetry({
+        params: { latency: report.latency, nodePositions: state.params.nodePositions },
+        telemetry: { signalScore: report.coverageReliability, latencyScore: 100 - report.latency, packetScore: 100 - report.congestion, mobilityScore: 80, reliability: report.coverageReliability }
+      });
+    });
   }
 
   global.toggleEmergency = function toggleEmergency() {
@@ -275,10 +331,18 @@
       optimizeCorridorBtn: document.getElementById('optimize-corridor-btn'),
       evaluateNetworkBtn: document.getElementById('evaluate-network-btn'),
       openAnalyticsBtn: document.getElementById('open-analytics-btn'),
-      optimizationResult: document.getElementById('optimization-result')
+      optimizationResult: document.getElementById('optimization-result'),
+      runEvolutionBtn: document.getElementById('run-evolution-btn'),
+      compareLayoutBtn: document.getElementById('compare-layout-btn'),
+      replaySimBtn: document.getElementById('replay-sim-btn'),
+      protocolLeaderboard: document.getElementById('protocol-leaderboard'),
+      evolutionCanvas: document.getElementById('evolution-canvas'),
+      generationSelector: document.getElementById('generation-selector'),
+      experimentOutput: document.getElementById('experiment-output')
     };
 
     drawNodes(state.params.nodePositions);
+    runtime.simulation.initializeLab();
     bindUi();
     runtime.tools.load('scenario-planner');
     animate();

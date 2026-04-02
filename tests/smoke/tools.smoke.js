@@ -30,6 +30,7 @@ const SMOKE_TARGETS = [
   // Engine / Simulations
   { id: 'seed-quality-scorer',  path: 'tools/engine/seed-quality-scorer/index.html' },
   { id: 'daily-quest-generator',path: 'tools/engine/daily-quest-generator/index.html' },
+  { id: 'highway-v2i-lab',       path: 'Highway-V2I dashboard simulation.html' },
 
   // Home shell
   { id: 'home',                 path: 'index.html' },
