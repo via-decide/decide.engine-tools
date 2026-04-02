@@ -80,10 +80,58 @@
     };
   }
 
+  function runScenarioSuite(lab, options) {
+    const suite = Object.assign({
+      id: `scenario-suite-${Date.now()}`,
+      scenarios: [
+        { name: 'heavy-rain', rainIntensity: 35, roadSlope: 1.8, drainPlacement: 3, waterFlowDirection: 'west' },
+        { name: 'traffic-accident', emergencyEvent: 'crash', rainIntensity: 10, behaviorMode: 'cooperative-braking-signals' },
+        { name: 'festival-crowd', rainIntensity: 8, behaviorMode: 'dynamic-relay-nodes' },
+        { name: 'sensor-failure', rainIntensity: 15, behaviorMode: 'baseline' },
+        { name: 'power-outage', emergencyEvent: 'road_blockage', networkMode: 'opportunistic-communication', rainIntensity: 16 }
+      ]
+    }, options || {});
+
+    const rows = suite.scenarios.map((scenario, idx) => {
+      const run = lab.runScenarioExperiment(scenario);
+      return {
+        scenarioId: idx + 1,
+        scenario: scenario.name,
+        trafficDelay: Number((run.metrics.congestion * 0.7).toFixed(3)),
+        accidentResponseTime: Number((run.metrics.emergencyMobility.avgEmergencyResponseTime || run.metrics.emergencyMobility.emergencyResponseTime || 0).toFixed(3)),
+        networkLatency: Number(run.metrics.latency.toFixed(3)),
+        energyConsumption: Number(run.metrics.energyConsumption.toFixed(3)),
+        sensorCoverage: Number(run.metrics.coverageReliability.toFixed(3)),
+        floodRisk: run.metrics.drainage.floodRisk
+      };
+    });
+
+    const json = {
+      type: 'scenario-experiment-suite',
+      generatedAt: new Date().toISOString(),
+      suiteId: suite.id,
+      storagePath: '/highway-v2i-lab/research/',
+      rows,
+      summary: {
+        avgTrafficDelay: Number((rows.reduce((sum, r) => sum + r.trafficDelay, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgAccidentResponseTime: Number((rows.reduce((sum, r) => sum + r.accidentResponseTime, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgNetworkLatency: Number((rows.reduce((sum, r) => sum + r.networkLatency, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgEnergyConsumption: Number((rows.reduce((sum, r) => sum + r.energyConsumption, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgSensorCoverage: Number((rows.reduce((sum, r) => sum + r.sensorCoverage, 0) / Math.max(1, rows.length)).toFixed(3))
+      }
+    };
+
+    return {
+      json,
+      csv: toCsv(rows)
+    };
+  }
+
   global.HighwayExperimentRunner = {
     runProtocolExperiment,
     runInfrastructureComparison,
     runArchitectureSearchBatch,
+    runScenarioSuite,
     toCsv
   };
 })(window);
