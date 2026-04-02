@@ -408,6 +408,7 @@
       exportProtocolJsonBtn: document.getElementById('export-protocol-json-btn'),
       exportProtocolCsvBtn: document.getElementById('export-protocol-csv-btn'),
       exportProtocolSummaryBtn: document.getElementById('export-protocol-summary-btn')
+      optimizationResult: document.getElementById('optimization-result')
     };
 
     drawNodes(state.params.nodePositions);
