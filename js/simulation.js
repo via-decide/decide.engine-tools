@@ -1,0 +1,422 @@
+(function (global) {
+  'use strict';
+
+  const DEFAULT_PARAMS = {
+    vehicleSpeed: 100,
+    nodePositions: [150, 400, 650, 900],
+    signalDecay: 0.33,
+    latency: 12,
+    packetLoss: 0.02
+  };
+
+  const DEFAULT_EVOLUTION_CONFIG = {
+    seed: 20260402,
+    population: 50,
+    generations: 200,
+    mutationRate: 0.1,
+    lanes: 3,
+    vehicleCount: 110,
+    rsuNodes: 5
+  };
+
+  const TOOL_ENTRY_MAP = {
+    'decision-matrix': 'tools/decision-matrix/index.html',
+    'scenario-planner': 'tools/scenario-planner/index.html',
+    'output-evaluator': 'tools/output-evaluator/index.html',
+    'analytics-bay': 'tools/engine/leaderboard-analytics/index.html'
+  };
+
+  const runtime = global.DECIDE || {
+    engine: {},
+    tools: {},
+    simulation: {},
+    ui: {}
+  };
+  global.DECIDE = runtime;
+
+  const state = {
+    pos: 0,
+    speedStep: 2,
+    isEmergency: false,
+    params: { ...DEFAULT_PARAMS },
+    protocolLabResult: null,
+    dom: {}
+  };
+
+  function getEngineUtils() {
+    const fallback = {
+      clamp(num, min, max) { return Math.max(min, Math.min(max, num)); },
+      weightedScore(parts) {
+        return Object.keys(parts).reduce((sum, key) => {
+          const item = parts[key] || { value: 0, weight: 0 };
+          return sum + (item.value * item.weight);
+        }, 0);
+      }
+    };
+    return global.EngineUtils || fallback;
+  }
+
+  function resolveToolEntry(toolName) {
+    const key = String(toolName || '').trim().toLowerCase();
+    if (TOOL_ENTRY_MAP[key]) return TOOL_ENTRY_MAP[key];
+    return null;
+  }
+
+  runtime.tools.load = function loadTool(toolName) {
+    const entry = resolveToolEntry(toolName);
+    const frame = state.dom.toolFrame;
+    if (!frame || !entry) return null;
+    frame.src = `./${entry}`;
+    return entry;
+  };
+
+  runtime.simulation.run = function runSimulation(params) {
+    const utils = getEngineUtils();
+    const merged = { ...state.params, ...(params || {}) };
+    merged.nodePositions = Array.isArray(merged.nodePositions) && merged.nodePositions.length
+      ? merged.nodePositions.slice().sort((a, b) => a - b)
+      : DEFAULT_PARAMS.nodePositions.slice();
+
+    const spacing = merged.nodePositions
+      .slice(1)
+      .map((pos, idx) => pos - merged.nodePositions[idx]);
+    const avgSpacing = spacing.length
+      ? spacing.reduce((sum, n) => sum + n, 0) / spacing.length
+      : 250;
+
+    const signalScore = utils.clamp(100 - (avgSpacing * merged.signalDecay * 0.22), 0, 100);
+    const latencyScore = utils.clamp(100 - (merged.latency * 2.1), 0, 100);
+    const packetScore = utils.clamp(100 - (merged.packetLoss * 1300), 0, 100);
+    const mobilityScore = utils.clamp(100 - Math.max(0, merged.vehicleSpeed - 90) * 0.75, 0, 100);
+
+    const reliability = utils.clamp(
+      utils.weightedScore({
+        signal: { value: signalScore, weight: 0.34 },
+        latency: { value: latencyScore, weight: 0.26 },
+        packet: { value: packetScore, weight: 0.2 },
+        mobility: { value: mobilityScore, weight: 0.2 }
+      }),
+      0,
+      100
+    );
+
+    state.params = merged;
+    return {
+      params: merged,
+      telemetry: {
+        signalScore,
+        latencyScore,
+        packetScore,
+        mobilityScore,
+        reliability,
+        recommendedRsuPlacement: merged.nodePositions
+      }
+    };
+  };
+
+  runtime.simulation.optimize = function optimizeSimulation() {
+    const utils = getEngineUtils();
+    const candidates = [120, 180, 240, 300, 360, 420, 480, 560, 640, 720, 800, 880, 960];
+    let best = null;
+
+    for (let i = 0; i < 250; i += 1) {
+      const shuffled = candidates.slice().sort(() => Math.random() - 0.5);
+      const nodePositions = shuffled.slice(0, 4).sort((a, b) => a - b);
+      const scenario = runtime.simulation.run({
+        vehicleSpeed: 80 + Math.round(Math.random() * 55),
+        signalDecay: 0.2 + (Math.random() * 0.25),
+        latency: 8 + (Math.random() * 20),
+        packetLoss: 0.005 + (Math.random() * 0.06),
+        nodePositions
+      });
+
+      const adjusted = utils.clamp(
+        scenario.telemetry.reliability - (Math.max(0, scenario.params.latency - 18) * 0.45),
+        0,
+        100
+      );
+
+      const run = {
+        ...scenario,
+        telemetry: {
+          ...scenario.telemetry,
+          adjustedReliability: adjusted
+        }
+      };
+
+      if (!best || run.telemetry.adjustedReliability > best.telemetry.adjustedReliability) {
+        best = run;
+      }
+    }
+
+    return {
+      trials: 250,
+      bestLayout: best.params.nodePositions,
+      bestTelemetry: best.telemetry,
+      example: {
+        corridor: '1km pilot',
+        projectedCoverage: `${Math.round(best.telemetry.signalScore)}%`,
+        expectedP95LatencyMs: Number(best.params.latency.toFixed(2))
+      }
+    };
+  };
+
+  runtime.engine.runProtocolEvolution = function runProtocolEvolution(config) {
+    if (!global.ProtocolEvolution || typeof global.ProtocolEvolution.runEvolution !== 'function') {
+      return { error: 'ProtocolEvolution engine unavailable.' };
+    }
+    const merged = { ...DEFAULT_EVOLUTION_CONFIG, ...(config || {}) };
+    state.protocolLabResult = global.ProtocolEvolution.runEvolution(merged);
+    return state.protocolLabResult;
+  };
+
+  runtime.engine.generateProtocolReport = function generateProtocolReport(kind) {
+    if (!state.protocolLabResult) return '';
+    if (kind === 'csv' && global.ProtocolEvolution && typeof global.ProtocolEvolution.toCsvRows === 'function') {
+      return global.ProtocolEvolution.toCsvRows(state.protocolLabResult);
+    }
+    if (kind === 'json') return JSON.stringify(state.protocolLabResult, null, 2);
+
+    const champion = (state.protocolLabResult.leaderboard || [])[0];
+    if (!champion) return 'No champion protocol available.';
+    return [
+      `Protocol Evolution Technical Summary`,
+      `Seed: ${state.protocolLabResult.seed}`,
+      `Champion: ${champion.protocol.name}`,
+      `Fitness: ${champion.metrics.compositeFitness}`,
+      `Safety: ${champion.metrics.safetyScore}`,
+      `Congestion: ${champion.metrics.networkCongestion}`,
+      `Coverage: ${champion.metrics.coverageReliability}`,
+      `Recommended RSU spacing: ${state.protocolLabResult.recommendations.optimalRsuSpacing}m`
+    ].join('\n');
+  };
+
+  function drawNodes(nodePositions) {
+    const { highway } = state.dom;
+    if (!highway) return;
+
+    highway.querySelectorAll('.rsu-node, .signal-aura').forEach((node) => node.remove());
+
+    nodePositions.forEach((x) => {
+      const node = document.createElement('div');
+      node.className = 'rsu-node';
+      node.style.left = `${x}px`;
+      highway.appendChild(node);
+
+      const signal = document.createElement('div');
+      signal.className = 'signal-aura';
+      signal.style.left = `${x - 125}px`;
+      signal.style.width = '250px';
+      highway.appendChild(signal);
+    });
+  }
+
+  function renderTelemetry(report) {
+    if (!report || !state.dom.uiRssi || !state.dom.barRssi || !state.dom.uiLatency) return;
+    const rssi = -40 - ((100 - report.telemetry.signalScore) * 0.7);
+    state.dom.uiRssi.innerText = `${Math.round(rssi)} dBm`;
+    state.dom.barRssi.style.width = `${Math.max(0, 100 + rssi)}%`;
+    state.dom.barRssi.className = rssi < -75 ? 'h-full bg-red-500 transition-all' : 'h-full bg-cyan-500 transition-all';
+    state.dom.uiLatency.innerText = String(Math.round(report.params.latency));
+    drawNodes(report.params.nodePositions);
+  }
+
+  function renderProtocolLab(result) {
+    if (!result || !state.dom.evolutionSummary) return;
+    const champion = (result.leaderboard || [])[0];
+    const graphRows = (result.history || []).slice(-20).map((point) => {
+      const bar = '█'.repeat(Math.max(1, Math.round(point.bestFitness / 6)));
+      return `${String(point.generation).padStart(3, '0')}: ${bar} ${point.bestFitness.toFixed(2)}`;
+    });
+
+    const leaderboard = (result.leaderboard || []).slice(0, 5).map((item, idx) => (
+      `${idx + 1}. ${item.protocol.name} | fit ${item.metrics.compositeFitness} | cong ${item.metrics.networkCongestion} | cov ${item.metrics.coverageReliability}`
+    ));
+
+    const heatmap = (result.leaderboard || []).slice(0, 8).map((item) => {
+      const zone = item.metrics.coverageReliability >= 85 ? 'HIGH' : (item.metrics.coverageReliability >= 70 ? 'MED ' : 'LOW ');
+      return `${zone} [${'#'.repeat(Math.max(1, Math.round(item.metrics.coverageReliability / 8)))}] ${item.protocol.name}`;
+    });
+
+    state.dom.evolutionSummary.textContent = JSON.stringify({
+      seed: result.seed,
+      config: result.config,
+      improvements: result.improvements,
+      recommendations: result.recommendations,
+      successCriteriaMet: Boolean(
+        result.improvements.vsDSRC.latencyGain > 0 &&
+        result.improvements.vsDSRC.congestionGain > 0 &&
+        result.improvements.vsDSRC.coverageGain > 0
+      )
+    }, null, 2);
+
+    state.dom.evolutionGraph.textContent = graphRows.join('\n');
+    state.dom.protocolLeaderboard.textContent = leaderboard.join('\n');
+    state.dom.coverageHeatmap.textContent = heatmap.join('\n');
+
+    if (champion) {
+      state.dom.meshTopology.textContent = [
+        `Champion: ${champion.protocol.name}`,
+        `Node spacing: ${champion.infrastructure.nodeSpacing.toFixed(2)}m`,
+        `Node height: ${champion.infrastructure.nodeHeight.toFixed(2)}m`,
+        `TX power: ${champion.infrastructure.txPower.toFixed(2)}dBm`,
+        `Relay probability: ${champion.protocol.relayProbability.toFixed(2)}`,
+        `Cluster strategy: dynamic leader election`
+      ].join('\n');
+    }
+  }
+
+  function parseProtocolConfigFromUi() {
+    return {
+      seed: Number(state.dom.protocolSeed.value || DEFAULT_EVOLUTION_CONFIG.seed),
+      generations: Number(state.dom.protocolGenerations.value || DEFAULT_EVOLUTION_CONFIG.generations),
+      population: Number(state.dom.protocolPopulation.value || DEFAULT_EVOLUTION_CONFIG.population),
+      mutationRate: Number(state.dom.protocolMutationRate.value || DEFAULT_EVOLUTION_CONFIG.mutationRate),
+      vehicleCount: Number(state.dom.protocolVehicleCount.value || DEFAULT_EVOLUTION_CONFIG.vehicleCount),
+      lanes: Number(state.dom.protocolLanes.value || DEFAULT_EVOLUTION_CONFIG.lanes),
+      rsuNodes: Number(state.dom.protocolRsuNodes.value || DEFAULT_EVOLUTION_CONFIG.rsuNodes)
+    };
+  }
+
+  function animate() {
+    if (!state.isEmergency) {
+      state.pos += state.speedStep;
+      if (state.pos > 1000) state.pos = -50;
+      state.dom.car.style.left = `${state.pos}px`;
+
+      const report = runtime.simulation.run({
+        vehicleSpeed: state.speedStep * 40,
+        latency: Number(state.dom.uiLatency.innerText) || state.params.latency
+      });
+      renderTelemetry(report);
+    }
+
+    global.requestAnimationFrame(animate);
+  }
+
+  function bindUi() {
+    state.dom.runScenarioBtn.addEventListener('click', () => {
+      runtime.tools.load('scenario-planner');
+      const report = runtime.simulation.run({
+        vehicleSpeed: Number(state.dom.uiSpeed.innerText) || 100,
+        latency: 9 + Math.random() * 15,
+        packetLoss: 0.01 + Math.random() * 0.05,
+        signalDecay: 0.25 + Math.random() * 0.2
+      });
+      renderTelemetry(report);
+    });
+
+    state.dom.optimizeCorridorBtn.addEventListener('click', () => {
+      runtime.tools.load('decision-matrix');
+      const result = runtime.simulation.optimize();
+      state.dom.optimizationResult.textContent = JSON.stringify(result, null, 2);
+      const report = runtime.simulation.run({
+        nodePositions: result.bestLayout,
+        latency: result.example.expectedP95LatencyMs
+      });
+      renderTelemetry(report);
+    });
+
+    state.dom.evaluateNetworkBtn.addEventListener('click', () => {
+      runtime.tools.load('output-evaluator');
+      const report = runtime.simulation.run();
+      state.dom.optimizationResult.textContent = JSON.stringify({
+        evaluation: report.telemetry.reliability >= 80 ? 'Network nominal' : 'Network needs intervention',
+        reliabilityScore: Number(report.telemetry.reliability.toFixed(2)),
+        recommendedRsuPlacement: report.telemetry.recommendedRsuPlacement
+      }, null, 2);
+    });
+
+    state.dom.openAnalyticsBtn.addEventListener('click', () => {
+      runtime.tools.load('analytics-bay');
+    });
+
+    state.dom.runProtocolEvolutionBtn.addEventListener('click', () => {
+      const result = runtime.engine.runProtocolEvolution(parseProtocolConfigFromUi());
+      renderProtocolLab(result);
+    });
+
+    state.dom.exportProtocolJsonBtn.addEventListener('click', () => {
+      state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('json');
+    });
+
+    state.dom.exportProtocolCsvBtn.addEventListener('click', () => {
+      state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('csv');
+    });
+
+    state.dom.exportProtocolSummaryBtn.addEventListener('click', () => {
+      state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('summary');
+    });
+  }
+
+  global.toggleEmergency = function toggleEmergency() {
+    state.isEmergency = !state.isEmergency;
+    const status = state.dom.globalStatus;
+    const dots = document.querySelectorAll('.led-dot');
+
+    if (state.isEmergency) {
+      state.dom.car.classList.add('emergency-active');
+      status.innerText = '● EMERGENCY DETECTED';
+      status.className = 'text-red-500 font-mono font-bold status-pulse';
+      dots.forEach((dot, i) => {
+        global.setTimeout(() => { dot.style.backgroundColor = '#ef4444'; }, i * 450);
+      });
+      return;
+    }
+
+    state.dom.car.classList.remove('emergency-active');
+    status.innerText = '● CONNECTED / NOMINAL';
+    status.className = 'text-emerald-400 font-mono font-bold';
+    dots.forEach((dot) => { dot.style.backgroundColor = '#3f3f46'; });
+  };
+
+  global.changeSpeed = function changeSpeed(val) {
+    state.speedStep = Number(val) / 40;
+    state.dom.uiSpeed.innerText = String(val);
+    state.dom.uiLatency.innerText = String(Math.round((Math.random() * 5) + (val / 10)));
+  };
+
+  function init() {
+    state.dom = {
+      car: document.getElementById('car'),
+      highway: document.getElementById('highway'),
+      globalStatus: document.getElementById('global-status'),
+      uiSpeed: document.getElementById('ui-speed'),
+      uiLatency: document.getElementById('ui-latency'),
+      uiRssi: document.getElementById('ui-rssi'),
+      barRssi: document.getElementById('bar-rssi'),
+      toolFrame: document.getElementById('tool-frame'),
+      runScenarioBtn: document.getElementById('run-scenario-btn'),
+      optimizeCorridorBtn: document.getElementById('optimize-corridor-btn'),
+      evaluateNetworkBtn: document.getElementById('evaluate-network-btn'),
+      openAnalyticsBtn: document.getElementById('open-analytics-btn'),
+      optimizationResult: document.getElementById('optimization-result'),
+      protocolSeed: document.getElementById('protocol-seed'),
+      protocolGenerations: document.getElementById('protocol-generations'),
+      protocolPopulation: document.getElementById('protocol-population'),
+      protocolMutationRate: document.getElementById('protocol-mutation-rate'),
+      protocolVehicleCount: document.getElementById('protocol-vehicle-count'),
+      protocolLanes: document.getElementById('protocol-lanes'),
+      protocolRsuNodes: document.getElementById('protocol-rsu-nodes'),
+      protocolExportOutput: document.getElementById('protocol-export-output'),
+      evolutionSummary: document.getElementById('protocol-evolution-summary'),
+      evolutionGraph: document.getElementById('protocol-evolution-graph'),
+      protocolLeaderboard: document.getElementById('protocol-leaderboard'),
+      coverageHeatmap: document.getElementById('protocol-coverage-heatmap'),
+      meshTopology: document.getElementById('protocol-mesh-topology'),
+      runProtocolEvolutionBtn: document.getElementById('run-protocol-evolution-btn'),
+      exportProtocolJsonBtn: document.getElementById('export-protocol-json-btn'),
+      exportProtocolCsvBtn: document.getElementById('export-protocol-csv-btn'),
+      exportProtocolSummaryBtn: document.getElementById('export-protocol-summary-btn')
+    };
+
+    drawNodes(state.params.nodePositions);
+    bindUi();
+    runtime.tools.load('scenario-planner');
+    const initialEvolutionResult = runtime.engine.runProtocolEvolution(DEFAULT_EVOLUTION_CONFIG);
+    renderProtocolLab(initialEvolutionResult);
+    animate();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})(window);

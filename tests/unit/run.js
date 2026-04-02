@@ -14,6 +14,8 @@ const suites = [
   { name: 'Router',       file: './router.test.js' },
   { name: 'SmokeTools',   file: './smoke-tools.test.js' },
   { name: 'StudyOSAuthFallback', file: './studyos-auth-fallback.test.js' },
+  { name: 'HighwaySimulation', file: './highway-simulation.test.js' },
+  { name: 'ProtocolEvolution', file: './protocol-evolution.test.js' },
 ];
 
 let totalPassed = 0;
