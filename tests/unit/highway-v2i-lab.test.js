@@ -32,6 +32,12 @@ assert('network selector exists', html.includes('id="network-selector"'));
 assert('behavior selector exists', html.includes('id="behavior-selector"'));
 assert('architecture discovery button exists', html.includes('id="discover-architecture-btn"'));
 assert('scenario suite button exists', html.includes('id="run-scenario-suite-btn"'));
+assert('infrastructure evolution trigger button exists', html.includes('id="run-infra-evolution-btn"'));
+assert('infrastructure evolution panel exists', html.includes('Infrastructure Evolution Lab'));
+assert('infrastructure top designs panel exists', html.includes('id="infra-top-designs"'));
+assert('infrastructure genome tree panel exists', html.includes('id="infra-genome-tree"'));
+assert('infrastructure playback panel exists', html.includes('id="infra-playback"'));
+assert('infrastructure evolution graph canvas exists', html.includes('id="infra-evolution-canvas"'));
 assert('traffic intelligence panel exists', html.includes('id="traffic-intelligence-panel"'));
 assert('infrastructure health panel exists', html.includes('id="infrastructure-health-panel"'));
 assert('flood risk panel exists', html.includes('id="flood-risk-panel"'));
@@ -40,6 +46,8 @@ assert('scenario lab panel exists', html.includes('id="scenario-lab-panel"'));
 assert('lab engine exposes runEvolution', labEngine.includes('function runEvolution(opts)'));
 assert('lab engine includes >=5% success fallback logic', labEngine.includes('latencyGain >= 5 || reliabilityGain >= 5 || energyGain >= 5 || safetyGain >= 5'));
 assert('lab engine exposes scenario experiment mode', labEngine.includes('function runScenarioExperiment(scenario)'));
+assert('lab engine exposes infrastructure evolution mode', labEngine.includes('function evolveInfrastructureDesigns(options)'));
+assert('lab engine includes infrastructure scenario scoring', labEngine.includes('function scoreInfrastructureAcrossScenarios(results)'));
 assert('lab engine includes digital twin builder', labEngine.includes('function buildDigitalTwin'));
 assert('evolution engine default population 80', evolution.includes('population: 80'));
 assert('evolution engine default generations 200', evolution.includes('generations: 200'));
@@ -48,5 +56,6 @@ assert('lab engine exposes architecture discovery', labEngine.includes('function
 assert('lab engine exposes invention mode', labEngine.includes('function runInventionMode(options)'));
 assert('experiment runner exports architecture batch', experiment.includes('runArchitectureSearchBatch'));
 assert('experiment runner exports scenario suite', experiment.includes('runScenarioSuite'));
+assert('experiment runner exports infrastructure evolution', experiment.includes('runInfrastructureEvolution'));
 
 module.exports = { passed, failed };

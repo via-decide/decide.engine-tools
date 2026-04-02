@@ -180,6 +180,7 @@
             <button id="invention-mode-btn" class="bg-amber-900/30 border border-amber-700 text-amber-300 py-3 px-3 rounded-lg text-xs">Run Invention Mode</button>
             <button id="run-batch-btn" class="bg-fuchsia-900/30 border border-fuchsia-700 text-fuchsia-300 py-3 px-3 rounded-lg text-xs">Run Batch Experiments</button>
             <button id="run-scenario-suite-btn" class="bg-indigo-900/30 border border-indigo-700 text-indigo-300 py-3 px-3 rounded-lg text-xs">Run Scenario Lab Suite</button>
+            <button id="run-infra-evolution-btn" class="bg-amber-900/30 border border-amber-700 text-amber-300 py-3 px-3 rounded-lg text-xs">Run Infrastructure Evolution Lab</button>
         </div>
         <div class="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="panel-shell p-3">
@@ -192,6 +193,28 @@
             </div>
         </div>
         <pre id="experiment-output" class="mt-4 text-[11px] text-zinc-300 whitespace-pre-wrap bg-zinc-950 border border-zinc-800 rounded p-3">Experiment outputs (JSON/CSV preview) appear here.</pre>
+    </section>
+
+    <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">
+        <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-300 mb-4">Infrastructure Evolution Lab</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Top Performing Designs</h4>
+                <pre id="infra-top-designs" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Run infrastructure evolution to view top layouts.</pre>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Genome Evolution Tree</h4>
+                <div id="infra-genome-tree" class="text-[11px] text-zinc-300">Run infrastructure evolution to view genome tree.</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Simulation Playback</h4>
+                <pre id="infra-playback" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Playback of best evolved infrastructure appears here.</pre>
+            </div>
+        </div>
+        <div class="panel-shell p-4 mt-4">
+            <h4 class="text-xs uppercase text-zinc-500 mb-2">Performance Graphs</h4>
+            <canvas id="infra-evolution-canvas" width="760" height="190" class="w-full rounded bg-zinc-950"></canvas>
+        </div>
     </section>
 
     <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">

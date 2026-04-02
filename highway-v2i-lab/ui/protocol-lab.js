@@ -47,8 +47,53 @@
     ].join('');
   }
 
+  function drawInfrastructurePerformance(canvas, history) {
+    if (!canvas || !canvas.getContext) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#0b1220';
+    ctx.fillRect(0, 0, width, height);
+    if (!history || !history.length) return;
+
+    const maxScore = Math.max.apply(null, history.map((h) => h.bestFitness));
+    const minScore = Math.min.apply(null, history.map((h) => h.bestFitness));
+    const range = Math.max(1, maxScore - minScore);
+
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    history.forEach((point, idx) => {
+      const x = (idx / Math.max(1, history.length - 1)) * (width - 20) + 10;
+      const y = height - (((point.bestFitness - minScore) / range) * (height - 20) + 10);
+      if (idx === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  }
+
+  function renderGenomeTree(container, tree) {
+    if (!container) return;
+    const latest = tree && tree.length ? tree.slice(-1)[0] : null;
+    if (!latest) {
+      container.textContent = 'Run infrastructure evolution to view genome tree.';
+      return;
+    }
+    container.innerHTML = [
+      `<div class="text-[10px] text-zinc-500 mb-2">Generation ${latest.generation}</div>`,
+      '<ul class="space-y-1 text-[11px]">',
+      latest.nodes.map((node) => (
+        `<li class="flex justify-between gap-2 border-b border-zinc-800 pb-1"><span>${node.id}</span><span class="text-amber-300">score ${node.score}</span></li>`
+      )).join(''),
+      '</ul>'
+    ].join('');
+  }
+
   global.HighwayProtocolLabUi = {
     drawEvolutionChart,
-    renderLeaderboard
+    renderLeaderboard,
+    drawInfrastructurePerformance,
+    renderGenomeTree
   };
 })(window);

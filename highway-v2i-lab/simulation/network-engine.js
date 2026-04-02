@@ -25,7 +25,9 @@
       networkMode: 'dsrc',
       bandwidthMbps: 160,
       nodeLatencyMs: 3,
-      energyPerMessage: 0.08
+      energyPerMessage: 0.08,
+      communicationRange: 260,
+      communicationTopology: 1
     }, config || {});
 
     function setNetworkMode(mode) {
@@ -54,8 +56,10 @@
 
       const baseLatency = preset.latencyBase + (anomalies * 1.8) + (genome.broadcastInterval * 0.6);
       const trafficDensityPenalty = utils.clamp((simState.vehicles.length / 40) * 8, 0, 30);
-      const congestion = utils.clamp(((1000 / cfg.rsuSpacing) * (1 - effectiveRelay) * 20 * preset.congestionFactor) + (anomalies * 4) + trafficDensityPenalty, 0, 100);
-      const latency = utils.clamp(baseLatency + (congestion * 0.25) + (adaptiveDelay * 20) - (ttl * 0.5) - (clusterRadius / 180), 4, 300);
+      const topologyBonus = cfg.communicationTopology * 0.9;
+      const rangeBonus = utils.clamp((cfg.communicationRange - 180) / 90, -1.5, 3.2);
+      const congestion = utils.clamp(((1000 / cfg.rsuSpacing) * (1 - effectiveRelay) * 20 * preset.congestionFactor) + (anomalies * 4) + trafficDensityPenalty - (topologyBonus * 1.4), 0, 100);
+      const latency = utils.clamp(baseLatency + (congestion * 0.25) + (adaptiveDelay * 20) - (ttl * 0.5) - (clusterRadius / 180) - rangeBonus - topologyBonus, 4, 300);
 
       const packetReliability = utils.clamp(100 - congestion + preset.reliabilityBoost + ((genome.collisionAvoidanceFactor || 0.5) * 10), 20, 100);
       const energyConsumption = utils.clamp((simState.vehicles.length * cfg.energyPerMessage * preset.energyFactor) + (congestion * 0.04), 1, 500);
@@ -85,7 +89,9 @@
         coverageReliability: coverage.coverageReliability,
         rsuCount: coverage.rsuCount,
         bandwidthMbps: cfg.bandwidthMbps,
-        nodeLatencyMs: cfg.nodeLatencyMs
+        nodeLatencyMs: cfg.nodeLatencyMs,
+        communicationRange: cfg.communicationRange,
+        communicationTopology: cfg.communicationTopology
       };
     }
 
@@ -93,6 +99,8 @@
       cfg.rsuSpacing = Math.max(80, Number(genome.rsuSpacing) || cfg.rsuSpacing);
       cfg.bandwidthMbps = Math.max(40, Number(genome.bandwidthMbps) || cfg.bandwidthMbps);
       cfg.nodeLatencyMs = Math.max(1, Number(genome.nodeLatencyMs) || cfg.nodeLatencyMs);
+      cfg.communicationRange = Math.max(80, Number(genome.communicationRange) || cfg.communicationRange);
+      cfg.communicationTopology = Math.max(0, Math.min(4, Number(genome.communicationTopology == null ? cfg.communicationTopology : genome.communicationTopology)));
       return evaluateCoverage();
     }
 

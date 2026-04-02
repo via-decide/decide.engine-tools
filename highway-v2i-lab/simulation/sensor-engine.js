@@ -11,7 +11,10 @@
       detectionNoise: 0.08,
       confidenceFloor: 0.55,
       drainageAngle: 22,
-      selfCleaningFactor: 0.7
+      selfCleaningFactor: 0.7,
+      cameraAngle: 38,
+      sensorAngle: 34,
+      sensorPlacement: 0.5
     }, config || {});
 
     const infrastructure = {
@@ -25,7 +28,9 @@
     function tick(vehicleState, events) {
       const anomalies = vehicleState.anomalyCount || 0;
       const flowPenalty = vehicleState.trafficFlowState === 'congested' ? 0.08 : (vehicleState.trafficFlowState === 'dense' ? 0.03 : 0);
-      const rawConfidence = (cfg.sensorDensity * 1.2) - (cfg.detectionNoise * 0.5) - flowPenalty + (anomalies > 0 ? 0.2 : 0);
+      const angleCoverageBonus = utils.clamp(((cfg.sensorAngle + cfg.cameraAngle) / 120) - 0.45, -0.08, 0.24);
+      const placementBonus = utils.clamp(Math.abs(cfg.sensorPlacement - 0.5) < 0.22 ? 0.06 : -0.05, -0.08, 0.08);
+      const rawConfidence = (cfg.sensorDensity * 1.2) - (cfg.detectionNoise * 0.5) - flowPenalty + angleCoverageBonus + placementBonus + (anomalies > 0 ? 0.2 : 0);
       const confidence = utils.clamp(rawConfidence, cfg.confidenceFloor, 0.99);
       const sensorHits = Math.max(0, Math.round((vehicleState.vehicles.length * cfg.sensorDensity) * (0.7 + Math.random() * 0.6)));
 
@@ -81,6 +86,11 @@
           angle: cfg.drainageAngle,
           selfCleaningFactor: cfg.selfCleaningFactor,
           cloggingRisk: utils.clamp(1 - (cfg.selfCleaningFactor * (cfg.drainageAngle / 40)), 0.05, 0.9)
+        },
+        cameraSystem: {
+          cameraAngle: cfg.cameraAngle,
+          sensorAngle: cfg.sensorAngle,
+          sensorPlacement: cfg.sensorPlacement
         }
       };
     }
@@ -90,7 +100,24 @@
       return cfg.sensorDensity;
     }
 
-    return { tick, updateDensity };
+    function updateInfrastructureConfig(genome) {
+      cfg.sensorDensity = utils.clamp(Number(genome.sensorDensity) || cfg.sensorDensity, 0.1, 0.95);
+      cfg.drainageAngle = utils.clamp(Number(genome.drainSlope) * 10, 10, 60);
+      cfg.selfCleaningFactor = utils.clamp(0.45 + ((Number(genome.drainSlope) || 2.4) / 10), 0.45, 0.96);
+      cfg.cameraAngle = utils.clamp(Number(genome.cameraAngle) || cfg.cameraAngle, 10, 85);
+      cfg.sensorAngle = utils.clamp(Number(genome.sensorAngle) || cfg.sensorAngle, 5, 85);
+      cfg.sensorPlacement = utils.clamp(Number(genome.sensorPlacement) || cfg.sensorPlacement, 0, 1);
+      return {
+        sensorDensity: cfg.sensorDensity,
+        drainageAngle: cfg.drainageAngle,
+        selfCleaningFactor: cfg.selfCleaningFactor,
+        cameraAngle: cfg.cameraAngle,
+        sensorAngle: cfg.sensorAngle,
+        sensorPlacement: cfg.sensorPlacement
+      };
+    }
+
+    return { tick, updateDensity, updateInfrastructureConfig };
   }
 
   global.HighwaySensorEngine = { createSensorEngine };

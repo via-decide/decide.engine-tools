@@ -38,6 +38,7 @@
 
     function buildOptimizationSuggestions() {
       const latestInfra = datasets.filter((d) => d.name === 'infrastructure-eval').slice(-1)[0];
+      const latestInfraEvolution = datasets.filter((d) => d.name === 'infrastructure-evolution').slice(-1)[0];
       const latestScenario = datasets.filter((d) => d.name === 'scenario-experiment').slice(-1)[0];
       const suggestions = [];
 
@@ -45,6 +46,12 @@
         const m = latestInfra.payload.metrics;
         if ((m.congestion || 0) > 55) suggestions.push('Increase RSU density around bottleneck segments to reduce congestion.');
         if ((m.infrastructureHealth && m.infrastructureHealth.healthScore || 100) < 75) suggestions.push('Prioritize preventive maintenance for deteriorating road/sensor assets.');
+      }
+
+      if (latestInfraEvolution && latestInfraEvolution.payload && latestInfraEvolution.payload.recommendations) {
+        const rec = latestInfraEvolution.payload.recommendations;
+        suggestions.push(`RSU target spacing near ${rec.optimizedRsuPlacement.spacingMeters}m with topology mode ${rec.optimizedRsuPlacement.topology}.`);
+        suggestions.push(`Sensor plan: density ${rec.sensorLayoutRecommendations.density}, sensor angle ${rec.sensorLayoutRecommendations.sensorAngle}°, camera angle ${rec.sensorLayoutRecommendations.cameraAngle}°.`);
       }
 
       if (latestScenario && latestScenario.payload && latestScenario.payload.metrics) {
