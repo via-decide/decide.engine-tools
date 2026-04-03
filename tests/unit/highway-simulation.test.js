@@ -40,4 +40,12 @@ assert('output-evaluator tool mapping exists', script.includes("'output-evaluato
 assert('HTML loads refactored simulation module', html.includes('<script src="./js/simulation.js"></script>'));
 assert('UI includes optimize button', html.includes('id="optimize-corridor-btn"'));
 
+assert('HTML loads protocol core script', html.includes('<script src="./engine/protocol-core.js"></script>'));
+assert('HTML loads protocol evolution script', html.includes('<script src="./engine/protocol-evolution.js"></script>'));
+assert('protocol evolution API exists', script.includes('runtime.engine.runProtocolEvolution'));
+assert('protocol report API exists', script.includes('runtime.engine.generateProtocolReport'));
+assert('Protocol Lab run button exists', html.includes('id="run-protocol-evolution-btn"'));
+assert('Protocol Lab generations input defaults to 200', html.includes('id="protocol-generations"') && html.includes('value="200"'));
+
+
 module.exports = { passed, failed };

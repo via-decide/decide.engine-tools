@@ -9,6 +9,16 @@
     packetLoss: 0.02
   };
 
+  const DEFAULT_EVOLUTION_CONFIG = {
+    seed: 20260402,
+    population: 50,
+    generations: 200,
+    mutationRate: 0.1,
+    lanes: 3,
+    vehicleCount: 110,
+    rsuNodes: 5
+  };
+
   const TOOL_ENTRY_MAP = {
     'decision-matrix': 'tools/decision-matrix/index.html',
     'scenario-planner': 'tools/scenario-planner/index.html',
@@ -29,6 +39,8 @@
     speedStep: 2,
     isEmergency: false,
     params: { ...DEFAULT_PARAMS },
+    protocolLabResult: null,
+    dom: {}
     dom: {},
     lab: null,
     latestEvolution: null,
@@ -155,6 +167,34 @@
     };
   };
 
+  runtime.engine.runProtocolEvolution = function runProtocolEvolution(config) {
+    if (!global.ProtocolEvolution || typeof global.ProtocolEvolution.runEvolution !== 'function') {
+      return { error: 'ProtocolEvolution engine unavailable.' };
+    }
+    const merged = { ...DEFAULT_EVOLUTION_CONFIG, ...(config || {}) };
+    state.protocolLabResult = global.ProtocolEvolution.runEvolution(merged);
+    return state.protocolLabResult;
+  };
+
+  runtime.engine.generateProtocolReport = function generateProtocolReport(kind) {
+    if (!state.protocolLabResult) return '';
+    if (kind === 'csv' && global.ProtocolEvolution && typeof global.ProtocolEvolution.toCsvRows === 'function') {
+      return global.ProtocolEvolution.toCsvRows(state.protocolLabResult);
+    }
+    if (kind === 'json') return JSON.stringify(state.protocolLabResult, null, 2);
+
+    const champion = (state.protocolLabResult.leaderboard || [])[0];
+    if (!champion) return 'No champion protocol available.';
+    return [
+      `Protocol Evolution Technical Summary`,
+      `Seed: ${state.protocolLabResult.seed}`,
+      `Champion: ${champion.protocol.name}`,
+      `Fitness: ${champion.metrics.compositeFitness}`,
+      `Safety: ${champion.metrics.safetyScore}`,
+      `Congestion: ${champion.metrics.networkCongestion}`,
+      `Coverage: ${champion.metrics.coverageReliability}`,
+      `Recommended RSU spacing: ${state.protocolLabResult.recommendations.optimalRsuSpacing}m`
+    ].join('\n');
   runtime.simulation.initializeLab = function initializeLab(options) {
     if (!global.HighwayLabEngine || !global.HighwayLabEngine.createLabEngine) return null;
     state.lab = global.HighwayLabEngine.createLabEngine(options || {});
@@ -205,6 +245,61 @@
     drawNodes(report.params.nodePositions);
   }
 
+  function renderProtocolLab(result) {
+    if (!result || !state.dom.evolutionSummary) return;
+    const champion = (result.leaderboard || [])[0];
+    const graphRows = (result.history || []).slice(-20).map((point) => {
+      const bar = '█'.repeat(Math.max(1, Math.round(point.bestFitness / 6)));
+      return `${String(point.generation).padStart(3, '0')}: ${bar} ${point.bestFitness.toFixed(2)}`;
+    });
+
+    const leaderboard = (result.leaderboard || []).slice(0, 5).map((item, idx) => (
+      `${idx + 1}. ${item.protocol.name} | fit ${item.metrics.compositeFitness} | cong ${item.metrics.networkCongestion} | cov ${item.metrics.coverageReliability}`
+    ));
+
+    const heatmap = (result.leaderboard || []).slice(0, 8).map((item) => {
+      const zone = item.metrics.coverageReliability >= 85 ? 'HIGH' : (item.metrics.coverageReliability >= 70 ? 'MED ' : 'LOW ');
+      return `${zone} [${'#'.repeat(Math.max(1, Math.round(item.metrics.coverageReliability / 8)))}] ${item.protocol.name}`;
+    });
+
+    state.dom.evolutionSummary.textContent = JSON.stringify({
+      seed: result.seed,
+      config: result.config,
+      improvements: result.improvements,
+      recommendations: result.recommendations,
+      successCriteriaMet: Boolean(
+        result.improvements.vsDSRC.latencyGain > 0 &&
+        result.improvements.vsDSRC.congestionGain > 0 &&
+        result.improvements.vsDSRC.coverageGain > 0
+      )
+    }, null, 2);
+
+    state.dom.evolutionGraph.textContent = graphRows.join('\n');
+    state.dom.protocolLeaderboard.textContent = leaderboard.join('\n');
+    state.dom.coverageHeatmap.textContent = heatmap.join('\n');
+
+    if (champion) {
+      state.dom.meshTopology.textContent = [
+        `Champion: ${champion.protocol.name}`,
+        `Node spacing: ${champion.infrastructure.nodeSpacing.toFixed(2)}m`,
+        `Node height: ${champion.infrastructure.nodeHeight.toFixed(2)}m`,
+        `TX power: ${champion.infrastructure.txPower.toFixed(2)}dBm`,
+        `Relay probability: ${champion.protocol.relayProbability.toFixed(2)}`,
+        `Cluster strategy: dynamic leader election`
+      ].join('\n');
+    }
+  }
+
+  function parseProtocolConfigFromUi() {
+    return {
+      seed: Number(state.dom.protocolSeed.value || DEFAULT_EVOLUTION_CONFIG.seed),
+      generations: Number(state.dom.protocolGenerations.value || DEFAULT_EVOLUTION_CONFIG.generations),
+      population: Number(state.dom.protocolPopulation.value || DEFAULT_EVOLUTION_CONFIG.population),
+      mutationRate: Number(state.dom.protocolMutationRate.value || DEFAULT_EVOLUTION_CONFIG.mutationRate),
+      vehicleCount: Number(state.dom.protocolVehicleCount.value || DEFAULT_EVOLUTION_CONFIG.vehicleCount),
+      lanes: Number(state.dom.protocolLanes.value || DEFAULT_EVOLUTION_CONFIG.lanes),
+      rsuNodes: Number(state.dom.protocolRsuNodes.value || DEFAULT_EVOLUTION_CONFIG.rsuNodes)
+    };
   function renderLabPanels(metrics) {
     if (!metrics) return;
     if (state.dom.trafficIntelligencePanel && metrics.trafficIntelligence) {
@@ -310,6 +405,21 @@
       runtime.tools.load('analytics-bay');
     });
 
+    state.dom.runProtocolEvolutionBtn.addEventListener('click', () => {
+      const result = runtime.engine.runProtocolEvolution(parseProtocolConfigFromUi());
+      renderProtocolLab(result);
+    });
+
+    state.dom.exportProtocolJsonBtn.addEventListener('click', () => {
+      state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('json');
+    });
+
+    state.dom.exportProtocolCsvBtn.addEventListener('click', () => {
+      state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('csv');
+    });
+
+    state.dom.exportProtocolSummaryBtn.addEventListener('click', () => {
+      state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('summary');
     state.dom.runEvolutionBtn.addEventListener('click', () => {
       const generations = Number(state.dom.generationSelector.value) || 200;
       const networkMode = state.dom.networkSelector ? state.dom.networkSelector.value : 'dsrc';
@@ -487,6 +597,24 @@
       evaluateNetworkBtn: document.getElementById('evaluate-network-btn'),
       openAnalyticsBtn: document.getElementById('open-analytics-btn'),
       optimizationResult: document.getElementById('optimization-result'),
+      protocolSeed: document.getElementById('protocol-seed'),
+      protocolGenerations: document.getElementById('protocol-generations'),
+      protocolPopulation: document.getElementById('protocol-population'),
+      protocolMutationRate: document.getElementById('protocol-mutation-rate'),
+      protocolVehicleCount: document.getElementById('protocol-vehicle-count'),
+      protocolLanes: document.getElementById('protocol-lanes'),
+      protocolRsuNodes: document.getElementById('protocol-rsu-nodes'),
+      protocolExportOutput: document.getElementById('protocol-export-output'),
+      evolutionSummary: document.getElementById('protocol-evolution-summary'),
+      evolutionGraph: document.getElementById('protocol-evolution-graph'),
+      protocolLeaderboard: document.getElementById('protocol-leaderboard'),
+      coverageHeatmap: document.getElementById('protocol-coverage-heatmap'),
+      meshTopology: document.getElementById('protocol-mesh-topology'),
+      runProtocolEvolutionBtn: document.getElementById('run-protocol-evolution-btn'),
+      exportProtocolJsonBtn: document.getElementById('export-protocol-json-btn'),
+      exportProtocolCsvBtn: document.getElementById('export-protocol-csv-btn'),
+      exportProtocolSummaryBtn: document.getElementById('export-protocol-summary-btn')
+      optimizationResult: document.getElementById('optimization-result')
       runEvolutionBtn: document.getElementById('run-evolution-btn'),
       compareLayoutBtn: document.getElementById('compare-layout-btn'),
       replaySimBtn: document.getElementById('replay-sim-btn'),
@@ -518,6 +646,8 @@
     runtime.simulation.initializeLab();
     bindUi();
     runtime.tools.load('scenario-planner');
+    const initialEvolutionResult = runtime.engine.runProtocolEvolution(DEFAULT_EVOLUTION_CONFIG);
+    renderProtocolLab(initialEvolutionResult);
     const bootMetrics = state.lab ? state.lab.simulateGenome(global.HighwayProtocolGenome.createRandomGenome(), 8) : null;
     renderLabPanels(bootMetrics);
     animate();
