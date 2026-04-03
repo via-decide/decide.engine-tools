@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build 'DaxiniAudit'-the autonomous verification and transparency engine for the 24,000-PR run. CORE ARCHITECTURE (The Proof Engine): 1. The Batch Certifier: - Create a module audit/certify.js that triggers every time the PR count hits a multiple of 1,000.
+Scan the 'shared/' and 'tools/engine/' folders. Locate the 'terminal-logger.js' and integrate it more deeply into the current 'swipe-crucible' tool to provide real-time terminal feedback for all swipe actions.
 
 RULES
 1. Audit touched files first and identify regressions.
