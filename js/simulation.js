@@ -40,7 +40,6 @@
     isEmergency: false,
     params: { ...DEFAULT_PARAMS },
     protocolLabResult: null,
-    dom: {}
     dom: {},
     lab: null,
     latestEvolution: null,
@@ -198,6 +197,8 @@
       `Coverage: ${champion.metrics.coverageReliability}`,
       `Recommended RSU spacing: ${state.protocolLabResult.recommendations.optimalRsuSpacing}m`
     ].join('\n');
+  };
+
   runtime.simulation.initializeLab = function initializeLab(options) {
     if (!global.HighwayLabEngine || !global.HighwayLabEngine.createLabEngine) return null;
     state.lab = global.HighwayLabEngine.createLabEngine(options || {});
@@ -335,6 +336,8 @@
       lanes: Number(state.dom.protocolLanes.value || DEFAULT_EVOLUTION_CONFIG.lanes),
       rsuNodes: Number(state.dom.protocolRsuNodes.value || DEFAULT_EVOLUTION_CONFIG.rsuNodes)
     };
+  }
+
   function renderLabPanels(metrics) {
     if (!metrics) return;
     if (state.dom.trafficIntelligencePanel && metrics.trafficIntelligence) {
@@ -492,6 +495,8 @@
 
     state.dom.exportProtocolSummaryBtn.addEventListener('click', () => {
       state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('summary');
+    });
+
     state.dom.runEvolutionBtn.addEventListener('click', () => {
       const generations = Number(state.dom.generationSelector.value) || 200;
       const networkMode = state.dom.networkSelector ? state.dom.networkSelector.value : 'dsrc';
@@ -689,12 +694,10 @@
       runProtocolEvolutionBtn: document.getElementById('run-protocol-evolution-btn'),
       exportProtocolJsonBtn: document.getElementById('export-protocol-json-btn'),
       exportProtocolCsvBtn: document.getElementById('export-protocol-csv-btn'),
-      exportProtocolSummaryBtn: document.getElementById('export-protocol-summary-btn')
-      optimizationResult: document.getElementById('optimization-result')
+      exportProtocolSummaryBtn: document.getElementById('export-protocol-summary-btn'),
       runEvolutionBtn: document.getElementById('run-evolution-btn'),
       compareLayoutBtn: document.getElementById('compare-layout-btn'),
       replaySimBtn: document.getElementById('replay-sim-btn'),
-      protocolLeaderboard: document.getElementById('protocol-leaderboard'),
       evolutionCanvas: document.getElementById('evolution-canvas'),
       generationSelector: document.getElementById('generation-selector'),
       experimentOutput: document.getElementById('experiment-output'),

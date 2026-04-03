@@ -212,7 +212,10 @@
           vehicle.lane = Math.max(0, Math.min(2, blockedLane + (idx % 2 ? -1 : 1)));
         }
         if (emergencyActive && ext.scenarioEffects && ext.scenarioEffects.emergencyLane != null && vehicle.type !== 'truck') {
-          vehicle.lane = Math.max(0, Math.min(2, Number(ext.scenarioEffects.emergencyLane)));
+          const eLane = Number(ext.scenarioEffects.emergencyLane);
+          if (vehicle.lane === eLane) {
+            vehicle.lane = eLane > 0 ? eLane - 1 : eLane + 1;
+          }
         }
         if (vehicle.lane !== vehicle.prevLane) laneChanges += 1;
 

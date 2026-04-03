@@ -390,7 +390,7 @@
       let best = null;
       for (let i = 0; i < total; i += 1) {
         const seed = infraGenomeApi.createRandomInfrastructureGenome();
-        const genome = i === 0 ? seed : infraGenomeApi.mutateInfrastructureGenome(seed);
+        const genome = (i === 0 || !best) ? seed : infraGenomeApi.mutateInfrastructureGenome(best.genome);
         const score = evaluateInfrastructure(genome, simOptions);
         if (!best || score.infrastructureScore > best.score.infrastructureScore) {
           best = { genome, score };
