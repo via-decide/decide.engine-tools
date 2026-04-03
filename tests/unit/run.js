@@ -17,6 +17,7 @@ const suites = [
   { name: 'HighwaySimulation', file: './highway-simulation.test.js' },
   { name: 'ProtocolEvolution', file: './protocol-evolution.test.js' },
   { name: 'HighwayV2ILab', file: './highway-v2i-lab.test.js' },
+  { name: 'ZayvoraPipelineScaffold', file: './zayvora-pipeline-scaffold.test.js' },
 ];
 
 let totalPassed = 0;
