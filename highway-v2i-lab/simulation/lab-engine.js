@@ -22,6 +22,12 @@
     const infraGenomeApi = global.HighwayInfrastructureGenome;
     const protocolGenomeApi = global.HighwayProtocolGenome;
     const research = global.HighwayResearchOutput.createResearchStore();
+    const calibration = global.HighwayDataCalibration && global.HighwayDataCalibration.createCalibrationSystem
+      ? global.HighwayDataCalibration.createCalibrationSystem()
+      : null;
+    const scenarios = global.HighwayScenarioEngine && global.HighwayScenarioEngine.createScenarioEngine
+      ? global.HighwayScenarioEngine.createScenarioEngine()
+      : null;
 
     function deriveTrafficIntelligence(vehicleState, networkState) {
       const density = vehicleState.densityPerKm || 0;
@@ -158,6 +164,33 @@
       };
     }
 
+    function buildResearchArtifacts(experimentId, scenarioName, metrics) {
+      const row = {
+        experimentId,
+        scenario: scenarioName,
+        averageVehicleDelay: Number((metrics.congestion * 0.72).toFixed(3)),
+        emergencyResponseTime: Number(((metrics.emergencyMobility && (metrics.emergencyMobility.avgEmergencyResponseTime || metrics.emergencyMobility.emergencyResponseTime)) || 0).toFixed(3)),
+        networkCommunicationLatency: Number((metrics.latency || 0).toFixed(3)),
+        trafficThroughput: Number(((metrics.trafficEfficiency || 0) * 10).toFixed(3)),
+        sensorCoverageEfficiency: Number((metrics.coverageReliability || 0).toFixed(3))
+      };
+      const headers = Object.keys(row);
+      const csv = [headers.join(','), headers.map((key) => JSON.stringify(row[key])).join(',')].join('\n');
+      return {
+        jsonLog: {
+          storagePath: '/highway-v2i-lab/research/',
+          fileName: `${experimentId}.json`,
+          generatedAt: new Date().toISOString(),
+          metrics: row
+        },
+        csvSummary: {
+          storagePath: '/highway-v2i-lab/research/',
+          fileName: `${experimentId}.csv`,
+          csv
+        }
+      };
+    }
+
     function simulateGenome(genome, ticks, simOptions) {
       const steps = Math.max(5, Number(ticks) || 24);
       const opts = Object.assign({
@@ -191,10 +224,31 @@
       let lastEmergency = null;
       let lastSensor = null;
 
+      const trafficSeries = calibration ? calibration.generateStream(steps, opts.calibrationProfile || {}) : [];
+      if (scenarios) scenarios.loadScenarios(opts.scenarios || []);
+
       for (let i = 0; i < steps; i += 1) {
-        const vehicleState = vehicles.tick(0.35, events);
+        const calibrationInfluence = calibration
+          ? calibration.influenceFromDataset(trafficSeries.slice(Math.max(0, i - 4), i + 1))
+          : null;
+        const scenarioState = scenarios ? scenarios.applyEffects(calibrationInfluence || {}, i) : { active: [], effects: {} };
+        const mergedCalibration = Object.assign({}, calibrationInfluence || {}, {
+          trafficDensity: (calibrationInfluence && calibrationInfluence.trafficDensity || 0.55) * ((scenarioState.effects && scenarioState.effects.densityMultiplier) || 1),
+          speedLimitKmh: (calibrationInfluence && calibrationInfluence.speedLimitKmh || 100) * ((scenarioState.effects && scenarioState.effects.speedFactor) || 1)
+        });
+
+        const vehicleState = vehicles.tick(0.35, events, {
+          calibration: mergedCalibration,
+          scenarioEffects: scenarioState.effects
+        });
         const sensorState = sensors.tick(vehicleState, events);
+        if (scenarioState.effects && scenarioState.effects.sensorConfidenceDrop) {
+          sensorState.confidence = Math.max(0.2, sensorState.confidence - scenarioState.effects.sensorConfidenceDrop);
+        }
         const networkState = network.simulateTick(vehicleState, genome, events);
+        if (scenarioState.effects && scenarioState.effects.latencyPenalty) {
+          networkState.latency += scenarioState.effects.latencyPenalty;
+        }
 
         const graphOutputs = graphExecutor.execute({
           vehicles: vehicleState,
@@ -260,7 +314,9 @@
           avgEmergencyResponseTime: emergencyResponseSum / steps,
           avgTrafficDisruptionIndex: disruptionSum / steps
         }),
-        digitalTwin: twin
+        digitalTwin: twin,
+        scenarioTimeline: opts.scenarios || [],
+        calibration: calibration ? calibration.snapshot() : null
       };
     }
 
@@ -593,6 +649,10 @@
     function runScenarioExperiment(scenario) {
       const cfgScenario = Object.assign({
         name: 'custom-scenario',
+        triggerTime: 4,
+        eventType: 'custom',
+        duration: 26,
+        parameters: {},
         rainIntensity: 12,
         roadSlope: 2.4,
         drainPlacement: 4,
@@ -602,14 +662,36 @@
         behaviorMode: cfg.behaviorMode
       }, scenario || {});
       const genome = protocolGenomeApi.createRandomGenome();
-      const metrics = simulateGenome(genome, 30, cfgScenario);
+      const scenarioList = [
+        {
+          name: cfgScenario.name,
+          triggerTime: cfgScenario.triggerTime,
+          eventType: cfgScenario.eventType,
+          duration: cfgScenario.duration,
+          parameters: cfgScenario.parameters
+        }
+      ];
+      const metrics = simulateGenome(genome, 30, Object.assign({}, cfgScenario, { scenarios: scenarioList }));
+      const experimentId = `scenario-${Date.now()}`;
+      const artifacts = buildResearchArtifacts(experimentId, cfgScenario.name, metrics);
       const record = {
         scenario: cfgScenario,
         metrics,
+        artifacts,
         generatedAt: new Date().toISOString()
       };
       research.addDataset('scenario-experiment', record);
       return record;
+    }
+
+    function updateCalibrationProfile(profile) {
+      if (!calibration) return null;
+      return calibration.update(profile || {});
+    }
+
+    function generateCalibrationDataset(minutes, profile) {
+      if (!calibration) return [];
+      return calibration.generateStream(minutes, profile || {});
     }
 
     function telemetrySnapshot() {
@@ -628,7 +710,9 @@
       evolveInfrastructureDesigns,
       telemetrySnapshot,
       simulateGenome,
-      runScenarioExperiment
+      runScenarioExperiment,
+      updateCalibrationProfile,
+      generateCalibrationDataset
     };
   }
 

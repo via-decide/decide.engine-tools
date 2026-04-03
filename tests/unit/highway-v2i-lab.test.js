@@ -9,6 +9,9 @@ const html = read('Highway-V2I dashboard simulation.html');
 const labEngine = read('highway-v2i-lab/simulation/lab-engine.js');
 const evolution = read('highway-v2i-lab/protocols/protocol-evolution.js');
 const experiment = read('highway-v2i-lab/experiments/experiment-runner.js');
+const vehicleEngine = read('highway-v2i-lab/simulation/vehicle-engine.js');
+const calibration = read('highway-v2i-lab/simulation/data-calibration.js');
+const scenarioEngine = read('highway-v2i-lab/experiments/scenario-engine.js');
 
 let passed = 0;
 let failed = 0;
@@ -43,6 +46,24 @@ assert('infrastructure health panel exists', html.includes('id="infrastructure-h
 assert('flood risk panel exists', html.includes('id="flood-risk-panel"'));
 assert('emergency mobility panel exists', html.includes('id="emergency-mobility-panel"'));
 assert('scenario lab panel exists', html.includes('id="scenario-lab-panel"'));
+
+assert('data calibration script loaded', html.includes('data-calibration.js'));
+assert('scenario engine script loaded', html.includes('scenario-engine.js'));
+assert('traffic physics panel exists', html.includes('id="traffic-physics-panel"'));
+assert('scenario timeline panel exists', html.includes('id="scenario-timeline-panel"'));
+assert('experiment metrics panel exists', html.includes('id="experiment-metrics-panel"'));
+assert('calibration density control exists', html.includes('id="calibration-density"'));
+assert('vehicle state includes acceleration field', vehicleEngine.includes('acceleration'));
+assert('vehicle state includes reactionTime field', vehicleEngine.includes('reactionTime'));
+assert('vehicle state includes driverType field', vehicleEngine.includes('driverType'));
+assert('vehicle engine supports calibration updates', vehicleEngine.includes('function updateCalibration(calibration)'));
+assert('calibration system exposes generateStream', calibration.includes('function generateStream(minutes, override)'));
+assert('scenario engine supports heavy rain', scenarioEngine.includes("'heavy rain'"));
+assert('scenario engine applies blocked lane effect', scenarioEngine.includes('blockedLane'));
+assert('lab engine exposes calibration profile updater', labEngine.includes('function updateCalibrationProfile(profile)'));
+assert('lab engine returns scenario timeline in metrics', labEngine.includes('scenarioTimeline'));
+assert('experiment runner includes required scenario names', experiment.includes("'ambulance emergency'"));
+assert('experiment runner outputs summary metrics', experiment.includes('avgVehicleDelay'));
 assert('lab engine exposes runEvolution', labEngine.includes('function runEvolution(opts)'));
 assert('lab engine includes >=5% success fallback logic', labEngine.includes('latencyGain >= 5 || reliabilityGain >= 5 || energyGain >= 5 || safetyGain >= 5'));
 assert('lab engine exposes scenario experiment mode', labEngine.includes('function runScenarioExperiment(scenario)'));

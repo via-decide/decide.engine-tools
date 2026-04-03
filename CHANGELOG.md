@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Enhanced Highway-V2I lab with microscopic per-vehicle physics (driver profiles, acceleration/braking, lane-following), real-time calibration controls + synthetic traffic stream generator, scenario experiment engine for rain/accident/sensor failure/festival/ambulance events, and research metrics artifacts (JSON/CSV targets under `/highway-v2i-lab/research/`) with new Traffic Physics, Scenario Lab timeline, and Experiment Metrics dashboard panels.
 - Upgraded the Highway-V2I lab into an autonomous transport architecture discovery system with multi-network switching (DSRC/C-V2X/5G and experimental mesh modes), protocol + infrastructure genomes, swarm behavior modes, decision-graph-evaluated simulation metrics, invention mode, and large-scale architecture batch experiments integrated into the dashboard UI.
 - Refactored the Highway-V2I dashboard into a DECIDE runtime wrapper with `DECIDE.simulation.run()` and Monte Carlo `DECIDE.simulation.optimize()`, plus embedded tool loading for decision-matrix, scenario-planner, output-evaluator, and analytics visualization.
 - Added a research-grade Highway-V2I lab module (`highway-v2i-lab/`) with simulation engines, protocol/infrastructure genomes, protocol evolution loop (population 60, configurable generations default 200), experiment runner with JSON/CSV exports, research artifact store, and Protocol Lab UI panel integrated into the dashboard.
