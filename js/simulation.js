@@ -46,7 +46,10 @@
     latestEvolution: null,
     latestArchitecture: null,
     latestScenarioSuite: null,
-    latestInfrastructureEvolution: null
+    latestInfrastructureEvolution: null,
+    frameCounter: 0,
+    frameWindowStart: performance.now(),
+    fps: 60
   };
 
   function getEngineUtils() {
@@ -215,6 +218,38 @@
     return state.latestScenarioSuite;
   };
 
+
+  function applyCalibrationFromUi() {
+    if (!state.lab) return null;
+    const density = Number(state.dom.calibrationDensity && state.dom.calibrationDensity.value) || 0.56;
+    const weather = state.dom.calibrationWeather ? state.dom.calibrationWeather.value : 'clear';
+    const carRatio = Number(state.dom.calibrationCarRatio && state.dom.calibrationCarRatio.value) || 0.68;
+    const truckRatio = Number(state.dom.calibrationTruckRatio && state.dom.calibrationTruckRatio.value) || 0.18;
+    const motorcycleRatio = Math.max(0, 1 - carRatio - truckRatio);
+    return state.lab.updateCalibrationProfile({
+      trafficDensity: density,
+      weather,
+      carRatio,
+      truckRatio,
+      motorcycleRatio
+    });
+  }
+
+  function updatePerformanceHud(vehicleCount) {
+    state.frameCounter += 1;
+    const now = performance.now();
+    const elapsed = now - state.frameWindowStart;
+    if (elapsed >= 1000) {
+      state.fps = Math.round((state.frameCounter * 1000) / elapsed);
+      state.frameWindowStart = now;
+      state.frameCounter = 0;
+    }
+    if (state.dom.globalStatus) {
+      const perfTag = state.fps >= 55 ? 'NOMINAL' : (state.fps >= 45 ? 'STABLE' : 'DEGRADED');
+      state.dom.globalStatus.innerText = `● CONNECTED / ${perfTag} / ${state.fps} FPS / ${vehicleCount} VEH`;
+    }
+  }
+
   function drawNodes(nodePositions) {
     const { highway } = state.dom;
     if (!highway) return;
@@ -332,6 +367,33 @@
     if (state.dom.emergencyMobilityPanel && metrics.emergencyMobility) {
       state.dom.emergencyMobilityPanel.textContent = JSON.stringify(metrics.emergencyMobility, null, 2);
     }
+
+    if (state.dom.trafficPhysicsPanel) {
+      const density = metrics.trafficIntelligence ? (metrics.trafficIntelligence.averageDensity || metrics.trafficIntelligence.density || 0) : 0;
+      state.dom.trafficPhysicsPanel.textContent = JSON.stringify({
+        vehicleCount: Math.round(density),
+        speedDistribution: {
+          average: Number((metrics.trafficIntelligence && (metrics.trafficIntelligence.travelTimeMinutes ? (60 / Math.max(0.5, metrics.trafficIntelligence.travelTimeMinutes)) : 0) || 0).toFixed(3)),
+          variance: Number((metrics.trafficIntelligence && (metrics.trafficIntelligence.averageSpeedVariation || metrics.trafficIntelligence.speedVariation || 0) || 0).toFixed(3))
+        },
+        laneOptimization: metrics.trafficIntelligence ? metrics.trafficIntelligence.laneOptimization : [],
+        target: '60 FPS, 1000 vehicles'
+      }, null, 2);
+    }
+
+    if (state.dom.scenarioTimelinePanel) {
+      state.dom.scenarioTimelinePanel.textContent = JSON.stringify(metrics.scenarioTimeline || [], null, 2);
+    }
+
+    if (state.dom.experimentMetricsPanel) {
+      state.dom.experimentMetricsPanel.textContent = JSON.stringify({
+        averageVehicleDelay: Number((metrics.congestion * 0.72).toFixed(3)),
+        emergencyResponseTime: Number(((metrics.emergencyMobility && (metrics.emergencyMobility.avgEmergencyResponseTime || metrics.emergencyMobility.emergencyResponseTime)) || 0).toFixed(3)),
+        networkCommunicationLatency: Number((metrics.latency || 0).toFixed(3)),
+        trafficThroughput: Number(((metrics.trafficEfficiency || 0) * 10).toFixed(3)),
+        sensorCoverageEfficiency: Number((metrics.coverageReliability || 0).toFixed(3))
+      }, null, 2);
+    }
   }
 
   function downloadTextFile(name, text, mimeType) {
@@ -358,12 +420,22 @@
         latency: Number(state.dom.uiLatency.innerText) || state.params.latency
       });
       renderTelemetry(report);
+      if (state.lab && Math.random() < 0.12) {
+        applyCalibrationFromUi();
+        const live = state.lab.simulateGenome(global.HighwayProtocolGenome.createRandomGenome(), 4, { calibrationProfile: applyCalibrationFromUi() || {} });
+        updatePerformanceHud(Math.round((live.trafficIntelligence && (live.trafficIntelligence.averageDensity || live.trafficIntelligence.density)) || 0));
+      }
     }
 
     global.requestAnimationFrame(animate);
   }
 
   function bindUi() {
+    ['calibrationDensity', 'calibrationWeather', 'calibrationCarRatio', 'calibrationTruckRatio'].forEach((key) => {
+      const el = state.dom[key];
+      if (el) el.addEventListener('change', applyCalibrationFromUi);
+    });
+
     state.dom.runScenarioBtn.addEventListener('click', () => {
       runtime.tools.load('scenario-planner');
       const report = runtime.simulation.run({
@@ -495,8 +567,12 @@
       state.dom.scenarioLabPanel.textContent = JSON.stringify({
         suiteId: result.json.suiteId,
         storagePath: result.json.storagePath,
+        files: result.json.files,
         summary: result.json.summary
       }, null, 2);
+      if (state.dom.experimentMetricsPanel) {
+        state.dom.experimentMetricsPanel.textContent = JSON.stringify(result.json.summary, null, 2);
+      }
       downloadTextFile(`scenario-suite-${result.json.suiteId}.json`, JSON.stringify(result.json, null, 2), 'application/json');
       downloadTextFile(`scenario-suite-${result.json.suiteId}.csv`, result.csv, 'text/csv');
       const run = state.lab.runScenarioExperiment({ name: 'dashboard-sync', rainIntensity: 22, emergencyEvent: 'crash' });
@@ -639,11 +715,19 @@
       infraTopDesigns: document.getElementById('infra-top-designs'),
       infraGenomeTree: document.getElementById('infra-genome-tree'),
       infraPlayback: document.getElementById('infra-playback'),
-      infraEvolutionCanvas: document.getElementById('infra-evolution-canvas')
+      infraEvolutionCanvas: document.getElementById('infra-evolution-canvas'),
+      calibrationDensity: document.getElementById('calibration-density'),
+      calibrationWeather: document.getElementById('calibration-weather'),
+      calibrationCarRatio: document.getElementById('calibration-car-ratio'),
+      calibrationTruckRatio: document.getElementById('calibration-truck-ratio'),
+      trafficPhysicsPanel: document.getElementById('traffic-physics-panel'),
+      scenarioTimelinePanel: document.getElementById('scenario-timeline-panel'),
+      experimentMetricsPanel: document.getElementById('experiment-metrics-panel')
     };
 
     drawNodes(state.params.nodePositions);
     runtime.simulation.initializeLab();
+    applyCalibrationFromUi();
     bindUi();
     runtime.tools.load('scenario-planner');
     const initialEvolutionResult = runtime.engine.runProtocolEvolution(DEFAULT_EVOLUTION_CONFIG);

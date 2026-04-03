@@ -84,11 +84,11 @@
     const suite = Object.assign({
       id: `scenario-suite-${Date.now()}`,
       scenarios: [
-        { name: 'heavy-rain', rainIntensity: 35, roadSlope: 1.8, drainPlacement: 3, waterFlowDirection: 'west' },
-        { name: 'traffic-accident', emergencyEvent: 'crash', rainIntensity: 10, behaviorMode: 'cooperative-braking-signals' },
-        { name: 'festival-crowd', rainIntensity: 8, behaviorMode: 'dynamic-relay-nodes' },
-        { name: 'sensor-failure', rainIntensity: 15, behaviorMode: 'baseline' },
-        { name: 'power-outage', emergencyEvent: 'road_blockage', networkMode: 'opportunistic-communication', rainIntensity: 16 }
+        { name: 'heavy rain', triggerTime: 3, eventType: 'weather', duration: 55, parameters: { speedFactor: 0.72, weather: 'heavy-rain' }, rainIntensity: 35, roadSlope: 1.8, drainPlacement: 3, waterFlowDirection: 'west' },
+        { name: 'traffic accident', triggerTime: 7, eventType: 'incident', duration: 42, parameters: { blockedLane: 1, congestionBoost: 0.18 }, emergencyEvent: 'crash', behaviorMode: 'cooperative-braking-signals' },
+        { name: 'sensor failure', triggerTime: 5, eventType: 'infrastructure', duration: 35, parameters: { sensorConfidenceDrop: 0.35, latencyPenalty: 10 }, rainIntensity: 15, behaviorMode: 'baseline' },
+        { name: 'festival traffic spike', triggerTime: 4, eventType: 'demand', duration: 70, parameters: { densityMultiplier: 1.4, spawnRateBoost: 0.4 }, rainIntensity: 8, behaviorMode: 'dynamic-relay-nodes' },
+        { name: 'ambulance emergency', triggerTime: 2, eventType: 'emergency', duration: 30, parameters: { emergencyVehicle: true, priorityRouting: true, emergencyLane: 2 }, emergencyEvent: 'breakdown' }
       ]
     }, options || {});
 
@@ -97,12 +97,11 @@
       return {
         scenarioId: idx + 1,
         scenario: scenario.name,
-        trafficDelay: Number((run.metrics.congestion * 0.7).toFixed(3)),
-        accidentResponseTime: Number((run.metrics.emergencyMobility.avgEmergencyResponseTime || run.metrics.emergencyMobility.emergencyResponseTime || 0).toFixed(3)),
-        networkLatency: Number(run.metrics.latency.toFixed(3)),
-        energyConsumption: Number(run.metrics.energyConsumption.toFixed(3)),
-        sensorCoverage: Number(run.metrics.coverageReliability.toFixed(3)),
-        floodRisk: run.metrics.drainage.floodRisk
+        averageVehicleDelay: Number((run.metrics.congestion * 0.72).toFixed(3)),
+        emergencyResponseTime: Number((run.metrics.emergencyMobility.avgEmergencyResponseTime || run.metrics.emergencyMobility.emergencyResponseTime || 0).toFixed(3)),
+        networkCommunicationLatency: Number(run.metrics.latency.toFixed(3)),
+        trafficThroughput: Number((run.metrics.trafficEfficiency * 10).toFixed(3)),
+        sensorCoverageEfficiency: Number(run.metrics.coverageReliability.toFixed(3))
       };
     });
 
@@ -111,13 +110,17 @@
       generatedAt: new Date().toISOString(),
       suiteId: suite.id,
       storagePath: '/highway-v2i-lab/research/',
+      files: {
+        jsonLog: `scenario-suite-${suite.id}.json`,
+        csvSummary: `scenario-suite-${suite.id}.csv`
+      },
       rows,
       summary: {
-        avgTrafficDelay: Number((rows.reduce((sum, r) => sum + r.trafficDelay, 0) / Math.max(1, rows.length)).toFixed(3)),
-        avgAccidentResponseTime: Number((rows.reduce((sum, r) => sum + r.accidentResponseTime, 0) / Math.max(1, rows.length)).toFixed(3)),
-        avgNetworkLatency: Number((rows.reduce((sum, r) => sum + r.networkLatency, 0) / Math.max(1, rows.length)).toFixed(3)),
-        avgEnergyConsumption: Number((rows.reduce((sum, r) => sum + r.energyConsumption, 0) / Math.max(1, rows.length)).toFixed(3)),
-        avgSensorCoverage: Number((rows.reduce((sum, r) => sum + r.sensorCoverage, 0) / Math.max(1, rows.length)).toFixed(3))
+        avgVehicleDelay: Number((rows.reduce((sum, r) => sum + r.averageVehicleDelay, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgEmergencyResponseTime: Number((rows.reduce((sum, r) => sum + r.emergencyResponseTime, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgCommunicationLatency: Number((rows.reduce((sum, r) => sum + r.networkCommunicationLatency, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgTrafficThroughput: Number((rows.reduce((sum, r) => sum + r.trafficThroughput, 0) / Math.max(1, rows.length)).toFixed(3)),
+        avgSensorCoverageEfficiency: Number((rows.reduce((sum, r) => sum + r.sensorCoverageEfficiency, 0) / Math.max(1, rows.length)).toFixed(3))
       }
     };
 

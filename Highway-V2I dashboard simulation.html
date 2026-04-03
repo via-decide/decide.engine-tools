@@ -12,6 +12,7 @@
     <script src="./engine/protocol-evolution.js"></script>
     <script src="./highway-v2i-lab/simulation/event-engine.js"></script>
     <script src="./highway-v2i-lab/simulation/vehicle-engine.js"></script>
+    <script src="./highway-v2i-lab/simulation/data-calibration.js"></script>
     <script src="./highway-v2i-lab/simulation/network-engine.js"></script>
     <script src="./highway-v2i-lab/simulation/sensor-engine.js"></script>
     <script src="./highway-v2i-lab/simulation/decision-graph.js"></script>
@@ -20,6 +21,7 @@
     <script src="./highway-v2i-lab/protocols/infrastructure-genome.js"></script>
     <script src="./highway-v2i-lab/research/research-output.js"></script>
     <script src="./highway-v2i-lab/simulation/lab-engine.js"></script>
+    <script src="./highway-v2i-lab/experiments/scenario-engine.js"></script>
     <script src="./highway-v2i-lab/experiments/experiment-runner.js"></script>
     <script src="./highway-v2i-lab/ui/protocol-lab.js"></script>
     <style>
@@ -254,6 +256,49 @@
         <div class="panel-shell p-4 mt-4">
             <h4 class="text-xs uppercase text-zinc-500 mb-2">Performance Graphs</h4>
             <canvas id="infra-evolution-canvas" width="760" height="190" class="w-full rounded bg-zinc-950"></canvas>
+        </div>
+    </section>
+
+
+    <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">
+        <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-300 mb-4">Traffic Physics & Calibration Lab</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div class="panel-shell p-3">
+                <label class="text-xs text-zinc-500 block mb-1" for="calibration-density">Traffic density</label>
+                <input id="calibration-density" type="range" min="0.1" max="1" step="0.05" value="0.56" class="w-full">
+            </div>
+            <div class="panel-shell p-3">
+                <label class="text-xs text-zinc-500 block mb-1" for="calibration-weather">Weather</label>
+                <select id="calibration-weather" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs">
+                    <option value="clear">Clear</option>
+                    <option value="cloudy">Cloudy</option>
+                    <option value="rain">Rain</option>
+                    <option value="heavy-rain">Heavy Rain</option>
+                    <option value="fog">Fog</option>
+                </select>
+            </div>
+            <div class="panel-shell p-3">
+                <label class="text-xs text-zinc-500 block mb-1" for="calibration-car-ratio">Car ratio</label>
+                <input id="calibration-car-ratio" type="number" min="0" max="1" step="0.01" value="0.68" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs">
+            </div>
+            <div class="panel-shell p-3">
+                <label class="text-xs text-zinc-500 block mb-1" for="calibration-truck-ratio">Truck ratio</label>
+                <input id="calibration-truck-ratio" type="number" min="0" max="1" step="0.01" value="0.18" class="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Traffic Physics</h4>
+                <div id="traffic-physics-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Awaiting simulation tick...</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Scenario Timeline</h4>
+                <div id="scenario-timeline-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Awaiting scenario trigger...</div>
+            </div>
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Experiment Metrics</h4>
+                <div id="experiment-metrics-panel" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Run scenario suite to compute metrics...</div>
+            </div>
         </div>
     </section>
 
