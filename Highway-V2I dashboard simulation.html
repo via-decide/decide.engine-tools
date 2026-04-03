@@ -8,6 +8,8 @@
     <script src="./shared/vd-nav-fix.js"></script>
     <script src="./shared/tool-registry.js"></script>
     <script src="./shared/engine-utils.js"></script>
+    <script src="./engine/protocol-core.js"></script>
+    <script src="./engine/protocol-evolution.js"></script>
     <script src="./highway-v2i-lab/simulation/event-engine.js"></script>
     <script src="./highway-v2i-lab/simulation/vehicle-engine.js"></script>
     <script src="./highway-v2i-lab/simulation/data-calibration.js"></script>
@@ -140,6 +142,44 @@
     </section>
 
     <section class="max-w-6xl mx-auto mt-6 panel-shell p-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-300">Protocol Evolution Lab</h3>
+            <span class="text-xs text-zinc-500">Extends existing Protocol Lab with protocol + infrastructure co-evolution.</span>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 mb-4">
+            <input id="protocol-seed" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="20260402" placeholder="Seed" />
+            <input id="protocol-generations" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="200" placeholder="Generations" />
+            <input id="protocol-population" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="50" placeholder="Population" />
+            <input id="protocol-mutation-rate" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="0.1" placeholder="Mutation" />
+            <input id="protocol-vehicle-count" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="110" placeholder="Vehicles" />
+            <input id="protocol-lanes" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="3" placeholder="Lanes" />
+            <input id="protocol-rsu-nodes" class="bg-zinc-900 border border-zinc-700 rounded px-2 py-2 text-xs" value="5" placeholder="RSUs" />
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-4">
+            <button id="run-protocol-evolution-btn" class="bg-cyan-900/30 border border-cyan-700 text-cyan-300 py-2 px-3 rounded-lg text-xs">Run Evolution Experiment</button>
+            <button id="export-protocol-json-btn" class="bg-zinc-800 border border-zinc-700 text-zinc-300 py-2 px-3 rounded-lg text-xs">Export JSON</button>
+            <button id="export-protocol-csv-btn" class="bg-zinc-800 border border-zinc-700 text-zinc-300 py-2 px-3 rounded-lg text-xs">Export CSV</button>
+            <button id="export-protocol-summary-btn" class="bg-zinc-800 border border-zinc-700 text-zinc-300 py-2 px-3 rounded-lg text-xs">Technical Summary</button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <pre id="protocol-evolution-summary" class="panel-shell p-3 text-[11px] text-zinc-300 whitespace-pre-wrap">Run evolution to view reproducible protocol and infrastructure discoveries.</pre>
+            <pre id="protocol-evolution-graph" class="panel-shell p-3 text-[11px] text-zinc-300 whitespace-pre-wrap">Evolution graph will appear here.</pre>
+            <pre id="protocol-leaderboard" class="panel-shell p-3 text-[11px] text-zinc-300 whitespace-pre-wrap">Protocol leaderboard will appear here.</pre>
+            <pre id="protocol-coverage-heatmap" class="panel-shell p-3 text-[11px] text-zinc-300 whitespace-pre-wrap">Coverage heatmap will appear here.</pre>
+            <pre id="protocol-mesh-topology" class="panel-shell p-3 text-[11px] text-zinc-300 whitespace-pre-wrap">Vehicle communication topology will appear here.</pre>
+            <pre id="protocol-export-output" class="panel-shell p-3 text-[11px] text-zinc-300 whitespace-pre-wrap">Export output appears here.</pre>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="panel-shell p-4">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Optimization Result</h4>
+                <pre id="optimization-result" class="text-[11px] text-zinc-300 whitespace-pre-wrap">Run optimization to view Monte Carlo best layout.</pre>
+            </div>
+            <div class="panel-shell p-4 lg:col-span-2">
+                <h4 class="text-xs uppercase text-zinc-500 mb-2">Embedded Tool Workspace</h4>
+                <iframe id="tool-frame" class="tool-frame" title="decide tools workspace"></iframe>
         <div class="flex flex-wrap items-center justify-between mb-4 gap-3">
             <h3 class="text-sm font-bold uppercase tracking-widest text-zinc-300">Protocol Lab</h3>
             <div class="flex flex-wrap items-center gap-2">
