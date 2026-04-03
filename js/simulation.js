@@ -41,6 +41,12 @@
     params: { ...DEFAULT_PARAMS },
     protocolLabResult: null,
     dom: {}
+    dom: {},
+    lab: null,
+    latestEvolution: null,
+    latestArchitecture: null,
+    latestScenarioSuite: null,
+    latestInfrastructureEvolution: null
   };
 
   function getEngineUtils() {
@@ -189,6 +195,24 @@
       `Coverage: ${champion.metrics.coverageReliability}`,
       `Recommended RSU spacing: ${state.protocolLabResult.recommendations.optimalRsuSpacing}m`
     ].join('\n');
+  runtime.simulation.initializeLab = function initializeLab(options) {
+    if (!global.HighwayLabEngine || !global.HighwayLabEngine.createLabEngine) return null;
+    state.lab = global.HighwayLabEngine.createLabEngine(options || {});
+    return state.lab;
+  };
+
+  runtime.simulation.runEvolution = function runEvolution(options) {
+    if (!state.lab) runtime.simulation.initializeLab();
+    if (!state.lab) return null;
+    state.latestEvolution = state.lab.runEvolution(options || {});
+    return state.latestEvolution;
+  };
+
+  runtime.simulation.runScenarioSuite = function runScenarioSuite(options) {
+    if (!state.lab) runtime.simulation.initializeLab();
+    if (!state.lab || !global.HighwayExperimentRunner || !global.HighwayExperimentRunner.runScenarioSuite) return null;
+    state.latestScenarioSuite = global.HighwayExperimentRunner.runScenarioSuite(state.lab, options || {});
+    return state.latestScenarioSuite;
   };
 
   function drawNodes(nodePositions) {
@@ -276,6 +300,51 @@
       lanes: Number(state.dom.protocolLanes.value || DEFAULT_EVOLUTION_CONFIG.lanes),
       rsuNodes: Number(state.dom.protocolRsuNodes.value || DEFAULT_EVOLUTION_CONFIG.rsuNodes)
     };
+  function renderLabPanels(metrics) {
+    if (!metrics) return;
+    if (state.dom.trafficIntelligencePanel && metrics.trafficIntelligence) {
+      const traffic = metrics.trafficIntelligence;
+      state.dom.trafficIntelligencePanel.textContent = JSON.stringify({
+        predictedCongestion: traffic.predictedCongestion,
+        vehicleDensity: Number((traffic.averageDensity || traffic.density || 0).toFixed(2)),
+        laneSwitchingRate: Number((traffic.averageLaneSwitchingRate || traffic.laneSwitchingRate || 0).toFixed(3)),
+        speedVariation: Number((traffic.averageSpeedVariation || traffic.speedVariation || 0).toFixed(3)),
+        trafficWaveIndex: Number((traffic.averageTrafficWaveIndex || traffic.trafficWaveIndex || 0).toFixed(3)),
+        travelTimeMinutes: Number((traffic.travelTimeMinutes || 0).toFixed(2)),
+        congestionAlerts: traffic.congestionAlerts || []
+      }, null, 2);
+    }
+
+    if (state.dom.infrastructureHealthPanel && metrics.infrastructureHealth) {
+      state.dom.infrastructureHealthPanel.textContent = JSON.stringify(metrics.infrastructureHealth, null, 2);
+    }
+
+    if (state.dom.floodRiskPanel && metrics.drainage) {
+      state.dom.floodRiskPanel.textContent = JSON.stringify({
+        floodRisk: metrics.drainage.floodRisk,
+        rainIntensity: metrics.drainage.rainIntensity,
+        waterAccumulationMap: metrics.drainage.waterAccumulationMap,
+        safeRoadSlope: metrics.drainage.safeRoadSlope,
+        drainPlacementOptimization: metrics.drainage.drainPlacementOptimization
+      }, null, 2);
+    }
+
+    if (state.dom.emergencyMobilityPanel && metrics.emergencyMobility) {
+      state.dom.emergencyMobilityPanel.textContent = JSON.stringify(metrics.emergencyMobility, null, 2);
+    }
+  }
+
+  function downloadTextFile(name, text, mimeType) {
+    const blob = new Blob([text], { type: mimeType || 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = name;
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      URL.revokeObjectURL(link.href);
+      link.remove();
+    }, 0);
   }
 
   function animate() {
@@ -304,6 +373,10 @@
         signalDecay: 0.25 + Math.random() * 0.2
       });
       renderTelemetry(report);
+      if (state.lab) {
+        const live = state.lab.runScenarioExperiment({ name: 'manual-scenario', rainIntensity: 12 + (Math.random() * 18) });
+        renderLabPanels(live.metrics);
+      }
     });
 
     state.dom.optimizeCorridorBtn.addEventListener('click', () => {
@@ -325,6 +398,7 @@
         reliabilityScore: Number(report.telemetry.reliability.toFixed(2)),
         recommendedRsuPlacement: report.telemetry.recommendedRsuPlacement
       }, null, 2);
+      if (state.lab) renderLabPanels(state.lab.simulateGenome(global.HighwayProtocolGenome.createRandomGenome(), 8));
     });
 
     state.dom.openAnalyticsBtn.addEventListener('click', () => {
@@ -346,6 +420,138 @@
 
     state.dom.exportProtocolSummaryBtn.addEventListener('click', () => {
       state.dom.protocolExportOutput.textContent = runtime.engine.generateProtocolReport('summary');
+    state.dom.runEvolutionBtn.addEventListener('click', () => {
+      const generations = Number(state.dom.generationSelector.value) || 200;
+      const networkMode = state.dom.networkSelector ? state.dom.networkSelector.value : 'dsrc';
+      const behaviorMode = state.dom.behaviorSelector ? state.dom.behaviorSelector.value : 'baseline';
+      const evolution = runtime.simulation.runEvolution({ generations, networkMode, behaviorMode });
+      if (!evolution) return;
+
+      global.HighwayProtocolLabUi.renderLeaderboard(
+        state.dom.protocolLeaderboard,
+        evolution.best,
+        evolution.baseline
+      );
+      global.HighwayProtocolLabUi.drawEvolutionChart(state.dom.evolutionCanvas, evolution.history);
+
+      const exportBundle = global.HighwayExperimentRunner.runProtocolExperiment(state.lab, { generations });
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        success: evolution.success,
+        improvements: evolution.improvements,
+        bestGenome: evolution.best.genome,
+        csvPreview: exportBundle.csv.split('\n').slice(0, 6).join('\n')
+      }, null, 2);
+      renderLabPanels(evolution.best.metrics);
+    });
+
+    state.dom.compareLayoutBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const layouts = [1, 2, 3, 4].map(() => global.HighwayInfrastructureGenome.createRandomInfrastructureGenome());
+      const comparison = global.HighwayExperimentRunner.runInfrastructureComparison(state.lab, layouts);
+      state.dom.experimentOutput.textContent = JSON.stringify(comparison.json, null, 2);
+      if (comparison && comparison.json && comparison.json.rows && comparison.json.rows[0]) {
+        state.dom.infrastructureHealthPanel.textContent = JSON.stringify(comparison.json.rows[0], null, 2);
+      }
+    });
+
+
+    state.dom.discoverArchitectureBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const runs = Number(state.dom.architectureRuns.value) || 120;
+      const result = state.lab.discoverArchitecture({ candidates: runs });
+      state.latestArchitecture = result.best;
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        best: result.best,
+        top5: result.ranked.slice(0, 5)
+      }, null, 2);
+    });
+
+    state.dom.inventionModeBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const invention = state.lab.runInventionMode({});
+      state.dom.optimizationResult.textContent = JSON.stringify({
+        mode: 'invention',
+        success: invention.success,
+        deltas: invention.deltas,
+        candidate: invention.candidate
+      }, null, 2);
+      renderLabPanels(invention.candidate.metrics);
+    });
+
+    state.dom.runBatchBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const batch = global.HighwayExperimentRunner.runArchitectureSearchBatch(state.lab, { runs: Math.max(10, Number(state.dom.batchRuns.value) || 50) });
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        type: batch.json.type,
+        runs: batch.json.rows.length,
+        csvPreview: batch.csv.split('\n').slice(0, 6).join('\n')
+      }, null, 2);
+    });
+
+    state.dom.runScenarioSuiteBtn.addEventListener('click', () => {
+      const result = runtime.simulation.runScenarioSuite({});
+      if (!result) return;
+      state.dom.experimentOutput.textContent = JSON.stringify(result.json, null, 2);
+      state.dom.scenarioLabPanel.textContent = JSON.stringify({
+        suiteId: result.json.suiteId,
+        storagePath: result.json.storagePath,
+        summary: result.json.summary
+      }, null, 2);
+      downloadTextFile(`scenario-suite-${result.json.suiteId}.json`, JSON.stringify(result.json, null, 2), 'application/json');
+      downloadTextFile(`scenario-suite-${result.json.suiteId}.csv`, result.csv, 'text/csv');
+      const run = state.lab.runScenarioExperiment({ name: 'dashboard-sync', rainIntensity: 22, emergencyEvent: 'crash' });
+      renderLabPanels(run.metrics);
+    });
+
+    state.dom.runInfraEvolutionBtn.addEventListener('click', () => {
+      if (!state.lab) runtime.simulation.initializeLab();
+      const generations = Math.max(8, Number(state.dom.generationSelector.value) || 40);
+      const infraEvolution = global.HighwayExperimentRunner.runInfrastructureEvolution(state.lab, {
+        generations,
+        population: 24
+      });
+      state.latestInfrastructureEvolution = infraEvolution.json;
+      state.dom.experimentOutput.textContent = JSON.stringify({
+        type: infraEvolution.json.type,
+        success: infraEvolution.json.success,
+        improvements: infraEvolution.json.improvements,
+        recommendations: infraEvolution.json.recommendations
+      }, null, 2);
+      state.dom.infraTopDesigns.textContent = JSON.stringify({
+        baseline: infraEvolution.json.baseline.score.metrics,
+        best: infraEvolution.json.best.metrics,
+        recommendations: infraEvolution.json.recommendations
+      }, null, 2);
+      state.dom.infraPlayback.textContent = JSON.stringify({
+        bestGenome: infraEvolution.json.best.genome,
+        scenarioScore: infraEvolution.json.best.score,
+        scenarios: infraEvolution.json.best.scenarioResults
+      }, null, 2);
+      global.HighwayProtocolLabUi.drawInfrastructurePerformance(state.dom.infraEvolutionCanvas, infraEvolution.json.rows.map((row) => ({
+        bestFitness: row.bestFitness
+      })));
+      global.HighwayProtocolLabUi.renderGenomeTree(state.dom.infraGenomeTree, infraEvolution.json.evolutionTree);
+      downloadTextFile(`infrastructure-evolution-${Date.now()}.json`, JSON.stringify(infraEvolution.json, null, 2), 'application/json');
+      downloadTextFile(`infrastructure-evolution-${Date.now()}.csv`, infraEvolution.csv, 'text/csv');
+      const playback = state.lab.simulateGenome(global.HighwayProtocolGenome.createRandomGenome(), 20, {
+        rainIntensity: 20,
+        emergencyEvent: 'crash'
+      });
+      renderLabPanels(playback);
+    });
+
+    state.dom.replaySimBtn.addEventListener('click', () => {
+      if (!state.latestEvolution) return;
+      const report = state.lab.simulateGenome(state.latestEvolution.best.genome, 24);
+      state.dom.optimizationResult.textContent = JSON.stringify({
+        replay: 'Best evolved protocol replay',
+        metrics: report
+      }, null, 2);
+      renderTelemetry({
+        params: { latency: report.latency, nodePositions: state.params.nodePositions },
+        telemetry: { signalScore: report.coverageReliability, latencyScore: 100 - report.latency, packetScore: 100 - report.congestion, mobilityScore: 80, reliability: report.coverageReliability }
+      });
+      renderLabPanels(report);
     });
   }
 
@@ -409,13 +615,41 @@
       exportProtocolCsvBtn: document.getElementById('export-protocol-csv-btn'),
       exportProtocolSummaryBtn: document.getElementById('export-protocol-summary-btn')
       optimizationResult: document.getElementById('optimization-result')
+      runEvolutionBtn: document.getElementById('run-evolution-btn'),
+      compareLayoutBtn: document.getElementById('compare-layout-btn'),
+      replaySimBtn: document.getElementById('replay-sim-btn'),
+      protocolLeaderboard: document.getElementById('protocol-leaderboard'),
+      evolutionCanvas: document.getElementById('evolution-canvas'),
+      generationSelector: document.getElementById('generation-selector'),
+      experimentOutput: document.getElementById('experiment-output'),
+      networkSelector: document.getElementById('network-selector'),
+      behaviorSelector: document.getElementById('behavior-selector'),
+      discoverArchitectureBtn: document.getElementById('discover-architecture-btn'),
+      inventionModeBtn: document.getElementById('invention-mode-btn'),
+      runBatchBtn: document.getElementById('run-batch-btn'),
+      architectureRuns: document.getElementById('architecture-runs'),
+      batchRuns: document.getElementById('batch-runs'),
+      runScenarioSuiteBtn: document.getElementById('run-scenario-suite-btn'),
+      runInfraEvolutionBtn: document.getElementById('run-infra-evolution-btn'),
+      trafficIntelligencePanel: document.getElementById('traffic-intelligence-panel'),
+      infrastructureHealthPanel: document.getElementById('infrastructure-health-panel'),
+      floodRiskPanel: document.getElementById('flood-risk-panel'),
+      emergencyMobilityPanel: document.getElementById('emergency-mobility-panel'),
+      scenarioLabPanel: document.getElementById('scenario-lab-panel'),
+      infraTopDesigns: document.getElementById('infra-top-designs'),
+      infraGenomeTree: document.getElementById('infra-genome-tree'),
+      infraPlayback: document.getElementById('infra-playback'),
+      infraEvolutionCanvas: document.getElementById('infra-evolution-canvas')
     };
 
     drawNodes(state.params.nodePositions);
+    runtime.simulation.initializeLab();
     bindUi();
     runtime.tools.load('scenario-planner');
     const initialEvolutionResult = runtime.engine.runProtocolEvolution(DEFAULT_EVOLUTION_CONFIG);
     renderProtocolLab(initialEvolutionResult);
+    const bootMetrics = state.lab ? state.lab.simulateGenome(global.HighwayProtocolGenome.createRandomGenome(), 8) : null;
+    renderLabPanels(bootMetrics);
     animate();
   }
 
