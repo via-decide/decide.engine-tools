@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniAudit'-the autonomous verification and transparency engine for the 24,000-PR run. CORE ARCHITECTURE (The Proof Engine): 1. The Batch Certifier: - Create a module audit/certify.js that triggers every time the PR count hits a multiple of 1,000.
+Scan the 'shared/' and 'tools/engine/' folders. Locate the 'terminal-logger.js' and integrate it more deeply into the current 'swipe-crucible' tool to provide real-time terminal feedback for all swipe actions.
 
 CONSTRAINTS
-Use 'crypto' for SHA-256 hashing. Ensure the audit files are lightweight and don't clutter the main code history. Use 'Table' formatting in Markdown for the mission logs.
+Implement a "Sovereign" dark-mode theme for the logs; keep all code additive.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
