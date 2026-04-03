@@ -1,9 +1,9 @@
-Branch: simba/build-daxiniaudit-the-autonomous-verification-an
-Title: Build 'DaxiniAudit'-the autonomous verification and transparency engi...
+Branch: simba/scan-the-shared-and-toolsengine-folders-locate-t
+Title: Scan the 'shared/' and 'tools/engine/' folders. Locate the 'terminal-...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Provide scientific and mathematical proof that all 24,000 PRs are high-quality contributions, silencing skeptics and securing your place as the "Boss of Git."
+- Goal: Scan the 'shared/' and 'tools/engine/' folders. Locate the 'terminal-logger.js' and integrate it more deeply into the current 'swipe-crucible' tool to provide real-time terminal feedback for all swipe actions.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
