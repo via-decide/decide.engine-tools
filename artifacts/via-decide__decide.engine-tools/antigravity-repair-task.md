@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Scan the 'shared/' and 'tools/engine/' folders. Locate the 'terminal-logger.js' and integrate it more deeply into the current 'swipe-crucible' tool to provide real-time terminal feedback for all swipe actions.
+Implement a "Load-Test-Orchestrator".
 
 RULES
 1. Audit touched files first and identify regressions.
