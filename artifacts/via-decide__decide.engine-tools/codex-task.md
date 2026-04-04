@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Scan the 'shared/' and 'tools/engine/' folders. Locate the 'terminal-logger.js' and integrate it more deeply into the current 'swipe-crucible' tool to provide real-time terminal feedback for all swipe actions.
+Implement a "Load-Test-Orchestrator".
 
 CONSTRAINTS
-Implement a "Sovereign" dark-mode theme for the logs; keep all code additive.
+- generate 1000 parallel Gemini API requests - measure latency per request - calculate token cost efficiency - detect API throttling limits - output metrics dashboard JSON
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
