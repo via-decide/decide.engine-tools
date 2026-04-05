@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-token-usage-monitoring-during-load-tests",
+  "branch": "simba/track-token-efficiency-across-distributed-reques",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
