@@ -1,9 +1,9 @@
-Branch: simba/implement-a-load-test-orchestrator
-Title: Implement a "Load-Test-Orchestrator".
+Branch: simba/implement-token-efficiency-measurement
+Title: Implement token efficiency measurement.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Implement a "Load-Test-Orchestrator".
+- Goal: maintain 80-95% token savings
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
