@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Implement token efficiency measurement.
+Add token usage monitoring during load tests.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
