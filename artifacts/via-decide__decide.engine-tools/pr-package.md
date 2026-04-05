@@ -1,9 +1,9 @@
-Branch: simba/implement-token-efficiency-measurement
-Title: Implement token efficiency measurement.
+Branch: simba/add-token-usage-monitoring-during-load-tests
+Title: Add token usage monitoring during load tests.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: maintain 80-95% token savings
+- Goal: verify context-refinery efficiency above 80%
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Implement token efficiency measurement.
+Add token usage monitoring during load tests.
 
 RULES
 1. Audit touched files first and identify regressions.
