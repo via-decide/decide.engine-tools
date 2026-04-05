@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decide Engine Workspace</title>
+  <script src="../shared/vd-nav-fix.js"></script>
+  <script src="../ui/navbar.js"></script>
+  <script src="../ui/layout/header.js"></script>
+  <script src="../ui/layout/sidebar.js"></script>
+  <script src="../ui/layout/workspace.js"></script>
+  <script src="../ui/status.js"></script>
+  <script src="./session.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0f0d0c; color: #f0e4d0; }
+    .vd-navbar { border-bottom: 1px solid #3a2e28; background: #1a1614; }
+    .vd-navbar-inner { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; }
+    .vd-nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .vd-nav-link, .vd-brand { color: #f0e4d0; text-decoration: none; }
+    .vd-brand { color: #52B756; font-weight: 700; }
+    .shell { max-width: 1100px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 220px 1fr; gap: 14px; }
+    .vd-layout-header,.vd-layout-sidebar,.vd-layout-workspace { background: #1a1614; border: 1px solid #3a2e28; border-radius: 12px; padding: 14px; }
+    .vd-side-link { display: block; margin: 6px 0; text-decoration: none; color: #f0e4d0; background: #231e1b; border: 1px solid #3a2e28; border-radius: 8px; padding: 8px; }
+    .workspace-form { display: grid; gap: 10px; }
+    .workspace-form label { display: grid; gap: 6px; font-size: 14px; }
+    .workspace-form textarea, .workspace-form input { width: 100%; min-height: 80px; border: 1px solid #3a2e28; border-radius: 8px; background: #231e1b; color: #f0e4d0; padding: 10px; }
+    .workspace-form button { width: fit-content; padding: 10px 14px; border-radius: 8px; border: 1px solid #3a2e28; background: #52B756; color: #0a1a0a; font-weight: 700; }
+    .vd-status { margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #3a2e28; }
+  </style>
+</head>
+<body>
+  <div data-vd-navbar></div>
+  <div class="shell">
+    <div data-layout-sidebar></div>
+    <div>
+      <div data-layout-header></div>
+      <div data-layout-workspace></div>
+      <div data-status></div>
+    </div>
+  </div>
+  <script>
+    window.VDNavbar.render();
+    window.VDLayoutSidebar.render('[data-layout-sidebar]', [
+      { label: 'Dashboard', href: '../dashboard/index.html' },
+      { label: 'Tool Catalog', href: '../tools/index.html' },
+      { label: 'Agent Console', href: '../agent/index.html' }
+    ]);
+    window.VDLayoutHeader.render('[data-layout-header]', 'Workspace Session');
+    window.VDLayoutWorkspace.render('[data-layout-workspace]', `
+      <h2>Session Manager</h2>
+      <form class="workspace-form" id="workspace-form">
+        <label>Progress
+          <textarea id="workspace-progress" placeholder="What did you complete?"></textarea>
+        </label>
+        <label>Tool Context
+          <input id="workspace-context" type="text" placeholder="Current tool or module" />
+        </label>
+        <button type="submit">Save Session</button>
+      </form>
+    `);
+
+    const form = document.getElementById('workspace-form');
+    const progress = '#workspace-progress';
+    const context = '#workspace-context';
+
+    const restored = window.WorkspaceSession.restoreInto(progress, context);
+    if (restored) {
+      window.VDStatus.setProgress('[data-status]', `Restored session from ${restored.updatedAt}.`);
+    } else {
+      window.VDStatus.setLoading('[data-status]', 'No saved session found yet.');
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const payload = window.WorkspaceSession.saveSession({
+        progress: document.querySelector(progress).value,
+        toolContext: document.querySelector(context).value
+      });
+      window.VDStatus.setProgress('[data-status]', `Saved workspace.json at ${payload.updatedAt}.`);
+    });
+  </script>
+</body>
+</html>
