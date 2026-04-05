@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Implement a "Load-Test-Orchestrator".
+Implement token efficiency measurement.
 
 CONSTRAINTS
-- generate 1000 parallel Gemini API requests - measure latency per request - calculate token cost efficiency - detect API throttling limits - output metrics dashboard JSON
+Preserve existing code; prefer additive changes.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
