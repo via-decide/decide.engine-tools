@@ -34,6 +34,9 @@ const SMOKE_TARGETS = [
 
   // Home shell
   { id: 'home',                 path: 'index.html' },
+  { id: 'dashboard',            path: 'dashboard/index.html' },
+  { id: 'workspace',            path: 'workspace/index.html' },
+  { id: 'tool-catalog',         path: 'tools/index.html' },
 ];
 
 function isMissingBrowserExecutableError(error) {

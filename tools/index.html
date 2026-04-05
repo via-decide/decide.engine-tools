@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decide Engine Tools</title>
+  <script src="../shared/vd-nav-fix.js"></script>
+  <script src="../ui/navbar.js"></script>
+  <script src="../ui/layout/header.js"></script>
+  <script src="../ui/layout/sidebar.js"></script>
+  <script src="../ui/layout/workspace.js"></script>
+  <script src="../ui/status.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0f0d0c; color: #f0e4d0; }
+    .vd-navbar { border-bottom: 1px solid #3a2e28; background: #1a1614; }
+    .vd-navbar-inner { max-width: 1100px; margin: 0 auto; padding: 12px 16px; display: flex; justify-content: space-between; }
+    .vd-nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .vd-nav-link, .vd-brand { color: #f0e4d0; text-decoration: none; }
+    .vd-brand { color: #52B756; font-weight: 700; }
+    .shell { max-width: 1100px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 220px 1fr; gap: 14px; }
+    .vd-layout-header,.vd-layout-sidebar,.vd-layout-workspace { background: #1a1614; border: 1px solid #3a2e28; border-radius: 12px; padding: 14px; }
+    .vd-side-link { display: block; margin: 6px 0; text-decoration: none; color: #f0e4d0; background: #231e1b; border: 1px solid #3a2e28; border-radius: 8px; padding: 8px; }
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .tool-card { display: block; text-decoration: none; color: #f0e4d0; background: #231e1b; border: 1px solid #3a2e28; border-radius: 10px; padding: 12px; }
+    .vd-status { margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #3a2e28; }
+  </style>
+</head>
+<body>
+  <div data-vd-navbar></div>
+  <div class="shell">
+    <div data-layout-sidebar></div>
+    <div>
+      <div data-layout-header></div>
+      <div data-layout-workspace></div>
+      <div data-status></div>
+    </div>
+  </div>
+  <script>
+    window.VDNavbar.render();
+    window.VDLayoutSidebar.render('[data-layout-sidebar]', [
+      { label: 'Dashboard', href: '../dashboard/index.html' },
+      { label: 'Workspace', href: '../workspace/index.html' },
+      { label: 'StudyOS', href: '../ui/studyos.html' }
+    ]);
+    window.VDLayoutHeader.render('[data-layout-header]', 'Tool Catalog');
+    window.VDLayoutWorkspace.render('[data-layout-workspace]', `
+      <h2>Available Modules</h2>
+      <div class="tool-grid">
+        <a class="tool-card" href="../interview-prep/index.html"><strong>Interview Practice</strong><p>Interview prep module.</p></a>
+        <a class="tool-card" href="./games/vialogic/index.html"><strong>LogicHub Builder</strong><p>Logic and cartography missions.</p></a>
+        <a class="tool-card" href="./engine/simulation-runner/index.html"><strong>Simulation Lab</strong><p>Simulation tools and experiments.</p></a>
+        <a class="tool-card" href="../prompt-alchemy/index.html"><strong>Prompt Studio</strong><p>Prompt design and comparison.</p></a>
+      </div>
+    `);
+    window.VDStatus.setProgress('[data-status]', 'Tool catalog loaded.');
+  </script>
+</body>
+</html>

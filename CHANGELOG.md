@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Introduced a unified dashboard shell (`dashboard/index.html`) with reusable layout modules, global navigation, command palette, status states, and new workspace/session + tool catalog entry pages (`workspace/index.html`, `workspace/session.js`, `tools/index.html`).
 - Added a cross-repository Zayvora pipeline scaffolder script (`scripts/scaffold/zayvora-pipeline.js`), unit tests, and `docs/system_pipeline.md` to generate the first Simulation → Sensor → Protocol → AI → Dashboard integration skeleton across target repositories.
 - Enhanced Highway-V2I lab with microscopic per-vehicle physics (driver profiles, acceleration/braking, lane-following), real-time calibration controls + synthetic traffic stream generator, scenario experiment engine for rain/accident/sensor failure/festival/ambulance events, and research metrics artifacts (JSON/CSV targets under `/highway-v2i-lab/research/`) with new Traffic Physics, Scenario Lab timeline, and Experiment Metrics dashboard panels.
 - Extended Highway-V2I with a self-evolving Protocol Evolution Lab: protocol/infrastructure genomes, 200-generation configurable GA default, reproducible seeded runs, and Protocol Lab experiment/report controls for JSON/CSV/technical summaries.

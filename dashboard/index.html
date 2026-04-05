@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decide Engine Dashboard</title>
+  <script src="../shared/vd-nav-fix.js"></script>
+  <script src="../ui/navbar.js"></script>
+  <script src="../ui/layout/header.js"></script>
+  <script src="../ui/layout/sidebar.js"></script>
+  <script src="../ui/layout/workspace.js"></script>
+  <script src="../ui/status.js"></script>
+  <script src="../ui/command_palette.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0f0d0c; color: #f0e4d0; }
+    .vd-navbar { border-bottom: 1px solid #3a2e28; background: #1a1614; }
+    .vd-navbar-inner { max-width: 1200px; margin: 0 auto; padding: 14px 18px; display: flex; justify-content: space-between; gap: 12px; }
+    .vd-brand { color: #52B756; text-decoration: none; font-weight: 700; }
+    .vd-nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .vd-nav-link { color: #f0e4d0; text-decoration: none; font-size: 14px; }
+    .vd-shell { max-width: 1200px; margin: 0 auto; padding: 18px; display: grid; grid-template-columns: 240px 1fr; gap: 16px; }
+    .vd-layout-header { background: #1a1614; border: 1px solid #3a2e28; border-radius: 12px; padding: 16px; }
+    .vd-layout-sidebar { background: #1a1614; border: 1px solid #3a2e28; border-radius: 12px; padding: 14px; display: grid; gap: 10px; }
+    .vd-side-link { color: #f0e4d0; text-decoration: none; background: #231e1b; border: 1px solid #3a2e28; border-radius: 8px; padding: 10px; }
+    .vd-layout-workspace { background: #1a1614; border: 1px solid #3a2e28; border-radius: 12px; padding: 16px; min-height: 280px; }
+    .dashboard-main { display: grid; gap: 16px; }
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; }
+    .module-card { background: #231e1b; border: 1px solid #3a2e28; border-radius: 10px; padding: 12px; }
+    .vd-status { margin-top: 12px; padding: 10px; border-radius: 8px; border: 1px solid #3a2e28; }
+    .vd-status.loading .spinner { width: 12px; height: 12px; border: 2px solid #52B756; border-top-color: transparent; border-radius: 50%; display: inline-block; margin-right: 8px; animation: spin 1s linear infinite; }
+    .vd-status.error { color: #fecaca; border-color: #7f1d1d; }
+    .vd-command-palette { position: fixed; inset: 0; display: none; background: rgba(0,0,0,0.7); }
+    .vd-command-palette.open { display: block; }
+    .vd-command-inner { width: min(560px, 92vw); margin: 10vh auto; background: #1a1614; border: 1px solid #3a2e28; border-radius: 12px; padding: 12px; }
+    .vd-command-inner input { width: 100%; margin-bottom: 10px; padding: 10px; border-radius: 8px; border: 1px solid #3a2e28; background: #231e1b; color: #f0e4d0; }
+    .vd-command-list { display: grid; gap: 8px; }
+    .vd-command-list button { text-align: left; padding: 10px; border-radius: 8px; border: 1px solid #3a2e28; background: #231e1b; color: #f0e4d0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div data-vd-navbar></div>
+  <div class="vd-shell">
+    <div data-layout-sidebar></div>
+    <div class="dashboard-main">
+      <div data-layout-header></div>
+      <div data-layout-workspace></div>
+      <div data-status></div>
+    </div>
+  </div>
+  <script>
+    window.VDNavbar.render();
+    window.VDLayoutSidebar.render('[data-layout-sidebar]', [
+      { label: 'Workspace', href: '../workspace/index.html' },
+      { label: 'StudyOS', href: '../ui/studyos.html' },
+      { label: 'Tools', href: '../tools/index.html' },
+      { label: 'Agent Console', href: '../agent/index.html' },
+      { label: 'Settings', href: '../founder/index.html' }
+    ]);
+    window.VDLayoutHeader.render('[data-layout-header]', 'Decide Engine Dashboard');
+    window.VDLayoutWorkspace.render('[data-layout-workspace]', `
+      <h2>Workspace</h2>
+      <p>Unified shell for all modules.</p>
+      <div class="module-grid">
+        <article class="module-card"><strong>Workspace</strong><p>Resume and manage sessions.</p></article>
+        <article class="module-card"><strong>StudyOS</strong><p>Learning and focus modules.</p></article>
+        <article class="module-card"><strong>Tools</strong><p>Launch productivity modules.</p></article>
+        <article class="module-card"><strong>Agent Console</strong><p>Run and inspect agent tasks.</p></article>
+        <article class="module-card"><strong>Settings</strong><p>Account and preferences.</p></article>
+      </div>
+    `);
+    window.VDStatus.setProgress('[data-status]', 'Dashboard shell initialized.');
+    window.VDCommandPalette.init();
+  </script>
+</body>
+</html>
