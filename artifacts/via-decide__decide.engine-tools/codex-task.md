@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add token usage monitoring during load tests.
+Track token efficiency across distributed requests.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
