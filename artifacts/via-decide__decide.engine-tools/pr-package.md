@@ -1,9 +1,9 @@
-Branch: simba/create-corpus-document-reader-for-studyos-so-use
-Title: Create corpus document reader for StudyOS so users can open text chun...
+Branch: simba/add-ai-summarization-interface-for-studyos-using
+Title: Add AI summarization interface for StudyOS using Nex + Zayvora.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create corpus document reader for StudyOS so users can open text chunks from the Nex corpus.
+- Goal: Add AI summarization interface for StudyOS using Nex + Zayvora.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
