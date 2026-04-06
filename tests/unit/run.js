@@ -19,6 +19,7 @@ const suites = [
   { name: 'ProtocolEvolution', file: './protocol-evolution.test.js' },
   { name: 'HighwayV2ILab', file: './highway-v2i-lab.test.js' },
   { name: 'ZayvoraPipelineScaffold', file: './zayvora-pipeline-scaffold.test.js' },
+  { name: 'OrchadeFoundation', file: './orchade-foundation.test.js' },
 ];
 
 let totalPassed = 0;
