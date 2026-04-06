@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/create-source-explorer-for-books",
+  "branch": "simba/create-research-workspace-layout",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
