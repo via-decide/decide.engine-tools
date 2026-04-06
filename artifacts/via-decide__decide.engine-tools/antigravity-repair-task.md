@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add semantic search panel.
+Create source explorer for books.
 
 RULES
 1. Audit touched files first and identify regressions.
