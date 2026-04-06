@@ -14,6 +14,7 @@ const suites = [
   { name: 'Router',       file: './router.test.js' },
   { name: 'SmokeTools',   file: './smoke-tools.test.js' },
   { name: 'StudyOSAuthFallback', file: './studyos-auth-fallback.test.js' },
+  { name: 'StudyOSNexIntegration', file: './studyos-nex-integration.test.js' },
   { name: 'HighwaySimulation', file: './highway-simulation.test.js' },
   { name: 'ProtocolEvolution', file: './protocol-evolution.test.js' },
   { name: 'HighwayV2ILab', file: './highway-v2i-lab.test.js' },
