@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create corpus document reader for StudyOS so users can open text chunks from the Nex corpus.
+Add AI summarization interface for StudyOS using Nex + Zayvora.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
