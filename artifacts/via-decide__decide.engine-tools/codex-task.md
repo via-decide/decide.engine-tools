@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add semantic search panel.
+Create source explorer for books.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
