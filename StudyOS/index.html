@@ -29,6 +29,17 @@
     <!-- Shared Auth/Wallet -->
     <script src="../shared/vd-auth.js"></script>
     <script src="../shared/vd-wallet.js"></script>
+    <script src="./api/nex_client.ts"></script>
+    <script src="./services/summary_engine.ts"></script>
+    <script src="./components/CorpusSearchPanel.tsx"></script>
+    <script src="./components/SourceExplorer.tsx"></script>
+    <script src="./layout/ResearchWorkspace.tsx"></script>
+    <script src="./components/DocumentViewer.tsx"></script>
+    <script src="./components/NotesEditor.tsx"></script>
+    <script src="./components/CorpusDashboard.tsx"></script>
+    <script src="./components/NexChat.tsx"></script>
+    <script src="./components/KnowledgeGraph.tsx"></script>
+    <script src="./main.tsx"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -487,6 +498,10 @@
                 <button class="nl" data-tab="vault">Vault</button>
                 <button class="nl" data-tab="tracker">Tracker</button>
                 <button class="nl" data-tab="pyq">Simulator</button>
+                <button class="nl" data-tab="research">Research</button>
+                <button class="nl" data-tab="sources">Sources</button>
+                <button class="nl" data-tab="notes">Notes</button>
+                <button class="nl" data-tab="corpus-stats">Corpus Stats</button>
             </div>
         </div>
     </nav>
@@ -737,6 +752,38 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section id="research" class="tab-content space-y-6 !pt-0">
+            <div class="mb-6">
+                <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900; letter-spacing:-0.2px;">Nex Research Workspace</h2>
+                <p class="text-[var(--muted)] mt-1">Semantic search, corpus summaries, and research orchestration.</p>
+            </div>
+            <div id="research-workspace-root"></div>
+        </section>
+
+        <section id="sources" class="tab-content space-y-6 !pt-0">
+            <div class="mb-6">
+                <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900; letter-spacing:-0.2px;">Corpus Sources</h2>
+                <p class="text-[var(--muted)] mt-1">Source explorer fed by active Nex query context.</p>
+            </div>
+            <div id="sources-tab-mount"></div>
+        </section>
+
+        <section id="notes" class="tab-content space-y-6 !pt-0">
+            <div class="mb-6">
+                <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900; letter-spacing:-0.2px;">Research Notes</h2>
+                <p class="text-[var(--muted)] mt-1">Markdown-ready notes saved to StudyOS/notes/ as .md artifacts.</p>
+            </div>
+            <div id="notes-tab-mount" class="os-card"></div>
+        </section>
+
+        <section id="corpus-stats" class="tab-content space-y-6 !pt-0">
+            <div class="mb-6">
+                <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900; letter-spacing:-0.2px;">Corpus Analytics Dashboard</h2>
+                <p class="text-[var(--muted)] mt-1">Nex indexing and embedding telemetry.</p>
+            </div>
+            <div id="corpus-stats-mount"></div>
         </section>
     </main>
 
@@ -1379,6 +1426,10 @@ const UIEngine = {
                     document.getElementById(btn.dataset.tab).classList.add("active");
                     if (btn.dataset.tab === "dashboard") window.Dashboard.updateCharts();
                     if (btn.dataset.tab === "tracker") { window.Tracker.renderErrors(); window.Tracker.renderScores(); }
+                    if (btn.dataset.tab === "research") window.StudyOSResearchApp?.init();
+                    if (btn.dataset.tab === "sources") window.StudyOSResearchApp?.init();
+                    if (btn.dataset.tab === "notes") window.StudyOSResearchApp?.init();
+                    if (btn.dataset.tab === "corpus-stats") window.StudyOSResearchApp?.init();
                     btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
                     Sidebar.render();
                 });
@@ -1403,8 +1454,8 @@ const UIEngine = {
 
         this.renderPreferenceSummary();
 
-        const prefMap = { "Analytics Dashboard": "dashboard", "Mission Control": "missions", "Study Engine": "engine" };
-        const route = prefMap[AppStore.config.layout] || "dashboard";
+        const prefMap = { "Analytics Dashboard": "research", "Mission Control": "missions", "Study Engine": "research" };
+        const route = prefMap[AppStore.config.layout] || "research";
         document.querySelector(`.nl[data-tab="${route}"]`)?.click();
 
         const matrix = UIUXMatrix.summary();
@@ -1427,6 +1478,7 @@ const UIEngine = {
         window.Sidebar.render();
 
         KineticEngine.init();
+        window.StudyOSResearchApp?.init();
     },
 
     renderPreferenceSummary() {
@@ -1470,7 +1522,8 @@ window.Sidebar = {
         const active = document.querySelector(".nl.active")?.dataset.tab || "dashboard";
         document.getElementById("sidebar-nav").innerHTML = [
             ["dashboard","📊 Dashboard"],["engine","🧠 Study Engine"],["kinetic","⚡ Kinetic Simulator"],["missions","🎯 Missions"],
-            ["vault","🗂 Vault"],["tracker","📍 Tracker"],["pyq","🧪 Simulator"]
+            ["vault","🗂 Vault"],["tracker","📍 Tracker"],["pyq","🧪 Simulator"],
+            ["research","🔎 Research"],["sources","📚 Sources"],["notes","📝 Notes"],["corpus-stats","📈 Corpus Stats"]
         ].map(([tab,label]) =>
             `<button class="sidebar-nav-btn ${active===tab?'active':''}" onclick="Sidebar.go('${tab}')"><span>${label}</span><span>›</span></button>`
         ).join("");
