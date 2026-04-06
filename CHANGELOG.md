@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Initialized `Orchade/` AI-native game engine prototype scaffold with modular engine/game/assets/tools/docs layout, ECS + core engine lifecycle, Zayvora bridge integration layer, procedural world generator, gameplay systems, YAML config, and runnable demo script.
 - Upgraded StudyOS with a Nex-powered research workspace including semantic corpus search, source exploration, document viewing, AI summaries, markdown notes, and corpus analytics tabs wired into the main UI shell.
 - Introduced a unified dashboard shell (`dashboard/index.html`) with reusable layout modules, global navigation, command palette, status states, and new workspace/session + tool catalog entry pages (`workspace/index.html`, `workspace/session.js`, `tools/index.html`).
 - Added a cross-repository Zayvora pipeline scaffolder script (`scripts/scaffold/zayvora-pipeline.js`), unit tests, and `docs/system_pipeline.md` to generate the first Simulation → Sensor → Protocol → AI → Dashboard integration skeleton across target repositories.
