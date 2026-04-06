@@ -1,9 +1,9 @@
-Branch: simba/track-token-efficiency-across-distributed-reques
-Title: Track token efficiency across distributed requests.
+Branch: simba/connect-studyos-frontend-to-nex-research-engine-
+Title: Connect StudyOS frontend to Nex Research Engine backend.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: maintain token efficiency above 80%
+- Goal: Connect StudyOS frontend to Nex Research Engine backend.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
