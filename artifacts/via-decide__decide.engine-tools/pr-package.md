@@ -1,9 +1,9 @@
-Branch: simba/create-research-workspace-layout
-Title: Create research workspace layout.
+Branch: simba/create-topic-graph-visualization
+Title: Create topic graph visualization.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create research workspace layout.
+- Goal: Create topic graph visualization.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
