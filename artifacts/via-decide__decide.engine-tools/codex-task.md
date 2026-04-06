@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Connect StudyOS frontend to Nex Research Engine backend.
+Add semantic search panel.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

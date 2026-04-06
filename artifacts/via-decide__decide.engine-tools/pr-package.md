@@ -1,9 +1,9 @@
-Branch: simba/connect-studyos-frontend-to-nex-research-engine-
-Title: Connect StudyOS frontend to Nex Research Engine backend.
+Branch: simba/add-semantic-search-panel
+Title: Add semantic search panel.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Connect StudyOS frontend to Nex Research Engine backend.
+- Goal: Add semantic search panel.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

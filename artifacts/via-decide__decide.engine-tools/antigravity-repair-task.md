@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Connect StudyOS frontend to Nex Research Engine backend.
+Add semantic search panel.
 
 RULES
 1. Audit touched files first and identify regressions.
