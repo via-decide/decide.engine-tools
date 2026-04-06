@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Allow users to create notes from research inside StudyOS.
+Add corpus analytics dashboard for Nex inside StudyOS.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
