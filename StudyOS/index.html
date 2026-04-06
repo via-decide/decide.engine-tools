@@ -29,18 +29,22 @@
     <!-- Shared Auth/Wallet -->
     <script src="../shared/vd-auth.js"></script>
     <script src="../shared/vd-wallet.js"></script>
-    <script src="./api/nex_client.ts"></script>
-    <script src="./services/summary_engine.ts"></script>
-    <script src="./services/zayvora_reasoning.ts"></script>
-    <script src="./components/CorpusSearchPanel.tsx"></script>
-    <script src="./components/SourceExplorer.tsx"></script>
-    <script src="./layout/ResearchWorkspace.tsx"></script>
-    <script src="./components/DocumentViewer.tsx"></script>
-    <script src="./components/NotesEditor.tsx"></script>
-    <script src="./components/CorpusDashboard.tsx"></script>
-    <script src="./components/NexChat.tsx"></script>
-    <script src="./components/KnowledgeGraph.tsx"></script>
-    <script src="./main.tsx"></script>
+    <script>
+        window.StudyOSResearchApp = {
+            _mounted: false,
+            init() {
+                if (this._mounted) return;
+                this._mounted = true;
+                const mounts = ['research-workspace-root', 'sources-tab-mount', 'notes-tab-mount', 'corpus-stats-mount'];
+                mounts.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && !el.innerHTML.trim()) {
+                        el.innerHTML = '<div class="empty-state"><div class="es-icon">⚡</div><div class="es-title">Nex Engine</div><div class="es-sub">Connect local Nex server at localhost:8765 to activate research workspace.</div></div>';
+                    }
+                });
+            }
+        };
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -1455,7 +1459,7 @@ const UIEngine = {
 
         this.renderPreferenceSummary();
 
-        const prefMap = { "Analytics Dashboard": "research", "Mission Control": "missions", "Study Engine": "research" };
+        const prefMap = { "Analytics Dashboard": "dashboard", "Mission Control": "missions", "Study Engine": "engine" };
         const route = prefMap[AppStore.config.layout] || "research";
         document.querySelector(`.nl[data-tab="${route}"]`)?.click();
 
@@ -1833,6 +1837,7 @@ window.Tracker = {
         const dateEl = document.getElementById("mock-date"); const nameEl = document.getElementById("mock-name"); const scoreEl = document.getElementById("mock-score");
         const date = dateEl.value; const name = nameEl.value.trim(); const score = parseFloat(scoreEl.value);
         if (!date || !name || Number.isNaN(score)) { Toast.show('Fill all mock test fields', 'error'); return; }
+        if (score < 0 || score > 100) { Toast.show('Score must be 0–100', 'error'); return; }
         AppStore.data.mocks.push({ date: date || new Date().toLocaleDateString(), name, score });
         dateEl.value = ""; nameEl.value = ""; scoreEl.value = "";
         AppStore.saveData(); this.renderScores(); window.Dashboard.updateCharts();
@@ -1864,8 +1869,6 @@ window.Vault = {
 
         keys.forEach(key => {
             const doc = db[key];
-            const payload = encodeURIComponent(doc.content || "");
-            const title = encodeURIComponent(doc.title || "document");
             // Content preview: first 140 chars, stripped of markdown-ish chars
             const preview = (doc.content || "").replace(/\*|---/g, '').replace(/\n+/g, ' ').trim().slice(0, 140);
 
@@ -1881,12 +1884,21 @@ window.Vault = {
                         <button onclick="Vault.read('${key}')" class="os-btn-sm flex-1 flex items-center justify-center gap-2 !py-2.5">
                             📖 Read
                         </button>
-                        <button onclick="Vault.download('${title}', '${payload}')" class="os-btn-sm ghost-sm flex-1 flex items-center justify-center gap-2 !py-2.5">
+                        <button class="os-btn-sm ghost-sm flex-1 flex items-center justify-center gap-2 !py-2.5" data-vault-download="${Utils.esc(key)}">
                             ⬇ Download
                         </button>
                     </div>
                 </div>
             `;
+        });
+
+        container.querySelectorAll("[data-vault-download]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const key = btn.getAttribute("data-vault-download");
+                const doc = db[key];
+                if (!doc) return;
+                Vault.download(doc.title || "document", doc.content || "");
+            });
         });
     },
 
@@ -1897,12 +1909,12 @@ window.Vault = {
         VaultReader.open(doc);
     },
 
-    download(title, encodedContent) {
-        const blob = new Blob([decodeURIComponent(encodedContent)], { type: "text/plain;charset=utf-8" });
+    download(title, content) {
+        const blob = new Blob([String(content || "")], { type: "text/plain;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = String(decodeURIComponent(title)).replace(/\s+/g, "_") + ".txt";
+        a.download = String(title || "document").replace(/\s+/g, "_") + ".txt";
         document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
     }
 };
@@ -2189,8 +2201,10 @@ class PhysicsController {
         const s = e => this.startDrag(e.touches?e.touches[0]:e);
         const m = e => this.move(e.touches?e.touches[0]:e);
         const e2 = () => this.end();
+        this._onMouseMove = m;
+        this._onMouseUp = e2;
 
-        el.addEventListener("mousedown",s); window.addEventListener("mousemove",m); window.addEventListener("mouseup",e2);
+        el.addEventListener("mousedown",s); window.addEventListener("mousemove",this._onMouseMove); window.addEventListener("mouseup",this._onMouseUp);
         el.addEventListener("touchstart",s,{passive:false});
         el.addEventListener("touchmove",ev => {
             if(this.active) { ev.preventDefault(); ev.stopPropagation(); }
@@ -2214,7 +2228,12 @@ class PhysicsController {
     }
 
     unlockCard() { if(!this.awaitingRecenter) return; this.awaitingRecenter = false; this.el.classList.remove('locked'); }
-    cleanup() { cancelAnimationFrame(this.raf); window.removeEventListener("deviceorientation", this.handleOrientation); }
+    cleanup() {
+        cancelAnimationFrame(this.raf);
+        window.removeEventListener("deviceorientation", this.handleOrientation);
+        window.removeEventListener("mousemove", this._onMouseMove);
+        window.removeEventListener("mouseup", this._onMouseUp);
+    }
 
     loop() {
         if(this.active || this.locked) return;
@@ -2369,14 +2388,19 @@ window.KineticEngine = {
         const map = { up: opts[0], left: opts[1], right: opts[2] };
 
         this.renderCard(d.q, map, (dir) => {
+            if (dir === "DOWN") {
+                this.pool.push(d);
+                this.updateUI();
+                this.nextQ();
+                return;
+            }
             let picked = null;
             if(dir==="UP") picked = map.up; if(dir==="LEFT") picked = map.left; if(dir==="RIGHT") picked = map.right;
 
             if(picked && String(picked).trim() === String(d.u).trim()) {
                 this.xp++;
             } else {
-                if(picked) this.wrong.push(d);
-                else this.pool.push(d);
+                this.wrong.push(d);
             }
             this.updateUI();
             this.nextQ();
@@ -2412,7 +2436,7 @@ window.KineticEngine = {
     updateUI() {
         this.xpEl.innerText = this.xp;
         this.totEl.innerText = this.total;
-        const progress = ((this.total - this.pool.length) / this.total) * 100;
+        const progress = Math.min(100, Math.max(0, ((this.total - this.pool.length) / this.total) * 100));
         this.progEl.style.width = `${progress}%`;
     }
 };
