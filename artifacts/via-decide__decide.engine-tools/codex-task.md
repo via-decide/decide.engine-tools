@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create source explorer for books.
+Create research workspace layout.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
