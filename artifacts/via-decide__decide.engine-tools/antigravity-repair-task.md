@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add AI summarization interface for StudyOS using Nex + Zayvora.
+Allow users to create notes from research inside StudyOS.
 
 RULES
 1. Audit touched files first and identify regressions.
