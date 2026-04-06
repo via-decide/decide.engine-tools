@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add AI summarization interface for StudyOS using Nex + Zayvora.
+Allow users to create notes from research inside StudyOS.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
