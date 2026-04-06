@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "studyos-shared"
+version = "0.1.0"
+description = "Shared StudyOS adapters for polyglot ViaDecide workspace"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools]
+packages = ["studyos_core", "research_tools", "ui_components", "corpus_reader"]
