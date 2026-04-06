@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create source explorer for books.
+Create research workspace layout.
 
 RULES
 1. Audit touched files first and identify regressions.
