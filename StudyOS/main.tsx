@@ -5,68 +5,101 @@
     query: '',
     results: [],
     selectedDoc: null,
-    debounceTimer: null
+    searchCache: new Map(),
+    debounceTimer: null,
+    savedQueries: []
   };
-
-  function renderSearchResults(results) {
-    const container = document.getElementById('nex-search-results');
-    if (!container) return;
-    container.innerHTML = (results || []).map((item, index) => {
-      const snippet = item.text || item.passage || item.content || 'No snippet';
-      return `<button class="w-full text-left border border-[var(--border)] rounded p-2" data-doc-open="${item.doc_id || item.id || ''}" data-result-index="${index}">${snippet.slice(0, 220)}</button>`;
-    }).join('') || '<p class="text-sm text-[var(--muted)]">No results yet.</p>';
-
-    container.querySelectorAll('[data-result-index]').forEach((button) => {
-      button.addEventListener('click', async () => {
-        const idx = Number(button.dataset.resultIndex || 0);
-        const item = state.results[idx] || {};
-        const docId = button.dataset.docOpen || item.doc_id || item.id;
-        if (!docId) return;
-        const documentData = await global.NexClient.getDocument(docId);
-        state.selectedDoc = documentData;
-        global.DocumentViewer.render(document.getElementById('document-viewer-panel'), documentData, state.query);
-      });
-    });
-  }
 
   function renderSummary(summaryData) {
     const target = document.getElementById('summary-content');
     if (!target) return;
     target.innerHTML = `
       <p class="text-sm mb-3">${summaryData.summary || 'No summary generated.'}</p>
-      <ul class="list-disc pl-5 text-sm space-y-1">${(summaryData.bullet_points || []).map((point) => `<li>${point}</li>`).join('')}</ul>
+      <ul class="list-disc pl-5 text-sm space-y-1">${(summaryData.insights || []).map((point) => `<li>${point}</li>`).join('')}</ul>
       <p class="text-xs mt-3 text-[var(--muted)]">Sources: ${(summaryData.sources || []).join(', ') || 'N/A'}</p>
     `;
+  }
+
+  function renderReasoningOutput(data) {
+    const target = document.getElementById('reasoning-content');
+    if (!target) return;
+    target.innerHTML = `
+      <p class="text-sm mb-2">${data.summary || 'No synthesis yet.'}</p>
+      <ul class="list-disc pl-5 text-sm space-y-1">${(data.insights || []).map((item) => `<li>${item}</li>`).join('')}</ul>
+      <div class="text-xs mt-2 text-[var(--muted)]">Sources: ${(data.sources || []).join(', ') || 'N/A'}</div>
+    `;
+  }
+
+  function renderSavedQueries() {
+    const root = document.getElementById('saved-query-list');
+    if (!root) return;
+    root.innerHTML = state.savedQueries.length
+      ? state.savedQueries.map((query) => `<button class="w-full text-left text-sm border border-[var(--border)] rounded p-2 mb-2" data-saved-query="${query}">${query}</button>`).join('')
+      : '<div class="text-sm text-[var(--muted)]">No saved searches yet.</div>';
+
+    root.querySelectorAll('[data-saved-query]').forEach((node) => {
+      node.addEventListener('click', () => runSearch(node.getAttribute('data-saved-query') || ''));
+    });
+  }
+
+  function rememberQuery(query) {
+    if (!query) return;
+    if (!state.savedQueries.includes(query)) {
+      state.savedQueries.unshift(query);
+      state.savedQueries = state.savedQueries.slice(0, 12);
+      renderSavedQueries();
+    }
+  }
+
+  async function openDocumentById(docId) {
+    if (!docId) return;
+    const documentData = await global.NexClient.getDocument(docId);
+    state.selectedDoc = documentData;
+    global.DocumentViewer.render(document.getElementById('document-viewer-panel'), documentData, state.query);
   }
 
   async function runSearch(query) {
     const normalized = String(query || '').trim();
     state.query = normalized;
+
     if (!normalized) {
-      renderSearchResults([]);
-      renderSummary({ summary: '', bullet_points: [], sources: [] });
-      return;
+      renderSummary({ summary: '', insights: [], sources: [] });
+      renderReasoningOutput({ summary: '', insights: [], sources: [] });
+      global.SourceExplorer.render(document.getElementById('sources-explorer-panel'), []);
+      return [];
     }
 
-    const searchPayload = await global.NexClient.searchCorpus(normalized);
-    state.results = (searchPayload.results || searchPayload.passages || []).slice(0, 10);
-    renderSearchResults(state.results);
+    rememberQuery(normalized);
 
-    const summary = await global.SummaryEngine.generateSummary(state.results, normalized);
-    renderSummary(summary);
+    let searchPayload = state.searchCache.get(normalized);
+    if (!searchPayload) {
+      searchPayload = await global.NexClient.searchCorpus(normalized, 10);
+      state.searchCache.set(normalized, searchPayload);
+    }
+
+    state.results = (searchPayload.results || []).slice(0, 10);
+
+    const reasoning = await global.ZayvoraReasoning.synthesize(state.results, normalized);
+    renderReasoningOutput(reasoning);
+    renderSummary(reasoning);
 
     const sourcePayload = await global.NexClient.getSources(normalized);
-    const sources = sourcePayload.sources || sourcePayload.results || [];
+    const sources = sourcePayload.sources || [];
     global.SourceExplorer.render(document.getElementById('sources-explorer-panel'), sources);
 
+    if (global.KnowledgeGraph) {
+      global.KnowledgeGraph.updateFromResults(state.results);
+      global.KnowledgeGraph.renderGraph(document.getElementById('knowledge-graph-panel'));
+    }
+
     if (state.results.length > 0) {
-      const first = state.results[0];
-      const docId = first.doc_id || first.id;
-      if (docId) {
-        const doc = await global.NexClient.getDocument(docId);
-        global.DocumentViewer.render(document.getElementById('document-viewer-panel'), doc, normalized);
+      const firstDocId = state.results[0].document_id;
+      if (firstDocId) {
+        await openDocumentById(firstDocId);
       }
     }
+
+    return state.results;
   }
 
   function initWorkspaceTab() {
@@ -74,25 +107,37 @@
     if (!researchRoot || !global.ResearchWorkspace) return;
 
     global.ResearchWorkspace.mount(researchRoot);
-    global.CorpusSearchPanel.mount(document.getElementById('corpus-search-panel'), (value) => {
-      clearTimeout(state.debounceTimer);
-      state.debounceTimer = setTimeout(() => runSearch(value), 300);
-    });
+    global.CorpusSearchPanel.mount(
+      document.getElementById('corpus-search-panel'),
+      async (value) => {
+        clearTimeout(state.debounceTimer);
+        return new Promise((resolve) => {
+          state.debounceTimer = setTimeout(async () => {
+            const results = await runSearch(value);
+            resolve(results);
+          }, 300);
+        });
+      },
+      async (selected, query) => {
+        state.query = query;
+        await openDocumentById(selected.document_id);
+      }
+    );
+
     global.NotesEditor.mount(document.getElementById('notes-editor-panel'));
-    global.NexChat.mount(document.getElementById('research-chat-panel'));
     global.KnowledgeGraph.mount(document.getElementById('knowledge-graph-panel'));
+    renderSavedQueries();
 
     const copyBtn = document.getElementById('copy-summary-to-notes');
     const notesArea = document.getElementById('research-notes-text');
     copyBtn?.addEventListener('click', () => {
       const summaryText = document.getElementById('summary-content')?.innerText || '';
       notesArea.value = `${notesArea.value}\n\n${summaryText}`.trim();
+      global.NotesEditor.saveNote(notesArea.value);
     });
   }
 
   function initSourcesTab() {
-    const sourceTab = document.getElementById('sources');
-    if (!sourceTab) return;
     const mount = document.getElementById('sources-tab-mount');
     if (mount && !mount.dataset.ready) {
       mount.dataset.ready = 'true';
@@ -121,5 +166,5 @@
     initCorpusStatsTab();
   }
 
-  global.StudyOSResearchApp = { init, runSearch };
+  global.StudyOSResearchApp = { init, runSearch, openDocumentById };
 })(window);
