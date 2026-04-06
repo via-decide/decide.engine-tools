@@ -1,9 +1,9 @@
-Branch: simba/add-semantic-search-panel
-Title: Add semantic search panel.
+Branch: simba/create-source-explorer-for-books
+Title: Create source explorer for books.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add semantic search panel.
+- Goal: Create source explorer for books.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
