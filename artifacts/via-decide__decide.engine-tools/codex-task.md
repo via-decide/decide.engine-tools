@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create topic graph visualization.
+Create corpus document reader for StudyOS so users can open text chunks from the Nex corpus.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

@@ -1,9 +1,9 @@
-Branch: simba/create-topic-graph-visualization
-Title: Create topic graph visualization.
+Branch: simba/create-corpus-document-reader-for-studyos-so-use
+Title: Create corpus document reader for StudyOS so users can open text chun...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create topic graph visualization.
+- Goal: Create corpus document reader for StudyOS so users can open text chunks from the Nex corpus.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

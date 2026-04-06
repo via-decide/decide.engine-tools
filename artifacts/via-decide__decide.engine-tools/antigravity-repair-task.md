@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create topic graph visualization.
+Create corpus document reader for StudyOS so users can open text chunks from the Nex corpus.
 
 RULES
 1. Audit touched files first and identify regressions.
