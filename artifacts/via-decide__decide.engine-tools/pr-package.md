@@ -1,9 +1,9 @@
-Branch: simba/allow-users-to-create-notes-from-research-inside
-Title: Allow users to create notes from research inside StudyOS.
+Branch: simba/add-corpus-analytics-dashboard-for-nex-inside-st
+Title: Add corpus analytics dashboard for Nex inside StudyOS.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Allow users to create notes from research inside StudyOS.
+- Goal: Add corpus analytics dashboard for Nex inside StudyOS.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
