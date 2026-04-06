@@ -1,9 +1,9 @@
-Branch: simba/add-ai-summarization-interface-for-studyos-using
-Title: Add AI summarization interface for StudyOS using Nex + Zayvora.
+Branch: simba/allow-users-to-create-notes-from-research-inside
+Title: Allow users to create notes from research inside StudyOS.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add AI summarization interface for StudyOS using Nex + Zayvora.
+- Goal: Allow users to create notes from research inside StudyOS.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
