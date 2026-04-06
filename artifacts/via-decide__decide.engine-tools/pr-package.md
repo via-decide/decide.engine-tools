@@ -1,9 +1,9 @@
-Branch: simba/create-source-explorer-for-books
-Title: Create source explorer for books.
+Branch: simba/create-research-workspace-layout
+Title: Create research workspace layout.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create source explorer for books.
+- Goal: Create research workspace layout.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
