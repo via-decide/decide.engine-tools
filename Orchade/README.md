@@ -6,6 +6,7 @@ AI-native game engine prototype scaffold.
 Orchade is structured to separate world simulation from reasoning:
 - `engine/` runs simulation, ECS, loop, and systems.
 - `ai/zayvora_bridge/` integrates Zayvora Toolkit decisioning.
+- `ai/studyos_bridge/` enriches NPC context via StudyOS corpus and summary APIs.
 - `game/` contains domain systems (combat/quest/dialogue/inventory).
 - `tools/` contains offline worldgen + asset pipeline tooling.
 
