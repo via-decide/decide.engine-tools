@@ -1,9 +1,9 @@
-Branch: simba/add-corpus-analytics-dashboard-for-nex-inside-st
-Title: Add corpus analytics dashboard for Nex inside StudyOS.
+Branch: simba/create-protected-file-guard-report-generator
+Title: Create protected-file guard report generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add corpus analytics dashboard for Nex inside StudyOS.
+- Goal: Create protected-file guard report generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
