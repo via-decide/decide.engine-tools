@@ -1,9 +1,9 @@
-Branch: simba/add-corpus-analytics-dashboard-for-nex-inside-st
-Title: Add corpus analytics dashboard for Nex inside StudyOS.
+Branch: simba/create-repository-safety-audit-for-script-order-
+Title: Create repository safety audit for script order and browser compatibi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add corpus analytics dashboard for Nex inside StudyOS.
+- Goal: Create repository safety audit for script order and browser compatibility.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
