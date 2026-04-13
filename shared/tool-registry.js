@@ -13,30 +13,31 @@
 
   const BUILTIN_TOOLS = [
     {
-      id: 'workflow-builder',
-      name: 'Agent Plan Editor',
-      description: 'Build step-based agent workflows and run previews.',
-      category: 'coders',
-      tags: ['workflow', 'agent'],
-      entry: 'workflow-builder.html',
-      outputs: ['agent_workflow_json']
+      id: 'decision-matrix',
+      name: 'Decision Matrix',
+      description: 'Weighted decision-making with scored criteria analysis.',
+      category: 'business',
+      tags: ['decision', 'matrix', 'scoring'],
+      entry: 'decision-matrix.html',
+      featured: true
     },
     {
-      id: 'tool-graph',
-      name: 'Agent Tool Graph',
-      description: 'Visualize tool, workflow and agent relationships.',
-      category: 'system',
-      tags: ['graph', 'registry'],
-      entry: 'tool-graph.html'
+      id: 'opportunity-radar',
+      name: 'Opportunity Radar',
+      description: 'Identify, evaluate, and prioritize opportunities systematically.',
+      category: 'business',
+      tags: ['opportunities', 'radar', 'assessment'],
+      entry: 'opportunity-radar.html',
+      featured: true
     },
     {
-      id: 'agent-builder',
-      name: 'Agent Builder',
-      description: 'Create and save agents as JSON documents.',
-      category: 'coders',
-      tags: ['agent', 'builder'],
-      entry: 'agent/index.html',
-      outputs: ['agent_json']
+      id: 'reality-check',
+      name: 'Reality Check',
+      description: 'Validate decisions and identify blind spots through reality testing.',
+      category: 'business',
+      tags: ['validation', 'risk', 'decisions'],
+      entry: 'reality-check.html',
+      featured: true
     },
     {
       id: 'founder',
@@ -46,17 +47,8 @@
       audience: ['founders', 'creators'],
       inputs: ['story', 'offer'],
       outputs: ['founder_narrative'],
-      relatedTools: ['prompt-alchemy-main', 'script-generator'],
       entry: 'founder/index.html',
       tags: ['legacy', 'positioning']
-    },
-    {
-      id: 'tool-registry-console',
-      name: 'Tool Registry Console',
-      description: 'Inspect and manage registered tools and plugins.',
-      category: 'system',
-      tags: ['registry'],
-      entry: 'tool-registry.html'
     },
     {
       id: 'mars-decision-lab',
@@ -65,131 +57,22 @@
       category: 'education',
       tags: ['game', 'mars', 'simulation'],
       entry: 'mars.html'
-    },
-    {
-      id: 'vd-wallet',
-      name: 'VD Wallet',
-      description: 'Shared cross-game economy wallet using localStorage.',
-      category: 'system',
-      tags: ['wallet', 'economy', 'shared'],
-      entry: 'shared/vd-wallet.js'
-    },
-    {
-      id: 'execution-console',
-      name: 'Execution Console',
-      description: 'Run saved agents and inspect sequential execution logs.',
-      category: 'system',
-      tags: ['runtime', 'execution'],
-      entry: 'execution-console.html',
-      outputs: ['execution_log']
-    },
-    {
-      id: 'llm_router',
-      name: 'LLM Router',
-      description: 'Routes prompts to Groq, Gemini, or Claude and normalizes output.',
-      category: 'system',
-      tags: ['llm', 'router', 'ai'],
-      entry: 'shared/tool-registry.js',
-      inputs: ['provider', 'prompt'],
-      outputs: ['text']
     }
   ];
 
 
-  const GAME_ENHANCEMENT_TOOLS = [
-    {
-      id: 'ai-game-strategy-advisor',
-      name: 'AI Game Strategy Advisor',
-      description: 'AI-powered strategic advisor — analyzes player state & recommends optimal growth.',
-      category: 'simulations',
-      tags: ['orchard-engine', 'ai', 'strategy', 'game-logic'],
-      entry: 'tools/engine/ai-game-strategy-advisor/index.html',
-      audience: ['players', 'founders', 'operators'],
-      inputs: ['player_state', 'growth_mode', 'goal'],
-      outputs: ['strategy_report', 'action_plan'],
-      relatedTools: ['ai-coach-console', 'growth-path-recommender', 'daily-quest-generator'],
-      featured: true,
-      isEngineTool: true
-    },
-    {
-      id: 'game-command-center',
-      name: 'Game Command Center',
-      description: 'Unified dashboard — live stats, farm health, quests & all game layers.',
-      category: 'simulations',
-      tags: ['orchard-engine', 'dashboard', 'game-hub'],
-      entry: 'tools/engine/game-command-center/index.html',
-      audience: ['players', 'founders', 'operators'],
-      inputs: ['player_id'],
-      outputs: ['dashboard_view'],
-      relatedTools: ['meta-health-dashboard', 'starter-farm-generator', 'daily-quest-generator'],
-      featured: true,
-      isEngineTool: true
-    },
-    {
-      id: 'leaderboard-analytics',
-      name: 'Leaderboard & Analytics',
-      description: 'Interactive leaderboard with rankings, archetype charts & fairness analytics.',
-      category: 'simulations',
-      tags: ['orchard-engine', 'leaderboard', 'analytics', 'visualization'],
-      entry: 'tools/engine/leaderboard-analytics/index.html',
-      audience: ['players', 'recruiters', 'operators'],
-      inputs: ['player_data', 'time_range'],
-      outputs: ['leaderboard_view', 'fairness_report'],
-      relatedTools: ['fair-ranking-engine', 'balance-dashboard', 'trust-score-engine'],
-      featured: true,
-      isEngineTool: true
-    },
-    {
-      id: 'network-latency-simulator',
-      name: 'Network Latency Simulator',
-      description: 'Simulate network conditions — latency, jitter, packet loss & bandwidth caps.',
-      category: 'simulations',
-      tags: ['orchard-engine', 'network', 'simulation', 'operations'],
-      entry: 'tools/engine/network-latency-simulator/index.html',
-      audience: ['operators', 'founders', 'coders'],
-      inputs: ['latency_ms', 'jitter_ms', 'packet_loss_pct', 'bandwidth_kbps'],
-      outputs: ['simulation_report', 'buffer_metrics'],
-      relatedTools: ['meta-health-dashboard', 'market-dynamics'],
-      isEngineTool: true
-    },
-    {
-      id: 'gesture-feedback-ui',
-      name: 'Gesture Feedback UI',
-      description: 'Visual gesture toasts, consensus meter & SOS emergency overlay.',
-      category: 'simulations',
-      tags: ['orchard-engine', 'ui', 'gesture', 'feedback'],
-      entry: 'tools/engine/gesture-feedback-ui/index.html',
-      audience: ['players', 'operators', 'coders'],
-      inputs: ['gesture_type', 'intensity'],
-      outputs: ['toast_event', 'consensus_state'],
-      relatedTools: ['game-command-center', 'ai-coach-console'],
-      isEngineTool: true
-    }
-  ];
+  /* Engine/template tools removed from UI — backend-only, not user-facing */
+  const GAME_ENHANCEMENT_TOOLS = [];
 
+  /* Only real, user-facing tools are importable */
   const importableToolDirs = [
-    'tools/promptalchemy', 'tools/script-generator', 'tools/spec-builder',
-    'tools/code-generator', 'tools/code-reviewer', 'tools/tool-router',
-    'tools/export-studio', 'tools/template-vault', 'tools/idea-remixer',
-    'tools/task-splitter', 'tools/prompt-compare', 'tools/repo-improvement-brief',
-    'tools/workflow-template-gallery', 'tools/tool-search-discovery',
-    'tools/context-packager', 'tools/output-evaluator',
-    'tools/engine/player-signup', 'tools/engine/orchard-profile-builder',
-    'tools/engine/starter-farm-generator', 'tools/engine/root-strength-calculator',
-    'tools/engine/trunk-growth-calculator', 'tools/engine/fruit-yield-engine',
-    'tools/engine/daily-quest-generator', 'tools/engine/weekly-harvest-engine',
-    'tools/engine/thirty-day-promotion-engine', 'tools/engine/fair-ranking-engine',
-    'tools/engine/seed-exchange', 'tools/engine/fruit-sharing',
-    'tools/engine/circle-builder', 'tools/engine/peer-validation-engine',
-    'tools/engine/trust-score-engine', 'tools/engine/recruiter-dashboard',
-    'tools/engine/orchard-discovery-search', 'tools/engine/hire-readiness-scorer',
-    'tools/engine/four-direction-pipeline', 'tools/engine/growth-path-recommender',
-    'tools/engine/ai-coach-console', 'tools/engine/simulation-runner',
-    'tools/engine/seed-quality-scorer', 'tools/engine/meta-health-dashboard',
-    'tools/engine/synthetic-player-generator', 'tools/engine/wave1-simulation-runner',
-    'tools/engine/balance-dashboard', 'tools/engine/growth-milestone-engine',
-    'tools/games/hex-wars', 'tools/games/wings-of-fire-quiz',
-    'tools/engine/script-generator-files', 'tools/engine/layer1-swipe-crucible'
+    'tools/decision-matrix', 'tools/scenario-planner', 'tools/eco-engine-test',
+    'tools/color-palette', 'tools/json-formatter', 'tools/pomodoro',
+    'tools/regex-tester',
+    'tools/games/hex-wars', 'tools/games/freecell-classic',
+    'tools/games/snake-game', 'tools/games/wings-of-fire-quiz',
+    'tools/games/skillhex-mission-control', 'tools/games/vialogic',
+    'tools/business/kutch-map'
   ];
 
   function normalizeCategory(category) {

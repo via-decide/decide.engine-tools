@@ -22,7 +22,7 @@
     category: 'all',
     search: '',
     sortAlpha: true,
-    includeEngineTools: false,
+    includeEngineTools: false, /* always false — backend tools hidden from UI */
     filtered: [],
     renderCursor: 0,
     renderBatch: 20,
@@ -44,9 +44,13 @@
   }
 
   function isVisibleTool(tool) {
-    if (state.includeEngineTools) return true;
+    /* Always hide backend/engine/template tools from the main UI */
     if (tool.isEngineTool) return false;
-    return !normalizeEntry(tool.entry).includes('tools/engine/');
+    const entry = normalizeEntry(tool.entry);
+    if (entry.includes('tools/engine/')) return false;
+    /* Hide system-only tools (wallet, execution console, llm router, etc.) */
+    if (tool.category === 'system') return false;
+    return true;
   }
 
   function clearGrid() {
