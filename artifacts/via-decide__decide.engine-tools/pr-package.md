@@ -1,9 +1,9 @@
-Branch: simba/add-corpus-analytics-dashboard-for-nex-inside-st
-Title: Add corpus analytics dashboard for Nex inside StudyOS.
+Branch: simba/create-shared-economy-wiring-validator
+Title: Create shared economy wiring validator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add corpus analytics dashboard for Nex inside StudyOS.
+- Goal: Create shared economy wiring validator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
