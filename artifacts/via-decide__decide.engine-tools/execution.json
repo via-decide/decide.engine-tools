@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-corpus-analytics-dashboard-for-nex-inside-st",
+  "branch": "simba/create-repository-safety-audit-for-script-order-",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
