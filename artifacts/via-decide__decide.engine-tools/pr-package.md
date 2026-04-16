@@ -1,9 +1,9 @@
-Branch: simba/create-game-economy-simulation-engine
-Title: Create game economy simulation engine.
+Branch: simba/create-npc-behavior-system-builder
+Title: Create NPC behavior system builder.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create game economy simulation engine.
+- Goal: Create NPC behavior system builder.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
