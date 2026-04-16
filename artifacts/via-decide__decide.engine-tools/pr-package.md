@@ -1,9 +1,9 @@
-Branch: simba/create-autonomous-asset-production-pipeline
-Title: Create autonomous asset production pipeline.
+Branch: simba/create-ai-generated-soundtrack-composer
+Title: Create AI-generated soundtrack composer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create autonomous asset production pipeline.
+- Goal: Create AI-generated soundtrack composer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
