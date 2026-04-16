@@ -1,9 +1,9 @@
-Branch: simba/create-architecture-evolution-tracker
-Title: Create architecture evolution tracker.
+Branch: simba/create-solution-synthesis-engine
+Title: Create solution synthesis engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create architecture evolution tracker.
+- Goal: Create solution synthesis engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
