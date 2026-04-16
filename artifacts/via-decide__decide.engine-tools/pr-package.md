@@ -1,9 +1,9 @@
-Branch: simba/create-architecture-design-assistant
-Title: Create architecture design assistant.
+Branch: simba/create-engineering-tradeoff-simulator
+Title: Create engineering tradeoff simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create architecture design assistant.
+- Goal: Create engineering tradeoff simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
