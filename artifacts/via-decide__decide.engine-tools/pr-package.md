@@ -1,9 +1,9 @@
-Branch: simba/create-cli-interface-for-the-decision-engine
-Title: Create CLI interface for the decision engine.
+Branch: simba/create-plugin-loader-for-decision-tools
+Title: Create plugin loader for decision tools.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create CLI interface for the decision engine.
+- Goal: Create plugin loader for decision tools.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create CLI interface for the decision engine.
+Create plugin loader for decision tools.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
