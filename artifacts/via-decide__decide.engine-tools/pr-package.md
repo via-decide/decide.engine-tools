@@ -1,9 +1,9 @@
-Branch: simba/create-decision-audit-trail-viewer
-Title: Create decision audit trail viewer.
+Branch: simba/create-engineering-pattern-detector
+Title: Create engineering pattern detector.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision audit trail viewer.
+- Goal: Create engineering pattern detector.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
