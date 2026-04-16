@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tool auto-registration system.
+Create autonomous engineering assistant interface.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

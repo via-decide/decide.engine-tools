@@ -1,9 +1,9 @@
-Branch: simba/create-tool-auto-registration-system
-Title: Create tool auto-registration system.
+Branch: simba/create-autonomous-engineering-assistant-interfac
+Title: Create autonomous engineering assistant interface.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create tool auto-registration system.
+- Goal: Create autonomous engineering assistant interface.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
