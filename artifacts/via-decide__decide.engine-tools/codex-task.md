@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create player behavior modeling system.
+Create procedural quest generation system.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
