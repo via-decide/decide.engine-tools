@@ -1,9 +1,9 @@
-Branch: simba/create-game-project-architecture-generator
-Title: Create game project architecture generator.
+Branch: simba/create-procedural-world-generator-engine
+Title: Create procedural world generator engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create game project architecture generator.
+- Goal: Create procedural world generator engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

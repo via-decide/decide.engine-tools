@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create game project architecture generator.
+Create procedural world generator engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
