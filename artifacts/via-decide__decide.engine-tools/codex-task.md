@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create problem decomposition engine.
+Create automated engineering review engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
