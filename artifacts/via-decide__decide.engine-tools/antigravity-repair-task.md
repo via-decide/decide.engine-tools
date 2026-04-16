@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add corpus analytics dashboard for Nex inside StudyOS.
+Create engineering insight summarizer.
 
 RULES
 1. Audit touched files first and identify regressions.

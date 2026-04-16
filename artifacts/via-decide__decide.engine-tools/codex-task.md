@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add corpus analytics dashboard for Nex inside StudyOS.
+Create engineering insight summarizer.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
