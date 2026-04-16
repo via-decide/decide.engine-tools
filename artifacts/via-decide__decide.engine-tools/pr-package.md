@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-quest-generation-system
-Title: Create procedural quest generation system.
+Branch: simba/create-autonomous-npc-cognition-engine
+Title: Create autonomous NPC cognition engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural quest generation system.
+- Goal: Create autonomous NPC cognition engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
