@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create planetary world generator.
+Create procedural star system generator.
 
 RULES
 1. Audit touched files first and identify regressions.
