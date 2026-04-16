@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create engineering experiment tracker.
+Create CLI interface for the decision engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
