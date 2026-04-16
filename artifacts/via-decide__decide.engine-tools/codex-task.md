@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create game production orchestration engine.
+Create autonomous asset production pipeline.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
