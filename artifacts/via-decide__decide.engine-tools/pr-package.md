@@ -1,9 +1,9 @@
-Branch: simba/create-gameplay-systems-composer
-Title: Create gameplay systems composer.
+Branch: simba/create-shader-configuration-generator
+Title: Create shader configuration generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create gameplay systems composer.
+- Goal: Create shader configuration generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
