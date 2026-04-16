@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tool usage analytics tracker.
+Create decision matrix generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
