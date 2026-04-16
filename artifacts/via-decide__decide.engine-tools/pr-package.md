@@ -1,9 +1,9 @@
-Branch: simba/create-problem-decomposition-engine
-Title: Create problem decomposition engine.
+Branch: simba/create-automated-engineering-review-engine
+Title: Create automated engineering review engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create problem decomposition engine.
+- Goal: Create automated engineering review engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
