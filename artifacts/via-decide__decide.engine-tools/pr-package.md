@@ -1,9 +1,9 @@
-Branch: simba/create-performance-optimization-analyzer
-Title: Create performance optimization analyzer.
+Branch: simba/create-multiplayer-architecture-planner
+Title: Create multiplayer architecture planner.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create performance optimization analyzer.
+- Goal: Create multiplayer architecture planner.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
