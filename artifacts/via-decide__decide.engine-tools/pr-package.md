@@ -1,9 +1,9 @@
-Branch: simba/create-open-world-streaming-architecture-planner
-Title: Create open-world streaming architecture planner.
+Branch: simba/create-ai-driven-level-design-generator
+Title: Create AI-driven level design generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create open-world streaming architecture planner.
+- Goal: Create AI-driven level design generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
