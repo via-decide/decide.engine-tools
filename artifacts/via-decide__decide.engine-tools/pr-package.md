@@ -1,9 +1,9 @@
-Branch: simba/create-dynamic-weather-simulation-system
-Title: Create dynamic weather simulation system.
+Branch: simba/create-procedural-animation-synthesis-engine
+Title: Create procedural animation synthesis engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create dynamic weather simulation system.
+- Goal: Create procedural animation synthesis engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
