@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-animation-synthesis-engine
-Title: Create procedural animation synthesis engine.
+Branch: simba/create-procedural-quest-generation-system
+Title: Create procedural quest generation system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural animation synthesis engine.
+- Goal: Create procedural quest generation system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
