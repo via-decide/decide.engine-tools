@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create historical timeline generator.
+Create faction politics simulator.
 
 RULES
 1. Audit touched files first and identify regressions.
