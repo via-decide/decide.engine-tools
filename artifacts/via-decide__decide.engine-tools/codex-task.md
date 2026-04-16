@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tool manifest auto-generator.
+Create autonomous tool recommendation engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
