@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create decision workflow composer.
+Create engineering experiment tracker.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
