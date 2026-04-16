@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create decision replay engine.
+Create architecture reasoning logger.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
