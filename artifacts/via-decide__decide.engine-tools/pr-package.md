@@ -1,9 +1,9 @@
-Branch: simba/create-universe-simulation-orchestrator
-Title: Create universe simulation orchestrator.
+Branch: simba/create-galactic-conflict-simulator
+Title: Create galactic conflict simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create universe simulation orchestrator.
+- Goal: Create galactic conflict simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
