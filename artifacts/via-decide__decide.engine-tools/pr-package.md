@@ -1,9 +1,9 @@
-Branch: simba/create-ai-driven-level-design-generator
-Title: Create AI-driven level design generator.
+Branch: simba/create-real-time-game-balancing-simulator
+Title: Create real-time game balancing simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI-driven level design generator.
+- Goal: Create real-time game balancing simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
