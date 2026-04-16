@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create AI-assisted decision orchestrator.
+Create game development orchestration engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
