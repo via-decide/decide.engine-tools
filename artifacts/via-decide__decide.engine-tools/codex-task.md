@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create asset pipeline automation tool.
+Create combat system balancing engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
