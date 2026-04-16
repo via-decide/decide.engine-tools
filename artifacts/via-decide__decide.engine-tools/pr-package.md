@@ -1,9 +1,9 @@
-Branch: simba/create-asset-pipeline-automation-tool
-Title: Create asset pipeline automation tool.
+Branch: simba/create-combat-system-balancing-engine
+Title: Create combat system balancing engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create asset pipeline automation tool.
+- Goal: Create combat system balancing engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
