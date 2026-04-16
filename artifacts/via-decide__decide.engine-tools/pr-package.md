@@ -1,9 +1,9 @@
-Branch: simba/create-technological-progression-engine
-Title: Create technological progression engine.
+Branch: simba/create-societal-population-simulator
+Title: Create societal population simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create technological progression engine.
+- Goal: Create societal population simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
