@@ -1,9 +1,9 @@
-Branch: simba/create-solution-synthesis-engine
-Title: Create solution synthesis engine.
+Branch: simba/create-problem-decomposition-engine
+Title: Create problem decomposition engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create solution synthesis engine.
+- Goal: Create problem decomposition engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
