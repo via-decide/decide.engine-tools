@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create cosmic event simulation engine.
+Create galaxy generation engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
