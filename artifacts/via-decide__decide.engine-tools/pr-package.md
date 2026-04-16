@@ -1,9 +1,9 @@
-Branch: simba/create-reasoning-memory-store
-Title: Create reasoning memory store.
+Branch: simba/create-decision-workflow-composer
+Title: Create decision workflow composer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create reasoning memory store.
+- Goal: Create decision workflow composer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
