@@ -1,9 +1,9 @@
-Branch: simba/create-cosmic-event-simulation-engine
-Title: Create cosmic event simulation engine.
+Branch: simba/create-galaxy-generation-engine
+Title: Create galaxy generation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create cosmic event simulation engine.
+- Goal: Create galaxy generation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
