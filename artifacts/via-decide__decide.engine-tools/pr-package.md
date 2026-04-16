@@ -1,9 +1,9 @@
-Branch: simba/create-warfare-strategy-simulator
-Title: Create warfare strategy simulator.
+Branch: simba/create-economic-trade-network-simulator
+Title: Create economic trade network simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create warfare strategy simulator.
+- Goal: Create economic trade network simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
