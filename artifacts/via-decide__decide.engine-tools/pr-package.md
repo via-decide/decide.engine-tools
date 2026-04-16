@@ -1,9 +1,9 @@
-Branch: simba/create-shader-configuration-generator
-Title: Create shader configuration generator.
+Branch: simba/create-asset-pipeline-automation-tool
+Title: Create asset pipeline automation tool.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create shader configuration generator.
+- Goal: Create asset pipeline automation tool.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
