@@ -1,9 +1,9 @@
-Branch: simba/create-decision-replay-engine
-Title: Create decision replay engine.
+Branch: simba/create-architecture-reasoning-logger
+Title: Create architecture reasoning logger.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision replay engine.
+- Goal: Create architecture reasoning logger.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
