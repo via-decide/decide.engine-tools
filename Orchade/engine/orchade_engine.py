@@ -1,0 +1,36 @@
+"""Top-level executable Orchade engine facade."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
+
+from runtime.runtime_controller import RuntimeController
+
+
+@dataclass
+class OrchadeEngine:
+    """Coordinates runtime controller lifecycle for external callers."""
+
+    seed: int = 42
+    runtime: RuntimeController = field(init=False)
+    started: bool = False
+
+    def __post_init__(self) -> None:
+        self.runtime = RuntimeController(seed=self.seed)
+
+    def start(self, vialogic_path: str) -> Dict[str, Any]:
+        self.started = True
+        return self.runtime.bootstrap(vialogic_path)
+
+    def run_ticks(self, tick_count: int = 1, delta_time: float = 1.0) -> List[Dict[str, Any]]:
+        if not self.started:
+            raise RuntimeError("Engine must be started before running ticks")
+
+        snapshots: List[Dict[str, Any]] = []
+        for _ in range(max(0, tick_count)):
+            snapshots.append(self.runtime.tick(delta_time))
+        return snapshots
+
+    def shutdown(self) -> None:
+        self.started = False
