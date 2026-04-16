@@ -1,9 +1,9 @@
-Branch: simba/create-emergent-narrative-engine
-Title: Create emergent narrative engine.
+Branch: simba/create-warfare-strategy-simulator
+Title: Create warfare strategy simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create emergent narrative engine.
+- Goal: Create warfare strategy simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
