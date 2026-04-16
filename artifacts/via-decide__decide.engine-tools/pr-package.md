@@ -1,9 +1,9 @@
-Branch: simba/create-ai-assisted-decision-orchestrator
-Title: Create AI-assisted decision orchestrator.
+Branch: simba/create-game-development-orchestration-engine
+Title: Create game development orchestration engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI-assisted decision orchestrator.
+- Goal: Create game development orchestration engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
