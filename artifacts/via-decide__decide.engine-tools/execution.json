@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/create-procedural-soundscape-generator",
+  "branch": "simba/create-adaptive-difficulty-engine",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
