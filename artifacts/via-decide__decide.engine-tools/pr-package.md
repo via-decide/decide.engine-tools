@@ -1,9 +1,9 @@
-Branch: simba/create-autonomous-npc-cognition-engine
-Title: Create autonomous NPC cognition engine.
+Branch: simba/create-ecosystem-simulation-engine
+Title: Create ecosystem simulation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create autonomous NPC cognition engine.
+- Goal: Create ecosystem simulation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
