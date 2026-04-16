@@ -1,9 +1,9 @@
-Branch: simba/create-ai-dialogue-writing-engine
-Title: Create AI dialogue writing engine.
+Branch: simba/create-ai-character-design-generator
+Title: Create AI character design generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI dialogue writing engine.
+- Goal: Create AI character design generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
