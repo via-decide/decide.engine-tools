@@ -1,9 +1,9 @@
-Branch: simba/create-quest-and-storyline-generator
-Title: Create quest and storyline generator.
+Branch: simba/create-game-economy-simulation-engine
+Title: Create game economy simulation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create quest and storyline generator.
+- Goal: Create game economy simulation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
