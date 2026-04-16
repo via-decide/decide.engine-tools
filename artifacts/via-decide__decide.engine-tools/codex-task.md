@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create architecture reasoning logger.
+Create tool usage analytics tracker.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
