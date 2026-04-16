@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create decision audit trail viewer.
+Create engineering pattern detector.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
