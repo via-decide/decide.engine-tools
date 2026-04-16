@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create automated engineering review engine.
+Create architecture design assistant.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
