@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create procedural world generator engine.
+Create open-world streaming architecture planner.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
