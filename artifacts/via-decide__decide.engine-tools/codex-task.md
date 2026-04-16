@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create galactic conflict simulator.
+Create alien species generation engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
