@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create decision workflow simulator.
+Create tool manifest auto-generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
