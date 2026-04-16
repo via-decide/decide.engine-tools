@@ -1,9 +1,9 @@
-Branch: simba/create-decision-quality-evaluator
-Title: Create decision quality evaluator.
+Branch: simba/create-architecture-evolution-tracker
+Title: Create architecture evolution tracker.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision quality evaluator.
+- Goal: Create architecture evolution tracker.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
