@@ -1,9 +1,9 @@
-Branch: simba/create-ai-generated-soundtrack-composer
-Title: Create AI-generated soundtrack composer.
+Branch: simba/create-automated-gameplay-telemetry-analyzer
+Title: Create automated gameplay telemetry analyzer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI-generated soundtrack composer.
+- Goal: Create automated gameplay telemetry analyzer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
