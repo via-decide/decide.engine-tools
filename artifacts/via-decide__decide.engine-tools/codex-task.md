@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create AI dialogue writing engine.
+Create AI character design generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
