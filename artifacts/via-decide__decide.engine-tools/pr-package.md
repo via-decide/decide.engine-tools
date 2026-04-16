@@ -1,9 +1,9 @@
-Branch: simba/create-tool-dependency-visualizer
-Title: Create tool dependency visualizer.
+Branch: simba/create-decision-workflow-simulator
+Title: Create decision workflow simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create tool dependency visualizer.
+- Goal: Create decision workflow simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
