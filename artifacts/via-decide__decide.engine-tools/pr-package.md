@@ -1,9 +1,9 @@
-Branch: simba/create-engineering-pattern-detector
-Title: Create engineering pattern detector.
+Branch: simba/create-reasoning-memory-store
+Title: Create reasoning memory store.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create engineering pattern detector.
+- Goal: Create reasoning memory store.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
