@@ -1,9 +1,9 @@
-Branch: simba/create-engineering-experiment-tracker
-Title: Create engineering experiment tracker.
+Branch: simba/create-cli-interface-for-the-decision-engine
+Title: Create CLI interface for the decision engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create engineering experiment tracker.
+- Goal: Create CLI interface for the decision engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
