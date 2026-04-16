@@ -1,9 +1,9 @@
-Branch: simba/create-planetary-world-generator
-Title: Create planetary world generator.
+Branch: simba/create-procedural-star-system-generator
+Title: Create procedural star system generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create planetary world generator.
+- Goal: Create procedural star system generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
