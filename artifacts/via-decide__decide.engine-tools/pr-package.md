@@ -1,9 +1,9 @@
-Branch: simba/create-adaptive-difficulty-engine
-Title: Create adaptive difficulty engine.
+Branch: simba/create-player-behavior-modeling-system
+Title: Create player behavior modeling system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create adaptive difficulty engine.
+- Goal: Create player behavior modeling system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
