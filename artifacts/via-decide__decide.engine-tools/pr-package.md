@@ -1,9 +1,9 @@
-Branch: simba/create-game-production-orchestration-engine
-Title: Create game production orchestration engine.
+Branch: simba/create-autonomous-asset-production-pipeline
+Title: Create autonomous asset production pipeline.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create game production orchestration engine.
+- Goal: Create autonomous asset production pipeline.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
