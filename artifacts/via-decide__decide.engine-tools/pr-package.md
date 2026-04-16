@@ -1,9 +1,9 @@
-Branch: simba/create-ai-concept-art-generation-pipeline
-Title: Create AI concept art generation pipeline.
+Branch: simba/create-civilization-simulation-orchestrator
+Title: Create civilization simulation orchestrator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI concept art generation pipeline.
+- Goal: Create civilization simulation orchestrator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
