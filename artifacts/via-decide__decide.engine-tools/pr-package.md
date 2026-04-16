@@ -1,9 +1,9 @@
-Branch: simba/create-npc-behavior-system-builder
-Title: Create NPC behavior system builder.
+Branch: simba/create-game-project-architecture-generator
+Title: Create game project architecture generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create NPC behavior system builder.
+- Goal: Create game project architecture generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
