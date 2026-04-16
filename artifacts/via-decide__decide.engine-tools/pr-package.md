@@ -1,9 +1,9 @@
-Branch: simba/create-civilization-generation-engine
-Title: Create civilization generation engine.
+Branch: simba/create-universe-simulation-orchestrator
+Title: Create universe simulation orchestrator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create civilization generation engine.
+- Goal: Create universe simulation orchestrator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
