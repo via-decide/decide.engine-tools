@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create automated gameplay telemetry analyzer.
+Create AI cinematic scene generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
