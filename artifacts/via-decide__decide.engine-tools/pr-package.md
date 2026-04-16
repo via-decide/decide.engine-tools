@@ -1,9 +1,9 @@
-Branch: simba/create-decision-matrix-generator
-Title: Create decision matrix generator.
+Branch: simba/create-tool-dependency-visualizer
+Title: Create tool dependency visualizer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision matrix generator.
+- Goal: Create tool dependency visualizer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
