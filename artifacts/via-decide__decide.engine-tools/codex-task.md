@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create knowledge graph builder.
+Create decision audit trail viewer.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
