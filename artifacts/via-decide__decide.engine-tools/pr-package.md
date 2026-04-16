@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-quest-generation-system
-Title: Create procedural quest generation system.
+Branch: simba/create-game-production-orchestration-engine
+Title: Create game production orchestration engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural quest generation system.
+- Goal: Create game production orchestration engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
