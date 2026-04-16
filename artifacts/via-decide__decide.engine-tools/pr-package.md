@@ -1,9 +1,9 @@
-Branch: simba/create-decision-workflow-composer
-Title: Create decision workflow composer.
+Branch: simba/create-engineering-experiment-tracker
+Title: Create engineering experiment tracker.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision workflow composer.
+- Goal: Create engineering experiment tracker.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
