@@ -1,9 +1,9 @@
-Branch: simba/create-economic-trade-network-simulator
-Title: Create economic trade network simulator.
+Branch: simba/create-cultural-evolution-simulator
+Title: Create cultural evolution simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create economic trade network simulator.
+- Goal: Create cultural evolution simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
