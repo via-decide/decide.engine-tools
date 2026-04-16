@@ -1,9 +1,9 @@
-Branch: simba/create-game-development-orchestration-engine
-Title: Create game development orchestration engine.
+Branch: simba/create-game-design-reasoning-engine
+Title: Create game design reasoning engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create game development orchestration engine.
+- Goal: Create game design reasoning engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
