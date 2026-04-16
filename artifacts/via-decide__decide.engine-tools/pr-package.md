@@ -1,9 +1,9 @@
-Branch: simba/create-societal-population-simulator
-Title: Create societal population simulator.
+Branch: simba/create-emergent-narrative-engine
+Title: Create emergent narrative engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create societal population simulator.
+- Goal: Create emergent narrative engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

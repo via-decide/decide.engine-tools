@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create societal population simulator.
+Create emergent narrative engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
