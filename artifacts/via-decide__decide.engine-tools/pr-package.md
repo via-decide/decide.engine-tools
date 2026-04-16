@@ -1,9 +1,9 @@
-Branch: simba/create-level-design-automation-engine
-Title: Create level design automation engine.
+Branch: simba/create-gameplay-systems-composer
+Title: Create gameplay systems composer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create level design automation engine.
+- Goal: Create gameplay systems composer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

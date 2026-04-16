@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create level design automation engine.
+Create gameplay systems composer.
 
 RULES
 1. Audit touched files first and identify regressions.
