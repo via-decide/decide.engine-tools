@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create engineering insight summarizer.
+Create decision knowledge exporter.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
