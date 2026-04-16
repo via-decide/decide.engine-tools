@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create decision knowledge exporter.
+Create cross-tool orchestration engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
