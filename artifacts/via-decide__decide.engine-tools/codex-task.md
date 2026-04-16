@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create planetary world generator.
+Create procedural star system generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
