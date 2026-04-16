@@ -1,9 +1,9 @@
-Branch: simba/create-galaxy-generation-engine
-Title: Create galaxy generation engine.
+Branch: simba/create-planetary-world-generator
+Title: Create planetary world generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create galaxy generation engine.
+- Goal: Create planetary world generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
