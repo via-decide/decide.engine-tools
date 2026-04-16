@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create NPC behavior system builder.
+Create game project architecture generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
