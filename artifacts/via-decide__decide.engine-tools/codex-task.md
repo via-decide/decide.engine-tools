@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create civilization simulation orchestrator.
+Create technological progression engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
