@@ -1,9 +1,9 @@
-Branch: simba/create-automated-engineering-review-engine
-Title: Create automated engineering review engine.
+Branch: simba/create-architecture-design-assistant
+Title: Create architecture design assistant.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create automated engineering review engine.
+- Goal: Create architecture design assistant.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
