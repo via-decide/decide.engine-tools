@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create AI-driven level design generator.
+Create real-time game balancing simulator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
