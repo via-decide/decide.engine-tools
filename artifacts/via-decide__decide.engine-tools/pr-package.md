@@ -1,9 +1,9 @@
-Branch: simba/create-decision-workflow-simulator
-Title: Create decision workflow simulator.
+Branch: simba/create-tool-manifest-auto-generator
+Title: Create tool manifest auto-generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision workflow simulator.
+- Goal: Create tool manifest auto-generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
