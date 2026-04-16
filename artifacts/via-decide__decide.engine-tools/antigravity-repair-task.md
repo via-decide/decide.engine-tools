@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create engineering tradeoff simulator.
+Create AI-assisted decision orchestrator.
 
 RULES
 1. Audit touched files first and identify regressions.

@@ -1,9 +1,9 @@
-Branch: simba/create-engineering-tradeoff-simulator
-Title: Create engineering tradeoff simulator.
+Branch: simba/create-ai-assisted-decision-orchestrator
+Title: Create AI-assisted decision orchestrator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create engineering tradeoff simulator.
+- Goal: Create AI-assisted decision orchestrator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
