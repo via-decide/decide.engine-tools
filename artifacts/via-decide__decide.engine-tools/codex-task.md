@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tool dependency visualizer.
+Create decision workflow simulator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
