@@ -1,9 +1,9 @@
-Branch: simba/create-engineering-insight-summarizer
-Title: Create engineering insight summarizer.
+Branch: simba/create-decision-knowledge-exporter
+Title: Create decision knowledge exporter.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create engineering insight summarizer.
+- Goal: Create decision knowledge exporter.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
