@@ -1,9 +1,9 @@
-Branch: simba/create-ai-character-design-generator
-Title: Create AI character design generator.
+Branch: simba/create-ai-concept-art-generation-pipeline
+Title: Create AI concept art generation pipeline.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI character design generator.
+- Goal: Create AI concept art generation pipeline.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
