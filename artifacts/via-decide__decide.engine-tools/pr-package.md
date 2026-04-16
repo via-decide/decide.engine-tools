@@ -1,9 +1,9 @@
-Branch: simba/create-historical-timeline-generator
-Title: Create historical timeline generator.
+Branch: simba/create-faction-politics-simulator
+Title: Create faction politics simulator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create historical timeline generator.
+- Goal: Create faction politics simulator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
