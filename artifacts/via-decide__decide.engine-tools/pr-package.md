@@ -1,9 +1,9 @@
-Branch: simba/create-tool-usage-analytics-tracker
-Title: Create tool usage analytics tracker.
+Branch: simba/create-decision-matrix-generator
+Title: Create decision matrix generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create tool usage analytics tracker.
+- Goal: Create decision matrix generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
