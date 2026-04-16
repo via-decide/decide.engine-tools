@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-world-generator-engine
-Title: Create procedural world generator engine.
+Branch: simba/create-open-world-streaming-architecture-planner
+Title: Create open-world streaming architecture planner.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural world generator engine.
+- Goal: Create open-world streaming architecture planner.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
