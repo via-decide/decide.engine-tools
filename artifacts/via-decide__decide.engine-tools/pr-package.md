@@ -1,9 +1,9 @@
-Branch: simba/create-game-design-reasoning-engine
-Title: Create game design reasoning engine.
+Branch: simba/create-performance-optimization-analyzer
+Title: Create performance optimization analyzer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create game design reasoning engine.
+- Goal: Create performance optimization analyzer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
