@@ -1,9 +1,9 @@
-Branch: simba/create-autonomous-tool-recommendation-engine
-Title: Create autonomous tool recommendation engine.
+Branch: simba/create-knowledge-graph-builder
+Title: Create knowledge graph builder.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create autonomous tool recommendation engine.
+- Goal: Create knowledge graph builder.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
