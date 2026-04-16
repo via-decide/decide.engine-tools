@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create historical timeline generator.
+Create faction politics simulator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
