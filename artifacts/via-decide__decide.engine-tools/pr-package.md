@@ -1,9 +1,9 @@
-Branch: simba/create-cultural-evolution-simulator
-Title: Create cultural evolution simulator.
+Branch: simba/create-historical-timeline-generator
+Title: Create historical timeline generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create cultural evolution simulator.
+- Goal: Create historical timeline generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
