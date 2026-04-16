@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-corpus-analytics-dashboard-for-nex-inside-st",
+  "branch": "simba/create-engineering-insight-summarizer",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
