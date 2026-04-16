@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create adaptive difficulty engine.
+Create player behavior modeling system.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
