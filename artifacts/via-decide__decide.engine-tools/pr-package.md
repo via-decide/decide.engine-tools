@@ -1,9 +1,9 @@
-Branch: simba/create-multiplayer-architecture-planner
-Title: Create multiplayer architecture planner.
+Branch: simba/create-level-design-automation-engine
+Title: Create level design automation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create multiplayer architecture planner.
+- Goal: Create level design automation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
