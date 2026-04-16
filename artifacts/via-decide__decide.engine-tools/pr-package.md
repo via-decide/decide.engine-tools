@@ -1,9 +1,9 @@
-Branch: simba/create-real-time-game-balancing-simulator
-Title: Create real-time game balancing simulator.
+Branch: simba/create-procedural-soundscape-generator
+Title: Create procedural soundscape generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create real-time game balancing simulator.
+- Goal: Create procedural soundscape generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
