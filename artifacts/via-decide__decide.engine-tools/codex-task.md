@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create ecosystem simulation engine.
+Create dynamic weather simulation system.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
