@@ -1,9 +1,9 @@
-Branch: simba/create-civilization-simulation-orchestrator
-Title: Create civilization simulation orchestrator.
+Branch: simba/create-technological-progression-engine
+Title: Create technological progression engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create civilization simulation orchestrator.
+- Goal: Create technological progression engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
