@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create AI character design generator.
+Create AI concept art generation pipeline.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
