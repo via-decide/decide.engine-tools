@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create game design reasoning engine.
+Create performance optimization analyzer.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
