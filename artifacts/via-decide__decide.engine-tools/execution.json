@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/create-ai-character-design-generator",
+  "branch": "simba/create-ai-concept-art-generation-pipeline",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
