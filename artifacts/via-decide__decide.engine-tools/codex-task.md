@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create AI-generated soundtrack composer.
+Create automated gameplay telemetry analyzer.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
