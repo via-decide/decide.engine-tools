@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-soundscape-generator
-Title: Create procedural soundscape generator.
+Branch: simba/create-adaptive-difficulty-engine
+Title: Create adaptive difficulty engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural soundscape generator.
+- Goal: Create adaptive difficulty engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
