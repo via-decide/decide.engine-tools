@@ -1,9 +1,9 @@
-Branch: simba/create-ai-cinematic-scene-generator
-Title: Create AI cinematic scene generator.
+Branch: simba/create-ai-voice-acting-pipeline
+Title: Create AI voice acting pipeline.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI cinematic scene generator.
+- Goal: Create AI voice acting pipeline.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
