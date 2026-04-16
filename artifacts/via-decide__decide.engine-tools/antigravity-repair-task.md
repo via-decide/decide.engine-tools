@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create AI-driven level design generator.
+Create real-time game balancing simulator.
 
 RULES
 1. Audit touched files first and identify regressions.
