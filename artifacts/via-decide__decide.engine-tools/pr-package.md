@@ -1,9 +1,9 @@
-Branch: simba/create-tool-manifest-auto-generator
-Title: Create tool manifest auto-generator.
+Branch: simba/create-autonomous-tool-recommendation-engine
+Title: Create autonomous tool recommendation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create tool manifest auto-generator.
+- Goal: Create autonomous tool recommendation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
