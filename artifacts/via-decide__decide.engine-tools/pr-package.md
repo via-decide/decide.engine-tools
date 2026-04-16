@@ -1,9 +1,9 @@
-Branch: simba/create-ai-voice-acting-pipeline
-Title: Create AI voice acting pipeline.
+Branch: simba/create-ai-dialogue-writing-engine
+Title: Create AI dialogue writing engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create AI voice acting pipeline.
+- Goal: Create AI dialogue writing engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
