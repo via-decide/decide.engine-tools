@@ -1,9 +1,9 @@
-Branch: simba/create-autonomous-engineering-assistant-interfac
-Title: Create autonomous engineering assistant interface.
+Branch: simba/create-engineering-reasoning-graph
+Title: Create engineering reasoning graph.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create autonomous engineering assistant interface.
+- Goal: Create engineering reasoning graph.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
