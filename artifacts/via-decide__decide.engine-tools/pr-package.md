@@ -1,9 +1,9 @@
-Branch: simba/create-automated-gameplay-telemetry-analyzer
-Title: Create automated gameplay telemetry analyzer.
+Branch: simba/create-ai-cinematic-scene-generator
+Title: Create AI cinematic scene generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create automated gameplay telemetry analyzer.
+- Goal: Create AI cinematic scene generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
