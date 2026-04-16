@@ -1,9 +1,9 @@
-Branch: simba/create-galactic-conflict-simulator
-Title: Create galactic conflict simulator.
+Branch: simba/create-alien-species-generation-engine
+Title: Create alien species generation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create galactic conflict simulator.
+- Goal: Create alien species generation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
