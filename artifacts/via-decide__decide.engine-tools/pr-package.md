@@ -1,9 +1,9 @@
-Branch: simba/create-decision-knowledge-exporter
-Title: Create decision knowledge exporter.
+Branch: simba/create-cross-tool-orchestration-engine
+Title: Create cross-tool orchestration engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision knowledge exporter.
+- Goal: Create cross-tool orchestration engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
