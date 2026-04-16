@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create autonomous asset production pipeline.
+Create AI-generated soundtrack composer.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
