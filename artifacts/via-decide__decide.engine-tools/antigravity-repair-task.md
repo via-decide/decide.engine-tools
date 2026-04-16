@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create plugin loader for decision tools.
+Create tool auto-registration system.
 
 RULES
 1. Audit touched files first and identify regressions.

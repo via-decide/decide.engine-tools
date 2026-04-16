@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create plugin loader for decision tools.
+Create tool auto-registration system.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
