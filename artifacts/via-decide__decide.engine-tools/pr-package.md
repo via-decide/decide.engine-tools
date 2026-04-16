@@ -1,9 +1,9 @@
-Branch: simba/create-architecture-reasoning-logger
-Title: Create architecture reasoning logger.
+Branch: simba/create-tool-usage-analytics-tracker
+Title: Create tool usage analytics tracker.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create architecture reasoning logger.
+- Goal: Create tool usage analytics tracker.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
