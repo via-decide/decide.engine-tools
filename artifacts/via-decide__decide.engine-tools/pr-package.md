@@ -1,9 +1,9 @@
-Branch: simba/create-faction-politics-simulator
-Title: Create faction politics simulator.
+Branch: simba/create-civilization-generation-engine
+Title: Create civilization generation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create faction politics simulator.
+- Goal: Create civilization generation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
