@@ -1,9 +1,9 @@
-Branch: simba/create-combat-system-balancing-engine
-Title: Create combat system balancing engine.
+Branch: simba/create-quest-and-storyline-generator
+Title: Create quest and storyline generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create combat system balancing engine.
+- Goal: Create quest and storyline generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
