@@ -1,9 +1,9 @@
-Branch: simba/create-alien-species-generation-engine
-Title: Create alien species generation engine.
+Branch: simba/create-cosmic-event-simulation-engine
+Title: Create cosmic event simulation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create alien species generation engine.
+- Goal: Create cosmic event simulation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
