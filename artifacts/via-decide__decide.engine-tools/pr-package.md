@@ -1,9 +1,9 @@
-Branch: simba/create-cross-tool-orchestration-engine
-Title: Create cross-tool orchestration engine.
+Branch: simba/create-decision-replay-engine
+Title: Create decision replay engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create cross-tool orchestration engine.
+- Goal: Create decision replay engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
