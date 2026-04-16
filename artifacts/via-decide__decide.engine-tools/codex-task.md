@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create engineering reasoning graph.
+Create decision quality evaluator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

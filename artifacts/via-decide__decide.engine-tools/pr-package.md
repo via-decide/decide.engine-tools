@@ -1,9 +1,9 @@
-Branch: simba/create-engineering-reasoning-graph
-Title: Create engineering reasoning graph.
+Branch: simba/create-decision-quality-evaluator
+Title: Create decision quality evaluator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create engineering reasoning graph.
+- Goal: Create decision quality evaluator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
