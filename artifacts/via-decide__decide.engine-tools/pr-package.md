@@ -1,9 +1,9 @@
-Branch: simba/create-knowledge-graph-builder
-Title: Create knowledge graph builder.
+Branch: simba/create-decision-audit-trail-viewer
+Title: Create decision audit trail viewer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create knowledge graph builder.
+- Goal: Create decision audit trail viewer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
