@@ -1,9 +1,9 @@
-Branch: simba/create-plugin-loader-for-decision-tools
-Title: Create plugin loader for decision tools.
+Branch: simba/create-tool-auto-registration-system
+Title: Create tool auto-registration system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create plugin loader for decision tools.
+- Goal: Create tool auto-registration system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
