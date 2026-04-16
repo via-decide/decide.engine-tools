@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create open-world streaming architecture planner.
+Create AI-driven level design generator.
 
 RULES
 1. Audit touched files first and identify regressions.

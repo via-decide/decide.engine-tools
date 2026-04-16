@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create open-world streaming architecture planner.
+Create AI-driven level design generator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
