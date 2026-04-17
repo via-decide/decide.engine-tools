@@ -1,9 +1,9 @@
-Branch: simba/document-the-mission-system
-Title: Document the mission system.
+Branch: simba/create-documentation-for-the-world-map-system
+Title: Create documentation for the world map system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document the mission system.
+- Goal: Create documentation for the world map system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
