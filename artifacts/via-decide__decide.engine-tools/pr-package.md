@@ -1,9 +1,9 @@
-Branch: simba/create-level-of-detail-lod-system-for-map-render
-Title: Create level-of-detail (LOD) system for map rendering.
+Branch: simba/create-map-zoom-controller
+Title: Create map zoom controller.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create level-of-detail (LOD) system for map rendering.
+- Goal: Create map zoom controller.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
