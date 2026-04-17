@@ -1,9 +1,9 @@
-Branch: simba/create-reasoning-trace-logger
-Title: Create reasoning trace logger.
+Branch: simba/create-decision-graph-engine
+Title: Create decision graph engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create reasoning trace logger.
+- Goal: Create decision graph engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
