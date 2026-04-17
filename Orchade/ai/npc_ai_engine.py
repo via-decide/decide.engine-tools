@@ -120,12 +120,6 @@ class NPCAIEngine:
             "npc_count": len(self._npcs),
             "npcs": [
                 {
-                    "npc_id": npc.npc_id,
-                    "name": npc.name,
-                    "faction": npc.faction,
-                    "last_action": npc.last_action,
-                }
-                for npc in self._npcs.values()
                     "npc_id": npc_id,
                     "name": npc.get("name", npc_id),
                     "faction": npc.get("faction", "independent"),

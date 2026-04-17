@@ -6,9 +6,19 @@
  * No mocking. If a tool loads without console errors → pass.
  */
 
-const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
+
+function loadChromium() {
+  try {
+    return { chromium: require('playwright').chromium };
+  } catch (error) {
+    if (error && error.code === 'MODULE_NOT_FOUND') {
+      return { missingModule: true, error };
+    }
+    throw error;
+  }
+}
 
 const ROOT = path.join(__dirname, '../..');
 
@@ -49,9 +59,16 @@ function isMissingBrowserExecutableError(error) {
 async function runSmokeTests() {
   console.log('\n── Smoke Tests (Playwright) ──\n');
 
+  const loaded = loadChromium();
+  if (loaded.missingModule) {
+    console.warn('  ⚠ Skipping smoke tests: Playwright is not installed.');
+    console.warn('  ⚠ Run `npm install` (and `npx playwright install chromium`) to enable smoke tests.');
+    return { passed: 0, failed: 0, skipped: true, reason: 'missing-playwright-module' };
+  }
+
   let browser;
   try {
-    browser = await chromium.launch({ headless: true });
+    browser = await loaded.chromium.launch({ headless: true });
   } catch (error) {
     if (isMissingBrowserExecutableError(error)) {
       console.warn('  ⚠ Skipping smoke tests: Playwright browser executable is not installed.');
