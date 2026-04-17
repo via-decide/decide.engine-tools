@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create documentation for world regions.
+Document the zoom system used by the map engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
