@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create documentation describing the philosophy of procedural world generation.
+Document the development workflow used in this repository.
 
 RULES
 1. Audit touched files first and identify regressions.

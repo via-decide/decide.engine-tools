@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create documentation describing the philosophy of procedural world generation.
+Document the development workflow used in this repository.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
