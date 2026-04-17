@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Document the mission system.
+Create documentation for the world map system.
 
 RULES
 1. Audit touched files first and identify regressions.
