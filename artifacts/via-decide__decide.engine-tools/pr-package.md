@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-star-system-generator
-Title: Create procedural star system generator.
+Branch: simba/create-vialogic-world-data-loader
+Title: Create ViaLogic world data loader.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural star system generator.
+- Goal: Create ViaLogic world data loader.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

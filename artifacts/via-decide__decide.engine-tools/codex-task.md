@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create procedural star system generator.
+Create ViaLogic world data loader.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
