@@ -151,19 +151,6 @@ class RuntimeController:
             world_state.get("npc_actions", []),
         )
         world_state["quest_log"] = quests
-            "npcs": npcs,
-            "npc_actions": [],
-            "simulation": self.simulation.snapshot(),
-            "quest_log": [],
-            "dungeons": [],
-            "combat_log": [],
-            "global_threat": 0.25,
-        }
-
-        self.ecs_world.global_state = self._state
-        self._spawn_ecs_entities(world, npcs, factions)
-        self._state["ecs"] = self.ecs_world.snapshot()
-        return self._state
 
     def _spawn_ecs_entities(self, world: Dict[str, Any], npcs: List[Dict[str, Any]], factions: List[Dict[str, Any]]) -> None:
         for location in world.get("locations", []):

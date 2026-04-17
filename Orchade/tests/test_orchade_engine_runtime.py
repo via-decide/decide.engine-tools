@@ -1,4 +1,3 @@
-"""Integration tests for new Orchade runtime architecture modules."""
 """Integration tests for Orchade runtime architecture modules."""
 
 from __future__ import annotations
@@ -35,7 +34,6 @@ class OrchadeEngineRuntimeTests(unittest.TestCase):
         self.addCleanup(tmpdir.cleanup)
         return str(root)
 
-    def test_engine_bootstrap_and_tick_generates_world_and_quests(self) -> None:
     def test_engine_bootstrap_creates_world_and_ecs_entities(self) -> None:
         repo_path = self._make_vialogic_fixture()
         engine = OrchadeEngine(seed=7)

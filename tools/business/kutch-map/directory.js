@@ -1,4 +1,12 @@
-let savedBusinesses = JSON.parse(localStorage.getItem('kutchmap_saved')) || [];
+let savedBusinesses = (() => {
+  try {
+    const raw = localStorage.getItem('kutchmap_saved');
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_err) {
+    return [];
+  }
+})();
 let currentFilter = 'all';
 let searchQuery = '';
 
