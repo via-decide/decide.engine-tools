@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create dataset decision analyzer.
+Create interactive decision visualization UI.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
