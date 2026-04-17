@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-for-building-interactions
-Title: Create documentation for building interactions.
+Branch: simba/document-the-mission-engine
+Title: Document the mission engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation for building interactions.
+- Goal: Document the mission engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
