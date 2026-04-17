@@ -8,6 +8,8 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added a Python `decision_engine/` package implementing a complete decision intelligence workflow: context management, evidence collection, reasoning chains and hypotheses, multi-agent scoring, constraint solving, risk/confidence analysis, scenario simulation, strategy/resource planning, feedback loops, metrics, knowledge retrieval, autonomous execution, browser graph viewer, and a runnable `decision_engine/main.py` entrypoint.
+- Added `tests/unit/test_decision_engine.py` to validate end-to-end execution of the new decision engine workflow.
 - Added `game-engine/` browser-playable AAA prototype scaffold with multi-scale zoom (global/city/ground), mission-based region unlocks, minimap/UI overlays, and modular Canvas runtime files (`index.html`, `style.css`, `game.js`, `world.js`, `player.js`, `map.js`, and placeholder assets).
 - Added central Orchade runtime orchestrator entrypoint at `Orchade/engine/orchade_runtime.py` to wire map engine state, world region/city generation, NPC spawn/behavior, gameplay mission triggers, simulation systems, and the unified game tick/game loop lifecycle.
 - Implemented full Orchade modular runtime engine with ECS world orchestration, ViaLogic entity conversion, procedural world/character generation, NPC goal-memory-dialogue AI, quest/event/story systems, combat + level generators, simulation subsystems, and runtime game loop integration with expanded runtime tests.
