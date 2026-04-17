@@ -1,9 +1,9 @@
-Branch: simba/create-interactive-decision-visualization-ui
-Title: Create interactive decision visualization UI.
+Branch: simba/create-strategy-evaluation-engine
+Title: Create strategy evaluation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create interactive decision visualization UI.
+- Goal: Create strategy evaluation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
