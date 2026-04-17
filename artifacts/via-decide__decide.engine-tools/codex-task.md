@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create documentation explaining the Orchade folder structure.
+Document the Orchade engine architecture.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
