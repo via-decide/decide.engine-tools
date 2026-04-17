@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-for-world-regions
-Title: Create documentation for world regions.
+Branch: simba/document-the-zoom-system-used-by-the-map-engine
+Title: Document the zoom system used by the map engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation for world regions.
+- Goal: Document the zoom system used by the map engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
