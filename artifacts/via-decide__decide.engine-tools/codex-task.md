@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create tool integration bridge.
+Create dataset decision analyzer.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
