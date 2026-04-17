@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create map camera controller.
+Create zoom state model for the world map.
 
 RULES
 1. Audit touched files first and identify regressions.
