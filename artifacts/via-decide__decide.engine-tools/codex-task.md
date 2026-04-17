@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Document procedural city generation.
+Create documentation for world regions.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
