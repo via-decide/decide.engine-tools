@@ -1,9 +1,9 @@
-Branch: simba/create-vialogic-world-data-loader
-Title: Create ViaLogic world data loader.
+Branch: simba/create-map-unlock-system
+Title: Create map unlock system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create ViaLogic world data loader.
+- Goal: Create map unlock system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
