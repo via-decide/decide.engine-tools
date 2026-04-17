@@ -1,9 +1,9 @@
-Branch: simba/create-high-level-purpose-documentation-for-the-
-Title: Create high-level purpose documentation for the Orchade engine.
+Branch: simba/create-execution-orchestrator
+Title: Create execution orchestrator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create high-level purpose documentation for the Orchade engine.
+- Goal: Create execution orchestrator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
