@@ -1,9 +1,9 @@
-Branch: simba/create-gameplay-design-documentation
-Title: Create gameplay design documentation.
+Branch: simba/create-documentation-describing-the-philosophy-o
+Title: Create documentation describing the philosophy of procedural world ge...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create gameplay design documentation.
+- Goal: Create documentation describing the philosophy of procedural world generation.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
