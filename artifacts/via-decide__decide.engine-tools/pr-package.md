@@ -1,9 +1,9 @@
-Branch: simba/create-region-graph-system
-Title: Create region graph system.
+Branch: simba/create-level-of-detail-lod-system-for-map-render
+Title: Create level-of-detail (LOD) system for map rendering.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create region graph system.
+- Goal: Create level-of-detail (LOD) system for map rendering.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
