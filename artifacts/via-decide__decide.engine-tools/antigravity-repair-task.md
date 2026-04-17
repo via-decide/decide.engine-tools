@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create documentation for the multi-scale world map engine.
+Create runtime loop documentation.
 
 RULES
 1. Audit touched files first and identify regressions.
