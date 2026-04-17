@@ -1,9 +1,9 @@
-Branch: simba/create-map-zoom-controller
-Title: Create map zoom controller.
+Branch: simba/build-a-multi-scale-world-engine-that-supports-a
+Title: Build a multi-scale world engine that supports Apple-Maps-style zoom ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create map zoom controller.
+- Goal: Produce a working open-world engine capable of: - dynamic world maps - smooth zoom transitions - interactive exploration - mission-driven map unlocking
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
