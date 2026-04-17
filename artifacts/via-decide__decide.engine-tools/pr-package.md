@@ -1,9 +1,9 @@
-Branch: simba/create-mission-engine
-Title: Create mission engine.
+Branch: simba/create-player-movement-controller
+Title: Create player movement controller.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create mission engine.
+- Goal: Create player movement controller.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
