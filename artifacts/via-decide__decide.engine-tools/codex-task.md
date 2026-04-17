@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create interactive decision visualization UI.
+Create strategy evaluation engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
