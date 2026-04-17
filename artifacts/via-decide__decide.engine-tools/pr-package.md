@@ -1,9 +1,9 @@
-Branch: simba/create-dataset-decision-analyzer
-Title: Create dataset decision analyzer.
+Branch: simba/create-interactive-decision-visualization-ui
+Title: Create interactive decision visualization UI.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create dataset decision analyzer.
+- Goal: Create interactive decision visualization UI.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
