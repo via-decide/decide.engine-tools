@@ -1,9 +1,9 @@
-Branch: simba/document-the-ai-architecture
-Title: Document the AI architecture.
+Branch: simba/create-gameplay-design-documentation
+Title: Create gameplay design documentation.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document the AI architecture.
+- Goal: Create gameplay design documentation.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
