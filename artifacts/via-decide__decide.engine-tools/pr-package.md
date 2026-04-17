@@ -1,9 +1,9 @@
-Branch: simba/document-the-orchade-engine-architecture
-Title: Document the Orchade engine architecture.
+Branch: simba/create-high-level-purpose-documentation-for-the-
+Title: Create high-level purpose documentation for the Orchade engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document the Orchade engine architecture.
+- Goal: Create high-level purpose documentation for the Orchade engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
