@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create map camera controller.
+Create zoom state model for the world map.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
