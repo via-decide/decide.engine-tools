@@ -1,9 +1,9 @@
-Branch: simba/create-scenario-simulation-engine
-Title: Create scenario simulation engine.
+Branch: simba/create-reasoning-trace-logger
+Title: Create reasoning trace logger.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create scenario simulation engine.
+- Goal: Create reasoning trace logger.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
