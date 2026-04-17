@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create documentation for the multi-scale world map engine.
+Create runtime loop documentation.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
