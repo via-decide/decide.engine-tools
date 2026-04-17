@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create documentation for the world map system.
+Document the AI architecture.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
