@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-city-generator
-Title: Create procedural city generator.
+Branch: simba/create-procedural-region-generator
+Title: Create procedural region generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural city generator.
+- Goal: Create procedural region generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
