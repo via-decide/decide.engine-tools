@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Document integration with ViaLogic.
+Create documentation for world simulation.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
