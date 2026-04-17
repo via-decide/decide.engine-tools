@@ -1,9 +1,9 @@
-Branch: simba/create-player-movement-controller
-Title: Create player movement controller.
+Branch: simba/create-procedural-city-generator
+Title: Create procedural city generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create player movement controller.
+- Goal: Create procedural city generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
