@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-explaining-the-orchade-fold
-Title: Create documentation explaining the Orchade folder structure.
+Branch: simba/document-the-orchade-engine-architecture
+Title: Document the Orchade engine architecture.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation explaining the Orchade folder structure.
+- Goal: Document the Orchade engine architecture.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
