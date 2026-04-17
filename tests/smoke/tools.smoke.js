@@ -19,6 +19,7 @@ const SMOKE_TARGETS = [
   { id: 'snake-game',           path: 'tools/games/snake-game/index.html' },
   { id: 'hex-wars',             path: 'tools/games/hex-wars/index.html' },
   { id: 'freecell-classic',     path: 'tools/games/freecell-classic/index.html' },
+  { id: 'aaa-world-prototype',  path: 'game-engine/index.html' },
 
   // Productivity (subscription value)
   { id: 'json-formatter',       path: 'tools/json-formatter/index.html' },
