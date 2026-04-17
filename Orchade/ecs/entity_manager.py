@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, Set
+from typing import Dict, Iterable, List, Set
 
 
 @dataclass
@@ -28,6 +28,9 @@ class EntityManager:
 
     def exists(self, entity_id: int) -> bool:
         return entity_id in self._active_entities
+
+    def all_entities(self) -> List[int]:
+        return sorted(self._active_entities)
 
     def snapshot(self) -> Dict[str, int]:
         return {

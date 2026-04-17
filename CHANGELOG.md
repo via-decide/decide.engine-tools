@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Implemented full Orchade modular runtime engine with ECS world orchestration, ViaLogic entity conversion, procedural world/character generation, NPC goal-memory-dialogue AI, quest/event/story systems, combat + level generators, simulation subsystems, and runtime game loop integration with expanded runtime tests.
 - Implemented Orchade AAA runtime foundations with executable Python modules for ECS (`Orchade/ecs`), ViaLogic ingestion (`Orchade/integration/vialogic_loader.py`), procedural world generation (`Orchade/world/world_generator.py`), NPC cognition (`Orchade/ai/npc_ai_engine.py`), civilization simulation (`Orchade/simulation/world_simulation.py`), runtime orchestration (`Orchade/runtime/runtime_controller.py`), and top-level engine lifecycle (`Orchade/engine/orchade_engine.py`), plus integration coverage in `Orchade/tests/test_orchade_engine_runtime.py`.
 - Added polyglot workspace interoperability scaffolding: `workspace/shared_modules` catalog, editable-install Python shared adapters under `workspace/shared/`, Orchade `ai/studyos_bridge` integration, and a Zayvora toolkit StudyOS bridge module for corpus/research access.
 - Initialized `Orchade/` AI-native game engine prototype scaffold with modular engine/game/assets/tools/docs layout, ECS + core engine lifecycle, Zayvora bridge integration layer, procedural world generator, gameplay systems, YAML config, and runnable demo script.

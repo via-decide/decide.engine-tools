@@ -26,11 +26,7 @@ class OrchadeEngine:
     def run_ticks(self, tick_count: int = 1, delta_time: float = 1.0) -> List[Dict[str, Any]]:
         if not self.started:
             raise RuntimeError("Engine must be started before running ticks")
-
-        snapshots: List[Dict[str, Any]] = []
-        for _ in range(max(0, tick_count)):
-            snapshots.append(self.runtime.tick(delta_time))
-        return snapshots
+        return self.runtime.run(tick_count=tick_count, delta_time=delta_time)
 
     def shutdown(self) -> None:
         self.started = False

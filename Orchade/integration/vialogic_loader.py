@@ -37,7 +37,7 @@ class ViaLogicLoader:
     DATA_FOLDERS = ["people", "characters", "maps", "narrative", "assets"]
 
     def load(self, repo_path: str | Path) -> ViaLogicSnapshot:
-        root = Path(repo_path).resolve()
+        root = Path(repo_path).expanduser().resolve()
         snapshot = ViaLogicSnapshot(root_path=str(root))
         for folder in self.DATA_FOLDERS:
             bucket = self._load_folder(root / folder, folder)
@@ -66,23 +66,26 @@ class ViaLogicLoader:
     def _parse_file(self, file_path: Path) -> Dict[str, Any]:
         raw = file_path.read_text(encoding="utf-8").strip()
         if not raw:
-            return {"content": ""}
+            return {"content": "", "fields": {}}
 
         suffix = file_path.suffix.lower()
         if suffix == ".json":
             try:
-                return {"content": json.loads(raw)}
+                content = json.loads(raw)
             except json.JSONDecodeError:
-                return {"content": raw}
+                content = raw
+            return {"content": content, "fields": self._extract_fields(content)}
 
         if suffix in {".yaml", ".yml"}:
             try:
                 import yaml  # type: ignore
 
-                parsed = yaml.safe_load(raw)
-                return {"content": parsed if parsed is not None else {}}
+                content = yaml.safe_load(raw)
+                if content is None:
+                    content = {}
             except Exception:
-                return {"content": raw}
+                content = raw
+            return {"content": content, "fields": self._extract_fields(content)}
 
         key_values: Dict[str, Any] = {}
         for line in raw.splitlines():
@@ -92,6 +95,9 @@ class ViaLogicLoader:
             key, value = line.split(":", 1)
             key_values[key.strip()] = value.strip()
 
-        if key_values:
-            return {"content": raw, "fields": key_values}
-        return {"content": raw}
+        return {"content": raw, "fields": key_values}
+
+    def _extract_fields(self, content: Any) -> Dict[str, Any]:
+        if isinstance(content, dict):
+            return {str(k): v for k, v in content.items() if isinstance(k, str)}
+        return {}
