@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/create-map-camera-controller",
+  "branch": "simba/create-zoom-state-model-for-the-world-map",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
