@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-describing-the-philosophy-o
-Title: Create documentation describing the philosophy of procedural world ge...
+Branch: simba/document-the-development-workflow-used-in-this-r
+Title: Document the development workflow used in this repository.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation describing the philosophy of procedural world generation.
+- Goal: Document the development workflow used in this repository.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
