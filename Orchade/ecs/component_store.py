@@ -16,6 +16,7 @@ class ComponentStore:
         self._components.setdefault(component_name, {})[entity_id] = dict(payload)
 
     def get_component(self, entity_id: int, component_name: str) -> Dict[str, Any] | None:
+        return self._components.get(component_name, {}).get(entity_id)
         component = self._components.get(component_name, {}).get(entity_id)
         return dict(component) if component is not None else None
 
@@ -32,6 +33,9 @@ class ComponentStore:
             return []
 
         pools = [set(self._components.get(name, {}).keys()) for name in component_names]
+        if not pools:
+            return []
+
         shared = set.intersection(*pools) if pools else set()
         return sorted(shared)
 
