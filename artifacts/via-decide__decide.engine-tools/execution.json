@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/document-the-zoom-system-used-by-the-map-engine",
+  "branch": "simba/create-documentation-for-the-multi-scale-world-m",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
