@@ -1,9 +1,9 @@
-Branch: simba/document-integration-with-vialogic
-Title: Document integration with ViaLogic.
+Branch: simba/create-documentation-for-world-simulation
+Title: Create documentation for world simulation.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document integration with ViaLogic.
+- Goal: Create documentation for world simulation.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
