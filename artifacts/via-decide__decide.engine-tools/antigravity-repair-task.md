@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Document the development workflow used in this repository.
+Create documentation explaining the Orchade folder structure.
 
 RULES
 1. Audit touched files first and identify regressions.
