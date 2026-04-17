@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create high-level purpose documentation for the Orchade engine.
+Create execution orchestrator.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
