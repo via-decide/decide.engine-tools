@@ -1,9 +1,9 @@
-Branch: simba/document-faction-mechanics
-Title: Document faction mechanics.
+Branch: simba/create-documentation-for-building-interactions
+Title: Create documentation for building interactions.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document faction mechanics.
+- Goal: Create documentation for building interactions.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
