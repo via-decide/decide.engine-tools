@@ -1,9 +1,9 @@
-Branch: simba/document-the-development-workflow-used-in-this-r
-Title: Document the development workflow used in this repository.
+Branch: simba/create-documentation-explaining-the-orchade-fold
+Title: Create documentation explaining the Orchade folder structure.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document the development workflow used in this repository.
+- Goal: Create documentation explaining the Orchade folder structure.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
