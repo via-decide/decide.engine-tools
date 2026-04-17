@@ -1,9 +1,9 @@
-Branch: simba/document-the-zoom-system-used-by-the-map-engine
-Title: Document the zoom system used by the map engine.
+Branch: simba/create-documentation-for-the-multi-scale-world-m
+Title: Create documentation for the multi-scale world map engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document the zoom system used by the map engine.
+- Goal: Create documentation for the multi-scale world map engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
