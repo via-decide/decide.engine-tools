@@ -1,9 +1,9 @@
-Branch: simba/create-execution-orchestrator
-Title: Create execution orchestrator.
+Branch: simba/create-tool-integration-bridge
+Title: Create tool integration bridge.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create execution orchestrator.
+- Goal: Create tool integration bridge.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
