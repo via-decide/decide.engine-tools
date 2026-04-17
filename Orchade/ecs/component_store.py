@@ -17,6 +17,11 @@ class ComponentStore:
 
     def get_component(self, entity_id: int, component_name: str) -> Dict[str, Any] | None:
         return self._components.get(component_name, {}).get(entity_id)
+        component = self._components.get(component_name, {}).get(entity_id)
+        return dict(component) if component is not None else None
+
+    def get_all(self, component_name: str) -> Dict[int, Dict[str, Any]]:
+        return {entity_id: dict(payload) for entity_id, payload in self._components.get(component_name, {}).items()}
 
     def remove_entity(self, entity_id: int) -> None:
         for component_map in self._components.values():

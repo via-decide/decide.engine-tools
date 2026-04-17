@@ -31,6 +31,7 @@ class OrchadeEngine:
         for _ in range(max(0, tick_count)):
             snapshots.append(self.runtime.tick(delta_time))
         return snapshots
+        return self.runtime.run(tick_count=tick_count, delta_time=delta_time)
 
     def shutdown(self) -> None:
         self.started = False

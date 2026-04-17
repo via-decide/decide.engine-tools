@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-star-system-generator
-Title: Create procedural star system generator.
+Branch: simba/create-high-level-purpose-documentation-for-the-
+Title: Create high-level purpose documentation for the Orchade engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural star system generator.
+- Goal: Create high-level purpose documentation for the Orchade engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
