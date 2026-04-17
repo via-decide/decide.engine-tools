@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Document procedural city generation.
+Create documentation for world regions.
 
 RULES
 1. Audit touched files first and identify regressions.
