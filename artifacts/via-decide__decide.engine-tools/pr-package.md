@@ -1,9 +1,9 @@
-Branch: simba/create-map-camera-controller
-Title: Create map camera controller.
+Branch: simba/create-zoom-state-model-for-the-world-map
+Title: Create zoom state model for the world map.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create map camera controller.
+- Goal: Create zoom state model for the world map.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
