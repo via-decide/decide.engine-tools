@@ -1,9 +1,9 @@
-Branch: simba/document-the-mission-engine
-Title: Document the mission engine.
+Branch: simba/create-documentation-for-the-npc-system
+Title: Create documentation for the NPC system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document the mission engine.
+- Goal: Create documentation for the NPC system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
