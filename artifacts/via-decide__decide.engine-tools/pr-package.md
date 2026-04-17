@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-for-world-simulation
-Title: Create documentation for world simulation.
+Branch: simba/document-faction-mechanics
+Title: Document faction mechanics.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation for world simulation.
+- Goal: Document faction mechanics.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
