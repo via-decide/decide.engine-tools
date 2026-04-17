@@ -1,9 +1,9 @@
-Branch: simba/create-procedural-region-generator
-Title: Create procedural region generator.
+Branch: simba/create-region-graph-system
+Title: Create region graph system.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create procedural region generator.
+- Goal: Create region graph system.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
