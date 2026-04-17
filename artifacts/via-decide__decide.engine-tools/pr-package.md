@@ -1,9 +1,9 @@
-Branch: simba/create-tool-integration-bridge
-Title: Create tool integration bridge.
+Branch: simba/create-dataset-decision-analyzer
+Title: Create dataset decision analyzer.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create tool integration bridge.
+- Goal: Create dataset decision analyzer.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
