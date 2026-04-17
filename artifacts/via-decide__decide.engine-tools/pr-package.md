@@ -1,9 +1,9 @@
-Branch: simba/create-knowledge-graph-builder
-Title: Create knowledge graph builder.
+Branch: simba/create-scenario-simulation-engine
+Title: Create scenario simulation engine.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create knowledge graph builder.
+- Goal: Create scenario simulation engine.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
