@@ -1,7 +1,7 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/create-tool-integration-bridge",
+  "branch": "simba/create-dataset-decision-analyzer",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
