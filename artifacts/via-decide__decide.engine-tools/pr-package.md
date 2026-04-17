@@ -1,9 +1,9 @@
-Branch: simba/create-strategy-evaluation-engine
-Title: Create strategy evaluation engine.
+Branch: simba/create-decision-matrix-generator
+Title: Create decision matrix generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create strategy evaluation engine.
+- Goal: Create decision matrix generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
