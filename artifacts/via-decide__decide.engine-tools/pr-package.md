@@ -1,9 +1,9 @@
-Branch: simba/document-procedural-city-generation
-Title: Document procedural city generation.
+Branch: simba/create-documentation-for-world-regions
+Title: Create documentation for world regions.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Document procedural city generation.
+- Goal: Create documentation for world regions.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
