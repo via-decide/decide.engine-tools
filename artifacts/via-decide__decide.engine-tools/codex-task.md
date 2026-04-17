@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create execution orchestrator.
+Create tool integration bridge.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
