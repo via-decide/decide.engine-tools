@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create runtime loop documentation.
+Document the mission system.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
