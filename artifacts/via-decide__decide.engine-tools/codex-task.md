@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Document the zoom system used by the map engine.
+Create documentation for the multi-scale world map engine.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

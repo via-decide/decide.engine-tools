@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Document the zoom system used by the map engine.
+Create documentation for the multi-scale world map engine.
 
 RULES
 1. Audit touched files first and identify regressions.
