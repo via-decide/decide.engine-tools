@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-for-the-world-map-system
-Title: Create documentation for the world map system.
+Branch: simba/document-the-ai-architecture
+Title: Document the AI architecture.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation for the world map system.
+- Goal: Document the AI architecture.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
