@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create region graph system.
+Create level-of-detail (LOD) system for map rendering.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
