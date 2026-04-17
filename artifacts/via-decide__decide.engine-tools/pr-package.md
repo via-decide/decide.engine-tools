@@ -1,9 +1,9 @@
-Branch: simba/create-map-camera-controller
-Title: Create map camera controller.
+Branch: simba/document-integration-with-vialogic
+Title: Document integration with ViaLogic.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create map camera controller.
+- Goal: Document integration with ViaLogic.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
