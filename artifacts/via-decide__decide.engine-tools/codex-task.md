@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build a multi-scale world engine that supports Apple-Maps-style zoom transitions and GTA-style gameplay exploration. The system must allow players to zoom from a global world map into fully interactive gameplay seamlessly.
+Create map camera controller.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
