@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Build a multi-scale world engine that supports Apple-Maps-style zoom transitions and GTA-style gameplay exploration. The system must allow players to zoom from a global world map into fully interactive gameplay seamlessly.
+Create map camera controller.
 
 RULES
 1. Audit touched files first and identify regressions.
