@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create documentation for the NPC system.
+Document procedural city generation.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

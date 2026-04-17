@@ -1,9 +1,9 @@
-Branch: simba/create-documentation-for-the-npc-system
-Title: Create documentation for the NPC system.
+Branch: simba/document-procedural-city-generation
+Title: Document procedural city generation.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create documentation for the NPC system.
+- Goal: Document procedural city generation.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
