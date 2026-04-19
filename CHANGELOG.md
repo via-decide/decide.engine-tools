@@ -28,6 +28,7 @@ Format: [Semantic Versioning](https://semver.org)
 - Added a Self-Evolving Infrastructure Engine integrated into Highway-V2I with infrastructure genome crossover/mutation/selection across heavy-traffic/rain/failure/emergency/accident scenarios, new Infrastructure Evolution Lab dashboard panel (leaderboard + genome tree + performance graph + playback), and research exports for optimized RSU placement, sensor layout recommendations, and traffic control strategies.
 
 ### Fixed
+- Fixed dashboard module launcher wiring so module cards now open workspace/tools/agent/settings and games reliably inside the dashboard workspace with loader status + fallback error UI.
 - Fixed six critical StudyOS regressions in `StudyOS/index.html`: removed browser-incompatible TS/TSX script tags in favor of a safe research stub mount, repaired PhysicsController window listener cleanup, corrected onboarding layout-to-tab routing map, added explicit Kinetic DOWN-swipe skip flow with clamped progress math, enforced Tracker mock score validation (0–100), and switched Vault download wiring from inline onclick strings to data-attribute event listeners.
 - Fixed StudyOS bootloader blank-screen regression by adding an auth-readiness fallback timer so the app still initializes when Firebase auth never reaches ready state.
 - Fixed duplicate `SUPABASE_ANON_KEY` declarations and duplicate setup-render assignment in `tools/eco-engine-test/index.html` to prevent runtime script errors.
