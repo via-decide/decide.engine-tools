@@ -19,6 +19,14 @@
   <script src="../ai/simulation-generator.js"></script>
   <script src="../ai/pipeline.js"></script>
   <script src="../ai/simulation-api.js"></script>
+  <script src="../world-templates/voxel-world/terrain-generator.js"></script>
+  <script src="../world-templates/voxel-world/entity-system.js"></script>
+  <script src="../world-templates/voxel-world/ui-template.js"></script>
+  <script src="../ai/world-generator/world-parser.js"></script>
+  <script src="../ai/world-generator/world-template-selector.js"></script>
+  <script src="../ai/world-generator/world-builder.js"></script>
+  <script src="../ai/world-generator/world-registry.js"></script>
+  <script src="../ai/world-pipeline.js"></script>
   <style>
     body { margin: 0; font-family: system-ui, sans-serif; background: #0d121c; color: #e8f0ff; }
     .shell { max-width: 1000px; margin: 0 auto; padding: 20px; }
@@ -45,6 +53,7 @@
           <option value="strategy-game">Create Strategy Game</option>
           <option value="network-game">Create Network Game</option>
           <option value="sandbox">Create Sandbox</option>
+          <option value="voxel-world">Create Voxel World</option>
         </select>
       </label>
       <label>
@@ -109,11 +118,14 @@
         const template = document.getElementById('template-select').value;
         if (!prompt.trim()) return;
 
-        const generated = await window.generateSimulation(prompt, {
-          template,
-          creator: 'zayvora',
-          autoLaunch: true
-        });
+        const isWorldFlow = template === 'voxel-world';
+        const generated = isWorldFlow
+          ? await window.createWorld(prompt || 'voxel-demo', { template: 'voxel-world', autoLaunch: true })
+          : await window.generateSimulation(prompt, {
+              template,
+              creator: 'zayvora',
+              autoLaunch: true
+            });
 
         selectedSimulation = generated.name;
         document.getElementById('engine-status').textContent = `Generated and launched ${generated.title}`;

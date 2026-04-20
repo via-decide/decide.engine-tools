@@ -1,0 +1,12 @@
+{
+  "id": "voxel-world",
+  "title": "Voxel Survival Template",
+  "chunkSize": 16,
+  "mapSize": 48,
+  "biomeSet": ["plains", "forest", "hills", "river"],
+  "starterEntities": {
+    "animals": 8,
+    "resources": 16,
+    "structures": 2
+  }
+}

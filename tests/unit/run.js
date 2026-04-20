@@ -22,6 +22,7 @@ const suites = [
   { name: 'OrchadeFoundation', file: './orchade-foundation.test.js' },
   { name: 'DashboardModuleLoader', file: './dashboard-module-loader.test.js' },
   { name: 'AISimulationPipeline', file: './ai-simulation-pipeline.test.js' },
+  { name: 'AIWorldPipeline', file: './ai-world-pipeline.test.js' },
   { name: 'SimulationMarketplace', file: './simulation-marketplace.test.js' },
 ];
 
