@@ -3,6 +3,7 @@
 
   const GAME_ROOT = './games';
   const CACHE = {};
+  const MANIFEST_PATH = `${GAME_ROOT}/manifest.json`;
 
   function normalizeGameName(name) {
     return String(name || '').trim().toLowerCase();
@@ -39,9 +40,44 @@
     throw new Error(`Unable to load config for ${gameName}.`);
   }
 
+  async function loadManifest() {
+    try {
+      const response = await fetch(MANIFEST_PATH, { cache: 'no-cache' });
+      if (!response.ok) return [];
+      const payload = await response.json();
+      return Array.isArray(payload.games) ? payload.games : [];
+    } catch (_error) {
+      return [];
+    }
+  }
+
+  function registerDynamicModule(environment) {
+    if (!environment || !environment.name) return null;
+    if (!global.DECIDE_DYNAMIC_MODULES) global.DECIDE_DYNAMIC_MODULES = {};
+    global.DECIDE_DYNAMIC_MODULES[environment.name] = environment;
+    return environment;
+  }
+
+  function getDynamicModule(name) {
+    if (!global.DECIDE_DYNAMIC_MODULES) return null;
+    return global.DECIDE_DYNAMIC_MODULES[normalizeGameName(name)] || null;
+  }
+
   async function loadGame(name) {
     const gameName = normalizeGameName(name);
     if (CACHE[gameName]) return CACHE[gameName];
+
+    const dynamicModule = getDynamicModule(gameName);
+    if (dynamicModule) {
+      const loadedDynamic = {
+        name: gameName,
+        config: dynamicModule.config,
+        game: dynamicModule.definition.gameFactory(global),
+        ui: dynamicModule.definition.uiFactory(global)
+      };
+      CACHE[gameName] = loadedDynamic;
+      return loadedDynamic;
+    }
 
     if (!global.DECIDE_GAME_MODULES) global.DECIDE_GAME_MODULES = {};
 
@@ -68,6 +104,8 @@
 
   global.GameLoader = {
     loadGame,
+    loadManifest,
+    registerDynamicModule,
     normalizeGameName
   };
 })(window);

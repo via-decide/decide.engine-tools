@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Decide Engine Studio</title>
   <script src="../shared/vd-nav-fix.js"></script>
+  <script src="../engine/core/game-loader.js"></script>
+  <script src="../ai/simulation-generator.js"></script>
   <style>
     body { margin: 0; font-family: system-ui, sans-serif; background: #0b0e13; color: #f2f6ff; }
     .shell { max-width: 1000px; margin: 0 auto; padding: 28px 16px; }
@@ -20,29 +22,58 @@
   <div class="shell">
     <h1>DECIDE ENGINE STUDIO</h1>
     <p class="sub">Available environments</p>
-
-    <div class="grid">
-      <article class="card">
-        <div class="status">Live</div>
-        <h2>Mars Simulation</h2>
-        <p>Constraint-driven rover simulation with runtime-managed state updates.</p>
-        <a class="launch" href="./mars/index.html">Launch</a>
-      </article>
-
-      <article class="card">
-        <div class="status">Scaffold</div>
-        <h2>Orchade Strategy</h2>
-        <p>Flagship strategy environment scaffold with map and economy systems.</p>
-        <a class="launch" href="./orchade/index.html">Launch</a>
-      </article>
-
-      <article class="card">
-        <div class="status">Prototype</div>
-        <h2>SkillHex Capability Graph</h2>
-        <p>Capability graph growth and reputation simulation for professional progression.</p>
-        <a class="launch" href="./skillhex/index.html">Launch</a>
-      </article>
-    </div>
+    <div class="grid" id="launcher-grid"></div>
   </div>
+
+  <script>
+    (async function renderLauncher() {
+      if (window.SimulationGenerator && typeof window.SimulationGenerator.restoreGeneratedModules === 'function') {
+        window.SimulationGenerator.restoreGeneratedModules();
+      }
+
+      const builtInGames = window.GameLoader && typeof window.GameLoader.loadManifest === 'function'
+        ? await window.GameLoader.loadManifest()
+        : [];
+
+      window.DECIDE_GAME_MANIFEST = builtInGames;
+
+      const generated = window.SimulationGenerator
+        ? window.SimulationGenerator.getAllGenerated().map((entry) => ({
+            name: entry.name,
+            title: entry.config && entry.config.title,
+            status: 'Generated',
+            description: entry.config && entry.config.description,
+            href: './ai-simulation-studio.html'
+          }))
+        : [];
+
+      const cards = [
+        ...builtInGames,
+        {
+          name: 'ai-simulation-studio',
+          title: 'AI Simulation Studio',
+          status: 'New',
+          description: 'Generate simulations, strategy games, network games, and sandbox environments from prompts.',
+          href: './ai-simulation-studio.html'
+        },
+        ...generated
+      ];
+
+      const grid = document.getElementById('launcher-grid');
+      grid.innerHTML = '';
+
+      cards.forEach((game) => {
+        const article = document.createElement('article');
+        article.className = 'card';
+        article.innerHTML = `
+          <div class="status">${game.status || 'Live'}</div>
+          <h2>${game.title || game.name}</h2>
+          <p>${game.description || 'Simulation environment module.'}</p>
+          <a class="launch" href="${game.href || './ai-simulation-studio.html'}">Launch</a>
+        `;
+        grid.appendChild(article);
+      });
+    })();
+  </script>
 </body>
 </html>
