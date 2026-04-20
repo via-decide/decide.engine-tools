@@ -21,6 +21,7 @@ const suites = [
   { name: 'ZayvoraPipelineScaffold', file: './zayvora-pipeline-scaffold.test.js' },
   { name: 'OrchadeFoundation', file: './orchade-foundation.test.js' },
   { name: 'DashboardModuleLoader', file: './dashboard-module-loader.test.js' },
+  { name: 'AISimulationPipeline', file: './ai-simulation-pipeline.test.js' },
 ];
 
 let totalPassed = 0;

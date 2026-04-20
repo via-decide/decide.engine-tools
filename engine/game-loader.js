@@ -45,9 +45,33 @@
     return response.json();
   }
 
+  function registerDynamicModule(environment) {
+    if (!environment || !environment.name) return null;
+    if (!global.DECIDE_DYNAMIC_MODULES) global.DECIDE_DYNAMIC_MODULES = {};
+    global.DECIDE_DYNAMIC_MODULES[environment.name] = environment;
+    return environment;
+  }
+
+  function getDynamicModule(name) {
+    if (!global.DECIDE_DYNAMIC_MODULES) return null;
+    return global.DECIDE_DYNAMIC_MODULES[normalizeGameName(name)] || null;
+  }
+
   async function loadGame(name) {
     const gameName = normalizeGameName(name);
     if (CACHE[gameName]) return CACHE[gameName];
+
+    const dynamicModule = getDynamicModule(gameName);
+    if (dynamicModule) {
+      const loadedDynamic = {
+        name: gameName,
+        config: dynamicModule.config,
+        game: dynamicModule.definition.gameFactory(global),
+        ui: dynamicModule.definition.uiFactory(global)
+      };
+      CACHE[gameName] = loadedDynamic;
+      return loadedDynamic;
+    }
 
     const registry = ensureRegistry(gameName);
     registry.config = await loadConfig(gameName);
@@ -66,6 +90,7 @@
 
   global.GameLoader = {
     loadGame,
+    registerDynamicModule,
     normalizeGameName
   };
 })(window);

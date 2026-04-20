@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Simulation Studio — Decide Engine</title>
+  <script src="../shared/vd-nav-fix.js"></script>
+  <script src="../engine/systems/entity-manager.js"></script>
+  <script src="../engine/systems/component-registry.js"></script>
+  <script src="../engine/systems/system-runner.js"></script>
+  <script src="../engine/systems/entity-system.js"></script>
+  <script src="../engine/runtime/simulation-loop.js"></script>
+  <script src="../engine/core/asset-loader.js"></script>
+  <script src="../engine/core/game-loader.js"></script>
+  <script src="../engine/ui-orchestrator.js"></script>
+  <script src="../engine/core/engine-core.js"></script>
+  <script src="../ai/environment-builder.js"></script>
+  <script src="../ai/game-scaffold-generator.js"></script>
+  <script src="../ai/simulation-generator.js"></script>
+  <script src="../ai/pipeline.js"></script>
+  <script src="../ai/simulation-api.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0d121c; color: #e8f0ff; }
+    .shell { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    .panel { background: #121a29; border: 1px solid #2d4269; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    button { background: #1e3257; border: 1px solid #375b94; border-radius: 8px; color: #fff; padding: 8px 10px; cursor: pointer; }
+    input, textarea, select { width: 100%; background: #0f1725; color: #e8f0ff; border: 1px solid #2d4269; border-radius: 8px; padding: 8px; margin-top: 6px; }
+    #engine-game-host { min-height: 180px; }
+    .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .list li { background: #0f1725; border: 1px solid #25395a; border-radius: 8px; padding: 8px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>AI Simulation Studio</h1>
+    <p id="engine-status">Ready.</p>
+
+    <section class="panel">
+      <h2>Generate Environment</h2>
+      <label>
+        Create Simulation / Strategy Game / Network Game / Sandbox
+        <select id="template-select">
+          <option value="simulation">Create Simulation</option>
+          <option value="strategy-game">Create Strategy Game</option>
+          <option value="network-game">Create Network Game</option>
+          <option value="sandbox">Create Sandbox</option>
+        </select>
+      </label>
+      <label>
+        Describe your simulation
+        <textarea id="prompt-input" rows="3" placeholder="Create a Mars colony economy simulation"></textarea>
+      </label>
+      <div class="row" style="margin-top:10px;">
+        <button id="generate-btn">Generate Environment</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Generated Simulations</h2>
+      <ul id="sim-list" class="list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Runtime</h2>
+      <div class="row" style="margin-bottom:10px;">
+        <button id="start-btn">Start</button>
+        <button id="pause-btn">Pause</button>
+        <button id="reset-btn">Reset</button>
+        <a href="./index.html" style="color:#8fc2ff;align-self:center">Back to launcher</a>
+      </div>
+      <div id="engine-game-host"></div>
+    </section>
+  </div>
+
+  <script>
+    (function initStudio() {
+      if (window.SimulationGenerator && typeof window.SimulationGenerator.restoreGeneratedModules === 'function') {
+        window.SimulationGenerator.restoreGeneratedModules();
+      }
+
+      let selectedSimulation = '';
+
+      function renderList() {
+        const list = document.getElementById('sim-list');
+        const simulations = window.listSimulations();
+        list.innerHTML = '';
+        simulations.forEach((sim) => {
+          const li = document.createElement('li');
+          const launchableName = sim.name || '';
+          const creator = sim.creator || 'engine';
+          li.innerHTML = `<strong>${sim.title || sim.name}</strong><p>${sim.description || ''}</p><small>${sim.type || 'runtime'} · ${creator}</small>`;
+
+          const launchBtn = document.createElement('button');
+          launchBtn.textContent = 'Launch';
+          launchBtn.addEventListener('click', async () => {
+            selectedSimulation = launchableName;
+            await window.EngineCore.loadGame(selectedSimulation);
+            document.getElementById('engine-status').textContent = `Loaded ${selectedSimulation}`;
+          });
+          li.appendChild(document.createElement('br'));
+          li.appendChild(launchBtn);
+          list.appendChild(li);
+        });
+      }
+
+      document.getElementById('generate-btn').addEventListener('click', async () => {
+        const prompt = document.getElementById('prompt-input').value;
+        const template = document.getElementById('template-select').value;
+        if (!prompt.trim()) return;
+
+        const generated = await window.generateSimulation(prompt, {
+          template,
+          creator: 'zayvora',
+          autoLaunch: true
+        });
+
+        selectedSimulation = generated.name;
+        document.getElementById('engine-status').textContent = `Generated and launched ${generated.title}`;
+        renderList();
+      });
+
+      document.getElementById('start-btn').addEventListener('click', async () => {
+        if (!selectedSimulation) return;
+        await window.launchSimulation(selectedSimulation);
+      });
+      document.getElementById('pause-btn').addEventListener('click', () => window.EngineCore.pauseSimulation());
+      document.getElementById('reset-btn').addEventListener('click', () => window.EngineCore.resetSimulation());
+
+      renderList();
+    })();
+  </script>
+</body>
+</html>
