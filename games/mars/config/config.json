@@ -1,0 +1,6 @@
+{
+  "name": "mars",
+  "title": "Mars Simulation",
+  "status": "Live",
+  "description": "Constraint-driven rover simulation with energy, risk, and mission progress state."
+}

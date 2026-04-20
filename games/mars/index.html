@@ -5,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mars Simulation — Decide Engine Studio</title>
   <script src="../../shared/vd-nav-fix.js"></script>
-  <script src="../../engine/game-loader.js"></script>
-  <script src="../../engine/simulation-runtime.js"></script>
+  <script src="../../engine/systems/entity-manager.js"></script>
+  <script src="../../engine/systems/component-registry.js"></script>
+  <script src="../../engine/systems/system-runner.js"></script>
+  <script src="../../engine/systems/entity-system.js"></script>
+  <script src="../../engine/runtime/simulation-loop.js"></script>
+  <script src="../../engine/core/asset-loader.js"></script>
+  <script src="../../engine/core/game-loader.js"></script>
   <script src="../../engine/ui-orchestrator.js"></script>
-  <script src="../../engine/engine-core.js"></script>
+  <script src="../../engine/core/engine-core.js"></script>
   <style>
     body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #f5f5f5; }
     .shell { max-width: 900px; margin: 0 auto; padding: 24px; }
