@@ -49,6 +49,10 @@ const SMOKE_TARGETS = [
   { id: 'workspace',            path: 'workspace/index.html' },
   { id: 'tool-catalog',         path: 'tools/index.html' },
   { id: 'studyos',              path: 'StudyOS/index.html' },
+  { id: 'decide-engine-studio', path: 'games/index.html' },
+  { id: 'mars-runtime',         path: 'games/mars/index.html' },
+  { id: 'orchade-runtime',      path: 'games/orchade/index.html' },
+  { id: 'skillhex-runtime',     path: 'games/skillhex/index.html' },
 ];
 
 function isMissingBrowserExecutableError(error) {

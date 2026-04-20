@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added a unified Decide Engine Studio platform scaffold: shared `/engine` runtime (`engine-core`, `game-loader`, `simulation-runtime`, `ui-orchestrator`), modular `/games` environments for Mars/Orchade/SkillHex, dedicated runtime launch pages (`/games/mars`, `/games/orchade`, `/games/skillhex`), launcher UI at `/games/index.html`, architecture docs at `docs/engine-architecture.md`, and smoke coverage for the new launcher/runtime routes.
 - Added a Python `decision_engine/` package implementing a complete decision intelligence workflow: context management, evidence collection, reasoning chains and hypotheses, multi-agent scoring, constraint solving, risk/confidence analysis, scenario simulation, strategy/resource planning, feedback loops, metrics, knowledge retrieval, autonomous execution, browser graph viewer, and a runnable `decision_engine/main.py` entrypoint.
 - Added `tests/unit/test_decision_engine.py` to validate end-to-end execution of the new decision engine workflow.
 - Added `game-engine/` browser-playable AAA prototype scaffold with multi-scale zoom (global/city/ground), mission-based region unlocks, minimap/UI overlays, and modular Canvas runtime files (`index.html`, `style.css`, `game.js`, `world.js`, `player.js`, `map.js`, and placeholder assets).

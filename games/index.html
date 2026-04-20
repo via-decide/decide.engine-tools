@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decide Engine Studio</title>
+  <script src="../shared/vd-nav-fix.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0b0e13; color: #f2f6ff; }
+    .shell { max-width: 1000px; margin: 0 auto; padding: 28px 16px; }
+    h1 { margin: 0 0 8px; }
+    .sub { margin: 0 0 24px; color: #97a8c2; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { border: 1px solid #2a3547; border-radius: 12px; background: #111722; padding: 14px; }
+    .status { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid #3a516f; color: #b8d9ff; margin-bottom: 8px; }
+    .launch { display: inline-block; margin-top: 10px; padding: 8px 12px; border-radius: 8px; background: #20304a; border: 1px solid #35507a; color: #f2f6ff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>DECIDE ENGINE STUDIO</h1>
+    <p class="sub">Available environments</p>
+
+    <div class="grid">
+      <article class="card">
+        <div class="status">Live</div>
+        <h2>Mars Simulation</h2>
+        <p>Constraint-driven rover simulation with runtime-managed state updates.</p>
+        <a class="launch" href="./mars/index.html">Launch</a>
+      </article>
+
+      <article class="card">
+        <div class="status">Scaffold</div>
+        <h2>Orchade Strategy</h2>
+        <p>Flagship strategy environment scaffold with map and economy systems.</p>
+        <a class="launch" href="./orchade/index.html">Launch</a>
+      </article>
+
+      <article class="card">
+        <div class="status">Prototype</div>
+        <h2>SkillHex Capability Graph</h2>
+        <p>Capability graph growth and reputation simulation for professional progression.</p>
+        <a class="launch" href="./skillhex/index.html">Launch</a>
+      </article>
+    </div>
+  </div>
+</body>
+</html>
