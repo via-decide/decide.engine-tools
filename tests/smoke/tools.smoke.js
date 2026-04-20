@@ -53,6 +53,10 @@ const SMOKE_TARGETS = [
   { id: 'mars-runtime',         path: 'games/mars/index.html' },
   { id: 'orchade-runtime',      path: 'games/orchade/index.html' },
   { id: 'skillhex-runtime',     path: 'games/skillhex/index.html' },
+  { id: 'studio-editor',        path: 'editor/index.html' },
+  { id: 'map-editor',           path: 'tools/map-editor/index.html' },
+  { id: 'simulation-debugger',  path: 'tools/simulation-debugger/index.html' },
+  { id: 'ui-builder',           path: 'tools/ui-builder/index.html' },
 ];
 
 function isMissingBrowserExecutableError(error) {
