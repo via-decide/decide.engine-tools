@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mars Simulation — Decide Engine Studio</title>
+  <script src="../../shared/vd-nav-fix.js"></script>
+  <script src="../../engine/game-loader.js"></script>
+  <script src="../../engine/simulation-runtime.js"></script>
+  <script src="../../engine/ui-orchestrator.js"></script>
+  <script src="../../engine/engine-core.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #f5f5f5; }
+    .shell { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .controls { display: flex; gap: 8px; margin: 12px 0; }
+    button { background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+    .panel { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 16px; }
+    .metrics { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 8px; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>Mars Simulation</h1>
+    <p id="engine-status">Initializing…</p>
+    <div class="controls">
+      <button id="start-btn">Start</button>
+      <button id="pause-btn">Pause</button>
+      <button id="reset-btn">Reset</button>
+      <a href="../index.html" style="color:#9ad;align-self:center">Back to launcher</a>
+    </div>
+    <div id="engine-game-host" class="panel"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.EngineCore.loadGame('mars');
+      document.getElementById('start-btn').addEventListener('click', () => window.EngineCore.startSimulation('mars'));
+      document.getElementById('pause-btn').addEventListener('click', () => window.EngineCore.pauseSimulation('mars'));
+      document.getElementById('reset-btn').addEventListener('click', () => window.EngineCore.resetSimulation('mars'));
+    });
+  </script>
+</body>
+</html>

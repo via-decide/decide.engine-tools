@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillHex Capability Graph — Decide Engine Studio</title>
+  <script src="../../shared/vd-nav-fix.js"></script>
+  <script src="../../engine/game-loader.js"></script>
+  <script src="../../engine/simulation-runtime.js"></script>
+  <script src="../../engine/ui-orchestrator.js"></script>
+  <script src="../../engine/engine-core.js"></script>
+  <script src="./graph-engine.js"></script>
+  <script src="./reputation-system.js"></script>
+  <script src="./player-profile.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #120f1c; color: #f5eaff; }
+    .shell { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .controls { display: flex; gap: 8px; margin: 12px 0; }
+    button { background: #2a1d40; color: #fff; border: 1px solid #5f4692; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+    .panel { background: #1a1427; border: 1px solid #48356f; border-radius: 10px; padding: 16px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>SkillHex Capability Graph</h1>
+    <p id="engine-status">Initializing…</p>
+    <div class="controls">
+      <button id="start-btn">Start</button>
+      <button id="pause-btn">Pause</button>
+      <button id="reset-btn">Reset</button>
+      <a href="../index.html" style="color:#c9a7ff;align-self:center">Back to launcher</a>
+    </div>
+    <div id="engine-game-host" class="panel"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.EngineCore.loadGame('skillhex');
+      document.getElementById('start-btn').addEventListener('click', () => window.EngineCore.startSimulation('skillhex'));
+      document.getElementById('pause-btn').addEventListener('click', () => window.EngineCore.pauseSimulation('skillhex'));
+      document.getElementById('reset-btn').addEventListener('click', () => window.EngineCore.resetSimulation('skillhex'));
+    });
+  </script>
+</body>
+</html>

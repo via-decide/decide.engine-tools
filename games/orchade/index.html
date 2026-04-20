@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orchade Strategy — Decide Engine Studio</title>
+  <script src="../../shared/vd-nav-fix.js"></script>
+  <script src="../../engine/game-loader.js"></script>
+  <script src="../../engine/simulation-runtime.js"></script>
+  <script src="../../engine/ui-orchestrator.js"></script>
+  <script src="../../engine/engine-core.js"></script>
+  <script src="./strategy-engine.js"></script>
+  <script src="./game-map.js"></script>
+  <script src="./economy-system.js"></script>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #101419; color: #e6f1ff; }
+    .shell { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .controls { display: flex; gap: 8px; margin: 12px 0; }
+    button { background: #1e2b3a; color: #fff; border: 1px solid #3b4f66; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+    .panel { background: #131c27; border: 1px solid #2c3f55; border-radius: 10px; padding: 16px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>Orchade Strategy</h1>
+    <p id="engine-status">Initializing…</p>
+    <div class="controls">
+      <button id="start-btn">Start</button>
+      <button id="pause-btn">Pause</button>
+      <button id="reset-btn">Reset</button>
+      <a href="../index.html" style="color:#8ec5ff;align-self:center">Back to launcher</a>
+    </div>
+    <div id="engine-game-host" class="panel"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.EngineCore.loadGame('orchade');
+      document.getElementById('start-btn').addEventListener('click', () => window.EngineCore.startSimulation('orchade'));
+      document.getElementById('pause-btn').addEventListener('click', () => window.EngineCore.pauseSimulation('orchade'));
+      document.getElementById('reset-btn').addEventListener('click', () => window.EngineCore.resetSimulation('orchade'));
+    });
+  </script>
+</body>
+</html>
