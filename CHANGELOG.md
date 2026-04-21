@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added DAX App Bundle Forge foundations under `/bundle-forge` with builder/validator/exporter modules that generate `app.dax`, validate manifest + runtime + script safety + bundle size, and unit coverage for bundle creation/export security checks.
 - Added Milestone 1 AI world generator foundations: `/ai/world-generator` parser/selector/builder/registry modules, `/ai/world-pipeline.js`, reusable `/world-templates/voxel-world` terrain/entity/UI/config template assets, runtime world registration + launch plumbing via `createWorld(...)`, sample metadata at `/worlds/voxel-demo-world-index.json`, studio UI hook for voxel generation, and architecture docs at `docs/ai-world-generator.md`.
 - Added simulation marketplace publishing pipeline with manifest builder, security validation gate, simulation packager, daxini marketplace client, publish/export orchestration, discovery registry scaffold, unit coverage, and docs for package/publish/launch workflows.
 - Added AI Simulation Studio foundations with `/ai` generation pipeline modules, reusable `/templates` scaffolds (strategy/simulation/network/sandbox), dynamic runtime module registration in game loaders, launcher manifest support, public simulation APIs (`generateSimulation`, `launchSimulation`, `listSimulations`), studio UI at `games/ai-simulation-studio.html`, and architecture docs at `docs/ai-simulation-studio.md`.
