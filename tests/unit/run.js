@@ -24,6 +24,7 @@ const suites = [
   { name: 'AISimulationPipeline', file: './ai-simulation-pipeline.test.js' },
   { name: 'AIWorldPipeline', file: './ai-world-pipeline.test.js' },
   { name: 'SimulationMarketplace', file: './simulation-marketplace.test.js' },
+  { name: 'DaxBundleForge', file: './dax-bundle-forge.test.js' },
 ];
 
 let totalPassed = 0;
