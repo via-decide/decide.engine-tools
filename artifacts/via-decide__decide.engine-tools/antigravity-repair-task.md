@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add unified input system to capture user interactions and map them to ECS-driven actions for gameplay control.
+Add AI behavior system using behavior trees or state machines to control NPC decision-making.
 
 RULES
 1. Audit touched files first and identify regressions.

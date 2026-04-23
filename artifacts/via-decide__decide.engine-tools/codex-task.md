@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add unified input system to capture user interactions and map them to ECS-driven actions for gameplay control.
+Add AI behavior system using behavior trees or state machines to control NPC decision-making.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Input processing <1ms per frame - Must not block game loop
+- Max 1 new file - No external dependencies - AI update <3ms per frame - Must not break deterministic update loop
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
