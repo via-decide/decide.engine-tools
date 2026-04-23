@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add per-node resource governance (time and memory limits) to prevent runaway executions and ensure predictable performance.
+Add concurrency control and execution locking to enable safe parallel execution of independent nodes without race conditions.
 
 RULES
 1. Audit touched files first and identify regressions.
