@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create decision graph engine.
+Add dependency graph validation and execution ordering to ensure all tools execute in correct sequence without invalid or circular dependencies.
 
 RULES
 1. Audit touched files first and identify regressions.
