@@ -1,9 +1,9 @@
-Branch: simba/add-sandboxed-execution-wrapper-for-each-node-to
-Title: Add sandboxed execution wrapper for each node to isolate side-effects...
+Branch: simba/add-external-call-adapter-with-normalization-and
+Title: Add external call adapter with normalization and caching to eliminate...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add sandboxed execution wrapper for each node to isolate side-effects and prevent global state corruption.
+- Goal: Add external call adapter with normalization and caching to eliminate nondeterminism from external APIs and tools.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
