@@ -1,9 +1,9 @@
-Branch: simba/add-per-node-resource-governance-time-and-memory
-Title: Add per-node resource governance (time and memory limits) to prevent ...
+Branch: simba/add-concurrency-control-and-execution-locking-to
+Title: Add concurrency control and execution locking to enable safe parallel...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add per-node resource governance (time and memory limits) to prevent runaway executions and ensure predictable performance.
+- Goal: Add concurrency control and execution locking to enable safe parallel execution of independent nodes without race conditions.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
