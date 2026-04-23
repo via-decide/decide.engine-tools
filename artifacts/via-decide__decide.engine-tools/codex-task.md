@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add deterministic scheduler to enforce consistent execution order across runs, even with parallel execution enabled.
+Add idempotency layer to prevent duplicate node execution and ensure consistent results for identical inputs.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Scheduling overhead <10ms - Must preserve concurrency benefits
+- Max 1 new file - No external dependencies - Cache lookup <5ms - Must integrate with replay and determinism layers
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
