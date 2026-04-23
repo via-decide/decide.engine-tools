@@ -1,9 +1,9 @@
-Branch: simba/add-rendering-abstraction-layer-to-convert-ecs-w
-Title: Add rendering abstraction layer to convert ECS world state into struc...
+Branch: simba/add-webgl-based-graphics-backend-to-execute-rend
+Title: Add WebGL-based graphics backend to execute render commands and produ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add rendering abstraction layer to convert ECS world state into structured frame output for visual systems.
+- Goal: Add WebGL-based graphics backend to execute render commands and produce actual on-screen visuals.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
