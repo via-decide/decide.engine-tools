@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add Entity-Component-System (ECS) architecture to enable scalable world simulation and structured game object management.
+Add physics system (movement + collision detection/resolution) integrated with ECS for real-time simulation.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - ECS operations <1ms per 1k entities - Must integrate with deterministic scheduler
+- Max 1 new file - No external dependencies - Physics step <5ms per frame - Must integrate with ECS and scheduler
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
