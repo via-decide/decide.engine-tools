@@ -1,9 +1,9 @@
-Branch: simba/add-animation-system-to-drive-entity-movement-an
-Title: Add animation system to drive entity movement and transformations usi...
+Branch: simba/add-unified-input-system-to-capture-user-interac
+Title: Add unified input system to capture user interactions and map them to...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add animation system to drive entity movement and transformations using keyframe interpolation integrated with ECS and rendering.
+- Goal: Add unified input system to capture user interactions and map them to ECS-driven actions for gameplay control.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

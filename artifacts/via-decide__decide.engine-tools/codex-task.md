@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add animation system to drive entity movement and transformations using keyframe interpolation integrated with ECS and rendering.
+Add unified input system to capture user interactions and map them to ECS-driven actions for gameplay control.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Animation update <3ms per frame - Must preserve deterministic update loop
+- Max 1 new file - No external dependencies - Input processing <1ms per frame - Must not block game loop
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
