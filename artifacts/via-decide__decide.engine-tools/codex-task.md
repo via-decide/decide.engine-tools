@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add per-node latency tracking and critical path analysis to identify performance bottlenecks and optimize execution flow.
+Add sandboxed execution wrapper for each node to isolate side-effects and prevent global state corruption.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Tracking overhead <5ms per node - Must not affect execution determinism
+- Max 1 new file - No external dependencies - Sandbox overhead <15% - Must preserve determinism and replay behavior
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
