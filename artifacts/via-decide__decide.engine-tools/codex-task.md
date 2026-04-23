@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add asset management system for loading, caching, and providing textures, meshes, and materials to the rendering pipeline.
+Add animation system to drive entity movement and transformations using keyframe interpolation integrated with ECS and rendering.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Asset lookup <5ms - Must not block render loop (async only)
+- Max 1 new file - No external dependencies - Animation update <3ms per frame - Must preserve deterministic update loop
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
