@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add execution state persistence and replay system to ensure all tool chains are reproducible, debuggable, and verifiable.
+Add node-level retry isolation and partial execution recovery to prevent full graph failure from individual node errors.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Replay overhead <20% - Must not affect normal execution flow
+- Max 1 new file - No external dependencies - Recovery overhead <10% - Must not break determinism or replay logic
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
