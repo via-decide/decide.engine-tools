@@ -1,9 +1,9 @@
-Branch: simba/add-entity-component-system-ecs-architecture-to-
-Title: Add Entity-Component-System (ECS) architecture to enable scalable wor...
+Branch: simba/add-physics-system-movement-collision-detectionr
+Title: Add physics system (movement + collision detection/resolution) integr...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add Entity-Component-System (ECS) architecture to enable scalable world simulation and structured game object management.
+- Goal: Add physics system (movement + collision detection/resolution) integrated with ECS for real-time simulation.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
