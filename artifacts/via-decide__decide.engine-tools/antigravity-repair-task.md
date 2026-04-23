@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add idempotency layer to prevent duplicate node execution and ensure consistent results for identical inputs.
+Add per-node latency tracking and critical path analysis to identify performance bottlenecks and optimize execution flow.
 
 RULES
 1. Audit touched files first and identify regressions.

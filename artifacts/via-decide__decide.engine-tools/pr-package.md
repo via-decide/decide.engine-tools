@@ -1,9 +1,9 @@
-Branch: simba/add-idempotency-layer-to-prevent-duplicate-node-
-Title: Add idempotency layer to prevent duplicate node execution and ensure ...
+Branch: simba/add-per-node-latency-tracking-and-critical-path-
+Title: Add per-node latency tracking and critical path analysis to identify ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add idempotency layer to prevent duplicate node execution and ensure consistent results for identical inputs.
+- Goal: Add per-node latency tracking and critical path analysis to identify performance bottlenecks and optimize execution flow.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

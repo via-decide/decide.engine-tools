@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add idempotency layer to prevent duplicate node execution and ensure consistent results for identical inputs.
+Add per-node latency tracking and critical path analysis to identify performance bottlenecks and optimize execution flow.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Cache lookup <5ms - Must integrate with replay and determinism layers
+- Max 1 new file - No external dependencies - Tracking overhead <5ms per node - Must not affect execution determinism
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
