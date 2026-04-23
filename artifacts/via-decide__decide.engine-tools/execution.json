@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-external-call-adapter-with-normalization-and",
+  "branch": "simba/add-real-time-game-loop-and-frame-scheduler-to-c",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/adapter.js"
+    "core/loop.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/adapter.js",
-  "synthesized_size": 28135
+  "synthesized_file": "core/loop.js",
+  "synthesized_size": 19354
 }
