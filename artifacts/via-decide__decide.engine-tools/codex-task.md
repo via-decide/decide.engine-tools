@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add sandboxed execution wrapper for each node to isolate side-effects and prevent global state corruption.
+Add external call adapter with normalization and caching to eliminate nondeterminism from external APIs and tools.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Sandbox overhead <15% - Must preserve determinism and replay behavior
+- Max 1 new file - No external dependencies - Adapter overhead <10ms - Must preserve determinism and replay consistency
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
