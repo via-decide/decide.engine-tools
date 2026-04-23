@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-sandboxed-execution-wrapper-for-each-node-to",
+  "branch": "simba/add-external-call-adapter-with-normalization-and",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/sandbox.js"
+    "core/adapter.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/sandbox.js",
-  "synthesized_size": 24797
+  "synthesized_file": "core/adapter.js",
+  "synthesized_size": 28135
 }

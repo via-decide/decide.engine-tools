@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add sandboxed execution wrapper for each node to isolate side-effects and prevent global state corruption.
+Add external call adapter with normalization and caching to eliminate nondeterminism from external APIs and tools.
 
 RULES
 1. Audit touched files first and identify regressions.
