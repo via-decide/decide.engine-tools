@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add execution state persistence and replay system to ensure all tool chains are reproducible, debuggable, and verifiable.
+Add node-level retry isolation and partial execution recovery to prevent full graph failure from individual node errors.
 
 RULES
 1. Audit touched files first and identify regressions.

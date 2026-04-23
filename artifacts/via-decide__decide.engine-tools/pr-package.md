@@ -1,9 +1,9 @@
-Branch: simba/add-execution-state-persistence-and-replay-syste
-Title: Add execution state persistence and replay system to ensure all tool ...
+Branch: simba/add-node-level-retry-isolation-and-partial-execu
+Title: Add node-level retry isolation and partial execution recovery to prev...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add execution state persistence and replay system to ensure all tool chains are reproducible, debuggable, and verifiable.
+- Goal: Add node-level retry isolation and partial execution recovery to prevent full graph failure from individual node errors.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
