@@ -1,9 +1,9 @@
-Branch: simba/add-ai-behavior-system-using-behavior-trees-or-s
-Title: Add AI behavior system using behavior trees or state machines to cont...
+Branch: simba/add-audio-system-for-sound-playback-and-spatial-
+Title: Add audio system for sound playback and spatial audio integrated with...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add AI behavior system using behavior trees or state machines to control NPC decision-making.
+- Goal: Add audio system for sound playback and spatial audio integrated with ECS and asset pipeline.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
