@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add concurrency control and execution locking to enable safe parallel execution of independent nodes without race conditions.
+Add deterministic scheduler to enforce consistent execution order across runs, even with parallel execution enabled.
 
 RULES
 1. Audit touched files first and identify regressions.
