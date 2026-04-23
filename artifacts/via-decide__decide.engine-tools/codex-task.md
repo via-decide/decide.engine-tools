@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add WebGL-based graphics backend to execute render commands and produce actual on-screen visuals.
+Add asset management system for loading, caching, and providing textures, meshes, and materials to the rendering pipeline.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Rendering must stay within frame budget (~16ms) - Must not break deterministic simulation logic
+- Max 1 new file - No external dependencies - Asset lookup <5ms - Must not block render loop (async only)
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.

@@ -1,9 +1,9 @@
-Branch: simba/add-webgl-based-graphics-backend-to-execute-rend
-Title: Add WebGL-based graphics backend to execute render commands and produ...
+Branch: simba/add-asset-management-system-for-loading-caching-
+Title: Add asset management system for loading, caching, and providing textu...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add WebGL-based graphics backend to execute render commands and produce actual on-screen visuals.
+- Goal: Add asset management system for loading, caching, and providing textures, meshes, and materials to the rendering pipeline.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

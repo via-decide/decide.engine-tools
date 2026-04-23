@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-webgl-based-graphics-backend-to-execute-rend",
+  "branch": "simba/add-asset-management-system-for-loading-caching-",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/graphics.js"
+    "core/assets.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/graphics.js",
-  "synthesized_size": 29245
+  "synthesized_file": "core/assets.js",
+  "synthesized_size": 25927
 }
