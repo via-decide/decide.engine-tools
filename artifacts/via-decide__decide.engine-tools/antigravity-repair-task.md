@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add external call adapter with normalization and caching to eliminate nondeterminism from external APIs and tools.
+Add real-time game loop and frame scheduler to convert execution model from batch pipeline to continuous real-time simulation.
 
 RULES
 1. Audit touched files first and identify regressions.
