@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add animation system to drive entity movement and transformations using keyframe interpolation integrated with ECS and rendering.
+Add unified input system to capture user interactions and map them to ECS-driven actions for gameplay control.
 
 RULES
 1. Audit touched files first and identify regressions.
