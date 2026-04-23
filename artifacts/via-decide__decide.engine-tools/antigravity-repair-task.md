@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add deterministic scheduler to enforce consistent execution order across runs, even with parallel execution enabled.
+Add idempotency layer to prevent duplicate node execution and ensure consistent results for identical inputs.
 
 RULES
 1. Audit touched files first and identify regressions.
