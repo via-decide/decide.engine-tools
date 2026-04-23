@@ -1,9 +1,9 @@
-Branch: simba/add-strict-inputoutput-data-contract-enforcement
-Title: Add strict input/output data contract enforcement between nodes to en...
+Branch: simba/add-per-node-resource-governance-time-and-memory
+Title: Add per-node resource governance (time and memory limits) to prevent ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add strict input/output data contract enforcement between nodes to ensure valid and consistent data propagation across the execution graph.
+- Goal: Add per-node resource governance (time and memory limits) to prevent runaway executions and ensure predictable performance.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
