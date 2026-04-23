@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add rendering abstraction layer to convert ECS world state into structured frame output for visual systems.
+Add WebGL-based graphics backend to execute render commands and produce actual on-screen visuals.
 
 RULES
 1. Audit touched files first and identify regressions.
