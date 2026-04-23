@@ -1,9 +1,9 @@
-Branch: simba/add-external-call-adapter-with-normalization-and
-Title: Add external call adapter with normalization and caching to eliminate...
+Branch: simba/add-real-time-game-loop-and-frame-scheduler-to-c
+Title: Add real-time game loop and frame scheduler to convert execution mode...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add external call adapter with normalization and caching to eliminate nondeterminism from external APIs and tools.
+- Goal: Add real-time game loop and frame scheduler to convert execution model from batch pipeline to continuous real-time simulation.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

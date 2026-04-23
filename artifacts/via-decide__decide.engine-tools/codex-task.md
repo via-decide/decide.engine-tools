@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add external call adapter with normalization and caching to eliminate nondeterminism from external APIs and tools.
+Add real-time game loop and frame scheduler to convert execution model from batch pipeline to continuous real-time simulation.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Adapter overhead <10ms - Must preserve determinism and replay consistency
+- Max 1 new file - No external dependencies - Loop overhead minimal - Must preserve determinism where applicable
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
