@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-unified-input-system-to-capture-user-interac",
+  "branch": "simba/add-ai-behavior-system-using-behavior-trees-or-s",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/input.js"
+    "core/ai.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/input.js",
-  "synthesized_size": 23415
+  "synthesized_file": "core/ai.js",
+  "synthesized_size": 34687
 }
