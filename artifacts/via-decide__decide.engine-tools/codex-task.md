@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add AI behavior system using behavior trees or state machines to control NPC decision-making.
+Add audio system for sound playback and spatial audio integrated with ECS and asset pipeline.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - AI update <3ms per frame - Must not break deterministic update loop
+- Max 1 new file - No external dependencies - Audio processing <3ms per frame - Must not block main loop
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.

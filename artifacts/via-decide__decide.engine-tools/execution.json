@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-ai-behavior-system-using-behavior-trees-or-s",
+  "branch": "simba/add-audio-system-for-sound-playback-and-spatial-",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/ai.js"
+    "core/audio.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/ai.js",
-  "synthesized_size": 34687
+  "synthesized_file": "core/audio.js",
+  "synthesized_size": 25455
 }
