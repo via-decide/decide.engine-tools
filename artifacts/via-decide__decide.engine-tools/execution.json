@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-strict-inputoutput-data-contract-enforcement",
+  "branch": "simba/add-per-node-resource-governance-time-and-memory",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/contracts.js"
+    "core/resource.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/contracts.js",
-  "synthesized_size": 20644
+  "synthesized_file": "core/resource.js",
+  "synthesized_size": 19398
 }

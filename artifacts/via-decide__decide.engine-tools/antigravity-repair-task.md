@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add strict input/output data contract enforcement between nodes to ensure valid and consistent data propagation across the execution graph.
+Add per-node resource governance (time and memory limits) to prevent runaway executions and ensure predictable performance.
 
 RULES
 1. Audit touched files first and identify regressions.

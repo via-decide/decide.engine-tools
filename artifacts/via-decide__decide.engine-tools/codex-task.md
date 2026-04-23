@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add strict input/output data contract enforcement between nodes to ensure valid and consistent data propagation across the execution graph.
+Add per-node resource governance (time and memory limits) to prevent runaway executions and ensure predictable performance.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Validation overhead <10ms - Must integrate with replay and recovery logic
+- Max 1 new file - No external dependencies - Monitoring overhead <10% - Must not break determinism or replay
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
