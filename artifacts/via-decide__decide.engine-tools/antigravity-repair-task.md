@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add AI behavior system using behavior trees or state machines to control NPC decision-making.
+Add audio system for sound playback and spatial audio integrated with ECS and asset pipeline.
 
 RULES
 1. Audit touched files first and identify regressions.
