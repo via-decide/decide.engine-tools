@@ -1,9 +1,9 @@
-Branch: simba/add-real-time-game-loop-and-frame-scheduler-to-c
-Title: Add real-time game loop and frame scheduler to convert execution mode...
+Branch: simba/add-entity-component-system-ecs-architecture-to-
+Title: Add Entity-Component-System (ECS) architecture to enable scalable wor...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add real-time game loop and frame scheduler to convert execution model from batch pipeline to continuous real-time simulation.
+- Goal: Add Entity-Component-System (ECS) architecture to enable scalable world simulation and structured game object management.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
