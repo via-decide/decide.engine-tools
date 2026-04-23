@@ -1,9 +1,9 @@
-Branch: simba/add-dependency-graph-validation-and-execution-or
-Title: Add dependency graph validation and execution ordering to ensure all ...
+Branch: simba/add-execution-state-persistence-and-replay-syste
+Title: Add execution state persistence and replay system to ensure all tool ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add dependency graph validation and execution ordering to ensure all tools execute in correct sequence without invalid or circular dependencies.
+- Goal: Add execution state persistence and replay system to ensure all tool chains are reproducible, debuggable, and verifiable.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
