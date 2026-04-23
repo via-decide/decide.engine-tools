@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add audio system for sound playback and spatial audio integrated with ECS and asset pipeline.
+Add networking system with server-authoritative model and state synchronization for multiplayer support.
 
 RULES
 1. Audit touched files first and identify regressions.
