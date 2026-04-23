@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-idempotency-layer-to-prevent-duplicate-node-",
+  "branch": "simba/add-per-node-latency-tracking-and-critical-path-",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/idempotency.js"
+    "core/performance.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/idempotency.js",
-  "synthesized_size": 16630
+  "synthesized_file": "core/performance.js",
+  "synthesized_size": 15585
 }
