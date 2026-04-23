@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create decision graph engine.
+Add dependency graph validation and execution ordering to ensure all tools execute in correct sequence without invalid or circular dependencies.
 
 CONSTRAINTS
-Preserve existing code; prefer additive changes.
+- Max 1 new file - No external dependencies - Graph validation <10ms - Must not break existing execution logic
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.

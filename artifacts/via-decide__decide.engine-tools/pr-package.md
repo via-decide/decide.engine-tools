@@ -1,9 +1,9 @@
-Branch: simba/create-decision-graph-engine
-Title: Create decision graph engine.
+Branch: simba/add-dependency-graph-validation-and-execution-or
+Title: Add dependency graph validation and execution ordering to ensure all ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create decision graph engine.
+- Goal: Add dependency graph validation and execution ordering to ensure all tools execute in correct sequence without invalid or circular dependencies.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
