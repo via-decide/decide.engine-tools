@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add concurrency control and execution locking to enable safe parallel execution of independent nodes without race conditions.
+Add deterministic scheduler to enforce consistent execution order across runs, even with parallel execution enabled.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Concurrency overhead <15% - Must preserve determinism and replay capability
+- Max 1 new file - No external dependencies - Scheduling overhead <10ms - Must preserve concurrency benefits
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
