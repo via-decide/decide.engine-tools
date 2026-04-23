@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add real-time game loop and frame scheduler to convert execution model from batch pipeline to continuous real-time simulation.
+Add Entity-Component-System (ECS) architecture to enable scalable world simulation and structured game object management.
 
 RULES
 1. Audit touched files first and identify regressions.
