@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add per-node resource governance (time and memory limits) to prevent runaway executions and ensure predictable performance.
+Add concurrency control and execution locking to enable safe parallel execution of independent nodes without race conditions.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Monitoring overhead <10% - Must not break determinism or replay
+- Max 1 new file - No external dependencies - Concurrency overhead <15% - Must preserve determinism and replay capability
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
