@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add WebGL-based graphics backend to execute render commands and produce actual on-screen visuals.
+Add asset management system for loading, caching, and providing textures, meshes, and materials to the rendering pipeline.
 
 RULES
 1. Audit touched files first and identify regressions.
