@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add physics system (movement + collision detection/resolution) integrated with ECS for real-time simulation.
+Add rendering abstraction layer to convert ECS world state into structured frame output for visual systems.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Physics step <5ms per frame - Must integrate with ECS and scheduler
+- Max 1 new file - No external dependencies - Render step <5ms per frame - Must not break deterministic update loop
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
