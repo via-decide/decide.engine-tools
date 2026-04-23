@@ -1,9 +1,9 @@
-Branch: simba/add-concurrency-control-and-execution-locking-to
-Title: Add concurrency control and execution locking to enable safe parallel...
+Branch: simba/add-deterministic-scheduler-to-enforce-consisten
+Title: Add deterministic scheduler to enforce consistent execution order acr...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add concurrency control and execution locking to enable safe parallel execution of independent nodes without race conditions.
+- Goal: Add deterministic scheduler to enforce consistent execution order across runs, even with parallel execution enabled.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
