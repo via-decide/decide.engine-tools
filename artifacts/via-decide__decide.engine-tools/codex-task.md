@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add dependency graph validation and execution ordering to ensure all tools execute in correct sequence without invalid or circular dependencies.
+Add execution state persistence and replay system to ensure all tool chains are reproducible, debuggable, and verifiable.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Graph validation <10ms - Must not break existing execution logic
+- Max 1 new file - No external dependencies - Replay overhead <20% - Must not affect normal execution flow
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
