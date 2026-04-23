@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add asset management system for loading, caching, and providing textures, meshes, and materials to the rendering pipeline.
+Add animation system to drive entity movement and transformations using keyframe interpolation integrated with ECS and rendering.
 
 RULES
 1. Audit touched files first and identify regressions.

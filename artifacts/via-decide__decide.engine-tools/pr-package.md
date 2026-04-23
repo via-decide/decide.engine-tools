@@ -1,9 +1,9 @@
-Branch: simba/add-asset-management-system-for-loading-caching-
-Title: Add asset management system for loading, caching, and providing textu...
+Branch: simba/add-animation-system-to-drive-entity-movement-an
+Title: Add animation system to drive entity movement and transformations usi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add asset management system for loading, caching, and providing textures, meshes, and materials to the rendering pipeline.
+- Goal: Add animation system to drive entity movement and transformations using keyframe interpolation integrated with ECS and rendering.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
