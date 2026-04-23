@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-asset-management-system-for-loading-caching-",
+  "branch": "simba/add-animation-system-to-drive-entity-movement-an",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/assets.js"
+    "core/animation.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/assets.js",
-  "synthesized_size": 25927
+  "synthesized_file": "core/animation.js",
+  "synthesized_size": 22501
 }
