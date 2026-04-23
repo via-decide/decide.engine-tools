@@ -1,9 +1,9 @@
-Branch: simba/add-physics-system-movement-collision-detectionr
-Title: Add physics system (movement + collision detection/resolution) integr...
+Branch: simba/add-rendering-abstraction-layer-to-convert-ecs-w
+Title: Add rendering abstraction layer to convert ECS world state into struc...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add physics system (movement + collision detection/resolution) integrated with ECS for real-time simulation.
+- Goal: Add rendering abstraction layer to convert ECS world state into structured frame output for visual systems.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
