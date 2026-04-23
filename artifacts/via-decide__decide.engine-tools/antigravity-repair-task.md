@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add dependency graph validation and execution ordering to ensure all tools execute in correct sequence without invalid or circular dependencies.
+Add execution state persistence and replay system to ensure all tool chains are reproducible, debuggable, and verifiable.
 
 RULES
 1. Audit touched files first and identify regressions.
