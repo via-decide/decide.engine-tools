@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add node-level retry isolation and partial execution recovery to prevent full graph failure from individual node errors.
+Add strict input/output data contract enforcement between nodes to ensure valid and consistent data propagation across the execution graph.
 
 RULES
 1. Audit touched files first and identify regressions.

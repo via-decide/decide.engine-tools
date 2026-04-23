@@ -1,9 +1,9 @@
-Branch: simba/add-node-level-retry-isolation-and-partial-execu
-Title: Add node-level retry isolation and partial execution recovery to prev...
+Branch: simba/add-strict-inputoutput-data-contract-enforcement
+Title: Add strict input/output data contract enforcement between nodes to en...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add node-level retry isolation and partial execution recovery to prevent full graph failure from individual node errors.
+- Goal: Add strict input/output data contract enforcement between nodes to ensure valid and consistent data propagation across the execution graph.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

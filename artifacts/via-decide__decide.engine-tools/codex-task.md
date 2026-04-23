@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add node-level retry isolation and partial execution recovery to prevent full graph failure from individual node errors.
+Add strict input/output data contract enforcement between nodes to ensure valid and consistent data propagation across the execution graph.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Recovery overhead <10% - Must not break determinism or replay logic
+- Max 1 new file - No external dependencies - Validation overhead <10ms - Must integrate with replay and recovery logic
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
