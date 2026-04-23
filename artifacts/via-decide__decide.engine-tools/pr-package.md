@@ -1,9 +1,9 @@
-Branch: simba/add-per-node-latency-tracking-and-critical-path-
-Title: Add per-node latency tracking and critical path analysis to identify ...
+Branch: simba/add-sandboxed-execution-wrapper-for-each-node-to
+Title: Add sandboxed execution wrapper for each node to isolate side-effects...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add per-node latency tracking and critical path analysis to identify performance bottlenecks and optimize execution flow.
+- Goal: Add sandboxed execution wrapper for each node to isolate side-effects and prevent global state corruption.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
