@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-rendering-abstraction-layer-to-convert-ecs-w",
+  "branch": "simba/add-webgl-based-graphics-backend-to-execute-rend",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/render.js"
+    "core/graphics.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/render.js",
-  "synthesized_size": 26856
+  "synthesized_file": "core/graphics.js",
+  "synthesized_size": 29245
 }
