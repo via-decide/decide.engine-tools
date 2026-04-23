@@ -1,9 +1,9 @@
-Branch: simba/add-unified-input-system-to-capture-user-interac
-Title: Add unified input system to capture user interactions and map them to...
+Branch: simba/add-ai-behavior-system-using-behavior-trees-or-s
+Title: Add AI behavior system using behavior trees or state machines to cont...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add unified input system to capture user interactions and map them to ECS-driven actions for gameplay control.
+- Goal: Add AI behavior system using behavior trees or state machines to control NPC decision-making.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
