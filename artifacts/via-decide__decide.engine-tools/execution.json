@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-per-node-resource-governance-time-and-memory",
+  "branch": "simba/add-concurrency-control-and-execution-locking-to",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/resource.js"
+    "core/concurrency.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/resource.js",
-  "synthesized_size": 19398
+  "synthesized_file": "core/concurrency.js",
+  "synthesized_size": 25244
 }
