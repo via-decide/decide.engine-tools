@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add audio system for sound playback and spatial audio integrated with ECS and asset pipeline.
+Add networking system with server-authoritative model and state synchronization for multiplayer support.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Audio processing <3ms per frame - Must not block main loop
+- Max 1 new file - No external dependencies - Network overhead minimal - Must preserve deterministic simulation
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
