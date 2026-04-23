@@ -1,9 +1,9 @@
-Branch: simba/add-audio-system-for-sound-playback-and-spatial-
-Title: Add audio system for sound playback and spatial audio integrated with...
+Branch: simba/add-networking-system-with-server-authoritative-
+Title: Add networking system with server-authoritative model and state synch...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add audio system for sound playback and spatial audio integrated with ECS and asset pipeline.
+- Goal: Add networking system with server-authoritative model and state synchronization for multiplayer support.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
