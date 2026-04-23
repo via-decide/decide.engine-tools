@@ -1,9 +1,9 @@
-Branch: simba/add-deterministic-scheduler-to-enforce-consisten
-Title: Add deterministic scheduler to enforce consistent execution order acr...
+Branch: simba/add-idempotency-layer-to-prevent-duplicate-node-
+Title: Add idempotency layer to prevent duplicate node execution and ensure ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add deterministic scheduler to enforce consistent execution order across runs, even with parallel execution enabled.
+- Goal: Add idempotency layer to prevent duplicate node execution and ensure consistent results for identical inputs.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
