@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add per-node latency tracking and critical path analysis to identify performance bottlenecks and optimize execution flow.
+Add sandboxed execution wrapper for each node to isolate side-effects and prevent global state corruption.
 
 RULES
 1. Audit touched files first and identify regressions.
