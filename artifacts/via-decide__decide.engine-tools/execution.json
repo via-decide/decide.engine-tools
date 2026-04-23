@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/add-execution-state-persistence-and-replay-syste",
+  "branch": "simba/add-node-level-retry-isolation-and-partial-execu",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "core/replay.js"
+    "core/recovery.js"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "core/replay.js",
-  "synthesized_size": 26742
+  "synthesized_file": "core/recovery.js",
+  "synthesized_size": 22698
 }
