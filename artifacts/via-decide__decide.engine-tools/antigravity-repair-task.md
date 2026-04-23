@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add Entity-Component-System (ECS) architecture to enable scalable world simulation and structured game object management.
+Add physics system (movement + collision detection/resolution) integrated with ECS for real-time simulation.
 
 RULES
 1. Audit touched files first and identify regressions.
