@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add real-time game loop and frame scheduler to convert execution model from batch pipeline to continuous real-time simulation.
+Add Entity-Component-System (ECS) architecture to enable scalable world simulation and structured game object management.
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Loop overhead minimal - Must preserve determinism where applicable
+- Max 1 new file - No external dependencies - ECS operations <1ms per 1k entities - Must integrate with deterministic scheduler
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
