@@ -76,6 +76,19 @@
       "metaPath": "tools/business/kutch-map/config.json"
     },
     {
+      "id": "printbydd",
+      "name": "PrintByDD Store",
+      "title": "Precision 3D Manufacturing",
+      "path": "tools/commerce/printbydd/index.html",
+      "tags": ["3d-printing", "nfc", "keychains", "gifts", "smart-accessories", "e-commerce", "commerce"],
+      "tier": "commerce",
+      "icon": "🎨",
+      "pullable": true,
+      "sparks": false,
+      "toolDir": "tools/commerce/printbydd",
+      "metaPath": "tools/commerce/printbydd/tool-manifest.json"
+    },
+    {
       "_comment": "ARCHIVED: Backend/template tools moved to internal-only. Not shown in UI.",
       "_archived_engine_tools": [
         "tools/engine/ai-coach-console",

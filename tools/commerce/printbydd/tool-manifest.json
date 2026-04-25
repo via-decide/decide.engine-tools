@@ -1,0 +1,16 @@
+{
+  "id": "printbydd",
+  "name": "PrintByDD Store",
+  "category": "commerce",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "description": "Precision 3D manufacturing — smart NFC accessories, architectural models, personalized gifts that mean more.",
+  "featured": true,
+  "icon": "🎨",
+  "tags": ["3d-printing", "nfc", "keychains", "gifts", "smart-accessories", "e-commerce"],
+  "status": "active",
+  "dependencies": [],
+  "externalApis": [],
+  "monetization": "direct-sales",
+  "notes": "PWA-enabled, offline-capable store. Service worker caches offline assets. Integrated into viadecide monorepo."
+}
