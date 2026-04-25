@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products - PrintByDD Store</title>
+  <meta name="description" content="Complete catalog of 3D-printed products from PrintByDD.">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #333; }
+    header { background: linear-gradient(135deg, #ff2a2a 0%, #ff6b6b 100%); color: white; padding: 2rem; }
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .back-link { color: #ff2a2a; text-decoration: none; margin-bottom: 1.5rem; display: inline-block; }
+    h1 { font-size: 2.5rem; margin: 2rem 0 1rem; }
+    h2 { font-size: 1.8rem; margin: 2rem 0 1rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .product-item { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+    .product-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .product-icon { font-size: 3rem; text-align: center; padding: 2rem; background: linear-gradient(135deg, #ffe0e0 0%, #fff5f5 100%); }
+    .product-info { padding: 1.5rem; }
+    .product-name { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
+    .product-price { color: #ff2a2a; font-weight: bold; font-size: 1.3rem; margin: 0.5rem 0; }
+    .product-desc { color: #666; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
+    .btn { display: inline-block; background: #ff2a2a; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; transition: background 0.3s; font-size: 0.9rem; }
+    .btn:hover { background: #ff6b6b; }
+    .filter-section { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
+    .filter-section h3 { margin-bottom: 1rem; }
+    .filter-btn { display: inline-block; padding: 0.5rem 1rem; margin-right: 0.5rem; margin-bottom: 0.5rem; background: #f0f0f0; border: 2px solid transparent; border-radius: 20px; cursor: pointer; transition: all 0.3s; }
+    .filter-btn.active { background: #ff2a2a; color: white; }
+    @media (max-width: 768px) { .products-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>📦 All Products</h1>
+      <p>Complete catalog of 3D-printed products</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <a href="./index.html" class="back-link">← Back to Store</a>
+
+    <div class="filter-section">
+      <h3>Filter by Category</h3>
+      <button class="filter-btn active">All Products</button>
+      <button class="filter-btn">Keychains</button>
+      <button class="filter-btn">Plates & Tags</button>
+      <button class="filter-btn">Gifts</button>
+      <button class="filter-btn">Accessories</button>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-item">
+        <div class="product-icon">🔑</div>
+        <div class="product-info">
+          <div class="product-name">NFC Keychain Pro</div>
+          <div class="product-price">₹2,499</div>
+          <p class="product-desc">Aerospace-grade titanium with NFC chip and lifetime warranty.</p>
+          <a href="./keychain.html" class="btn">View Details</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">🚗</div>
+        <div class="product-info">
+          <div class="product-name">3D Numberplate</div>
+          <div class="product-price">₹3,999</div>
+          <p class="product-desc">Custom design with real-time 3D preview. Legal compliant.</p>
+          <a href="./numberplate.html" class="btn">View Details</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">🎁</div>
+        <div class="product-info">
+          <div class="product-name">Memory Box</div>
+          <div class="product-price">₹2,999</div>
+          <p class="product-desc">Custom engraved storage box. Perfect for keepsakes.</p>
+          <a href="./gifts-that-mean-more.html" class="btn">Explore</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">💍</div>
+        <div class="product-info">
+          <div class="product-name">Couples' Keychain Set</div>
+          <div class="product-price">₹2,499</div>
+          <p class="product-desc">Matching pair with engraved initials or messages.</p>
+          <a href="./gifts-that-mean-more.html" class="btn">View Set</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">🏆</div>
+        <div class="product-info">
+          <div class="product-name">Achievement Trophy</div>
+          <div class="product-price">₹1,999</div>
+          <p class="product-desc">3D-printed trophies for milestones and achievements.</p>
+          <a href="./gifts-that-mean-more.html" class="btn">Order Now</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">🎯</div>
+        <div class="product-info">
+          <div class="product-name">Custom Name Badge</div>
+          <div class="product-price">₹899</div>
+          <p class="product-desc">Professional-grade badges for teams and events.</p>
+          <a href="./gifts-that-mean-more.html" class="btn">Customize</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">🎨</div>
+        <div class="product-info">
+          <div class="product-name">Custom Art Piece</div>
+          <div class="product-price">₹3,999</div>
+          <p class="product-desc">Turn your design into 3D-printed sculptures.</p>
+          <a href="./gifts-that-mean-more.html" class="btn">Design Yours</a>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div class="product-icon">🔖</div>
+        <div class="product-info">
+          <div class="product-name">Custom Bookmarks</div>
+          <div class="product-price">₹499</div>
+          <p class="product-desc">Lightweight, durable bookmarks with custom designs.</p>
+          <a href="#" class="btn">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <section style="background: white; padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+      <h2>Can't Find What You're Looking For?</h2>
+      <p style="color: #666; margin: 1rem 0;">We specialize in custom designs. Got a unique idea? Let's bring it to life.</p>
+      <button class="btn">Request Custom Design</button>
+    </section>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>
