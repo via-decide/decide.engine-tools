@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_GAME_PHYSICS_ENGINE_V1.md - Real-time physics simulation system
+Write ZAYVORA_GAME_MEMORY_STREAMING_V1.md - Asset streaming and memory management system
 
 RULES
 1. Audit touched files first and identify regressions.
