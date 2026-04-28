@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragameaudioenginev1md---3d-audio-syst
-Title: Write ZAYVORA_GAME_AUDIO_ENGINE_V1.md - 3D audio system
+Branch: simba/write-zayvoragamenetworkingv1md---multiplayer-ne
+Title: Write ZAYVORA_GAME_NETWORKING_V1.md - Multiplayer networking system
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_AUDIO_ENGINE_V1.md - 3D audio system
+- Goal: Write ZAYVORA_GAME_NETWORKING_V1.md - Multiplayer networking system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
