@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragamenetworkingv1md---multiplayer-ne
-Title: Write ZAYVORA_GAME_NETWORKING_V1.md - Multiplayer networking system
+Branch: simba/write-zayvoragamephysicsenginev1md---real-time-p
+Title: Write ZAYVORA_GAME_PHYSICS_ENGINE_V1.md - Real-time physics simulatio...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_NETWORKING_V1.md - Multiplayer networking system
+- Goal: Write ZAYVORA_GAME_PHYSICS_ENGINE_V1.md - Real-time physics simulation system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
