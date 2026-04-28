@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_THERMAL_ADAPTATION_V1.md - Adaptive performance system
+Write ZAYVORA_GAME_AUDIO_ENGINE_V1.md - 3D audio system
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
