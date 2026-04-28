@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragamethermaladaptationv1md---adaptiv
-Title: Write ZAYVORA_GAME_THERMAL_ADAPTATION_V1.md - Adaptive performance sy...
+Branch: simba/write-zayvoragameaudioenginev1md---3d-audio-syst
+Title: Write ZAYVORA_GAME_AUDIO_ENGINE_V1.md - 3D audio system
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_THERMAL_ADAPTATION_V1.md - Adaptive performance system
+- Goal: Write ZAYVORA_GAME_AUDIO_ENGINE_V1.md - 3D audio system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
