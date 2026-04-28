@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integration layer
+Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input system
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
