@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integration
+Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
 
 RULES
 1. Audit touched files first and identify regressions.
