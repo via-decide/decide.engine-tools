@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_PHYSICS_ENGINE_V1.md - Real-time physics simulation system
+Write ZAYVORA_GAME_MEMORY_STREAMING_V1.md - Asset streaming and memory management system
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
