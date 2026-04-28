@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input system
+Write ZAYVORA_GAME_THERMAL_ADAPTATION_V1.md - Adaptive performance system
 
 RULES
 1. Audit touched files first and identify regressions.

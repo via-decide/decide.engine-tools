@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragameinputsystemv1md---gesture-contr
-Title: Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input sy...
+Branch: simba/write-zayvoragamethermaladaptationv1md---adaptiv
+Title: Write ZAYVORA_GAME_THERMAL_ADAPTATION_V1.md - Adaptive performance sy...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input system
+- Goal: Write ZAYVORA_GAME_THERMAL_ADAPTATION_V1.md - Adaptive performance system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
