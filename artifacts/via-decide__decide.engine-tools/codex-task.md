@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_MEMORY_STREAMING_V1.md - Asset streaming and memory management system
+Write ZAYVORA_GAME_RENDERING_ENGINE_V1.md - High-performance GPU rendering system (WebGL/Vulkan abstraction)
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

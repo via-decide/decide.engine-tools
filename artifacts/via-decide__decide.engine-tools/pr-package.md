@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragamememorystreamingv1md---asset-str
-Title: Write ZAYVORA_GAME_MEMORY_STREAMING_V1.md - Asset streaming and memor...
+Branch: simba/write-zayvoragamerenderingenginev1md---high-perf
+Title: Write ZAYVORA_GAME_RENDERING_ENGINE_V1.md - High-performance GPU rend...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_MEMORY_STREAMING_V1.md - Asset streaming and memory management system
+- Goal: Write ZAYVORA_GAME_RENDERING_ENGINE_V1.md - High-performance GPU rendering system (WebGL/Vulkan abstraction)
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
