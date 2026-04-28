@@ -1,9 +1,9 @@
-Branch: simba/add-networking-system-with-server-authoritative-
-Title: Add networking system with server-authoritative model and state synch...
+Branch: simba/write-zayvoragameengineintegrationv1md---full-ga
+Title: Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integr...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Add networking system with server-authoritative model and state synchronization for multiplayer support.
+- Goal: Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integration layer
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
