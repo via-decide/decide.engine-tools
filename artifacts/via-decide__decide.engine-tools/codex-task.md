@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_AUDIO_ENGINE_V1.md - 3D audio system
+Write ZAYVORA_GAME_NETWORKING_V1.md - Multiplayer networking system
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
