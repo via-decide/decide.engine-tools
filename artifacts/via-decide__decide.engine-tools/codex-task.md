@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Add networking system with server-authoritative model and state synchronization for multiplayer support.
+Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integration layer
 
 CONSTRAINTS
-- Max 1 new file - No external dependencies - Network overhead minimal - Must preserve deterministic simulation
+Preserve existing code; prefer additive changes.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.

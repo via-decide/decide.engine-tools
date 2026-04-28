@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Add networking system with server-authoritative model and state synchronization for multiplayer support.
+Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integration layer
 
 RULES
 1. Audit touched files first and identify regressions.
