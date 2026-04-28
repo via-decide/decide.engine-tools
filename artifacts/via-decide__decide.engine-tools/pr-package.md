@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragameengineintegrationv1md---full-ga
-Title: Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integr...
+Branch: simba/write-zayvoragameinputsystemv1md---gesture-contr
+Title: Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input sy...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integration layer
+- Goal: Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
