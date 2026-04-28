@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_GAME_ENGINE_INTEGRATION_V1.md - Full game engine integration layer
+Write ZAYVORA_GAME_INPUT_SYSTEM_V1.md - Gesture + controller input system
 
 RULES
 1. Audit touched files first and identify regressions.
