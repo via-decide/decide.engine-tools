@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragameenginefinalintegrationv1md---fu
-Title: Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integ...
+Branch: simba/write-zayvorabuildpipelinev1md---asset-build-pip
+Title: Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integration
+- Goal: Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
