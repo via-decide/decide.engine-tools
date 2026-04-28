@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_RENDERING_ENGINE_V1.md - High-performance GPU rendering system (WebGL/Vulkan abstraction)
+Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integration
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

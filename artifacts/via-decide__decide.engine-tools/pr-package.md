@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoragamerenderingenginev1md---high-perf
-Title: Write ZAYVORA_GAME_RENDERING_ENGINE_V1.md - High-performance GPU rend...
+Branch: simba/write-zayvoragameenginefinalintegrationv1md---fu
+Title: Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integ...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_GAME_RENDERING_ENGINE_V1.md - High-performance GPU rendering system (WebGL/Vulkan abstraction)
+- Goal: Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integration
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
