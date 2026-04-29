@@ -1,9 +1,9 @@
-Branch: simba/write-zayvorasavesystemv1md---game-state-persist
-Title: Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
+Branch: simba/write-zayvorauirenderingv1md---game-ui-system
+Title: Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
+- Goal: Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
