@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoradebuggingsystemv1md---debug-tools
-Title: Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
+Branch: simba/write-zayvorascriptingsystemv1md---game-scriptin
+Title: Write ZAYVORA_SCRIPTING_SYSTEM_V1.md - Game scripting system
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
+- Goal: Write ZAYVORA_SCRIPTING_SYSTEM_V1.md - Game scripting system
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

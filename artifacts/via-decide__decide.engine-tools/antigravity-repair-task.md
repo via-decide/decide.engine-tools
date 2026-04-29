@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
+Write ZAYVORA_SCRIPTING_SYSTEM_V1.md - Game scripting system
 
 RULES
 1. Audit touched files first and identify regressions.
