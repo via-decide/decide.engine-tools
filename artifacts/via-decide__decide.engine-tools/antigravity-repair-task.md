@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
+Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
 
 RULES
 1. Audit touched files first and identify regressions.

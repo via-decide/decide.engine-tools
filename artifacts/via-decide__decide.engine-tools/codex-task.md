@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
+Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
