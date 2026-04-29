@@ -1,9 +1,9 @@
-Branch: simba/write-zayvorabuildpipelinev1md---asset-build-pip
-Title: Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
+Branch: simba/write-zayvoraprofilingsystemv1md---performance-p
+Title: Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
+- Goal: Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
