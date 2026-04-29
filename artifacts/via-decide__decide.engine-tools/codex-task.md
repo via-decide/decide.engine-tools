@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
+Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

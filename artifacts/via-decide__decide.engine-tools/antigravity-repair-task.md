@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
+Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
 
 RULES
 1. Audit touched files first and identify regressions.
