@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
+Write ZAYVORA_SCRIPTING_SYSTEM_V1.md - Game scripting system
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
