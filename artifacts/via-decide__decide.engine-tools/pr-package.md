@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoraparticlesystemv1md---particle-effec
-Title: Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
+Branch: simba/write-zayvoraclaudegameexecutionloopv1md---auton
+Title: Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game deve...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
+- Goal: Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game development loop
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
