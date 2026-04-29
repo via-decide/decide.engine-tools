@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/write-zayvoragameenginefinalintegrationv1md---fu",
+  "branch": "simba/write-zayvorabuildpipelinev1md---asset-build-pip",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "docs/game/ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md"
+    "docs/game/ZAYVORA_BUILD_PIPELINE_V1.md"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "docs/game/ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md",
-  "synthesized_size": 2311
+  "synthesized_file": "docs/game/ZAYVORA_BUILD_PIPELINE_V1.md",
+  "synthesized_size": 1701
 }

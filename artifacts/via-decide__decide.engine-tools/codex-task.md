@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_GAME_ENGINE_FINAL_INTEGRATION_V1.md - Full engine integration
+Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
