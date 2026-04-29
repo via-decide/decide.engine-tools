@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
+Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
