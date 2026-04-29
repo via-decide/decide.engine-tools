@@ -1,9 +1,9 @@
-Branch: simba/write-zayvorascriptingsystemv1md---game-scriptin
-Title: Write ZAYVORA_SCRIPTING_SYSTEM_V1.md - Game scripting system
+Branch: simba/write-zayvorasavesystemv1md---game-state-persist
+Title: Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_SCRIPTING_SYSTEM_V1.md - Game scripting system
+- Goal: Write ZAYVORA_SAVE_SYSTEM_V1.md - Game state persistence
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
