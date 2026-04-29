@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
+Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
