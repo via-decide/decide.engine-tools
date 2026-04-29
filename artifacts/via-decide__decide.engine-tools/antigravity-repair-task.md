@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
+Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
 
 RULES
 1. Audit touched files first and identify regressions.
