@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoraprofilingsystemv1md---performance-p
-Title: Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
+Branch: simba/write-zayvoradebuggingsystemv1md---debug-tools
+Title: Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
+- Goal: Write ZAYVORA_DEBUGGING_SYSTEM_V1.md - Debug tools
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
