@@ -1,9 +1,9 @@
-Branch: simba/write-zayvorauirenderingv1md---game-ui-system
-Title: Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
+Branch: simba/write-zayvoraparticlesystemv1md---particle-effec
+Title: Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_UI_RENDERING_V1.md - Game UI system
+- Goal: Write ZAYVORA_PARTICLE_SYSTEM_V1.md - Particle effects engine
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
