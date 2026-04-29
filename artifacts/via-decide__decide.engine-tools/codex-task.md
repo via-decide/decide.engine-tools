@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_BUILD_PIPELINE_V1.md - Asset build pipeline
+Write ZAYVORA_PROFILING_SYSTEM_V1.md - Performance profiling
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.
