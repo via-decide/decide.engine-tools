@@ -1,17 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/write-zayvorascriptingsystemv1md---game-scriptin",
+  "branch": "simba/write-zayvorasavesystemv1md---game-state-persist",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
     "execution.json",
-    "docs/game/ZAYVORA_SCRIPTING_SYSTEM_V1.md"
+    "docs/game/ZAYVORA_SAVE_SYSTEM_V1.md"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
   "repair_prompt_path": "antigravity-repair-task.md",
-  "synthesized_file": "docs/game/ZAYVORA_SCRIPTING_SYSTEM_V1.md",
-  "synthesized_size": 2775
+  "synthesized_file": "docs/game/ZAYVORA_SAVE_SYSTEM_V1.md",
+  "synthesized_size": 2180
 }
