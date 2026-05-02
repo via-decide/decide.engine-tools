@@ -27,6 +27,7 @@ const suites = [
   { name: 'DaxBundleForge', file: './dax-bundle-forge.test.js' },
   { name: 'PluginSystem', file: './plugin-system.test.js' },
   { name: 'Runtime', file: './runtime.test.js' },
+  { name: 'TraceEngine', file: './trace-engine.test.js' },
 ];
 
 let totalPassed = 0;

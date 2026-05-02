@@ -8,6 +8,9 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added deterministic core trace observability foundations with in-memory `Flow`/`Span`/`Breakpoint` lifecycle APIs (`core/id.js`, `core/trace-store.js`, `core/trace-engine.js`) and DAG link support for full execution trace retrieval.
+- Integrated trace flow/span instrumentation into runtime tick cycles, scheduler task execution, and plugin execution lifecycles so failures create flow-level breakpoints and traceable outcomes.
+- Added unit coverage for trace engine lifecycle behavior and runtime/plugin trace integration assertions.
 - Added an independent engine audit suite under `audit/` with a single-entry audit runner (`audit/engine-audit.js`), structured JSON reporter (`audit/reporter.js`), and deterministic lifecycle/isolation/global leak checks (`audit/tests/*.js`) for plugin/runtime system validation.
 - Added deterministic runtime backbone modules (`core/runtime.js`, `core/scheduler.js`, `core/state-manager.js`) with fixed tick execution controls (`start/stop/step/getState`), queue-based per-tick scheduling, state snapshot management, and safe task failure isolation plus runtime unit coverage.
 - Added core plugin runtime modules (`core/plugin-registry.js`, `core/plugin-system.js`) with deterministic register/load/execute/unload lifecycle, isolated sandbox contexts, plugin state tracking, and activity logging plus example plugin + unit coverage.

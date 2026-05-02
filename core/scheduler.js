@@ -44,12 +44,19 @@ class Scheduler {
     };
 
     for (const task of tasks) {
+      const trace = context.trace || null;
+      const flowId = context.flowId || null;
+      const parentSpanId = context.parentSpanId || null;
+      const taskSpanId = trace && flowId ? trace.startSpan(flowId, { name: `scheduler.task:${task.id}`, parentId: parentSpanId }) : null;
+
       try {
-        task.run({ ...context, tick: currentTick, taskId: task.id });
+        task.run({ ...context, tick: currentTick, taskId: task.id, taskSpanId });
         report.executed += 1;
+        if (trace && taskSpanId) trace.endSpan(taskSpanId, { taskId: task.id });
       } catch (error) {
         report.failed += 1;
         report.errors.push({ taskId: task.id, message: error && error.message ? error.message : String(error) });
+        if (trace && taskSpanId) trace.fail(taskSpanId, error, { taskId: task.id });
       }
     }
 
