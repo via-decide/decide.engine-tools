@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added an independent engine audit suite under `audit/` with a single-entry audit runner (`audit/engine-audit.js`), structured JSON reporter (`audit/reporter.js`), and deterministic lifecycle/isolation/global leak checks (`audit/tests/*.js`) for plugin/runtime system validation.
 - Added deterministic runtime backbone modules (`core/runtime.js`, `core/scheduler.js`, `core/state-manager.js`) with fixed tick execution controls (`start/stop/step/getState`), queue-based per-tick scheduling, state snapshot management, and safe task failure isolation plus runtime unit coverage.
 - Added core plugin runtime modules (`core/plugin-registry.js`, `core/plugin-system.js`) with deterministic register/load/execute/unload lifecycle, isolated sandbox contexts, plugin state tracking, and activity logging plus example plugin + unit coverage.
 - Added DAX App Bundle Forge foundations under `/bundle-forge` with builder/validator/exporter modules that generate `app.dax`, validate manifest + runtime + script safety + bundle size, and unit coverage for bundle creation/export security checks.
