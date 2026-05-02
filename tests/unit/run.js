@@ -26,6 +26,7 @@ const suites = [
   { name: 'SimulationMarketplace', file: './simulation-marketplace.test.js' },
   { name: 'DaxBundleForge', file: './dax-bundle-forge.test.js' },
   { name: 'PluginSystem', file: './plugin-system.test.js' },
+  { name: 'Runtime', file: './runtime.test.js' },
 ];
 
 let totalPassed = 0;
