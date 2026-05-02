@@ -1,4 +1,5 @@
 const { createPluginSystem } = require('../../core/plugin-system');
+const { createTraceEngine } = require('../../core/trace-engine');
 const examplePlugin = require('../../plugins/example.plugin');
 
 let passed = 0;
@@ -26,5 +27,19 @@ assert('unloadPlugin transitions to unloaded', system.unloadPlugin('example-plug
 assert('execution blocked when unloaded', (() => { try { system.executePlugin('example-plugin', {}); return false; } catch (_err) { return true; } })());
 assert('lifecycle activity logged', system.getActivityLog().some((entry) => entry.event === 'load') && system.getActivityLog().some((entry) => entry.event === 'unload'));
 assert('plugin execution traces are recorded', system.trace.listFlows().length >= 1);
+
+const callerTrace = createTraceEngine();
+const isolatedSystem = createPluginSystem();
+isolatedSystem.registerPlugin(examplePlugin);
+isolatedSystem.loadPlugin('example-plugin');
+const callerFlowId = callerTrace.startFlow({ source: 'runtime' });
+const callerSpanId = callerTrace.startSpan(callerFlowId, { name: 'runtime.tick' });
+const propagated = isolatedSystem.executePlugin('example-plugin', { b: 2 }, {
+  trace: callerTrace,
+  flowId: callerFlowId,
+  parentSpanId: callerSpanId
+});
+assert('executePlugin uses caller trace context flow', propagated.ok === true);
+assert('executePlugin writes span into caller trace', callerTrace.getFlow(callerFlowId).spans.length >= 2);
 
 module.exports = { passed, failed };
