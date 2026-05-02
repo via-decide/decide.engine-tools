@@ -57,29 +57,50 @@ class AgentManager {
     });
 
     let result;
+    let runFailed = false;
+    let runError = null;
     try {
       const initSpanId = this.trace.startSpan(flowId, { name: 'agent.init', parentId: rootSpanId });
       this.runtime.scheduler.schedule({ id: `agent:init:${agentId}`, run: () => agent.init(ctx) });
-      this.runtime.step();
+      const initReport = this.runtime.step();
+      if (initReport.failed > 0) {
+        const firstError = initReport.errors[0] || { message: 'Agent init failed during scheduled task execution.' };
+        throw new Error(firstError.message);
+      }
       this.trace.endSpan(initSpanId, { agentId });
 
       const runSpanId = this.trace.startSpan(flowId, { name: 'agent.lifecycle.run', parentId: rootSpanId });
       this.runtime.scheduler.schedule({ id: `agent:run:${agentId}`, run: () => { result = agent.run(ctx, input); } });
-      this.runtime.step();
+      const runReport = this.runtime.step();
+      if (runReport.failed > 0) {
+        const firstError = runReport.errors[0] || { message: 'Agent run failed during scheduled task execution.' };
+        throw new Error(firstError.message);
+      }
       this.trace.endSpan(runSpanId, { agentId });
     } catch (error) {
-      this.trace.fail(rootSpanId, error, { agentId, phase: 'execution' });
-      this.trace.endFlow(flowId, { failed: true, agentId, error: error.message });
-      throw error;
+      runFailed = true;
+      runError = error;
     } finally {
       const disposeSpanId = this.trace.startSpan(flowId, { name: 'agent.dispose', parentId: rootSpanId });
       try {
         this.runtime.scheduler.schedule({ id: `agent:dispose:${agentId}`, run: () => agent.dispose(ctx) });
-        this.runtime.step();
+        const disposeReport = this.runtime.step();
+        if (disposeReport.failed > 0) {
+          const firstError = disposeReport.errors[0] || { message: 'Agent dispose failed during scheduled task execution.' };
+          throw new Error(firstError.message);
+        }
         this.trace.endSpan(disposeSpanId, { agentId });
       } catch (disposeError) {
+        runFailed = true;
+        runError = runError || disposeError;
         this.trace.fail(disposeSpanId, disposeError, { agentId, phase: 'dispose' });
       }
+    }
+
+    if (runFailed) {
+      this.trace.fail(rootSpanId, runError, { agentId, phase: 'execution' });
+      this.trace.endFlow(flowId, { failed: true, agentId, error: runError.message });
+      throw runError;
     }
 
     this.trace.endSpan(rootSpanId, { agentId });

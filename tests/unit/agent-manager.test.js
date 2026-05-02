@@ -28,3 +28,44 @@ assert('run is deterministic for identical input shape', typeof output.result.ru
 assert('agent context state is scoped by agent id', manager.runtime.stateManager.get('example.runCount') === 1);
 
 module.exports = { passed, failed };
+
+
+let initFailureThrown = false;
+try {
+  const failingInitManager = createAgentManager();
+  failingInitManager.registerAgent({
+    id: 'failing-init',
+    name: 'Failing Init',
+    version: '1.0.0',
+    init() { throw new Error('init exploded'); },
+    run() { return 'nope'; },
+    dispose() {}
+  });
+  failingInitManager.runAgent('failing-init', {});
+} catch (error) {
+  initFailureThrown = error.message === 'init exploded';
+}
+assert('runAgent throws when init task fails in scheduler report', initFailureThrown);
+
+const failingDisposeManager = createAgentManager();
+failingDisposeManager.registerAgent({
+  id: 'failing-dispose',
+  name: 'Failing Dispose',
+  version: '1.0.0',
+  init() {},
+  run() { return { ok: true }; },
+  dispose() { throw new Error('dispose exploded'); }
+});
+
+let disposeFailureThrown = false;
+let disposeFlowStatus = null;
+try {
+  failingDisposeManager.runAgent('failing-dispose', {});
+} catch (error) {
+  disposeFailureThrown = error.message === 'dispose exploded';
+  const latestFlow = failingDisposeManager.trace.listFlows()[failingDisposeManager.trace.listFlows().length - 1];
+  disposeFlowStatus = latestFlow && latestFlow.status;
+}
+
+assert('runAgent throws when dispose task fails in scheduler report', disposeFailureThrown);
+assert('dispose failure marks flow as failed', disposeFlowStatus === 'failed');
