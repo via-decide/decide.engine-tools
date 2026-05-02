@@ -47,8 +47,18 @@ class AgentManager {
 
     const flowId = this.trace.startFlow({ source: 'agent-manager', agentId });
     const rootSpanId = this.trace.startSpan(flowId, { name: 'agent.run' });
+    const invocationKey = `${agentId}:${flowId}`;
+    const ensureTickSucceeded = (report, phase) => {
+      if (report && report.failed > 0) {
+        const firstError = Array.isArray(report.errors) && report.errors.length ? report.errors[0] : null;
+        const message = firstError && firstError.message
+          ? firstError.message
+          : `Scheduled ${phase} task failed.`;
+        throw new Error(message);
+      }
+    };
     const emitTransition = (eventType, spanId) => {
-      const transition = this.runtime.stateMachine.transition(agentId, { type: eventType });
+      const transition = this.runtime.stateMachine.transition(invocationKey, { type: eventType });
       this.trace.event(spanId, 'state.transition', transition);
       return transition;
     };
@@ -66,20 +76,28 @@ class AgentManager {
       const initSpanId = this.trace.startSpan(flowId, { name: 'agent.init', parentId: rootSpanId });
       emitTransition('initialize', initSpanId);
       this.runtime.scheduler.schedule({ id: `agent:init:${agentId}`, run: () => agent.init(ctx) });
-      this.runtime.step();
+      const initReport = this.runtime.step();
+      ensureTickSucceeded(initReport, 'init');
       this.trace.endSpan(initSpanId, { agentId });
 
       const runSpanId = this.trace.startSpan(flowId, { name: 'agent.lifecycle.run', parentId: rootSpanId });
       emitTransition('start', runSpanId);
       this.runtime.scheduler.schedule({ id: `agent:run:${agentId}`, run: () => { result = agent.run(ctx, input); } });
-      this.runtime.step();
+      const runReport = this.runtime.step();
+      if (runReport.failed > 0) {
+        if (this.runtime.stateMachine.canTransition(invocationKey, { type: 'fail' })) {
+          this.trace.event(runSpanId, 'state.transition', this.runtime.stateMachine.transition(invocationKey, { type: 'fail' }));
+        }
+        ensureTickSucceeded(runReport, 'run');
+      }
       emitTransition('complete', runSpanId);
       this.trace.endSpan(runSpanId, { agentId });
     } catch (error) {
-      if (this.runtime.stateMachine.canTransition(agentId, { type: 'fail' })) {
-        const failTransition = this.runtime.stateMachine.transition(agentId, { type: 'fail' });
+      if (this.runtime.stateMachine.canTransition(invocationKey, { type: 'fail' })) {
+        const failTransition = this.runtime.stateMachine.transition(invocationKey, { type: 'fail' });
         this.trace.event(rootSpanId, 'state.transition', failTransition);
       }
+      error.flowId = flowId;
       this.trace.fail(rootSpanId, error, { agentId, phase: 'execution' });
       this.trace.endFlow(flowId, { failed: true, agentId, error: error.message });
       throw error;
@@ -87,7 +105,8 @@ class AgentManager {
       const disposeSpanId = this.trace.startSpan(flowId, { name: 'agent.dispose', parentId: rootSpanId });
       try {
         this.runtime.scheduler.schedule({ id: `agent:dispose:${agentId}`, run: () => agent.dispose(ctx) });
-        this.runtime.step();
+        const disposeReport = this.runtime.step();
+        ensureTickSucceeded(disposeReport, 'dispose');
         this.trace.endSpan(disposeSpanId, { agentId });
       } catch (disposeError) {
         this.trace.fail(disposeSpanId, disposeError, { agentId, phase: 'dispose' });
