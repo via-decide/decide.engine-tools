@@ -47,6 +47,11 @@ class AgentManager {
 
     const flowId = this.trace.startFlow({ source: 'agent-manager', agentId });
     const rootSpanId = this.trace.startSpan(flowId, { name: 'agent.run' });
+    const emitTransition = (eventType, spanId) => {
+      const transition = this.runtime.stateMachine.transition(agentId, { type: eventType });
+      this.trace.event(spanId, 'state.transition', transition);
+      return transition;
+    };
     const ctx = createAgentContext({
       stateManager: this.runtime.stateManager,
       trace: this.trace,
@@ -59,15 +64,22 @@ class AgentManager {
     let result;
     try {
       const initSpanId = this.trace.startSpan(flowId, { name: 'agent.init', parentId: rootSpanId });
+      emitTransition('initialize', initSpanId);
       this.runtime.scheduler.schedule({ id: `agent:init:${agentId}`, run: () => agent.init(ctx) });
       this.runtime.step();
       this.trace.endSpan(initSpanId, { agentId });
 
       const runSpanId = this.trace.startSpan(flowId, { name: 'agent.lifecycle.run', parentId: rootSpanId });
+      emitTransition('start', runSpanId);
       this.runtime.scheduler.schedule({ id: `agent:run:${agentId}`, run: () => { result = agent.run(ctx, input); } });
       this.runtime.step();
+      emitTransition('complete', runSpanId);
       this.trace.endSpan(runSpanId, { agentId });
     } catch (error) {
+      if (this.runtime.stateMachine.canTransition(agentId, { type: 'fail' })) {
+        const failTransition = this.runtime.stateMachine.transition(agentId, { type: 'fail' });
+        this.trace.event(rootSpanId, 'state.transition', failTransition);
+      }
       this.trace.fail(rootSpanId, error, { agentId, phase: 'execution' });
       this.trace.endFlow(flowId, { failed: true, agentId, error: error.message });
       throw error;

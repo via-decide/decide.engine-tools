@@ -8,6 +8,10 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added deterministic task/agent lifecycle state management with `core/state-machine.js` and `core/state-registry.js`, enforcing strict CREATED→INITIALIZED→RUNNING→(COMPLETED|FAILED) transitions with invalid-transition rejection and in-memory per-entity state tracking.
+- Integrated state-machine lifecycle transitions into runtime/agent execution flow and trace events so every lifecycle transition is recorded as a `state.transition` trace event.
+- Added unit assertions validating agent lifecycle completion state and transition trace emission.
+
 - Added an agent execution layer with `core/agent-manager.js`, `core/agent-context.js`, and `agents/example.agent.js`, integrating runtime scheduler execution and trace flow/span lifecycle instrumentation (`init`/`run`/`dispose`) with isolated per-agent state context APIs.
 - Added unit coverage for agent manager lifecycle execution, isolation, and trace behavior in `tests/unit/agent-manager.test.js`.
 - Added deterministic core trace observability foundations with in-memory `Flow`/`Span`/`Breakpoint` lifecycle APIs (`core/id.js`, `core/trace-store.js`, `core/trace-engine.js`) and DAG link support for full execution trace retrieval.

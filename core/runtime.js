@@ -3,6 +3,7 @@
 const { createScheduler } = require('./scheduler');
 const { createStateManager } = require('./state-manager');
 const { createTraceEngine } = require('./trace-engine');
+const { createStateMachine } = require('./state-machine');
 
 class Runtime {
   constructor(options = {}) {
@@ -15,6 +16,15 @@ class Runtime {
     this.tick = 0;
     this.logs = [];
     this.trace = options.traceEngine || createTraceEngine();
+    this.stateMachine = options.stateMachine || createStateMachine({
+      states: ['CREATED', 'INITIALIZED', 'RUNNING', 'COMPLETED', 'FAILED'],
+      initialState: 'CREATED',
+      transitions: {
+        CREATED: { initialize: 'INITIALIZED' },
+        INITIALIZED: { start: 'RUNNING' },
+        RUNNING: { complete: 'COMPLETED', fail: 'FAILED' }
+      }
+    });
   }
 
   _runOneTick() {
