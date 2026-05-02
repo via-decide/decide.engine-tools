@@ -28,6 +28,7 @@ const suites = [
   { name: 'PluginSystem', file: './plugin-system.test.js' },
   { name: 'Runtime', file: './runtime.test.js' },
   { name: 'TraceEngine', file: './trace-engine.test.js' },
+  { name: 'AgentManager', file: './agent-manager.test.js' },
 ];
 
 let totalPassed = 0;
