@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added deterministic runtime backbone modules (`core/runtime.js`, `core/scheduler.js`, `core/state-manager.js`) with fixed tick execution controls (`start/stop/step/getState`), queue-based per-tick scheduling, state snapshot management, and safe task failure isolation plus runtime unit coverage.
 - Added core plugin runtime modules (`core/plugin-registry.js`, `core/plugin-system.js`) with deterministic register/load/execute/unload lifecycle, isolated sandbox contexts, plugin state tracking, and activity logging plus example plugin + unit coverage.
 - Added DAX App Bundle Forge foundations under `/bundle-forge` with builder/validator/exporter modules that generate `app.dax`, validate manifest + runtime + script safety + bundle size, and unit coverage for bundle creation/export security checks.
 - Added Milestone 1 AI world generator foundations: `/ai/world-generator` parser/selector/builder/registry modules, `/ai/world-pipeline.js`, reusable `/world-templates/voxel-world` terrain/entity/UI/config template assets, runtime world registration + launch plumbing via `createWorld(...)`, sample metadata at `/worlds/voxel-demo-world-index.json`, studio UI hook for voxel generation, and architecture docs at `docs/ai-world-generator.md`.
