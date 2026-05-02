@@ -26,7 +26,7 @@ assert('runAgent returns flow and result payload', !!output.flowId && output.res
 assert('lifecycle spans are recorded', flow.spans.length >= 4);
 assert('run is deterministic for identical input shape', typeof output.result.runCount === 'number' && output.result.echoedInput.value === 42);
 assert('agent context state is scoped by agent id', manager.runtime.stateManager.get('example.runCount') === 1);
-assert('agent state machine reaches COMPLETED', manager.runtime.stateMachine.getState('example') === 'COMPLETED');
+assert('invocation state is cleaned after run', manager.runtime.stateMachine.registry.size() === 0);
 assert('state transitions are traced as events', flow.spans.some((id) => manager.trace.store.getSpan(id).events.some((evt) => evt.name === 'state.transition')));
 
 module.exports = { passed, failed };

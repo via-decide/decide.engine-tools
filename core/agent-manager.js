@@ -47,8 +47,9 @@ class AgentManager {
 
     const flowId = this.trace.startFlow({ source: 'agent-manager', agentId });
     const rootSpanId = this.trace.startSpan(flowId, { name: 'agent.run' });
+    const invocationKey = `${agentId}:${flowId}`;
     const emitTransition = (eventType, spanId) => {
-      const transition = this.runtime.stateMachine.transition(agentId, { type: eventType });
+      const transition = this.runtime.stateMachine.transition(invocationKey, { type: eventType });
       this.trace.event(spanId, 'state.transition', transition);
       return transition;
     };
@@ -76,8 +77,8 @@ class AgentManager {
       emitTransition('complete', runSpanId);
       this.trace.endSpan(runSpanId, { agentId });
     } catch (error) {
-      if (this.runtime.stateMachine.canTransition(agentId, { type: 'fail' })) {
-        const failTransition = this.runtime.stateMachine.transition(agentId, { type: 'fail' });
+      if (this.runtime.stateMachine.canTransition(invocationKey, { type: 'fail' })) {
+        const failTransition = this.runtime.stateMachine.transition(invocationKey, { type: 'fail' });
         this.trace.event(rootSpanId, 'state.transition', failTransition);
       }
       this.trace.fail(rootSpanId, error, { agentId, phase: 'execution' });
@@ -91,6 +92,8 @@ class AgentManager {
         this.trace.endSpan(disposeSpanId, { agentId });
       } catch (disposeError) {
         this.trace.fail(disposeSpanId, disposeError, { agentId, phase: 'dispose' });
+      } finally {
+        this.runtime.stateMachine.registry.delete(invocationKey);
       }
     }
 

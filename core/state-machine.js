@@ -42,7 +42,7 @@ function createStateMachine(definition) {
     return { entityId, event: event.type, from: current, to: next };
   }
 
-  return { transition, getState, canTransition };
+  return { transition, getState, canTransition, registry };
 }
 
 module.exports = { createStateMachine };
