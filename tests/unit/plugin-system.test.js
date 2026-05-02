@@ -25,5 +25,6 @@ assert('executePlugin returns deterministic payload', system.executePlugin('exam
 assert('unloadPlugin transitions to unloaded', system.unloadPlugin('example-plugin') === true);
 assert('execution blocked when unloaded', (() => { try { system.executePlugin('example-plugin', {}); return false; } catch (_err) { return true; } })());
 assert('lifecycle activity logged', system.getActivityLog().some((entry) => entry.event === 'load') && system.getActivityLog().some((entry) => entry.event === 'unload'));
+assert('plugin execution traces are recorded', system.trace.listFlows().length >= 1);
 
 module.exports = { passed, failed };

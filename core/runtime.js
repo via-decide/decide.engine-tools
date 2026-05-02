@@ -2,6 +2,7 @@
 
 const { createScheduler } = require('./scheduler');
 const { createStateManager } = require('./state-manager');
+const { createTraceEngine } = require('./trace-engine');
 
 class Runtime {
   constructor(options = {}) {
@@ -13,13 +14,18 @@ class Runtime {
     this.isRunning = false;
     this.tick = 0;
     this.logs = [];
+    this.trace = options.traceEngine || createTraceEngine();
   }
 
   _runOneTick() {
-    const report = this.scheduler.runTick({ state: this.stateManager.snapshot() });
+    const flowId = this.trace.startFlow({ source: 'runtime', tick: this.tick });
+    const rootSpanId = this.trace.startSpan(flowId, { name: 'runtime.tick' });
+    const report = this.scheduler.runTick({ state: this.stateManager.snapshot(), trace: this.trace, flowId, parentSpanId: rootSpanId });
     this.stateManager.set('lastTick', this.tick);
     this.stateManager.set('lastReport', report);
     this.logs.push({ type: 'runtime:tick', tick: this.tick, report });
+    this.trace.endSpan(rootSpanId, { report });
+    this.trace.endFlow(flowId, { failed: report.failed > 0, report });
     this.tick += 1;
     return report;
   }

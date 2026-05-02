@@ -28,5 +28,6 @@ assert('step executes at least one task', report.executed >= 1);
 assert('step captures task failures and continues', report.failed === 1 && value === 1);
 assert('state manager stores last report', state.state.lastReport && state.state.lastReport.tick === 0);
 assert('runtime control start/stop exposed', runtime.start() === true && runtime.stop() === true);
+assert('runtime trace flow created per step', runtime.trace.listFlows().length >= 1);
 
 module.exports = { passed, failed };
