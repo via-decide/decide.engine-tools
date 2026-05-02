@@ -4,6 +4,13 @@ const { createPluginSystem } = require('./plugin-system');
 const { createRuntime } = require('./runtime');
 const { createAgentContext } = require('./agent-context');
 
+function getLifecycleTaskError(report, expectedTaskId, fallbackMessage) {
+  if (!report || !Array.isArray(report.errors)) return null;
+  const matchingError = report.errors.find((error) => error && error.taskId === expectedTaskId);
+  if (!matchingError) return null;
+  return new Error(matchingError.message || fallbackMessage);
+}
+
 class AgentManager {
   constructor(options = {}) {
     this.runtime = options.runtime || createRuntime(options.runtimeOptions || {});
@@ -62,20 +69,18 @@ class AgentManager {
     try {
       const initSpanId = this.trace.startSpan(flowId, { name: 'agent.init', parentId: rootSpanId });
       this.runtime.scheduler.schedule({ id: `agent:init:${agentId}`, run: () => agent.init(ctx) });
+      const initTaskId = `agent:init:${agentId}`;
       const initReport = this.runtime.step();
-      if (initReport.failed > 0) {
-        const firstError = initReport.errors[0] || { message: 'Agent init failed during scheduled task execution.' };
-        throw new Error(firstError.message);
-      }
+      const initError = getLifecycleTaskError(initReport, initTaskId, 'Agent init failed during scheduled task execution.');
+      if (initError) throw initError;
       this.trace.endSpan(initSpanId, { agentId });
 
       const runSpanId = this.trace.startSpan(flowId, { name: 'agent.lifecycle.run', parentId: rootSpanId });
-      this.runtime.scheduler.schedule({ id: `agent:run:${agentId}`, run: () => { result = agent.run(ctx, input); } });
+      const runTaskId = `agent:run:${agentId}`;
+      this.runtime.scheduler.schedule({ id: runTaskId, run: () => { result = agent.run(ctx, input); } });
       const runReport = this.runtime.step();
-      if (runReport.failed > 0) {
-        const firstError = runReport.errors[0] || { message: 'Agent run failed during scheduled task execution.' };
-        throw new Error(firstError.message);
-      }
+      const runErrorFromReport = getLifecycleTaskError(runReport, runTaskId, 'Agent run failed during scheduled task execution.');
+      if (runErrorFromReport) throw runErrorFromReport;
       this.trace.endSpan(runSpanId, { agentId });
     } catch (error) {
       runFailed = true;
@@ -83,12 +88,11 @@ class AgentManager {
     } finally {
       const disposeSpanId = this.trace.startSpan(flowId, { name: 'agent.dispose', parentId: rootSpanId });
       try {
-        this.runtime.scheduler.schedule({ id: `agent:dispose:${agentId}`, run: () => agent.dispose(ctx) });
+        const disposeTaskId = `agent:dispose:${agentId}`;
+        this.runtime.scheduler.schedule({ id: disposeTaskId, run: () => agent.dispose(ctx) });
         const disposeReport = this.runtime.step();
-        if (disposeReport.failed > 0) {
-          const firstError = disposeReport.errors[0] || { message: 'Agent dispose failed during scheduled task execution.' };
-          throw new Error(firstError.message);
-        }
+        const disposeErrorFromReport = getLifecycleTaskError(disposeReport, disposeTaskId, 'Agent dispose failed during scheduled task execution.');
+        if (disposeErrorFromReport) throw disposeErrorFromReport;
         this.trace.endSpan(disposeSpanId, { agentId });
       } catch (disposeError) {
         runFailed = true;
