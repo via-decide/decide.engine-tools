@@ -8,6 +8,8 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added an agent execution layer with `core/agent-manager.js`, `core/agent-context.js`, and `agents/example.agent.js`, integrating runtime scheduler execution and trace flow/span lifecycle instrumentation (`init`/`run`/`dispose`) with isolated per-agent state context APIs.
+- Added unit coverage for agent manager lifecycle execution, isolation, and trace behavior in `tests/unit/agent-manager.test.js`.
 - Added deterministic core trace observability foundations with in-memory `Flow`/`Span`/`Breakpoint` lifecycle APIs (`core/id.js`, `core/trace-store.js`, `core/trace-engine.js`) and DAG link support for full execution trace retrieval.
 - Integrated trace flow/span instrumentation into runtime tick cycles, scheduler task execution, and plugin execution lifecycles so failures create flow-level breakpoints and traceable outcomes.
 - Added unit coverage for trace engine lifecycle behavior and runtime/plugin trace integration assertions.
