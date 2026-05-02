@@ -69,3 +69,22 @@ try {
 
 assert('runAgent throws when dispose task fails in scheduler report', disposeFailureThrown);
 assert('dispose failure marks flow as failed', disposeFlowStatus === 'failed');
+
+
+const unrelatedTaskManager = createAgentManager();
+unrelatedTaskManager.runtime.scheduler.schedule({ id: 'background:task', run: () => { throw new Error('background exploded'); } });
+unrelatedTaskManager.registerAgent({
+  id: 'unrelated-safe',
+  name: 'Unrelated Safe',
+  version: '1.0.0',
+  init() {},
+  run() { return { ok: true }; },
+  dispose() {}
+});
+let unrelatedFailure = null;
+try {
+  unrelatedTaskManager.runAgent('unrelated-safe', {});
+} catch (error) {
+  unrelatedFailure = error;
+}
+assert('runAgent ignores unrelated scheduler task failures when lifecycle task succeeds', unrelatedFailure === null);
