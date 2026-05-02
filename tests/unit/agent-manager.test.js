@@ -27,8 +27,6 @@ assert('lifecycle spans are recorded', flow.spans.length >= 4);
 assert('run is deterministic for identical input shape', typeof output.result.runCount === 'number' && output.result.echoedInput.value === 42);
 assert('agent context state is scoped by agent id', manager.runtime.stateManager.get('example.runCount') === 1);
 
-module.exports = { passed, failed };
-
 
 let initFailureThrown = false;
 try {
@@ -88,3 +86,5 @@ try {
   unrelatedFailure = error;
 }
 assert('runAgent ignores unrelated scheduler task failures when lifecycle task succeeds', unrelatedFailure === null);
+
+module.exports = { passed, failed };
