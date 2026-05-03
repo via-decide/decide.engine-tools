@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added an isolated advisory DSA Decision Engine prototype under `experimental/dsa/` with pure-function APIs (`analyzeProblem`, `classifyConstraints`, `suggestAlgorithms`), explicit reasoning output, and a standalone sample runner for constraint/algorithm recommendation validation.
 - Added deterministic task/agent lifecycle state management with `core/state-machine.js` and `core/state-registry.js`, enforcing strict CREATED→INITIALIZED→RUNNING→(COMPLETED|FAILED) transitions with invalid-transition rejection and in-memory per-entity state tracking.
 - Integrated state-machine lifecycle transitions into runtime/agent execution flow and trace events so every lifecycle transition is recorded as a `state.transition` trace event.
 - Added unit assertions validating agent lifecycle completion state and transition trace emission.
