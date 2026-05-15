@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added sovereign embedded continuity infrastructure with embedded manifest schema, deterministic hardware lineage/failure graph generators, firmware replay spec, mesh coordination spec, embedded sovereignty dataset generation, and offline `embedded_station.html`.
 - Added repository context intelligence infrastructure with deterministic continuity index spec, cross-repo graphing, context resolution, repository replay lineage, sovereignty dataset generation, and offline `repository_station.html`.
 - Added continuity-native game infrastructure layer with world continuity manifests, plugin legality contracts, deterministic lineage/replay scripts, multiplayer sync spec, authority profiles, and offline `world_station.html`.
 - Added deterministic bootstrap recovery infrastructure: canonical `.codex/session.md` continuity anchor, bootstrap validation spec, recovery/diagnostic Python scripts, persisted recovery artifacts, and offline `bootstrap_station.html` continuity workstation.
