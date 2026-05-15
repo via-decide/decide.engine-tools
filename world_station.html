@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World Station</title><style>body{font-family:Arial,sans-serif;margin:20px}section{border:1px solid #ccc;padding:12px;margin:0 0 10px}pre{white-space:pre-wrap}</style></head>
+<body>
+<h1>Sovereign Game Workstation</h1>
+<section><h2>World Lineage Viewer</h2><pre id="lineage">Loading...</pre></section>
+<section><h2>Replay Inspector</h2><pre id="replay">Loading...</pre></section>
+<section><h2>Plugin Governance Viewer</h2><pre id="plugin"></pre></section>
+<section><h2>Sovereign Multiplayer Viewer</h2><pre id="multi"></pre></section>
+<script>
+const fallbackLineage={world_id:"offline_world",lineage:[],deterministic:true};
+const fallbackReplay={status:"OFFLINE_NO_REPORT",divergence_classes:["UNKNOWN_WORLD_STATE"],deterministic:true};
+const plugin={legality:"enforced",mutation_scope:["canonical_state"],replay_guarantees:["deterministic","replay_safe"],multiplayer_admissibility:"authority_checked"};
+const multi={topology:"local_first_mesh",offline_continuity:"queued",authority_propagation:"epoch_ordered",replay_merge_flows:"deterministic"};
+Promise.all([fetch('./world_lineage/world-lineage.json').then(r=>r.ok?r.json():fallbackLineage).catch(()=>fallbackLineage),fetch('./world_replay/world-replay-report.json').then(r=>r.ok?r.json():fallbackReplay).catch(()=>fallbackReplay)]).then(([lineage,replay])=>{document.getElementById('lineage').textContent=JSON.stringify(lineage,null,2);document.getElementById('replay').textContent=JSON.stringify(replay,null,2);document.getElementById('plugin').textContent=JSON.stringify(plugin,null,2);document.getElementById('multi').textContent=JSON.stringify(multi,null,2);});
+</script>
+</body></html>

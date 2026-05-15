@@ -1,0 +1,43 @@
+{
+  "mode": "ARCHITECTURE_MODE",
+  "supported_modes": [
+    "ARCHITECTURE_MODE",
+    "REPLAY_MODE",
+    "PLUGIN_MODE",
+    "AUTHORITY_MODE",
+    "MULTIPLAYER_MODE",
+    "SYNTHESIS_MODE"
+  ],
+  "token_budget": 2400,
+  "selected_modules": [
+    "core/world-continuity-manifest.md",
+    "plugins/plugin-legality-contracts.md",
+    "multiplayer/continuity-sync-spec.md",
+    "authority/world-authority-profiles.md",
+    "scripts/replay_world_state.py"
+  ],
+  "replay_priority": [
+    {
+      "module": "core/world-continuity-manifest.md",
+      "weight": 1.0
+    },
+    {
+      "module": "plugins/plugin-legality-contracts.md",
+      "weight": 0.9
+    },
+    {
+      "module": "multiplayer/continuity-sync-spec.md",
+      "weight": 0.8
+    },
+    {
+      "module": "authority/world-authority-profiles.md",
+      "weight": 0.7
+    },
+    {
+      "module": "scripts/replay_world_state.py",
+      "weight": 0.6
+    }
+  ],
+  "lineage_preserved": true,
+  "hallucination_guard": "only_indexed_paths"
+}
