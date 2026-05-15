@@ -1,0 +1,29 @@
+{
+  "root_repository": "via-decide/decide.engine-tools",
+  "relationships": [
+    {
+      "from": "zayvora-cookbook",
+      "to": "decide.engine-tools",
+      "type": "continuity_contracts"
+    },
+    {
+      "from": "decide.engine-tools",
+      "to": "nex",
+      "type": "context_synthesis_dependency"
+    },
+    {
+      "from": "decide.engine-tools",
+      "to": "daxini",
+      "type": "orchestration_runtime_exchange"
+    }
+  ],
+  "relationship_types": [
+    "shared_orchestration_primitives",
+    "continuity_manifests",
+    "replay_semantics",
+    "authority_propagation",
+    "plugin_interoperability",
+    "synchronization_contracts"
+  ],
+  "deterministic": true
+}

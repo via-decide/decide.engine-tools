@@ -1,0 +1,16 @@
+[BOOTSTRAP]
+AGENTS.md ✓
+instructions.md ✓
+session.md ✓
+
+[STATE]
+BOOTSTRAP_READY
+
+[RECOVERY]
+minimal session restored
+
+[PIPELINE]
+execution unlocked
+
+[TIMESTAMP]
+2026-05-15T06:41:09.031403+00:00
