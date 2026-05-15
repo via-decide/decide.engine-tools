@@ -1,0 +1,36 @@
+{
+  "repository_problem": "continuity_native_repository_intelligence",
+  "architectural_constraints": [
+    "deterministic_processing",
+    "offline_capable"
+  ],
+  "dependency_constraints": [
+    "no_build_systems",
+    "native_python_and_static_html_only"
+  ],
+  "replay_requirements": [
+    "lineage_preservation",
+    "replay_admissibility_checks"
+  ],
+  "continuity_dependencies": [
+    "core/world-continuity-manifest.md",
+    "context/repository-continuity-index.md"
+  ],
+  "plugin_relationships": [
+    "plugins/plugin-legality-contracts.md"
+  ],
+  "failure_modes": [
+    "dependency_drift",
+    "continuity_fragmentation",
+    "replay_incompatibility"
+  ],
+  "migration_constraints": [
+    "portable_paths",
+    "stable_manifest_contracts"
+  ],
+  "context_resolution_rules": [
+    "prioritize_replay_critical_modules",
+    "avoid_non_indexed_dependencies",
+    "respect_token_budget"
+  ]
+}
