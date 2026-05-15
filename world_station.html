@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World Station</title><style>body{font-family:Arial,sans-serif;margin:20px}section{border:1px solid #ccc;padding:12px;margin:0 0 10px}pre{white-space:pre-wrap}</style></head>
+<body>
+<h1>Sovereign Game Workstation</h1>
+<section><h2>World Lineage Viewer</h2><pre id="lineage"></pre></section>
+<section><h2>Replay Inspector</h2><pre id="replay"></pre></section>
+<section><h2>Plugin Governance Viewer</h2><pre id="plugin"></pre></section>
+<section><h2>Sovereign Multiplayer Viewer</h2><pre id="multi"></pre></section>
+<script>
+const lineage={simulation_history:["player_trade","economy_shift","npc_migration"],faction_evolution:["stable","shifting","unstable"],plugin_mutations:["economy_rules_v2"],continuity_forks:["fork_A@tick_4"]};
+const replay={states:["economy","faction","inventory"],divergence_events:["SIMULATION_DIVERGENCE"],authority_transitions:["solo->community"],canonical_reconciliation:"complete"};
+const plugin={legality:"enforced",mutation_scope:["economy","npc_behavior"],replay_guarantees:["deterministic","replay_safe"],multiplayer_admissibility:"profile_checked"};
+const multi={topology:"local_first_mesh",offline_continuity:"queued_and_signed",authority_propagation:"epoch_ordered",replay_merge_flows:"deterministic_conflict_resolution"};
+document.getElementById('lineage').textContent=JSON.stringify(lineage,null,2);
+document.getElementById('replay').textContent=JSON.stringify(replay,null,2);
+document.getElementById('plugin').textContent=JSON.stringify(plugin,null,2);
+document.getElementById('multi').textContent=JSON.stringify(multi,null,2);
+</script>
+</body></html>

@@ -1,0 +1,37 @@
+{
+  "world_id": "demo_world",
+  "lineage": [
+    {
+      "event": "player_trade",
+      "tick": 1
+    },
+    {
+      "event": "economy_shift",
+      "tick": 2
+    },
+    {
+      "event": "npc_migration",
+      "tick": 3
+    },
+    {
+      "event": "faction_instability",
+      "tick": 4
+    },
+    {
+      "event": "world_divergence",
+      "tick": 5
+    },
+    {
+      "event": "replay_lineage_update",
+      "tick": 6
+    }
+  ],
+  "tracks": [
+    "player_actions",
+    "simulation_events",
+    "plugin_mutations",
+    "authority_changes",
+    "world_forks",
+    "reconciliation_paths"
+  ]
+}

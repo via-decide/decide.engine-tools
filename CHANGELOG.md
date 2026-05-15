@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added continuity-native game infrastructure layer with world continuity manifests, plugin legality contracts, deterministic lineage/replay scripts, multiplayer sync spec, authority profiles, and offline `world_station.html`.
 - Added deterministic bootstrap recovery infrastructure: canonical `.codex/session.md` continuity anchor, bootstrap validation spec, recovery/diagnostic Python scripts, persisted recovery artifacts, and offline `bootstrap_station.html` continuity workstation.
 - Added an isolated advisory DSA Decision Engine prototype under `experimental/dsa/` with pure-function APIs (`analyzeProblem`, `classifyConstraints`, `suggestAlgorithms`), explicit reasoning output, and a standalone sample runner for constraint/algorithm recommendation validation.
 - Added deterministic task/agent lifecycle state management with `core/state-machine.js` and `core/state-registry.js`, enforcing strict CREATED→INITIALIZED→RUNNING→(COMPLETED|FAILED) transitions with invalid-transition rejection and in-memory per-entity state tracking.
