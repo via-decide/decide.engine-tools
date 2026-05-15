@@ -1,5 +1,5 @@
 {
-  "world_id": "demo_world",
+  "world_id": "manifest_defined_world",
   "replay_targets": [
     "economic_systems",
     "faction_systems",
@@ -17,5 +17,7 @@
     "RUNTIME_DIVERGENCE",
     "UNKNOWN_WORLD_STATE"
   ],
-  "status": "REPLAY_STABLE"
+  "status": "REPLAY_STABLE",
+  "missing_required_events": [],
+  "deterministic": true
 }

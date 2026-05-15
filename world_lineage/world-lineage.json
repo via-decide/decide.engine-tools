@@ -1,5 +1,5 @@
 {
-  "world_id": "demo_world",
+  "world_id": "manifest_defined_world",
   "lineage": [
     {
       "event": "player_trade",
@@ -33,5 +33,7 @@
     "authority_changes",
     "world_forks",
     "reconciliation_paths"
-  ]
+  ],
+  "source_manifest": "core/world-continuity-manifest.md",
+  "deterministic": true
 }
