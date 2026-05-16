@@ -1,0 +1,12 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Constitutional Station</title><style>body{font-family:Arial,sans-serif;margin:20px}section{border:1px solid #ccc;padding:12px;margin:0 0 10px}pre{white-space:pre-wrap}</style></head><body>
+<h1>Constitutional Continuity Workstation</h1>
+<section><h2>Consensus Lineage Viewer</h2><pre id="consensus">Loading...</pre></section>
+<section><h2>Effect Journal Inspector</h2><pre id="effects">Loading...</pre></section>
+<section><h2>Partition Recovery Viewer</h2><pre id="partition">Loading...</pre></section>
+<section><h2>Canonical State Timeline</h2><pre id="timeline">Loading...</pre></section>
+<script>
+const fallback={status:'offline_unavailable',deterministic:true}; const read=(p)=>fetch(p).then(r=>r.ok?r.json():fallback).catch(()=>fallback);
+const effects={states:['EFFECT_PENDING','EFFECT_PRECOMMITTED','EFFECT_COMMITTED','EFFECT_REPLAYABLE','EFFECT_IRREVERSIBLE','EFFECT_RECONCILED','EFFECT_DIVERGED'],irreversible_classes:['sms','email','payment','hardware','external_api','physical_trigger']};
+Promise.all([read('./distributed_replay/distributed-replay.json'),read('./canonical_ordering/canonical-ordering.json'),read('./partition_simulations/partition-simulation.json')]).then(([a,b,c])=>{document.getElementById('consensus').textContent=JSON.stringify(b,null,2);document.getElementById('effects').textContent=JSON.stringify(effects,null,2);document.getElementById('partition').textContent=JSON.stringify(c,null,2);document.getElementById('timeline').textContent=JSON.stringify(a,null,2);});
+</script></body></html>

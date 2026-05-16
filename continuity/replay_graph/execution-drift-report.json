@@ -1,0 +1,6 @@
+{
+  "semantic_drift_detections": 1,
+  "continuity_confidence_score": 0.0,
+  "reports": [],
+  "verdict": "DRIFT_DETECTED"
+}
