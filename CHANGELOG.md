@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added isolated `game-engine/` deterministic roguelike foundations (immutable turn state, deterministic RNG, mesh sync scaffold, safe mod verification, simulation script, and tests) without disturbing existing repo runtime paths.
 - Upgraded distributed replay consensus engine with concrete replay graph Python modules, deterministic consensus simulator, drift detector, canonical fork resolution docs, offline continuity station, and replay determinism tests.
 - Added continuity-native sovereign game engine foundations: simulation kernel, entity continuity ECS, deterministic physics continuity, asset lineage, AI NPC continuity, multiplayer continuity protocol, world replay builder, and offline `worldline_station.html`.
 - Added distributed replay consensus engine infrastructure with replay graph schema, deterministic replay consensus and drift detector scripts, canonical fork resolution model, and offline `continuity_station.html`.
