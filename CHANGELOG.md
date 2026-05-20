@@ -9,6 +9,7 @@ Format: [Semantic Versioning](https://semver.org)
 
 ### Added
 - Added Zayvora Constraint Discovery Phase 1 foundations under `experimental/zayvora/phase1/` with JSON-backed experiment registry, deterministic replay recorder/verification, artifact directory bootstrap, and screenshot capture utilities plus unit coverage.
+- Added Zayvora Phase 2–4 infrastructure modules for visual constraints (monochrome/dither/tile-grid/scanline), interaction timing/rotation/rhythm helpers, replay window divergence validation, and a reflection bridge with anti-scoring prompt sanitization plus unit tests.
 - Added sovereign embedded continuity infrastructure with embedded manifest schema, deterministic hardware lineage/failure graph generators, firmware replay spec, mesh coordination spec, embedded sovereignty dataset generation, and offline `embedded_station.html`.
 - Added repository context intelligence infrastructure with deterministic continuity index spec, cross-repo graphing, context resolution, repository replay lineage, sovereignty dataset generation, and offline `repository_station.html`.
 - Added continuity-native game infrastructure layer with world continuity manifests, plugin legality contracts, deterministic lineage/replay scripts, multiplayer sync spec, authority profiles, and offline `world_station.html`.
