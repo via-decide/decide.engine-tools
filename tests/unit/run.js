@@ -35,6 +35,8 @@ const suites = [
   { name: 'ReplayEngineArchitecture', file: './replay-engine-architecture.test.js' },
   { name: 'ConstraintLab', file: './constraint-lab.test.js' },
   { name: 'LivingArchive', file: './living-archive.test.js' },
+  { name: 'SignalCapture', file: './signal-capture.test.js' },
+  { name: 'ConstraintStudio', file: './constraint-studio.test.js' },
 ];
 
 let totalPassed = 0;

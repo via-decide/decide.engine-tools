@@ -8,6 +8,8 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added `packages/constraint-studio` mutation-first constraint experiment infrastructure with live config layering, five identity presets, bounded mutation generation, variant tree engine, replay/signal comparison hooks, snapshot exports, living-archive bridge, and unit coverage.
+- Added `packages/signal-capture` embodied interaction instrumentation with 120Hz input sampling, timing analysis, interaction fingerprint generation, visualization datasets, replay-engine bridge, feel-delta comparison, export helpers, living-archive integration, and unit coverage.
 - Added `packages/living-archive` identity preservation infrastructure with experiment archiving, lineage graphing, timeline grouping, replay history integration, emotional notes formatting, search utilities, discovery resurfacing mode, and unit coverage.
 - Added `packages/constraint-lab` creative experimentation infrastructure with constraint runtime/chaining, replay bridge integration, comparison controls, artifact + notes capture helpers, three starter experiments, presets, and unit coverage.
 - Added `packages/replay-engine` deterministic replay foundation (fixed timestep loop, input recorder, replay player, stable state hashing, snapshot store, frame stepper, and GIF exporter scaffold) plus architecture tests and documentation.
