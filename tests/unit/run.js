@@ -30,6 +30,7 @@ const suites = [
   { name: 'TraceEngine', file: './trace-engine.test.js' },
   { name: 'StateRegistry', file: './state-registry.test.js' },
   { name: 'AgentManager', file: './agent-manager.test.js' },
+  { name: 'ZayvoraConstraintRuntime', file: './zayvora-constraint-runtime.test.js' },
 ];
 
 let totalPassed = 0;
