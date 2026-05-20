@@ -8,6 +8,11 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added `packages/living-archive` identity preservation infrastructure with experiment archiving, lineage graphing, timeline grouping, replay history integration, emotional notes formatting, search utilities, discovery resurfacing mode, and unit coverage.
+- Added `packages/constraint-lab` creative experimentation infrastructure with constraint runtime/chaining, replay bridge integration, comparison controls, artifact + notes capture helpers, three starter experiments, presets, and unit coverage.
+- Added `packages/replay-engine` deterministic replay foundation (fixed timestep loop, input recorder, replay player, stable state hashing, snapshot store, frame stepper, and GIF exporter scaffold) plus architecture tests and documentation.
+- Added Zayvora Constraint Discovery Phase 1 foundations under `experimental/zayvora/phase1/` with JSON-backed experiment registry, deterministic replay recorder/verification, artifact directory bootstrap, and screenshot capture utilities plus unit coverage.
+- Added Zayvora Phase 2–4 infrastructure modules for visual constraints (monochrome/dither/tile-grid/scanline), interaction timing/rotation/rhythm helpers, replay window divergence validation, and a reflection bridge with anti-scoring prompt sanitization plus unit tests.
 - Added sovereign embedded continuity infrastructure with embedded manifest schema, deterministic hardware lineage/failure graph generators, firmware replay spec, mesh coordination spec, embedded sovereignty dataset generation, and offline `embedded_station.html`.
 - Added repository context intelligence infrastructure with deterministic continuity index spec, cross-repo graphing, context resolution, repository replay lineage, sovereignty dataset generation, and offline `repository_station.html`.
 - Added continuity-native game infrastructure layer with world continuity manifests, plugin legality contracts, deterministic lineage/replay scripts, multiplayer sync spec, authority profiles, and offline `world_station.html`.
