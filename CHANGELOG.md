@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added `packages/living-archive` identity preservation infrastructure with experiment archiving, lineage graphing, timeline grouping, replay history integration, emotional notes formatting, search utilities, discovery resurfacing mode, and unit coverage.
 - Added `packages/constraint-lab` creative experimentation infrastructure with constraint runtime/chaining, replay bridge integration, comparison controls, artifact + notes capture helpers, three starter experiments, presets, and unit coverage.
 - Added `packages/replay-engine` deterministic replay foundation (fixed timestep loop, input recorder, replay player, stable state hashing, snapshot store, frame stepper, and GIF exporter scaffold) plus architecture tests and documentation.
 - Added Zayvora Constraint Discovery Phase 1 foundations under `experimental/zayvora/phase1/` with JSON-backed experiment registry, deterministic replay recorder/verification, artifact directory bootstrap, and screenshot capture utilities plus unit coverage.
