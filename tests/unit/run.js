@@ -33,6 +33,7 @@ const suites = [
   { name: 'ZayvoraConstraintRuntime', file: './zayvora-constraint-runtime.test.js' },
   { name: 'ZayvoraConstraintsPhase2to4', file: './zayvora-constraints-phase2-4.test.js' },
   { name: 'ReplayEngineArchitecture', file: './replay-engine-architecture.test.js' },
+  { name: 'ConstraintLab', file: './constraint-lab.test.js' },
 ];
 
 let totalPassed = 0;
