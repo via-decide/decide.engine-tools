@@ -8,6 +8,9 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added continuity-native sovereign game engine foundations: simulation kernel, entity continuity ECS, deterministic physics continuity, asset lineage, AI NPC continuity, multiplayer continuity protocol, world replay builder, and offline `worldline_station.html`.
+- Added distributed replay consensus engine infrastructure with replay graph schema, deterministic replay consensus and drift detector scripts, canonical fork resolution model, and offline `continuity_station.html`.
+- Added constitutional distributed continuity infrastructure with consensus/effect specs, deterministic distributed replay/canonical ordering/partition simulation generators, constitutional dataset builder, and offline `constitutional_station.html`.
 - Added constitutional distributed continuity infrastructure with consensus/effect specs, deterministic distributed replay/canonical ordering/partition simulation generators, constitutional dataset builder, and offline `constitutional_station.html`.
 - Added `tools/executors/security-scan-executor.js` to deterministically scan for exposed secrets, .env commits, dangerous shell patterns, path traversal usage, and insecure eval/new Function usage with `security_scan_report.json` output.
 - Added `tools/executors/documentation-executor.js` to generate/update scoped markdown documentation (README/API/task/architecture), keep code files untouched, optionally validate markdown links, and emit `documentation_report.json`.

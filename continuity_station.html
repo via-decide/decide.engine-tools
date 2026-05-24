@@ -1,0 +1,13 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Continuity Station</title><style>body{font-family:Arial;margin:20px}section{border:1px solid #ccc;padding:12px;margin-bottom:10px}pre{white-space:pre-wrap}</style></head><body>
+<h1>Distributed Replay Continuity Station</h1>
+<section><h2>Replay DAG Viewer</h2><pre id="dag">Loading...</pre></section>
+<section><h2>Distributed Node Map</h2><pre id="nodes">Loading...</pre></section>
+<section><h2>Divergence Visualization</h2><pre id="div">Loading...</pre></section>
+<section><h2>Canonical Branch Inspector</h2><pre id="canon">Loading...</pre></section>
+<section><h2>Orphan Lineage Tracker</h2><pre id="orph">Loading...</pre></section>
+<section><h2>Synchronization Replay Timeline</h2><pre id="time">Loading...</pre></section>
+<script>
+const fb={status:'offline_unavailable'};const read=(p)=>fetch(p).then(r=>r.ok?r.json():fb).catch(()=>fb);
+Promise.all([read('./continuity/replay_graph/replay-consensus-report.json'),read('./continuity/replay_graph/execution-drift-report.json')]).then(([a,b])=>{document.getElementById('dag').textContent=JSON.stringify(a.consensus_results?.canonical_replay_paths||fb,null,2);document.getElementById('nodes').textContent=JSON.stringify(a.simulation||fb,null,2);document.getElementById('div').textContent=JSON.stringify(a.consensus_results?.lineage_corruption_detected||fb,null,2);document.getElementById('canon').textContent=JSON.stringify(a.ordering_key||fb,null,2);document.getElementById('orph').textContent=JSON.stringify(a.consensus_results?.orphaned_branches||fb,null,2);document.getElementById('time').textContent=JSON.stringify({replay_admissibility:b.replay_admissibility,confidence:b.continuity_confidence_score},null,2);});
+</script></body></html>
