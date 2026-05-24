@@ -47,6 +47,7 @@ const suites = [
   { name: 'RefactorExecutor', file: './refactor-executor.test.js' },
   { name: 'DebugExecutor', file: './debug-executor.test.js' },
   { name: 'DocumentationExecutor', file: './documentation-executor.test.js' },
+  { name: 'SecurityScanExecutor', file: './security-scan-executor.test.js' },
 ];
 
 let totalPassed = 0;
