@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added universal task manifest schema at `tools/schema/tool-task.schema.json` and deterministic validator CLI `tools/engine/validate-task-manifest.js` for all supported task modes.
 - Added `tools/engine/pea-runner.js` to execute tool tasks in partitioned isolated repositories under `cloned_repos/<repo>/<task_id>/`, enforce path safety, emit `execution_manifest.json`, and commit validated task output locally inside the isolated repo.
 - Added `tools/engine/local-commit-executor.js` to safely detect the target repository, stage only task-scoped modified files, gate commits on validation, and emit structured `local_commit_result.json` output.
 - Added `packages/constraint-studio` mutation-first constraint experiment infrastructure with live config layering, five identity presets, bounded mutation generation, variant tree engine, replay/signal comparison hooks, snapshot exports, living-archive bridge, and unit coverage.

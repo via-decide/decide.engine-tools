@@ -39,6 +39,7 @@ const suites = [
   { name: 'ConstraintStudio', file: './constraint-studio.test.js' },
   { name: 'LocalCommitExecutor', file: './local-commit-executor.test.js' },
   { name: 'PEARunner', file: './pea-runner.test.js' },
+  { name: 'ValidateTaskManifest', file: './validate-task-manifest.test.js' },
 ];
 
 let totalPassed = 0;
