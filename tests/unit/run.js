@@ -42,6 +42,7 @@ const suites = [
   { name: 'ValidateTaskManifest', file: './validate-task-manifest.test.js' },
   { name: 'ToolTaskRouter', file: './tool-task-router.test.js' },
   { name: 'ValidationExecutor', file: './validation-executor.test.js' },
+  { name: 'FileChangeTracker', file: './file-change-tracker.test.js' },
 ];
 
 let totalPassed = 0;
