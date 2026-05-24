@@ -1,0 +1,1 @@
+export const terminalPreset = { rendering: { monochrome: true, palette: ['#001100', '#00ff66'], scanlines: true }, movement: { inertia: 0.3, acceleration: 0.9, snapToGrid: true, latencyMs: 60 }, audio: { waveform: 'noise', bitDepth: 4, sampleRate: 8000 } };
