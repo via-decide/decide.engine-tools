@@ -1,0 +1,1 @@
+export const demoscenePreset = { rendering: { monochrome: false, scanlines: true, palette: ['#0ff', '#f0f', '#ff0', '#00f'] }, movement: { inertia: 0.4, acceleration: 1.4, snapToGrid: false, latencyMs: 25 }, audio: { waveform: 'triangle', bitDepth: 6, sampleRate: 12000 } };

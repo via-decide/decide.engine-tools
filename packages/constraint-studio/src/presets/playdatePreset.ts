@@ -1,0 +1,1 @@
+export const playdatePreset = { rendering: { monochrome: true, scanlines: false }, movement: { inertia: 0.5, acceleration: 0.8, snapToGrid: false, latencyMs: 40 }, audio: { waveform: 'triangle', bitDepth: 8, sampleRate: 16000 } };

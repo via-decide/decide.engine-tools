@@ -1,0 +1,1 @@
+export const gameboyPreset = { rendering: { monochrome: true, tileSize: 8 }, movement: { inertia: 0.2, acceleration: 1.1, snapToGrid: true, latencyMs: 20 }, audio: { waveform: 'square', bitDepth: 4, sampleRate: 11025 } };
