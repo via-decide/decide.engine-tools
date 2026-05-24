@@ -40,6 +40,7 @@ const suites = [
   { name: 'LocalCommitExecutor', file: './local-commit-executor.test.js' },
   { name: 'PEARunner', file: './pea-runner.test.js' },
   { name: 'ValidateTaskManifest', file: './validate-task-manifest.test.js' },
+  { name: 'ToolTaskRouter', file: './tool-task-router.test.js' },
 ];
 
 let totalPassed = 0;
