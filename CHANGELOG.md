@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added `tools/executors/generator-executor.js` to generate template-based files within allowed target paths, enforce overwrite policy, and emit deterministic `generator_result.json` reports.
 - Added `tools/engine/file-change-tracker.js` to snapshot git status before/after tasks, attribute created/changed/deleted files, detect out-of-scope writes, and emit `file_change_report.json`.
 - Added `tools/executors/validation-executor.js` deterministic validation executor with timeout control, captured stdout/stderr/exit code, and `validation_result.json` output without direct commit behavior.
 - Added `tools/engine/tool-task-router.js` universal task router mapping supported task modes to executor identifiers with deterministic JSON responses and safe unknown-mode failure handling.

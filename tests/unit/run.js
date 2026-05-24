@@ -43,6 +43,7 @@ const suites = [
   { name: 'ToolTaskRouter', file: './tool-task-router.test.js' },
   { name: 'ValidationExecutor', file: './validation-executor.test.js' },
   { name: 'FileChangeTracker', file: './file-change-tracker.test.js' },
+  { name: 'GeneratorExecutor', file: './generator-executor.test.js' },
 ];
 
 let totalPassed = 0;
