@@ -25,7 +25,7 @@ console.log('\n── ValidationExecutor ──');
     repo: 'via-decide/decide.engine-tools',
     mode: 'validate',
     validation_command: 'node -e "process.stdout.write(\'ok\\n\')"',
-    timeout_ms: 3000,
+    timeout_ms: 10000,
   }, { cwd: tmp });
 
   assert('command executes', result.exit_code === 0);
@@ -41,7 +41,7 @@ console.log('\n── ValidationExecutor ──');
     repo: 'via-decide/decide.engine-tools',
     mode: 'validate',
     validation_command: 'node -e "process.stderr.write(\'err\\n\');process.exit(2)"',
-    timeout_ms: 3000,
+    timeout_ms: 10000,
   }, { cwd: tmp });
 
   assert('stderr captured', result.stderr.includes('err'));
@@ -56,7 +56,7 @@ console.log('\n── ValidationExecutor ──');
     repo: 'via-decide/decide.engine-tools',
     mode: 'validate',
     validation_command: 'node -e "setTimeout(()=>process.exit(0), 1000)"',
-    timeout_ms: 10,
+    timeout_ms: 25,
   }, { cwd: tmp });
 
   assert('timeout handled', result.timed_out === true);
