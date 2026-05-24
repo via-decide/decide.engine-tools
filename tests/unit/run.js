@@ -48,6 +48,7 @@ const suites = [
   { name: 'DebugExecutor', file: './debug-executor.test.js' },
   { name: 'DocumentationExecutor', file: './documentation-executor.test.js' },
   { name: 'SecurityScanExecutor', file: './security-scan-executor.test.js' },
+  { name: 'PackageExecutor', file: './package-executor.test.js' },
 ];
 
 let totalPassed = 0;
