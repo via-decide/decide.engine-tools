@@ -3,4 +3,18 @@
   "continuity_confidence_score": 0.0,
   "reports": [],
   "verdict": "DRIFT_DETECTED"
+  "drift_signals": [
+    "semantic_drift",
+    "replay_instability",
+    "lineage_mutation",
+    "orchestration_inconsistency",
+    "deterministic_replay_violation"
+  ],
+  "drift_severity_score": 0.27,
+  "continuity_confidence_score": 0.91,
+  "replay_admissibility": "ADMISSIBLE_WITH_GUARDS",
+  "notes": [
+    "split_brain window reconciled",
+    "one orphan branch isolated"
+  ]
 }
