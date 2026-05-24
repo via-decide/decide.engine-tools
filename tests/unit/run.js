@@ -37,6 +37,7 @@ const suites = [
   { name: 'LivingArchive', file: './living-archive.test.js' },
   { name: 'SignalCapture', file: './signal-capture.test.js' },
   { name: 'ConstraintStudio', file: './constraint-studio.test.js' },
+  { name: 'LocalCommitExecutor', file: './local-commit-executor.test.js' },
 ];
 
 let totalPassed = 0;
