@@ -38,6 +38,7 @@ const suites = [
   { name: 'SignalCapture', file: './signal-capture.test.js' },
   { name: 'ConstraintStudio', file: './constraint-studio.test.js' },
   { name: 'LocalCommitExecutor', file: './local-commit-executor.test.js' },
+  { name: 'PEARunner', file: './pea-runner.test.js' },
 ];
 
 let totalPassed = 0;
