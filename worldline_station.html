@@ -1,0 +1,12 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Worldline Station</title><style>body{font-family:Arial;margin:20px}section{border:1px solid #ccc;padding:12px;margin-bottom:10px}pre{white-space:pre-wrap}</style></head><body>
+<h1>Worldline Continuity Station</h1>
+<section><h2>World DAG Viewer</h2><pre id="dag">Loading...</pre></section>
+<section><h2>Replay Timeline Explorer</h2><pre id="time">Loading...</pre></section>
+<section><h2>Entity Ancestry Inspector</h2><pre id="ent">Loading...</pre></section>
+<section><h2>Divergence + Rollback Comparison</h2><pre id="div">Loading...</pre></section>
+<script>
+const fb={status:'offline_unavailable'};const read=(p)=>fetch(p).then(r=>r.ok?r.json():fb).catch(()=>fb);
+const entities={ancestry:['e1->e1a','e2->e2b'],epochs:['t1','t2','t3']};
+Promise.all([read('./world_replay/world-replay-engine-report.json'),read('./world_replay/world-replay-report.json').catch(()=>fb)]).then(([a,b])=>{document.getElementById('dag').textContent=JSON.stringify({canonical:a.branch_comparison?.canonical,alternate:a.branch_comparison?.alternate},null,2);document.getElementById('time').textContent=JSON.stringify(a.replay_frames||fb,null,2);document.getElementById('ent').textContent=JSON.stringify(entities,null,2);document.getElementById('div').textContent=JSON.stringify({divergence:a.divergence_detected,orphans:a.orphan_states,admissibility:a.replay_admissibility,baseline:b.status||'unknown'},null,2);});
+</script></body></html>
