@@ -41,6 +41,7 @@ const suites = [
   { name: 'PEARunner', file: './pea-runner.test.js' },
   { name: 'ValidateTaskManifest', file: './validate-task-manifest.test.js' },
   { name: 'ToolTaskRouter', file: './tool-task-router.test.js' },
+  { name: 'ValidationExecutor', file: './validation-executor.test.js' },
 ];
 
 let totalPassed = 0;

@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added `tools/executors/validation-executor.js` deterministic validation executor with timeout control, captured stdout/stderr/exit code, and `validation_result.json` output without direct commit behavior.
 - Added `tools/engine/tool-task-router.js` universal task router mapping supported task modes to executor identifiers with deterministic JSON responses and safe unknown-mode failure handling.
 - Added universal task manifest schema at `tools/schema/tool-task.schema.json` and deterministic validator CLI `tools/engine/validate-task-manifest.js` for all supported task modes.
 - Added `tools/engine/pea-runner.js` to execute tool tasks in partitioned isolated repositories under `cloned_repos/<repo>/<task_id>/`, enforce path safety, emit `execution_manifest.json`, and commit validated task output locally inside the isolated repo.
