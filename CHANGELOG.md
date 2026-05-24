@@ -8,6 +8,18 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added `tools/executors/package-executor.js` for package/build verification with package-manager detection (npm/pnpm/yarn/pip/uv), lockfile-gated install checks, optional build/test execution, and deterministic `package_report.json` output that blocks commit flow on failures.
+- Added `tools/executors/security-scan-executor.js` to deterministically scan for exposed secrets, .env commits, dangerous shell patterns, path traversal usage, and insecure eval/new Function usage with `security_scan_report.json` output.
+- Added `tools/executors/documentation-executor.js` to generate/update scoped markdown documentation (README/API/task/architecture), keep code files untouched, optionally validate markdown links, and emit `documentation_report.json`.
+- Added `tools/executors/debug-executor.js` for deterministic bug-fix execution with reproduction-before-fix support, scoped file-change enforcement, post-fix validation, and `debug_report.json` output.
+- Added `tools/executors/refactor-executor.js` with safety gates for scoped refactors, optional formatter execution, post-refactor validation, and deterministic `refactor_report.json` output.
+- Added `tools/executors/generator-executor.js` to generate template-based files within allowed target paths, enforce overwrite policy, and emit deterministic `generator_result.json` reports.
+- Added `tools/engine/file-change-tracker.js` to snapshot git status before/after tasks, attribute created/changed/deleted files, detect out-of-scope writes, and emit `file_change_report.json`.
+- Added `tools/executors/validation-executor.js` deterministic validation executor with timeout control, captured stdout/stderr/exit code, and `validation_result.json` output without direct commit behavior.
+- Added `tools/engine/tool-task-router.js` universal task router mapping supported task modes to executor identifiers with deterministic JSON responses and safe unknown-mode failure handling.
+- Added universal task manifest schema at `tools/schema/tool-task.schema.json` and deterministic validator CLI `tools/engine/validate-task-manifest.js` for all supported task modes.
+- Added `tools/engine/pea-runner.js` to execute tool tasks in partitioned isolated repositories under `cloned_repos/<repo>/<task_id>/`, enforce path safety, emit `execution_manifest.json`, and commit validated task output locally inside the isolated repo.
+- Added `tools/engine/local-commit-executor.js` to safely detect the target repository, stage only task-scoped modified files, gate commits on validation, and emit structured `local_commit_result.json` output.
 - Added `packages/constraint-studio` mutation-first constraint experiment infrastructure with live config layering, five identity presets, bounded mutation generation, variant tree engine, replay/signal comparison hooks, snapshot exports, living-archive bridge, and unit coverage.
 - Added `packages/signal-capture` embodied interaction instrumentation with 120Hz input sampling, timing analysis, interaction fingerprint generation, visualization datasets, replay-engine bridge, feel-delta comparison, export helpers, living-archive integration, and unit coverage.
 - Added `packages/living-archive` identity preservation infrastructure with experiment archiving, lineage graphing, timeline grouping, replay history integration, emotional notes formatting, search utilities, discovery resurfacing mode, and unit coverage.
