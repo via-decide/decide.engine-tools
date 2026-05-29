@@ -8,6 +8,7 @@ Format: [Semantic Versioning](https://semver.org)
 ## [Unreleased]
 
 ### Added
+- Added the standalone Mars visual layer Task 1 checkpoint with deterministic axial hex grid math, procedural basalt terrain metadata, p5.js rendering, camera pan/zoom, hover HUD, router alias, and smoke/unit coverage.
 - Added `tools/executors/package-executor.js` for package/build verification with package-manager detection (npm/pnpm/yarn/pip/uv), lockfile-gated install checks, optional build/test execution, and deterministic `package_report.json` output that blocks commit flow on failures.
 - Added isolated `game-engine/` deterministic roguelike foundations (immutable turn state, deterministic RNG, mesh sync scaffold, safe mod verification, simulation script, and tests) without disturbing existing repo runtime paths.
 - Upgraded distributed replay consensus engine with concrete replay graph Python modules, deterministic consensus simulator, drift detector, canonical fork resolution docs, offline continuity station, and replay determinism tests.

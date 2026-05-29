@@ -1,0 +1,11 @@
+{
+  "name": "@viadecide/mars-game-visual-layer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone Mars visual layer Task 1 checkpoint for hex terrain rendering.",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "p5": "^1.7.0",
+    "p5.sound": "^1.4.0"
+  }
+}
