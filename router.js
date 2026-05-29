@@ -16,6 +16,7 @@
     'agent-builder': 'agent/index.html',
     'app-generator': 'app-generator/index.html',
     'mars-colony': 'mars.html',
+    'mars-visual-v1': 'tools/mars-game/mars-visual-v1.html',
     'orchard-sim': 'tools/eco-engine-test/index.html',
     'context-packager': 'tools/context-packager/index.html',
     'spec-builder': 'tools/spec-builder/index.html',
