@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mars Hex Grid Visual Layer — Task 1</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <script src="src/lib/TerrainGenerator.js"></script>
+  <script src="src/lib/HexGrid.js"></script>
+  <script src="src/components/HexRenderer.js"></script>
+  <style>
+    :root {
+      --void: #0d1118;
+      --panel: rgba(5, 8, 12, 0.78);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #e7e0d4;
+      --muted: #8d928f;
+      --amber: #ffc14d;
+      --blue: #65c7ff;
+      --green: #59ff9d;
+      --danger: #ff8659;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      background: radial-gradient(circle at 50% 100%, rgba(178, 72, 28, 0.28), transparent 48%), var(--void);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      touch-action: none;
+    }
+
+    #canvas-container {
+      position: fixed;
+      inset: 0;
+      min-height: 100dvh;
+    }
+
+    .panel {
+      position: fixed;
+      z-index: 5;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(12px);
+      border-radius: 14px;
+    }
+
+    #hud {
+      top: max(14px, env(safe-area-inset-top));
+      left: max(14px, env(safe-area-inset-left));
+      width: min(330px, calc(100vw - 28px));
+      padding: 15px;
+      pointer-events: none;
+    }
+
+    #controls {
+      left: max(14px, env(safe-area-inset-left));
+      bottom: max(14px, env(safe-area-inset-bottom));
+      width: min(360px, calc(100vw - 28px));
+      padding: 13px 15px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    h1 { font-size: 14px; letter-spacing: 0.16em; margin-bottom: 4px; }
+    .subtitle { color: var(--muted); font-size: 10px; letter-spacing: 0.12em; margin-bottom: 12px; }
+    .grid { display: grid; gap: 7px; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 11px; }
+    .label { color: var(--muted); }
+    .value { color: var(--green); font-weight: 700; text-align: right; }
+    .value.amber { color: var(--amber); }
+    .value.blue { color: var(--blue); }
+    .value.danger { color: var(--danger); }
+    .divider { height: 1px; margin: 10px 0; background: var(--line); }
+    kbd { color: var(--green); font: inherit; font-weight: 800; }
+    #p5-status { color: var(--amber); margin-top: 8px; }
+
+    .fallback-canvas {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      background: linear-gradient(135deg, #111721, #24140d);
+    }
+
+    @media (max-width: 640px) {
+      #hud { padding: 12px; }
+      #controls { font-size: 10px; }
+      h1 { font-size: 12px; }
+      .row { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main id="canvas-container" aria-label="Interactive Mars hex terrain canvas"></main>
+
+  <section id="hud" class="panel" aria-live="polite">
+    <h1>HEX-01 · SOL 127</h1>
+    <p class="subtitle">VISUAL LAYER TASK 1</p>
+    <div class="grid">
+      <div class="row"><span class="label">Grid</span><span class="value" id="grid-size">7 hexes</span></div>
+      <div class="row"><span class="label">Viewport</span><span class="value blue" id="viewport-size">—</span></div>
+      <div class="row"><span class="label">Rover origin</span><span class="value" id="rover-pos">0, 0</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="grid" id="hex-info">
+      <div class="row"><span class="label">Hex</span><span class="value amber" id="hex-pos">Hover terrain</span></div>
+      <div class="row"><span class="label">Complexity</span><span class="value" id="hex-complexity">—</span></div>
+      <div class="row"><span class="label">Hazard</span><span class="value danger" id="hex-hazard">—</span></div>
+      <div class="row"><span class="label">Solar Energy</span><span class="value blue" id="hex-energy">—</span></div>
+      <div class="row"><span class="label">APXS</span><span class="value blue" id="hex-apxs">—</span></div>
+      <div class="row"><span class="label">Quadrant</span><span class="value" id="hex-quadrant">—</span></div>
+    </div>
+    <p id="p5-status"></p>
+  </section>
+
+  <aside id="controls" class="panel">
+    <strong style="color: var(--text);">CONTROLS</strong><br>
+    <kbd>DRAG</kbd> pan camera · <kbd>SCROLL</kbd> zoom · <kbd>HOVER</kbd> inspect hex<br>
+    <span>Mobile: one-finger pan, two-finger pinch prepared for p5 touch events.</span>
+  </aside>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const fallbackTerrain = [
+        { q: 0, r: 0, complexity: 4.2, hazardType: null, hazardFlags: [], apxsContact: true, energy: 84, terrain: 'basalt', quadrant: 'A3-07' },
+        { q: 1, r: 0, complexity: 5.1, hazardType: 'rock', hazardFlags: ['rock'], apxsContact: false, energy: 72, terrain: 'basalt', quadrant: 'A3-08' },
+        { q: 1, r: -1, complexity: 6.4, hazardType: 'thermal', hazardFlags: ['thermal'], apxsContact: false, energy: 63, terrain: 'basalt', quadrant: 'A3-14' },
+        { q: 0, r: -1, complexity: 5.8, hazardType: null, hazardFlags: [], apxsContact: true, energy: 79, terrain: 'basalt', quadrant: 'A3-13' },
+        { q: -1, r: 0, complexity: 4.9, hazardType: 'dust', hazardFlags: ['dust'], apxsContact: false, energy: 58, terrain: 'basalt', quadrant: 'A3-06' },
+        { q: -1, r: 1, complexity: 7.2, hazardType: 'rock', hazardFlags: ['rock'], apxsContact: false, energy: 67, terrain: 'basalt', quadrant: 'A2-12' },
+        { q: 0, r: 1, complexity: 4.6, hazardType: null, hazardFlags: [], apxsContact: true, energy: 91, terrain: 'basalt', quadrant: 'A2-13' }
+      ];
+
+      const $ = (id) => document.getElementById(id);
+
+      function setHexInfo(hex) {
+        if (!hex) {
+          $('hex-pos').textContent = 'Hover terrain';
+          $('hex-complexity').textContent = '—';
+          $('hex-hazard').textContent = '—';
+          $('hex-energy').textContent = '—';
+          $('hex-apxs').textContent = '—';
+          $('hex-quadrant').textContent = '—';
+          return;
+        }
+
+        $('hex-pos').textContent = `${hex.q}, ${hex.r}`;
+        $('hex-complexity').textContent = Number(hex.complexity || 0).toFixed(1);
+        $('hex-hazard').textContent = hex.hazardType || 'None';
+        $('hex-energy').textContent = `${hex.energy || 0}%`;
+        $('hex-apxs').textContent = hex.apxsContact ? 'CONTACT ✓' : 'No contact';
+        $('hex-quadrant').textContent = hex.quadrant || 'Generated';
+      }
+
+      function setViewport(width, height) {
+        $('viewport-size').textContent = `${Math.round(width)}×${Math.round(height)}`;
+      }
+
+      function loadTerrain() {
+        return fetch('src/assets/terrain.json', { cache: 'no-cache' })
+          .then((response) => response.ok ? response.json() : null)
+          .then((payload) => payload && Array.isArray(payload.hexes) ? payload.hexes : fallbackTerrain)
+          .catch(() => fallbackTerrain);
+      }
+
+      function showOfflineFallback(message) {
+        $('p5-status').textContent = message;
+        const node = document.createElement('div');
+        node.className = 'fallback-canvas';
+        node.innerHTML = '<div><h2>Mars Hex Grid</h2><p>p5.js is unavailable, but the standalone visual layer shell loaded.</p></div>';
+        $('canvas-container').appendChild(node);
+      }
+
+      function startSketch(terrain) {
+        if (!window.p5 || !window.HexGrid || !window.TerrainGenerator || !window.HexRenderer) {
+          showOfflineFallback('Offline mode: p5 CDN unavailable in this environment.');
+          return;
+        }
+
+        new window.p5((p) => {
+          let grid;
+          let renderer;
+          const container = $('canvas-container');
+
+          p.setup = function () {
+            const canvas = p.createCanvas(container.clientWidth, container.clientHeight);
+            canvas.parent('canvas-container');
+            grid = new window.HexGrid({
+              radius: 1,
+              hexSize: Math.max(40, Math.min(58, p.width / 11)),
+              centerX: p.width / 2,
+              centerY: p.height / 2,
+              terrain,
+              terrainGenerator: new window.TerrainGenerator()
+            });
+            renderer = new window.HexRenderer(grid, p, { onHover: setHexInfo });
+            $('grid-size').textContent = `${grid.getAllHexes().length} hexes`;
+            $('rover-pos').textContent = `${grid.roverPos.q}, ${grid.roverPos.r}`;
+            setViewport(p.width, p.height);
+            setHexInfo(grid.getHex(0, 0));
+          };
+
+          p.draw = function () {
+            renderer.updateHover();
+            renderer.render();
+          };
+
+          p.mousePressed = function () { return renderer.handlePress(); };
+          p.mouseReleased = function () { return renderer.handleRelease(); };
+          p.mouseDragged = function () { return renderer.handleDrag(); };
+          p.mouseWheel = function (event) { return renderer.handleWheel(event); };
+          p.touchMoved = function () { return renderer.handleTouchMove(); };
+          p.windowResized = function () {
+            p.resizeCanvas(container.clientWidth, container.clientHeight);
+            grid.centerX = p.width / 2;
+            grid.centerY = p.height / 2;
+            grid.updatePixelCoordinates();
+            setViewport(p.width, p.height);
+          };
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        loadTerrain().then(startSketch);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -13,6 +13,7 @@ const suites = [
   { name: 'ToolBridge',   file: './tool-bridge.test.js' },
   { name: 'Router',       file: './router.test.js' },
   { name: 'SmokeTools',   file: './smoke-tools.test.js' },
+  { name: 'MarsHexGrid', file: './mars-hex-grid.test.js' },
   { name: 'StudyOSAuthFallback', file: './studyos-auth-fallback.test.js' },
   { name: 'StudyOSNexIntegration', file: './studyos-nex-integration.test.js' },
   { name: 'HighwaySimulation', file: './highway-simulation.test.js' },

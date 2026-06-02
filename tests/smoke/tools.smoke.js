@@ -28,6 +28,7 @@ const SMOKE_TARGETS = [
   // Games (core Play Store draw)
   { id: 'snake-game',           path: 'tools/games/snake-game/index.html' },
   { id: 'hex-wars',             path: 'tools/games/hex-wars/index.html' },
+  { id: 'mars-visual-v1',       path: 'tools/mars-game/mars-visual-v1.html', timeout: 8000 },
   { id: 'freecell-classic',     path: 'tools/games/freecell-classic/index.html' },
   { id: 'aaa-world-prototype',  path: 'game-engine/index.html' },
 
@@ -124,7 +125,8 @@ async function runSmokeTests() {
 
     try {
       const fileUrl = `file://${fullPath}`;
-      await page.goto(fileUrl, { timeout: 8000, waitUntil: 'domcontentloaded' });
+      const timeout = Number.isFinite(tool.timeout) ? tool.timeout : 8000;
+      await page.goto(fileUrl, { timeout, waitUntil: 'domcontentloaded' });
 
       // Check document title exists (basic render test)
       const title = await page.title();

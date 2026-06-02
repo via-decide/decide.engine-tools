@@ -1,0 +1,11 @@
+{
+  "hexes": [
+    { "q": 0, "r": 0, "complexity": 4.2, "hazardType": null, "hazardFlags": [], "apxsContact": true, "energy": 84, "terrain": "basalt", "quadrant": "A3-07" },
+    { "q": 1, "r": 0, "complexity": 5.1, "hazardType": "rock", "hazardFlags": ["rock"], "apxsContact": false, "energy": 72, "terrain": "basalt", "quadrant": "A3-08" },
+    { "q": 1, "r": -1, "complexity": 6.4, "hazardType": "thermal", "hazardFlags": ["thermal"], "apxsContact": false, "energy": 63, "terrain": "basalt", "quadrant": "A3-14" },
+    { "q": 0, "r": -1, "complexity": 5.8, "hazardType": null, "hazardFlags": [], "apxsContact": true, "energy": 79, "terrain": "basalt", "quadrant": "A3-13" },
+    { "q": -1, "r": 0, "complexity": 4.9, "hazardType": "dust", "hazardFlags": ["dust"], "apxsContact": false, "energy": 58, "terrain": "basalt", "quadrant": "A3-06" },
+    { "q": -1, "r": 1, "complexity": 7.2, "hazardType": "rock", "hazardFlags": ["rock"], "apxsContact": false, "energy": 67, "terrain": "basalt", "quadrant": "A2-12" },
+    { "q": 0, "r": 1, "complexity": 4.6, "hazardType": null, "hazardFlags": [], "apxsContact": true, "energy": 91, "terrain": "basalt", "quadrant": "A2-13" }
+  ]
+}
