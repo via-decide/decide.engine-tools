@@ -1,0 +1,95 @@
+Here is the improved code:
+
+```javascript
+// tools/flashcard-engine/config.json
+{
+  "id": "flashcard-engine",
+  "name": "Flashcard Engine",
+  "description": "Spaced repetition flashcard tool with JSON decks.",
+  "category": "education",
+  "audience": ["students", "teachers"],
+  "inputs": {
+    "deckFile": {"type": "file", "required": true},
+    "flashcards": {"type": "array", "required": false}
+  },
+  "outputs": {
+    "flashcardStats": {"type": "object", "required": true}
+  },
+  "tags": ["study aid", "learning tool"]
+}
+
+// tools/flashcard-engine/index.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flashcard Engine</title>
+  <link rel="stylesheet" href="../shared/shared.css">
+</head>
+<body>
+  <h1>Flashcard Engine</h1>
+  <form id="deck-form">
+    <label for="deck-file">Select a deck file:</label>
+    <input type="file" id="deck-file" accept=".json">
+    <button id="start-flashcards">Start Flashcards!</button>
+  </form>
+  <div id="flashcard-container"></div>
+  <script src="../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>
+
+// tools/flashcard-engine/tool.js
+const ToolStorage = require('../shared/tool-storage');
+const fs = require('fs');
+
+class FlashcardEngine {
+  constructor() {
+    this.deckFile = null;
+    this.flashcards = [];
+    this.stats = {};
+  }
+
+  async startFlashcards(event) {
+    const deckFile = event.target.deckFile.files[0];
+    if (!deckFile) return;
+
+    try {
+      const deckData = await fs.promises.readFile(deckFile.path, 'utf8');
+      this.flashcards = JSON.parse(deckData);
+      ToolStorage.set('flashcard-engine', this.stats);
+
+      // render flashcards
+      const flashcardHTML = this.flashcards.map((fc) => `
+        <div class="flashcard">
+          <h2>${fc.front}</h2>
+          <p>${fc.back}</p>
+        </div>
+      `).join('');
+      document.getElementById('flashcard-container').innerHTML = flashcardHTML;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async updateFlashcardsStats() {
+    // implement spaced repetition logic here
+    this.stats = { ...this.stats, ...{ /* stats calculation */ } };
+    ToolStorage.set('flashcard-engine', this.stats);
+  }
+}
+
+const tool = new FlashcardEngine();
+document.getElementById('start-flashcards').addEventListener('click', () => tool.startFlashcards());
+
+// shared/tool-registry.js
+module.exports = {
+  importableToolDirs: ['tools/flashcard-engine']
+};
+
+// router.js
+module.exports = {
+  toolPaths: [
+    { path: 'flashcard-engine', component: () => import('./tools/flashcard-engine/index.html') }
+  ]
+};
+```

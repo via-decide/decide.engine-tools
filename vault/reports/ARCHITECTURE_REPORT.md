@@ -1,10 +1,10 @@
 # Architecture Report
 
-Generated at: 2026-06-09T00:06:58.262Z
+Generated at: 2026-06-09T00:21:04.303Z
 
 ## Repository Overview
 
-- **Total Files Checked:** 1127
+- **Total Files Checked:** 1134
 - **Layer Breakdown:**
   - Shared Utilities: 42 files
   - Games: 41 files
@@ -18,10 +18,10 @@ Generated at: 2026-06-09T00:06:58.262Z
 |---|---|
 | `(no ext)` | 12 |
 | `.md` | 50 |
-| `.json` | 111 |
+| `.json` | 112 |
 | `.ts` | 14 |
-| `.html` | 267 |
-| `.js` | 185 |
+| `.html` | 268 |
+| `.js` | 190 |
 | `.css` | 12 |
 | `.webmanifest` | 1 |
 | `.sh` | 3 |
@@ -197,6 +197,10 @@ graph TD
     "index.html" --> "vd-nav-fix.js"
     "scaffold-tool.js" --> "manifest-sync"
     "pre-commit-check.js" --> "verification-engine"
+    "mission-runner.js" --> "scanner"
+    "mission-runner.js" --> "planner"
+    "mission-runner.js" --> "verifier"
+    "mission-runner.js" --> "tracer"
     "index.html" --> "vd-nav-fix.js"
     "execution-console.html" --> "agent-storage.js"
     "execution-console.html" --> "tool-registry.js"

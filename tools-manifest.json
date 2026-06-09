@@ -1,9 +1,109 @@
 {
-  "generatedAt": "2026-06-09T00:06:25.259Z",
+  "generatedAt": "2026-06-09T00:28:29.850Z",
   "entries": [
     {
-      "toolDir": "tools/ai-tool-generator",
-      "metaPath": "tools/ai-tool-generator/config.json",
+      "toolDir": "apps/matrix/decision-matrix",
+      "metaPath": "apps/matrix/decision-matrix/config.json",
+      "id": "decision-matrix",
+      "name": "Decision Matrix",
+      "tags": [
+        "decision",
+        "analysis",
+        "strategy",
+        "weighted",
+        "matrix"
+      ],
+      "icon": "⚖️"
+    },
+    {
+      "toolDir": "apps/matrix/task-splitter",
+      "metaPath": "apps/matrix/task-splitter/config.json",
+      "id": "task-splitter",
+      "name": "Task Splitter",
+      "tags": [
+        "planning",
+        "task-graph",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "apps/matrix/tool-router",
+      "metaPath": "apps/matrix/tool-router/config.json",
+      "id": "tool-router",
+      "name": "Tool Router",
+      "tags": [
+        "mesh-ready",
+        "pipeline-prep"
+      ]
+    },
+    {
+      "toolDir": "apps/matrix/tool-search-discovery",
+      "metaPath": "apps/matrix/tool-search-discovery/config.json",
+      "id": "tool-search-discovery",
+      "name": "Tool Search Discovery",
+      "title": "Tool Search Discovery",
+      "tags": [
+        "search",
+        "discovery",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "apps/oracle/output-evaluator",
+      "metaPath": "apps/oracle/output-evaluator/config.json",
+      "id": "output-evaluator",
+      "name": "Output Evaluator",
+      "tags": [
+        "evaluation",
+        "scoring",
+        "delivery"
+      ]
+    },
+    {
+      "toolDir": "apps/oracle/prompt-compare",
+      "metaPath": "apps/oracle/prompt-compare/config.json",
+      "id": "prompt-compare",
+      "name": "Prompt Compare",
+      "title": "Prompt Compare",
+      "tags": [
+        "prompting",
+        "analysis",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "apps/oracle/promptalchemy",
+      "metaPath": "apps/oracle/promptalchemy/config.json",
+      "id": "promptalchemy",
+      "name": "PromptAlchemy",
+      "tags": [
+        "mesh-ready",
+        "prompting"
+      ]
+    },
+    {
+      "toolDir": "apps/oracle/revenue-forecaster",
+      "metaPath": "apps/oracle/revenue-forecaster/config.json",
+      "name": "Revenue Forecaster",
+      "icon": "📈"
+    },
+    {
+      "toolDir": "apps/oracle/scenario-planner",
+      "metaPath": "apps/oracle/scenario-planner/config.json",
+      "id": "scenario-planner",
+      "name": "Scenario Planner",
+      "tags": [
+        "scenario",
+        "planning",
+        "probability",
+        "strategy",
+        "risk"
+      ],
+      "icon": "🔭"
+    },
+    {
+      "toolDir": "apps/remixer/ai-tool-generator",
+      "metaPath": "apps/remixer/ai-tool-generator/config.json",
       "id": "ai-tool-generator",
       "name": "AI Tool Generator",
       "tags": [
@@ -11,6 +111,96 @@
         "generation",
         "registry",
         "plugin"
+      ]
+    },
+    {
+      "toolDir": "apps/remixer/code-generator",
+      "metaPath": "apps/remixer/code-generator/config.json",
+      "id": "code-generator",
+      "name": "Code Generator",
+      "tags": [
+        "prompting",
+        "generation",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "apps/remixer/idea-remixer",
+      "metaPath": "apps/remixer/idea-remixer/config.json",
+      "id": "idea-remixer",
+      "name": "Idea Remixer",
+      "title": "Idea Remixer",
+      "tags": [
+        "ideation",
+        "variants",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "apps/remixer/script-generator",
+      "metaPath": "apps/remixer/script-generator/config.json",
+      "id": "script-generator",
+      "name": "Script Generator",
+      "tags": [
+        "mesh-ready",
+        "content"
+      ]
+    },
+    {
+      "toolDir": "apps/remixer/workflow-template-gallery",
+      "metaPath": "apps/remixer/workflow-template-gallery/config.json",
+      "id": "workflow-template-gallery",
+      "name": "Workflow Template Gallery",
+      "title": "Workflow Template Gallery",
+      "tags": [
+        "workflow",
+        "templates",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "apps/studyos/code-reviewer",
+      "metaPath": "apps/studyos/code-reviewer/config.json",
+      "id": "code-reviewer",
+      "name": "Code Reviewer",
+      "tags": [
+        "review",
+        "quality",
+        "repair"
+      ]
+    },
+    {
+      "toolDir": "apps/studyos/context-packager",
+      "metaPath": "apps/studyos/context-packager/config.json",
+      "id": "context-packager",
+      "name": "Context Packager",
+      "tags": [
+        "context",
+        "handoff",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "apps/studyos/repo-improvement-brief",
+      "metaPath": "apps/studyos/repo-improvement-brief/config.json",
+      "id": "repo-improvement-brief",
+      "name": "Repo Improvement Brief",
+      "title": "Repo Improvement Brief",
+      "tags": [
+        "brief",
+        "planning",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "apps/studyos/spec-builder",
+      "metaPath": "apps/studyos/spec-builder/config.json",
+      "id": "spec-builder",
+      "name": "Spec Builder",
+      "tags": [
+        "spec",
+        "requirements",
+        "pipeline"
       ]
     },
     {
@@ -32,43 +222,10 @@
       "sparks": true
     },
     {
-      "toolDir": "tools/code-generator",
-      "metaPath": "tools/code-generator/config.json",
-      "id": "code-generator",
-      "name": "Code Generator",
-      "tags": [
-        "prompting",
-        "generation",
-        "pipeline"
-      ]
-    },
-    {
-      "toolDir": "tools/code-reviewer",
-      "metaPath": "tools/code-reviewer/config.json",
-      "id": "code-reviewer",
-      "name": "Code Reviewer",
-      "tags": [
-        "review",
-        "quality",
-        "repair"
-      ]
-    },
-    {
       "toolDir": "tools/color-palette",
       "metaPath": "tools/color-palette/config.json",
       "name": "Color Palette Generator",
       "icon": "🎨"
-    },
-    {
-      "toolDir": "tools/context-packager",
-      "metaPath": "tools/context-packager/config.json",
-      "id": "context-packager",
-      "name": "Context Packager",
-      "tags": [
-        "context",
-        "handoff",
-        "pipeline"
-      ]
     },
     {
       "toolDir": "tools/creators/caption-generator",
@@ -121,23 +278,6 @@
         "video",
         "content"
       ]
-    },
-    {
-  "generatedAt": "2026-04-13T17:40:00.000Z",
-  "entries": [
-    {
-      "toolDir": "tools/decision-matrix",
-      "metaPath": "tools/decision-matrix/config.json",
-      "id": "decision-matrix",
-      "name": "Decision Matrix",
-      "tags": [
-        "decision",
-        "analysis",
-        "strategy",
-        "weighted",
-        "matrix"
-      ],
-      "icon": "⚖️"
     },
     {
       "toolDir": "tools/eco-engine-test",
@@ -710,28 +850,6 @@
       ]
     },
     {
-      "toolDir": "tools/idea-remixer",
-      "metaPath": "tools/idea-remixer/config.json",
-      "id": "idea-remixer",
-      "name": "Idea Remixer",
-      "title": "Idea Remixer",
-      "tags": [
-        "ideation",
-        "variants",
-        "simba-workflows"
-      ]
-      "toolDir": "tools/scenario-planner",
-      "metaPath": "tools/scenario-planner/config.json"
-    },
-    {
-      "toolDir": "tools/eco-engine-test",
-      "metaPath": "tools/eco-engine-test/config.json"
-    },
-    {
-      "toolDir": "tools/color-palette",
-      "metaPath": "tools/color-palette/config.json"
-    },
-    {
       "toolDir": "tools/json-formatter",
       "metaPath": "tools/json-formatter/config.json",
       "name": "JSON Formatter",
@@ -753,113 +871,16 @@
       "sparks": true
     },
     {
-      "toolDir": "tools/output-evaluator",
-      "metaPath": "tools/output-evaluator/config.json",
-      "id": "output-evaluator",
-      "name": "Output Evaluator",
-      "tags": [
-        "evaluation",
-        "scoring",
-        "delivery"
-      ]
-    },
-    {
       "toolDir": "tools/pomodoro",
       "metaPath": "tools/pomodoro/config.json",
       "name": "Pomodoro Timer",
       "icon": "🍅"
     },
     {
-      "toolDir": "tools/prompt-compare",
-      "metaPath": "tools/prompt-compare/config.json",
-      "id": "prompt-compare",
-      "name": "Prompt Compare",
-      "title": "Prompt Compare",
-      "tags": [
-        "prompting",
-        "analysis",
-        "simba-workflows"
-      ]
-    },
-    {
-      "toolDir": "tools/promptalchemy",
-      "metaPath": "tools/promptalchemy/config.json",
-      "id": "promptalchemy",
-      "name": "PromptAlchemy",
-      "tags": [
-        "mesh-ready",
-        "prompting"
-      ]
-    },
-    {
       "toolDir": "tools/regex-tester",
       "metaPath": "tools/regex-tester/config.json",
       "name": "RegEx Tester",
       "icon": "🔍"
-    },
-    {
-      "toolDir": "tools/repo-improvement-brief",
-      "metaPath": "tools/repo-improvement-brief/config.json",
-      "id": "repo-improvement-brief",
-      "name": "Repo Improvement Brief",
-      "title": "Repo Improvement Brief",
-      "tags": [
-        "brief",
-        "planning",
-        "simba-workflows"
-      ]
-    },
-    {
-      "toolDir": "tools/revenue-forecaster",
-      "metaPath": "tools/revenue-forecaster/config.json",
-      "name": "Revenue Forecaster",
-      "icon": "📈"
-    },
-    {
-      "toolDir": "tools/scenario-planner",
-      "metaPath": "tools/scenario-planner/config.json",
-      "id": "scenario-planner",
-      "name": "Scenario Planner",
-      "tags": [
-        "scenario",
-        "planning",
-        "probability",
-        "strategy",
-        "risk"
-      ],
-      "icon": "🔭"
-    },
-    {
-      "toolDir": "tools/script-generator",
-      "metaPath": "tools/script-generator/config.json",
-      "id": "script-generator",
-      "name": "Script Generator",
-      "tags": [
-        "mesh-ready",
-        "content"
-      ]
-    },
-    {
-      "toolDir": "tools/spec-builder",
-      "metaPath": "tools/spec-builder/config.json",
-      "id": "spec-builder",
-      "name": "Spec Builder",
-      "tags": [
-        "spec",
-        "requirements",
-        "pipeline"
-      ]
-    },
-    {
-      "toolDir": "tools/task-splitter",
-      "metaPath": "tools/task-splitter/config.json",
-      "id": "task-splitter",
-      "name": "Task Splitter",
-      "tags": [
-        "planning",
-        "task-graph",
-        "pipeline"
-      ]
     },
     {
       "toolDir": "tools/template-vault",
@@ -869,155 +890,6 @@
       "tags": [
         "mesh-ready",
         "templates"
-      ]
-    },
-    {
-      "toolDir": "tools/tool-router",
-      "metaPath": "tools/tool-router/config.json",
-      "id": "tool-router",
-      "name": "Tool Router",
-      "tags": [
-        "mesh-ready",
-        "pipeline-prep"
-      ]
-    },
-    {
-      "toolDir": "tools/tool-search-discovery",
-      "metaPath": "tools/tool-search-discovery/config.json",
-      "id": "tool-search-discovery",
-      "name": "Tool Search Discovery",
-      "title": "Tool Search Discovery",
-      "tags": [
-        "search",
-        "discovery",
-        "simba-workflows"
-      ]
-    },
-    {
-      "toolDir": "tools/workflow-template-gallery",
-      "metaPath": "tools/workflow-template-gallery/config.json",
-      "id": "workflow-template-gallery",
-      "name": "Workflow Template Gallery",
-      "title": "Workflow Template Gallery",
-      "tags": [
-        "workflow",
-        "templates",
-        "simba-workflows"
-      "toolDir": "tools/games/hex-wars",
-      "metaPath": "tools/games/hex-wars/config.json"
-    },
-    {
-      "toolDir": "tools/games/freecell-classic",
-      "metaPath": "tools/games/freecell-classic/config.json"
-    },
-    {
-      "toolDir": "tools/games/snake-game",
-      "metaPath": "tools/games/snake-game/config.json"
-    },
-    {
-      "toolDir": "tools/games/wings-of-fire-quiz",
-      "metaPath": "tools/games/wings-of-fire-quiz/config.json"
-    },
-    {
-      "toolDir": "tools/games/skillhex-mission-control",
-      "metaPath": "tools/games/skillhex-mission-control/config.json"
-    },
-    {
-      "id": "vialogic",
-      "name": "ViaLogic",
-      "title": "Cartography of Minds",
-      "path": "tools/games/vialogic/index.html",
-      "tags": ["math", "history", "exploration", "game", "india"],
-      "tier": "game",
-      "icon": "🗺️",
-      "pullable": true,
-      "sparks": true,
-      "toolDir": "tools/games/vialogic",
-      "metaPath": "tools/games/vialogic/config.json"
-    },
-    {
-      "id": "kutch-map",
-      "name": "Kutch Digital Map",
-      "title": "Local Discovery Engine",
-      "path": "tools/business/kutch-map/index.html",
-      "tags": ["business", "directory", "local", "kutch", "india"],
-      "tier": "business",
-      "icon": "🗺️",
-      "pullable": true,
-      "sparks": true,
-      "toolDir": "tools/business/kutch-map",
-      "metaPath": "tools/business/kutch-map/config.json"
-    },
-    {
-      "id": "printbydd",
-      "name": "PrintByDD Store",
-      "title": "Precision 3D Manufacturing",
-      "path": "tools/commerce/printbydd/index.html",
-      "tags": ["3d-printing", "nfc", "keychains", "gifts", "smart-accessories", "e-commerce", "commerce"],
-      "tier": "commerce",
-      "icon": "🎨",
-      "pullable": true,
-      "sparks": false,
-      "toolDir": "tools/commerce/printbydd",
-      "metaPath": "tools/commerce/printbydd/tool-manifest.json"
-    },
-    {
-      "_comment": "ARCHIVED: Backend/template tools moved to internal-only. Not shown in UI.",
-      "_archived_engine_tools": [
-        "tools/engine/ai-coach-console",
-        "tools/engine/ai-game-strategy-advisor",
-        "tools/engine/balance-dashboard",
-        "tools/engine/circle-builder",
-        "tools/engine/daily-quest-generator",
-        "tools/engine/fair-ranking-engine",
-        "tools/engine/four-direction-pipeline",
-        "tools/engine/fruit-sharing",
-        "tools/engine/fruit-yield-engine",
-        "tools/engine/growth-path-recommender",
-        "tools/engine/hire-readiness-scorer",
-        "tools/engine/meta-health-dashboard",
-        "tools/engine/orchard-discovery-search",
-        "tools/engine/orchard-profile-builder",
-        "tools/engine/peer-validation-engine",
-        "tools/engine/player-signup",
-        "tools/engine/recruiter-dashboard",
-        "tools/engine/root-strength-calculator",
-        "tools/engine/seed-exchange",
-        "tools/engine/seed-quality-scorer",
-        "tools/engine/simulation-runner",
-        "tools/engine/starter-farm-generator",
-        "tools/engine/synthetic-player-generator",
-        "tools/engine/thirty-day-promotion-engine",
-        "tools/engine/trunk-growth-calculator",
-        "tools/engine/trust-score-engine",
-        "tools/engine/wave1-simulation-runner",
-        "tools/engine/weekly-harvest-engine",
-        "tools/engine/script-generator-files",
-        "tools/engine/layer1-swipe-crucible",
-        "tools/engine/market-dynamics",
-        "tools/engine/meeting-cost-calculator",
-        "tools/engine/traffic-router",
-        "tools/engine/typography-scale-calculator"
-      ],
-      "_archived_stub_tools": [
-        "tools/ai-tool-generator",
-        "tools/code-generator",
-        "tools/code-reviewer",
-        "tools/context-packager",
-        "tools/export-studio",
-        "tools/idea-remixer",
-        "tools/output-evaluator",
-        "tools/prompt-compare",
-        "tools/promptalchemy",
-        "tools/repo-improvement-brief",
-        "tools/revenue-forecaster",
-        "tools/script-generator",
-        "tools/spec-builder",
-        "tools/task-splitter",
-        "tools/template-vault",
-        "tools/tool-router",
-        "tools/tool-search-discovery",
-        "tools/workflow-template-gallery"
       ]
     }
   ]

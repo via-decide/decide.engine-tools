@@ -58,9 +58,14 @@ async function syncManifest() {
     }
   }
 
-  // Walk the tools folder
+  // Walk the tools folder and apps folder
   if (fs.existsSync(toolsDir)) {
     await walk(toolsDir);
+  }
+  
+  const appsDir = path.join(repoPath, 'apps');
+  if (fs.existsSync(appsDir)) {
+    await walk(appsDir);
   }
 
   // Sort entries by toolDir for clean git diffs
