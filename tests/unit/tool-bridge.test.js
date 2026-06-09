@@ -17,6 +17,7 @@ const global_mock = {
   dispatchEvent: () => {},
   CustomEvent: function(type, opts) { this.type = type; this.detail = opts ? opts.detail : null; }
 };
+global.global_mock = global_mock;
 
 // Provide localStorage as a global for the eval'd code (it references it directly)
 global.localStorage = global_mock.localStorage;
@@ -28,7 +29,7 @@ const code = fs.readFileSync(
 );
 // Replace the (window) IIFE arg with our mock
 const sandboxed = code.replace(/\}\)\(window\);?\s*$/, '})(global_mock);');
-eval(sandboxed);
+new Function(sandboxed)();
 
 const { sendContext, receiveContext } = global_mock.ToolBridge;
 

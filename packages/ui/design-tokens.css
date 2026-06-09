@@ -1,0 +1,96 @@
+/**
+ * Platform Design Tokens
+ * Reusable layout variables, glassmorphic panels, and styling colors.
+ */
+
+:root {
+  /* HSL Color Palette */
+  --void: #030508;
+  --surface: #0a0d12;
+  --border: #1a1f2a;
+  --text: #e8eaef;
+  --text-dim: #a0a8b8;
+  --saffron: #ff671f;
+  --green: #00e676;
+  --blue: #00d1ff;
+  --purple: #a78bfa;
+  --danger: #ff4757;
+  
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Transitions */
+  --transition-fast: all 0.2s ease;
+  --transition-normal: all 0.3s ease;
+}
+
+/* Glassmorphic Cyber Card Standard layout */
+.cyber-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: var(--transition-normal);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.cyber-card:hover {
+  border-color: var(--saffron);
+  box-shadow: 0 12px 24px rgba(255, 103, 31, 0.15);
+}
+
+/* Common Platform Inputs */
+.cyber-input {
+  background: rgba(3, 5, 8, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 12px;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.cyber-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 10px rgba(0, 209, 255, 0.25);
+}
+
+/* Common Platform Buttons */
+.cyber-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 10px 16px;
+  transition: var(--transition-fast);
+}
+
+.cyber-btn-primary {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  color: var(--void);
+  font-weight: 600;
+}
+
+.cyber-btn-primary:hover {
+  background: var(--green);
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(0, 230, 118, 0.4);
+}
+
+.cyber-btn-secondary {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.cyber-btn-secondary:hover {
+  background: rgba(0, 209, 255, 0.1);
+  box-shadow: 0 0 12px rgba(0, 209, 255, 0.2);
+}

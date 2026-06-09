@@ -5,6 +5,7 @@
 
 // Simulate the window global that engine-utils.js expects
 const global_mock = {};
+global.global_mock = global_mock;
 const fs = require('fs');
 const path = require('path');
 
@@ -14,7 +15,7 @@ const utilCode = fs.readFileSync(
 );
 // Replace window reference with our mock so the IIFE receives it
 const sandboxed = utilCode.replace(/\}\)\(window\);?\s*$/, '})(global_mock);');
-eval(sandboxed);
+new Function(sandboxed)();
 
 const { tryParse, clamp, weightedScore } = global_mock.EngineUtils;
 
