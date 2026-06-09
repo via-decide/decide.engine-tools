@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIA Cockpit — Boss Level Control Center</title>
     <style>
@@ -318,6 +319,55 @@
             background-clip: text;
             letter-spacing: -0.5px;
         }
+
+        /* Dependency Graph Modal */
+        .graph-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(3, 5, 8, 0.95);
+            z-index: 2000;
+            padding: 40px;
+            overflow: auto;
+            backdrop-filter: blur(10px);
+        }
+        .graph-modal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .graph-modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            min-height: 80vh;
+            position: relative;
+        }
+        .graph-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .graph-modal-close:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        #mermaid-container {
+            margin-top: 20px;
+            overflow: auto;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -385,6 +435,11 @@
                         <span>Catches: <strong id="repo-empty-catches" style="color: var(--text);">0</strong></span>
                         <span>Evals: <strong id="repo-evals" style="color: var(--text);">0</strong></span>
                         <span>Duplicates: <strong id="repo-duplicates" style="color: var(--text);">0</strong></span>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-secondary" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px;" onclick="openGraphModal()">
+                            🗺️ View Architecture Dependency Graph
+                        </button>
                     </div>
                 </div>
             </div>
@@ -843,6 +898,63 @@ python3 -m http.server 8000
         // Poll every 2 seconds
         setInterval(fetchAgentState, 2000);
         fetchAgentState();
+
+        // Architecture Graph Logic
+        function openGraphModal() {
+            document.getElementById('graph-modal').classList.add('active');
+            renderGraph();
+        }
+
+        function closeGraphModal() {
+            document.getElementById('graph-modal').classList.remove('active');
+        }
+
+        async function renderGraph() {
+            const container = document.getElementById('mermaid-container');
+            container.innerHTML = '<div style="color: var(--text-dim); padding: 40px;">Fetching architecture report...</div>';
+            
+            try {
+                // Try to fetch from vault/reports first, then fallback to root
+                let reportText = '';
+                try {
+                    const res = await fetch('../../vault/reports/ARCHITECTURE_REPORT.md');
+                    if (!res.ok) throw new Error('Not found');
+                    reportText = await res.text();
+                } catch(e) {
+                    const res = await fetch('../../ARCHITECTURE_REPORT.md');
+                    if (!res.ok) throw new Error('Could not find ARCHITECTURE_REPORT.md');
+                    reportText = await res.text();
+                }
+
+                const mermaidMatch = reportText.match(/```mermaid\n([\s\S]*?)\n```/);
+                if (mermaidMatch && mermaidMatch[1]) {
+                    container.innerHTML = `<div class="mermaid">${mermaidMatch[1]}</div>`;
+                    mermaid.init(undefined, container.querySelectorAll('.mermaid'));
+                } else {
+                    container.innerHTML = '<div style="color: var(--danger); padding: 40px;">No Mermaid graph found in report.</div>';
+                }
+            } catch (err) {
+                container.innerHTML = `<div style="color: var(--danger); padding: 40px;">Error loading graph: ${err.message}</div>`;
+            }
+        }
+        
+        // Initialize mermaid globally
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Syne, sans-serif'
+        });
     </script>
+
+    <!-- Graph Modal -->
+    <div id="graph-modal" class="graph-modal">
+        <div class="graph-modal-content">
+            <button class="graph-modal-close" onclick="closeGraphModal()">✕ Close</button>
+            <h2 style="color: var(--green); margin-bottom: 10px;">🗺️ Repository Dependency Graph</h2>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Automatically generated by the AntiGravity Scanner</p>
+            <div id="mermaid-container"></div>
+        </div>
+    </div>
 </body>
 </html>
