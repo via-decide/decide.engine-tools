@@ -1,0 +1,121 @@
+Here is the improved code:
+
+```javascript
+// tools/pomodoro-timer/config.json
+{
+  "id": "pomodoro-timer",
+  "name": "Pomodoro Timer",
+  "description": "25/5 focus/break timer with session tracking.",
+  "category": "education",
+  "audience": ["students", "teachers"],
+  "inputs": {
+    "work_time": {"type": "number", "min": 1, "max": 60},
+    "break_time": {"type": "number", "min": 1, "max": 30}
+  },
+  "outputs": [],
+  "tags": ["productivity", "time management"]
+}
+
+// tools/pomodoro-timer/index.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="../../../shared/shared.css">
+</head>
+<body>
+  <h1>Pomodoro Timer</h1>
+  <div id="timer"></div>
+  <script src="../../../shared/tool-storage.js"></script>
+  <script src="tool.js"></script>
+</body>
+</html>
+
+// tools/pomodoro-timer/tool.js
+import { ToolStorage } from "../../../shared/tool-storage";
+
+class PomodoroTimer {
+  constructor() {
+    this.workTime = 25;
+    this.breakTime = 5;
+    this.currentSession = 0;
+    this.totalSessions = 0;
+    this.timerInterval = null;
+
+    this.init();
+  }
+
+  init() {
+    const config = JSON.parse(localStorage.getItem("pomodoro-timer-config"));
+    if (config) {
+      this.workTime = config.work_time;
+      this.breakTime = config.break_time;
+    }
+  }
+
+  startTimer() {
+    this.timerInterval = setInterval(() => {
+      this.currentSession++;
+      document.getElementById("timer").innerHTML = `Work Time: ${this.workTime} minutes, Break Time: ${this.breakTime} minutes, Session: ${this.currentSession}`;
+      if (this.currentSession >= this.totalSessions) {
+        clearInterval(this.timerInterval);
+      }
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timerInterval);
+  }
+
+  saveConfig() {
+    localStorage.setItem("pomodoro-timer-config", JSON.stringify({ work_time: this.workTime, break_time: this.breakTime }));
+  }
+
+  loadConfig() {
+    const config = localStorage.getItem("pomodoro-timer-config");
+    if (config) {
+      this.workTime = JSON.parse(config).work_time;
+      this.breakTime = JSON.parse(config).break_time;
+    }
+  }
+}
+
+const tool = new PomodoroTimer();
+document.addEventListener("DOMContentLoaded", () => {
+  const startButton = document.createElement("button");
+  startButton.textContent = "Start";
+  startButton.onclick = () => {
+    tool.startTimer();
+  };
+  const stopButton = document.createElement("button");
+  stopButton.textContent = "Stop";
+  stopButton.onclick = () => {
+    tool.stopTimer();
+  };
+  const saveButton = document.createElement("button");
+  saveButton.textContent = "Save Config";
+  saveButton.onclick = () => {
+    tool.saveConfig();
+  };
+  const loadButton = document.createElement("button");
+  loadButton.textContent = "Load Config";
+  loadButton.onclick = () => {
+    tool.loadConfig();
+  };
+
+  document.body.appendChild(startButton);
+  document.body.appendChild(stopButton);
+  document.body.appendChild(saveButton);
+  document.body.appendChild(loadButton);
+
+  tool.startTimer();
+});
+
+// shared/tool-registry.js
+const importableToolDirs = ["tools/pomodoro-timer"];
+
+// router.js
+export const toolPathStaticMap = {
+  "/tools/pomodoro-timer": "tools/pomodoro-timer/index.html"
+};
+```

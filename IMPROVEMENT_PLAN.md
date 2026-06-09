@@ -1,7 +1,7 @@
 # Improvement Plan
 
-Mission: **Validate Category 2 Automation**
-Generated at: 2026-06-09T00:06:59.068Z
+Mission: **Cockpit v0.2 Verification Mission**
+Generated at: 2026-06-09T00:21:04.305Z
 
 ## User Review Required
 
@@ -11,23 +11,31 @@ Generated at: 2026-06-09T00:06:59.068Z
 
 ## Executive Analysis
 
-- **Repository Complexity:** High (1127 files detected across multiple layers)
+- **Repository Complexity:** High (1134 files detected across multiple layers)
 - **Identified Technical Debt:**
   - TODO items: 0
-  - Empty error catches: 5
+  - Empty error catches: 7
   - Duplicate block patterns: 0
-  - Unsafe evals: 0
+  - Unsafe evals: 4
 
 
 ## Tech Debt Remediation Tasks
+
+### Task 1: Replace Unsafe Evals
+- **Description:** Eliminate direct evals in the repository to prevent potential injection risks.
+- **Impact:** High | **Complexity:** Medium
+- **Recommendation:** Replace `eval()` references in the following files with secure JSON parsing or structured mapping:
+  - `cockpit/missions/planner.js` (Line: 88): `content += `- **Recommendation:** Replace \`eval()\` references in the following files with secure JSON parsing or structured mapping:\n`;`
+  - `cockpit/missions/scanner.js` (Line: 270): `report += `- **Unsafe \`eval()\` Statements:** ${techDebt.evalList.length}\n`;`
+  - `cockpit/missions/scanner.js` (Line: 274): `report += `## Unsafe Evals (\`eval()\`) Detail\n\n`;`
 
 ### Task 2: Log Silent / Empty Catch Blocks
 - **Description:** Ensure unexpected exceptions are not silently suppressed without observability.
 - **Impact:** Medium | **Complexity:** Low
 - **Recommendation:** Inject error logging metrics in catch handlers. Focus first on:
   - `StudyOS/sw.js` (Line: 64): `catch (_) { // Optional dependency; ignore fetch errors for non-existent files. }`
-  - `shared/workflow-ui.js` (Line: 204): `catch (_error) { // no-op }`
-  - `tools/engine/ai-game-strategy-advisor/tool.js` (Line: 20): `catch (e) { /* fall through */ }`
+  - `cockpit/missions/scanner.js` (Line: 109): `catch (e) { // Silent catch on read failure }`
+  - `cockpit/missions/scanner.js` (Line: 178): `catch (e) { // Silent catch on read failure }`
 
 ## Verification Protocol
 
