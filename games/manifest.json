@@ -1,0 +1,25 @@
+{
+  "games": [
+    {
+      "name": "mars",
+      "title": "Mars Simulation",
+      "status": "Live",
+      "description": "Constraint-driven rover simulation with runtime-managed state updates.",
+      "href": "./mars/index.html"
+    },
+    {
+      "name": "orchade",
+      "title": "Orchade Strategy",
+      "status": "Scaffold",
+      "description": "Flagship strategy environment scaffold with map and economy systems.",
+      "href": "./orchade/index.html"
+    },
+    {
+      "name": "skillhex",
+      "title": "SkillHex Capability Graph",
+      "status": "Prototype",
+      "description": "Capability graph growth and reputation simulation for professional progression.",
+      "href": "./skillhex/index.html"
+    }
+  ]
+}

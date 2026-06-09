@@ -1,0 +1,14 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Embedded Station</title><style>body{font-family:Arial,sans-serif;margin:20px}section{border:1px solid #ccc;padding:12px;margin:0 0 10px}pre{white-space:pre-wrap}</style></head><body>
+<h1>Sovereign Embedded Workstation</h1>
+<section><h2>Hardware Lineage Viewer</h2><pre id="lineage">Loading...</pre></section>
+<section><h2>Mesh Synchronization Viewer</h2><pre id="mesh">Loading...</pre></section>
+<section><h2>Failure Propagation Viewer</h2><pre id="failure">Loading...</pre></section>
+<section><h2>Firmware Replay Inspector</h2><pre id="firmware">Loading...</pre></section>
+<script>
+const fallback={status:'offline_unavailable',deterministic:true};
+const read=(p)=>fetch(p).then(r=>r.ok?r.json():fallback).catch(()=>fallback);
+const mesh={topology:'sovereign_local_mesh',sync:'replay_safe',ordering:['event_tick','authority_epoch','device_id'],recovery:'canonical_restoration'};
+const firmware={classes:['FIRMWARE_COMPATIBLE','FIRMWARE_PARTIAL','FIRMWARE_DIVERGENT','FIRMWARE_RECOVERABLE','FIRMWARE_UNKNOWN'],admissibility:'authority_verified'};
+Promise.all([read('./hardware_lineage/hardware-lineage.json'),read('./embedded_failure_graphs/embedded-failure-graph.json')]).then(([a,b])=>{document.getElementById('lineage').textContent=JSON.stringify(a,null,2);document.getElementById('mesh').textContent=JSON.stringify(mesh,null,2);document.getElementById('failure').textContent=JSON.stringify(b,null,2);document.getElementById('firmware').textContent=JSON.stringify(firmware,null,2);});
+</script></body></html>

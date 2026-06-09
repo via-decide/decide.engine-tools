@@ -1,0 +1,11 @@
+engine:
+  target_fps: 30
+world:
+  seed: 777
+  width: 24
+  height: 24
+npc:
+  id: npc_guard_01
+  name: Gatekeeper
+  initial_energy: 0.6
+  initial_goal: patrol_gate

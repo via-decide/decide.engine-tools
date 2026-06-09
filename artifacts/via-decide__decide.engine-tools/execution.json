@@ -1,14 +1,17 @@
 {
   "repo": "via-decide/decide.engine-tools",
   "mode": "codex_then_antigravity",
-  "branch": "simba/build-daxiniaudit-the-autonomous-verification-an",
+  "branch": "simba/write-zayvoraclaudegameexecutionloopv1md---auton",
   "files_to_create": [
     "codex-task.md",
     "antigravity-repair-task.md",
     "pr-package.md",
-    "execution.json"
+    "execution.json",
+    "docs/game/ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md"
   ],
   "files_to_modify": [],
   "codex_prompt_path": "codex-task.md",
-  "repair_prompt_path": "antigravity-repair-task.md"
+  "repair_prompt_path": "antigravity-repair-task.md",
+  "synthesized_file": "docs/game/ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md",
+  "synthesized_size": 2383
 }

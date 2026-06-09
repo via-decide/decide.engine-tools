@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViaDecide — AAA World Prototype</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="game-shell">
+    <canvas id="game-canvas" aria-label="AAA world game canvas"></canvas>
+
+    <aside id="mission-panel" class="ui-card">
+      <h2>Mission Control</h2>
+      <div id="mission-name">Mission: Loading...</div>
+      <div id="mission-progress">Progress: 0%</div>
+      <div id="region-status">Region: Unknown</div>
+    </aside>
+
+    <section id="player-stats" class="ui-card">
+      <h2>Agent Stats</h2>
+      <div>HP <span id="stat-hp">100</span></div>
+      <div>Energy <span id="stat-energy">100</span></div>
+      <div>XP <span id="stat-xp">0</span></div>
+      <div>Unlocked Regions <span id="stat-regions">1</span></div>
+    </section>
+
+    <section id="zoom-controls" class="ui-card">
+      <h2>Zoom</h2>
+      <button data-zoom="0">Global</button>
+      <button data-zoom="1">City</button>
+      <button data-zoom="2">Ground</button>
+      <div id="zoom-state">Level: Global</div>
+      <small>Mouse wheel: zoom in/out</small>
+    </section>
+
+    <canvas id="minimap" width="220" height="220" class="ui-card" aria-label="world minimap"></canvas>
+  </div>
+
+  <script src="./map.js"></script>
+  <script src="./player.js"></script>
+  <script src="./world.js"></script>
+  <script src="./game.js"></script>
+</body>
+</html>

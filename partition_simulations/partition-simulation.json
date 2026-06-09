@@ -1,0 +1,19 @@
+{
+  "failure_types": [
+    "split_brain_execution",
+    "delayed_synchronization",
+    "duplicate_mutations",
+    "authority_divergence",
+    "replay_corruption",
+    "effect_duplication",
+    "transport_collapse"
+  ],
+  "flow": [
+    "partition",
+    "local_mutations",
+    "replay_divergence",
+    "reconciliation_attempt",
+    "canonical_restoration"
+  ],
+  "deterministic": true
+}

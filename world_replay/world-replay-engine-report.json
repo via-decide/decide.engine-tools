@@ -1,0 +1,20 @@
+{
+  "replay_frames": [
+    "f0001",
+    "f0002",
+    "f0003"
+  ],
+  "reconstructed": true,
+  "divergence_detected": [
+    "branch_b_tick_42"
+  ],
+  "branch_comparison": {
+    "canonical": "main",
+    "alternate": "branch_b"
+  },
+  "orphan_states": [
+    "orphan_state_17"
+  ],
+  "replay_admissibility": "ADMISSIBLE_WITH_ROLLBACK",
+  "deterministic_frame_rebuild": true
+}

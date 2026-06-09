@@ -1,0 +1,1 @@
+export const arcade1985Preset = { rendering: { monochrome: false, palette: ['#000', '#0f0', '#ff0', '#f00'] }, movement: { inertia: 0.1, acceleration: 1.8, snapToGrid: false, latencyMs: 10 }, audio: { waveform: 'square', bitDepth: 8, sampleRate: 22050 } };

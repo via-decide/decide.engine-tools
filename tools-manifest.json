@@ -123,6 +123,9 @@
       ]
     },
     {
+  "generatedAt": "2026-04-13T17:40:00.000Z",
+  "entries": [
+    {
       "toolDir": "tools/decision-matrix",
       "metaPath": "tools/decision-matrix/config.json",
       "id": "decision-matrix",
@@ -717,6 +720,16 @@
         "variants",
         "simba-workflows"
       ]
+      "toolDir": "tools/scenario-planner",
+      "metaPath": "tools/scenario-planner/config.json"
+    },
+    {
+      "toolDir": "tools/eco-engine-test",
+      "metaPath": "tools/eco-engine-test/config.json"
+    },
+    {
+      "toolDir": "tools/color-palette",
+      "metaPath": "tools/color-palette/config.json"
     },
     {
       "toolDir": "tools/json-formatter",
@@ -890,6 +903,121 @@
         "workflow",
         "templates",
         "simba-workflows"
+      "toolDir": "tools/games/hex-wars",
+      "metaPath": "tools/games/hex-wars/config.json"
+    },
+    {
+      "toolDir": "tools/games/freecell-classic",
+      "metaPath": "tools/games/freecell-classic/config.json"
+    },
+    {
+      "toolDir": "tools/games/snake-game",
+      "metaPath": "tools/games/snake-game/config.json"
+    },
+    {
+      "toolDir": "tools/games/wings-of-fire-quiz",
+      "metaPath": "tools/games/wings-of-fire-quiz/config.json"
+    },
+    {
+      "toolDir": "tools/games/skillhex-mission-control",
+      "metaPath": "tools/games/skillhex-mission-control/config.json"
+    },
+    {
+      "id": "vialogic",
+      "name": "ViaLogic",
+      "title": "Cartography of Minds",
+      "path": "tools/games/vialogic/index.html",
+      "tags": ["math", "history", "exploration", "game", "india"],
+      "tier": "game",
+      "icon": "🗺️",
+      "pullable": true,
+      "sparks": true,
+      "toolDir": "tools/games/vialogic",
+      "metaPath": "tools/games/vialogic/config.json"
+    },
+    {
+      "id": "kutch-map",
+      "name": "Kutch Digital Map",
+      "title": "Local Discovery Engine",
+      "path": "tools/business/kutch-map/index.html",
+      "tags": ["business", "directory", "local", "kutch", "india"],
+      "tier": "business",
+      "icon": "🗺️",
+      "pullable": true,
+      "sparks": true,
+      "toolDir": "tools/business/kutch-map",
+      "metaPath": "tools/business/kutch-map/config.json"
+    },
+    {
+      "id": "printbydd",
+      "name": "PrintByDD Store",
+      "title": "Precision 3D Manufacturing",
+      "path": "tools/commerce/printbydd/index.html",
+      "tags": ["3d-printing", "nfc", "keychains", "gifts", "smart-accessories", "e-commerce", "commerce"],
+      "tier": "commerce",
+      "icon": "🎨",
+      "pullable": true,
+      "sparks": false,
+      "toolDir": "tools/commerce/printbydd",
+      "metaPath": "tools/commerce/printbydd/tool-manifest.json"
+    },
+    {
+      "_comment": "ARCHIVED: Backend/template tools moved to internal-only. Not shown in UI.",
+      "_archived_engine_tools": [
+        "tools/engine/ai-coach-console",
+        "tools/engine/ai-game-strategy-advisor",
+        "tools/engine/balance-dashboard",
+        "tools/engine/circle-builder",
+        "tools/engine/daily-quest-generator",
+        "tools/engine/fair-ranking-engine",
+        "tools/engine/four-direction-pipeline",
+        "tools/engine/fruit-sharing",
+        "tools/engine/fruit-yield-engine",
+        "tools/engine/growth-path-recommender",
+        "tools/engine/hire-readiness-scorer",
+        "tools/engine/meta-health-dashboard",
+        "tools/engine/orchard-discovery-search",
+        "tools/engine/orchard-profile-builder",
+        "tools/engine/peer-validation-engine",
+        "tools/engine/player-signup",
+        "tools/engine/recruiter-dashboard",
+        "tools/engine/root-strength-calculator",
+        "tools/engine/seed-exchange",
+        "tools/engine/seed-quality-scorer",
+        "tools/engine/simulation-runner",
+        "tools/engine/starter-farm-generator",
+        "tools/engine/synthetic-player-generator",
+        "tools/engine/thirty-day-promotion-engine",
+        "tools/engine/trunk-growth-calculator",
+        "tools/engine/trust-score-engine",
+        "tools/engine/wave1-simulation-runner",
+        "tools/engine/weekly-harvest-engine",
+        "tools/engine/script-generator-files",
+        "tools/engine/layer1-swipe-crucible",
+        "tools/engine/market-dynamics",
+        "tools/engine/meeting-cost-calculator",
+        "tools/engine/traffic-router",
+        "tools/engine/typography-scale-calculator"
+      ],
+      "_archived_stub_tools": [
+        "tools/ai-tool-generator",
+        "tools/code-generator",
+        "tools/code-reviewer",
+        "tools/context-packager",
+        "tools/export-studio",
+        "tools/idea-remixer",
+        "tools/output-evaluator",
+        "tools/prompt-compare",
+        "tools/promptalchemy",
+        "tools/repo-improvement-brief",
+        "tools/revenue-forecaster",
+        "tools/script-generator",
+        "tools/spec-builder",
+        "tools/task-splitter",
+        "tools/template-vault",
+        "tools/tool-router",
+        "tools/tool-search-discovery",
+        "tools/workflow-template-gallery"
       ]
     }
   ]

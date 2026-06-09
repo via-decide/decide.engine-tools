@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Build 'DaxiniAudit'-the autonomous verification and transparency engine for the 24,000-PR run. CORE ARCHITECTURE (The Proof Engine): 1. The Batch Certifier: - Create a module audit/certify.js that triggers every time the PR count hits a multiple of 1,000.
+Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game development loop
 
 CONSTRAINTS
-Use 'crypto' for SHA-256 hashing. Ensure the audit files are lightweight and don't clutter the main code history. Use 'Table' formatting in Markdown for the mission logs.
+Preserve existing code; prefer additive changes.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
@@ -19,7 +19,7 @@ REPO AUDIT CONTEXT
 - Description: 
 - Primary language: HTML
 - README snippet:
-⭐ If this saved you $X in API costs, star this repo Help other devs discover metadata-driven development # VIA Platform: 58-Tool Ecosystem with 80% Token Savings > **Before you fork another monorepo: This one saved me $33,756 in API costs and 2.25M tokens. Here's how.** [Detailed breakdown...] #
+# Decide Engine — Unified Dashboard Interface ## Overview Decide Engine is a browser-native decision and productivity platform by ViaDecide. The repository now includes a unified dashboard shell that routes users into core modules while preserving standalone tools. ## Dashboard Primary entry point
 
 - AGENTS snippet:
 # AGENTS.md — ViaDecide Studio ## Rules for all AI coding agents working in this repository --- ## IDENTITY This is a **production codebase** for a $199/month subscription product on the Play Store. Every change you make affects paying subscribers. Treat it accordingly. --- ## HARD GATE 1 — DES

@@ -71,7 +71,13 @@
       issuesEl.innerHTML = '<li class="good">✓ No balance issues detected.</li>';
       return;
     }
-    issuesEl.innerHTML = report.issues.map(i => '<li class="warn">⚠ ' + i + '</li>').join('');
+    issuesEl.textContent = '';
+    for (const issue of report.issues) {
+      const li = document.createElement('li');
+      li.className = 'warn';
+      li.textContent = '⚠ ' + issue;
+      issuesEl.appendChild(li);
+    }
   }
 
   /* ── Bar Charts (pure CSS) ── */

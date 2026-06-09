@@ -6,9 +6,19 @@
  * No mocking. If a tool loads without console errors → pass.
  */
 
-const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
+
+function loadChromium() {
+  try {
+    return { chromium: require('playwright').chromium };
+  } catch (error) {
+    if (error && error.code === 'MODULE_NOT_FOUND') {
+      return { missingModule: true, error };
+    }
+    throw error;
+  }
+}
 
 const ROOT = path.join(__dirname, '../..');
 
@@ -18,7 +28,9 @@ const SMOKE_TARGETS = [
   // Games (core Play Store draw)
   { id: 'snake-game',           path: 'tools/games/snake-game/index.html' },
   { id: 'hex-wars',             path: 'tools/games/hex-wars/index.html' },
+  { id: 'mars-visual-v1',       path: 'tools/mars-game/mars-visual-v1.html', timeout: 8000 },
   { id: 'freecell-classic',     path: 'tools/games/freecell-classic/index.html' },
+  { id: 'aaa-world-prototype',  path: 'game-engine/index.html' },
 
   // Productivity (subscription value)
   { id: 'json-formatter',       path: 'tools/json-formatter/index.html' },
@@ -30,9 +42,23 @@ const SMOKE_TARGETS = [
   // Engine / Simulations
   { id: 'seed-quality-scorer',  path: 'tools/engine/seed-quality-scorer/index.html' },
   { id: 'daily-quest-generator',path: 'tools/engine/daily-quest-generator/index.html' },
+  { id: 'highway-v2i-lab',       path: 'Highway-V2I dashboard simulation.html' },
 
   // Home shell
   { id: 'home',                 path: 'index.html' },
+  { id: 'dashboard',            path: 'dashboard/index.html' },
+  { id: 'workspace',            path: 'workspace/index.html' },
+  { id: 'tool-catalog',         path: 'tools/index.html' },
+  { id: 'studyos',              path: 'StudyOS/index.html' },
+  { id: 'decide-engine-studio', path: 'games/index.html' },
+  { id: 'ai-simulation-studio', path: 'games/ai-simulation-studio.html' },
+  { id: 'mars-runtime',         path: 'games/mars/index.html' },
+  { id: 'orchade-runtime',      path: 'games/orchade/index.html' },
+  { id: 'skillhex-runtime',     path: 'games/skillhex/index.html' },
+  { id: 'studio-editor',        path: 'editor/index.html' },
+  { id: 'map-editor',           path: 'tools/map-editor/index.html' },
+  { id: 'simulation-debugger',  path: 'tools/simulation-debugger/index.html' },
+  { id: 'ui-builder',           path: 'tools/ui-builder/index.html' },
 ];
 
 function isMissingBrowserExecutableError(error) {
@@ -43,9 +69,16 @@ function isMissingBrowserExecutableError(error) {
 async function runSmokeTests() {
   console.log('\n── Smoke Tests (Playwright) ──\n');
 
+  const loaded = loadChromium();
+  if (loaded.missingModule) {
+    console.warn('  ⚠ Skipping smoke tests: Playwright is not installed.');
+    console.warn('  ⚠ Run `npm install` (and `npx playwright install chromium`) to enable smoke tests.');
+    return { passed: 0, failed: 0, skipped: true, reason: 'missing-playwright-module' };
+  }
+
   let browser;
   try {
-    browser = await chromium.launch({ headless: true });
+    browser = await loaded.chromium.launch({ headless: true });
   } catch (error) {
     if (isMissingBrowserExecutableError(error)) {
       console.warn('  ⚠ Skipping smoke tests: Playwright browser executable is not installed.');
@@ -92,7 +125,8 @@ async function runSmokeTests() {
 
     try {
       const fileUrl = `file://${fullPath}`;
-      await page.goto(fileUrl, { timeout: 8000, waitUntil: 'domcontentloaded' });
+      const timeout = Number.isFinite(tool.timeout) ? tool.timeout : 8000;
+      await page.goto(fileUrl, { timeout, waitUntil: 'domcontentloaded' });
 
       // Check document title exists (basic render test)
       const title = await page.title();

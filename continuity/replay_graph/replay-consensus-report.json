@@ -1,0 +1,184 @@
+{
+  "timestamp": 1778891832.766785,
+  "num_nodes": 5,
+  "canonical_head": "1bafd7fc6d8d",
+  "divergences": {
+    "64656ce3e288": [
+      {
+        "type": "output_divergence",
+        "node_id": "64656ce3e288",
+        "competing_heads": [
+          "1bafd7fc6d8d",
+          "3d2752a07e47",
+          "64656ce3e288",
+          "83909acd1959",
+          "b52a9acef3cd"
+        ],
+        "severity": 1.0,
+        "resolution_path": null
+      }
+    ],
+    "83909acd1959": [
+      {
+        "type": "output_divergence",
+        "node_id": "83909acd1959",
+        "competing_heads": [
+          "1bafd7fc6d8d",
+          "3d2752a07e47",
+          "64656ce3e288",
+          "83909acd1959",
+          "b52a9acef3cd"
+        ],
+        "severity": 1.0,
+        "resolution_path": null
+      }
+    ],
+    "3d2752a07e47": [
+      {
+        "type": "output_divergence",
+        "node_id": "3d2752a07e47",
+        "competing_heads": [
+          "1bafd7fc6d8d",
+          "3d2752a07e47",
+          "64656ce3e288",
+          "83909acd1959",
+          "b52a9acef3cd"
+        ],
+        "severity": 1.0,
+        "resolution_path": null
+      }
+    ],
+    "1bafd7fc6d8d": [
+      {
+        "type": "output_divergence",
+        "node_id": "1bafd7fc6d8d",
+        "competing_heads": [
+          "1bafd7fc6d8d",
+          "3d2752a07e47",
+          "64656ce3e288",
+          "83909acd1959",
+          "b52a9acef3cd"
+        ],
+        "severity": 1.0,
+        "resolution_path": null
+      }
+    ],
+    "b52a9acef3cd": [
+      {
+        "type": "output_divergence",
+        "node_id": "b52a9acef3cd",
+        "competing_heads": [
+          "1bafd7fc6d8d",
+          "3d2752a07e47",
+          "64656ce3e288",
+          "83909acd1959",
+          "b52a9acef3cd"
+        ],
+        "severity": 1.0,
+        "resolution_path": null
+      }
+    ]
+  },
+  "conflicts": [
+    {
+      "type": "output_divergence",
+      "node_id": "64656ce3e288",
+      "competing_heads": [
+        "1bafd7fc6d8d",
+        "3d2752a07e47",
+        "64656ce3e288",
+        "83909acd1959",
+        "b52a9acef3cd"
+      ],
+      "severity": 1.0,
+      "resolution_path": null
+    },
+    {
+      "type": "output_divergence",
+      "node_id": "83909acd1959",
+      "competing_heads": [
+        "1bafd7fc6d8d",
+        "3d2752a07e47",
+        "64656ce3e288",
+        "83909acd1959",
+        "b52a9acef3cd"
+      ],
+      "severity": 1.0,
+      "resolution_path": null
+    },
+    {
+      "type": "output_divergence",
+      "node_id": "3d2752a07e47",
+      "competing_heads": [
+        "1bafd7fc6d8d",
+        "3d2752a07e47",
+        "64656ce3e288",
+        "83909acd1959",
+        "b52a9acef3cd"
+      ],
+      "severity": 1.0,
+      "resolution_path": null
+    },
+    {
+      "type": "output_divergence",
+      "node_id": "1bafd7fc6d8d",
+      "competing_heads": [
+        "1bafd7fc6d8d",
+        "3d2752a07e47",
+        "64656ce3e288",
+        "83909acd1959",
+        "b52a9acef3cd"
+      ],
+      "severity": 1.0,
+      "resolution_path": null
+    },
+    {
+      "type": "output_divergence",
+      "node_id": "b52a9acef3cd",
+      "competing_heads": [
+        "1bafd7fc6d8d",
+        "3d2752a07e47",
+        "64656ce3e288",
+        "83909acd1959",
+        "b52a9acef3cd"
+      ],
+      "severity": 1.0,
+      "resolution_path": null
+    }
+  ],
+  "orphaned_nodes": [
+    "3d2752a07e47",
+    "64656ce3e288",
+    "6892be7e5868",
+    "83909acd1959",
+    "9c2fd2667767",
+    "b52a9acef3cd"
+  ],
+  "consensus_confidence": 1.0
+  "simulation": [
+    "distributed_node_execution",
+    "replay_divergence",
+    "branch_conflicts",
+    "delayed_synchronization",
+    "split_brain_orchestration",
+    "eventual_consistency_recovery"
+  ],
+  "consensus_results": {
+    "canonical_replay_paths": [
+      "root->a1->a2",
+      "root->b1->reconciled_b2"
+    ],
+    "lineage_corruption_detected": [
+      "branch_x_orphan_parent_mismatch"
+    ],
+    "orphaned_branches": [
+      "branch_x"
+    ],
+    "deterministic_report": true
+  },
+  "ordering_key": [
+    "lineage_parent",
+    "authority_weight",
+    "event_nonce"
+  ]
+}

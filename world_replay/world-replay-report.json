@@ -1,0 +1,23 @@
+{
+  "world_id": "manifest_defined_world",
+  "replay_targets": [
+    "economic_systems",
+    "faction_systems",
+    "inventory_lineage",
+    "authority_transitions",
+    "simulation_events",
+    "plugin_mutations",
+    "world_continuity"
+  ],
+  "divergence_classes": [
+    "SIMULATION_DIVERGENCE",
+    "PLUGIN_DIVERGENCE",
+    "AUTHORITY_DIVERGENCE",
+    "MULTIPLAYER_DIVERGENCE",
+    "RUNTIME_DIVERGENCE",
+    "UNKNOWN_WORLD_STATE"
+  ],
+  "status": "REPLAY_STABLE",
+  "missing_required_events": [],
+  "deterministic": true
+}
