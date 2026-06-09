@@ -61,7 +61,7 @@ function build(){
   ].join('\n');
 }
 document.getElementById('gen').onclick = build;
-document.getElementById('copy').onclick = async () => { try { await navigator.clipboard.writeText(cssOut.textContent); } catch(_) {} };
+document.getElementById('copy').onclick = async () => { try { await navigator.clipboard.writeText(cssOut.textContent); } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); } };
 hexIn.addEventListener('input', build);build();
 </script>
 </body>

@@ -1166,24 +1166,24 @@ window.addEventListener('beforeinstallprompt',function(e){
   e.preventDefault();
   deferredInstall=e;
   setTimeout(function(){
-    try{if(!sessionStorage.getItem('hw-dismissed')&&!isStandalone)banner.classList.add('show');}catch(ex){}
+    try{if(!sessionStorage.getItem('hw-dismissed')&&!isStandalone)banner.classList.add('show');}catch(ex){ console.warn("VIA Cockpit: Handled silent error", ex); }
   },8000); // Show after 8s of play
 });
 
 document.getElementById('install-banner-btn').addEventListener('click',doInstall);
 document.getElementById('install-banner-dismiss').addEventListener('click',function(){
   banner.classList.remove('show');
-  try{sessionStorage.setItem('hw-dismissed','1');}catch(e){}
+  try{sessionStorage.setItem('hw-dismissed','1');}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 });
 
 if(isIOS&&!isStandalone){
   setTimeout(function(){
-    try{if(!sessionStorage.getItem('hw-ios-dismissed'))iosHint.classList.add('show');}catch(e){}
+    try{if(!sessionStorage.getItem('hw-ios-dismissed'))iosHint.classList.add('show');}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   },10000);
 }
 document.getElementById('ios-hint-close').addEventListener('click',function(){
   iosHint.classList.remove('show');
-  try{sessionStorage.setItem('hw-ios-dismissed','1');}catch(e){}
+  try{sessionStorage.setItem('hw-ios-dismissed','1');}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 });
 window.addEventListener('appinstalled',function(){deferredInstall=null;banner.classList.remove('show');});
 

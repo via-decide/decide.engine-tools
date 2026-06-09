@@ -20,5 +20,5 @@ function run(minify=false){
 }
 document.getElementById('format').onclick=()=>run(false);
 document.getElementById('minify').onclick=()=>run(true);
-document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(out.textContent);}catch(_){}};
+document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(out.textContent);}catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }};
 </script></body></html>

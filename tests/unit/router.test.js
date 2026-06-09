@@ -14,7 +14,7 @@ const routerCode = fs.readFileSync(path.join(root, 'router.js'), 'utf8');
 const mapMatch = routerCode.match(/const toolPathStaticMap\s*=\s*(\{[\s\S]*?\});/);
 if (!mapMatch) throw new Error('Could not find toolPathStaticMap in router.js');
 
-const toolPathStaticMap = eval('(' + mapMatch[1] + ')');
+const toolPathStaticMap = new Function('return ' + mapMatch[1])();
 
 let passed = 0;
 let failed = 0;

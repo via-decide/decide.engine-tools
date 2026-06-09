@@ -1,4 +1,4 @@
-import { getSupabaseAdminClient } from '../services/supabase';
+import { db } from '../db/indexeddb';
 import { verifyTelegramInitData } from '../services/telegram-auth';
 
 type SwipeResult = { cardId: string; accepted: boolean };
@@ -32,16 +32,16 @@ export async function swipeValidateHandler(request: SwipeValidateRequest): Promi
     const results = Array.isArray(request.body?.results) ? request.body?.results : [];
     const xpEarned = results.reduce((sum, result) => sum + xpForCardId(result.cardId, Boolean(result.accepted)), 0);
 
-    const supabase = getSupabaseAdminClient();
-    const { data: user, error: userError } = await supabase.from('users').select('id').eq('tg_id', telegramUserId).single();
-    if (userError || !user) return { status: 404, body: { ok: false, error: 'User not found' } };
+    const usersArray = await db.users.where('tg_id').equals(telegramUserId).toArray();
+    const user = usersArray[0];
+    if (!user) return { status: 404, body: { ok: false, error: 'User not found' } };
 
-    const { data: plant, error: plantError } = await supabase.from('plants').select('user_id,stage').eq('user_id', user.id).single();
-    if (plantError || !plant) return { status: 404, body: { ok: false, error: 'Plant not found' } };
+    const plantsArray = await db.plants.where('user_id').equals(user.id).toArray();
+    const plant = plantsArray[0];
+    if (!plant) return { status: 404, body: { ok: false, error: 'Plant not found' } };
 
     const nextStage = Number(plant.stage || 0) + xpEarned;
-    const { error: updateError } = await supabase.from('plants').update({ stage: nextStage }).eq('user_id', user.id);
-    if (updateError) throw updateError;
+    await db.plants.update(plant.id, { stage: nextStage });
 
     return { status: 200, body: { ok: true, xpEarned } };
   } catch (error) {

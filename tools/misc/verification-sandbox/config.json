@@ -1,0 +1,15 @@
+{
+  "id": "verification-sandbox",
+  "name": "Verification Sandbox",
+  "title": "Verification Sandbox",
+  "description": "A platform-native Verification Sandbox tool.",
+  "category": "misc",
+  "tags": [
+    "platform",
+    "scaffolded"
+  ],
+  "icon": "🛠️",
+  "pullable": true,
+  "sparks": true,
+  "path": "tools/misc/verification-sandbox/index.html"
+}

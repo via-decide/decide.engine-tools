@@ -753,7 +753,7 @@ let lastOutput = null;
     if (s.city)     document.getElementById('fCity').value     = s.city;
     if (s.skill)    document.getElementById('fSkill').value    = s.skill;
     if (s.capital)  document.getElementById('fCapital').value  = s.capital;
-  } catch(e) {}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 })();
 
 function saveInputs() {
@@ -762,7 +762,7 @@ function saveInputs() {
       industry: v('fIndustry'), city: v('fCity'),
       skill: v('fSkill'),       capital: v('fCapital')
     }));
-  } catch(e) {}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 }
 
 ['fIndustry','fCity','fSkill','fCapital'].forEach(id => {
@@ -1025,7 +1025,7 @@ function doReset() {
   });
   document.getElementById('results').classList.remove('show');
   lastOutput = null;
-  try { localStorage.removeItem(SK); } catch(e) {}
+  try { localStorage.removeItem(SK); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
   toast('Reset. Ready for a new scan.', '↺');
 }

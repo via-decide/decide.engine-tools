@@ -47,8 +47,11 @@ export default async function handler(req) {
   if (!apiKey) {
     console.error('[claude-proxy] ANTHROPIC_API_KEY not set');
     return new Response(
-      JSON.stringify({ error: 'Service not configured' }),
-      { status: 503, headers: corsHeaders }
+      JSON.stringify({ 
+        error: 'Unauthorized',
+        message: 'Server missing API key. Please provide your local Anthropic API key in the dashboard.'
+      }),
+      { status: 401, headers: corsHeaders }
     );
   }
 

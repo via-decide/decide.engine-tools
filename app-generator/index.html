@@ -366,7 +366,7 @@ var TS=["One thing you'd do differently with a week extra? / एक हफ्त
 var SD=["Take me back — what were you feeling right before you decided? / decide करने से पहले क्या feel हो रहा था?","What would the other person say right now? / दूसरा इंसान अभी क्या कहेगा?","Which part still sits uncomfortably with you? / कौन सा हिस्सा अभी भी असहज करता है?","How did that change your approach to similar situations? / उस experience ने approach कैसे बदला?","10-word message to yourself just before it happened? / खुद को 10 शब्दों में क्या कहते?"];
 var SS=["Your usual reset when a project feels chaotic? / project chaotic लगे तो reset क्या है?","Have you ever changed your mind on something you felt strongly about? / कभी strong opinion बदला है?","A skill you picked up completely by accident? / कोई skill जो accidentally सीखा हो?","What does your best workday look like, hour by hour? / सबसे अच्छा workday कैसा दिखता है?","How do you tell if you understood vs just memorised? / समझा है या सिर्फ याद किया?"];
 function pick(p,u){if(u.length>=p.length)u.length=0;var av=p.map(function(_,i){return i}).filter(function(i){return u.indexOf(i)===-1});var i=av[Math.floor(Math.random()*av.length)];u.push(i);return p[i]}
-function sv(){try{localStorage.setItem(LS,JSON.stringify({S:S,log:log}))}catch(e){}}
+function sv(){try{localStorage.setItem(LS,JSON.stringify({S:S,log:log}))}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }}
 function ld(){try{var r=localStorage.getItem(LS);if(!r)return false;var d=JSON.parse(r);if(!d||!d.S)return false;S=d.S;log=d.log||[];return true}catch(e){return false}}
 var vs=document.getElementById('vs'),vc=document.getElementById('vc'),ch=document.getElementById('ch'),ci=document.getElementById('ci');
 function sw(w){vs.classList.toggle('a',w==='s');vc.classList.toggle('a',w==='c')}
@@ -384,11 +384,11 @@ document.getElementById('bst').onclick=function(){var n=document.getElementById(
 document.getElementById('bsn').onclick=function(){if(!S)return;var v=ci.value;if(!v||!v.trim())return;ci.value='';add('user',v.trim());ci.disabled=true;typing();setTimeout(function(){rmT();add('bot',reply(v));ci.disabled=false;ci.focus()},400+Math.random()*350)};
 ci.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();document.getElementById('bsn').click()}});
 document.getElementById('bex').onclick=function(){var p=S&&S.p?S.p:{};var lines=['=== INTERVIEW PRACTICE TRANSCRIPT ===','Name: '+(p.n||'—'),'Role: '+(p.r||'—'),'Timeline: '+(p.tl||'—'),'Level: '+(p.lv||'—'),'Mode: '+(p.dd==='Yes'?'Deep Dive':'Standard'),'Exported: '+new Date().toISOString(),'=====================================',''];log.forEach(function(m){lines.push((m.s==='user'?'[YOU]    ':m.s==='bot'?'[BOT]    ':'[SYSTEM] ')+m.t);lines.push('')});var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain'}));a.download='interview_'+Date.now()+'.txt';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},0)};
-document.getElementById('brs').onclick=function(){try{localStorage.removeItem(LS)}catch(e){}S=null;log=[];ch.innerHTML='';uD.length=0;uS.length=0;stats();sw('s')};
+document.getElementById('brs').onclick=function(){try{localStorage.removeItem(LS)}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }S=null;log=[];ch.innerHTML='';uD.length=0;uS.length=0;stats();sw('s')};
 var TH=['','am','cy'],ti=0;
-document.getElementById('bth').onclick=function(){document.body.classList.remove('am','cy');ti=(ti+1)%TH.length;if(TH[ti])document.body.classList.add(TH[ti]);try{localStorage.setItem(LT,String(ti))}catch(e){}stats()};
+document.getElementById('bth').onclick=function(){document.body.classList.remove('am','cy');ti=(ti+1)%TH.length;if(TH[ti])document.body.classList.add(TH[ti]);try{localStorage.setItem(LT,String(ti))}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }stats()};
 window.addEventListener('resize',function(){clearTimeout(window.__r);window.__r=setTimeout(stats,120)},{passive:true});
-(function(){try{var t=parseInt(localStorage.getItem(LT)||'0',10);if(t>0&&t<TH.length){ti=t;document.body.classList.add(TH[t])}}catch(e){}if(ld()){um();sw('c');rc();stats()}else{stats()}})();
+(function(){try{var t=parseInt(localStorage.getItem(LT)||'0',10);if(t>0&&t<TH.length){ti=t;document.body.classList.add(TH[t])}}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }if(ld()){um();sw('c');rc();stats()}else{stats()}})();
 </script></body></html>
 </template>
 
@@ -447,7 +447,7 @@ var FT=[
 ];
 
 var selSP=null,selST='dark-india',selFT=new Set(),curReq={};
-var rh=[];try{rh=JSON.parse(localStorage.getItem('_rh')||'[]')}catch(e){}
+var rh=[];try{rh=JSON.parse(localStorage.getItem('_rh')||'[]')}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 
 function ak(el){el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}})}
 
@@ -516,7 +516,7 @@ function submitRequest(){
   curReq={subpage:sp?sp.lb:selSP,purpose:purpose,extra:extra,style:stLabel,lang:lang,feats:feats,ts:ts};
   rh.unshift({subpage:curReq.subpage,purpose:purpose.slice(0,60)+(purpose.length>60?'…':''),style:stLabel,ts:ts});
   if(rh.length>10)rh=rh.slice(0,10);
-  try{localStorage.setItem('_rh',JSON.stringify(rh))}catch(e){}
+  try{localStorage.setItem('_rh',JSON.stringify(rh))}catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   /* Populate summary */
   document.getElementById('os-subpage').textContent=curReq.subpage;
   document.getElementById('os-purpose').textContent=purpose;

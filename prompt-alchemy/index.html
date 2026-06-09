@@ -773,7 +773,7 @@ Flow:
           tools = meta.relatedTools.map((id) => all.find((t) => t.id === id) || { id, name: id });
         }
       }
-    } catch (err) {}
+    } catch(err){ console.warn("VIA Cockpit: Handled silent error", err); }
 
     tools.forEach((tool) => {
       const opt = document.createElement('option');

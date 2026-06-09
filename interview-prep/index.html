@@ -828,7 +828,7 @@
       }
 
       function clearSaved(){
-        try{ localStorage.removeItem(STORAGE_KEY); }catch(_){}
+        try{ localStorage.removeItem(STORAGE_KEY); }catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
       }
 
       function applyProfileInputsToState(){
@@ -1248,7 +1248,7 @@ Final score: ${score}/100
           s.transcript = Array.isArray(saved.transcript) ? saved.transcript : [];
           s.analytics = Object.assign(s.analytics, saved.analytics || {});
           s.score = (saved.score == null) ? null : saved.score;
-        }catch(_){}
+        }catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
         return s;
       }
 

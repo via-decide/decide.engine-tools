@@ -1100,7 +1100,7 @@ const DEFAULT = {
 };
 
 let saved = {};
-try { saved = JSON.parse(localStorage.getItem(KEY)||'{}'); } catch(e){}
+try { saved = JSON.parse(localStorage.getItem(KEY)||'{}'); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 const S = {
   ...DEFAULT, ...saved,
   missionLog:  { ...(saved.missionLog||{}) },
@@ -1149,7 +1149,7 @@ const INTERVIEW = {
 };
 
 function save() {
-  try { localStorage.setItem(KEY, JSON.stringify(STATE)); } catch(e){}
+  try { localStorage.setItem(KEY, JSON.stringify(STATE)); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   try {
     localStorage.setItem('retroInterviewSession_v1', JSON.stringify({
       qIndex: INTERVIEW.qIndex,
@@ -1158,7 +1158,7 @@ function save() {
       answers: INTERVIEW.answers,
       pendingFollowUp: INTERVIEW.pendingFollowUp,
     }));
-  } catch(e){}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 }
 
 function loadInterviewState() {
@@ -1169,7 +1169,7 @@ function loadInterviewState() {
     INTERVIEW.transcript = Array.isArray(data.transcript) ? data.transcript : [];
     INTERVIEW.answers = Array.isArray(data.answers) ? data.answers : [];
     INTERVIEW.pendingFollowUp = data.pendingFollowUp || null;
-  } catch(e){}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 }
 
 function wordsOf(t='') { return (t.trim().match(/\S+/g) || []).length; }

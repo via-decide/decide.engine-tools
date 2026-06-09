@@ -884,7 +884,7 @@ let lastResult = null;
     if (s.timeline)     document.getElementById('timeline').value     = s.timeline;
     if (s.difficulty)   { chips.difficulty   = s.difficulty;   syncChipUI('difficulty',   s.difficulty);   }
     if (s.consistency)  { chips.consistency  = s.consistency;  syncChipUI('consistency',  s.consistency);  }
-  } catch(e) {}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 })();
 
 function syncChipUI(group, val) {
@@ -904,7 +904,7 @@ function saveState() {
       difficulty:   chips.difficulty,
       consistency:  chips.consistency
     }));
-  } catch(e) {}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 }
 
 /* ── CHIP SELECTION ─────────────────────────────────────────── */
@@ -1039,7 +1039,7 @@ function doReset() {
   syncChipUI('consistency', 1.4);
   document.getElementById('resultSection').classList.remove('show');
   lastResult = null;
-  try { localStorage.removeItem(SK); } catch(e) {}
+  try { localStorage.removeItem(SK); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   toast('Reset complete.', '↺');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
