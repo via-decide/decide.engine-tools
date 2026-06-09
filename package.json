@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "ViaDecide Studio — 37 decision-making, productivity and game tools",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "automation/*"
+  ],
   "scripts": {
     "test": "node tests/run-all.js",
     "test:unit": "node tests/unit/run.js",
