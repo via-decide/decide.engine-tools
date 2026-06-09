@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vd: Verification Sandbox</title>
+    <!-- CSS Design Tokens Package -->
+    <link rel="stylesheet" href="../../../packages/ui/design-tokens.css">
+    <style>
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(135deg, var(--void), #0f1419);
+            color: var(--text);
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--saffron), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="tool-title">Verification Sandbox</h1>
+            <p style="color: var(--text-dim); margin-top: 8px;">Scaffolded platform tool connected to storage and exports</p>
+        </div>
+
+        <div class="cyber-card" style="margin-bottom: 20px;">
+            <h2 style="color: var(--saffron); margin-bottom: 15px;">💾 Workspace Storage</h2>
+            <div style="margin-bottom: 16px;">
+                <input type="text" id="storage-input" class="cyber-input" style="width: 100%;" placeholder="Type data to persist...">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="cyber-btn cyber-btn-primary" id="save-btn">Save State</button>
+                <button class="cyber-btn" id="load-btn">Load State</button>
+            </div>
+        </div>
+
+        <div class="cyber-card">
+            <h2 style="color: var(--blue); margin-bottom: 15px;">📊 Export Data</h2>
+            <button class="cyber-btn cyber-btn-secondary" id="export-btn">Download CSV Report</button>
+        </div>
+    </div>
+
+    <!-- Platform Modules -->
+    <script src="../../../packages/storage/index.js"></script>
+    <script src="../../../packages/exports/csv.js"></script>
+    <!-- Tool logic script -->
+    <script src="tool.js"></script>
+</body>
+</html>

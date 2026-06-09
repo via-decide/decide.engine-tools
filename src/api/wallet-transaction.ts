@@ -1,4 +1,4 @@
-import { getSupabaseAdminClient } from '../services/supabase';
+import { db } from '../db/indexeddb';
 import { verifyTelegramInitData } from '../services/telegram-auth';
 
 type WalletTransactionRequest = {
@@ -26,27 +26,22 @@ export async function walletTransactionHandler(request: WalletTransactionRequest
       return { status: 400, body: { ok: false, error: 'Invalid action' } };
     }
 
-    const supabase = getSupabaseAdminClient();
-    const { data: user, error: userError } = await supabase.from('users').select('id').eq('tg_id', telegramUserId).single();
-    if (userError || !user) return { status: 404, body: { ok: false, error: 'User not found' } };
+    const usersArray = await db.users.where('tg_id').equals(telegramUserId).toArray();
+    const user = usersArray[0];
+    if (!user) return { status: 404, body: { ok: false, error: 'User not found' } };
 
-    const { data: wallet, error: walletError } = await supabase.from('wallets').select('*').eq('user_id', user.id).single();
-    if (walletError || !wallet) return { status: 404, body: { ok: false, error: 'Wallet not found' } };
+    const walletsArray = await db.wallets.where('user_id').equals(user.id).toArray();
+    const wallet = walletsArray[0];
+    if (!wallet) return { status: 404, body: { ok: false, error: 'Wallet not found' } };
 
-    const current = Number((wallet as Record<string, unknown>)[currency] || 0);
+    const current = Number((wallet as Record<string, any>)[currency] || 0);
     const next = action === 'earn' ? current + amount : current - amount;
     if (next < 0) return { status: 400, body: { ok: false, error: 'Insufficient funds' } };
 
-    const { data: updatedWallet, error: updateError } = await supabase
-      .from('wallets')
-      .update({ [currency]: next })
-      .eq('user_id', user.id)
-      .select('*')
-      .single();
+    await db.wallets.update(wallet.id, { [currency]: next });
+    const updatedWallet = await db.wallets.get(wallet.id);
 
-    if (updateError) throw updateError;
-
-    return { status: 200, body: { ok: true, balances: updatedWallet } };
+    return { status: 200, body: { ok: true, balances: updatedWallet as any } };
   } catch (error) {
     return { status: 500, body: { ok: false, error: String((error as Error).message || error) } };
   }

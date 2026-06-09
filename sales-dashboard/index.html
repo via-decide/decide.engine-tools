@@ -553,6 +553,7 @@ canvas { width: 100% !important; display: block; cursor: pointer; }
 
 <div id="toast" class="toast"></div>
 
+<script src="../packages/exports/csv.js"></script>
 <script>
 'use strict';
 
@@ -1046,27 +1047,16 @@ function switchTab(btn) {
 function downloadTemplate() {
   const header = ['Date','Region','Category','Product','Salesperson','Units','Unit Price'];
   const sample = [['2025-01-05','Maharashtra','Electronics','Laptop','Ravi',2,55000],['2025-01-06','Delhi','Accessories','Mouse','Neha',10,499]];
-  const csv = [header, ...sample].map(r => r.map(csvEsc).join(',')).join('\n');
-  downloadBlob(csv, 'msme_sales_template.csv', 'text/csv;charset=utf-8');
+  const csv = [header, ...sample].map(r => r.map(CSVExporter.escape).join(',')).join('\n');
+  CSVExporter.download('msme_sales_template.csv', csv, 'text/csv;charset=utf-8');
   toast('Template downloaded');
 }
 function downloadCurrentCSV() {
   const header = ['Date','Region','Category','Product','Salesperson','Units','Unit Price'];
   const body = rows.map(r => [r.date, r.region, r.category, r.product, r.salesperson, r.units, r.unitPrice]);
-  const csv = [header, ...body].map(r => r.map(csvEsc).join(',')).join('\n');
-  downloadBlob(csv, 'msme_sales_export.csv', 'text/csv;charset=utf-8');
+  const csv = [header, ...body].map(r => r.map(CSVExporter.escape).join(',')).join('\n');
+  CSVExporter.download('msme_sales_export.csv', csv, 'text/csv;charset=utf-8');
   toast('CSV downloaded');
-}
-function downloadBlob(content, filename, mime) {
-  const blob = new Blob([content], { type: mime });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob); a.download = filename;
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(a.href);
-}
-function csvEsc(v) {
-  const s = String(v ?? '');
-  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
 /* ── Reset ── */

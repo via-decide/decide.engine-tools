@@ -268,6 +268,56 @@
             from { transform: translateX(400px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
+
+        /* Cockpit 2.0 Styles */
+        .terminal-box {
+            background: #030508;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #5ff78e;
+            padding: 16px;
+            height: 250px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-top: 4px;
+        }
+        .agent-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .agent-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--saffron), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
     </style>
 </head>
 <body>
@@ -276,6 +326,84 @@
         <div class="header">
             <h1>🚀 VIA COCKPIT</h1>
             <p>Boss Level Control Center — Unified Dashboard for AntiGravity + Claude Code</p>
+        </div>
+
+        <!-- ANTIGRAVITY MISSION CONTROL 2.0 -->
+        <div class="card" style="margin-bottom: 30px; border-color: rgba(0, 209, 255, 0.3);">
+            <div class="agent-header-row">
+                <div>
+                    <h2 class="agent-title">🤖 AntiGravity Code — Mission Control</h2>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Self-improving engineering cycle status and repository analytics</p>
+                </div>
+                <div style="text-align: right;">
+                    <span id="agent-loop-status" class="status-badge status-stable">OFFLINE</span>
+                    <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">
+                        <strong>Task:</strong> <span id="agent-loop-task">None</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid" style="margin-bottom: 20px;">
+                <!-- Column 1: Agent Health -->
+                <div class="card" style="background: rgba(3,5,8,0.4); padding: 18px;">
+                    <h3 style="font-size: 1.1rem; color: var(--saffron); margin-bottom: 12px;">🛡️ Agent Health Summary</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div style="font-size: 0.75rem; color: var(--text-dim);">Success Rate</div>
+                            <div class="stat-value" id="agent-success-rate">N/A</div>
+                        </div>
+                        <div class="stat-item">
+                            <div style="font-size: 0.75rem; color: var(--text-dim);">Token Usage</div>
+                            <div class="stat-value" id="agent-tokens">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div style="font-size: 0.75rem; color: var(--text-dim);">Execution Time</div>
+                            <div class="stat-value" id="agent-time" style="color: var(--green);">0s</div>
+                        </div>
+                        <div class="stat-item">
+                            <div style="font-size: 0.75rem; color: var(--text-dim);">Credits Saved</div>
+                            <div class="stat-value" id="agent-credits" style="color: var(--purple);">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Repo Health Stats -->
+                <div class="card" style="background: rgba(3,5,8,0.4); padding: 18px;">
+                    <h3 style="font-size: 1.1rem; color: var(--green); margin-bottom: 12px;">📈 Target Repository Health</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div style="font-size: 0.75rem; color: var(--text-dim);">Complexity</div>
+                            <div class="stat-value" id="repo-complexity" style="color: var(--blue);">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div style="font-size: 0.75rem; color: var(--text-dim);">Tech Debt Score</div>
+                            <div class="stat-value" id="repo-debt" style="color: var(--danger);">0</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 12px; color: var(--text-dim);">
+                        <span>TODOs: <strong id="repo-todos" style="color: var(--text);">0</strong></span>
+                        <span>Catches: <strong id="repo-empty-catches" style="color: var(--text);">0</strong></span>
+                        <span>Evals: <strong id="repo-evals" style="color: var(--text);">0</strong></span>
+                        <span>Duplicates: <strong id="repo-duplicates" style="color: var(--text);">0</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 20px;">
+                <!-- Queue Panel -->
+                <div class="card" style="background: rgba(3,5,8,0.2); padding: 16px;">
+                    <h3 style="font-size: 1.1rem; color: var(--blue); margin-bottom: 12px;">📋 Improvement Queue</h3>
+                    <ul class="checklist" id="improvement-queue" style="max-height: 250px; overflow-y: auto; font-size: 0.85rem;">
+                        <li>Awaiting scan details to populate proposed queue...</li>
+                    </ul>
+                </div>
+
+                <!-- Terminal Panel -->
+                <div class="card" style="background: rgba(3,5,8,0.2); padding: 16px;">
+                    <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 12px;">💻 Live Execution Stream</h3>
+                    <div class="terminal-box" id="agent-log-terminal">Awaiting active agent run logs...</div>
+                </div>
+            </div>
         </div>
 
         <!-- REPO STATUS SECTION -->
@@ -649,6 +777,72 @@ python3 -m http.server 8000
                 setTimeout(() => toast.remove(), 2000);
             });
         }
+
+        // AntiGravity State Hydrator
+        async function fetchAgentState() {
+            try {
+                const response = await fetch('./cockpit-state.json');
+                if (!response.ok) throw new Error('Offline');
+                const state = await response.json();
+                
+                // Status mapping
+                const statusBadge = document.getElementById('agent-loop-status');
+                statusBadge.textContent = state.status.toUpperCase();
+                statusBadge.className = 'status-badge ' + (state.status === 'Idle' ? 'status-ready' : 'status-active');
+                
+                document.getElementById('agent-loop-task').textContent = state.liveTask || 'None';
+                
+                // Agent Health stats
+                document.getElementById('agent-success-rate').textContent = state.agentHealth.successRate;
+                document.getElementById('agent-tokens').textContent = Number(state.agentHealth.tokenUsage).toLocaleString();
+                document.getElementById('agent-time').textContent = (state.agentHealth.executionTimeMs / 1000).toFixed(2) + 's';
+                document.getElementById('agent-credits').textContent = '$' + Number(state.agentHealth.creditsSaved).toFixed(2);
+                
+                // Repo Health stats
+                document.getElementById('repo-complexity').textContent = state.repoHealth.complexityScore;
+                document.getElementById('repo-debt').textContent = state.repoHealth.techDebtScore;
+                document.getElementById('repo-todos').textContent = state.repoHealth.todoCount;
+                document.getElementById('repo-empty-catches').textContent = state.repoHealth.emptyCatchCount;
+                document.getElementById('repo-evals').textContent = state.repoHealth.evalCount;
+                document.getElementById('repo-duplicates').textContent = state.repoHealth.duplicateCount;
+
+                // Queue
+                const queueList = document.getElementById('improvement-queue');
+                queueList.innerHTML = '';
+                if (state.queue && state.queue.length > 0) {
+                    state.queue.forEach(item => {
+                        const li = document.createElement('li');
+                        const badgeClass = item.status === 'Proposed' ? 'status-pending' : 'status-stable';
+                        li.innerHTML = `
+                            <span style="flex: 1; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${item.issue}</span>
+                            <span class="status-badge ${badgeClass}" style="margin: 0 8px; flex-shrink: 0; padding: 2px 8px; font-size: 0.7rem;">${item.impact}</span>
+                            <span style="font-size: 0.8rem; color: var(--text-dim); flex-shrink: 0; width: 60px; text-align: right;">${item.complexity}</span>
+                        `;
+                        queueList.appendChild(li);
+                    });
+                } else {
+                    queueList.innerHTML = '<li style="color: var(--text-dim);">No improvements queued.</li>';
+                }
+
+                // Log terminal
+                const terminal = document.getElementById('agent-log-terminal');
+                if (state.log && state.log.length > 0) {
+                    terminal.textContent = state.log.join('\n');
+                    terminal.scrollTop = terminal.scrollHeight;
+                } else {
+                    terminal.textContent = 'Awaiting active agent run logs...';
+                }
+            } catch (err) {
+                const statusBadge = document.getElementById('agent-loop-status');
+                statusBadge.textContent = 'OFFLINE';
+                statusBadge.className = 'status-badge status-pending';
+                document.getElementById('agent-loop-task').textContent = 'Awaiting agent run...';
+            }
+        }
+
+        // Poll every 2 seconds
+        setInterval(fetchAgentState, 2000);
+        fetchAgentState();
     </script>
 </body>
 </html>

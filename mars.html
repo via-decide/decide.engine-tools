@@ -65,7 +65,8 @@ body.perf-low .night-layer, body.perf-low .storm-layer { transition:none !import
 .pill.amber  { background: var(--amber-dim);  color: var(--amber);  border: 1px solid rgba(255,184,48,0.25); }
 .pill.red    { background: var(--red-dim);    color: var(--red);    border: 1px solid rgba(255,59,59,0.25); }
 .pill.mars   { background: rgba(214,64,0,0.15); color: var(--mars-glow); border: 1px solid var(--border2); }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; gap: 8px; padding: 10px 22px; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; }
+button, a, [role="button"], .nav-btn, .choice-btn, .tab-btn, .role-card, .skill-node, .mission-card { min-height: 44px; min-width: 44px; }
 .btn-primary   { background: var(--mars); color: #fff; }
 .btn-primary:hover { background: var(--mars-glow); }
 .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
@@ -250,7 +251,7 @@ body.perf-low .night-layer, body.perf-low .storm-layer { transition:none !import
 @keyframes sweep { from{transform:translateX(-100%)} to{transform:translateX(100%)} }
 
 .ctrl-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; gap: 6px; touch-action: none; }
-.dir-grid { display: grid; grid-template-columns: repeat(3,40px); grid-template-rows: repeat(3,40px); gap: 3px; }
+.dir-grid { display: grid; grid-template-columns: repeat(3,44px); grid-template-rows: repeat(3,44px); gap: 3px; }
 .dir-btn { display: flex; align-items: center; justify-content: center; background: var(--panel2); border: 1px solid var(--border); color: var(--text-dim); font-size: 14px; cursor: pointer; transition: all 0.12s; touch-action: manipulation; }
 .dir-btn:active, .dir-btn.pressed { background: rgba(214,64,0,0.15); border-color: var(--mars); color: var(--mars-glow); box-shadow: 0 0 10px rgba(214,64,0,0.3); }
 .dir-btn.scan-btn { font-family: var(--mono); font-size: 8px; color: var(--text-dim); letter-spacing: 0.5px; }
@@ -478,6 +479,14 @@ body.perf-low .night-layer, body.perf-low .storm-layer { transition:none !import
 ::-webkit-scrollbar { width:4px;height:4px; }
 ::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1);border-radius:2px; }
+
+@media (max-width: 768px) {
+  .sim-bottom { grid-template-columns: 1fr; height: auto; }
+  .cam-panel { border-right: none; border-bottom: 1px solid var(--border); min-height: 120px; }
+  .sim-topbar { grid-template-columns: 1fr auto; flex-wrap: wrap; }
+  .topbar-right { grid-column: 1 / -1; justify-content: space-between; margin-top: 8px; }
+  .ctrl-panel { padding: 16px 8px; }
+}
 
 @media(max-width:400px) {
   .stats-row { grid-template-columns:1fr 1fr; }
@@ -996,25 +1005,25 @@ function isDemoAuthed(){
   try { return localStorage.getItem(DEMO_AUTH_KEY) === "1"; } catch(e){ return false; }
 }
 function setDemoAuthed(){
-  try { localStorage.setItem(DEMO_AUTH_KEY, "1"); } catch(e){}
+  try { localStorage.setItem(DEMO_AUTH_KEY, "1"); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 }
 
 function isLowPerfMode(){
   try { return localStorage.getItem(PERF_MODE_KEY) === '1'; } catch(_){ return false; }
 }
 function setLowPerfMode(on){
-  try { localStorage.setItem(PERF_MODE_KEY, on ? '1' : '0'); } catch(_){ }
+  try { localStorage.setItem(PERF_MODE_KEY, on ? '1' : '0'); } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
   document.body.classList.toggle('perf-low', !!on);
 }
 
 function trackMissionStartCTA(source, meta = {}){
   const detail = { source, ts: nowISO(), ...meta };
-  try { window.dispatchEvent(new CustomEvent('mars:mission-start-cta', { detail })); } catch(_){}
+  try { window.dispatchEvent(new CustomEvent('mars:mission-start-cta', { detail })); } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
   try {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'mars_mission_start_cta', ...detail });
-  } catch(_){}
-  try { logEvent('MISSION_START_CTA', detail); } catch(_){ }
+  } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
+  try { logEvent('MISSION_START_CTA', detail); } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
 }
 
 function showQaSimStarted(role){
@@ -1165,7 +1174,7 @@ function hideInAppBanner(){
 }
 
 function haptic(ms = 16){
-  try { if (navigator.vibrate) navigator.vibrate(ms); } catch(_){}
+  try { if (navigator.vibrate) navigator.vibrate(ms); } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
 }
 
 let _audioCtx = null;
@@ -1186,7 +1195,7 @@ function playCue(type='ok'){
     g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
     o.connect(g); g.connect(_audioCtx.destination);
     o.start(t); o.stop(t+0.15);
-  } catch(_){}
+  } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
 }
 
 function pulseFeedback(targetId){
@@ -1216,7 +1225,7 @@ function hideCoachTip(markSeen = false){
   const box = document.getElementById('coachTip');
   if(box) box.classList.remove('show');
   if(markSeen){
-    try { localStorage.setItem(COACH_KEY, '1'); } catch(_){}
+    try { localStorage.setItem(COACH_KEY, '1'); } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
   }
 }
 function bindCoach(){

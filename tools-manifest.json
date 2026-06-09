@@ -1,11 +1,725 @@
 {
+  "generatedAt": "2026-06-09T00:06:25.259Z",
+  "entries": [
+    {
+      "toolDir": "tools/ai-tool-generator",
+      "metaPath": "tools/ai-tool-generator/config.json",
+      "id": "ai-tool-generator",
+      "name": "AI Tool Generator",
+      "tags": [
+        "ai",
+        "generation",
+        "registry",
+        "plugin"
+      ]
+    },
+    {
+      "toolDir": "tools/business/kutch-map",
+      "metaPath": "tools/business/kutch-map/config.json",
+      "id": "kutch-map",
+      "name": "Kutch Digital Map",
+      "title": "Local Discovery Engine",
+      "path": "tools/business/kutch-map/index.html",
+      "tags": [
+        "business",
+        "directory",
+        "local",
+        "kutch",
+        "india"
+      ],
+      "tier": "business",
+      "icon": "🗺️",
+      "sparks": true
+    },
+    {
+      "toolDir": "tools/code-generator",
+      "metaPath": "tools/code-generator/config.json",
+      "id": "code-generator",
+      "name": "Code Generator",
+      "tags": [
+        "prompting",
+        "generation",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "tools/code-reviewer",
+      "metaPath": "tools/code-reviewer/config.json",
+      "id": "code-reviewer",
+      "name": "Code Reviewer",
+      "tags": [
+        "review",
+        "quality",
+        "repair"
+      ]
+    },
+    {
+      "toolDir": "tools/color-palette",
+      "metaPath": "tools/color-palette/config.json",
+      "name": "Color Palette Generator",
+      "icon": "🎨"
+    },
+    {
+      "toolDir": "tools/context-packager",
+      "metaPath": "tools/context-packager/config.json",
+      "id": "context-packager",
+      "name": "Context Packager",
+      "tags": [
+        "context",
+        "handoff",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "tools/creators/caption-generator",
+      "metaPath": "tools/creators/caption-generator/config.json",
+      "id": "caption-generator",
+      "name": "Caption Generator",
+      "tags": [
+        "ai",
+        "captions",
+        "image",
+        "social-media",
+        "hashtags"
+      ]
+    },
+    {
+      "toolDir": "tools/creators/hook-writer",
+      "metaPath": "tools/creators/hook-writer/config.json",
+      "id": "hook-writer",
+      "name": "Hook Writer",
+      "tags": [
+        "ai",
+        "hooks",
+        "viral",
+        "copywriting",
+        "social-media"
+      ]
+    },
+    {
+      "toolDir": "tools/creators/prompt-alchemy",
+      "metaPath": "tools/creators/prompt-alchemy/config.json",
+      "id": "prompt-alchemy",
+      "name": "Prompt Alchemy",
+      "tags": [
+        "ai",
+        "prompts",
+        "social-media",
+        "content",
+        "optimization"
+      ]
+    },
+    {
+      "toolDir": "tools/creators/script-writer",
+      "metaPath": "tools/creators/script-writer/config.json",
+      "id": "script-writer",
+      "name": "Script Writer",
+      "tags": [
+        "ai",
+        "youtube",
+        "script",
+        "video",
+        "content"
+      ]
+    },
+    {
   "generatedAt": "2026-04-13T17:40:00.000Z",
   "entries": [
     {
       "toolDir": "tools/decision-matrix",
-      "metaPath": "tools/decision-matrix/config.json"
+      "metaPath": "tools/decision-matrix/config.json",
+      "id": "decision-matrix",
+      "name": "Decision Matrix",
+      "tags": [
+        "decision",
+        "analysis",
+        "strategy",
+        "weighted",
+        "matrix"
+      ],
+      "icon": "⚖️"
     },
     {
+      "toolDir": "tools/eco-engine-test",
+      "metaPath": "tools/eco-engine-test/config.json",
+      "id": "eco-engine-test",
+      "name": "Eco-Hack Engine Test",
+      "tags": [
+        "auth",
+        "supabase",
+        "orchard-engine",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/ai-coach-console",
+      "metaPath": "tools/engine/ai-coach-console/config.json",
+      "id": "ai-coach-console",
+      "name": "AI Coach Console",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/ai-game-strategy-advisor",
+      "metaPath": "tools/engine/ai-game-strategy-advisor/config.json",
+      "id": "ai-game-strategy-advisor",
+      "name": "AI Game Strategy Advisor",
+      "tags": [
+        "orchard-engine",
+        "ai",
+        "strategy",
+        "game-logic",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/balance-dashboard",
+      "metaPath": "tools/engine/balance-dashboard/config.json",
+      "id": "balance-dashboard",
+      "name": "Balance Dashboard",
+      "tags": [
+        "orchard-engine",
+        "wave1",
+        "simulation",
+        "balance",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/circle-builder",
+      "metaPath": "tools/engine/circle-builder/config.json",
+      "id": "circle-builder",
+      "name": "Circle Builder",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/daily-quest-generator",
+      "metaPath": "tools/engine/daily-quest-generator/config.json",
+      "id": "daily-quest-generator",
+      "name": "Daily Quest Generator",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/fair-ranking-engine",
+      "metaPath": "tools/engine/fair-ranking-engine/config.json",
+      "id": "fair-ranking-engine",
+      "name": "Fair Ranking Engine",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/four-direction-pipeline",
+      "metaPath": "tools/engine/four-direction-pipeline/config.json",
+      "id": "four-direction-pipeline",
+      "name": "Four Direction Pipeline",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/fruit-sharing",
+      "metaPath": "tools/engine/fruit-sharing/config.json",
+      "id": "fruit-sharing",
+      "name": "Fruit Sharing",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/fruit-yield-engine",
+      "metaPath": "tools/engine/fruit-yield-engine/config.json",
+      "id": "fruit-yield-engine",
+      "name": "Fruit Yield Engine",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/game-command-center",
+      "metaPath": "tools/engine/game-command-center/config.json",
+      "id": "game-command-center",
+      "name": "Game Command Center",
+      "tags": [
+        "orchard-engine",
+        "dashboard",
+        "game-hub",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/gesture-feedback-ui",
+      "metaPath": "tools/engine/gesture-feedback-ui/config.json",
+      "id": "gesture-feedback-ui",
+      "name": "Gesture Feedback UI",
+      "tags": [
+        "orchard-engine",
+        "ui",
+        "gesture",
+        "feedback",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/grid-evolution",
+      "metaPath": "tools/engine/grid-evolution/config.json",
+      "id": "grid-evolution",
+      "name": "Grid Evolution",
+      "tags": [
+        "simulation",
+        "cellular-automata",
+        "engine",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/growth-milestone-engine",
+      "metaPath": "tools/engine/growth-milestone-engine/config.json",
+      "id": "growth-milestone-engine",
+      "name": "Growth Milestone Engine",
+      "tags": [
+        "orchard-engine",
+        "growth",
+        "milestones",
+        "threejs",
+        "event-bus",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/growth-path-recommender",
+      "metaPath": "tools/engine/growth-path-recommender/config.json",
+      "id": "growth-path-recommender",
+      "name": "Growth Path Recommender",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/hire-readiness-scorer",
+      "metaPath": "tools/engine/hire-readiness-scorer/config.json",
+      "id": "hire-readiness-scorer",
+      "name": "Hire Readiness Scorer",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/layer1-swipe-crucible",
+      "metaPath": "tools/engine/layer1-swipe-crucible/config.json",
+      "id": "layer1-swipe-crucible",
+      "name": "Layer 1 — Swipe Crucible",
+      "tags": [
+        "orchard-engine",
+        "game",
+        "layer1",
+        "swipe",
+        "daily",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/leaderboard-analytics",
+      "metaPath": "tools/engine/leaderboard-analytics/config.json",
+      "id": "leaderboard-analytics",
+      "name": "Leaderboard & Analytics",
+      "tags": [
+        "orchard-engine",
+        "leaderboard",
+        "analytics",
+        "visualization",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/market-dynamics",
+      "metaPath": "tools/engine/market-dynamics/config.json",
+      "id": "market-dynamics",
+      "name": "Market Dynamics",
+      "tags": [
+        "simulation",
+        "market",
+        "business",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/meeting-cost-calculator",
+      "metaPath": "tools/engine/meeting-cost-calculator/config.json",
+      "id": "meeting-cost-calculator",
+      "name": "Meeting Cost Calculator",
+      "tags": [
+        "business",
+        "calculator",
+        "productivity",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/meta-health-dashboard",
+      "metaPath": "tools/engine/meta-health-dashboard/config.json",
+      "id": "meta-health-dashboard",
+      "name": "Meta Health Dashboard",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/network-latency-simulator",
+      "metaPath": "tools/engine/network-latency-simulator/config.json",
+      "id": "network-latency-simulator",
+      "name": "Network Latency Simulator",
+      "tags": [
+        "orchard-engine",
+        "network",
+        "simulation",
+        "operations",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/orchade-3d",
+      "metaPath": "tools/engine/orchade-3d/config.json",
+      "id": "orchade-3d",
+      "name": "Orchade 3D Visualizer",
+      "tags": [
+        "orchard-engine",
+        "game",
+        "3d",
+        "visualizer",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/orchard-discovery-search",
+      "metaPath": "tools/engine/orchard-discovery-search/config.json",
+      "id": "orchard-discovery-search",
+      "name": "Orchard Discovery Search",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/orchard-profile-builder",
+      "metaPath": "tools/engine/orchard-profile-builder/config.json",
+      "id": "orchard-profile-builder",
+      "name": "Orchard Profile Builder",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/peer-validation-engine",
+      "metaPath": "tools/engine/peer-validation-engine/config.json",
+      "id": "peer-validation-engine",
+      "name": "Peer Validation Engine",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/player-signup",
+      "metaPath": "tools/engine/player-signup/config.json",
+      "id": "player-signup",
+      "name": "Player Signup",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/recruiter-dashboard",
+      "metaPath": "tools/engine/recruiter-dashboard/config.json",
+      "id": "recruiter-dashboard",
+      "name": "Recruiter Dashboard",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/root-strength-calculator",
+      "metaPath": "tools/engine/root-strength-calculator/config.json",
+      "id": "root-strength-calculator",
+      "name": "Root Strength Calculator",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/script-generator-files",
+      "metaPath": "tools/engine/script-generator-files/config.json",
+      "id": "script-generator-files",
+      "name": "Script Generator Files",
+      "tags": [
+        "standalone",
+        "script",
+        "copy-friendly"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/seed-exchange",
+      "metaPath": "tools/engine/seed-exchange/config.json",
+      "id": "seed-exchange",
+      "name": "Seed Exchange",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/seed-quality-scorer",
+      "metaPath": "tools/engine/seed-quality-scorer/config.json",
+      "id": "seed-quality-scorer",
+      "name": "Seed Quality Scorer",
+      "tags": []
+    },
+    {
+      "toolDir": "tools/engine/simulation-runner",
+      "metaPath": "tools/engine/simulation-runner/config.json",
+      "id": "simulation-runner",
+      "name": "Simulation Runner",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/starter-farm-generator",
+      "metaPath": "tools/engine/starter-farm-generator/config.json",
+      "id": "starter-farm-generator",
+      "name": "Starter Farm Generator",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/synthetic-player-generator",
+      "metaPath": "tools/engine/synthetic-player-generator/config.json",
+      "id": "synthetic-player-generator",
+      "name": "Synthetic Player Generator",
+      "tags": [
+        "orchard-engine",
+        "wave1",
+        "simulation",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/thirty-day-promotion-engine",
+      "metaPath": "tools/engine/thirty-day-promotion-engine/config.json",
+      "id": "thirty-day-promotion-engine",
+      "name": "30-Day Promotion Engine",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/traffic-router",
+      "metaPath": "tools/engine/traffic-router/config.json",
+      "id": "traffic-router",
+      "name": "Traffic Router",
+      "tags": [
+        "simulation",
+        "routing",
+        "puzzle",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/trunk-growth-calculator",
+      "metaPath": "tools/engine/trunk-growth-calculator/config.json",
+      "id": "trunk-growth-calculator",
+      "name": "Trunk Growth Calculator",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/trust-score-engine",
+      "metaPath": "tools/engine/trust-score-engine/config.json",
+      "id": "trust-score-engine",
+      "name": "Trust Score Engine",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/typography-scale-calculator",
+      "metaPath": "tools/engine/typography-scale-calculator/config.json",
+      "id": "typography-scale-calculator",
+      "name": "Typography Scale Calculator",
+      "tags": [
+        "typography",
+        "css",
+        "design",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/wave1-simulation-runner",
+      "metaPath": "tools/engine/wave1-simulation-runner/config.json",
+      "id": "wave1-simulation-runner",
+      "name": "Wave 1 Simulation Runner",
+      "tags": [
+        "orchard-engine",
+        "wave1",
+        "simulation",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/engine/weekly-harvest-engine",
+      "metaPath": "tools/engine/weekly-harvest-engine/config.json",
+      "id": "weekly-harvest-engine",
+      "name": "Weekly Harvest Engine",
+      "tags": [
+        "orchard-engine",
+        "merit-based",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/export-studio",
+      "metaPath": "tools/export-studio/config.json",
+      "id": "export-studio",
+      "name": "Export Studio",
+      "tags": [
+        "mesh-ready",
+        "export"
+      ]
+    },
+    {
+      "toolDir": "tools/games/freecell-classic",
+      "metaPath": "tools/games/freecell-classic/config.json",
+      "id": "freecell-classic",
+      "name": "FreeCell Classic",
+      "tags": [
+        "game",
+        "cards",
+        "freecell",
+        "solitaire",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/games/hex-wars",
+      "metaPath": "tools/games/hex-wars/config.json",
+      "id": "hex-wars",
+      "name": "HexWars",
+      "tags": [
+        "game",
+        "quiz",
+        "strategy",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/games/skillhex-mission-control",
+      "metaPath": "tools/games/skillhex-mission-control/config.json",
+      "id": "skillhex-mission-control",
+      "name": "SkillHex Mission Control",
+      "tags": [
+        "game",
+        "skills",
+        "missions",
+        "progression",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/games/snake-game",
+      "metaPath": "tools/games/snake-game/config.json",
+      "id": "snake-game",
+      "name": "Decision Snake"
+    },
+    {
+      "toolDir": "tools/games/vialogic",
+      "metaPath": "tools/games/vialogic/config.json",
+      "id": "vialogic",
+      "name": "ViaLogic",
+      "title": "Cartography of Minds",
+      "path": "tools/games/vialogic/index.html",
+      "tags": [
+        "math",
+        "history",
+        "exploration",
+        "game",
+        "india"
+      ],
+      "tier": "game",
+      "icon": "🗺️",
+      "sparks": true
+    },
+    {
+      "toolDir": "tools/games/wings-of-fire-quiz",
+      "metaPath": "tools/games/wings-of-fire-quiz/config.json",
+      "id": "wings-of-fire-quiz",
+      "name": "Wings of Fire Quiz",
+      "tags": [
+        "game",
+        "quiz",
+        "kalam",
+        "education",
+        "standalone"
+      ]
+    },
+    {
+      "toolDir": "tools/idea-remixer",
+      "metaPath": "tools/idea-remixer/config.json",
+      "id": "idea-remixer",
+      "name": "Idea Remixer",
+      "title": "Idea Remixer",
+      "tags": [
+        "ideation",
+        "variants",
+        "simba-workflows"
+      ]
       "toolDir": "tools/scenario-planner",
       "metaPath": "tools/scenario-planner/config.json"
     },
@@ -19,17 +733,176 @@
     },
     {
       "toolDir": "tools/json-formatter",
-      "metaPath": "tools/json-formatter/config.json"
+      "metaPath": "tools/json-formatter/config.json",
+      "name": "JSON Formatter",
+      "icon": "{ }"
+    },
+    {
+      "toolDir": "tools/misc/verification-sandbox",
+      "metaPath": "tools/misc/verification-sandbox/config.json",
+      "id": "verification-sandbox",
+      "name": "Verification Sandbox",
+      "title": "Verification Sandbox",
+      "path": "tools/misc/verification-sandbox/index.html",
+      "tags": [
+        "platform",
+        "scaffolded"
+      ],
+      "icon": "🛠️",
+      "pullable": true,
+      "sparks": true
+    },
+    {
+      "toolDir": "tools/output-evaluator",
+      "metaPath": "tools/output-evaluator/config.json",
+      "id": "output-evaluator",
+      "name": "Output Evaluator",
+      "tags": [
+        "evaluation",
+        "scoring",
+        "delivery"
+      ]
     },
     {
       "toolDir": "tools/pomodoro",
-      "metaPath": "tools/pomodoro/config.json"
+      "metaPath": "tools/pomodoro/config.json",
+      "name": "Pomodoro Timer",
+      "icon": "🍅"
+    },
+    {
+      "toolDir": "tools/prompt-compare",
+      "metaPath": "tools/prompt-compare/config.json",
+      "id": "prompt-compare",
+      "name": "Prompt Compare",
+      "title": "Prompt Compare",
+      "tags": [
+        "prompting",
+        "analysis",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "tools/promptalchemy",
+      "metaPath": "tools/promptalchemy/config.json",
+      "id": "promptalchemy",
+      "name": "PromptAlchemy",
+      "tags": [
+        "mesh-ready",
+        "prompting"
+      ]
     },
     {
       "toolDir": "tools/regex-tester",
-      "metaPath": "tools/regex-tester/config.json"
+      "metaPath": "tools/regex-tester/config.json",
+      "name": "RegEx Tester",
+      "icon": "🔍"
     },
     {
+      "toolDir": "tools/repo-improvement-brief",
+      "metaPath": "tools/repo-improvement-brief/config.json",
+      "id": "repo-improvement-brief",
+      "name": "Repo Improvement Brief",
+      "title": "Repo Improvement Brief",
+      "tags": [
+        "brief",
+        "planning",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "tools/revenue-forecaster",
+      "metaPath": "tools/revenue-forecaster/config.json",
+      "name": "Revenue Forecaster",
+      "icon": "📈"
+    },
+    {
+      "toolDir": "tools/scenario-planner",
+      "metaPath": "tools/scenario-planner/config.json",
+      "id": "scenario-planner",
+      "name": "Scenario Planner",
+      "tags": [
+        "scenario",
+        "planning",
+        "probability",
+        "strategy",
+        "risk"
+      ],
+      "icon": "🔭"
+    },
+    {
+      "toolDir": "tools/script-generator",
+      "metaPath": "tools/script-generator/config.json",
+      "id": "script-generator",
+      "name": "Script Generator",
+      "tags": [
+        "mesh-ready",
+        "content"
+      ]
+    },
+    {
+      "toolDir": "tools/spec-builder",
+      "metaPath": "tools/spec-builder/config.json",
+      "id": "spec-builder",
+      "name": "Spec Builder",
+      "tags": [
+        "spec",
+        "requirements",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "tools/task-splitter",
+      "metaPath": "tools/task-splitter/config.json",
+      "id": "task-splitter",
+      "name": "Task Splitter",
+      "tags": [
+        "planning",
+        "task-graph",
+        "pipeline"
+      ]
+    },
+    {
+      "toolDir": "tools/template-vault",
+      "metaPath": "tools/template-vault/config.json",
+      "id": "template-vault",
+      "name": "Template Vault",
+      "tags": [
+        "mesh-ready",
+        "templates"
+      ]
+    },
+    {
+      "toolDir": "tools/tool-router",
+      "metaPath": "tools/tool-router/config.json",
+      "id": "tool-router",
+      "name": "Tool Router",
+      "tags": [
+        "mesh-ready",
+        "pipeline-prep"
+      ]
+    },
+    {
+      "toolDir": "tools/tool-search-discovery",
+      "metaPath": "tools/tool-search-discovery/config.json",
+      "id": "tool-search-discovery",
+      "name": "Tool Search Discovery",
+      "title": "Tool Search Discovery",
+      "tags": [
+        "search",
+        "discovery",
+        "simba-workflows"
+      ]
+    },
+    {
+      "toolDir": "tools/workflow-template-gallery",
+      "metaPath": "tools/workflow-template-gallery/config.json",
+      "id": "workflow-template-gallery",
+      "name": "Workflow Template Gallery",
+      "title": "Workflow Template Gallery",
+      "tags": [
+        "workflow",
+        "templates",
+        "simba-workflows"
       "toolDir": "tools/games/hex-wars",
       "metaPath": "tools/games/hex-wars/config.json"
     },

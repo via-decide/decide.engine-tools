@@ -36,7 +36,7 @@
             const parsed = JSON.parse(stored);
             if (Array.isArray(parsed) && parsed.length > 0) players = parsed.slice(0, count);
           }
-        } catch (e) {}
+        } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 
         if (!players || players.length < count) {
           players = SU.generateBatch(count, null, seed);
@@ -54,7 +54,7 @@
         statusEl.textContent = 'Simulation complete — ' + count + ' players × ' + duration + ' days (seed ' + seed + ')';
         statusEl.style.color = 'var(--accent-2)';
 
-        try { localStorage.setItem('wave1.lastSimulation', JSON.stringify(sim)); } catch (e) {}
+        try { localStorage.setItem('wave1.lastSimulation', JSON.stringify(sim)); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
       } catch (err) {
         statusEl.textContent = 'Error: ' + err.message;
         statusEl.style.color = '#f87171';

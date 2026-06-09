@@ -346,7 +346,7 @@
                 return;
               }
             }
-          } catch (_err) {}
+          } catch(_err){ console.warn("VIA Cockpit: Handled silent error", _err); }
 
           const w = VDWallet.get();
           walletValue.textContent = `${w.focusDrops} 💧 · ${w.lumina} ☀️`;
@@ -367,7 +367,7 @@
                   .eq('id', userId);
               }
             }
-          } catch (_err) {}
+          } catch(_err){ console.warn("VIA Cockpit: Handled silent error", _err); }
           this.pendingWrites--;
           await this.fetchWallet();
           logAction(`+${amount} Focus Drops earned`);
@@ -387,7 +387,7 @@
                   .eq('id', userId);
               }
             }
-          } catch (_err) {}
+          } catch(_err){ console.warn("VIA Cockpit: Handled silent error", _err); }
           this.pendingWrites--;
           await this.fetchWallet();
           logAction(`+${amount} Lumina earned`);
@@ -419,7 +419,7 @@
                 return;
               }
             }
-          } catch (_err) {}
+          } catch(_err){ console.warn("VIA Cockpit: Handled silent error", _err); }
           plantLevel.textContent = '🌱 Level 1';
           logAction('Plant (default): Level 1');
         }
@@ -487,7 +487,7 @@
               { id: userId, focusDrops: 0, lumina: 0, plantLevel: 1, plantHydration: 100 },
               { onConflict: 'id', ignoreDuplicates: true }
             );
-          } catch (_err) {}
+          } catch(_err){ console.warn("VIA Cockpit: Handled silent error", _err); }
         }
 
         bindAuthState() {

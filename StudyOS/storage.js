@@ -139,7 +139,7 @@
         console.warn(`[StudyOSStorage] Failed reading ${key} from IndexedDB, using compatibility fallback.`, error);
         try {
           await idbDelete(db, key);
-        } catch (_) {}
+        } catch(_){ console.warn("VIA Cockpit: Handled silent error", _); }
       }
     }
 

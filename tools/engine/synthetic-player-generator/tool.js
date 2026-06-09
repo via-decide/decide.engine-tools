@@ -34,7 +34,7 @@
     output.textContent = JSON.stringify(players, null, 2);
 
     // Store for other tools to pick up
-    try { localStorage.setItem('wave1.syntheticPlayers', JSON.stringify(players)); } catch (e) {}
+    try { localStorage.setItem('wave1.syntheticPlayers', JSON.stringify(players)); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   }
 
   function renderTable(players) {

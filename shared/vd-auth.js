@@ -19,6 +19,14 @@ window._VD_AUTH = (() => {
       return;
     }
 
+    if (firebase.apps.length === 0) {
+      console.warn("VD Auth: Firebase app not initialized. Auth disabled.");
+      isReady = true;
+      updateLoginWall();
+      while (readyCallbacks.length > 0) readyCallbacks.shift()(null);
+      return;
+    }
+
     const auth = firebase.auth();
     
     auth.onAuthStateChanged((user) => {
@@ -61,6 +69,9 @@ window._VD_AUTH = (() => {
   return {
     init,
     login: async () => {
+      if (!window.firebase || firebase.apps.length === 0) {
+        return alert("Auth is disabled (Firebase not configured).");
+      }
       const provider = new firebase.auth.GoogleAuthProvider();
       try {
         await firebase.auth().signInWithPopup(provider);
@@ -69,7 +80,9 @@ window._VD_AUTH = (() => {
         alert("Login failed: " + err.message);
       }
     },
-    logout: () => firebase.auth().signOut(),
+    logout: () => {
+      if (window.firebase && firebase.apps.length > 0) firebase.auth().signOut();
+    },
     getUser: () => currentUser,
     getUID: () => currentUser ? currentUser.uid : 'anonymous',
     onReady: (cb) => {

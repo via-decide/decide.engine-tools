@@ -222,7 +222,7 @@ function generateMicrositeHtml(b) {
           if (fs.existsSync(aboutPath)) {
               aboutText = fs.readFileSync(aboutPath, 'utf8');
           }
-      } catch(e) {}
+      } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   }
 
   let themeCss = '';

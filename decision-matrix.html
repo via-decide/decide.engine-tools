@@ -943,6 +943,7 @@ footer a:hover { text-decoration: underline; }
   .btn { padding: 8px 14px; font-size: 12px; }
 }
 </style>
+<link rel="stylesheet" href="packages/ui/design-tokens.css">
 </head>
 <body>
 
@@ -1118,6 +1119,8 @@ footer a:hover { text-decoration: underline; }
 <!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
+<script src="packages/storage/index.js"></script>
+<script src="packages/exports/csv.js"></script>
 <script>
 /* ─── STATE ─────────────────────────────────────────────────── */
 const STORAGE_KEY = 'vd:decision-matrix:v1';
@@ -1136,9 +1139,9 @@ let state = {
 /* ─── INIT ──────────────────────────────────────────────────── */
 (function init() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = PlatformStorage.getItem(STORAGE_KEY);
     if (saved) state = JSON.parse(saved);
-  } catch(e) {}
+  } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
   renderAll();
   document.getElementById('decisionTitle').value = state.title || '';
   document.getElementById('decisionTitle').addEventListener('input', e => {
@@ -1149,7 +1152,7 @@ let state = {
 
 /* ─── SAVE ──────────────────────────────────────────────────── */
 function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  try { PlatformStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){ console.warn("VIA Cockpit: Handled silent error", e); }
 }
 
 /* ─── NAVIGATION ────────────────────────────────────────────── */
@@ -1464,17 +1467,17 @@ function confirmReset() {
 function exportCSV() {
   const results = computeScores();
   const crits = getValidCriteria();
-  let csv = `"Decision","${esc2(state.title)}"\n`;
-  csv += `"Rank","Option","Weighted Score"${crits.map(c=>`,"${esc2(c.name)} (w=${c.weight})"`).join('')}\n`;
+  let csv = `"Decision","${CSVExporter.escape(state.title)}"\n`;
+  csv += `"Rank","Option","Weighted Score"${crits.map(c=>`,"${CSVExporter.escape(c.name)} (w=${c.weight})"`).join('')}\n`;
   results.forEach((r,i) => {
-    csv += `"${i+1}","${esc2(r.name)}","${r.score.toFixed(2)}"`;
+    csv += `"${i+1}","${CSVExporter.escape(r.name)}","${r.score.toFixed(2)}"`;
     crits.forEach(c => {
       const bd = r.breakdown.find(b=>b.crit===c.name);
-      csv += `,"${bd?bd.raw||'':''}"`;
+      csv += `,"${bd?CSVExporter.escape(bd.raw||''):''}"`;
     });
     csv += '\n';
   });
-  download('decision-matrix.csv', csv, 'text/csv');
+  CSVExporter.download('decision-matrix.csv', csv, 'text/csv');
   toast('CSV exported!', '⬇');
 }
 

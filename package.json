@@ -7,7 +7,10 @@
     "test": "node tests/run-all.js",
     "test:unit": "node tests/unit/run.js",
     "test:smoke": "node tests/smoke/run.js",
-    "version:bump": "node tests/scripts/bump-version.js"
+    "version:bump": "node tests/scripts/bump-version.js",
+    "manifest:sync": "node automation/metadata/manifest-sync.js",
+    "scaffold": "node automation/scaffolding/scaffold-tool.js",
+    "verify:gate": "node automation/workflows/pre-commit-check.js"
   },
   "devDependencies": {
     "jsdom": "^29.0.1",
