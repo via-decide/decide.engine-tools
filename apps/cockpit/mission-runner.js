@@ -152,7 +152,8 @@ class MissionRunner {
 
 // Run if called from CLI
 if (require.main === module) {
-  const runner = new MissionRunner(path.join(__dirname, '..'), 'Cockpit v0.2 Verification Mission');
+  const targetRepo = process.argv[2] ? path.resolve(process.cwd(), process.argv[2]) : path.join(__dirname, '..');
+  const runner = new MissionRunner(targetRepo, 'Cockpit v0.2 Verification Mission');
   runner.execute().catch(e => {
     console.error('Fatal execution error:', e);
     process.exit(1);

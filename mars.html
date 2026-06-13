@@ -986,7 +986,22 @@ button, a, [role="button"], .nav-btn, .choice-btn, .tab-btn, .role-card, .skill-
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script type="module">
+  const path = window.location.pathname.includes('/VIA/apps/') 
+    ? '../../core/via-auth-sdk.js' 
+    : '../core/via-auth-sdk.js';
+  import(path).then(module => {
+    window.viaAuth = module.viaAuth;
+    console.log("[Mars SDK] viaAuth loaded successfully.");
+    if (typeof window.checkEcosystemAuth === 'function') {
+      window.checkEcosystemAuth();
+    }
+  }).catch(err => {
+    console.warn("[Mars SDK] Failed to load viaAuth SDK, running in guest mode:", err);
+  });
+</script>
+<script>
 /* ══════════════════════════════════════════════════════
    DEMO LOGIN GUARD
 ══════════════════════════════════════════════════════ */
@@ -997,11 +1012,60 @@ let _pendingEnterRole = null;
 let _demoUnlockBusy = false;
 let _guestBypass = false;
 
+function checkEcosystemAuth() {
+  if (!window.viaAuth) return;
+  const uid = window.viaAuth.getEcosystemUid();
+  if (uid) {
+    GS.guestMode = false;
+    GS.role = 'commander';
+    try {
+      const savedRaw = localStorage.getItem('via_mars_save_' + uid);
+      if (savedRaw) {
+        const saved = JSON.parse(savedRaw);
+        GS.missionsCompleted = saved.missionsCompleted || [];
+        GS.skillNodes = saved.skillNodes || {};
+        GS.badges = saved.badges || [];
+        GS.xp = saved.xp || 0;
+        GS.tier = saved.tier || 1;
+        console.log("[Mars SDK] Loaded persistent state for " + uid);
+      }
+    } catch (e) {
+      console.error("[Mars SDK] Load state failed", e);
+    }
+    const demoLogin = document.getElementById('demo-login');
+    if (demoLogin) demoLogin.classList.remove('open');
+    updateAllUI();
+    updateValidationPips();
+  }
+}
+window.checkEcosystemAuth = checkEcosystemAuth;
+
+function saveEcosystemState() {
+  if (!window.viaAuth) return;
+  const uid = window.viaAuth.getEcosystemUid();
+  if (!uid) return;
+  try {
+    const state = {
+      missionsCompleted: GS.missionsCompleted,
+      skillNodes: GS.skillNodes,
+      badges: GS.badges,
+      xp: GS.xp,
+      tier: GS.tier
+    };
+    localStorage.setItem('via_mars_save_' + uid, JSON.stringify(state));
+    console.log("[Mars SDK] Saved persistent state for " + uid);
+  } catch (e) {
+    console.error("[Mars SDK] Save state failed", e);
+  }
+}
+window.saveEcosystemState = saveEcosystemState;
+
 function isInAppBrowser(){
   const ua = navigator.userAgent || "";
   return /Instagram|FBAN|FBAV|FB_IAB|Line|Twitter|Snapchat/i.test(ua);
 }
 function isDemoAuthed(){
+  if (window.viaAuth && window.viaAuth.getEcosystemUid()) return true;
   try { return localStorage.getItem(DEMO_AUTH_KEY) === "1"; } catch(e){ return false; }
 }
 function setDemoAuthed(){
@@ -1772,6 +1836,7 @@ function showResult(correct, opts = {}){
   openModal('resultModal');
   checkTier();
   updateAllUI(); updateValidationPips();
+  saveEcosystemState();
 }
 
 function delta(val,label,pos){
@@ -1858,6 +1923,7 @@ function endMission(){
   if(GS.missionsCompleted.length >= 3 && GS.tier < 2) GS.tier = 2;
   if(GS.missionsCompleted.length >= 5 && GS.tier < 3) GS.tier = 3;
   checkSkillUnlocks(); checkBadges(); updateAllUI();
+  saveEcosystemState();
   toast('MISSION COMPLETE — SURVIVAL INDEX: '+GS.lastRunSurvivalIndex+'%');
   showScreen('dar'); buildDAR();
 }
@@ -1900,6 +1966,7 @@ function checkSkillUnlocks(){
   if(GS.missionsCompleted.includes(6)) n('s3');
   if(GS.skillNodes['s1']) n('s4');
   updateSkillTree();
+  saveEcosystemState();
 }
 
 /* ══════════════════════════════════════════════════════
@@ -1915,6 +1982,7 @@ function checkBadges(){
   if(GS.metrics.moves >= 20 && GS.metrics.slips <= 1) add('Precision Driver');
   if(GS.metrics.stormOverride >= 3 && GS.metrics.correct >= 5) add('Rapid Commander');
   if(GS.comboScans >= 3) add('Signal Chain');
+  saveEcosystemState();
 }
 
 /* ══════════════════════════════════════════════════════
@@ -2217,7 +2285,45 @@ function buildDAR(){
   },200);
 
   const box = document.getElementById('aiAnalysisBox');
-  if(box) box.textContent = getFallbackAnalysis(si,acc);
+  if(box) {
+    const defaultCritique = getFallbackAnalysis(si, acc);
+    const uid = window.viaAuth ? window.viaAuth.getEcosystemUid() : null;
+    const token = window.viaAuth ? window.viaAuth.getAccessToken() : null;
+
+    if (uid && token) {
+      box.innerHTML = `<div style="color:var(--text-dim)">Connecting Zayvora Engine to compile run logs...</div>`;
+      
+      // Determine local logic hub endpoint (relative or absolute local)
+      const upgradeUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/api/v1/project/upgrade'
+        : '/api/v1/project/upgrade';
+
+      fetch(upgradeUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          projectId: 'mars_hex_01',
+          prompt: `Analyze survival session. Survival Index: ${si}%, Accuracy: ${acc}%, Risk: ${Math.round(GS.risk)}, Moves: ${GS.metrics.moves}, Slips: ${GS.metrics.slips}, Scans: ${GS.metrics.scans}, Correct: ${GS.metrics.correct}, Wrong: ${GS.metrics.wrong}.`
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          box.innerHTML = `<span style="color:var(--green)">⚡ [Zayvora Continuous Learning Engine Connected]</span><br><br>${defaultCritique}`;
+        } else {
+          box.textContent = defaultCritique;
+        }
+      })
+      .catch(() => {
+        box.textContent = defaultCritique;
+      });
+    } else {
+      box.textContent = defaultCritique;
+    }
+  }
 }
 
 function getFallbackAnalysis(si,acc){
