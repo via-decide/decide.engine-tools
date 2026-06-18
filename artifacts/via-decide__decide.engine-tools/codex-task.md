@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create zoom state model for the world map.
+Create repository safety audit for script order and browser compatibility.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

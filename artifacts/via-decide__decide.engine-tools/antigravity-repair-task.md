@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create zoom state model for the world map.
+Create repository safety audit for script order and browser compatibility.
 
 RULES
 1. Audit touched files first and identify regressions.

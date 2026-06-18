@@ -1,9 +1,9 @@
-Branch: simba/create-zoom-state-model-for-the-world-map
-Title: Create zoom state model for the world map.
+Branch: simba/create-repository-safety-audit-for-script-order-
+Title: Create repository safety audit for script order and browser compatibi...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create zoom state model for the world map.
+- Goal: Create repository safety audit for script order and browser compatibility.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
