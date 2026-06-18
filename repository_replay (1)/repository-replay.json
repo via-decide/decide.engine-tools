@@ -1,0 +1,25 @@
+{
+  "repository_id": "via-decide/decide.engine-tools",
+  "architectural_evolution": [
+    "orchestration_refactor",
+    "replay_manifest_update",
+    "plugin_contract_shift",
+    "continuity_validation",
+    "replay_compatibility_verified"
+  ],
+  "dependency_mutations": [
+    "scripts/replay_world_state.py",
+    "scripts/resolve_repository_context.py"
+  ],
+  "continuity_forks": [
+    "fork_repository_context_mode"
+  ],
+  "orchestration_changes": [
+    "context_assembly_pipeline"
+  ],
+  "replay_admissibility": "ADMISSIBLE",
+  "authority_transitions": [
+    "local_operator -> continuity_operator"
+  ],
+  "deterministic": true
+}

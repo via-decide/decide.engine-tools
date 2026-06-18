@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenario Planner — ViaDecide</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#0f0f0f; --bg-2:#161616; --bg-3:#1e1e1e; --bg-4:#252525;
+      --border:rgba(255,255,255,0.07); --border-h:rgba(255,255,255,0.14);
+      --green:#52B756; --green-dim:rgba(82,183,86,0.1); --green-border:rgba(82,183,86,0.25);
+      --blue:#29B6F6; --blue-dim:rgba(41,182,246,0.1);
+      --amber:#FFB300; --amber-dim:rgba(255,179,0,0.1);
+      --red:#EF5350; --red-dim:rgba(239,83,80,0.1);
+      --purple:#9C27B0; --purple-dim:rgba(156,39,176,0.1);
+      --text:#f0f0f0; --text-2:#999; --text-3:#555;
+      --r:8px; --r-sm:5px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:14px}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;padding:20px;min-height:100vh}
+    input,textarea,select{font-family:inherit;color:var(--text);background:var(--bg-3);border:1px solid var(--border);border-radius:var(--r-sm);outline:none}
+    input:focus,textarea:focus{border-color:var(--green)}
+    button{cursor:pointer;font-family:inherit;border:none}
+    ::-webkit-scrollbar{width:5px;height:5px}
+    ::-webkit-scrollbar-track{background:var(--bg-2)}
+    ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+
+    .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+    .header-left h1{font-size:1.3rem;font-weight:700}
+    .header-left p{font-size:0.8rem;color:var(--text-2);margin-top:3px}
+    .header-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);font-size:0.8rem;font-weight:500;transition:opacity 0.15s,background 0.15s}
+    .btn:hover{opacity:0.85}
+    .btn-primary{background:var(--green);color:#000}
+    .btn-ghost{background:var(--bg-3);border:1px solid var(--border);color:var(--text-2)}
+    .btn-ghost:hover{border-color:var(--border-h);color:var(--text)}
+
+    /* CONTEXT ROW */
+    .context-row{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+    .context-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:200px}
+    .context-field label{font-size:0.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:0.5px}
+    .context-field input,.context-field textarea{padding:8px 10px;font-size:0.85rem;border-radius:var(--r-sm)}
+    .context-field textarea{resize:vertical;min-height:60px}
+
+    /* SCENARIOS GRID */
+    .scenarios-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+    .scenario-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color 0.15s,box-shadow 0.15s}
+    .scenario-card:hover{border-color:var(--border-h);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+    .scenario-header{padding:12px 14px;display:flex;align-items:center;gap:8px;cursor:pointer}
+    .scenario-color-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .scenario-name-input{flex:1;background:none;border:none;font-size:0.92rem;font-weight:600;color:var(--text);padding:0}
+    .scenario-name-input::placeholder{color:var(--text-3)}
+    .prob-badge{font-size:0.75rem;font-weight:700;padding:3px 8px;border-radius:100px;flex-shrink:0}
+    .remove-scenario{background:none;color:var(--text-3);width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:color 0.15s;flex-shrink:0}
+    .remove-scenario:hover{color:var(--red)}
+    .scenario-body{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px}
+    .field-group{display:flex;flex-direction:column;gap:4px}
+    .field-label{font-size:0.72rem;color:var(--text-3);text-transform:uppercase;letter-spacing:0.4px}
+    .scenario-textarea{width:100%;padding:8px 10px;font-size:0.8rem;border-radius:var(--r-sm);resize:vertical;min-height:64px;line-height:1.5}
+    .scenario-textarea::placeholder{color:var(--text-3)}
+    .prob-row{display:flex;align-items:center;gap:8px}
+    .prob-slider{flex:1;accent-color:var(--green);height:4px;cursor:pointer}
+    .prob-input{width:52px;text-align:center;padding:4px 6px;font-size:0.82rem}
+    .prob-label{font-size:0.75rem;color:var(--text-2);flex-shrink:0}
+    .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .metric-item{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--r-sm);padding:7px 8px}
+    .metric-key{font-size:0.7rem;color:var(--text-3)}
+    .metric-val-input{width:100%;background:none;border:none;font-size:0.88rem;font-weight:600;color:var(--text);padding:2px 0}
+    .metric-val-input::placeholder{color:var(--text-3)}
+    .add-metric-btn{background:none;border:1px dashed var(--border-h);border-radius:var(--r-sm);width:100%;padding:5px;font-size:0.75rem;color:var(--text-3);transition:all 0.15s;grid-column:1/-1}
+    .add-metric-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-dim)}
+
+    /* PROBABILITY SUM WARNING */
+    #prob-sum-bar{margin-bottom:14px;padding:10px 14px;border-radius:var(--r);font-size:0.8rem;display:flex;align-items:center;gap:10px;transition:background 0.2s,border-color 0.2s}
+    #prob-sum-bar.ok{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green)}
+    #prob-sum-bar.warn{background:var(--amber-dim);border:1px solid rgba(255,179,0,0.25);color:var(--amber)}
+    #prob-sum-bar.over{background:var(--red-dim);border:1px solid rgba(239,83,80,0.2);color:var(--red)}
+    .prob-bar-visual{flex:1;height:6px;background:var(--bg-4);border-radius:3px;overflow:hidden}
+    .prob-bar-fill{height:100%;border-radius:3px;transition:width 0.3s ease,background 0.2s}
+
+    /* ANALYSIS */
+    .analysis-section{margin-top:20px}
+    .section-title{font-size:0.82rem;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px}
+    .ev-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px}
+    .ev-scenario-name{font-size:0.8rem;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .ev-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .ev-rows{display:flex;flex-direction:column;gap:4px}
+    .ev-row{display:flex;justify-content:space-between;align-items:center;font-size:0.78rem}
+    .ev-row-label{color:var(--text-3)}
+    .ev-row-val{font-weight:600}
+
+    .risk-matrix-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:16px}
+    .risk-cell{aspect-ratio:1;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:600;text-align:center;padding:4px;cursor:default;transition:transform 0.15s}
+    .risk-cell:hover{transform:scale(1.05)}
+    .risk-cell.empty{background:var(--bg-3);border:1px solid var(--border)}
+    .risk-cell.has-scenario{background:rgba(82,183,86,0.2);border:1px solid var(--green-border);color:var(--green)}
+
+    /* RECOMMENDATION */
+    .rec-box{background:var(--bg-2);border:1px solid var(--green-border);border-radius:var(--r);padding:16px 18px;margin-top:14px}
+    .rec-title{font-size:0.75rem;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+    .rec-text{font-size:0.85rem;color:var(--text-2);line-height:1.65}
+    .rec-text strong{color:var(--text)}
+
+    .add-scenario-btn{display:flex;align-items:center;justify-content:center;gap:8px;border:2px dashed var(--border-h);border-radius:var(--r);padding:20px;color:var(--text-3);font-size:0.85rem;cursor:pointer;transition:all 0.15s;background:none;width:100%}
+    .add-scenario-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-dim)}
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>🔭 Scenario Planner</h1>
+    <p>Map outcomes across multiple futures — probability-weighted expected value analysis</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost" onclick="loadExample()">Load Example</button>
+    <button class="btn btn-ghost" onclick="exportJSON()">Export</button>
+    <button class="btn btn-primary" onclick="scrollToAnalysis()">Analysis ↓</button>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<div class="context-row">
+  <div class="context-field">
+    <label>Decision / Situation</label>
+    <input id="ctx-decision" type="text" placeholder="What decision or situation are you planning for?" />
+  </div>
+  <div class="context-field">
+    <label>Time Horizon</label>
+    <input id="ctx-horizon" type="text" placeholder="e.g. 12 months, Q3 2026" style="max-width:180px" />
+  </div>
+  <div class="context-field">
+    <label>Key Uncertainty</label>
+    <input id="ctx-uncertainty" type="text" placeholder="What's the main unknown driver?" />
+  </div>
+</div>
+
+<!-- PROBABILITY SUM BAR -->
+<div id="prob-sum-bar" class="warn">
+  <span>Probability total:</span>
+  <div class="prob-bar-visual"><div class="prob-bar-fill" id="prob-bar-fill" style="width:0%"></div></div>
+  <strong id="prob-sum-text">0%</strong>
+  <span id="prob-sum-hint">Should sum to 100%</span>
+</div>
+
+<!-- SCENARIOS -->
+<div class="scenarios-container" id="scenarios-container"></div>
+<button class="add-scenario-btn" onclick="addScenario()" style="margin-top:12px">+ Add Scenario</button>
+
+<!-- ANALYSIS -->
+<div class="analysis-section" id="analysis-section">
+  <div class="section-title">📊 Expected Value Analysis <span style="font-weight:400;color:var(--text-3);font-size:0.75rem">Updates live as you edit</span></div>
+  <div class="ev-grid" id="ev-grid"></div>
+  <div class="rec-box" id="rec-box" style="display:none">
+    <div class="rec-title">💡 Strategic Recommendation</div>
+    <div class="rec-text" id="rec-text"></div>
+  </div>
+</div>
+
+<script>
+const COLORS = ['#52B756','#29B6F6','#FFB300','#EF5350','#9C27B0','#FF7043','#26C6DA','#66BB6A'];
+let scenarios = [];
+let uid = 0;
+const newId = () => ++uid;
+
+function addScenario(data) {
+  const id = newId();
+  const colorIdx = scenarios.length % COLORS.length;
+  const s = {
+    id,
+    name: data?.name ?? `Scenario ${scenarios.length + 1}`,
+    color: COLORS[colorIdx],
+    probability: data?.probability ?? 25,
+    description: data?.description ?? '',
+    outcomes: data?.outcomes ?? '',
+    actions: data?.actions ?? '',
+    metrics: data?.metrics ?? [{ key: 'Revenue', val: '' }, { key: 'Timeline', val: '' }],
+    impact: data?.impact ?? 5,
+    likelihood: data?.likelihood ?? 5
+  };
+  scenarios.push(s);
+  renderScenarios();
+  updateProbSum();
+  updateAnalysis();
+  return s;
+}
+
+function removeScenario(id) {
+  scenarios = scenarios.filter(s => s.id !== id);
+  renderScenarios();
+  updateProbSum();
+  updateAnalysis();
+}
+
+function getScenario(id) { return scenarios.find(s => s.id === id); }
+
+function renderScenarios() {
+  const container = document.getElementById('scenarios-container');
+  container.innerHTML = scenarios.map(s => scenarioCardHTML(s)).join('');
+  // Bind events
+  scenarios.forEach(s => {
+    const card = container.querySelector(`[data-scenario-id="${s.id}"]`);
+    if (!card) return;
+    card.querySelector('.scenario-name-input').addEventListener('input', e => { s.name = e.target.value; updateAnalysis(); });
+    card.querySelector('.scenario-textarea[data-field="description"]').addEventListener('input', e => { s.description = e.target.value; });
+    card.querySelector('.scenario-textarea[data-field="outcomes"]').addEventListener('input', e => { s.outcomes = e.target.value; updateAnalysis(); });
+    card.querySelector('.scenario-textarea[data-field="actions"]').addEventListener('input', e => { s.actions = e.target.value; });
+    const probSlider = card.querySelector('.prob-slider');
+    const probInput = card.querySelector('.prob-input');
+    probSlider.addEventListener('input', e => { s.probability = +e.target.value; probInput.value = e.target.value; updateProbSum(); updateAnalysis(); updateProbBadge(s.id); });
+    probInput.addEventListener('input', e => { s.probability = Math.min(100, Math.max(0, +e.target.value||0)); probSlider.value = s.probability; updateProbSum(); updateAnalysis(); updateProbBadge(s.id); });
+    card.querySelector('.remove-scenario').addEventListener('click', () => removeScenario(s.id));
+    // Metrics
+    card.querySelectorAll('.metric-val-input').forEach((inp, i) => {
+      inp.addEventListener('input', e => { if (s.metrics[i]) s.metrics[i].val = e.target.value; updateAnalysis(); });
+    });
+    card.querySelector('.add-metric-btn')?.addEventListener('click', () => {
+      s.metrics.push({ key: 'Metric', val: '' });
+      renderScenarios();
+    });
+  });
+}
+
+function scenarioCardHTML(s) {
+  const badgeStyle = `background:${s.color}22;color:${s.color};border:1px solid ${s.color}44`;
+  return `<div class="scenario-card" data-scenario-id="${s.id}">
+    <div class="scenario-header">
+      <div class="scenario-color-dot" style="background:${s.color}"></div>
+      <input class="scenario-name-input" type="text" value="${esc(s.name)}" placeholder="Scenario name…" />
+      <span class="prob-badge" id="prob-badge-${s.id}" style="${badgeStyle}">${s.probability}%</span>
+      <button class="remove-scenario">✕</button>
+    </div>
+    <div class="scenario-body">
+      <div class="field-group">
+        <div class="field-label">Description</div>
+        <textarea class="scenario-textarea" data-field="description" placeholder="What happens in this scenario?">${esc(s.description)}</textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Key Outcomes</div>
+        <textarea class="scenario-textarea" data-field="outcomes" placeholder="What are the main outcomes? (include numbers if possible)">${esc(s.outcomes)}</textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Recommended Actions</div>
+        <textarea class="scenario-textarea" data-field="actions" placeholder="What should you do if this scenario unfolds?">${esc(s.actions)}</textarea>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Probability</div>
+        <div class="prob-row">
+          <input type="range" class="prob-slider" min="0" max="100" step="1" value="${s.probability}" />
+          <input type="number" class="prob-input" min="0" max="100" value="${s.probability}" />
+          <span class="prob-label">%</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Key Metrics</div>
+        <div class="metrics-grid">
+          ${s.metrics.map((m, i) => `
+            <div class="metric-item">
+              <div class="metric-key">${esc(m.key)}</div>
+              <input class="metric-val-input" type="text" value="${esc(m.val)}" placeholder="Value…" />
+            </div>`).join('')}
+          <button class="add-metric-btn">+ Metric</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function updateProbBadge(id) {
+  const s = getScenario(id);
+  if (!s) return;
+  const badge = document.getElementById(`prob-badge-${id}`);
+  if (badge) badge.textContent = s.probability + '%';
+}
+
+function updateProbSum() {
+  const sum = scenarios.reduce((t, s) => t + (s.probability || 0), 0);
+  const bar = document.getElementById('prob-sum-bar');
+  const fill = document.getElementById('prob-bar-fill');
+  const text = document.getElementById('prob-sum-text');
+  const hint = document.getElementById('prob-sum-hint');
+  text.textContent = sum + '%';
+  fill.style.width = Math.min(100, sum) + '%';
+  if (sum === 100) {
+    bar.className = 'ok'; fill.style.background = 'var(--green)';
+    hint.textContent = '✓ Perfect';
+  } else if (sum > 100) {
+    bar.className = 'over'; fill.style.background = 'var(--red)';
+    hint.textContent = `Over by ${sum - 100}%`;
+  } else {
+    bar.className = 'warn'; fill.style.background = 'var(--amber)';
+    hint.textContent = `${100 - sum}% unallocated`;
+  }
+}
+
+function updateAnalysis() {
+  const grid = document.getElementById('ev-grid');
+  const recBox = document.getElementById('rec-box');
+  const recText = document.getElementById('rec-text');
+
+  if (scenarios.length === 0) {
+    grid.innerHTML = `<div style="color:var(--text-3);font-size:0.82rem;grid-column:1/-1;padding:20px;text-align:center">Add scenarios above to see analysis.</div>`;
+    recBox.style.display = 'none';
+    return;
+  }
+
+  // Build EV cards
+  grid.innerHTML = scenarios.map(s => {
+    const prob = (s.probability || 0) / 100;
+    return `<div class="ev-card">
+      <div class="ev-scenario-name"><div class="ev-dot" style="background:${s.color}"></div>${esc(s.name)}</div>
+      <div class="ev-rows">
+        <div class="ev-row"><span class="ev-row-label">Probability</span><span class="ev-row-val" style="color:${s.color}">${s.probability}%</span></div>
+        ${s.metrics.filter(m => m.val).slice(0,3).map(m =>
+          `<div class="ev-row"><span class="ev-row-label">${esc(m.key)}</span><span class="ev-row-val">${esc(m.val)}</span></div>`
+        ).join('')}
+        ${s.actions ? `<div class="ev-row" style="margin-top:4px;flex-direction:column;align-items:flex-start;gap:2px">
+          <span class="ev-row-label">If this: act on…</span>
+          <span style="font-size:0.76rem;color:var(--text-2);line-height:1.4">${esc(s.actions.slice(0,80))}${s.actions.length>80?'…':''}</span>
+        </div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Generate strategic recommendation
+  const sum = scenarios.reduce((t, s) => t + s.probability, 0);
+  const mostLikely = [...scenarios].sort((a, b) => b.probability - a.probability)[0];
+  const allHaveActions = scenarios.every(s => s.actions.trim().length > 0);
+  const probOk = sum >= 95 && sum <= 105;
+
+  let rec = '';
+  if (mostLikely) {
+    rec += `<strong>${esc(mostLikely.name)}</strong> is your most probable scenario at <strong>${mostLikely.probability}%</strong>. `;
+    rec += `Primary planning should default to this path. `;
+  }
+  if (!probOk) {
+    rec += `⚠️ Probabilities sum to ${sum}% — adjust them to 100% for accurate expected values. `;
+  }
+  if (scenarios.length < 3) {
+    rec += `Consider adding a <em>worst-case</em> or <em>tail-risk</em> scenario to stress-test your assumptions. `;
+  }
+  if (!allHaveActions) {
+    rec += `Fill in <em>Recommended Actions</em> for all scenarios to build a complete contingency playbook. `;
+  }
+  const highProbScenarios = scenarios.filter(s => s.probability > 30);
+  if (highProbScenarios.length > 1) {
+    rec += `Multiple scenarios above 30% probability indicates <strong>high uncertainty</strong> — consider hedging strategies that perform well across multiple futures.`;
+  }
+
+  recText.innerHTML = rec || 'Add more detail to scenarios to generate a recommendation.';
+  recBox.style.display = 'block';
+}
+
+function scrollToAnalysis() {
+  document.getElementById('analysis-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function loadExample() {
+  scenarios = [];
+  document.getElementById('ctx-decision').value = 'Launch new SaaS product in competitive market';
+  document.getElementById('ctx-horizon').value = '12 months';
+  document.getElementById('ctx-uncertainty').value = 'Market adoption speed & competitor response';
+
+  addScenario({ name:'🚀 Best Case', probability:25, color:'#52B756',
+    description:'Product-market fit confirmed in month 3. Word-of-mouth drives organic growth.',
+    outcomes:'ARR: $480K by month 12. CAC: $180. Churn: <3%.',
+    actions:'Raise Series A. Double engineering. Expand to second market segment.',
+    metrics:[{key:'ARR',val:'$480K'},{key:'CAC',val:'$180'},{key:'Churn',val:'2.8%'}]
+  });
+  addScenario({ name:'📈 Base Case', probability:50, color:'#29B6F6',
+    description:'Steady growth with moderate sales cycles. Enterprise deals close in month 6.',
+    outcomes:'ARR: $240K by month 12. CAC: $340. Churn: ~5%.',
+    actions:'Focus on conversion rate optimization. Hire 1 senior AE. Optimize onboarding.',
+    metrics:[{key:'ARR',val:'$240K'},{key:'CAC',val:'$340'},{key:'Churn',val:'5.1%'}]
+  });
+  addScenario({ name:'⚠️ Downside', probability:20, color:'#FFB300',
+    description:'Slower-than-expected adoption. Competitor launches competing feature.',
+    outcomes:'ARR: $80K by month 12. CAC: $620. Runway: 14 months.',
+    actions:'Pivot to niche vertical. Cut burn rate. Focus on 3 anchor customers.',
+    metrics:[{key:'ARR',val:'$80K'},{key:'CAC',val:'$620'},{key:'Runway',val:'14mo'}]
+  });
+  addScenario({ name:'🔻 Tail Risk', probability:5, color:'#EF5350',
+    description:'Key competitor acquires direct substitute at $0. Market consolidates rapidly.',
+    outcomes:'ARR flatlines. Team morale drops. Investor follow-on in doubt.',
+    actions:'Emergency pivot plan. Explore acqui-hire. Reduce team to core 3.',
+    metrics:[{key:'ARR',val:'$20K'},{key:'Runway',val:'6mo'},{key:'Action',val:'Pivot'}]
+  });
+
+  renderScenarios();
+  updateProbSum();
+  updateAnalysis();
+}
+
+function exportJSON() {
+  const data = {
+    decision: document.getElementById('ctx-decision').value,
+    horizon: document.getElementById('ctx-horizon').value,
+    uncertainty: document.getElementById('ctx-uncertainty').value,
+    scenarios: scenarios.map(s => ({ name:s.name, probability:s.probability, description:s.description, outcomes:s.outcomes, actions:s.actions, metrics:s.metrics })),
+    totalProbability: scenarios.reduce((t,s) => t+s.probability, 0)
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'scenario-plan.json';
+  a.click();
+}
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Init
+addScenario({ name:'Best Case', probability:30 });
+addScenario({ name:'Base Case', probability:50 });
+addScenario({ name:'Downside', probability:20 });
+</script>
+</body>
+</html>

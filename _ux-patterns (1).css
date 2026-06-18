@@ -1,0 +1,352 @@
+/* ─────────────────────────────────────────────────────────────
+   UX PATTERNS & ACCESSIBILITY EXTRACTED FROM PRODUCTION TOOLS
+   Source: viadecide-reality-check.html, viadecide-decision-matrix.html, viadecide-opportunity-radar.html
+   ───────────────────────────────────────────────────────────── */
+
+/* ── ACCESSIBILITY PATTERNS ─────────────────────────────── */
+
+/* Remove default tap highlight (mobile UX) */
+* {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+/* Disable selection on interactive elements except where needed */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+input,
+textarea,
+select,
+[contenteditable="true"],
+.allow-select,
+pre,
+code {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* Focus-visible styling (CRITICAL for accessibility) */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(255, 153, 51, 0.5);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(255, 153, 51, 0.18);
+  color: inherit;
+}
+
+/* ── BUTTON PATTERNS ────────────────────────────────────── */
+
+button,
+[role="button"] {
+  cursor: pointer;
+  font-family: var(--font);
+  border: none;
+  outline: none;
+  transition: all var(--transition-fast);
+  user-select: none;
+  -webkit-user-select: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:active,
+[role="button"]:active {
+  transform: translateY(1px);
+}
+
+button:disabled,
+[role="button"]:disabled,
+button[aria-disabled="true"],
+[role="button"][aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── LINK PATTERNS ────────────────────────────────────── */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+a:active {
+  opacity: 0.6;
+}
+
+/* ── FORM INPUT PATTERNS ────────────────────────────────── */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 11px 13px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  min-height: 44px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px var(--saffron-d);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+/* ── INTERACTIVE ELEMENT SIZING ────────────────────────── */
+
+/* Touch target minimum size (WCAG AA: 44x44px) */
+button,
+a,
+[role="button"],
+input,
+textarea,
+select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Button with icon pattern */
+button svg,
+[role="button"] svg,
+a svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+/* ── CARD & SURFACE PATTERNS ────────────────────────────── */
+
+.card,
+[role="article"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  transition: border-color var(--transition-fast);
+}
+
+.card:hover,
+[role="article"]:hover {
+  border-color: var(--border2);
+}
+
+/* ── ANIMATION PATTERNS ────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+/* ── MOTION PREFERENCES ────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── DARK MODE PREFERENCE (already dark, but explicit) ─── */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+}
+
+/* ── RESPONSIVE TEXT SIZING ────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: clamp(26px, 6vw, 40px);
+  letter-spacing: -0.8px;
+}
+
+h2 {
+  font-size: clamp(22px, 5vw, 32px);
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: clamp(18px, 4vw, 24px);
+  letter-spacing: -0.3px;
+}
+
+p {
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+
+/* ── VISIBILITY UTILITIES ───────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ── SKIP TO MAIN CONTENT LINK ─────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--saffron);
+  color: var(--bg);
+  padding: 8px;
+  text-decoration: none;
+  z-index: var(--z-tooltip);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: none;
+}

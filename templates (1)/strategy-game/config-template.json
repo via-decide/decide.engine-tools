@@ -1,0 +1,6 @@
+{
+  "type": "strategy-game",
+  "status": "template",
+  "creator": "zayvora",
+  "launch_url": "./games/generated/index.html"
+}

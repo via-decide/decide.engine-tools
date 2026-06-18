@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game development loop
+Create zoom state model for the world map.
 
 RULES
 1. Audit touched files first and identify regressions.

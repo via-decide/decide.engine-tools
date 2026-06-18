@@ -1,0 +1,18 @@
+{
+  "task_id": "unknown-task",
+  "executor": "refactor executor",
+  "status": "FAIL",
+  "files_changed": [
+    "ARCHITECTURE_REPORT.md",
+    "IMPROVEMENT_PLAN.md",
+    "TECH_DEBT_REPORT.md",
+    "apps/cockpit/missions/pr-consolidation-mission.js",
+    "automation/scanners/",
+    "cockpit/",
+    "vault/reports/PR_AUDIT_REPORT.md"
+  ],
+  "behavior_preservation_claim": "Refactor intended to preserve behavior.",
+  "validation_status": "NOT_RUN",
+  "formatter_status": "NOT_RUN",
+  "error": "Out-of-scope changes detected: ARCHITECTURE_REPORT.md, IMPROVEMENT_PLAN.md, TECH_DEBT_REPORT.md, apps/cockpit/missions/pr-consolidation-mission.js, automation/scanners/, cockpit/, vault/reports/PR_AUDIT_REPORT.md"
+}

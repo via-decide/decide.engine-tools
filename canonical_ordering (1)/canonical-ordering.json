@@ -1,0 +1,17 @@
+{
+  "flow": [
+    "event_received",
+    "lineage_inspection",
+    "authority_validation",
+    "deterministic_ordering",
+    "canonical_commit"
+  ],
+  "ordering_logic": [
+    "logical_sequencing",
+    "lineage_precedence",
+    "authority_weighting",
+    "replay_admissibility",
+    "continuity_safe_tie_breaking"
+  ],
+  "deterministic": true
+}

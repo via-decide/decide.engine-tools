@@ -1,0 +1,8 @@
+{
+  "world_id": "voxel-demo",
+  "world_name": "Voxel Demo World",
+  "creator": "zayvora",
+  "template": "voxel-world",
+  "seed": 424242,
+  "launch_url": "./games/ai-simulation-studio.html"
+}

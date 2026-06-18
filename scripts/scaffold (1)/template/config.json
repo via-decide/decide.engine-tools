@@ -1,0 +1,10 @@
+{
+  "id": "{{TOOL_NAME}}",
+  "name": "{{TOOL_NAME}}",
+  "description": "An automatically scaffolded tool.",
+  "category": "misc",
+  "tags": ["scaffolded"],
+  "inputs": [],
+  "outputs": [],
+  "entry": "tools/misc/{{TOOL_NAME}}/index.html"
+}

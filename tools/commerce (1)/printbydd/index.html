@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrintByDD Store - Precision 3D Manufacturing</title>
+  <meta name="description" content="Precision 3D manufacturing — smart NFC accessories, architectural models, personalized gifts that mean more.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #333; line-height: 1.6; }
+    header { background: linear-gradient(135deg, #ff2a2a 0%, #ff6b6b 100%); color: white; padding: 2rem; text-align: center; }
+    header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    header p { font-size: 1.1rem; opacity: 0.9; }
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+    .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .product-card h3 { padding: 1.5rem 1.5rem 0; font-size: 1.5rem; }
+    .product-card p { padding: 0.5rem 1.5rem; color: #666; }
+    .product-card .icon { font-size: 3rem; text-align: center; padding: 1rem; }
+    .product-card a { display: inline-block; margin: 1rem; padding: 0.75rem 1.5rem; background: #ff2a2a; color: white; text-decoration: none; border-radius: 6px; transition: background 0.3s; }
+    .product-card a:hover { background: #ff6b6b; }
+    footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎨 PrintByDD Store</h1>
+    <p>Precision 3D Manufacturing — Smart Accessories & Gifts That Mean More</p>
+  </header>
+
+  <main class="container">
+    <h2 style="text-align: center; font-size: 2rem; margin: 2rem 0;">Our Products</h2>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="icon">🔑</div>
+        <h3>NFC Keychains</h3>
+        <p>Personalised NFC-enabled keychains with custom engraving. Smart, durable, and built to last.</p>
+        <a href="./keychain.html">View Product →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="icon">🚗</div>
+        <h3>Custom Numberplates</h3>
+        <p>Custom 2D & 3D-printed vehicle numberplates with real-time 3D preview. Design your own.</p>
+        <a href="./numberplate.html">View Product →</a>
+      </div>
+
+      <div class="product-card">
+        <div class="icon">🎁</div>
+        <h3>Gifts That Mean More</h3>
+        <p>Curated personalised gift experiences. Gifts that people actually want to keep.</p>
+        <a href="./gifts-that-mean-more.html">Explore Gifts →</a>
+      </div>
+    </div>
+
+    <section style="background: white; padding: 2rem; border-radius: 12px; margin: 3rem 0;">
+      <h2>Why Choose PrintByDD?</h2>
+      <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+        <li>🎯 <strong>Precision Engineering:</strong> 3D-printed with micron-level accuracy</li>
+        <li>💡 <strong>Smart Integration:</strong> NFC chips for seamless connectivity</li>
+        <li>🎨 <strong>Custom Design:</strong> Personalize every detail</li>
+        <li>♻️ <strong>Sustainable:</strong> Eco-friendly manufacturing process</li>
+        <li>📦 <strong>Fast Delivery:</strong> Made to order, shipped within days</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 PrintByDD. Precision 3D Manufacturing. All rights reserved.</p>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">Part of the <a href="/" style="color: #ff2a2a; text-decoration: none;">viadecide</a> ecosystem.</p>
+  </footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(reg => console.log('SW registered')).catch(err => console.error('SW failed:', err));
+    }
+  </script>
+</body>
+</html>

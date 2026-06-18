@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-06-09T00:20:04.773Z",
+  "mission": "Cockpit v0.2 Verification Mission",
+  "elapsedMs": 2470,
+  "tokensEstimate": 174100,
+  "creditsSaved": 61.7,
+  "metrics": {
+    "filesScanned": 1134,
+    "techDebtScore": 61,
+    "todosCount": 0,
+    "emptyCatchesCount": 7,
+    "evalsCount": 4,
+    "duplicatesCount": 0
+  },
+  "verification": {
+    "success": true,
+    "testsPassed": 108,
+    "testsFailed": 0,
+    "lintPassed": true
+  },
+  "planPath": "/Users/dharamdaxini/Downloads/via/decide.engine-tools/IMPROVEMENT_PLAN.md",
+  "patchProposed": null,
+  "logs": [
+    "[5:50:02 AM] Mission Control Sequence Initiated: Cockpit v0.2 Verification Mission",
+    "[5:50:02 AM] Phase 1: Scanner (Measuring codebase)...",
+    "[5:50:02 AM] Scan Complete. Files: 1134, Debt Score: 61",
+    "[5:50:02 AM] Phase 2: Planner (Formulating improvements)...",
+    "[5:50:02 AM] Plan Complete: /Users/dharamdaxini/Downloads/via/decide.engine-tools/IMPROVEMENT_PLAN.md",
+    "[5:50:02 AM] Phase 3: Verifier (Running tests & syntax checks)...",
+    "[5:50:04 AM] Verification Passed ✅",
+    "[5:50:04 AM] Phase 4: Metrics (Computing token/time savings)...",
+    "[5:50:04 AM] Phase 5: Trace & Vault (Saving execution trace)..."
+  ]
+}

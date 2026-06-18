@@ -1,0 +1,1 @@
+// scaffolded tool.js

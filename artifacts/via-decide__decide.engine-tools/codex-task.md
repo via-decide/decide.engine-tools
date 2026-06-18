@@ -1,7 +1,7 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game development loop
+Create zoom state model for the world map.
 
 CONSTRAINTS
 Preserve existing code; prefer additive changes.

@@ -1,0 +1,11 @@
+{
+  "id": "scenario-planner",
+  "name": "Scenario Planner",
+  "description": "Map outcomes across multiple scenarios with probability weighting and expected value analysis.",
+  "category": "business",
+  "icon": "🔭",
+  "entry": "index.html",
+  "status": "live",
+  "tags": ["scenario", "planning", "probability", "strategy", "risk"],
+  "engine": false
+}

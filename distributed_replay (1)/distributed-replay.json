@@ -1,0 +1,19 @@
+{
+  "flow": [
+    "partition_detected",
+    "lineage_divergence",
+    "authority_verification",
+    "canonical_replay_ordering",
+    "effect_reconciliation",
+    "continuity_restoration"
+  ],
+  "modeled_failures": [
+    "network_partitions",
+    "replay_divergence",
+    "delayed_synchronization",
+    "authority_conflicts",
+    "distributed_mutations"
+  ],
+  "deterministic": true,
+  "status": "RESTORABLE"
+}

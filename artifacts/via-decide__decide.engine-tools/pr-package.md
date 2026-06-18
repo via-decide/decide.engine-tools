@@ -1,9 +1,9 @@
-Branch: simba/write-zayvoraclaudegameexecutionloopv1md---auton
-Title: Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game deve...
+Branch: simba/create-zoom-state-model-for-the-world-map
+Title: Create zoom state model for the world map.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Write ZAYVORA_CLAUDE_GAME_EXECUTION_LOOP_V1.md - Autonomous game development loop
+- Goal: Create zoom state model for the world map.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

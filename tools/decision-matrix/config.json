@@ -1,0 +1,11 @@
+{
+  "id": "decision-matrix",
+  "name": "Decision Matrix",
+  "description": "Weighted decision matrix for multi-criteria decisions with scoring, ranking, and reasoning.",
+  "category": "business",
+  "icon": "⚖️",
+  "entry": "index.html",
+  "status": "live",
+  "tags": ["decision", "analysis", "strategy", "weighted", "matrix"],
+  "engine": false
+}
