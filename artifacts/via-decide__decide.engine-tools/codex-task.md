@@ -1,10 +1,10 @@
 You are working in repository via-decide/decide.engine-tools on branch main.
 
 MISSION
-Create shared economy wiring validator.
+Build 'DaxiniControl'-the high-performance remote command-and-control (C2) terminal for the 24,000-PR run. CORE ARCHITECTURE (The Master Console): 1. The Command Dispatcher: - Create a module control/dispatcher.js that can send "Global Commands" to the DaxiniFactory.
 
 CONSTRAINTS
-Preserve existing code; prefer additive changes.
+Zero latency. Use 'Socket.io' for the remote bridge. Ensure the terminal UI is 'Non-Blocking' so the MacBook Air M2 can continue pushing PRs at 100/min.
 
 PROCESS (MANDATORY)
 1. Read README.md and AGENTS.md before editing.
@@ -19,7 +19,7 @@ REPO AUDIT CONTEXT
 - Description: 
 - Primary language: HTML
 - README snippet:
-# Decide Engine — Unified Dashboard Interface ## Overview Decide Engine is a browser-native decision and productivity platform by ViaDecide. The repository now includes a unified dashboard shell that routes users into core modules while preserving standalone tools. ## Dashboard Primary entry point
+⭐ If this saved you $X in API costs, star this repo Help other devs discover metadata-driven development # VIA Platform: 58-Tool Ecosystem with 80% Token Savings > **Before you fork another monorepo: This one saved me $33,756 in API costs and 2.25M tokens. Here's how.** [Detailed breakdown...] #
 
 - AGENTS snippet:
 # AGENTS.md — ViaDecide Studio ## Rules for all AI coding agents working in this repository --- ## IDENTITY This is a **production codebase** for a $199/month subscription product on the Play Store. Every change you make affects paying subscribers. Treat it accordingly. --- ## HARD GATE 1 — DES

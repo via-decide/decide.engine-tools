@@ -1,9 +1,9 @@
-Branch: simba/create-shared-economy-wiring-validator
-Title: Create shared economy wiring validator.
+Branch: simba/build-daxinicontrol-the-high-performance-remote-
+Title: Build 'DaxiniControl'-the high-performance remote command-and-control...
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create shared economy wiring validator.
+- Goal: Give the "Boss of Git" total, real-time control over the 24,000-PR empire, ensuring the mission is flexible, reactive, and unstoppable.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
