@@ -1,9 +1,9 @@
-Branch: simba/create-protected-file-guard-report-generator
-Title: Create protected-file guard report generator.
+Branch: simba/create-shared-economy-wiring-validator
+Title: Create shared economy wiring validator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create protected-file guard report generator.
+- Goal: Create shared economy wiring validator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests

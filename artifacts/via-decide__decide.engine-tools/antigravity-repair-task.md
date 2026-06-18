@@ -4,7 +4,7 @@ TARGET
 Validate and repair only the files touched by the previous implementation.
 
 TASK
-Create protected-file guard report generator.
+Create shared economy wiring validator.
 
 RULES
 1. Audit touched files first and identify regressions.
