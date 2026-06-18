@@ -1,9 +1,9 @@
-Branch: simba/create-repository-safety-audit-for-script-order-
-Title: Create repository safety audit for script order and browser compatibi...
+Branch: simba/create-protected-file-guard-report-generator
+Title: Create protected-file guard report generator.
 
 ## Summary
 - Repo orchestration task for via-decide/decide.engine-tools
-- Goal: Create repository safety audit for script order and browser compatibility.
+- Goal: Create protected-file guard report generator.
 
 ## Testing Checklist
 - [ ] Run unit/integration tests
