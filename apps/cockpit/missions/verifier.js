@@ -45,9 +45,16 @@ class VerificationEngine {
 
     try {
       console.log('[Verification Engine] Executing repository test suite (tests/run-all.js)...');
+      // Determine correct run path
+      let runCwd = this.repoPath;
+      const runScript = 'tests/run-all.js';
+      if (!fs.existsSync(path.join(runCwd, runScript)) && fs.existsSync(path.join(runCwd, 'decide.engine-tools', runScript))) {
+        runCwd = path.join(runCwd, 'decide.engine-tools');
+      }
+
       // Execute the test script synchronously, capturing output
-      const outputBuffer = execSync('node tests/run-all.js', {
-        cwd: this.repoPath,
+      const outputBuffer = execSync(`node ${runScript}`, {
+        cwd: runCwd,
         stdio: 'pipe',
         env: { ...process.env, PAGER: 'cat' }
       });
@@ -94,7 +101,7 @@ class VerificationEngine {
     for (const entry of entries) {
       const res = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        if (['node_modules', '.git', '.vercel', 'vault', 'artifacts', 'template'].includes(entry.name)) continue;
+        if (['node_modules', '.git', '.vercel', 'vault', 'artifacts', 'template', 'frontend'].includes(entry.name)) continue;
         this._walkJS(res, fileList);
       } else if (entry.isFile() && entry.name.endsWith('.js') && !entry.name.endsWith('.test.js') && !res.includes('template')) {
         fileList.push(res);

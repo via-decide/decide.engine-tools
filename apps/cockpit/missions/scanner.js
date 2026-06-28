@@ -4,7 +4,7 @@ const path = require('path');
 class RepoScanner {
   constructor(repoPath) {
     this.repoPath = path.resolve(repoPath);
-    this.excludeDirs = ['node_modules', '.git', '.vercel', 'artifacts', 'vault', 'backups', '.claude', '.codex'];
+    this.excludeDirs = ['node_modules', '.git', '.vercel', 'artifacts', 'vault', 'backups', '.claude', '.codex', '.next', 'build'];
   }
 
   async scan() {
@@ -37,15 +37,19 @@ class RepoScanner {
   }
 
   async _walk(dir, fileList) {
-    const entries = await fs.promises.readdir(dir, { withFileTypes: true });
-    for (const entry of entries) {
-      const res = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        if (this.excludeDirs.includes(entry.name)) continue;
-        await this._walk(res, fileList);
-      } else {
-        fileList.push(res);
+    try {
+      const entries = await fs.promises.readdir(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const res = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          if (this.excludeDirs.includes(entry.name)) continue;
+          await this._walk(res, fileList);
+        } else {
+          fileList.push(res);
+        }
       }
+    } catch (err) {
+      console.warn(`[Repo Scanner] Skipping inaccessible directory ${dir}: ${err.message}`);
     }
   }
 

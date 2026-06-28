@@ -1,7 +1,21 @@
 (function (global) {
   'use strict';
-
-  const GAME_ROOT = './games';
+  let gameRootPrefix = '.';
+  const scriptTags = document.getElementsByTagName('script');
+  for (let i = 0; i < scriptTags.length; i++) {
+    const src = scriptTags[i].getAttribute('src') || '';
+    if (src.includes('game-loader.js')) {
+      const idx = src.indexOf('engine/core/game-loader.js');
+      if (idx !== -1) {
+        gameRootPrefix = src.substring(0, idx) || '.';
+        if (gameRootPrefix.endsWith('/')) {
+          gameRootPrefix = gameRootPrefix.substring(0, gameRootPrefix.length - 1);
+        }
+      }
+      break;
+    }
+  }
+  const GAME_ROOT = `${gameRootPrefix}/games`;
   const CACHE = {};
   const MANIFEST_PATH = `${GAME_ROOT}/manifest.json`;
 

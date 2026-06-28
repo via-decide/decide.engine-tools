@@ -4,7 +4,7 @@ const path = require('path');
 class RepoScanner {
   constructor(repoPath) {
     this.repoPath = path.resolve(repoPath);
-    this.excludeDirs = ['node_modules', '.git', '.vercel', 'artifacts', 'vault', 'backups', '.claude', '.codex'];
+    this.excludeDirs = ['node_modules', '.git', '.vercel', 'artifacts', 'vault', 'backups', '.claude', '.codex', '.next', 'build'];
   }
 
   async scan() {

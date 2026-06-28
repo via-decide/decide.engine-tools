@@ -1,0 +1,13 @@
+{
+  "id": "game-command-center",
+  "name": "Game Command Center",
+  "description": "Unified dashboard for the Orchard Engine — live player stats, farm health, quest progress, and all game layers in one view.",
+  "category": "engine",
+  "layer": "dashboard",
+  "audience": ["players", "founders", "operators"],
+  "inputs": ["player_id"],
+  "outputs": ["dashboard_view", "health_summary"],
+  "relatedTools": ["meta-health-dashboard", "starter-farm-generator", "daily-quest-generator", "weekly-harvest-engine"],
+  "entry": "tools/engine/game-command-center/index.html",
+  "tags": ["orchard-engine", "dashboard", "game-hub", "standalone"]
+}

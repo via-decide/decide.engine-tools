@@ -1106,14 +1106,14 @@ const TrialState = (() => {
     function getAll() { return {...state}; }
 
     function _persist() {
-        try { localStorage.setItem('studyos_trial', JSON.stringify(state)); } catch(e) {}
+        try { localStorage.setItem('studyos_trial', JSON.stringify(state)); } catch (e) { try { if (typeof sovereignAnalytics !== 'undefined') sovereignAnalytics.log('[SILENT CATCH]', e); else console.warn('[SILENT CATCH]', e); } catch(__e) {} }
     }
 
     function load() {
         try {
             const s = localStorage.getItem('studyos_trial');
             if (s) { Object.assign(state, JSON.parse(s)); _hydrate(); }
-        } catch(e) {}
+        } catch (e) { try { if (typeof sovereignAnalytics !== 'undefined') sovereignAnalytics.log('[SILENT CATCH]', e); else console.warn('[SILENT CATCH]', e); } catch(__e) {} }
     }
 
     function _hydrate() {

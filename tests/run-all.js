@@ -15,7 +15,7 @@ let exitCode = 0;
 // Unit tests — no install required
 console.log('[ 1/2 ] Unit Tests...\n');
 try {
-  execSync('node tests/unit/run.js', { stdio: 'inherit' });
+  execSync('node unit/run.js', { stdio: 'inherit', cwd: __dirname });
 } catch {
   exitCode = 1;
 }
@@ -23,7 +23,7 @@ try {
 // Smoke tests — requires playwright
 console.log('\n[ 2/2 ] Smoke Tests...\n');
 try {
-  execSync('node tests/smoke/run.js', { stdio: 'inherit' });
+  execSync('node smoke/run.js', { stdio: 'inherit', cwd: __dirname });
 } catch {
   exitCode = 1;
 }

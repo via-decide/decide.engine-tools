@@ -139,7 +139,7 @@
         console.warn(`[StudyOSStorage] Failed reading ${key} from IndexedDB, using compatibility fallback.`, error);
         try {
           await idbDelete(db, key);
-        } catch (_) {}
+        } catch (_) { try { if (typeof sovereignAnalytics !== 'undefined') sovereignAnalytics.log('[SILENT CATCH]', _); else console.warn('[SILENT CATCH]', _); } catch(__e) {} }
       }
     }
 
