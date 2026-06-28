@@ -1,10 +1,10 @@
 # Architecture Report
 
-Generated at: 2026-06-28T17:02:18.395Z
+Generated at: 2026-06-28T17:28:44.144Z
 
 ## Repository Overview
 
-- **Total Files Checked:** 2609
+- **Total Files Checked:** 2615
 - **Layer Breakdown:**
   - Shared Utilities: 55 files
   - Games: 43 files
@@ -17,17 +17,17 @@ Generated at: 2026-06-28T17:02:18.395Z
 | Extension | Count |
 |---|---|
 | `(no ext)` | 22 |
-| `.json` | 251 |
+| `.json` | 252 |
 | `.md` | 274 |
 | `.ts` | 138 |
-| `.html` | 392 |
+| `.html` | 393 |
 | `.py` | 278 |
 | `.yaml` | 2 |
 | `.txt` | 18 |
 | `.sh` | 9 |
 | `.tsx` | 29 |
-| `.js` | 709 |
-| `.css` | 20 |
+| `.js` | 712 |
+| `.css` | 21 |
 | `.png` | 8 |
 | `.webmanifest` | 1 |
 | `.mjs` | 1 |
@@ -262,6 +262,9 @@ graph TD
     "mission-runner.js" --> "verifier"
     "mission-runner.js" --> "tracer"
     "pr-consolidation-mission.js" --> "mission-runner"
+    "index.html" --> "vialogic.js"
+    "index.html" --> "graph.js"
+    "index.html" --> "app.js"
     "index.html" --> "vd-nav-fix.js"
     "index.html" --> "tool-storage.js"
     "tool.js" --> "tool-bus.js"

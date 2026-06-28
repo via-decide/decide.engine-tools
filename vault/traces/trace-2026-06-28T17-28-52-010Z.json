@@ -1,23 +1,25 @@
 {
-  "lastRun": "2026-06-28T17:28:52.010Z",
+  "timestamp": "2026-06-28T17:28:52.010Z",
   "mission": "Cockpit v0.2 Verification Mission",
-  "status": "Idle",
-  "liveTask": "Completed",
-  "agentHealth": {
-    "successRate": "100%",
-    "tokenUsage": 396250,
-    "executionTimeMs": 8381,
-    "creditsSaved": 135.75
-  },
-  "repoHealth": {
-    "complexityScore": 35,
+  "elapsedMs": 8381,
+  "tokensEstimate": 396250,
+  "creditsSaved": 135.75,
+  "metrics": {
+    "filesScanned": 2615,
     "techDebtScore": 419,
-    "todoCount": 0,
-    "emptyCatchCount": 33,
-    "evalCount": 32,
-    "duplicateCount": 0
+    "todosCount": 0,
+    "emptyCatchesCount": 33,
+    "evalsCount": 32,
+    "duplicatesCount": 0
   },
-  "queue": [],
+  "verification": {
+    "success": true,
+    "testsPassed": 501,
+    "testsFailed": 0,
+    "lintPassed": true
+  },
+  "planPath": "/Users/dharamdaxini/Downloads/via/decide.engine-tools/IMPROVEMENT_PLAN.md",
+  "patchProposed": null,
   "logs": [
     "[10:58:43 PM] Mission Control Sequence Initiated: Cockpit v0.2 Verification Mission",
     "[10:58:43 PM] Phase 1: Scanner (Measuring codebase)...",
@@ -27,8 +29,6 @@
     "[10:58:44 PM] Phase 3: Verifier (Running tests & syntax checks)...",
     "[10:58:52 PM] Verification Passed ✅",
     "[10:58:52 PM] Phase 4: Metrics (Computing token/time savings)...",
-    "[10:58:52 PM] Phase 5: Trace & Vault (Saving execution trace)...",
-    "[10:58:52 PM] Trace written to: trace-2026-06-28T17-28-52-010Z.json",
-    "[10:58:52 PM] Mission Sequence Complete. Total Time: 8.38s"
+    "[10:58:52 PM] Phase 5: Trace & Vault (Saving execution trace)..."
   ]
 }

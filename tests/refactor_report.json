@@ -3,33 +3,16 @@
   "executor": "refactor executor",
   "status": "FAIL",
   "files_changed": [
-    "\"StudyOS (1)/storage.js\"",
-    "\"StudyOS (1)/trail-module.html\"",
-    "\"apps/cockpit/missions/scanner (1).js\"",
-    "\"packages (1)/agents/antigravity-code/repo-scanner.js\"",
-    ".DS_Store",
     "ARCHITECTURE_REPORT.md",
     "IMPROVEMENT_PLAN.md",
-    "StudyOS/index.html",
     "TECH_DEBT_REPORT.md",
-    "apps/cockpit/missions/scanner.js",
-    "apps/cockpit/missions/verifier.js",
+    "apps/lore-labs/",
     "cockpit/dashboard/cockpit-state.json",
-    "cockpit/index.html",
-    "cockpit/sections/",
-    "cockpit/state/",
-    "cockpit/styles/",
-    "engine/core/game-loader.js",
-    "engine/game-loader.js",
-    "packages/agents/antigravity-code/repo-scanner.js",
-    "shared/cockpit-state.json",
     "tests/refactor_report.json",
-    "tests/run-all.js",
-    "tests/smoke/tools.smoke.js",
-    "vault/traces/trace-2026-06-28T17-00-20-896Z.json"
+    "tests/smoke/tools.smoke.js"
   ],
   "behavior_preservation_claim": "Refactor intended to preserve behavior.",
   "validation_status": "NOT_RUN",
   "formatter_status": "NOT_RUN",
-  "error": "Out-of-scope changes detected: \"StudyOS (1)/storage.js\", \"StudyOS (1)/trail-module.html\", \"apps/cockpit/missions/scanner (1).js\", \"packages (1)/agents/antigravity-code/repo-scanner.js\", .DS_Store, ARCHITECTURE_REPORT.md, IMPROVEMENT_PLAN.md, StudyOS/index.html, TECH_DEBT_REPORT.md, apps/cockpit/missions/scanner.js, apps/cockpit/missions/verifier.js, cockpit/dashboard/cockpit-state.json, cockpit/index.html, cockpit/sections/, cockpit/state/, cockpit/styles/, engine/core/game-loader.js, engine/game-loader.js, packages/agents/antigravity-code/repo-scanner.js, shared/cockpit-state.json, tests/refactor_report.json, tests/run-all.js, tests/smoke/tools.smoke.js, vault/traces/trace-2026-06-28T17-00-20-896Z.json"
+  "error": "Out-of-scope changes detected: ARCHITECTURE_REPORT.md, IMPROVEMENT_PLAN.md, TECH_DEBT_REPORT.md, apps/lore-labs/, cockpit/dashboard/cockpit-state.json, tests/refactor_report.json, tests/smoke/tools.smoke.js"
 }

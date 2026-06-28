@@ -59,6 +59,7 @@ const SMOKE_TARGETS = [
   { id: 'map-editor',           path: 'tools/map-editor/index.html' },
   { id: 'simulation-debugger',  path: 'tools/simulation-debugger/index.html' },
   { id: 'ui-builder',           path: 'tools/ui-builder/index.html' },
+  { id: 'lore-labs',            path: 'apps/lore-labs/index.html' },
 ];
 
 function isMissingBrowserExecutableError(error) {
