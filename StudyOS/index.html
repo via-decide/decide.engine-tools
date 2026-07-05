@@ -1395,17 +1395,31 @@ const Bootloader = {
 
     start() {
         AppStore.init();
-        if (localStorage.getItem('via_auth_source') === 'smarttag-qr' || (AppStore.config && AppStore.data)) {
-            if (localStorage.getItem('via_auth_source') === 'smarttag-qr') {
-                if (!AppStore.config) AppStore.config = {};
-                if (!AppStore.data) AppStore.data = {};
-            }
+
+        // ---- Explorer Pass: Cross-Origin + Same-Origin Bypass ----
+        const params = new URLSearchParams(window.location.search);
+        const fromQR = params.get('via_source') === 'smarttag-qr';
+        if (fromQR) {
+            try {
+                localStorage.setItem('via_auth_source', 'smarttag-qr');
+                localStorage.setItem('via_explorer_pass', 'active');
+            } catch(e) {}
+            const clean = new URL(window.location.href);
+            clean.searchParams.delete('via_source');
+            window.history.replaceState({}, '', clean.toString());
+            console.log('✅ StudyOS: Explorer Pass (URL param) detected. Onboarding bypassed.');
+        }
+
+        if (fromQR || localStorage.getItem('via_auth_source') === 'smarttag-qr' || (AppStore.config && AppStore.data)) {
+            if (!AppStore.config) AppStore.config = {};
+            if (!AppStore.data) AppStore.data = {};
             this.switchLayer("view-app");
         } else {
             this.switchLayer("view-onboarding");
             OnboardingEngine.start();
         }
     },
+
 
     switchLayer(id) {
         document.querySelectorAll(".view-layer").forEach(el => el.classList.remove("active"));

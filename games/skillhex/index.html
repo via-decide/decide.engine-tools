@@ -38,6 +38,29 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      // ---- Explorer Pass: Onboarding Bypass ----
+      (function checkExplorerPass() {
+        const params = new URLSearchParams(window.location.search);
+        const fromQR = params.get('via_source') === 'smarttag-qr';
+        const fromLS = localStorage.getItem('via_auth_source') === 'smarttag-qr';
+
+        if (fromQR) {
+          try {
+            localStorage.setItem('via_auth_source', 'smarttag-qr');
+            localStorage.setItem('via_explorer_pass', 'active');
+          } catch(e) {}
+          const clean = new URL(window.location.href);
+          clean.searchParams.delete('via_source');
+          window.history.replaceState({}, '', clean.toString());
+        }
+
+        if (fromQR || fromLS) {
+          document.getElementById('engine-status').textContent =
+            'Explorer Pass Active — Loading SkillHex...';
+          console.log('✅ SkillHex: Explorer Pass detected. Onboarding bypassed.');
+        }
+      })();
+
       await window.EngineCore.loadGame('skillhex');
       document.getElementById('start-btn').addEventListener('click', () => window.EngineCore.startSimulation('skillhex'));
       document.getElementById('pause-btn').addEventListener('click', () => window.EngineCore.pauseSimulation('skillhex'));
