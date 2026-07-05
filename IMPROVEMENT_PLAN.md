@@ -1,7 +1,7 @@
 # Improvement Plan
 
-Mission: **Cockpit v0.2 Verification Mission**
-Generated at: 2026-06-28T17:28:44.151Z
+Mission: **Make decide.engine-tools architecture world class**
+Generated at: 2026-07-01T05:05:38.651Z
 
 ## User Review Required
 
@@ -11,13 +11,44 @@ Generated at: 2026-06-28T17:28:44.151Z
 
 ## Executive Analysis
 
-- **Repository Complexity:** High (2615 files detected across multiple layers)
+- **Repository Complexity:** High (2619 files detected across multiple layers)
 - **Identified Technical Debt:**
   - TODO items: 0
   - Empty error catches: 33
   - Duplicate block patterns: 0
   - Unsafe evals: 32
 
+## Proposed Architecture Restructuring (World Class Target)
+
+The target state converts the flat directory into a modern structure:
+
+```
+decide.engine-tools/
+├── apps/                   # Sub-applications
+│   ├── studyos/            # StudyOS app components
+│   └── cockpit-v2/         # Operator console web application
+├── packages/               # Shared libraries and configuration
+│   ├── shared-foundation/  # tool-registry, storage, tool-bridge
+│   └── engine-core/        # calculation models and utilities
+├── agents/                 # Autonomous code agents
+│   └── antigravity-code/   # Self-improvement loops
+├── prompts/                # Prompt templates and alchemy resources
+├── docs/                   # ADRs, API specs, and walk-throughs
+├── tests/                  # Unit and smoke test folders
+├── architecture/           # Boundary configurations & diagrams
+├── telemetry/              # Token, execution, and cost trackers
+├── cockpit/                # Frontend control panel assets
+├── vault/                  # AI execution traces
+└── automation/             # Self-improving automated hooks & cron scripts
+```
+
+### Recommended Migration Roadmap:
+
+1. **[MODIFY] Create folders:** Initialize `apps/`, `packages/`, `vault/traces/`, `telemetry/`, `prompts/`, `docs/`.
+2. **[MODIFY] Consolidate utilities:** Move files under `shared/` into `packages/shared-foundation/`.
+3. **[MODIFY] Bundle engine models:** Move `shared/engine-models.js` and `shared/engine-utils.js` into `packages/engine-core/`.
+4. **[MODIFY] Reposition StudyOS:** Move the standalone `StudyOS` directory under `apps/studyos/`.
+5. **[MODIFY] Reposition Cockpit:** Move `shared/VIA-COCKPIT.html` and create corresponding integration code in `cockpit/`.
 
 ## Tech Debt Remediation Tasks
 

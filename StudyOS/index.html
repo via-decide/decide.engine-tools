@@ -462,6 +462,8 @@
         #k-gyro-status { transition: 0.3s; border-color: var(--border); color: var(--muted); }
         #k-gyro-status.active { color: var(--gold); border-color: var(--gold); background: rgba(255, 214, 0, 0.1); }
     </style>
+  <link rel="manifest" href="manifest.json">
+  <script src="pwa.js" defer></script>
 </head>
 
 <body>
@@ -1393,11 +1395,15 @@ const Bootloader = {
 
     start() {
         AppStore.init();
-        if (!AppStore.config || !AppStore.data) {
+        if (localStorage.getItem('via_auth_source') === 'smarttag-qr' || (AppStore.config && AppStore.data)) {
+            if (localStorage.getItem('via_auth_source') === 'smarttag-qr') {
+                if (!AppStore.config) AppStore.config = {};
+                if (!AppStore.data) AppStore.data = {};
+            }
+            this.switchLayer("view-app");
+        } else {
             this.switchLayer("view-onboarding");
             OnboardingEngine.start();
-        } else {
-            this.switchLayer("view-app");
         }
     },
 
@@ -2465,5 +2471,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+
+  <button id="pwa-install-btn" class="hidden" style="display:none; position:fixed; bottom:20px; right:20px; z-index:9999; padding:10px 20px; background:#ff2a2a; color:#fff; border:none; border-radius:5px; cursor:pointer; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.5);">Install App</button>
 </body>
 </html>

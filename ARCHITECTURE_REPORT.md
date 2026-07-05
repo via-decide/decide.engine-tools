@@ -1,10 +1,10 @@
 # Architecture Report
 
-Generated at: 2026-06-28T17:28:44.144Z
+Generated at: 2026-07-01T05:05:37.842Z
 
 ## Repository Overview
 
-- **Total Files Checked:** 2615
+- **Total Files Checked:** 2619
 - **Layer Breakdown:**
   - Shared Utilities: 55 files
   - Games: 43 files
@@ -17,8 +17,8 @@ Generated at: 2026-06-28T17:28:44.144Z
 | Extension | Count |
 |---|---|
 | `(no ext)` | 22 |
-| `.json` | 252 |
-| `.md` | 274 |
+| `.json` | 253 |
+| `.md` | 277 |
 | `.ts` | 138 |
 | `.html` | 393 |
 | `.py` | 278 |

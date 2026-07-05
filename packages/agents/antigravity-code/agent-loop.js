@@ -229,7 +229,7 @@ if (require.main === module) {
   }
 
   // Resolve engine-tools repo path relative to this script
-  const repoPath = path.join(__dirname, '../../decide.engine-tools');
+  const repoPath = path.join(__dirname, '../../..');
   const runner = new AgentLoop(repoPath, mission);
   runner.run(dryRun).catch(err => {
     console.error('Fatal agent loop error:', err);

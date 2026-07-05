@@ -3,16 +3,19 @@
   "executor": "refactor executor",
   "status": "FAIL",
   "files_changed": [
+    ".DS_Store",
     "ARCHITECTURE_REPORT.md",
     "IMPROVEMENT_PLAN.md",
     "TECH_DEBT_REPORT.md",
-    "apps/lore-labs/",
     "cockpit/dashboard/cockpit-state.json",
+    "packages/agents/antigravity-code/agent-loop.js",
+    "packages/decide.engine-tools/",
+    "shared/cockpit-state.json",
     "tests/refactor_report.json",
-    "tests/smoke/tools.smoke.js"
+    "vault/traces/trace-2026-06-28T18-12-49-763Z.json"
   ],
   "behavior_preservation_claim": "Refactor intended to preserve behavior.",
   "validation_status": "NOT_RUN",
   "formatter_status": "NOT_RUN",
-  "error": "Out-of-scope changes detected: ARCHITECTURE_REPORT.md, IMPROVEMENT_PLAN.md, TECH_DEBT_REPORT.md, apps/lore-labs/, cockpit/dashboard/cockpit-state.json, tests/refactor_report.json, tests/smoke/tools.smoke.js"
+  "error": "Out-of-scope changes detected: .DS_Store, ARCHITECTURE_REPORT.md, IMPROVEMENT_PLAN.md, TECH_DEBT_REPORT.md, cockpit/dashboard/cockpit-state.json, packages/agents/antigravity-code/agent-loop.js, packages/decide.engine-tools/, shared/cockpit-state.json, tests/refactor_report.json, vault/traces/trace-2026-06-28T18-12-49-763Z.json"
 }

@@ -21,6 +21,8 @@
     button { background: #2a1d40; color: #fff; border: 1px solid #5f4692; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
     .panel { background: #1a1427; border: 1px solid #48356f; border-radius: 10px; padding: 16px; }
   </style>
+  <link rel="manifest" href="manifest.json">
+  <script src="pwa.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -42,5 +44,7 @@
       document.getElementById('reset-btn').addEventListener('click', () => window.EngineCore.resetSimulation('skillhex'));
     });
   </script>
+
+  <button id="pwa-install-btn" class="hidden" style="display:none; position:fixed; bottom:20px; right:20px; z-index:9999; padding:10px 20px; background:#ff2a2a; color:#fff; border:none; border-radius:5px; cursor:pointer; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.5);">Install App</button>
 </body>
 </html>
