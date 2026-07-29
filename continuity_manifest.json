@@ -1,0 +1,14 @@
+{
+  "task_id": "042aca7c-b0ec-4d48-b380-715d0df4a889",
+  "timestamp": "2026-07-29T13:30:54.498Z",
+  "repo": "via-decide/decide.engine-tools",
+  "stages": [
+    "PLAN",
+    "AUDIT",
+    "SYNTHESIS",
+    "VERIFY",
+    "PATCH"
+  ],
+  "validator_output": "ADMISSIBLE",
+  "divergence_limit": 0.05
+}
