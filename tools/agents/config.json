@@ -1,0 +1,10 @@
+{
+  "id": "agent",
+  "name": "Agent Console",
+  "description": "Tool for managing and interacting with agents.",
+  "category": "Tools",
+  "audience": ["operators", "researchers"],
+  "inputs": [],
+  "outputs": [],
+  "tags": []
+}
