@@ -1,8 +1,5 @@
 const importableToolDirs = [
-  'tools/placeholder',
-  // existing tool directories
+  'tools/original_engineering_candidate_product_revision_r0_1'
 ];
 
-module.exports = {
-  importableToolDirs,
-};
+module.exports = { importableToolDirs };

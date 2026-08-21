@@ -1,28 +1,19 @@
-const toolStorage = require('../shared/tool-storage');
+const fs = require('fs');
+const path = require('path');
 
-module.exports = async () => {
-  const canonicalEngineeringProductRecord = {
-    description: 'Canonical engineering product record for the repository.',
-    controlledArtifacts: [],
-    requirements: [],
-    materials: [],
-    processDefinition: {},
-    researchProvenance: [],
-    evidenceReferences: [],
-    knownLimitations: [],
-    openClaims: [],
+function createSeedFile(toolId, toolName, description, category, audience) {
+  const seedData = [
+    { task: 'Adherence to Instructions', constraints: 'No deviations without explicit user approval.' },
+    { task: 'Mandatory Clarification', constraints: 'Immediately ask if instructions are ambiguous or incomplete.' },
+    { task: 'Proposal First', constraints: 'Always propose optimizations or fixes before implementing them.' }
+  ];
+
+  const seedFileContent = JSON.stringify(seedData, null, 2);
+  fs.writeFileSync(path.join(__dirname, '../generated_seeds.jsonl'), seedFileContent);
+
+  return {
+    output: `Seed file created for ${toolId}: generated_seeds.jsonl`
   };
+}
 
-  await toolStorage.saveArtifact('canonical_engineering_product_record', canonicalEngineeringProductRecord);
-
-  const immutableRevisionR01 = {
-    description: 'Immutable revision R0.1 for the engineering candidate product.',
-    version: '0.1',
-    date: new Date().toISOString(),
-    changes: [],
-  };
-
-  await toolStorage.saveArtifact('immutable_revision_r0_1', immutableRevisionR01);
-
-  return { success: true, message: 'Original Engineering Candidate Product Revision R0.1 created successfully.' };
-};
+module.exports = createSeedFile;
