@@ -1,3 +1,3 @@
-{"task": "Audit architecture", "constraints": "Preserve existing code; prefer additive changes."}
-{"task": "Implement the smallest safe change set for the stated goal.", "constraints": "Run validation commands and fix discovered issues."}
-{"task": "Self-review for regressions, missing env wiring, and docs drift.", "constraints": "Return complete final file contents for every modified or created file."}
+{"task": "Implement a functional dashboard component", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task": "Add real tools with actual logic to the registry", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task": "Implement proper routing and navigation between tools", "constraints": "Preserve existing code; prefer additive modular changes."}
