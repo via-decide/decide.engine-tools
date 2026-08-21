@@ -6,7 +6,27 @@
   <title>Original Engineering Candidate Product Revision R0.1</title>
 </head>
 <body>
-  <h1>Original Engineering Candidate Product Revision R0.1</h1>
-  <p>This is the canonical engineering product record.</p>
+  <h1>Register Original Engineering Candidate Tool</h1>
+  <input type="text" id="toolNameInput" placeholder="Enter tool name">
+  <button onclick="registerTool()">Register Tool</button>
+  <p id="statusMessage"></p>
+
+  <script src="../shared/shared.js"></script>
+  <script src="./tool.js"></script>
+  <script>
+    function registerTool() {
+      const toolName = document.getElementById('toolNameInput').value;
+      window.registerEngineer(toolName).then((result) => {
+        if (result && result.registration_status) {
+          document.getElementById('statusMessage').textContent = result.registration_status;
+        } else {
+          document.getElementById('statusMessage').textContent = 'Registration failed: Invalid response';
+        }
+      }).catch((error) => {
+        console.error(error);
+        document.getElementById('statusMessage').textContent = 'Registration failed: Error occurred';
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,3 +1,3 @@
-{"task": "Implement a functional dashboard component", "constraints": "Preserve existing code; prefer additive modular changes."}
-{"task": "Add real tools with actual logic to the registry", "constraints": "Preserve existing code; prefer additive modular changes."}
-{"task": "Implement proper routing and navigation between tools", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task":"Implement the tool's index.html and registerEngineer function.","constraints":"Preserve existing code; prefer additive changes."}
+{"task":"Add documentation for the original engineering candidate product revision registration tool.","constraints":"Preserve existing code; prefer additive changes."}
+{"task":"Run validation commands and fix discovered issues, ensuring no regressions or missing env wiring. Self-review for docs drift before claiming completion.","constraints":"Preserve existing code; prefer additive changes."}
