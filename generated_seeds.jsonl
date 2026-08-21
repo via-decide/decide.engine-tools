@@ -1,3 +1,3 @@
-{"task": "Register the original engineering candidate product revision r0.1 tool in the router.js file.", "constraints": "Preserve existing code; prefer additive changes."}
-{"task": "Implement the required outputs for the original engineering candidate product revision r0.1 tool.", "constraints": "Preserve existing code; prefer additive changes."}
-{"task": "Run validation commands and fix discovered issues.", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "review repository architecture", "constraints": "preserve existing code; prefer additive modular changes"}
+{"task": "audit dependencies", "constraints": "verify shared/tool-storage.js and shared/shared.css are not modified"}
+{"task": "implement the smallest safe change set for the stated goal", "constraints": "preservation of unrelated working code, run validation commands and fix discovered issues"}
