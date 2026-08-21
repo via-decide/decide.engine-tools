@@ -1,22 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+const tools = [];
+
+function registerTool(tool) {
+  if (!tool || typeof tool !== 'object') {
+    throw new Error('Invalid tool provided');
+  }
+  tools.push(tool);
+}
 
 module.exports = {
-  saveArtifact: async (artifactName, artifactData) => {
-    const artifactsDir = path.join(__dirname, '../artifacts');
-    if (!fs.existsSync(artifactsDir)) {
-      try {
-        await fs.promises.mkdir(artifactsDir);
-      } catch (err) {
-        console.error(`Failed to create directory: ${err}`);
-        throw err;
-      }
-    }
-    try {
-      await fs.promises.writeFile(path.join(artifactsDir, `${artifactName}.json`), JSON.stringify(artifactData));
-    } catch (err) {
-      console.error(`Failed to write file: ${err}`);
-      throw err;
-    }
-  },
+  registerTool,
+  getTools() {
+    return tools;
+  }
 };
