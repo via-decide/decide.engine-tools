@@ -1,3 +1,3 @@
-{"task": "Implement the core modules (Workspace, StudyOS, Tools, Agent Console, Settings) with their respective index.html and tool.js files.", "constraints": ""}
-{"task": "Preserve working code; prefer additive modular changes.", "constraints": ""}
-{"task": "Run validation commands and fix discovered issues.", "constraints": ""}
+{"task": "review repository architecture", "constraints": "preserve existing code; prefer additive modular changes"}
+{"task": "audit current implementation", "constraints": "verify local repo is codex-compatible and no regressions exist"}
+{"task": "synthesize draft revision notes", "constraints": "structure a canonical engineering product record for R0.1"}
