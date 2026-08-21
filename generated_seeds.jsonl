@@ -1,3 +1,3 @@
-{"task": "Audit architecture for current behavior.", "constraints": "Preserve existing code; prefer additive changes."}
-{"task": "Implement the smallest safe change set for the stated goal.", "constraints": "Preserve unrelated working code. Prefer additive modular changes."}
-{"task": "Return complete final file contents for every modified or created file.", "constraints": "Self-review for regressions, missing env wiring, and docs drift."}
+{"task": "Implement process definition", "constraints": "Preserve existing code and add modular changes"}
+{"task": "Research provenance and evidence references", "constraints": "Preserve existing code and add modular changes"}
+{"task": "Handle registration of new tools in existing files", "constraints": "Preserve working code and prefer additive modular changes"}
