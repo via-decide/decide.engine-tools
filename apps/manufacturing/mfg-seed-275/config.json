@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-275",
+  "name": "Mfg Task 275: Error/fault code parsing",
+  "title": "Implement an alert routing mechanism for PLC diagn",
+  "description": "Implement an alert routing mechanism for PLC diagnostic words.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-275/index.html"
+}

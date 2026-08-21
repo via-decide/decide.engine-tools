@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-309",
+  "name": "Mfg Task 309: Sensor calibration routines",
+  "title": "Implement moving-average noise filtering for an ab",
+  "description": "Implement moving-average noise filtering for an absolute pressure sensor.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-309/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-328",
+  "name": "Mfg Task 328: Edge data formatting",
+  "title": "Create a data aggregator that batches production c",
+  "description": "Create a data aggregator that batches production count metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-328/index.html"
+}

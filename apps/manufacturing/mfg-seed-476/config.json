@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-476",
+  "name": "Mfg Task 476: Production telemetry schema",
+  "title": "Write Zod validation rules for operator login/logo",
+  "description": "Write Zod validation rules for operator login/logout sessions.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-476/index.html"
+}

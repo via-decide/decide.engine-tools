@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-470",
+  "name": "Mfg Task 470: Hardware abstraction / HAL",
+  "title": "Create mock interfaces to simulate SPI flash memor",
+  "description": "Create mock interfaces to simulate SPI flash memory.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-470/index.html"
+}

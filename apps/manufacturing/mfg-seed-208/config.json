@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-208",
+  "name": "Mfg Task 208: Physical / Signal Layer",
+  "title": "Implement ADC scaling and noise filtering for disc",
+  "description": "Implement ADC scaling and noise filtering for discrete digital I/O.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-208/index.html"
+}

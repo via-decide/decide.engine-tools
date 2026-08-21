@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-285",
+  "name": "Mfg Task 285: Safety interlock logic",
+  "title": "Implement fail-safe state fallback for a robotic a",
+  "description": "Implement fail-safe state fallback for a robotic arm controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-285/index.html"
+}

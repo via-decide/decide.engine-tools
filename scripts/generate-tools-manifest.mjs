@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
 const TOOLS_DIR = path.join(REPO_ROOT, 'tools');
+const APPS_DIR = path.join(REPO_ROOT, 'apps');
 const MANIFEST_PATH = path.join(REPO_ROOT, 'tools-manifest.json');
 
 async function findConfigPaths(dir, results = []) {
@@ -32,7 +33,9 @@ function toPosixRelative(fullPath) {
 }
 
 async function generateManifest() {
-  const configPaths = await findConfigPaths(TOOLS_DIR);
+  const toolPaths = await findConfigPaths(TOOLS_DIR);
+  const appPaths = await findConfigPaths(APPS_DIR).catch(() => []); // Ignore if apps dir missing
+  const configPaths = [...toolPaths, ...appPaths];
   configPaths.sort((a, b) => toPosixRelative(a).localeCompare(toPosixRelative(b)));
 
   const entries = configPaths.map((configPath) => {

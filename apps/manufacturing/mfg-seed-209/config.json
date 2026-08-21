@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-209",
+  "name": "Mfg Task 209: Hardware abstraction / HAL",
+  "title": "Define a C-struct based hardware abstraction layer",
+  "description": "Define a C-struct based hardware abstraction layer for DAC outputs.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-209/index.html"
+}

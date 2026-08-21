@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-230",
+  "name": "Mfg Task 230: Error/fault code parsing",
+  "title": "Design a state machine to track severity escalatio",
+  "description": "Design a state machine to track severity escalation of PLC diagnostic words.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-230/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-132",
+  "name": "Mfg Task 132: Safety interlock logic",
+  "title": "Write dual-channel redundancy checks for a robotic",
+  "description": "Write dual-channel redundancy checks for a robotic arm controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-132/index.html"
+}

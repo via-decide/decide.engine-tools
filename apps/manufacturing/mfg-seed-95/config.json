@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-95",
+  "name": "Mfg Task 95: Error/fault code parsing",
+  "title": "Write a bitmask parser to decode fault states from",
+  "description": "Write a bitmask parser to decode fault states from PLC diagnostic words.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-95/index.html"
+}

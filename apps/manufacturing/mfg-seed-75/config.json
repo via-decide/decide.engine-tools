@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-75",
+  "name": "Mfg Task 75: Sensor calibration routines",
+  "title": "Write two-point linear calibration logic for a the",
+  "description": "Write two-point linear calibration logic for a thermistor reading.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-75/index.html"
+}

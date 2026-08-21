@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-499",
+  "name": "Mfg Task 499: Edge data formatting",
+  "title": "Implement a zero-allocation CSV formatter for prod",
+  "description": "Implement a zero-allocation CSV formatter for production count metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-499/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-4",
+  "name": "Mfg Task 4: Edge data formatting",
+  "title": "Build a lightweight JSON to MQTT serializer for ma",
+  "description": "Build a lightweight JSON to MQTT serializer for machine state transitions.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-4/index.html"
+}

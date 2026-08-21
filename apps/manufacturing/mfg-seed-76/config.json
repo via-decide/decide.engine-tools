@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-76",
+  "name": "Mfg Task 76: Edge data formatting",
+  "title": "Implement a zero-allocation CSV formatter for peri",
+  "description": "Implement a zero-allocation CSV formatter for periodic temperature logs.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-76/index.html"
+}

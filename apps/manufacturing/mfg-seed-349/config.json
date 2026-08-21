@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-349",
+  "name": "Mfg Task 349: Firmware OTA for constrained devices",
+  "title": "Implement A/B partition swapping logic for a BLE g",
+  "description": "Implement A/B partition swapping logic for a BLE gateway.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-349/index.html"
+}

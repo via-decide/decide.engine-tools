@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-9",
+  "name": "Mfg Task 9: Application / Device Protocols",
+  "title": "Build a timing-aware state machine for a J1939 die",
+  "description": "Build a timing-aware state machine for a J1939 diesel engine node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-9/index.html"
+}

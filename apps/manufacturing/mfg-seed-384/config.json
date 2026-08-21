@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-384",
+  "name": "Mfg Task 384: Safety interlock logic",
+  "title": "Write dual-channel redundancy checks for a high-po",
+  "description": "Write dual-channel redundancy checks for a high-power heater relay.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-384/index.html"
+}

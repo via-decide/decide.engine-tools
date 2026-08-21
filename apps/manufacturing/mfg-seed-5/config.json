@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-5",
+  "name": "Mfg Task 5: Error/fault code parsing",
+  "title": "Create a human-readable error translator for VFD e",
+  "description": "Create a human-readable error translator for VFD error registers.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-5/index.html"
+}

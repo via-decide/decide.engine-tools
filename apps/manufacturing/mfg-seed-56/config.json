@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-56",
+  "name": "Mfg Task 56: Hardware abstraction / HAL",
+  "title": "Write hardware initialization sequences for ADC pe",
+  "description": "Write hardware initialization sequences for ADC peripherals.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-56/index.html"
+}

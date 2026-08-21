@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-260",
+  "name": "Mfg Task 260: Production telemetry schema",
+  "title": "Write Zod validation rules for environmental condi",
+  "description": "Write Zod validation rules for environmental condition snapshots.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-260/index.html"
+}

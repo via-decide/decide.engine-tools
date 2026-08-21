@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-168",
+  "name": "Mfg Task 168: Safety interlock logic",
+  "title": "Design a watchdog timer reset strategy for a high-",
+  "description": "Design a watchdog timer reset strategy for a high-power heater relay.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-168/index.html"
+}

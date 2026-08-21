@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-71",
+  "name": "Mfg Task 71: Production telemetry schema",
+  "title": "Create a data migration script for v2 of operator ",
+  "description": "Create a data migration script for v2 of operator login/logout sessions.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-71/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-442",
+  "name": "Mfg Task 442: Physical / Signal Layer",
+  "title": "Implement debouncing logic for a 4-20mA analog cur",
+  "description": "Implement debouncing logic for a 4-20mA analog current loop.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-442/index.html"
+}

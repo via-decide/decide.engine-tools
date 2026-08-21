@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-347",
+  "name": "Mfg Task 347: Error/fault code parsing",
+  "title": "Implement an alert routing mechanism for servo dri",
+  "description": "Implement an alert routing mechanism for servo drive alarms.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-347/index.html"
+}

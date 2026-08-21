@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-26",
+  "name": "Mfg Task 26: Production telemetry schema",
+  "title": "Write Zod validation rules for machine cycle time ",
+  "description": "Write Zod validation rules for machine cycle time events.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-26/index.html"
+}

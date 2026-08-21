@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-1",
+  "name": "Mfg Task 1: Physical / Signal Layer",
+  "title": "Implement debouncing logic for discrete digital I/",
+  "description": "Implement debouncing logic for discrete digital I/O.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-1/index.html"
+}

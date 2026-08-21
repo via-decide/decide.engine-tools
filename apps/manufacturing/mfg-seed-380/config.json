@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-380",
+  "name": "Mfg Task 380: Hardware abstraction / HAL",
+  "title": "Implement vendor-agnostic GPIO and I2C wrappers fo",
+  "description": "Implement vendor-agnostic GPIO and I2C wrappers for SPI flash memory.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-380/index.html"
+}

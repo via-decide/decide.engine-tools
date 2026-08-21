@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-348",
+  "name": "Mfg Task 348: Safety interlock logic",
+  "title": "Design a watchdog timer reset strategy for a robot",
+  "description": "Design a watchdog timer reset strategy for a robotic arm controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-348/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-88",
+  "name": "Mfg Task 88: Firmware OTA for constrained devices",
+  "title": "Implement A/B partition swapping logic for an ESP3",
+  "description": "Implement A/B partition swapping logic for an ESP32 based sensor node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-88/index.html"
+}

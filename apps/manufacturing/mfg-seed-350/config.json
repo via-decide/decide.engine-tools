@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-350",
+  "name": "Mfg Task 350: Production telemetry schema",
+  "title": "Create a data migration script for v2 of environme",
+  "description": "Create a data migration script for v2 of environmental condition snapshots.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-350/index.html"
+}

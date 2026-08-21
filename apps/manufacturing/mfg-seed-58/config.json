@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-58",
+  "name": "Mfg Task 58: Edge data formatting",
+  "title": "Create a data aggregator that batches machine stat",
+  "description": "Create a data aggregator that batches machine state transitions.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-58/index.html"
+}

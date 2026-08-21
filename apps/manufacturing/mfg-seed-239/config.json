@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-239",
+  "name": "Mfg Task 239: Error/fault code parsing",
+  "title": "Write a bitmask parser to decode fault states from",
+  "description": "Write a bitmask parser to decode fault states from VFD error registers.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-239/index.html"
+}

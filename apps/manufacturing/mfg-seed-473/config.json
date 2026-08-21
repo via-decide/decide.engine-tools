@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-473",
+  "name": "Mfg Task 473: Error/fault code parsing",
+  "title": "Create a human-readable error translator for servo",
+  "description": "Create a human-readable error translator for servo drive alarms.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-473/index.html"
+}

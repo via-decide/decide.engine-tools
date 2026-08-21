@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-492",
+  "name": "Mfg Task 492: Safety interlock logic",
+  "title": "Create an emergency stop (E-stop) interrupt handle",
+  "description": "Create an emergency stop (E-stop) interrupt handler for a pneumatic press valve.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-492/index.html"
+}

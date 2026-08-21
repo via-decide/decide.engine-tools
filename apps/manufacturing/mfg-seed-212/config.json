@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-212",
+  "name": "Mfg Task 212: Error/fault code parsing",
+  "title": "Create a human-readable error translator for PLC d",
+  "description": "Create a human-readable error translator for PLC diagnostic words.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-212/index.html"
+}

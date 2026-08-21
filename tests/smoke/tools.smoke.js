@@ -49,7 +49,7 @@ const SMOKE_TARGETS = [
   { id: 'dashboard',            path: 'dashboard/index.html' },
   { id: 'workspace',            path: 'workspace/index.html' },
   { id: 'tool-catalog',         path: 'tools/index.html' },
-  { id: 'studyos',              path: 'StudyOS/index.html' },
+  { id: 'studyos',              path: 'apps/studyos/index.html' },
   { id: 'decide-engine-studio', path: 'games/index.html' },
   { id: 'ai-simulation-studio', path: 'games/ai-simulation-studio.html' },
   { id: 'mars-runtime',         path: 'games/mars/index.html' },

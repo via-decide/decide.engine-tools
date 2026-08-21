@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-211",
+  "name": "Mfg Task 211: Edge data formatting",
+  "title": "Design a schema validator for incoming high-freque",
+  "description": "Design a schema validator for incoming high-frequency vibration data.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-211/index.html"
+}

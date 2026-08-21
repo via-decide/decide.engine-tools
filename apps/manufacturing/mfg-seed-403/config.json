@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-403",
+  "name": "Mfg Task 403: Firmware OTA for constrained devices",
+  "title": "Implement A/B partition swapping logic for an LoRa",
+  "description": "Implement A/B partition swapping logic for an LoRaWAN endpoint.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-403/index.html"
+}

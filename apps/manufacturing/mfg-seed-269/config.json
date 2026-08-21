@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-269",
+  "name": "Mfg Task 269: Production telemetry schema",
+  "title": "Create a data migration script for v2 of machine c",
+  "description": "Create a data migration script for v2 of machine cycle time events.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-269/index.html"
+}

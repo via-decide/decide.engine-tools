@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-226",
+  "name": "Mfg Task 226: Physical / Signal Layer",
+  "title": "Implement ADC scaling and noise filtering for an R",
+  "description": "Implement ADC scaling and noise filtering for an RS-485 electrical interface.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-226/index.html"
+}

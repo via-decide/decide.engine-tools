@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-262",
+  "name": "Mfg Task 262: Physical / Signal Layer",
+  "title": "Handle differential signal integrity diagnostics o",
+  "description": "Handle differential signal integrity diagnostics on an RS-485 electrical interface.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-262/index.html"
+}

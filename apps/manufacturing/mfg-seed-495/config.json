@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-495",
+  "name": "Mfg Task 495: Application / Device Protocols",
+  "title": "Implement Modbus holding register word-ordering pa",
+  "description": "Implement Modbus holding register word-ordering parsing for a CANopen motor controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-495/index.html"
+}

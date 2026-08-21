@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-21",
+  "name": "Mfg Task 21: Sensor calibration routines",
+  "title": "Implement moving-average noise filtering for a the",
+  "description": "Implement moving-average noise filtering for a thermistor reading.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-21/index.html"
+}

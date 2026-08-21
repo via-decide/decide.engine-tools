@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-126",
+  "name": "Mfg Task 126: Application / Device Protocols",
+  "title": "Create a fault-tolerant CRC check for a J1939 dies",
+  "description": "Create a fault-tolerant CRC check for a J1939 diesel engine node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-126/index.html"
+}

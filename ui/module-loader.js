@@ -3,7 +3,7 @@
 
   const MODULE_PATHS = {
     workspace: '../workspace/index.html',
-    studyos: '../StudyOS/index.html',
+    studyos: '../apps/studyos/index.html',
     tools: '../tools/index.html',
     agent: '../agent/index.html',
     settings: '../founder/index.html',

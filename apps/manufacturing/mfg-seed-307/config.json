@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-307",
+  "name": "Mfg Task 307: Physical / Signal Layer",
+  "title": "Implement ADC scaling and noise filtering for a CA",
+  "description": "Implement ADC scaling and noise filtering for a CAN physical layer transceiver.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-307/index.html"
+}

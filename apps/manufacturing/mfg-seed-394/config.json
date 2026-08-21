@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-394",
+  "name": "Mfg Task 394: Firmware OTA for constrained devices",
+  "title": "Write a cryptographic signature verification routi",
+  "description": "Write a cryptographic signature verification routine for an ESP32 based sensor node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-394/index.html"
+}

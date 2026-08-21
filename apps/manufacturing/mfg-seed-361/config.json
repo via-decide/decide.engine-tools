@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-361",
+  "name": "Mfg Task 361: Physical / Signal Layer",
+  "title": "Handle differential signal integrity diagnostics o",
+  "description": "Handle differential signal integrity diagnostics on discrete digital I/O.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-361/index.html"
+}

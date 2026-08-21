@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-55",
+  "name": "Mfg Task 55: Physical / Signal Layer",
+  "title": "Detect open-loop faults (under 4mA) on a 4-20mA an",
+  "description": "Detect open-loop faults (under 4mA) on a 4-20mA analog current loop.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-55/index.html"
+}

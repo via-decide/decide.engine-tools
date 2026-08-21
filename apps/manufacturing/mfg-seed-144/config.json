@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-144",
+  "name": "Mfg Task 144: Application / Device Protocols",
+  "title": "Create a fault-tolerant CRC check for a Modbus RTU",
+  "description": "Create a fault-tolerant CRC check for a Modbus RTU pressure transmitter.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-144/index.html"
+}

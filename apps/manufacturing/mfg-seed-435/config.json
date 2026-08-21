@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-435",
+  "name": "Mfg Task 435: Sensor calibration routines",
+  "title": "Design an auto-zeroing routine for a thermistor re",
+  "description": "Design an auto-zeroing routine for a thermistor reading.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-435/index.html"
+}

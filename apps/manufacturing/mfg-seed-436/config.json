@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-436",
+  "name": "Mfg Task 436: Edge data formatting",
+  "title": "Design a schema validator for incoming periodic te",
+  "description": "Design a schema validator for incoming periodic temperature logs.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-436/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-477",
+  "name": "Mfg Task 477: Application / Device Protocols",
+  "title": "Handle line noise and protocol framing errors on a",
+  "description": "Handle line noise and protocol framing errors on a generic Modbus TCP bridge.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-477/index.html"
+}

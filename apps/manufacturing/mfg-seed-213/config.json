@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-213",
+  "name": "Mfg Task 213: Safety interlock logic",
+  "title": "Design a watchdog timer reset strategy for a pneum",
+  "description": "Design a watchdog timer reset strategy for a pneumatic press valve.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-213/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-356",
+  "name": "Mfg Task 356: Error/fault code parsing",
+  "title": "Implement an alert routing mechanism for VFD error",
+  "description": "Implement an alert routing mechanism for VFD error registers.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-356/index.html"
+}

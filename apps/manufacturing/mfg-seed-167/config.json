@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-167",
+  "name": "Mfg Task 167: Error/fault code parsing",
+  "title": "Write a bitmask parser to decode fault states from",
+  "description": "Write a bitmask parser to decode fault states from servo drive alarms.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-167/index.html"
+}

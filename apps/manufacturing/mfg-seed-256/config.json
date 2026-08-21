@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-256",
+  "name": "Mfg Task 256: Edge data formatting",
+  "title": "Implement a zero-allocation CSV formatter for high",
+  "description": "Implement a zero-allocation CSV formatter for high-frequency vibration data.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-256/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-69",
+  "name": "Mfg Task 69: Safety interlock logic",
+  "title": "Write dual-channel redundancy checks for a UV curi",
+  "description": "Write dual-channel redundancy checks for a UV curing lamp.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-69/index.html"
+}

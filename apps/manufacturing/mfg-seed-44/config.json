@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-44",
+  "name": "Mfg Task 44: Production telemetry schema",
+  "title": "Implement a telemetry aggregation endpoint for mac",
+  "description": "Implement a telemetry aggregation endpoint for machine cycle time events.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-44/index.html"
+}

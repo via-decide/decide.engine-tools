@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-330",
+  "name": "Mfg Task 330: Safety interlock logic",
+  "title": "Create an emergency stop (E-stop) interrupt handle",
+  "description": "Create an emergency stop (E-stop) interrupt handler for a high-power heater relay.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-330/index.html"
+}

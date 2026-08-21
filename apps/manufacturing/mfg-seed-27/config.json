@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-27",
+  "name": "Mfg Task 27: Application / Device Protocols",
+  "title": "Handle line noise and protocol framing errors on a",
+  "description": "Handle line noise and protocol framing errors on a J1939 diesel engine node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-27/index.html"
+}

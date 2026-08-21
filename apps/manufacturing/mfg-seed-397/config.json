@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-397",
+  "name": "Mfg Task 397: Physical / Signal Layer",
+  "title": "Handle differential signal integrity diagnostics o",
+  "description": "Handle differential signal integrity diagnostics on a CAN physical layer transceiver.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-397/index.html"
+}

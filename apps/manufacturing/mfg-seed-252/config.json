@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-252",
+  "name": "Mfg Task 252: Application / Device Protocols",
+  "title": "Build a timing-aware state machine for a generic M",
+  "description": "Build a timing-aware state machine for a generic Modbus TCP bridge.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-252/index.html"
+}

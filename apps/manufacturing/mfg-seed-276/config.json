@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-276",
+  "name": "Mfg Task 276: Safety interlock logic",
+  "title": "Implement fail-safe state fallback for a UV curing",
+  "description": "Implement fail-safe state fallback for a UV curing lamp.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-276/index.html"
+}

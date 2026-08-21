@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-171",
+  "name": "Mfg Task 171: Application / Device Protocols",
+  "title": "Create a fault-tolerant CRC check for a generic Mo",
+  "description": "Create a fault-tolerant CRC check for a generic Modbus TCP bridge.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-171/index.html"
+}

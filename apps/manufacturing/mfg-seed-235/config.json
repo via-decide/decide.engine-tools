@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-235",
+  "name": "Mfg Task 235: Physical / Signal Layer",
+  "title": "Detect open-loop faults (under 4mA) on a CAN physi",
+  "description": "Detect open-loop faults (under 4mA) on a CAN physical layer transceiver.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-235/index.html"
+}

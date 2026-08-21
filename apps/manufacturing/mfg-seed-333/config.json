@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-333",
+  "name": "Mfg Task 333: Application / Device Protocols",
+  "title": "Implement Modbus holding register word-ordering pa",
+  "description": "Implement Modbus holding register word-ordering parsing for a Modbus RTU pressure transmitter.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-333/index.html"
+}

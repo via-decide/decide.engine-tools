@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-47",
+  "name": "Mfg Task 47: Hardware abstraction / HAL",
+  "title": "Write hardware initialization sequences for SPI fl",
+  "description": "Write hardware initialization sequences for SPI flash memory.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-47/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-154",
+  "name": "Mfg Task 154: Physical / Signal Layer",
+  "title": "Implement debouncing logic for a CAN physical laye",
+  "description": "Implement debouncing logic for a CAN physical layer transceiver.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-154/index.html"
+}

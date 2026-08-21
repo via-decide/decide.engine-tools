@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-223",
+  "name": "Mfg Task 223: Firmware OTA for constrained devices",
+  "title": "Design a rollback mechanism for failed an ESP32 ba",
+  "description": "Design a rollback mechanism for failed an ESP32 based sensor node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-223/index.html"
+}

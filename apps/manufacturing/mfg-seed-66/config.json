@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-66",
+  "name": "Mfg Task 66: Sensor calibration routines",
+  "title": "Write two-point linear calibration logic for a loa",
+  "description": "Write two-point linear calibration logic for a load cell amplifier.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-66/index.html"
+}

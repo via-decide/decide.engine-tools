@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-170",
+  "name": "Mfg Task 170: Production telemetry schema",
+  "title": "Write Zod validation rules for yield and scrap rat",
+  "description": "Write Zod validation rules for yield and scrap rate metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-170/index.html"
+}

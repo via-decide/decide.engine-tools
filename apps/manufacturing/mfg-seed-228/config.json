@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-228",
+  "name": "Mfg Task 228: Sensor calibration routines",
+  "title": "Write two-point linear calibration logic for a pH ",
+  "description": "Write two-point linear calibration logic for a pH probe interface.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-228/index.html"
+}

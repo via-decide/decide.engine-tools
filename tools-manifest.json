@@ -1,896 +1,2337 @@
 {
-  "generatedAt": "2026-06-09T00:28:29.850Z",
+  "generatedAt": "2026-08-21T22:57:46.952Z",
   "entries": [
     {
+      "toolDir": "apps/manufacturing/mfg-seed-0",
+      "metaPath": "apps/manufacturing/mfg-seed-0/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-1",
+      "metaPath": "apps/manufacturing/mfg-seed-1/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-10",
+      "metaPath": "apps/manufacturing/mfg-seed-10/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-100",
+      "metaPath": "apps/manufacturing/mfg-seed-100/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-101",
+      "metaPath": "apps/manufacturing/mfg-seed-101/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-102",
+      "metaPath": "apps/manufacturing/mfg-seed-102/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-103",
+      "metaPath": "apps/manufacturing/mfg-seed-103/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-104",
+      "metaPath": "apps/manufacturing/mfg-seed-104/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-105",
+      "metaPath": "apps/manufacturing/mfg-seed-105/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-106",
+      "metaPath": "apps/manufacturing/mfg-seed-106/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-107",
+      "metaPath": "apps/manufacturing/mfg-seed-107/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-108",
+      "metaPath": "apps/manufacturing/mfg-seed-108/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-109",
+      "metaPath": "apps/manufacturing/mfg-seed-109/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-11",
+      "metaPath": "apps/manufacturing/mfg-seed-11/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-110",
+      "metaPath": "apps/manufacturing/mfg-seed-110/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-111",
+      "metaPath": "apps/manufacturing/mfg-seed-111/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-112",
+      "metaPath": "apps/manufacturing/mfg-seed-112/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-113",
+      "metaPath": "apps/manufacturing/mfg-seed-113/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-114",
+      "metaPath": "apps/manufacturing/mfg-seed-114/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-115",
+      "metaPath": "apps/manufacturing/mfg-seed-115/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-116",
+      "metaPath": "apps/manufacturing/mfg-seed-116/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-117",
+      "metaPath": "apps/manufacturing/mfg-seed-117/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-118",
+      "metaPath": "apps/manufacturing/mfg-seed-118/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-119",
+      "metaPath": "apps/manufacturing/mfg-seed-119/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-12",
+      "metaPath": "apps/manufacturing/mfg-seed-12/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-120",
+      "metaPath": "apps/manufacturing/mfg-seed-120/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-121",
+      "metaPath": "apps/manufacturing/mfg-seed-121/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-122",
+      "metaPath": "apps/manufacturing/mfg-seed-122/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-123",
+      "metaPath": "apps/manufacturing/mfg-seed-123/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-124",
+      "metaPath": "apps/manufacturing/mfg-seed-124/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-125",
+      "metaPath": "apps/manufacturing/mfg-seed-125/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-126",
+      "metaPath": "apps/manufacturing/mfg-seed-126/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-127",
+      "metaPath": "apps/manufacturing/mfg-seed-127/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-128",
+      "metaPath": "apps/manufacturing/mfg-seed-128/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-129",
+      "metaPath": "apps/manufacturing/mfg-seed-129/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-13",
+      "metaPath": "apps/manufacturing/mfg-seed-13/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-130",
+      "metaPath": "apps/manufacturing/mfg-seed-130/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-131",
+      "metaPath": "apps/manufacturing/mfg-seed-131/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-132",
+      "metaPath": "apps/manufacturing/mfg-seed-132/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-133",
+      "metaPath": "apps/manufacturing/mfg-seed-133/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-134",
+      "metaPath": "apps/manufacturing/mfg-seed-134/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-135",
+      "metaPath": "apps/manufacturing/mfg-seed-135/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-136",
+      "metaPath": "apps/manufacturing/mfg-seed-136/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-137",
+      "metaPath": "apps/manufacturing/mfg-seed-137/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-138",
+      "metaPath": "apps/manufacturing/mfg-seed-138/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-139",
+      "metaPath": "apps/manufacturing/mfg-seed-139/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-14",
+      "metaPath": "apps/manufacturing/mfg-seed-14/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-140",
+      "metaPath": "apps/manufacturing/mfg-seed-140/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-141",
+      "metaPath": "apps/manufacturing/mfg-seed-141/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-142",
+      "metaPath": "apps/manufacturing/mfg-seed-142/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-143",
+      "metaPath": "apps/manufacturing/mfg-seed-143/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-144",
+      "metaPath": "apps/manufacturing/mfg-seed-144/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-145",
+      "metaPath": "apps/manufacturing/mfg-seed-145/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-146",
+      "metaPath": "apps/manufacturing/mfg-seed-146/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-147",
+      "metaPath": "apps/manufacturing/mfg-seed-147/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-148",
+      "metaPath": "apps/manufacturing/mfg-seed-148/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-149",
+      "metaPath": "apps/manufacturing/mfg-seed-149/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-15",
+      "metaPath": "apps/manufacturing/mfg-seed-15/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-150",
+      "metaPath": "apps/manufacturing/mfg-seed-150/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-151",
+      "metaPath": "apps/manufacturing/mfg-seed-151/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-152",
+      "metaPath": "apps/manufacturing/mfg-seed-152/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-153",
+      "metaPath": "apps/manufacturing/mfg-seed-153/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-154",
+      "metaPath": "apps/manufacturing/mfg-seed-154/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-155",
+      "metaPath": "apps/manufacturing/mfg-seed-155/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-156",
+      "metaPath": "apps/manufacturing/mfg-seed-156/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-157",
+      "metaPath": "apps/manufacturing/mfg-seed-157/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-158",
+      "metaPath": "apps/manufacturing/mfg-seed-158/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-159",
+      "metaPath": "apps/manufacturing/mfg-seed-159/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-16",
+      "metaPath": "apps/manufacturing/mfg-seed-16/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-160",
+      "metaPath": "apps/manufacturing/mfg-seed-160/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-161",
+      "metaPath": "apps/manufacturing/mfg-seed-161/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-162",
+      "metaPath": "apps/manufacturing/mfg-seed-162/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-163",
+      "metaPath": "apps/manufacturing/mfg-seed-163/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-164",
+      "metaPath": "apps/manufacturing/mfg-seed-164/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-165",
+      "metaPath": "apps/manufacturing/mfg-seed-165/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-166",
+      "metaPath": "apps/manufacturing/mfg-seed-166/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-167",
+      "metaPath": "apps/manufacturing/mfg-seed-167/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-168",
+      "metaPath": "apps/manufacturing/mfg-seed-168/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-169",
+      "metaPath": "apps/manufacturing/mfg-seed-169/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-17",
+      "metaPath": "apps/manufacturing/mfg-seed-17/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-170",
+      "metaPath": "apps/manufacturing/mfg-seed-170/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-171",
+      "metaPath": "apps/manufacturing/mfg-seed-171/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-172",
+      "metaPath": "apps/manufacturing/mfg-seed-172/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-173",
+      "metaPath": "apps/manufacturing/mfg-seed-173/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-174",
+      "metaPath": "apps/manufacturing/mfg-seed-174/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-175",
+      "metaPath": "apps/manufacturing/mfg-seed-175/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-176",
+      "metaPath": "apps/manufacturing/mfg-seed-176/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-177",
+      "metaPath": "apps/manufacturing/mfg-seed-177/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-178",
+      "metaPath": "apps/manufacturing/mfg-seed-178/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-179",
+      "metaPath": "apps/manufacturing/mfg-seed-179/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-18",
+      "metaPath": "apps/manufacturing/mfg-seed-18/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-180",
+      "metaPath": "apps/manufacturing/mfg-seed-180/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-181",
+      "metaPath": "apps/manufacturing/mfg-seed-181/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-182",
+      "metaPath": "apps/manufacturing/mfg-seed-182/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-183",
+      "metaPath": "apps/manufacturing/mfg-seed-183/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-184",
+      "metaPath": "apps/manufacturing/mfg-seed-184/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-185",
+      "metaPath": "apps/manufacturing/mfg-seed-185/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-186",
+      "metaPath": "apps/manufacturing/mfg-seed-186/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-187",
+      "metaPath": "apps/manufacturing/mfg-seed-187/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-188",
+      "metaPath": "apps/manufacturing/mfg-seed-188/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-189",
+      "metaPath": "apps/manufacturing/mfg-seed-189/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-19",
+      "metaPath": "apps/manufacturing/mfg-seed-19/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-190",
+      "metaPath": "apps/manufacturing/mfg-seed-190/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-191",
+      "metaPath": "apps/manufacturing/mfg-seed-191/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-192",
+      "metaPath": "apps/manufacturing/mfg-seed-192/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-193",
+      "metaPath": "apps/manufacturing/mfg-seed-193/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-194",
+      "metaPath": "apps/manufacturing/mfg-seed-194/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-195",
+      "metaPath": "apps/manufacturing/mfg-seed-195/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-196",
+      "metaPath": "apps/manufacturing/mfg-seed-196/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-197",
+      "metaPath": "apps/manufacturing/mfg-seed-197/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-198",
+      "metaPath": "apps/manufacturing/mfg-seed-198/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-199",
+      "metaPath": "apps/manufacturing/mfg-seed-199/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-2",
+      "metaPath": "apps/manufacturing/mfg-seed-2/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-20",
+      "metaPath": "apps/manufacturing/mfg-seed-20/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-200",
+      "metaPath": "apps/manufacturing/mfg-seed-200/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-201",
+      "metaPath": "apps/manufacturing/mfg-seed-201/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-202",
+      "metaPath": "apps/manufacturing/mfg-seed-202/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-203",
+      "metaPath": "apps/manufacturing/mfg-seed-203/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-204",
+      "metaPath": "apps/manufacturing/mfg-seed-204/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-205",
+      "metaPath": "apps/manufacturing/mfg-seed-205/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-206",
+      "metaPath": "apps/manufacturing/mfg-seed-206/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-207",
+      "metaPath": "apps/manufacturing/mfg-seed-207/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-208",
+      "metaPath": "apps/manufacturing/mfg-seed-208/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-209",
+      "metaPath": "apps/manufacturing/mfg-seed-209/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-21",
+      "metaPath": "apps/manufacturing/mfg-seed-21/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-210",
+      "metaPath": "apps/manufacturing/mfg-seed-210/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-211",
+      "metaPath": "apps/manufacturing/mfg-seed-211/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-212",
+      "metaPath": "apps/manufacturing/mfg-seed-212/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-213",
+      "metaPath": "apps/manufacturing/mfg-seed-213/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-214",
+      "metaPath": "apps/manufacturing/mfg-seed-214/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-215",
+      "metaPath": "apps/manufacturing/mfg-seed-215/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-216",
+      "metaPath": "apps/manufacturing/mfg-seed-216/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-217",
+      "metaPath": "apps/manufacturing/mfg-seed-217/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-218",
+      "metaPath": "apps/manufacturing/mfg-seed-218/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-219",
+      "metaPath": "apps/manufacturing/mfg-seed-219/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-22",
+      "metaPath": "apps/manufacturing/mfg-seed-22/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-220",
+      "metaPath": "apps/manufacturing/mfg-seed-220/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-221",
+      "metaPath": "apps/manufacturing/mfg-seed-221/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-222",
+      "metaPath": "apps/manufacturing/mfg-seed-222/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-223",
+      "metaPath": "apps/manufacturing/mfg-seed-223/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-224",
+      "metaPath": "apps/manufacturing/mfg-seed-224/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-225",
+      "metaPath": "apps/manufacturing/mfg-seed-225/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-226",
+      "metaPath": "apps/manufacturing/mfg-seed-226/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-227",
+      "metaPath": "apps/manufacturing/mfg-seed-227/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-228",
+      "metaPath": "apps/manufacturing/mfg-seed-228/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-229",
+      "metaPath": "apps/manufacturing/mfg-seed-229/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-23",
+      "metaPath": "apps/manufacturing/mfg-seed-23/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-230",
+      "metaPath": "apps/manufacturing/mfg-seed-230/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-231",
+      "metaPath": "apps/manufacturing/mfg-seed-231/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-232",
+      "metaPath": "apps/manufacturing/mfg-seed-232/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-233",
+      "metaPath": "apps/manufacturing/mfg-seed-233/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-234",
+      "metaPath": "apps/manufacturing/mfg-seed-234/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-235",
+      "metaPath": "apps/manufacturing/mfg-seed-235/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-236",
+      "metaPath": "apps/manufacturing/mfg-seed-236/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-237",
+      "metaPath": "apps/manufacturing/mfg-seed-237/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-238",
+      "metaPath": "apps/manufacturing/mfg-seed-238/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-239",
+      "metaPath": "apps/manufacturing/mfg-seed-239/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-24",
+      "metaPath": "apps/manufacturing/mfg-seed-24/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-240",
+      "metaPath": "apps/manufacturing/mfg-seed-240/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-241",
+      "metaPath": "apps/manufacturing/mfg-seed-241/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-242",
+      "metaPath": "apps/manufacturing/mfg-seed-242/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-243",
+      "metaPath": "apps/manufacturing/mfg-seed-243/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-244",
+      "metaPath": "apps/manufacturing/mfg-seed-244/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-245",
+      "metaPath": "apps/manufacturing/mfg-seed-245/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-246",
+      "metaPath": "apps/manufacturing/mfg-seed-246/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-247",
+      "metaPath": "apps/manufacturing/mfg-seed-247/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-248",
+      "metaPath": "apps/manufacturing/mfg-seed-248/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-249",
+      "metaPath": "apps/manufacturing/mfg-seed-249/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-25",
+      "metaPath": "apps/manufacturing/mfg-seed-25/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-250",
+      "metaPath": "apps/manufacturing/mfg-seed-250/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-251",
+      "metaPath": "apps/manufacturing/mfg-seed-251/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-252",
+      "metaPath": "apps/manufacturing/mfg-seed-252/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-253",
+      "metaPath": "apps/manufacturing/mfg-seed-253/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-254",
+      "metaPath": "apps/manufacturing/mfg-seed-254/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-255",
+      "metaPath": "apps/manufacturing/mfg-seed-255/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-256",
+      "metaPath": "apps/manufacturing/mfg-seed-256/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-257",
+      "metaPath": "apps/manufacturing/mfg-seed-257/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-258",
+      "metaPath": "apps/manufacturing/mfg-seed-258/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-259",
+      "metaPath": "apps/manufacturing/mfg-seed-259/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-26",
+      "metaPath": "apps/manufacturing/mfg-seed-26/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-260",
+      "metaPath": "apps/manufacturing/mfg-seed-260/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-261",
+      "metaPath": "apps/manufacturing/mfg-seed-261/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-262",
+      "metaPath": "apps/manufacturing/mfg-seed-262/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-263",
+      "metaPath": "apps/manufacturing/mfg-seed-263/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-264",
+      "metaPath": "apps/manufacturing/mfg-seed-264/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-265",
+      "metaPath": "apps/manufacturing/mfg-seed-265/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-266",
+      "metaPath": "apps/manufacturing/mfg-seed-266/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-267",
+      "metaPath": "apps/manufacturing/mfg-seed-267/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-268",
+      "metaPath": "apps/manufacturing/mfg-seed-268/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-269",
+      "metaPath": "apps/manufacturing/mfg-seed-269/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-27",
+      "metaPath": "apps/manufacturing/mfg-seed-27/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-270",
+      "metaPath": "apps/manufacturing/mfg-seed-270/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-271",
+      "metaPath": "apps/manufacturing/mfg-seed-271/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-272",
+      "metaPath": "apps/manufacturing/mfg-seed-272/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-273",
+      "metaPath": "apps/manufacturing/mfg-seed-273/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-274",
+      "metaPath": "apps/manufacturing/mfg-seed-274/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-275",
+      "metaPath": "apps/manufacturing/mfg-seed-275/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-276",
+      "metaPath": "apps/manufacturing/mfg-seed-276/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-277",
+      "metaPath": "apps/manufacturing/mfg-seed-277/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-278",
+      "metaPath": "apps/manufacturing/mfg-seed-278/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-279",
+      "metaPath": "apps/manufacturing/mfg-seed-279/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-28",
+      "metaPath": "apps/manufacturing/mfg-seed-28/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-280",
+      "metaPath": "apps/manufacturing/mfg-seed-280/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-281",
+      "metaPath": "apps/manufacturing/mfg-seed-281/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-282",
+      "metaPath": "apps/manufacturing/mfg-seed-282/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-283",
+      "metaPath": "apps/manufacturing/mfg-seed-283/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-284",
+      "metaPath": "apps/manufacturing/mfg-seed-284/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-285",
+      "metaPath": "apps/manufacturing/mfg-seed-285/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-286",
+      "metaPath": "apps/manufacturing/mfg-seed-286/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-287",
+      "metaPath": "apps/manufacturing/mfg-seed-287/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-288",
+      "metaPath": "apps/manufacturing/mfg-seed-288/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-289",
+      "metaPath": "apps/manufacturing/mfg-seed-289/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-29",
+      "metaPath": "apps/manufacturing/mfg-seed-29/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-290",
+      "metaPath": "apps/manufacturing/mfg-seed-290/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-291",
+      "metaPath": "apps/manufacturing/mfg-seed-291/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-292",
+      "metaPath": "apps/manufacturing/mfg-seed-292/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-293",
+      "metaPath": "apps/manufacturing/mfg-seed-293/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-294",
+      "metaPath": "apps/manufacturing/mfg-seed-294/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-295",
+      "metaPath": "apps/manufacturing/mfg-seed-295/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-296",
+      "metaPath": "apps/manufacturing/mfg-seed-296/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-297",
+      "metaPath": "apps/manufacturing/mfg-seed-297/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-298",
+      "metaPath": "apps/manufacturing/mfg-seed-298/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-299",
+      "metaPath": "apps/manufacturing/mfg-seed-299/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-3",
+      "metaPath": "apps/manufacturing/mfg-seed-3/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-30",
+      "metaPath": "apps/manufacturing/mfg-seed-30/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-300",
+      "metaPath": "apps/manufacturing/mfg-seed-300/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-301",
+      "metaPath": "apps/manufacturing/mfg-seed-301/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-302",
+      "metaPath": "apps/manufacturing/mfg-seed-302/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-303",
+      "metaPath": "apps/manufacturing/mfg-seed-303/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-304",
+      "metaPath": "apps/manufacturing/mfg-seed-304/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-305",
+      "metaPath": "apps/manufacturing/mfg-seed-305/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-306",
+      "metaPath": "apps/manufacturing/mfg-seed-306/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-307",
+      "metaPath": "apps/manufacturing/mfg-seed-307/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-308",
+      "metaPath": "apps/manufacturing/mfg-seed-308/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-309",
+      "metaPath": "apps/manufacturing/mfg-seed-309/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-31",
+      "metaPath": "apps/manufacturing/mfg-seed-31/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-310",
+      "metaPath": "apps/manufacturing/mfg-seed-310/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-311",
+      "metaPath": "apps/manufacturing/mfg-seed-311/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-312",
+      "metaPath": "apps/manufacturing/mfg-seed-312/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-313",
+      "metaPath": "apps/manufacturing/mfg-seed-313/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-314",
+      "metaPath": "apps/manufacturing/mfg-seed-314/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-315",
+      "metaPath": "apps/manufacturing/mfg-seed-315/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-316",
+      "metaPath": "apps/manufacturing/mfg-seed-316/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-317",
+      "metaPath": "apps/manufacturing/mfg-seed-317/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-318",
+      "metaPath": "apps/manufacturing/mfg-seed-318/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-319",
+      "metaPath": "apps/manufacturing/mfg-seed-319/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-32",
+      "metaPath": "apps/manufacturing/mfg-seed-32/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-320",
+      "metaPath": "apps/manufacturing/mfg-seed-320/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-321",
+      "metaPath": "apps/manufacturing/mfg-seed-321/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-322",
+      "metaPath": "apps/manufacturing/mfg-seed-322/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-323",
+      "metaPath": "apps/manufacturing/mfg-seed-323/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-324",
+      "metaPath": "apps/manufacturing/mfg-seed-324/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-325",
+      "metaPath": "apps/manufacturing/mfg-seed-325/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-326",
+      "metaPath": "apps/manufacturing/mfg-seed-326/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-327",
+      "metaPath": "apps/manufacturing/mfg-seed-327/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-328",
+      "metaPath": "apps/manufacturing/mfg-seed-328/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-329",
+      "metaPath": "apps/manufacturing/mfg-seed-329/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-33",
+      "metaPath": "apps/manufacturing/mfg-seed-33/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-330",
+      "metaPath": "apps/manufacturing/mfg-seed-330/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-331",
+      "metaPath": "apps/manufacturing/mfg-seed-331/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-332",
+      "metaPath": "apps/manufacturing/mfg-seed-332/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-333",
+      "metaPath": "apps/manufacturing/mfg-seed-333/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-334",
+      "metaPath": "apps/manufacturing/mfg-seed-334/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-335",
+      "metaPath": "apps/manufacturing/mfg-seed-335/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-336",
+      "metaPath": "apps/manufacturing/mfg-seed-336/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-337",
+      "metaPath": "apps/manufacturing/mfg-seed-337/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-338",
+      "metaPath": "apps/manufacturing/mfg-seed-338/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-339",
+      "metaPath": "apps/manufacturing/mfg-seed-339/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-34",
+      "metaPath": "apps/manufacturing/mfg-seed-34/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-340",
+      "metaPath": "apps/manufacturing/mfg-seed-340/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-341",
+      "metaPath": "apps/manufacturing/mfg-seed-341/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-342",
+      "metaPath": "apps/manufacturing/mfg-seed-342/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-343",
+      "metaPath": "apps/manufacturing/mfg-seed-343/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-344",
+      "metaPath": "apps/manufacturing/mfg-seed-344/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-345",
+      "metaPath": "apps/manufacturing/mfg-seed-345/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-346",
+      "metaPath": "apps/manufacturing/mfg-seed-346/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-347",
+      "metaPath": "apps/manufacturing/mfg-seed-347/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-348",
+      "metaPath": "apps/manufacturing/mfg-seed-348/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-349",
+      "metaPath": "apps/manufacturing/mfg-seed-349/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-35",
+      "metaPath": "apps/manufacturing/mfg-seed-35/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-350",
+      "metaPath": "apps/manufacturing/mfg-seed-350/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-351",
+      "metaPath": "apps/manufacturing/mfg-seed-351/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-352",
+      "metaPath": "apps/manufacturing/mfg-seed-352/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-353",
+      "metaPath": "apps/manufacturing/mfg-seed-353/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-354",
+      "metaPath": "apps/manufacturing/mfg-seed-354/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-355",
+      "metaPath": "apps/manufacturing/mfg-seed-355/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-356",
+      "metaPath": "apps/manufacturing/mfg-seed-356/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-357",
+      "metaPath": "apps/manufacturing/mfg-seed-357/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-358",
+      "metaPath": "apps/manufacturing/mfg-seed-358/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-359",
+      "metaPath": "apps/manufacturing/mfg-seed-359/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-36",
+      "metaPath": "apps/manufacturing/mfg-seed-36/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-360",
+      "metaPath": "apps/manufacturing/mfg-seed-360/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-361",
+      "metaPath": "apps/manufacturing/mfg-seed-361/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-362",
+      "metaPath": "apps/manufacturing/mfg-seed-362/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-363",
+      "metaPath": "apps/manufacturing/mfg-seed-363/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-364",
+      "metaPath": "apps/manufacturing/mfg-seed-364/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-365",
+      "metaPath": "apps/manufacturing/mfg-seed-365/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-366",
+      "metaPath": "apps/manufacturing/mfg-seed-366/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-367",
+      "metaPath": "apps/manufacturing/mfg-seed-367/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-368",
+      "metaPath": "apps/manufacturing/mfg-seed-368/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-369",
+      "metaPath": "apps/manufacturing/mfg-seed-369/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-37",
+      "metaPath": "apps/manufacturing/mfg-seed-37/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-370",
+      "metaPath": "apps/manufacturing/mfg-seed-370/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-371",
+      "metaPath": "apps/manufacturing/mfg-seed-371/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-372",
+      "metaPath": "apps/manufacturing/mfg-seed-372/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-373",
+      "metaPath": "apps/manufacturing/mfg-seed-373/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-374",
+      "metaPath": "apps/manufacturing/mfg-seed-374/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-375",
+      "metaPath": "apps/manufacturing/mfg-seed-375/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-376",
+      "metaPath": "apps/manufacturing/mfg-seed-376/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-377",
+      "metaPath": "apps/manufacturing/mfg-seed-377/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-378",
+      "metaPath": "apps/manufacturing/mfg-seed-378/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-379",
+      "metaPath": "apps/manufacturing/mfg-seed-379/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-38",
+      "metaPath": "apps/manufacturing/mfg-seed-38/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-380",
+      "metaPath": "apps/manufacturing/mfg-seed-380/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-381",
+      "metaPath": "apps/manufacturing/mfg-seed-381/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-382",
+      "metaPath": "apps/manufacturing/mfg-seed-382/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-383",
+      "metaPath": "apps/manufacturing/mfg-seed-383/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-384",
+      "metaPath": "apps/manufacturing/mfg-seed-384/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-385",
+      "metaPath": "apps/manufacturing/mfg-seed-385/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-386",
+      "metaPath": "apps/manufacturing/mfg-seed-386/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-387",
+      "metaPath": "apps/manufacturing/mfg-seed-387/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-388",
+      "metaPath": "apps/manufacturing/mfg-seed-388/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-389",
+      "metaPath": "apps/manufacturing/mfg-seed-389/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-39",
+      "metaPath": "apps/manufacturing/mfg-seed-39/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-390",
+      "metaPath": "apps/manufacturing/mfg-seed-390/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-391",
+      "metaPath": "apps/manufacturing/mfg-seed-391/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-392",
+      "metaPath": "apps/manufacturing/mfg-seed-392/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-393",
+      "metaPath": "apps/manufacturing/mfg-seed-393/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-394",
+      "metaPath": "apps/manufacturing/mfg-seed-394/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-395",
+      "metaPath": "apps/manufacturing/mfg-seed-395/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-396",
+      "metaPath": "apps/manufacturing/mfg-seed-396/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-397",
+      "metaPath": "apps/manufacturing/mfg-seed-397/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-398",
+      "metaPath": "apps/manufacturing/mfg-seed-398/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-399",
+      "metaPath": "apps/manufacturing/mfg-seed-399/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-4",
+      "metaPath": "apps/manufacturing/mfg-seed-4/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-40",
+      "metaPath": "apps/manufacturing/mfg-seed-40/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-400",
+      "metaPath": "apps/manufacturing/mfg-seed-400/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-401",
+      "metaPath": "apps/manufacturing/mfg-seed-401/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-402",
+      "metaPath": "apps/manufacturing/mfg-seed-402/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-403",
+      "metaPath": "apps/manufacturing/mfg-seed-403/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-404",
+      "metaPath": "apps/manufacturing/mfg-seed-404/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-405",
+      "metaPath": "apps/manufacturing/mfg-seed-405/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-406",
+      "metaPath": "apps/manufacturing/mfg-seed-406/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-407",
+      "metaPath": "apps/manufacturing/mfg-seed-407/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-408",
+      "metaPath": "apps/manufacturing/mfg-seed-408/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-409",
+      "metaPath": "apps/manufacturing/mfg-seed-409/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-41",
+      "metaPath": "apps/manufacturing/mfg-seed-41/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-410",
+      "metaPath": "apps/manufacturing/mfg-seed-410/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-411",
+      "metaPath": "apps/manufacturing/mfg-seed-411/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-412",
+      "metaPath": "apps/manufacturing/mfg-seed-412/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-413",
+      "metaPath": "apps/manufacturing/mfg-seed-413/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-414",
+      "metaPath": "apps/manufacturing/mfg-seed-414/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-415",
+      "metaPath": "apps/manufacturing/mfg-seed-415/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-416",
+      "metaPath": "apps/manufacturing/mfg-seed-416/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-417",
+      "metaPath": "apps/manufacturing/mfg-seed-417/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-418",
+      "metaPath": "apps/manufacturing/mfg-seed-418/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-419",
+      "metaPath": "apps/manufacturing/mfg-seed-419/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-42",
+      "metaPath": "apps/manufacturing/mfg-seed-42/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-420",
+      "metaPath": "apps/manufacturing/mfg-seed-420/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-421",
+      "metaPath": "apps/manufacturing/mfg-seed-421/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-422",
+      "metaPath": "apps/manufacturing/mfg-seed-422/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-423",
+      "metaPath": "apps/manufacturing/mfg-seed-423/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-424",
+      "metaPath": "apps/manufacturing/mfg-seed-424/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-425",
+      "metaPath": "apps/manufacturing/mfg-seed-425/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-426",
+      "metaPath": "apps/manufacturing/mfg-seed-426/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-427",
+      "metaPath": "apps/manufacturing/mfg-seed-427/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-428",
+      "metaPath": "apps/manufacturing/mfg-seed-428/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-429",
+      "metaPath": "apps/manufacturing/mfg-seed-429/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-43",
+      "metaPath": "apps/manufacturing/mfg-seed-43/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-430",
+      "metaPath": "apps/manufacturing/mfg-seed-430/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-431",
+      "metaPath": "apps/manufacturing/mfg-seed-431/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-432",
+      "metaPath": "apps/manufacturing/mfg-seed-432/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-433",
+      "metaPath": "apps/manufacturing/mfg-seed-433/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-434",
+      "metaPath": "apps/manufacturing/mfg-seed-434/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-435",
+      "metaPath": "apps/manufacturing/mfg-seed-435/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-436",
+      "metaPath": "apps/manufacturing/mfg-seed-436/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-437",
+      "metaPath": "apps/manufacturing/mfg-seed-437/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-438",
+      "metaPath": "apps/manufacturing/mfg-seed-438/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-439",
+      "metaPath": "apps/manufacturing/mfg-seed-439/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-44",
+      "metaPath": "apps/manufacturing/mfg-seed-44/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-440",
+      "metaPath": "apps/manufacturing/mfg-seed-440/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-441",
+      "metaPath": "apps/manufacturing/mfg-seed-441/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-442",
+      "metaPath": "apps/manufacturing/mfg-seed-442/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-443",
+      "metaPath": "apps/manufacturing/mfg-seed-443/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-444",
+      "metaPath": "apps/manufacturing/mfg-seed-444/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-445",
+      "metaPath": "apps/manufacturing/mfg-seed-445/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-446",
+      "metaPath": "apps/manufacturing/mfg-seed-446/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-447",
+      "metaPath": "apps/manufacturing/mfg-seed-447/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-448",
+      "metaPath": "apps/manufacturing/mfg-seed-448/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-449",
+      "metaPath": "apps/manufacturing/mfg-seed-449/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-45",
+      "metaPath": "apps/manufacturing/mfg-seed-45/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-450",
+      "metaPath": "apps/manufacturing/mfg-seed-450/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-451",
+      "metaPath": "apps/manufacturing/mfg-seed-451/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-452",
+      "metaPath": "apps/manufacturing/mfg-seed-452/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-453",
+      "metaPath": "apps/manufacturing/mfg-seed-453/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-454",
+      "metaPath": "apps/manufacturing/mfg-seed-454/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-455",
+      "metaPath": "apps/manufacturing/mfg-seed-455/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-456",
+      "metaPath": "apps/manufacturing/mfg-seed-456/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-457",
+      "metaPath": "apps/manufacturing/mfg-seed-457/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-458",
+      "metaPath": "apps/manufacturing/mfg-seed-458/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-459",
+      "metaPath": "apps/manufacturing/mfg-seed-459/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-46",
+      "metaPath": "apps/manufacturing/mfg-seed-46/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-460",
+      "metaPath": "apps/manufacturing/mfg-seed-460/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-461",
+      "metaPath": "apps/manufacturing/mfg-seed-461/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-462",
+      "metaPath": "apps/manufacturing/mfg-seed-462/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-463",
+      "metaPath": "apps/manufacturing/mfg-seed-463/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-464",
+      "metaPath": "apps/manufacturing/mfg-seed-464/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-465",
+      "metaPath": "apps/manufacturing/mfg-seed-465/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-466",
+      "metaPath": "apps/manufacturing/mfg-seed-466/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-467",
+      "metaPath": "apps/manufacturing/mfg-seed-467/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-468",
+      "metaPath": "apps/manufacturing/mfg-seed-468/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-469",
+      "metaPath": "apps/manufacturing/mfg-seed-469/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-47",
+      "metaPath": "apps/manufacturing/mfg-seed-47/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-470",
+      "metaPath": "apps/manufacturing/mfg-seed-470/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-471",
+      "metaPath": "apps/manufacturing/mfg-seed-471/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-472",
+      "metaPath": "apps/manufacturing/mfg-seed-472/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-473",
+      "metaPath": "apps/manufacturing/mfg-seed-473/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-474",
+      "metaPath": "apps/manufacturing/mfg-seed-474/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-475",
+      "metaPath": "apps/manufacturing/mfg-seed-475/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-476",
+      "metaPath": "apps/manufacturing/mfg-seed-476/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-477",
+      "metaPath": "apps/manufacturing/mfg-seed-477/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-478",
+      "metaPath": "apps/manufacturing/mfg-seed-478/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-479",
+      "metaPath": "apps/manufacturing/mfg-seed-479/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-48",
+      "metaPath": "apps/manufacturing/mfg-seed-48/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-480",
+      "metaPath": "apps/manufacturing/mfg-seed-480/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-481",
+      "metaPath": "apps/manufacturing/mfg-seed-481/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-482",
+      "metaPath": "apps/manufacturing/mfg-seed-482/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-483",
+      "metaPath": "apps/manufacturing/mfg-seed-483/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-484",
+      "metaPath": "apps/manufacturing/mfg-seed-484/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-485",
+      "metaPath": "apps/manufacturing/mfg-seed-485/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-486",
+      "metaPath": "apps/manufacturing/mfg-seed-486/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-487",
+      "metaPath": "apps/manufacturing/mfg-seed-487/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-488",
+      "metaPath": "apps/manufacturing/mfg-seed-488/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-489",
+      "metaPath": "apps/manufacturing/mfg-seed-489/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-49",
+      "metaPath": "apps/manufacturing/mfg-seed-49/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-490",
+      "metaPath": "apps/manufacturing/mfg-seed-490/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-491",
+      "metaPath": "apps/manufacturing/mfg-seed-491/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-492",
+      "metaPath": "apps/manufacturing/mfg-seed-492/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-493",
+      "metaPath": "apps/manufacturing/mfg-seed-493/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-494",
+      "metaPath": "apps/manufacturing/mfg-seed-494/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-495",
+      "metaPath": "apps/manufacturing/mfg-seed-495/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-496",
+      "metaPath": "apps/manufacturing/mfg-seed-496/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-497",
+      "metaPath": "apps/manufacturing/mfg-seed-497/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-498",
+      "metaPath": "apps/manufacturing/mfg-seed-498/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-499",
+      "metaPath": "apps/manufacturing/mfg-seed-499/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-5",
+      "metaPath": "apps/manufacturing/mfg-seed-5/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-50",
+      "metaPath": "apps/manufacturing/mfg-seed-50/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-51",
+      "metaPath": "apps/manufacturing/mfg-seed-51/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-52",
+      "metaPath": "apps/manufacturing/mfg-seed-52/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-53",
+      "metaPath": "apps/manufacturing/mfg-seed-53/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-54",
+      "metaPath": "apps/manufacturing/mfg-seed-54/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-55",
+      "metaPath": "apps/manufacturing/mfg-seed-55/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-56",
+      "metaPath": "apps/manufacturing/mfg-seed-56/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-57",
+      "metaPath": "apps/manufacturing/mfg-seed-57/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-58",
+      "metaPath": "apps/manufacturing/mfg-seed-58/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-59",
+      "metaPath": "apps/manufacturing/mfg-seed-59/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-6",
+      "metaPath": "apps/manufacturing/mfg-seed-6/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-60",
+      "metaPath": "apps/manufacturing/mfg-seed-60/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-61",
+      "metaPath": "apps/manufacturing/mfg-seed-61/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-62",
+      "metaPath": "apps/manufacturing/mfg-seed-62/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-63",
+      "metaPath": "apps/manufacturing/mfg-seed-63/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-64",
+      "metaPath": "apps/manufacturing/mfg-seed-64/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-65",
+      "metaPath": "apps/manufacturing/mfg-seed-65/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-66",
+      "metaPath": "apps/manufacturing/mfg-seed-66/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-67",
+      "metaPath": "apps/manufacturing/mfg-seed-67/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-68",
+      "metaPath": "apps/manufacturing/mfg-seed-68/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-69",
+      "metaPath": "apps/manufacturing/mfg-seed-69/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-7",
+      "metaPath": "apps/manufacturing/mfg-seed-7/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-70",
+      "metaPath": "apps/manufacturing/mfg-seed-70/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-71",
+      "metaPath": "apps/manufacturing/mfg-seed-71/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-72",
+      "metaPath": "apps/manufacturing/mfg-seed-72/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-73",
+      "metaPath": "apps/manufacturing/mfg-seed-73/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-74",
+      "metaPath": "apps/manufacturing/mfg-seed-74/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-75",
+      "metaPath": "apps/manufacturing/mfg-seed-75/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-76",
+      "metaPath": "apps/manufacturing/mfg-seed-76/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-77",
+      "metaPath": "apps/manufacturing/mfg-seed-77/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-78",
+      "metaPath": "apps/manufacturing/mfg-seed-78/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-79",
+      "metaPath": "apps/manufacturing/mfg-seed-79/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-8",
+      "metaPath": "apps/manufacturing/mfg-seed-8/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-80",
+      "metaPath": "apps/manufacturing/mfg-seed-80/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-81",
+      "metaPath": "apps/manufacturing/mfg-seed-81/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-82",
+      "metaPath": "apps/manufacturing/mfg-seed-82/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-83",
+      "metaPath": "apps/manufacturing/mfg-seed-83/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-84",
+      "metaPath": "apps/manufacturing/mfg-seed-84/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-85",
+      "metaPath": "apps/manufacturing/mfg-seed-85/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-86",
+      "metaPath": "apps/manufacturing/mfg-seed-86/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-87",
+      "metaPath": "apps/manufacturing/mfg-seed-87/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-88",
+      "metaPath": "apps/manufacturing/mfg-seed-88/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-89",
+      "metaPath": "apps/manufacturing/mfg-seed-89/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-9",
+      "metaPath": "apps/manufacturing/mfg-seed-9/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-90",
+      "metaPath": "apps/manufacturing/mfg-seed-90/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-91",
+      "metaPath": "apps/manufacturing/mfg-seed-91/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-92",
+      "metaPath": "apps/manufacturing/mfg-seed-92/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-93",
+      "metaPath": "apps/manufacturing/mfg-seed-93/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-94",
+      "metaPath": "apps/manufacturing/mfg-seed-94/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-95",
+      "metaPath": "apps/manufacturing/mfg-seed-95/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-96",
+      "metaPath": "apps/manufacturing/mfg-seed-96/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-97",
+      "metaPath": "apps/manufacturing/mfg-seed-97/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-98",
+      "metaPath": "apps/manufacturing/mfg-seed-98/config.json"
+    },
+    {
+      "toolDir": "apps/manufacturing/mfg-seed-99",
+      "metaPath": "apps/manufacturing/mfg-seed-99/config.json"
+    },
+    {
       "toolDir": "apps/matrix/decision-matrix",
-      "metaPath": "apps/matrix/decision-matrix/config.json",
-      "id": "decision-matrix",
-      "name": "Decision Matrix",
-      "tags": [
-        "decision",
-        "analysis",
-        "strategy",
-        "weighted",
-        "matrix"
-      ],
-      "icon": "⚖️"
+      "metaPath": "apps/matrix/decision-matrix/config.json"
     },
     {
       "toolDir": "apps/matrix/task-splitter",
-      "metaPath": "apps/matrix/task-splitter/config.json",
-      "id": "task-splitter",
-      "name": "Task Splitter",
-      "tags": [
-        "planning",
-        "task-graph",
-        "pipeline"
-      ]
+      "metaPath": "apps/matrix/task-splitter/config.json"
     },
     {
       "toolDir": "apps/matrix/tool-router",
-      "metaPath": "apps/matrix/tool-router/config.json",
-      "id": "tool-router",
-      "name": "Tool Router",
-      "tags": [
-        "mesh-ready",
-        "pipeline-prep"
-      ]
+      "metaPath": "apps/matrix/tool-router/config.json"
     },
     {
       "toolDir": "apps/matrix/tool-search-discovery",
-      "metaPath": "apps/matrix/tool-search-discovery/config.json",
-      "id": "tool-search-discovery",
-      "name": "Tool Search Discovery",
-      "title": "Tool Search Discovery",
-      "tags": [
-        "search",
-        "discovery",
-        "simba-workflows"
-      ]
+      "metaPath": "apps/matrix/tool-search-discovery/config.json"
     },
     {
       "toolDir": "apps/oracle/output-evaluator",
-      "metaPath": "apps/oracle/output-evaluator/config.json",
-      "id": "output-evaluator",
-      "name": "Output Evaluator",
-      "tags": [
-        "evaluation",
-        "scoring",
-        "delivery"
-      ]
+      "metaPath": "apps/oracle/output-evaluator/config.json"
     },
     {
       "toolDir": "apps/oracle/prompt-compare",
-      "metaPath": "apps/oracle/prompt-compare/config.json",
-      "id": "prompt-compare",
-      "name": "Prompt Compare",
-      "title": "Prompt Compare",
-      "tags": [
-        "prompting",
-        "analysis",
-        "simba-workflows"
-      ]
+      "metaPath": "apps/oracle/prompt-compare/config.json"
     },
     {
       "toolDir": "apps/oracle/promptalchemy",
-      "metaPath": "apps/oracle/promptalchemy/config.json",
-      "id": "promptalchemy",
-      "name": "PromptAlchemy",
-      "tags": [
-        "mesh-ready",
-        "prompting"
-      ]
+      "metaPath": "apps/oracle/promptalchemy/config.json"
     },
     {
       "toolDir": "apps/oracle/revenue-forecaster",
-      "metaPath": "apps/oracle/revenue-forecaster/config.json",
-      "name": "Revenue Forecaster",
-      "icon": "📈"
+      "metaPath": "apps/oracle/revenue-forecaster/config.json"
     },
     {
       "toolDir": "apps/oracle/scenario-planner",
-      "metaPath": "apps/oracle/scenario-planner/config.json",
-      "id": "scenario-planner",
-      "name": "Scenario Planner",
-      "tags": [
-        "scenario",
-        "planning",
-        "probability",
-        "strategy",
-        "risk"
-      ],
-      "icon": "🔭"
+      "metaPath": "apps/oracle/scenario-planner/config.json"
     },
     {
       "toolDir": "apps/remixer/ai-tool-generator",
-      "metaPath": "apps/remixer/ai-tool-generator/config.json",
-      "id": "ai-tool-generator",
-      "name": "AI Tool Generator",
-      "tags": [
-        "ai",
-        "generation",
-        "registry",
-        "plugin"
-      ]
+      "metaPath": "apps/remixer/ai-tool-generator/config.json"
     },
     {
       "toolDir": "apps/remixer/code-generator",
-      "metaPath": "apps/remixer/code-generator/config.json",
-      "id": "code-generator",
-      "name": "Code Generator",
-      "tags": [
-        "prompting",
-        "generation",
-        "pipeline"
-      ]
+      "metaPath": "apps/remixer/code-generator/config.json"
     },
     {
       "toolDir": "apps/remixer/idea-remixer",
-      "metaPath": "apps/remixer/idea-remixer/config.json",
-      "id": "idea-remixer",
-      "name": "Idea Remixer",
-      "title": "Idea Remixer",
-      "tags": [
-        "ideation",
-        "variants",
-        "simba-workflows"
-      ]
+      "metaPath": "apps/remixer/idea-remixer/config.json"
     },
     {
       "toolDir": "apps/remixer/script-generator",
-      "metaPath": "apps/remixer/script-generator/config.json",
-      "id": "script-generator",
-      "name": "Script Generator",
-      "tags": [
-        "mesh-ready",
-        "content"
-      ]
+      "metaPath": "apps/remixer/script-generator/config.json"
     },
     {
       "toolDir": "apps/remixer/workflow-template-gallery",
-      "metaPath": "apps/remixer/workflow-template-gallery/config.json",
-      "id": "workflow-template-gallery",
-      "name": "Workflow Template Gallery",
-      "title": "Workflow Template Gallery",
-      "tags": [
-        "workflow",
-        "templates",
-        "simba-workflows"
-      ]
+      "metaPath": "apps/remixer/workflow-template-gallery/config.json"
     },
     {
       "toolDir": "apps/studyos/code-reviewer",
-      "metaPath": "apps/studyos/code-reviewer/config.json",
-      "id": "code-reviewer",
-      "name": "Code Reviewer",
-      "tags": [
-        "review",
-        "quality",
-        "repair"
-      ]
+      "metaPath": "apps/studyos/code-reviewer/config.json"
     },
     {
       "toolDir": "apps/studyos/context-packager",
-      "metaPath": "apps/studyos/context-packager/config.json",
-      "id": "context-packager",
-      "name": "Context Packager",
-      "tags": [
-        "context",
-        "handoff",
-        "pipeline"
-      ]
+      "metaPath": "apps/studyos/context-packager/config.json"
     },
     {
       "toolDir": "apps/studyos/repo-improvement-brief",
-      "metaPath": "apps/studyos/repo-improvement-brief/config.json",
-      "id": "repo-improvement-brief",
-      "name": "Repo Improvement Brief",
-      "title": "Repo Improvement Brief",
-      "tags": [
-        "brief",
-        "planning",
-        "simba-workflows"
-      ]
+      "metaPath": "apps/studyos/repo-improvement-brief/config.json"
     },
     {
       "toolDir": "apps/studyos/spec-builder",
-      "metaPath": "apps/studyos/spec-builder/config.json",
-      "id": "spec-builder",
-      "name": "Spec Builder",
-      "tags": [
-        "spec",
-        "requirements",
-        "pipeline"
-      ]
+      "metaPath": "apps/studyos/spec-builder/config.json"
     },
     {
       "toolDir": "tools/business/kutch-map",
-      "metaPath": "tools/business/kutch-map/config.json",
-      "id": "kutch-map",
-      "name": "Kutch Digital Map",
-      "title": "Local Discovery Engine",
-      "path": "tools/business/kutch-map/index.html",
-      "tags": [
-        "business",
-        "directory",
-        "local",
-        "kutch",
-        "india"
-      ],
-      "tier": "business",
-      "icon": "🗺️",
-      "sparks": true
+      "metaPath": "tools/business/kutch-map/config.json"
+    },
+    {
+      "toolDir": "tools/candidate_tool",
+      "metaPath": "tools/candidate_tool/config.json"
     },
     {
       "toolDir": "tools/color-palette",
-      "metaPath": "tools/color-palette/config.json",
-      "name": "Color Palette Generator",
-      "icon": "🎨"
+      "metaPath": "tools/color-palette/config.json"
     },
     {
       "toolDir": "tools/creators/caption-generator",
-      "metaPath": "tools/creators/caption-generator/config.json",
-      "id": "caption-generator",
-      "name": "Caption Generator",
-      "tags": [
-        "ai",
-        "captions",
-        "image",
-        "social-media",
-        "hashtags"
-      ]
+      "metaPath": "tools/creators/caption-generator/config.json"
     },
     {
       "toolDir": "tools/creators/hook-writer",
-      "metaPath": "tools/creators/hook-writer/config.json",
-      "id": "hook-writer",
-      "name": "Hook Writer",
-      "tags": [
-        "ai",
-        "hooks",
-        "viral",
-        "copywriting",
-        "social-media"
-      ]
+      "metaPath": "tools/creators/hook-writer/config.json"
     },
     {
       "toolDir": "tools/creators/prompt-alchemy",
-      "metaPath": "tools/creators/prompt-alchemy/config.json",
-      "id": "prompt-alchemy",
-      "name": "Prompt Alchemy",
-      "tags": [
-        "ai",
-        "prompts",
-        "social-media",
-        "content",
-        "optimization"
-      ]
+      "metaPath": "tools/creators/prompt-alchemy/config.json"
     },
     {
       "toolDir": "tools/creators/script-writer",
-      "metaPath": "tools/creators/script-writer/config.json",
-      "id": "script-writer",
-      "name": "Script Writer",
-      "tags": [
-        "ai",
-        "youtube",
-        "script",
-        "video",
-        "content"
-      ]
+      "metaPath": "tools/creators/script-writer/config.json"
     },
     {
       "toolDir": "tools/eco-engine-test",
-      "metaPath": "tools/eco-engine-test/config.json",
-      "id": "eco-engine-test",
-      "name": "Eco-Hack Engine Test",
-      "tags": [
-        "auth",
-        "supabase",
-        "orchard-engine",
-        "standalone"
-      ]
+      "metaPath": "tools/eco-engine-test/config.json"
     },
     {
       "toolDir": "tools/engine/ai-coach-console",
-      "metaPath": "tools/engine/ai-coach-console/config.json",
-      "id": "ai-coach-console",
-      "name": "AI Coach Console",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/ai-coach-console/config.json"
     },
     {
       "toolDir": "tools/engine/ai-game-strategy-advisor",
-      "metaPath": "tools/engine/ai-game-strategy-advisor/config.json",
-      "id": "ai-game-strategy-advisor",
-      "name": "AI Game Strategy Advisor",
-      "tags": [
-        "orchard-engine",
-        "ai",
-        "strategy",
-        "game-logic",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/ai-game-strategy-advisor/config.json"
     },
     {
       "toolDir": "tools/engine/balance-dashboard",
-      "metaPath": "tools/engine/balance-dashboard/config.json",
-      "id": "balance-dashboard",
-      "name": "Balance Dashboard",
-      "tags": [
-        "orchard-engine",
-        "wave1",
-        "simulation",
-        "balance",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/balance-dashboard/config.json"
+    },
+    {
+      "toolDir": "tools/engine/casio-drone-controller",
+      "metaPath": "tools/engine/casio-drone-controller/config.json"
     },
     {
       "toolDir": "tools/engine/circle-builder",
-      "metaPath": "tools/engine/circle-builder/config.json",
-      "id": "circle-builder",
-      "name": "Circle Builder",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/circle-builder/config.json"
     },
     {
       "toolDir": "tools/engine/daily-quest-generator",
-      "metaPath": "tools/engine/daily-quest-generator/config.json",
-      "id": "daily-quest-generator",
-      "name": "Daily Quest Generator",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/daily-quest-generator/config.json"
     },
     {
       "toolDir": "tools/engine/fair-ranking-engine",
-      "metaPath": "tools/engine/fair-ranking-engine/config.json",
-      "id": "fair-ranking-engine",
-      "name": "Fair Ranking Engine",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/fair-ranking-engine/config.json"
     },
     {
       "toolDir": "tools/engine/four-direction-pipeline",
-      "metaPath": "tools/engine/four-direction-pipeline/config.json",
-      "id": "four-direction-pipeline",
-      "name": "Four Direction Pipeline",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/four-direction-pipeline/config.json"
     },
     {
       "toolDir": "tools/engine/fruit-sharing",
-      "metaPath": "tools/engine/fruit-sharing/config.json",
-      "id": "fruit-sharing",
-      "name": "Fruit Sharing",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/fruit-sharing/config.json"
     },
     {
       "toolDir": "tools/engine/fruit-yield-engine",
-      "metaPath": "tools/engine/fruit-yield-engine/config.json",
-      "id": "fruit-yield-engine",
-      "name": "Fruit Yield Engine",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/fruit-yield-engine/config.json"
     },
     {
       "toolDir": "tools/engine/game-command-center",
-      "metaPath": "tools/engine/game-command-center/config.json",
-      "id": "game-command-center",
-      "name": "Game Command Center",
-      "tags": [
-        "orchard-engine",
-        "dashboard",
-        "game-hub",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/game-command-center/config.json"
     },
     {
       "toolDir": "tools/engine/gesture-feedback-ui",
-      "metaPath": "tools/engine/gesture-feedback-ui/config.json",
-      "id": "gesture-feedback-ui",
-      "name": "Gesture Feedback UI",
-      "tags": [
-        "orchard-engine",
-        "ui",
-        "gesture",
-        "feedback",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/gesture-feedback-ui/config.json"
     },
     {
       "toolDir": "tools/engine/grid-evolution",
-      "metaPath": "tools/engine/grid-evolution/config.json",
-      "id": "grid-evolution",
-      "name": "Grid Evolution",
-      "tags": [
-        "simulation",
-        "cellular-automata",
-        "engine",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/grid-evolution/config.json"
     },
     {
       "toolDir": "tools/engine/growth-milestone-engine",
-      "metaPath": "tools/engine/growth-milestone-engine/config.json",
-      "id": "growth-milestone-engine",
-      "name": "Growth Milestone Engine",
-      "tags": [
-        "orchard-engine",
-        "growth",
-        "milestones",
-        "threejs",
-        "event-bus",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/growth-milestone-engine/config.json"
     },
     {
       "toolDir": "tools/engine/growth-path-recommender",
-      "metaPath": "tools/engine/growth-path-recommender/config.json",
-      "id": "growth-path-recommender",
-      "name": "Growth Path Recommender",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/growth-path-recommender/config.json"
     },
     {
       "toolDir": "tools/engine/hire-readiness-scorer",
-      "metaPath": "tools/engine/hire-readiness-scorer/config.json",
-      "id": "hire-readiness-scorer",
-      "name": "Hire Readiness Scorer",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/hire-readiness-scorer/config.json"
     },
     {
       "toolDir": "tools/engine/layer1-swipe-crucible",
-      "metaPath": "tools/engine/layer1-swipe-crucible/config.json",
-      "id": "layer1-swipe-crucible",
-      "name": "Layer 1 — Swipe Crucible",
-      "tags": [
-        "orchard-engine",
-        "game",
-        "layer1",
-        "swipe",
-        "daily",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/layer1-swipe-crucible/config.json"
     },
     {
       "toolDir": "tools/engine/leaderboard-analytics",
-      "metaPath": "tools/engine/leaderboard-analytics/config.json",
-      "id": "leaderboard-analytics",
-      "name": "Leaderboard & Analytics",
-      "tags": [
-        "orchard-engine",
-        "leaderboard",
-        "analytics",
-        "visualization",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/leaderboard-analytics/config.json"
     },
     {
       "toolDir": "tools/engine/market-dynamics",
-      "metaPath": "tools/engine/market-dynamics/config.json",
-      "id": "market-dynamics",
-      "name": "Market Dynamics",
-      "tags": [
-        "simulation",
-        "market",
-        "business",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/market-dynamics/config.json"
     },
     {
       "toolDir": "tools/engine/meeting-cost-calculator",
-      "metaPath": "tools/engine/meeting-cost-calculator/config.json",
-      "id": "meeting-cost-calculator",
-      "name": "Meeting Cost Calculator",
-      "tags": [
-        "business",
-        "calculator",
-        "productivity",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/meeting-cost-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/meta-health-dashboard",
-      "metaPath": "tools/engine/meta-health-dashboard/config.json",
-      "id": "meta-health-dashboard",
-      "name": "Meta Health Dashboard",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/meta-health-dashboard/config.json"
     },
     {
       "toolDir": "tools/engine/network-latency-simulator",
-      "metaPath": "tools/engine/network-latency-simulator/config.json",
-      "id": "network-latency-simulator",
-      "name": "Network Latency Simulator",
-      "tags": [
-        "orchard-engine",
-        "network",
-        "simulation",
-        "operations",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/network-latency-simulator/config.json"
     },
     {
       "toolDir": "tools/engine/orchade-3d",
-      "metaPath": "tools/engine/orchade-3d/config.json",
-      "id": "orchade-3d",
-      "name": "Orchade 3D Visualizer",
-      "tags": [
-        "orchard-engine",
-        "game",
-        "3d",
-        "visualizer",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/orchade-3d/config.json"
     },
     {
       "toolDir": "tools/engine/orchard-discovery-search",
-      "metaPath": "tools/engine/orchard-discovery-search/config.json",
-      "id": "orchard-discovery-search",
-      "name": "Orchard Discovery Search",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/orchard-discovery-search/config.json"
     },
     {
       "toolDir": "tools/engine/orchard-profile-builder",
-      "metaPath": "tools/engine/orchard-profile-builder/config.json",
-      "id": "orchard-profile-builder",
-      "name": "Orchard Profile Builder",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/orchard-profile-builder/config.json"
     },
     {
       "toolDir": "tools/engine/peer-validation-engine",
-      "metaPath": "tools/engine/peer-validation-engine/config.json",
-      "id": "peer-validation-engine",
-      "name": "Peer Validation Engine",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/peer-validation-engine/config.json"
     },
     {
       "toolDir": "tools/engine/player-signup",
-      "metaPath": "tools/engine/player-signup/config.json",
-      "id": "player-signup",
-      "name": "Player Signup",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/player-signup/config.json"
     },
     {
       "toolDir": "tools/engine/recruiter-dashboard",
-      "metaPath": "tools/engine/recruiter-dashboard/config.json",
-      "id": "recruiter-dashboard",
-      "name": "Recruiter Dashboard",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/recruiter-dashboard/config.json"
     },
     {
       "toolDir": "tools/engine/root-strength-calculator",
-      "metaPath": "tools/engine/root-strength-calculator/config.json",
-      "id": "root-strength-calculator",
-      "name": "Root Strength Calculator",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/root-strength-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/script-generator-files",
-      "metaPath": "tools/engine/script-generator-files/config.json",
-      "id": "script-generator-files",
-      "name": "Script Generator Files",
-      "tags": [
-        "standalone",
-        "script",
-        "copy-friendly"
-      ]
+      "metaPath": "tools/engine/script-generator-files/config.json"
     },
     {
       "toolDir": "tools/engine/seed-exchange",
-      "metaPath": "tools/engine/seed-exchange/config.json",
-      "id": "seed-exchange",
-      "name": "Seed Exchange",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/seed-exchange/config.json"
     },
     {
       "toolDir": "tools/engine/seed-quality-scorer",
-      "metaPath": "tools/engine/seed-quality-scorer/config.json",
-      "id": "seed-quality-scorer",
-      "name": "Seed Quality Scorer",
-      "tags": []
+      "metaPath": "tools/engine/seed-quality-scorer/config.json"
     },
     {
       "toolDir": "tools/engine/simulation-runner",
-      "metaPath": "tools/engine/simulation-runner/config.json",
-      "id": "simulation-runner",
-      "name": "Simulation Runner",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/simulation-runner/config.json"
     },
     {
       "toolDir": "tools/engine/starter-farm-generator",
-      "metaPath": "tools/engine/starter-farm-generator/config.json",
-      "id": "starter-farm-generator",
-      "name": "Starter Farm Generator",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/starter-farm-generator/config.json"
     },
     {
       "toolDir": "tools/engine/synthetic-player-generator",
-      "metaPath": "tools/engine/synthetic-player-generator/config.json",
-      "id": "synthetic-player-generator",
-      "name": "Synthetic Player Generator",
-      "tags": [
-        "orchard-engine",
-        "wave1",
-        "simulation",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/synthetic-player-generator/config.json"
     },
     {
       "toolDir": "tools/engine/thirty-day-promotion-engine",
-      "metaPath": "tools/engine/thirty-day-promotion-engine/config.json",
-      "id": "thirty-day-promotion-engine",
-      "name": "30-Day Promotion Engine",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/thirty-day-promotion-engine/config.json"
     },
     {
       "toolDir": "tools/engine/traffic-router",
-      "metaPath": "tools/engine/traffic-router/config.json",
-      "id": "traffic-router",
-      "name": "Traffic Router",
-      "tags": [
-        "simulation",
-        "routing",
-        "puzzle",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/traffic-router/config.json"
     },
     {
       "toolDir": "tools/engine/trunk-growth-calculator",
-      "metaPath": "tools/engine/trunk-growth-calculator/config.json",
-      "id": "trunk-growth-calculator",
-      "name": "Trunk Growth Calculator",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/trunk-growth-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/trust-score-engine",
-      "metaPath": "tools/engine/trust-score-engine/config.json",
-      "id": "trust-score-engine",
-      "name": "Trust Score Engine",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/trust-score-engine/config.json"
     },
     {
       "toolDir": "tools/engine/typography-scale-calculator",
-      "metaPath": "tools/engine/typography-scale-calculator/config.json",
-      "id": "typography-scale-calculator",
-      "name": "Typography Scale Calculator",
-      "tags": [
-        "typography",
-        "css",
-        "design",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/typography-scale-calculator/config.json"
     },
     {
       "toolDir": "tools/engine/wave1-simulation-runner",
-      "metaPath": "tools/engine/wave1-simulation-runner/config.json",
-      "id": "wave1-simulation-runner",
-      "name": "Wave 1 Simulation Runner",
-      "tags": [
-        "orchard-engine",
-        "wave1",
-        "simulation",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/wave1-simulation-runner/config.json"
     },
     {
       "toolDir": "tools/engine/weekly-harvest-engine",
-      "metaPath": "tools/engine/weekly-harvest-engine/config.json",
-      "id": "weekly-harvest-engine",
-      "name": "Weekly Harvest Engine",
-      "tags": [
-        "orchard-engine",
-        "merit-based",
-        "standalone"
-      ]
+      "metaPath": "tools/engine/weekly-harvest-engine/config.json"
     },
     {
       "toolDir": "tools/export-studio",
-      "metaPath": "tools/export-studio/config.json",
-      "id": "export-studio",
-      "name": "Export Studio",
-      "tags": [
-        "mesh-ready",
-        "export"
-      ]
+      "metaPath": "tools/export-studio/config.json"
     },
     {
       "toolDir": "tools/games/freecell-classic",
-      "metaPath": "tools/games/freecell-classic/config.json",
-      "id": "freecell-classic",
-      "name": "FreeCell Classic",
-      "tags": [
-        "game",
-        "cards",
-        "freecell",
-        "solitaire",
-        "standalone"
-      ]
+      "metaPath": "tools/games/freecell-classic/config.json"
     },
     {
       "toolDir": "tools/games/hex-wars",
-      "metaPath": "tools/games/hex-wars/config.json",
-      "id": "hex-wars",
-      "name": "HexWars",
-      "tags": [
-        "game",
-        "quiz",
-        "strategy",
-        "standalone"
-      ]
+      "metaPath": "tools/games/hex-wars/config.json"
     },
     {
       "toolDir": "tools/games/skillhex-mission-control",
-      "metaPath": "tools/games/skillhex-mission-control/config.json",
-      "id": "skillhex-mission-control",
-      "name": "SkillHex Mission Control",
-      "tags": [
-        "game",
-        "skills",
-        "missions",
-        "progression",
-        "standalone"
-      ]
+      "metaPath": "tools/games/skillhex-mission-control/config.json"
     },
     {
       "toolDir": "tools/games/snake-game",
-      "metaPath": "tools/games/snake-game/config.json",
-      "id": "snake-game",
-      "name": "Decision Snake"
+      "metaPath": "tools/games/snake-game/config.json"
     },
     {
       "toolDir": "tools/games/vialogic",
-      "metaPath": "tools/games/vialogic/config.json",
-      "id": "vialogic",
-      "name": "ViaLogic",
-      "title": "Cartography of Minds",
-      "path": "tools/games/vialogic/index.html",
-      "tags": [
-        "math",
-        "history",
-        "exploration",
-        "game",
-        "india"
-      ],
-      "tier": "game",
-      "icon": "🗺️",
-      "sparks": true
+      "metaPath": "tools/games/vialogic/config.json"
     },
     {
       "toolDir": "tools/games/wings-of-fire-quiz",
-      "metaPath": "tools/games/wings-of-fire-quiz/config.json",
-      "id": "wings-of-fire-quiz",
-      "name": "Wings of Fire Quiz",
-      "tags": [
-        "game",
-        "quiz",
-        "kalam",
-        "education",
-        "standalone"
-      ]
+      "metaPath": "tools/games/wings-of-fire-quiz/config.json"
     },
     {
       "toolDir": "tools/json-formatter",
-      "metaPath": "tools/json-formatter/config.json",
-      "name": "JSON Formatter",
-      "icon": "{ }"
+      "metaPath": "tools/json-formatter/config.json"
     },
     {
       "toolDir": "tools/misc/verification-sandbox",
-      "metaPath": "tools/misc/verification-sandbox/config.json",
-      "id": "verification-sandbox",
-      "name": "Verification Sandbox",
-      "title": "Verification Sandbox",
-      "path": "tools/misc/verification-sandbox/index.html",
-      "tags": [
-        "platform",
-        "scaffolded"
-      ],
-      "icon": "🛠️",
-      "pullable": true,
-      "sparks": true
+      "metaPath": "tools/misc/verification-sandbox/config.json"
+    },
+    {
+      "toolDir": "tools/original_engineering_candidate_product_revision_r0_1",
+      "metaPath": "tools/original_engineering_candidate_product_revision_r0_1/config.json"
+    },
+    {
+      "toolDir": "tools/original_tool",
+      "metaPath": "tools/original_tool/config.json"
+    },
+    {
+      "toolDir": "tools/placeholder",
+      "metaPath": "tools/placeholder/config.json"
     },
     {
       "toolDir": "tools/pomodoro",
-      "metaPath": "tools/pomodoro/config.json",
-      "name": "Pomodoro Timer",
-      "icon": "🍅"
+      "metaPath": "tools/pomodoro/config.json"
     },
     {
       "toolDir": "tools/regex-tester",
-      "metaPath": "tools/regex-tester/config.json",
-      "name": "RegEx Tester",
-      "icon": "🔍"
+      "metaPath": "tools/regex-tester/config.json"
     },
     {
       "toolDir": "tools/template-vault",
-      "metaPath": "tools/template-vault/config.json",
-      "id": "template-vault",
-      "name": "Template Vault",
-      "tags": [
-        "mesh-ready",
-        "templates"
-      ]
+      "metaPath": "tools/template-vault/config.json"
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-189",
+  "name": "Mfg Task 189: Application / Device Protocols",
+  "title": "Create a fault-tolerant CRC check for a CANopen mo",
+  "description": "Create a fault-tolerant CRC check for a CANopen motor controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-189/index.html"
+}

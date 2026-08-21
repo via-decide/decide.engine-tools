@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-417",
+  "name": "Mfg Task 417: Sensor calibration routines",
+  "title": "Implement moving-average noise filtering for a pH ",
+  "description": "Implement moving-average noise filtering for a pH probe interface.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-417/index.html"
+}

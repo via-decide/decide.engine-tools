@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-164",
+  "name": "Mfg Task 164: Hardware abstraction / HAL",
+  "title": "Implement vendor-agnostic GPIO and I2C wrappers fo",
+  "description": "Implement vendor-agnostic GPIO and I2C wrappers for ADC peripherals.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-164/index.html"
+}

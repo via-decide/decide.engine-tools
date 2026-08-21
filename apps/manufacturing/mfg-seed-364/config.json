@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-364",
+  "name": "Mfg Task 364: Edge data formatting",
+  "title": "Design a schema validator for incoming machine sta",
+  "description": "Design a schema validator for incoming machine state transitions.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-364/index.html"
+}

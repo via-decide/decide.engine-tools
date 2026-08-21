@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-426",
+  "name": "Mfg Task 426: Sensor calibration routines",
+  "title": "Design an auto-zeroing routine for a load cell amp",
+  "description": "Design an auto-zeroing routine for a load cell amplifier.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-426/index.html"
+}

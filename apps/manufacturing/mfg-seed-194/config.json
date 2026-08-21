@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-194",
+  "name": "Mfg Task 194: Error/fault code parsing",
+  "title": "Implement an alert routing mechanism for sensor ou",
+  "description": "Implement an alert routing mechanism for sensor out-of-bounds flags.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-194/index.html"
+}

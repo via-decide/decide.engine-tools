@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-274",
+  "name": "Mfg Task 274: Edge data formatting",
+  "title": "Build a lightweight JSON to MQTT serializer for hi",
+  "description": "Build a lightweight JSON to MQTT serializer for high-frequency vibration data.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-274/index.html"
+}

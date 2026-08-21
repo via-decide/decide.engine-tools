@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-423",
+  "name": "Mfg Task 423: Application / Device Protocols",
+  "title": "Build a timing-aware state machine for a CANopen m",
+  "description": "Build a timing-aware state machine for a CANopen motor controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-423/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-3",
+  "name": "Mfg Task 3: Sensor calibration routines",
+  "title": "Add temperature compensation math for a load cell ",
+  "description": "Add temperature compensation math for a load cell amplifier.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-3/index.html"
+}

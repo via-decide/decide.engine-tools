@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-446",
+  "name": "Mfg Task 446: Error/fault code parsing",
+  "title": "Create a human-readable error translator for senso",
+  "description": "Create a human-readable error translator for sensor out-of-bounds flags.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-446/index.html"
+}

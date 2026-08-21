@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-457",
+  "name": "Mfg Task 457: Firmware OTA for constrained devices",
+  "title": "Create a chunked binary download manager for a BLE",
+  "description": "Create a chunked binary download manager for a BLE gateway.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-457/index.html"
+}

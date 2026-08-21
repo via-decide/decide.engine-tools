@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-248",
+  "name": "Mfg Task 248: Error/fault code parsing",
+  "title": "Design a state machine to track severity escalatio",
+  "description": "Design a state machine to track severity escalation of servo drive alarms.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-248/index.html"
+}

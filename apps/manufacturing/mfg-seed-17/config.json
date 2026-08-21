@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-17",
+  "name": "Mfg Task 17: Production telemetry schema",
+  "title": "Implement a telemetry aggregation endpoint for yie",
+  "description": "Implement a telemetry aggregation endpoint for yield and scrap rate metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-17/index.html"
+}

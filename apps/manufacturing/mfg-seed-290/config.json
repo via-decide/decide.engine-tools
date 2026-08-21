@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-290",
+  "name": "Mfg Task 290: Hardware abstraction / HAL",
+  "title": "Create mock interfaces to simulate DAC outputs.",
+  "description": "Create mock interfaces to simulate DAC outputs.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-290/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-177",
+  "name": "Mfg Task 177: Safety interlock logic",
+  "title": "Design a watchdog timer reset strategy for a UV cu",
+  "description": "Design a watchdog timer reset strategy for a UV curing lamp.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-177/index.html"
+}

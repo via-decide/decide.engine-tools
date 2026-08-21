@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-386",
+  "name": "Mfg Task 386: Production telemetry schema",
+  "title": "Create a data migration script for v2 of yield and",
+  "description": "Create a data migration script for v2 of yield and scrap rate metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-386/index.html"
+}

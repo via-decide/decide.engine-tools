@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-106",
+  "name": "Mfg Task 106: Firmware OTA for constrained devices",
+  "title": "Create a chunked binary download manager for an ES",
+  "description": "Create a chunked binary download manager for an ESP32 based sensor node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-106/index.html"
+}

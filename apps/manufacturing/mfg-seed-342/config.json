@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-342",
+  "name": "Mfg Task 342: Application / Device Protocols",
+  "title": "Handle line noise and protocol framing errors on a",
+  "description": "Handle line noise and protocol framing errors on a CANopen motor controller.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-342/index.html"
+}

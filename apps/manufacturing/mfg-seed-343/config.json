@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-343",
+  "name": "Mfg Task 343: Physical / Signal Layer",
+  "title": "Implement debouncing logic for an RS-485 electrica",
+  "description": "Implement debouncing logic for an RS-485 electrical interface.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-343/index.html"
+}

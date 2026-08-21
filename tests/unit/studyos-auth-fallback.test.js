@@ -7,7 +7,8 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '../..');
-const studyOSHtml = fs.readFileSync(path.join(root, 'StudyOS/index.html'), 'utf8');
+const studyOSHtml = fs.readFileSync(path.join(root, 'apps/studyos/index.html'), 'utf8');
+
 
 let passed = 0;
 let failed = 0;

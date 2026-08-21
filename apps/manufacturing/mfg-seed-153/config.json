@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-153",
+  "name": "Mfg Task 153: Application / Device Protocols",
+  "title": "Implement Modbus holding register word-ordering pa",
+  "description": "Implement Modbus holding register word-ordering parsing for a J1939 diesel engine node.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-153/index.html"
+}

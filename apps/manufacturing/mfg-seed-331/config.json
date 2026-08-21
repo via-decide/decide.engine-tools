@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-331",
+  "name": "Mfg Task 331: Firmware OTA for constrained devices",
+  "title": "Design a rollback mechanism for failed a Cortex-M0",
+  "description": "Design a rollback mechanism for failed a Cortex-M0 motor driver.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-331/index.html"
+}

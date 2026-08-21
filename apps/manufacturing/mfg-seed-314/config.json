@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-314",
+  "name": "Mfg Task 314: Production telemetry schema",
+  "title": "Define the structural JSON schema for yield and sc",
+  "description": "Define the structural JSON schema for yield and scrap rate metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-314/index.html"
+}

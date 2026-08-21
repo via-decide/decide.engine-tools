@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-287",
+  "name": "Mfg Task 287: Production telemetry schema",
+  "title": "Implement a telemetry aggregation endpoint for ope",
+  "description": "Implement a telemetry aggregation endpoint for operator login/logout sessions.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-287/index.html"
+}

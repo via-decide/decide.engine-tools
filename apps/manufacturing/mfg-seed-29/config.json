@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-29",
+  "name": "Mfg Task 29: Hardware abstraction / HAL",
+  "title": "Define a C-struct based hardware abstraction layer",
+  "description": "Define a C-struct based hardware abstraction layer for SPI flash memory.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-29/index.html"
+}

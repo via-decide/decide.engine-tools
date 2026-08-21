@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-286",
+  "name": "Mfg Task 286: Firmware OTA for constrained devices",
+  "title": "Create a chunked binary download manager for an Lo",
+  "description": "Create a chunked binary download manager for an LoRaWAN endpoint.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-286/index.html"
+}

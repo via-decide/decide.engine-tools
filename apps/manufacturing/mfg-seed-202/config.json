@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-202",
+  "name": "Mfg Task 202: Edge data formatting",
+  "title": "Create a data aggregator that batches high-frequen",
+  "description": "Create a data aggregator that batches high-frequency vibration data.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-202/index.html"
+}

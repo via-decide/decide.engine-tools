@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-12",
+  "name": "Mfg Task 12: Sensor calibration routines",
+  "title": "Design an auto-zeroing routine for an absolute pre",
+  "description": "Design an auto-zeroing routine for an absolute pressure sensor.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-12/index.html"
+}

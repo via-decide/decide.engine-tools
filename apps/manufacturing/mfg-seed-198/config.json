@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-198",
+  "name": "Mfg Task 198: Application / Device Protocols",
+  "title": "Handle line noise and protocol framing errors on a",
+  "description": "Handle line noise and protocol framing errors on a Modbus RTU pressure transmitter.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-198/index.html"
+}

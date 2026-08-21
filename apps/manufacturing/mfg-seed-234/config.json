@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-234",
+  "name": "Mfg Task 234: Application / Device Protocols",
+  "title": "Build a timing-aware state machine for a Modbus RT",
+  "description": "Build a timing-aware state machine for a Modbus RTU pressure transmitter.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "application-device-protocols"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-234/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-389",
+  "name": "Mfg Task 389: Hardware abstraction / HAL",
+  "title": "Write hardware initialization sequences for PWM mo",
+  "description": "Write hardware initialization sequences for PWM motor drives.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-389/index.html"
+}

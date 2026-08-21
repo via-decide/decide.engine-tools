@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-119",
+  "name": "Mfg Task 119: Hardware abstraction / HAL",
+  "title": "Create mock interfaces to simulate PWM motor drive",
+  "description": "Create mock interfaces to simulate PWM motor drives.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-119/index.html"
+}

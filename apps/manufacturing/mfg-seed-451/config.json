@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-451",
+  "name": "Mfg Task 451: Physical / Signal Layer",
+  "title": "Handle differential signal integrity diagnostics o",
+  "description": "Handle differential signal integrity diagnostics on a 4-20mA analog current loop.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-451/index.html"
+}

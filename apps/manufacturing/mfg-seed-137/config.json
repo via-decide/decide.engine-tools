@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-137",
+  "name": "Mfg Task 137: Hardware abstraction / HAL",
+  "title": "Define a C-struct based hardware abstraction layer",
+  "description": "Define a C-struct based hardware abstraction layer for PWM motor drives.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-137/index.html"
+}

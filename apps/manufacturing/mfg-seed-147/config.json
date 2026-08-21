@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-147",
+  "name": "Mfg Task 147: Sensor calibration routines",
+  "title": "Implement moving-average noise filtering for a loa",
+  "description": "Implement moving-average noise filtering for a load cell amplifier.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "sensor-calibration-routines"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-147/index.html"
+}

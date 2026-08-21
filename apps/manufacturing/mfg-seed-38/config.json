@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-38",
+  "name": "Mfg Task 38: Hardware abstraction / HAL",
+  "title": "Create mock interfaces to simulate ADC peripherals",
+  "description": "Create mock interfaces to simulate ADC peripherals.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-38/index.html"
+}

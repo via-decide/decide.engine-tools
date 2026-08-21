@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-391",
+  "name": "Mfg Task 391: Edge data formatting",
+  "title": "Create a data aggregator that batches periodic tem",
+  "description": "Create a data aggregator that batches periodic temperature logs.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-391/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-190",
+  "name": "Mfg Task 190: Physical / Signal Layer",
+  "title": "Detect open-loop faults (under 4mA) on discrete di",
+  "description": "Detect open-loop faults (under 4mA) on discrete digital I/O.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-190/index.html"
+}

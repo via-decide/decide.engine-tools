@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-161",
+  "name": "Mfg Task 161: Production telemetry schema",
+  "title": "Define the structural JSON schema for environmenta",
+  "description": "Define the structural JSON schema for environmental condition snapshots.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-161/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-303",
+  "name": "Mfg Task 303: Safety interlock logic",
+  "title": "Implement fail-safe state fallback for a pneumatic",
+  "description": "Implement fail-safe state fallback for a pneumatic press valve.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "safety-interlock-logic"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-303/index.html"
+}

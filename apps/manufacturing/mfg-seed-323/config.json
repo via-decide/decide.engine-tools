@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-323",
+  "name": "Mfg Task 323: Production telemetry schema",
+  "title": "Implement a telemetry aggregation endpoint for env",
+  "description": "Implement a telemetry aggregation endpoint for environmental condition snapshots.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-323/index.html"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-326",
+  "name": "Mfg Task 326: Hardware abstraction / HAL",
+  "title": "Implement vendor-agnostic GPIO and I2C wrappers fo",
+  "description": "Implement vendor-agnostic GPIO and I2C wrappers for PWM motor drives.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-326/index.html"
+}

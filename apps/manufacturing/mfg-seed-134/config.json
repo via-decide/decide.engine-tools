@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-134",
+  "name": "Mfg Task 134: Production telemetry schema",
+  "title": "Define the structural JSON schema for machine cycl",
+  "description": "Define the structural JSON schema for machine cycle time events.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "production-telemetry-schema"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-134/index.html"
+}

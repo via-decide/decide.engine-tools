@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-463",
+  "name": "Mfg Task 463: Edge data formatting",
+  "title": "Design a schema validator for incoming production ",
+  "description": "Design a schema validator for incoming production count metrics.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "edge-data-formatting"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-463/index.html"
+}

@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '../..');
-const indexHtml = fs.readFileSync(path.join(root, 'StudyOS/index.html'), 'utf8');
-const nexClient = fs.readFileSync(path.join(root, 'StudyOS/api/nex_client.ts'), 'utf8');
-const summaryEngine = fs.readFileSync(path.join(root, 'StudyOS/services/summary_engine.ts'), 'utf8');
+const indexHtml = fs.readFileSync(path.join(root, 'apps/studyos/index.html'), 'utf8');
+const nexClient = fs.readFileSync(path.join(root, 'apps/studyos/api/nex_client.ts'), 'utf8');
+const summaryEngine = fs.readFileSync(path.join(root, 'apps/studyos/services/summary_engine.ts'), 'utf8');
 
 let passed = 0;
 let failed = 0;

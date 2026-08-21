@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-61",
+  "name": "Mfg Task 61: Firmware OTA for constrained devices",
+  "title": "Implement A/B partition swapping logic for a Corte",
+  "description": "Implement A/B partition swapping logic for a Cortex-M0 motor driver.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "firmware-ota-for-constrained-devices"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-61/index.html"
+}

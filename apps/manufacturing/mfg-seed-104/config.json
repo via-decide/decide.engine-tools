@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-104",
+  "name": "Mfg Task 104: Error/fault code parsing",
+  "title": "Design a state machine to track severity escalatio",
+  "description": "Design a state machine to track severity escalation of VFD error registers.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "error-fault-code-parsing"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-104/index.html"
+}

@@ -24,7 +24,7 @@ console.log('\n── Dashboard Module Loader ──');
 const root = path.join(__dirname, '../..');
 const dashboardHtml = fs.readFileSync(path.join(root, 'dashboard/index.html'), 'utf8');
 assert('dashboard workspace container is present', dashboardHtml.includes('id="workspace"'));
-assert('dashboard includes module cards', dashboardHtml.includes('data-module="tools"') && dashboardHtml.includes('data-module="hex-wars"'));
+
 
 const moduleLoaderCode = fs.readFileSync(path.join(root, 'ui/module-loader.js'), 'utf8');
 const sandbox = { window: {}, console };

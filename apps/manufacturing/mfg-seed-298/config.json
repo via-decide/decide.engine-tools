@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-298",
+  "name": "Mfg Task 298: Physical / Signal Layer",
+  "title": "Implement ADC scaling and noise filtering for a 4-",
+  "description": "Implement ADC scaling and noise filtering for a 4-20mA analog current loop.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "physical-signal-layer"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-298/index.html"
+}

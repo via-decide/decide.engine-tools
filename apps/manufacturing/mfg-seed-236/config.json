@@ -1,0 +1,14 @@
+{
+  "id": "mfg-seed-236",
+  "name": "Mfg Task 236: Hardware abstraction / HAL",
+  "title": "Write hardware initialization sequences for DAC ou",
+  "description": "Write hardware initialization sequences for DAC outputs.",
+  "category": "manufacturing",
+  "tags": [
+    "manufacturing",
+    "ssd-loop",
+    "gn8r-seeded",
+    "hardware-abstraction-hal"
+  ],
+  "entry": "apps/manufacturing/mfg-seed-236/index.html"
+}
