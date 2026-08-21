@@ -1,25 +1,18 @@
-const fs = require('fs');
-const path = require('./tool-storage');
+// shared/tool-registry.js
+import { registerTool } from './shared/tool-storage.js';
 
-function registerTool(toolId) {
-  const toolsDir = path.join(__dirname, '../tools');
-  const toolPath = path.join(toolsDir, `${toolId}`);
-  
-  if (!fs.existsSync(toolPath)) {
-    throw new Error(`Tool directory ${toolPath} not found`);
-  }
-  
-  const configPath = path.join(toolPath, 'config.json');
-  if (!fs.existsSync(configPath)) {
-    throw new Error(`Config file ${configPath} not found`);
-  }
-  
-  try {
-    const toolData = require(configPath);
-    toolStorage.saveArtifact('registered_tool', { id: toolId, data: toolData });
-  } catch (error) {
-    throw new Error(`Error loading config file for tool ${toolId}: ${error.message}`);
+const importableToolDirs = [
+  'tools/agent-console',
+  'tools/settings',
+  'tools/example-tool'
+];
+
+for (const dir of importableToolDirs) {
+  const tools = require(`./${dir}`);
+  for (const toolId in tools) {
+    if (!tools.hasOwnProperty(toolId)) continue;
+    registerTool(tools[toolId]);
   }
 }
 
-module.exports = { registerTool };
+module.exports = { importableToolDirs };

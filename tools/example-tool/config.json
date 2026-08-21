@@ -1,0 +1,10 @@
+{
+  "id": "example-tool",
+  "name": "Example Tool",
+  "description": "A sample tool to demonstrate the system.",
+  "category": "Tools",
+  "audience": ["developers", "users"],
+  "inputs": [],
+  "outputs": [],
+  "tags": ["sample"]
+}
