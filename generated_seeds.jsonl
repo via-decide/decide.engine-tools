@@ -1,3 +1,3 @@
-{"task": "Implement the router.js and importableToolDirs[] array.", "constraints": "Preserve existing code; prefer additive modular changes."}
-{"task": "Review architecture and summarize current behavior.", "constraints": "Preserve unrelated working code. Prefer additive modular changes."}
-{"task": "Implement the smallest safe change set for the stated goal.", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task": "Implement the smallest safe change set for the stated goal.", "constraints": "Preserve unrelated working code. Prefer additive modular changes."}
+{"task": "Run validation commands and fix discovered issues.", "constraints": "Use node --check on all modified files."}
+{"task": "Self-review for regressions, missing env wiring, and docs drift.", "constraints": "Verify the implementation does not break existing functionality."}
