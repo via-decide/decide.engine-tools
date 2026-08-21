@@ -1,3 +1,12 @@
-{"task": "Implement the Smallest Safe Change Set for the Stated Goal.", "constraints": "Preserve unrelated working code. Prefer additive modular changes."}
-{"task": "Run Validation Commands and Fix Discovered Issues.", "constraints": "Use node --check / python3 -m py_compile / JSON parse when applicable."}
-{"task": "Self-Review for Regressions, Missing Env Wiring, and Docs Drift.", "constraints": "Preserve existing code; prefer additive changes."}
+{
+  "task": "Audit architecture",
+  "constraints": "Preserve existing code; prefer additive modular changes."
+},
+{
+  "task": "Implement the smallest safe change set for the stated goal",
+  "constraints": "Run validation commands and fix discovered issues."
+},
+{
+  "task": "Self-review for regressions, missing env wiring, and docs drift.",
+  "constraints": "Return complete final file contents for every modified or created file."
+}
