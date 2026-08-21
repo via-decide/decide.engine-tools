@@ -1,12 +1,10 @@
-let tools = [];
+const tools = [];
 
-export function registerTool(tool) {
-    if (!tool || typeof tool !== 'object') {
-        throw new Error('Invalid input: tool must be an object');
-    }
-    tools.push(tool);
+function registerTool(tool) {
+  if (!tool || typeof tool !== 'object') {
+    throw new Error('Invalid tool provided');
+  }
+  tools.push(tool);
 }
 
-export function getTools() {
-    return [...tools];
-}
+module.exports = { registerTool };

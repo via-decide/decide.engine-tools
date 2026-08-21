@@ -1,3 +1,3 @@
-{"task": "Implement process definition", "constraints": "Preserve existing code and add modular changes"}
-{"task": "Research provenance and evidence references", "constraints": "Preserve existing code and add modular changes"}
-{"task": "Handle registration of new tools in existing files", "constraints": "Preserve working code and prefer additive modular changes"}
+{"task": "Implement the core module for Workspace", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "Implement the core module for StudyOS", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "Implement the core module for Tools", "constraints": "Preserve existing code; prefer additive changes."}
