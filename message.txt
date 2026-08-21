@@ -1,0 +1,5 @@
+Diagnostic: This task requires a deep understanding of the repository's architecture and existing code. It must not be executed without explicit user approval.
+
+Please provide:
+1. A summary of your current implementation.
+2. Any risks or issues you have identified in this approach.
