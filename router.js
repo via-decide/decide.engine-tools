@@ -1,19 +1,13 @@
-const importableToolDirs = require('./importable-tool-dirs.json');
-const { registerTool } = require('./shared/tool-storage.js');
+const { createRouter } = require('./shared/router');
 
-const routeMap = {};
+const router = createRouter();
 
-for (const dir of importableToolDirs) {
-  try {
-    const tools = require(`./${dir}`);
-    for (const toolId in tools) {
-      if (!tools.hasOwnProperty(toolId)) continue;
-      registerTool(tools[toolId]);
-      routeMap[toolId] = `/${dir}/${toolId}`;
-    }
-  } catch (error) {
-    console.error(`Failed to load tools from directory ${dir}:`, error);
-  }
-}
+router.addRoute('tool', '/tools/tool.html');
+router.addRoute('workspace', '/dashboard/workspace.html');
 
-module.exports = { routeMap };
+// add placeholder tool route
+router.addRoute('placeholder', '/tools/placeholder/index.html');
+
+module.exports = {
+  router,
+};

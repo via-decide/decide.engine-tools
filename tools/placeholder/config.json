@@ -1,0 +1,10 @@
+{
+  "id": "placeholder",
+  "name": "Placeholder Tool",
+  "description": "A placeholder tool for the Original Engineering Candidate Product Revision R0.1.",
+  "category": "Tools",
+  "audience": ["All users"],
+  "inputs": [],
+  "outputs": [],
+  "tags": []
+}
