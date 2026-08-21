@@ -1,3 +1,3 @@
-{"task": "Implement a functional dashboard component", "constraints": "Preserve existing code; prefer additive modular changes."}
-{"task": "Add real tools with actual logic to the registry", "constraints": "Preserve existing code; prefer additive modular changes."}
-{"task": "Implement proper routing and navigation between tools", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task": "Implement the Smallest Safe Change Set for the Stated Goal.", "constraints": "Preserve unrelated working code. Prefer additive modular changes."}
+{"task": "Run Validation Commands and Fix Discovered Issues.", "constraints": "Use node --check / python3 -m py_compile / JSON parse when applicable."}
+{"task": "Self-Review for Regressions, Missing Env Wiring, and Docs Drift.", "constraints": "Preserve existing code; prefer additive changes."}

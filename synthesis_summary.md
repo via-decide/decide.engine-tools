@@ -1,10 +1,17 @@
-This tool provides the first Original Engineering Candidate Product Revision R0.1 from an ENGINEERING_CANDIDATE_READY Lab transfer, establishing the canonical engineering product record.
+# Synthesis Summary
 
-The core modules are:
-- Workspace
-- StudyOS
-- Tools
-- Agent Console
-- Settings
+## Architecture Audit
+- The repository contains a unified dashboard shell that routes users into core modules while preserving standalone tools.
+- The primary entry point is `dashboard/index.html`.
 
-The process definition is to implement the smallest safe change set for the stated goal. It preserves existing code and prefers additive modular changes.
+## Implementation Steps
+1. Audit architecture by examining the dashboard/index.html routes and presuming the current behavior.
+2. Preserve unrelated working code. Prefer additive modular changes.
+3. Implement the smallest safe change set for the stated goal.
+4. Run validation commands and fix discovered issues.
+5. Self-review for regressions, missing env wiring, and docs drift.
+
+## Next Tasks
+1. Implement the Smallest Safe Change Set for the Stated Goal.
+2. Run Validation Commands and Fix Discovered Issues.
+3. Self-Review for Regressions, Missing Env Wiring, and Docs Drift.

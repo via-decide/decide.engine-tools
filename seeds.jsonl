@@ -1,3 +1,3 @@
-{"task": "Read README.md and AGENTS.md.", "constraints": "Review the existing relevant files in full."}
-{"task": "Audit architecture before coding.", "constraints": "Provide a summary of current behavior."}
-{"task": "Preserve unrelated working code. Prefer additive modular changes.", "constraints": "List any existing tool directories that should be preserved."}
+{"task": "Generate the canonical engineering product record.", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "Implement the smallest safe change set for the stated goal.", "constraints": "Preserve unrelated working code. Prefer additive modular changes."}
+{"task": "Run validation commands and fix discovered issues.", "constraints": "Self-review for regressions, missing env wiring, and docs drift."}
