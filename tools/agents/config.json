@@ -1,0 +1,10 @@
+{
+  "id": "agent",
+  "name": "Agent Console",
+  "description": "Tool for interacting with AI agents.",
+  "category": "Tools",
+  "audience": ["developers", "researchers"],
+  "inputs": ["command", "parameters"],
+  "outputs": ["result", "logs"],
+  "tags": ["ai", "agent"]
+}
