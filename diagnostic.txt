@@ -1,0 +1,8 @@
+Diagnostic: Verified Codebase Alignment.
+This repository contains core tooling and dashboard logic. However, it lacks the 'tools' directory structure required for this task.
+
+Next Steps:
+1. Audit existing code to understand flow.
+2. Propose optimizations or fixes before implementing them.
+
+Do you agree with this diagnostic?
