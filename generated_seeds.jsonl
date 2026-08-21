@@ -1,3 +1,3 @@
-{"task": "Implement the core module for Workspace", "constraints": "Preserve existing code; prefer additive changes."}
-{"task": "Implement the core module for StudyOS", "constraints": "Preserve existing code; prefer additive changes."}
-{"task": "Implement the core module for Tools", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "Implement the core modules (Workspace, StudyOS, Tools, Agent Console, Settings) with their respective index.html and tool.js files.", "constraints": ""}
+{"task": "Preserve working code; prefer additive modular changes.", "constraints": ""}
+{"task": "Run validation commands and fix discovered issues.", "constraints": ""}
