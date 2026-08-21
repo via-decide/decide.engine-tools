@@ -1,5 +1,7 @@
-const importableToolDirs = [
-  'tools/original_engineering_candidate_product_revision_r0_1'
+const tools = [
+  'tools/agent-console',
+  'tools/settings',
+  // TO DO: add your tool here
 ];
 
-module.exports = { importableToolDirs };
+export const registeredTools = [...importableToolDirs, ...tools];

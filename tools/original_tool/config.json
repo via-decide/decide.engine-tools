@@ -1,0 +1,10 @@
+{
+  "id": "original_tool",
+  "name": "Original Engineering Candidate Product Revision R0.1",
+  "description": "Preserve existing code; prefer additive changes.",
+  "category": "core",
+  "audience": ["engineers", "founders"],
+  "inputs": [],
+  "outputs": [],
+  "tags": ["canonical", "immutable"]
+}
