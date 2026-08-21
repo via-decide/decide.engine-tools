@@ -1,3 +1,3 @@
-{"task": "Implement the core modules (Workspace, StudyOS, Tools, Agent Console, Settings) with their respective index.html and tool.js files.", "constraints": ""}
-{"task": "Preserve working code; prefer additive modular changes.", "constraints": ""}
-{"task": "Run validation commands and fix discovered issues.", "constraints": ""}
+{"task": "Register the original engineering candidate product revision r0.1 tool in the router.js file.", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "Implement the required outputs for the original engineering candidate product revision r0.1 tool.", "constraints": "Preserve existing code; prefer additive changes."}
+{"task": "Run validation commands and fix discovered issues.", "constraints": "Preserve existing code; prefer additive changes."}

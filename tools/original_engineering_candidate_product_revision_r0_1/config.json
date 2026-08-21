@@ -1,0 +1,22 @@
+{
+  "id": "original_engineering_candidate_product_revision_r0_1",
+  "name": "Original Engineering Candidate Product Revision R0.1",
+  "description": "Establish the canonical engineering product record, immutable revision, controlled artifacts, requirements, materials, process definition, research provenance, evidence references, known limitations and open claims.",
+  "category": "Core System",
+  "audience": "Developers",
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "canonical_engineering_product_record.json",
+      "description": "Canonical engineering product record (canonical_engineering_product_record.json)"
+    },
+    {
+      "name": "immutable_revision_r0_1.md",
+      "description": "Immutable revision R0.1 for the engineering candidate product."
+    }
+  ],
+  "tags": [
+    "canonical-engineering-product-record",
+    "immutable-revision-r0-1"
+  ]
+}
