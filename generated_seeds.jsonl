@@ -1,3 +1,3 @@
-{"task": "review repository architecture", "constraints": "preserve existing code; prefer additive modular changes"}
-{"task": "audit dependencies", "constraints": "verify shared/tool-storage.js and shared/shared.css are not modified"}
-{"task": "implement the smallest safe change set for the stated goal", "constraints": "preservation of unrelated working code, run validation commands and fix discovered issues"}
+{"task": "Implement controlled artifacts (e.g., README.md).", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task": "Add requirements and materials sections with concrete content.", "constraints": "Preserve existing code; prefer additive modular changes."}
+{"task": "Run validation commands and fix discovered issues.", "constraints": "Preserve existing code; prefer additive modular changes."}
