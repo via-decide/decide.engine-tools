@@ -1,12 +1,17 @@
 {
-  "task_id": "042aca7c-b0ec-4d48-b380-715d0df4a889",
-  "timestamp": "2026-07-29T13:30:54.498Z",
+  "task_id": "a5f7ef81-946d-4d1e-9528-a91475eb301f",
+  "timestamp": "2026-08-21T14:28:05.697Z",
   "repo": "via-decide/decide.engine-tools",
   "stages": [
+    "FLIGHT_PLAN",
     "PLAN",
     "AUDIT",
+    "GENERATE",
+    "RESEARCH",
+    "DECISION",
     "SYNTHESIS",
     "VERIFY",
+    "REFLECT",
     "PATCH"
   ],
   "validator_output": "ADMISSIBLE",

@@ -1,0 +1,10 @@
+{
+  "id": "candidate_tool",
+  "name": "Original Engineering Candidate Tool",
+  "description": "Tool for Original Engineering Candidate Product Revision R0.1 from an ENGINEERING_CANDIDATE_READY Lab transfer.",
+  "category": "core",
+  "audience": ["engineers", "researchers"],
+  "inputs": [],
+  "outputs": [],
+  "tags": ["canonical", "immutable"]
+}
