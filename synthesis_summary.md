@@ -1,14 +1,14 @@
 # Synthesis Summary
 
-## Tool: Markdown Previewer (id: markdown-previewer)
+## Task: Audit the current decide.engine-tools repository
 
-### Description
-The Markdown Previewer is a standalone tool that allows users to preview their markdown text in real-time and export it as an HTML file.
+### Problematic behavior
+The existing tool.js file does not have any logic implemented. It is an empty placeholder.
 
-### Implementation
-- Created `config.json` with metadata.
-- Created `index.html` for the user interface, including a textarea for input, buttons for actions, and a div for output.
-- Created `tool.js` for the business logic, using MarkdownIt to render markdown text to HTML and registering the tool in ToolStorage.
+### Required changes
+1. Implement minimal logic to fulfill the mission.
+2. Run validation commands and fix discovered issues.
+3. Self-review for regressions, missing env wiring, and docs drift.
 
-### Changes
-No existing files were modified. All changes are additive and localized to the new tool directory (`tools/markdown-previewer/`). The implementation follows the specified architecture and constraints.
+### Implementation summary
+This audit required analyzing architecture before coding. The repository uses CommonJS modules (no 'import' syntax). The tool.js file is empty, so this implementation adds minimal logic to fulfill the mission. No existing code was modified outside of the specified tool directory.
