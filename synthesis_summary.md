@@ -1,4 +1,9 @@
-Tool: Puzzle Generator
-
-Description:
-Add a new standalone tool "Puzzle Generator" (id: puzzle-generator) at tools/games/puzzle-generator/. Description: "Generate logic puzzles with answer checking.". Category: "games". Required files: tools/games/puzzle-generator/config.json, tools/games/puzzle-generator/index.html, tools/games/puzzle-generator/tool.js. config.json must include: id, name, description, category, audience, inputs, outputs, tags. Load shared/tool-storage.js, shared/shared.css. Use ToolStorage for persistence. No external frameworks. Register in shared/tool-registry.js: add "tools/games/puzzle-generator" to importableToolDirs. Register in router.js: add to the tool path static map.
+Tool: Memory Match (id: memory-match)
+Category: games
+Description: Card flip memory game with scoring and timer.
+Input: None
+Output: Score, time taken
+Related files:
+  tools/games/memory-match/config.json - Tool configuration
+  tools/games/memory-match/index.html - HTML template
+  tools/games/memory-match/tool.js - JavaScript logic
