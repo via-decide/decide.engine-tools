@@ -1,0 +1,27 @@
+{
+  "id": "thumbnail-brief",
+  "name": "Thumbnail Brief Generator",
+  "description": "Generate visual briefs for YouTube thumbnails.",
+  "category": "creators",
+  "audience": ["creators", "content creators"],
+  "inputs": [
+    {
+      "name": "title",
+      "type": "string",
+      "label": "Title"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "label": "Description"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "thumbnail",
+      "type": "image",
+      "label": "Generated Thumbnail"
+    }
+  ],
+  "tags": ["youtube", "thumbnails"]
+}
