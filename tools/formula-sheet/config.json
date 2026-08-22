@@ -1,0 +1,28 @@
+{
+  "id": "formula-sheet",
+  "name": "Formula Sheet Builder",
+  "description": "Build and export LaTeX/plain formula sheets.",
+  "category": "education",
+  "audience": ["students", "teachers"],
+  "inputs": [
+    {
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "label": "Formulas",
+      "type": "array",
+      "items": {
+        "label": "Formula",
+        "type": "string"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "label": "Download Link",
+      "type": "link"
+    }
+  ],
+  "tags": ["education", "formula"]
+}

@@ -1,1 +1,3 @@
-Tool directory created at tools/pomodoro-timer/. Added required files: config.json, index.html, tool.js. Registered the tool in shared/tool-registry.js by adding 'tools/pomodoro-timer' to importableToolDirs. Registered the tool in router.js by adding it to the tool path static map.
+Tool: Formula Sheet Builder
+
+Formula Sheet Builder is a new standalone tool designed to build and export LaTeX/plain formula sheets. It adheres to the CEA architecture by creating a dedicated directory (tools/formula-sheet/) with required files (config.json, index.html, tool.js). The tool loads shared/tool-storage.js and shared/shared.css for persistence and styling. It registers in shared/tool-registry.js and router.js without modifying any existing tools or breaking category routing.
