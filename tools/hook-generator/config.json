@@ -1,0 +1,15 @@
+{
+  "id": "hook-generator",
+  "name": "Hook Generator",
+  "description": "Generate scroll-stopping intros for posts.",
+  "category": "creators",
+  "audience": ["content creators", "bloggers"],
+  "inputs": [],
+  "outputs": [
+    {
+      "label": "Generated Hook",
+      "type": "string"
+    }
+  ],
+  "tags": ["hook generator"]
+}

@@ -1,19 +1,11 @@
-const express = require('express');
-const app = express();
+const toolPathMap = {
+  '/dashboard': './dashboard/index.html',
+  '/studyos': './studyos/index.html',
+  '/workspace': './workspace/index.html',
+  '/agent-console': './agent-console/index.html',
+  '/settings': './settings/index.html'
+};
 
-app.use('/api/tools', (req, res) => {
-  const tools = [
-    'tools/agents',
-    'tools/calculators',
-    'tools/guides',
-    'tools/scheduling'
-  ];
-  
-  if (req.query.id === 'swot-analyzer') {
-    tools.push('tools/swot-analyzer');
-  }
-  
-  res.json({ tools });
-});
+toolPathMap['/hook-generator'] = './tools/hook-generator/index.html';
 
-module.exports = app;
+module.exports = { toolPathMap };

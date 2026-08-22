@@ -1,11 +1,12 @@
 let importableToolDirs = [
   'tools/agents',
-  'tools/calculator',
-  'tools/note-taker',
-  'tools/puzzle-generator',
-  'tools/swot-analyzer'
+  'tools/dashboard',
+  'tools/studyos',
+  'tools/tools',
+  'tools/agent-console',
+  'tools/settings'
 ];
 
-importableToolDirs.push('tools/flashcard-engine');
+importableToolDirs.push('tools/hook-generator');
 
 module.exports = { importableToolDirs };
