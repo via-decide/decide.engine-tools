@@ -1,0 +1,14 @@
+{
+  "id": "unit-converter",
+  "name": "Unit Converter",
+  "description": "Convert between units: length, mass, temp, currency.",
+  "category": "misc",
+  "audience": ["students", "researchers", "creatives"],
+  "inputs": [
+    {"label": "From Unit", "type": "text"},
+    {"label": "To Unit", "type": "text"},
+    {"label": "Value", "type": "number"}
+  ],
+  "outputs": [{"label": "Converted Value", "type": "string"}],
+  "tags": ["length", "mass", "temperature", "currency"]
+}
