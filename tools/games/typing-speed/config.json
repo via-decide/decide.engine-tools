@@ -1,0 +1,10 @@
+{
+  "id": "typing-speed",
+  "name": "Typing Speed Test",
+  "description": "Measure WPM with accuracy tracking.",
+  "category": "games",
+  "audience": "all",
+  "inputs": [],
+  "outputs": ["wpm", "accuracy"],
+  "tags": ["typing"]
+}
