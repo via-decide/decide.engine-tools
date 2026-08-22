@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Previewer</title>
+  <link rel="stylesheet" href="../shared/shared.css">
+</head>
+<body>
+  <h2>Markdown Previewer</h2>
+  <textarea id="markdownInput" placeholder="Enter your markdown text here..."></textarea><br/>
+  <button onclick="previewMarkdown()">Preview</button>
+  <a id="downloadLink" download="document.html">Download HTML</a><br/>
+  <div id="htmlOutput"></div>
+
+  <script src="../shared/tool-storage.js"></script>
+  <script src="./tool.js"></script>
+</body>
+</html>

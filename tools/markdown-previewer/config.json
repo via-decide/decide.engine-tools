@@ -1,0 +1,24 @@
+{
+  "id": "markdown-previewer",
+  "name": "Markdown Previewer",
+  "description": "Live markdown preview with export to HTML.",
+  "category": "misc",
+  "audience": ["developers", "students"],
+  "inputs": [
+    {
+      "name": "markdownText",
+      "type": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "htmlPreview",
+      "type": "string"
+    },
+    {
+      "name": "downloadLink",
+      "type": "string"
+    }
+  ],
+  "tags": ["live", "preview", "export"]
+}

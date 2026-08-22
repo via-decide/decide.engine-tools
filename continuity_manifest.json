@@ -1,6 +1,6 @@
 {
-  "task_id": "399585fa-004a-48ff-bea5-4910361866e6",
-  "timestamp": "2026-08-22T07:13:52.968Z",
+  "task_id": "1f3100c9-9584-4833-8119-4476c21cb920",
+  "timestamp": "2026-08-22T07:17:58.158Z",
   "repo": "via-decide/decide.engine-tools",
   "stages": [
     "FLIGHT_PLAN",
@@ -17,5 +17,5 @@
   "validator_output": "ADMISSIBLE",
   "divergence_limit": 0.05,
   "category": "misc",
-  "toolId": "color-palette"
+  "toolId": "markdown-previewer"
 }

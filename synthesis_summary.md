@@ -1,9 +1,14 @@
 # Synthesis Summary
 
-## Tool: Color Palette Generator (id: color-palette)
-- Created tool directory structure: `tools/color-palette/`
-- Added required files: `config.json`, `index.html`, `tool.js`
-- Configured the tool with a unique ID, name, description, category, audience, inputs, outputs, and tags
-- Loaded shared dependencies (shared/tool-storage.js, shared/shared.css)
-- Registered the new tool in `shared/tool-registry.js` under importableToolDirs
-- Added route mapping for the new tool in `router.js`
+## Tool: Markdown Previewer (id: markdown-previewer)
+
+### Description
+The Markdown Previewer is a standalone tool that allows users to preview their markdown text in real-time and export it as an HTML file.
+
+### Implementation
+- Created `config.json` with metadata.
+- Created `index.html` for the user interface, including a textarea for input, buttons for actions, and a div for output.
+- Created `tool.js` for the business logic, using MarkdownIt to render markdown text to HTML and registering the tool in ToolStorage.
+
+### Changes
+No existing files were modified. All changes are additive and localized to the new tool directory (`tools/markdown-previewer/`). The implementation follows the specified architecture and constraints.
