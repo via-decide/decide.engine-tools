@@ -1,0 +1,25 @@
+{
+  "task_id": "unknown-task",
+  "executor": "refactor executor",
+  "status": "FAIL",
+  "files_changed": [
+    "apps/manufacturing/",
+    "dashboard/index.html",
+    "refactor_report.json",
+    "router.js",
+    "scripts/generate-manufacturing-tools.js",
+    "scripts/generate-tools-manifest.mjs",
+    "test_output.txt",
+    "tests/smoke/tools.smoke.js",
+    "tests/unit/dashboard-module-loader.test.js",
+    "tests/unit/studyos-auth-fallback.test.js",
+    "tests/unit/studyos-nex-integration.test.js",
+    "tools-manifest.json",
+    "tools/original_engineering_candidate_product_revision_r0_1/tool.js",
+    "ui/module-loader.js"
+  ],
+  "behavior_preservation_claim": "Refactor intended to preserve behavior.",
+  "validation_status": "NOT_RUN",
+  "formatter_status": "NOT_RUN",
+  "error": "Out-of-scope changes detected: apps/manufacturing/, dashboard/index.html, refactor_report.json, router.js, scripts/generate-manufacturing-tools.js, scripts/generate-tools-manifest.mjs, test_output.txt, tests/smoke/tools.smoke.js, tests/unit/dashboard-module-loader.test.js, tests/unit/studyos-auth-fallback.test.js, tests/unit/studyos-nex-integration.test.js, tools-manifest.json, tools/original_engineering_candidate_product_revision_r0_1/tool.js, ui/module-loader.js"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "tetris-game",
+  "name": "Tetris Game",
+  "description": "Falling block puzzle with rotation and line clears.",
+  "category": "games",
+  "audience": ["students", "developers"],
+  "inputs": [],
+  "outputs": [],
+  "tags": ["puzzle", "arcade"]
+}

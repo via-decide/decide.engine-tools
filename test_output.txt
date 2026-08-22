@@ -1,0 +1,531 @@
+
+> decide-engine-tools@1.0.0 test
+> node tests/run-all.js
+
+╔═══════════════════════════════════╗
+║  ViaDecide Studio — Full Test Run ║
+╚═══════════════════════════════════╝
+
+[ 1/2 ] Unit Tests...
+
+═══════════════════════════════════
+  ViaDecide Studio — Unit Tests
+═══════════════════════════════════
+
+── EngineUtils ──
+
+tryParse()
+  ✓ null input returns {}
+  ✓ valid JSON parses correctly
+  ✓ invalid JSON returns {raw: value}
+  ✓ empty string returns {}
+
+clamp()
+  ✓ clamps below min
+  ✓ clamps above max
+  ✓ passes through in-range value
+  ✓ clamps at min boundary
+  ✓ clamps at max boundary
+
+weightedScore()
+  ✓ calculates weighted sum correctly
+  ✓ handles single item
+  ✓ handles zero weight
+
+── ToolBridge ──
+
+sendContext() / receiveContext()
+  ✓ envelope is received
+  ✓ data payload is correct
+  ✓ fromToolId is set
+  ✓ toToolId is set
+  ✓ timestamp is present
+
+receiveContext() cleanup
+  ✓ message is consumed after receive
+
+receiveContext() with no message
+  ✓ returns null when no message
+
+── Router ──
+
+toolPathStaticMap structure
+  ✓ map is an object
+  ✓ has at least 30 tools registered (found 83)
+
+All registered paths exist on disk
+
+Key tools are registered
+  ✓ "json-formatter" is in map
+  ✓ "pomodoro" is in map
+  ✓ "hex-wars" is in map
+  ✓ "prompt-alchemy" is in map
+  ✓ "agent-builder" is in map
+  ✓ "color-palette" is in map
+
+── Smoke Tools ──
+  ✓ detects missing browser executable error signature
+  ✓ ignores generic runtime errors
+  ✓ returns false for malformed error objects
+
+── Mars HexGrid ──
+
+coordinate conversion
+  ✓ round trip -2,0
+  ✓ round trip -2,1
+  ✓ round trip -2,2
+  ✓ round trip -1,-1
+  ✓ round trip -1,0
+  ✓ round trip -1,1
+  ✓ round trip -1,2
+  ✓ round trip 0,-2
+  ✓ round trip 0,-1
+  ✓ round trip 0,0
+  ✓ round trip 0,1
+  ✓ round trip 0,2
+  ✓ round trip 1,-2
+  ✓ round trip 1,-1
+  ✓ round trip 1,0
+  ✓ round trip 1,1
+  ✓ round trip 2,-2
+  ✓ round trip 2,-1
+  ✓ round trip 2,0
+
+neighbors and distance
+  ✓ interior center hex has exactly 6 neighbors
+  ✓ edge hex has fewer than 6 neighbors
+  ✓ distance from center to center is 0
+  ✓ distance from 0,0 to 2,-1 is 2
+  ✓ distance is symmetric
+
+pan and zoom consistency
+  ✓ pan updates center x/y consistently
+  ✓ zoom keeps origin hex stable under cursor
+  ✓ zoom changes hex size
+
+grid generation
+  ✓ radius 1 Task 1 grid creates 7 visible hexes
+  ✓ terrain generator supports decimal complexity values
+  ✓ terrain generator stores complexity at one-decimal precision
+
+── HighwaySimulation ──
+  ✓ DECIDE runtime wrapper exists
+  ✓ run API exists
+  ✓ optimize API exists
+  ✓ decision-matrix tool mapping exists
+  ✓ scenario-planner tool mapping exists
+  ✓ output-evaluator tool mapping exists
+  ✓ HTML loads refactored simulation module
+  ✓ UI includes optimize button
+  ✓ HTML loads protocol core script
+  ✓ HTML loads protocol evolution script
+  ✓ protocol evolution API exists
+  ✓ protocol report API exists
+  ✓ Protocol Lab run button exists
+  ✓ Protocol Lab generations input defaults to 200
+
+── ProtocolEvolution ──
+  ✓ Protocol core defines DSRC model
+  ✓ Protocol core defines C-V2X model
+  ✓ Protocol core defines AM-V2X model
+  ✓ Protocol core contains AM-V2X relay policy
+  ✓ Evolution engine defaults generations to 200
+  ✓ Evolution engine supports protocol+infrastructure genomes
+  ✓ Evolution engine exposes CSV export
+  ✓ Evolution engine calculates improvements against DSRC baseline
+
+── HighwayV2ILab ──
+  ✓ protocol lab panel exists
+  ✓ evolution trigger button exists
+  ✓ generation selector exists
+  ✓ network selector exists
+  ✓ behavior selector exists
+  ✓ architecture discovery button exists
+  ✓ scenario suite button exists
+  ✓ infrastructure evolution trigger button exists
+  ✓ infrastructure evolution panel exists
+  ✓ infrastructure top designs panel exists
+  ✓ infrastructure genome tree panel exists
+  ✓ infrastructure playback panel exists
+  ✓ infrastructure evolution graph canvas exists
+  ✓ traffic intelligence panel exists
+  ✓ infrastructure health panel exists
+  ✓ flood risk panel exists
+  ✓ emergency mobility panel exists
+  ✓ scenario lab panel exists
+  ✓ data calibration script loaded
+  ✓ scenario engine script loaded
+  ✓ traffic physics panel exists
+  ✓ scenario timeline panel exists
+  ✓ experiment metrics panel exists
+  ✓ calibration density control exists
+  ✓ vehicle state includes acceleration field
+  ✓ vehicle state includes reactionTime field
+  ✓ vehicle state includes driverType field
+  ✓ vehicle engine supports calibration updates
+  ✓ calibration system exposes generateStream
+  ✓ scenario engine supports heavy rain
+  ✓ scenario engine applies blocked lane effect
+  ✓ lab engine exposes calibration profile updater
+  ✓ lab engine returns scenario timeline in metrics
+  ✓ experiment runner includes required scenario names
+  ✓ experiment runner outputs summary metrics
+  ✓ lab engine exposes runEvolution
+  ✓ lab engine includes >=5% success fallback logic
+  ✓ lab engine exposes scenario experiment mode
+  ✓ lab engine exposes infrastructure evolution mode
+  ✓ lab engine includes infrastructure scenario scoring
+  ✓ lab engine includes digital twin builder
+  ✓ evolution engine default population 80
+  ✓ evolution engine default generations 200
+  ✓ experiment runner exports CSV helper
+  ✓ lab engine exposes architecture discovery
+  ✓ lab engine exposes invention mode
+  ✓ experiment runner exports architecture batch
+  ✓ experiment runner exports scenario suite
+  ✓ experiment runner exports infrastructure evolution
+
+── ZayvoraPipelineScaffold ──
+  ✓ contains five target repositories
+  ✓ sim lab blueprint has corridor module
+  ✓ highway repo blueprint has dashboard connector
+  ✓ initial scaffold writes files
+  ✓ writes protocol router file
+  ✓ second scaffold skips existing files when overwrite is false
+  ✓ parseArgs detects dry-run
+  ✓ parseArgs detects overwrite
+✓ exists: engine/core/core_engine.py
+✓ exists: engine/core/ecs.py
+✓ exists: engine/ai/npc_ai.py
+✓ exists: engine/config.py
+✓ exists: ai/zayvora_bridge/zayvora_agent.py
+✓ exists: tools/worldgen/world_generator.py
+✓ exists: tools/asset_pipeline/asset_loader.py
+✓ exists: scripts/run_game.py
+✓ exists: docs/architecture.md
+✓ exists: docs/ecs_design.md
+✓ exists: docs/ai_system.md
+✓ exists: docs/zayvora_integration.md
+✓ exists: config/game.yaml
+✓ exists: requirements.txt
+✓ exists: setup.sh
+✓ exists: Makefile
+✓ python files compile
+
+── Dashboard Module Loader ──
+  ✓ module loader exports MODULE_PATHS map
+  ✓ module loader maps core dashboard modules
+  ✓ module loader maps game modules
+
+── AISimulationPipeline ──
+  ✓ parseRequest extracts readable name
+  ✓ selectTemplate infers simulation template
+  ✓ generated module has normalized name
+  ✓ generated config has creator metadata
+  ✓ generated state factory exists
+  ✓ generated module persisted in store
+
+── AIWorldPipeline ──
+  ✓ parsePrompt infers voxel template
+  ✓ world builder creates runtime module
+  ✓ world module exposes game factory
+  ✓ world registry stores voxel metadata
+  ✓ world registry tracks launch id
+  ✓ pipeline resolves voxel-demo preset
+
+── SimulationMarketplace ──
+  ✓ manifest creation includes required fields
+  ✓ package generation creates dist pkg path
+  ✓ package contains manifest entry point
+  ✓ launch URL generation is stable
+  ✓ publish pipeline returns a Promise
+
+── DaxBundleForge ──
+  ✓ builder produces manifest runtime
+  ✓ builder includes bundle metadata
+  ✓ validator approves valid bundle
+  ✓ validator rejects unsafe scripts
+  ✓ exporter defaults to app.dax filename
+  ✓ exporter emits dax extension
+  ✓ exporter serializes bundle payload
+
+── PluginSystem ──
+  ✓ registerPlugin stores plugin
+  ✓ listPlugins shows unloaded
+  ✓ loadPlugin transitions to loaded
+  ✓ executePlugin returns deterministic payload
+  ✓ unloadPlugin transitions to unloaded
+  ✓ execution blocked when unloaded
+  ✓ lifecycle activity logged
+  ✓ plugin execution traces are recorded
+
+── Runtime ──
+  ✓ step executes at least one task
+  ✓ step captures task failures and continues
+  ✓ state manager stores last report
+  ✓ runtime control start/stop exposed
+  ✓ runtime trace flow created per step
+
+── TraceEngine ──
+  ✓ flow exists
+  ✓ span IDs are attached to flow
+  ✓ parent-child linkage is preserved
+  ✓ events are appended
+  ✓ links are stored for DAG support
+  ✓ fail creates breakpoint
+  ✓ failed span is marked failed
+
+── StateRegistry ──
+  ✓ maxEntries evicts oldest key
+  ✓ eviction emits state_evicted event
+  ✓ cleanupExpired removes expired entries
+  ✓ delete removes entry deterministically
+  ✓ state_deleted event logged
+
+── AgentManager ──
+  ✓ registerAgent stores and exposes agent
+  ✓ runAgent returns flow and result payload
+  ✓ lifecycle spans are recorded
+  ✓ run is deterministic for identical input shape
+  ✓ agent context state is scoped by agent id
+  ✓ invocation state is cleaned after run
+  ✓ state transitions are traced as events
+
+── ZayvoraConstraintRuntime ──
+  ✓ registry create returns id
+  ✓ registry list has one experiment
+  ✓ registry getById restores experiment
+  ✓ replay verification passes for identical streams
+  ✓ replay verification detects divergence
+  ✓ screenshot capture writes PNG file
+
+── ZayvoraConstraintsPhase2to4 ──
+  ✓ monochrome thresholding works
+  ✓ bayer dither is deterministic for same cell
+  ✓ tile grid generates expected tile count
+  ✓ scanline mask reduces odd lines
+  ✓ timing offset uses jitter cycle
+  ✓ rotational delta wraps
+  ✓ tile movement applies speed
+  ✓ rhythm gate follows pattern
+  ✓ frame window hash is generated
+  ✓ window compare passes for identical
+  ✓ window compare fails for divergence
+  ✓ sanitize removes forbidden words
+  ✓ reflection prompt includes mode
+  ✓ reflection prompt has human critique prompts
+
+── ReplayEngineArchitecture ──
+  ✓ exists: README.md
+  ✓ exists: src/runtime/fixedLoop.ts
+  ✓ exists: src/recorder/inputRecorder.ts
+  ✓ exists: src/playback/replayPlayer.ts
+  ✓ exists: src/hashing/stateHash.ts
+  ✓ exists: src/snapshots/snapshotStore.ts
+  ✓ exists: src/stepping/frameStepper.ts
+  ✓ exists: src/exporters/gifExporter.ts
+  ✓ fixed loop uses accumulator
+  ✓ fixed loop exposes pause
+  ✓ hashing uses sorted keys
+  ✓ hashing uses sha256
+
+── ConstraintLab ──
+  ✓ exists: README.md
+  ✓ exists: src/runtime/constraintRuntime.ts
+  ✓ exists: src/constraints/monochromeConstraint.ts
+  ✓ exists: src/constraints/tileQuantizationConstraint.ts
+  ✓ exists: src/constraints/delayedInputConstraint.ts
+  ✓ exists: src/constraints/frameSkipConstraint.ts
+  ✓ exists: src/experiments/experimentRunner.ts
+  ✓ exists: src/replay/replayBridge.ts
+  ✓ exists: src/comparison/compareView.ts
+  ✓ exists: src/capture/artifactCapture.ts
+  ✓ exists: src/notes/sessionNotes.ts
+  ✓ exists: src/presets/gameboyPreset.ts
+  ✓ exists: src/presets/playdatePreset.ts
+  ✓ exists: src/presets/demoscenePreset.ts
+  ✓ exists: experiments/monochrome-dither/index.ts
+  ✓ exists: experiments/delayed-input/index.ts
+  ✓ exists: experiments/audio-friction/index.ts
+  ✓ runtime supports toggles
+  ✓ runtime applies chain
+  ✓ replay bridge integrates replay-engine recorder
+  ✓ replay bridge integrates replay-engine player
+  ✓ readme forbids scoring patterns
+
+── LivingArchive ──
+  ✓ exists: README.md
+  ✓ exists: src/archive/archiveExperiment.ts
+  ✓ exists: src/indexing/indexExperiment.ts
+  ✓ exists: src/notes/emotionalNotes.ts
+  ✓ exists: src/lineage/lineageGraph.ts
+  ✓ exists: src/timeline/timelineView.ts
+  ✓ exists: src/replay/replayArchive.ts
+  ✓ exists: src/search/searchExperiments.ts
+  ✓ exists: src/discovery/discoveryMode.ts
+  ✓ readme forbids ranking
+  ✓ archive writes replay
+  ✓ archive writes lineage
+
+── SignalCapture ──
+  ✓ exists: README.md
+  ✓ exists: src/input/inputSampler.ts
+  ✓ exists: src/timing/timingAnalyzer.ts
+  ✓ exists: src/replay/replaySignalBridge.ts
+  ✓ exists: src/fingerprints/generateFingerprint.ts
+  ✓ exists: src/visualization/heatmap.ts
+  ✓ exists: src/visualization/momentumGraph.ts
+  ✓ exists: src/visualization/cadenceGraph.ts
+  ✓ exists: src/comparison/compareSignals.ts
+  ✓ exists: src/export/exportSignalSession.ts
+  ✓ exists: src/archive/archiveIntegration.ts
+  ✓ readme forbids analytics ranking
+  ✓ replay bridge uses input recorder
+  ✓ replay bridge uses replay player
+
+── ConstraintStudio ──
+  ✓ exists: README.md
+  ✓ exists: src/runtime/constraintRuntime.ts
+  ✓ exists: src/presets/gameboyPreset.ts
+  ✓ exists: src/presets/playdatePreset.ts
+  ✓ exists: src/presets/arcade1985Preset.ts
+  ✓ exists: src/presets/terminalPreset.ts
+  ✓ exists: src/presets/demoscenePreset.ts
+  ✓ exists: src/mutations/generateMutation.ts
+  ✓ exists: src/variant-engine/createVariantTree.ts
+  ✓ exists: src/playback/variantPlayer.ts
+  ✓ exists: src/snapshots/createSnapshot.ts
+  ✓ exists: src/archive/archiveBridge.ts
+  ✓ exists: src/layering/layerComposer.ts
+  ✓ exists: src/export/exportVariantBundle.ts
+  ✓ exists: experiments/base-runner/index.ts
+  ✓ readme forbids best scoring
+  ✓ variant player integrates replay-engine
+  ✓ variant player integrates signal-capture compare
+
+── LocalCommitExecutor ──
+  ✓ commit message deterministic format
+  ✓ validation fail prevents commit
+  ✓ head commit unchanged on validation fail
+[main 03fbd9f] feat(engine): add local executor
+ 1 file changed, 1 insertion(+)
+ create mode 100644 tools/engine/local-commit-executor.js
+  ✓ validation pass creates commit
+  ✓ stages only task files for commit
+  ✓ refuses when outside expected repository
+
+── PEARunner ──
+  ✓ rejects relative path escape
+  ✓ rejects absolute path
+  ✓ accepts safe relative path
+  ✓ task runs in isolated cwd
+  ✓ independent git exists in isolated directory
+  ✓ manifest is written
+  ✓ manifest flags pea enabled
+  ✓ manifest flags cwd isolated
+  ✓ validated task commit created
+  ✓ parent repo receives zero writes
+  ✓ isolated repo has local commit
+
+── ValidateTaskManifest ──
+  ✓ valid manifests pass
+  ✓ missing required fields fail
+  ✓ invalid mode fails
+  ✓ validation output is deterministic JSON
+
+── ToolTaskRouter ──
+  ✓ routes generate correctly
+  ✓ routes refactor correctly
+  ✓ routes debug correctly
+  ✓ routes validate correctly
+  ✓ routes test correctly
+  ✓ routes document correctly
+  ✓ routes package correctly
+  ✓ routes security_scan correctly
+  ✓ unknown mode fails safely
+  ✓ output JSON stable
+
+── ValidationExecutor ──
+  ✓ command executes
+  ✓ stdout captured
+  ✓ PASS only when exit code is 0
+  ✓ validation_result.json generated
+  ✓ stderr captured
+  ✓ FAIL when exit code is non-zero
+  ✓ never commits directly
+  ✓ timeout handled
+  ✓ timeout is deterministic FAIL
+
+── FileChangeTracker ──
+  ✓ before/after snapshots captured
+  ✓ changed files attributed to task
+  ✓ created files detected
+  ✓ deleted files detected
+  ✓ out-of-scope file writes detected
+  ✓ report generated
+  ✓ report fails when out-of-scope writes exist
+
+── GeneratorExecutor ──
+  ✓ html_tool generates valid file
+  ✓ node_cli generates valid file
+  ✓ python_cli generates valid file
+  ✓ json_schema generates valid file
+  ✓ markdown_doc generates valid file
+  ✓ overwrite protection works
+  ✓ files remain inside target paths
+  ✓ deterministic output report created
+
+── RefactorExecutor ──
+  ✓ repo-wide changes blocked by default
+  ✓ only target files changed
+  ✓ validation runs
+  ✓ report generated
+
+── DebugExecutor ──
+  ✓ bug reproduction command supported
+  ✓ minimal changed files
+  ✓ validation confirms fix
+  ✓ report includes root cause and changed files
+  ✓ debug_report.json generated
+
+── DocumentationExecutor ──
+  ✓ docs generated
+  ✓ code files untouched
+  ✓ markdown valid
+  ✓ report generated
+
+── SecurityScanExecutor ──
+  ✓ secrets patterns detected
+  ✓ path traversal detected
+  ✓ insecure eval usage detected
+  ✓ report has PASS/FAIL
+  ✓ security_scan_report.json generated
+
+── PackageExecutor ──
+  ✓ package manager detected
+  ✓ build command runs
+  ✓ test command runs
+  ✓ report generated
+  ✓ failures prevent local commit
+
+═══════════════════════════════════
+  Passed: 459  Failed: 19
+═══════════════════════════════════
+
+
+[ 2/2 ] Smoke Tests...
+
+═══════════════════════════════════
+  ViaDecide Studio — Smoke Tests
+  (Loads real tools in headless Chrome)
+═══════════════════════════════════
+
+── Smoke Tests (Playwright) ──
+
+═══════════════════════════════════
+  Smoke tests skipped (missing browser runtime)
+═══════════════════════════════════
+
+
+✗ Tests failed — fix before shipping
+
