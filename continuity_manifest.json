@@ -1,6 +1,6 @@
 {
-  "task_id": "055351ef-7a0c-4c74-8840-7492141cb5f9",
-  "timestamp": "2026-08-22T06:18:43.819Z",
+  "task_id": "9b7b5f87-311a-4f9d-bd01-353e05799b69",
+  "timestamp": "2026-08-22T06:23:08.344Z",
   "repo": "via-decide/decide.engine-tools",
   "stages": [
     "FLIGHT_PLAN",
@@ -11,11 +11,10 @@
     "DECISION",
     "SYNTHESIS",
     "VERIFY",
-    "PATCH",
-    "COMMIT"
+    "PATCH"
   ],
   "validator_output": "ADMISSIBLE",
   "divergence_limit": 0.05,
-  "category": "games",
-  "toolId": "quiz-engine"
+  "category": null,
+  "toolId": null
 }

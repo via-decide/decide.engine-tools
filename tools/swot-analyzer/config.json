@@ -1,0 +1,10 @@
+{
+  "id": "swot-analyzer",
+  "name": "SWOT Analyzer",
+  "description": "Structured SWOT analysis with export.",
+  "category": "business",
+  "audience": "founders, managers, strategists",
+  "inputs": ["strategy", "market", "strengths", "weaknesses", "opportunities", "threats"],
+  "outputs": ["swot_analysis_report.pdf"],
+  "tags": ["swot", "analysis", "export"]
+}
