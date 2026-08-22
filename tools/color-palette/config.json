@@ -1,1 +1,16 @@
-{ "name": "Color Palette Generator", "cat": "creators", "desc": "Extract and generate accessible UI palettes.", "icon": "🎨", "entry": "tools/color-palette/index.html", "engine": false }
+{
+  "id": "color-palette",
+  "name": "Color Palette Generator",
+  "description": "Generate harmonious color palettes with hex codes.",
+  "category": "misc",
+  "audience": ["creators", "designers"],
+  "inputs": [],
+  "outputs": [
+    {
+      "label": "color-palette",
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  ],
+  "tags": ["palette-generator"]
+}
