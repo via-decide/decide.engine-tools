@@ -1,0 +1,22 @@
+{
+  "id": "flashcard-engine",
+  "name": "Flashcard Engine",
+  "description": "Spaced repetition flashcard tool with JSON decks.",
+  "category": "education",
+  "audience": ["students", "educators"],
+  "inputs": [
+    {
+      "name": "deckFile",
+      "type": "string",
+      "description": "Path to the JSON deck file."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "studySessionResult",
+      "type": "object",
+      "description": "Study session results including correct and incorrect answers."
+    }
+  ],
+  "tags": ["flashcards", "spaced-repetition"]
+}
