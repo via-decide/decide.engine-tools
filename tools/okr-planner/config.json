@@ -1,0 +1,15 @@
+{
+  "id": "okr-planner",
+  "name": "OKR Planner",
+  "description": "Define objectives and key results with progress tracking.",
+  "category": "business",
+  "audience": ["founders", "managers"],
+  "inputs": [
+    {"label": "Objective", "type": "string"},
+    {"label": "Key Result", "type": "array"}
+  ],
+  "outputs": [
+    {"label": "Plan Created", "type": "boolean"}
+  ],
+  "tags": ["puzzle-generator"]
+}
