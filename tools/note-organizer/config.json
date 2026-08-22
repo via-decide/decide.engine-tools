@@ -1,0 +1,17 @@
+{
+  "id": "note-organizer",
+  "name": "Note Organizer",
+  "description": "Tag-based note system with search.",
+  "category": "education",
+  "audience": ["students", "teachers"],
+  "inputs": [
+    {"label": "Title", "type": "string"},
+    {"label": "Content", "type": "string"},
+    {"label": "Tags", "type": "array"}
+  ],
+  "outputs": [
+    {"label": "Note ID", "type": "string"},
+    {"label": "Created At", "type": "timestamp"}
+  ],
+  "tags": ["note-organizer"]
+}

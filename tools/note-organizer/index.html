@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note Organizer</title>
+  <link rel="stylesheet" href="../../shared/shared.css">
+</head>
+<body>
+  <h1>Note Organizer</h1>
+  <input type="text" id="note-title" placeholder="Title">
+  <textarea id="note-content" placeholder="Content"></textarea>
+  <input type="text" id="note-tags" placeholder="Tags (comma-separated)">
+  <button onclick="createNote()">Create Note</button>
+  <ul id="notes-list"></ul>
+
+  <script src="../../shared/tool-storage.js"></script>
+  <script src="./tool.js"></script>
+</body>
+</html>
