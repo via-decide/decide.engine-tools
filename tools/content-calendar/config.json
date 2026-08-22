@@ -1,0 +1,15 @@
+{
+  "id": "content-calendar",
+  "name": "Content Calendar",
+  "description": "Weekly content planning grid with export.",
+  "category": "creators",
+  "audience": ["creators", "operators"],
+  "inputs": [
+    {"name": "title", "type": "string", "required": true},
+    {"name": "date", "type": "date", "required": true}
+  ],
+  "outputs": [
+    {"name": "contentPlan", "type": "object"}
+  ],
+  "tags": ["creators"]
+}
