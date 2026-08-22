@@ -1,0 +1,15 @@
+{
+  "id": "lean-canvas",
+  "name": "Lean Canvas Builder",
+  "description": "One-page business model canvas with export.",
+  "category": "business",
+  "audience": ["founders", "entrepreneurs"],
+  "inputs": [],
+  "outputs": [
+    {
+      "type": "file",
+      "format": "json"
+    }
+  ],
+  "tags": ["startup", "strategy"]
+}
