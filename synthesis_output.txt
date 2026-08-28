@@ -1,0 +1,10 @@
+{
+  "id": "puzzle-generator",
+  "name": "Puzzle Generator",
+  "description": "Generate various types of puzzles for educational or entertainment purposes.",
+  "category": "Games",
+  "audience": "General",
+  "inputs": [],
+  "outputs": ["puzzle"],
+  "tags": ["puzzle", "generator"]
+}
