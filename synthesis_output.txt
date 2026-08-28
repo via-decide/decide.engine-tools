@@ -1,10 +1,14 @@
-{
-  "id": "puzzle-generator",
-  "name": "Puzzle Generator",
-  "description": "Generate various types of puzzles for educational or entertainment purposes.",
-  "category": "Games",
-  "audience": "General",
-  "inputs": [],
-  "outputs": ["puzzle"],
-  "tags": ["puzzle", "generator"]
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Generator</title>
+    <link rel="stylesheet" href="../shared/shared.css">
+</head>
+<body>
+    <h1>Puzzle Generator</h1>
+    <div id="puzzle-container"></div>
+    <script src="tool.js"></script>
+</body>
+</html>
