@@ -8,23 +8,3 @@ This project requires Node.js version 14 or higher, npm, and Git. Ensure you hav
 
 ## Materials
 - [Orchade AI-powered game engine](https://github.com/orchade/ai-game-engine)
-- [Asset management system for rendering pipeline](https://github.com/via-decide/asset-management)
-
-## Dashboard
-Primary entry point:
-- `dashboard/index.html`
-
-Dashboard layout includes:
-- Header
-- Sidebar
-- Workspace panel
-
-Core sections exposed in the shell:
-- Workspace
-- StudyOS
-- Tools
-- Agent Console
-- Settings
-
-## Tools
-Tool storage and management are handled by the shared/tool-storage.js file.
