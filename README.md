@@ -1,8 +1,14 @@
 # Decide Engine — Unified Dashboard Interface
 
 ## Overview
-Decide Engine is a browser-native decision and productivity platform by ViaDecide.
-The repository now includes a unified dashboard shell that routes users into core modules while preserving standalone tools.
+Decide Engine is a browser-native decision and productivity platform by ViaDecide. The repository now includes a unified dashboard shell that routes users into core modules while preserving standalone tools.
+
+## Requirements
+This project requires Node.js version 14 or higher, npm, and Git. Ensure you have the necessary permissions to install dependencies and run the application.
+
+## Materials
+- [Orchade AI-powered game engine](https://github.com/orchade/ai-game-engine)
+- [Asset management system for rendering pipeline](https://github.com/via-decide/asset-management)
 
 ## Dashboard
 Primary entry point:
@@ -21,30 +27,4 @@ Core sections exposed in the shell:
 - Settings
 
 ## Tools
-Tool catalog entry point:
-- `tools/index.html`
-
-Catalog cards:
-- Interview Practice
-- LogicHub Builder
-- Simulation Lab
-- Prompt Studio
-
-## Workspace
-Workspace entry point:
-- `workspace/index.html`
-
-Session runtime:
-- `workspace/session.js`
-
-Workspace capabilities:
-- Save progress to localStorage
-- Restore last session
-- Load and persist tool context
-- Session key: `workspace.json`
-
-## Agents
-Agent entry point remains:
-- `agent/index.html`
-
-The dashboard and global navigation provide direct access to the Agent module for workflow execution.
+Tool storage and management are handled by the shared/tool-storage.js file.
