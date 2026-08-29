@@ -1,18 +1,20 @@
 class StorageAdapter {
-  constructor() {
-    this.storage = {};
-  }
+  constructor() {}
 
   get(key) {
-    return this.storage[key];
+    throw new Error('Method not implemented.');
   }
 
   set(key, value) {
-    if (typeof key !== 'string' || typeof value !== 'string') {
-      throw new Error('Key and value must be strings.');
-    }
-    this.storage[key] = value;
+    throw new Error('Method not implemented.');
+  }
+
+  delete(key) {
+    // Implement the logic to remove an item by its key
+    // For example:
+    // this.data[key] = undefined;
+    // or if using a database:
+    // await db.delete(key);
+    throw new Error('Method not implemented.');
   }
 }
-
-module.exports = new StorageAdapter();
