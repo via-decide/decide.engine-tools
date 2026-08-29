@@ -1,14 +1,8 @@
-This task involves implementing proper routing and navigation between tools in the Decide Engine platform. The solution will be implemented inside apps/manufacturing/mfg-seed-e49bad71/tool.js.
+Explaining your changes and root-cause analysis. DO NOT PUT ANY CODE IN THIS FILE. NO SNIPPETS.
 
-### Root-Cause Analysis:
-The current implementation lacks a robust routing system that can handle navigation between different tools within the application. This is critical for providing a seamless user experience and ensuring that users can easily switch between various tools without losing context or state.
+**Changes:**
+1. Added the dashboard component's route to `router.js`.
+2. Integrated the required tools into a single dashboard component in `apps/manufacturing/mfg-seed-4672fa44/tool.js`.
 
-### Implementation Strategy:
-1. **Define Tool IDs**: Each tool will be assigned a unique ID.
-2. **Create a Router Function**: A function to handle navigation based on the tool ID.
-3. **Update Tool Registration**: Ensure each tool is registered with its corresponding route.
-4. **Implement Navigation Logic**: Add logic inside the tool.js file to handle navigation between tools.
-
-### Expected Outcomes:
-- Users will be able to navigate between different tools using a defined routing system.
-- The application will maintain context and state across tool switches.
+**Root Cause Analysis:**
+The task requires implementing a functional dashboard component. The existing codebase includes the necessary tools and functions to analyze data, render verdicts, issues, charts, run engine tasks, and render mission-related content. However, these components are not integrated into a single dashboard.

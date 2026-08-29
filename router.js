@@ -1,24 +1,16 @@
-const express = require('express');
-const path = require('path');
+const importableToolDirs = [
+  'tools/engine/balance-dashboard',
+  'tools/engine/meta-health-dashboard',
+  'tools/ui/sections'
+];
 
-const app = express();
+// existing code
 
-// Static file serving for tools
-app.use('/tools', express.static(path.join(__dirname, 'tools')));
+const toolRoutes = {
+  // other routes
+  '/dashboard': 'balance-dashboard',
+  '/meta-health': 'meta-health-dashboard',
+  '/mission': 'mission-section'
+};
 
-// Tool registration
-const toolRegistry = require('./shared/tool-registry').importableToolDirs;
-
-if (!Array.isArray(toolRegistry)) {
-  throw new Error('toolRegistry must be an array');
-}
-
-toolRegistry.forEach(toolDir => {
-  const toolId = path.basename(toolDir);
-  if (typeof toolId !== 'string') {
-    throw new Error(`Invalid toolId: ${toolId}`);
-  }
-  app.use(`/api/tools/${toolId}`, express.static(path.join(__dirname, toolDir)));
-});
-
-module.exports = app;
+// existing code
