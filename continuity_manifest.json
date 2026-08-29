@@ -1,6 +1,6 @@
 {
-  "task_id": "d5a0aab8-817d-4e6c-9462-2ef8b986951d",
-  "timestamp": "2026-08-29T04:57:49.583Z",
+  "task_id": "a85e8478-5c52-4f3e-8d6a-213ee90dcfab",
+  "timestamp": "2026-08-29T05:00:42.961Z",
   "repo": "via-decide/decide.engine-tools",
   "stages": [
     "FLIGHT_PLAN",
@@ -17,5 +17,5 @@
   "validator_output": "ADMISSIBLE",
   "divergence_limit": 0.05,
   "category": "tooling",
-  "toolId": "handle-registration-of-new-tools"
+  "toolId": "research-provenance-and-evidence-references"
 }
