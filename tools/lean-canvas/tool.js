@@ -1,15 +1,12 @@
-const { generateCanvas } = require('./shared/canvas-utils');
+const ToolStorage = require('../../shared/tool-storage');
 
-function buildLeanCanvas() {
-  try {
-    const canvasData = generateCanvas();
-    return canvasData;
-  } catch (error) {
-    console.error('Error building Lean Canvas:', error);
-    throw new Error('Failed to build Lean Canvas');
-  }
+function LeanCanvasBuilder() {
+  this.id = 'lean-canvas';
 }
 
-module.exports = {
-  buildLeanCanvas,
+LeanCanvasBuilder.prototype.render = function () {
+  const toolStorage = new ToolStorage();
+  // TODO: Implement the actual canvas builder logic here.
 };
+
+module.exports = LeanCanvasBuilder;
