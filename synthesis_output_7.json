@@ -1,0 +1,6 @@
+{
+  "task": "Add a new standalone tool \"Email Scheduler\" (id: email-scheduler) at tools/email-scheduler/",
+  "constraints": "The tool should allow users to schedule emails for future delivery.",
+  "category": "Tools",
+  "toolId": "email-scheduler"
+}

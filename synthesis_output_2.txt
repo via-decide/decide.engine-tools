@@ -1,2 +1,13 @@
-{"task": "Implement the logic for the original engineering candidate product revision r0.1 tool within the file `apps/manufacturing/mfg-seed-1873fc4e/tool.js`.", "constraints": "Follow the constraints and schema definitions provided in the research report.", "category": "Engineering", "toolId": "mfg-revision-tool"}
-{"task": "Add documentation for the original engineering candidate product revision registration tool.", "constraints": "Ensure the documentation is added to the relevant files as specified in the implementation rules.", "category": "Documentation", "toolId": "mfg-revision-tool"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Calculator</title>
+  <link rel="stylesheet" href="../shared/shared.css">
+</head>
+<body>
+  <div id="pricing-calculator"></div>
+  <script src="./tool.js"></script>
+</body>
+</html>

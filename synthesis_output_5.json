@@ -1,0 +1,6 @@
+{
+  "task": "Add documentation for the original engineering candidate product revision registration tool.",
+  "constraints": "Ensure that the documentation is clear and includes examples of how to use the tool.",
+  "category": "Documentation",
+  "toolId": "product-revision-registration-tool"
+}

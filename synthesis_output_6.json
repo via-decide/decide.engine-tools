@@ -1,0 +1,6 @@
+{
+  "task": "Implement a new standalone tool \"Inventory Manager\" (id: inventory-manager) at tools/inventory-manager/",
+  "constraints": "The tool should allow users to manage their inventory by adding, removing, and updating items.",
+  "category": "Tools",
+  "toolId": "inventory-manager"
+}

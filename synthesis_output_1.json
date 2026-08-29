@@ -1,0 +1,27 @@
+{
+  "id": "pricing-calculator",
+  "name": "Pricing Calculator",
+  "description": "A simple pricing calculator for estimating costs based on input parameters.",
+  "category": "Finance",
+  "audience": "Users needing to estimate prices for products or services.",
+  "inputs": [
+    {
+      "name": "quantity",
+      "type": "number",
+      "label": "Quantity"
+    },
+    {
+      "name": "unit_price",
+      "type": "number",
+      "label": "Unit Price"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "total_cost",
+      "type": "number",
+      "label": "Total Cost"
+    }
+  ],
+  "tags": ["pricing", "finance"]
+}
