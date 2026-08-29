@@ -1,1 +1,1 @@
-{"task": "Register the original engineering candidate product revision r0.1 tool in the router.js file.", "constraints": "Do not modify any existing tool folder or shared utility file.", "category": "tool_registration", "toolId": "mfg-seed-254ffd4f"}
+{"task": "Implement proper routing and navigation between tools", "constraints": "Ensure each tool is registered with its corresponding route and add logic inside the tool.js file to handle navigation between tools.", "category": "development", "toolId": "mfg-seed-e49bad71"}
