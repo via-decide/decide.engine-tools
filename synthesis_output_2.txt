@@ -1,0 +1,5 @@
+[
+  {"task": "Handle registration of new tools in existing files", "constraints": "The tool data must be validated before registering it.", "category": "Manufacturing", "toolId": "new-tool-1"},
+  {"task": "Document merge workflows in a separate file", "constraints": "The documentation should include all relevant workflows.", "category": "Documentation", "toolId": "merge-workflows-doc"},
+  {"task": "List and describe browser tools in a separate file", "constraints": "The list should include all existing tools with their descriptions.", "category": "Tools", "toolId": "browser-tools-list"}
+]
