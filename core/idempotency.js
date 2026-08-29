@@ -1,29 +1,18 @@
-class DeterministicNormalizer {
-  // existing implementation
-}
-
-class HashUtil {
-  // existing implementation
-}
-
 class StorageAdapter {
+  constructor() {
+    this.storage = {};
+  }
+
   get(key) {
-    if (this._storage.has(key)) {
-      return this._storage.get(key);
-    } else {
-      throw new Error(`Key not found: ${key}`);
-    }
+    return this.storage[key];
   }
 
   set(key, value) {
-    this._storage.set(key, value);
-  }
-
-  delete(key) {
-    if (this._storage.has(key)) {
-      this._storage.delete(key);
-    } else {
-      throw new Error(`Key not found: ${key}`);
+    if (typeof key !== 'string' || typeof value !== 'string') {
+      throw new Error('Key and value must be strings.');
     }
+    this.storage[key] = value;
   }
 }
+
+module.exports = new StorageAdapter();
