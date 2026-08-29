@@ -1,14 +1,13 @@
 # Synthesis Summary
 
-## Task
-Preserve working code; prefer additive modular changes.
-
 ## Root-Cause Analysis
-The task requires modifying the `apps/manufacturing/mfg-seed-35b30515/tool.js` file to implement a specific logic change while preserving existing functionality. The approach involves adding a new function and updating an existing one without altering unrelated code.
+The task is to implement logic in `tools/okr-planner/tool.js` at line 6 to parse and store a plan in `ToolStorage`. The existing code has a TODO comment indicating this gap.
 
-## Changes Implemented
-1. Added a new function `calculateTotalCost` to compute the total cost based on input parameters.
-2. Updated the existing `generateReport` function to utilize the new `calculateTotalCost` function for generating reports with accurate costs.
+## Implementation Approach
+1. **Read the Existing Code**: I will read the relevant files in full, including `tool.js`, `config.json`, and any related files.
+2. **Implement the Logic**: I will implement the logic to parse and store the plan in `ToolStorage`.
+3. **Validation**: I will run validation commands to ensure the code works as expected.
 
-## Verification
-The changes were verified by running the application locally and ensuring that the new functionality did not break existing workflows or introduce errors.
+## Changes
+- Added a new function `createPlan` to handle parsing and storing the plan.
+- Updated the existing code at line 6 to call this new function.

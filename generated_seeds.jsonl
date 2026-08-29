@@ -1,1 +1,1 @@
-{"task": "Preserve working code; prefer additive modular changes.", "constraints": "Do not modify any existing tool folder or shared utility file. Do not use external frameworks, CDN packages, or bundlers.", "category": "Code Modification", "toolId": "mfg-seed-35b30515"}
+{"task": "Implement the logic to parse and store the plan in ToolStorage", "constraints": "Ensure the plan is correctly structured and validated using schema definitions.", "category": "Tool Implementation", "toolId": "okr-planner"}
