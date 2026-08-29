@@ -1,5 +1,2 @@
-[
-  {"task": "Handle registration of new tools in existing files", "constraints": "The tool data must be validated before registering it.", "category": "Manufacturing", "toolId": "new-tool-1"},
-  {"task": "Document merge workflows in a separate file", "constraints": "The documentation should include all relevant workflows.", "category": "Documentation", "toolId": "merge-workflows-doc"},
-  {"task": "List and describe browser tools in a separate file", "constraints": "The list should include all existing tools with their descriptions.", "category": "Tools", "toolId": "browser-tools-list"}
-]
+{"task": "Implement the logic for the original engineering candidate product revision r0.1 tool within the file `apps/manufacturing/mfg-seed-1873fc4e/tool.js`.", "constraints": "Follow the constraints and schema definitions provided in the research report.", "category": "Engineering", "toolId": "mfg-revision-tool"}
+{"task": "Add documentation for the original engineering candidate product revision registration tool.", "constraints": "Ensure the documentation is added to the relevant files as specified in the implementation rules.", "category": "Documentation", "toolId": "mfg-revision-tool"}
