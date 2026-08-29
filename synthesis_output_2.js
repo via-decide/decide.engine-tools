@@ -1,21 +1,20 @@
-const toolStorage = require('../shared/tool-storage');
+const Idempotency = require('./idempotency');
 
-module.exports = {
-    id: 'workspace',
-    name: 'Workspace',
-    description: 'The main workspace for project management and collaboration.',
-    category: 'Development',
-    audience: 'Developers',
-    inputs: [],
-    outputs: [],
-    tags: ['project', 'management', 'collaboration'],
-    config: toolStorage.getToolConfig('workspace'),
-    run: (context) => {
-        try {
-            console.log('Running Workspace Tool');
-            // Add workspace-specific logic here
-        } catch (error) {
-            console.error('Error running Workspace Tool:', error);
-        }
-    }
-};
+describe('Idempotency', () => {
+  let idempotency;
+
+  beforeEach(() => {
+    idempotency = new Idempotency();
+  });
+
+  it('should set and get values correctly', () => {
+    idempotency.set('key1', 'value1');
+    expect(idempotency.get('key1')).toBe('value1');
+  });
+
+  it('should clear all stored values', () => {
+    idempotency.set('key1', 'value1');
+    idempotency.clear();
+    expect(idempotency.get('key1')).toBe(undefined);
+  });
+});

@@ -1,13 +1,2 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyOS</title>
-    <link rel="stylesheet" href="../shared/shared.css">
-</head>
-<body>
-    <h1>StudyOS</h1>
-    <p>This is the StudyOS module.</p>
-</body>
-</html>
+{"task": "Implement the clear() method in core/storage.js", "constraints": "Do not modify any other files except core/storage.js and its test/consumer files.", "category": "bug_fix", "toolId": "core_storage"}
+{"task": "Add unit tests for the new clear() method in core/idempotency.test.js", "constraints": "Ensure that the tests cover both set/get functionality and clearing of stored values.", "category": "test", "toolId": "core_idempotency_test"}
