@@ -1,11 +1,24 @@
-const toolPathMap = {
-  '/dashboard': './dashboard/index.html',
-  '/studyos': './studyos/index.html',
-  '/workspace': './workspace/index.html',
-  '/agent-console': './agent-console/index.html',
-  '/settings': './settings/index.html'
-};
+const express = require('express');
+const path = require('path');
 
-toolPathMap['/hook-generator'] = './tools/hook-generator/index.html';
+const app = express();
 
-module.exports = { toolPathMap };
+// Static file serving for tools
+app.use('/tools', express.static(path.join(__dirname, 'tools')));
+
+// Tool registration
+const toolRegistry = require('./shared/tool-registry').importableToolDirs;
+
+if (!Array.isArray(toolRegistry)) {
+  throw new Error('toolRegistry must be an array');
+}
+
+toolRegistry.forEach(toolDir => {
+  const toolId = path.basename(toolDir);
+  if (typeof toolId !== 'string') {
+    throw new Error(`Invalid toolId: ${toolId}`);
+  }
+  app.use(`/api/tools/${toolId}`, express.static(path.join(__dirname, toolDir)));
+});
+
+module.exports = app;
